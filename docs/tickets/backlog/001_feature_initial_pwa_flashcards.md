@@ -1,52 +1,54 @@
 # Ticket 001: Initial PWA Setup with Flashcards Mode
 
 ## Metadata
-- **Status**: Not Started
+- **Status**: In Progress
 - **Priority**: High
 - **Effort**: 15 points (3 phases x 5 points)
 - **Created**: 2025-01-22
 - **Type**: feature
-- **Platforms**: iOS/Android/Web (PWA)
+- **Platforms**: Web (Desktop/Tablet/Mobile)
 
 ## User Stories
 
 ### Primary User Story
-As a language learner, I want to access flashcards on my mobile device so that I can study Chinese vocabulary anywhere.
+As a language learner, I want to access flashcards on any device through my web browser so that I can study Chinese vocabulary anywhere.
 
 ### Secondary User Stories
 - As a user, I want to see all available decks on the home screen so that I can choose what to study.
-- As a user, I want to swipe through flashcards intuitively so that I can quickly review vocabulary.
+- As a user, I want to click/tap or swipe through flashcards intuitively so that I can quickly review vocabulary.
 - As a user, I want to track my progress during a study session so that I know how well I'm doing.
 - As a user, I want to configure which card sides I see so that I can customize my learning experience.
 
 ## Technical Requirements
 
 ### Functional Requirements
-1. React Native PWA setup with TypeScript strict mode
-2. Home screen displaying deck list with metadata
-3. Tab navigation with Home as primary tab
-4. Complete Flashcards mode with swipe gestures and flip animations
+1. Vite setup with React 18 and TypeScript strict mode
+2. Home page displaying deck list with metadata
+3. React Router v6 navigation with URL-based routing
+4. Complete Flashcards mode with mouse/touch gestures and keyboard navigation
 5. Settings modal for side configuration
 6. Progress tracking (correct/incorrect counters)
 7. Chinese Chapter 9 deck integrated as sample data
 
 ### Non-Functional Requirements
-1. Performance: 60 FPS animations, <3s initial load
-2. Accessibility: VoiceOver/TalkBack support, minimum 44px touch targets
-3. Platform Parity: Consistent behavior on iOS and Android
-4. Offline Support: All functionality works without network connection
+1. Performance: Lighthouse score >90, smooth 60 FPS animations
+2. Accessibility: WCAG AA compliance, full keyboard navigation
+3. Responsive: Mobile-first design working on all screen sizes
+4. Offline Support: Service Worker enabling offline functionality
 
 ## Implementation Plan
 
-### Phase 1: Core Infrastructure & Navigation (5 points)
+### Phase 1: Core Infrastructure & Routing (5 points) ✅ COMPLETED
 
 **Files to create/modify:**
 - `package.json` - Project dependencies and scripts
 - `tsconfig.json` - TypeScript configuration with strict mode
-- `app.json` - Expo configuration
-- `src/theme/index.ts` - Design system implementation
+- `vite.config.ts` - Vite configuration
+- `index.html` - Entry HTML file
+- `src/styles/theme.css` - CSS custom properties design system
+- `src/styles/global.css` - Global styles
 - `src/types/index.ts` - Core TypeScript interfaces
-- `src/navigation/AppNavigator.tsx` - Navigation structure
+- `src/router/AppRouter.tsx` - React Router configuration
 - `src/store/deckStore.ts` - Zustand store for deck management
 
 **Component Structure:**
@@ -84,8 +86,8 @@ interface Deck {
 ```
 
 **Theme Implementation:**
-```typescript
-// src/theme/index.ts
+```css
+/* src/styles/theme.css */
 
 /**
  * Quizly Design System
@@ -96,488 +98,362 @@ interface Deck {
  * effective studying.
  */
 
-export const colors = {
-  primary: {
-    // Ocean Blue - Evokes trust, stability, and intelligence
-    // Used for primary actions, navigation, and key interactive elements
-    main: '#4A90E2',    // Confident ocean blue - CTAs, active states
-    light: '#6BA5E9',   // Soft sky blue - hover states, highlights
-    dark: '#3A7BC8',    // Deep sea blue - pressed states, emphasis
-  },
-  secondary: {
-    // Mint Turquoise - Fresh, energizing, and optimistic
-    // Used for success states, progress indicators, and positive feedback
-    main: '#50E3C2',    // Vibrant mint - correct answers, achievements
-    light: '#6FEBD0',   // Gentle seafoam - subtle success indicators
-    dark: '#3DCBAA',    // Rich teal - strong positive emphasis
-  },
-  neutral: {
-    // Carefully crafted grayscale for optimal contrast and hierarchy
-    white: '#FFFFFF',    // Pure white - card backgrounds, primary surfaces
-    gray100: '#F7F8FA',  // Ghost white - app background, subtle containers
-    gray200: '#E5E7EB',  // Mist gray - borders, dividers, disabled states
-    gray300: '#D1D5DB',  // Silver gray - inactive elements, placeholders
-    gray400: '#9CA3AF',  // Cool gray - secondary text, subtle icons
-    gray500: '#6B7280',  // Slate gray - body text, secondary content
-    gray600: '#4B5563',  // Charcoal gray - primary text, headings
-    gray700: '#374151',  // Dark slate - high emphasis text
-    gray800: '#1F2937',  // Near black - maximum contrast text
-    black: '#000000',    // True black - reserved for critical emphasis
-  },
-  semantic: {
-    // Functional colors for user feedback and system states
-    success: '#10B981',  // Emerald green - correct answers, achievements
-    warning: '#F59E0B',  // Amber - warnings, time running out
-    error: '#EF4444',    // Coral red - incorrect answers, errors
-    info: '#3B82F6',     // Bright blue - hints, information, tips
+:root {
+  /* Primary Colors */
+  --primary-main: #4A90E2;
+  --primary-light: #6BA5E9;
+  --primary-dark: #3A7BC8;
+
+  /* Secondary Colors */
+  --secondary-main: #50E3C2;
+  --secondary-light: #6FEBD0;
+  --secondary-dark: #3DCBAA;
+
+  /* Neutral Colors */
+  --neutral-white: #FFFFFF;
+  --neutral-gray-100: #F7F8FA;
+  --neutral-gray-200: #E5E7EB;
+  --neutral-gray-300: #D1D5DB;
+  --neutral-gray-400: #9CA3AF;
+  --neutral-gray-500: #6B7280;
+  --neutral-gray-600: #4B5563;
+  --neutral-gray-700: #374151;
+  --neutral-gray-800: #1F2937;
+  --neutral-black: #000000;
+
+  /* Semantic Colors */
+  --semantic-success: #10B981;
+  --semantic-warning: #F59E0B;
+  --semantic-error: #EF4444;
+  --semantic-info: #3B82F6;
+
+  /* Typography */
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SF Mono', Consolas, monospace;
+
+  /* Font Sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+
+  /* Dark Mode Variables */
+  @media (prefers-color-scheme: dark) {
+    --bg-primary: var(--neutral-gray-800);
+    --bg-secondary: var(--neutral-gray-700);
+    --text-primary: var(--neutral-gray-100);
+    --text-secondary: var(--neutral-gray-300);
   }
-};
-
-/**
- * Spacing System
- *
- * Based on an 8-point grid system for consistent rhythm and
- * visual harmony across all components. Each increment serves
- * a specific purpose in the visual hierarchy.
- */
-export const spacing = {
-  xs: 4,   // Hairline spacing - subtle gaps, inline elements
-  sm: 8,   // Tight spacing - related elements, compact layouts
-  md: 16,  // Default spacing - standard padding, margins
-  lg: 24,  // Comfortable spacing - section breaks, card padding
-  xl: 32,  // Generous spacing - major sections, breathing room
-  xxl: 48, // Maximum spacing - hero sections, major divisions
-};
-
-/**
- * Typography Scale
- *
- * Optimized for mobile readability with clear hierarchy.
- * All sizes tested for legibility on small screens.
- */
-export const typography = {
-  // Headlines - Bold and commanding for screen titles
-  h1: {
-    fontSize: 32,
-    fontWeight: '700',
-    lineHeight: 40,
-    letterSpacing: -0.5,
-    color: colors.neutral.gray800,
-  },
-  h2: {
-    fontSize: 28,
-    fontWeight: '600',
-    lineHeight: 36,
-    letterSpacing: -0.3,
-    color: colors.neutral.gray800,
-  },
-  h3: {
-    fontSize: 24,
-    fontWeight: '600',
-    lineHeight: 32,
-    letterSpacing: -0.2,
-    color: colors.neutral.gray700,
-  },
-
-  // Body text - Optimized for extended reading
-  body: {
-    large: {
-      fontSize: 18,
-      fontWeight: '400',
-      lineHeight: 28,
-      color: colors.neutral.gray600,
-    },
-    regular: {
-      fontSize: 16,
-      fontWeight: '400',
-      lineHeight: 24,
-      color: colors.neutral.gray600,
-    },
-    small: {
-      fontSize: 14,
-      fontWeight: '400',
-      lineHeight: 20,
-      color: colors.neutral.gray500,
-    },
-  },
-
-  // Card text - Larger sizes for flashcard content
-  card: {
-    primary: {
-      fontSize: 24,
-      fontWeight: '500',
-      lineHeight: 32,
-      color: colors.neutral.gray800,
-    },
-    secondary: {
-      fontSize: 20,
-      fontWeight: '400',
-      lineHeight: 28,
-      color: colors.neutral.gray700,
-    },
-    caption: {
-      fontSize: 14,
-      fontWeight: '400',
-      lineHeight: 18,
-      color: colors.neutral.gray500,
-    },
-  },
-};
-
-/**
- * Shadow System
- *
- * Subtle shadows that create depth without overwhelming
- * the clean, focused interface.
- */
-export const shadows = {
-  sm: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-    elevation: 2,
-  },
-  md: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 4,
-  },
-  lg: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
-    elevation: 8,
-  },
-};
-
-/**
- * Border Radius System
- *
- * Friendly, approachable rounded corners that soften
- * the interface while maintaining structure.
- */
-export const borderRadius = {
-  sm: 4,   // Subtle rounding - buttons, inputs
-  md: 8,   // Standard rounding - cards, containers
-  lg: 12,  // Prominent rounding - modals, featured cards
-  xl: 16,  // Strong rounding - floating elements
-  full: 9999, // Fully rounded - pills, badges
-};
+}
 ```
 
-**Navigation Setup:**
+**Routing Setup:**
 ```typescript
-// src/navigation/AppNavigator.tsx
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// src/router/AppRouter.tsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 
-export type RootStackParamList = {
-  HomeTabs: undefined;
-  Flashcards: { deckId: string };
-  DeckDetail: { deckId: string };
-};
+const Home = lazy(() => import('../pages/Home'));
+const Deck = lazy(() => import('../pages/Deck'));
+const Flashcards = lazy(() => import('../pages/Flashcards'));
 
-export type TabParamList = {
-  Home: undefined;
-};
+export function AppRouter() {
+  return (
+    <BrowserRouter>
+      <Suspense fallback={<LoadingScreen />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/deck/:id" element={<Deck />} />
+          <Route path="/deck/:id/flashcards" element={<Flashcards />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
+  );
+}
 ```
 
 **Implementation steps:**
-1. Initialize Expo project with TypeScript template
-2. Install core dependencies (react-navigation, zustand, react-native-reanimated, etc.)
-3. Configure TypeScript with strict mode
-4. Implement design system tokens
-5. Set up navigation structure
-6. Create Zustand store for deck management
+1. ✅ Initialize Vite project with React TypeScript template
+2. ✅ Install core dependencies (react-router-dom, zustand, framer-motion, etc.)
+3. ✅ Configure TypeScript with strict mode
+4. ✅ Implement CSS custom properties design system
+5. ✅ Set up React Router structure
+6. ✅ Create Zustand store for deck management
 
 **Testing:**
 ```bash
 npm run type-check
 npm run lint
 npm test
+npm run build
 ```
 
-**Commit**: `feat(core): initialize React Native PWA with navigation and theme`
+**Commit**: `feat(core): initialize Vite React PWA with routing and theme`
 
-### Phase 2: Home Screen & Deck Management (5 points)
+### Phase 2: Home Screen & Deck Management (5 points) ✅ COMPLETED
 
 **Files to create/modify:**
-- `src/screens/HomeScreen.tsx` - Main deck list screen
+- `src/pages/Home.tsx` - Main deck list page
 - `src/components/cards/DeckCard.tsx` - Individual deck display
 - `src/hooks/useDeckData.ts` - Hook for deck data management
-- `src/data/decks/chinese_chpt9.ts` - Chinese deck data (converted)
+- `src/data/decks/chinese_chpt9.json` - Chinese deck data
 - `src/store/deckStore.ts` - Update with deck loading logic
 
-**Home Screen Implementation:**
+**Home Page Implementation:**
 ```typescript
-// src/screens/HomeScreen.tsx
-import React, { FC, useEffect } from 'react';
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+// src/pages/Home.tsx
+import { FC, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDeckStore } from '@/store/deckStore';
 import { DeckCard } from '@/components/cards/DeckCard';
-import { colors, spacing, typography } from '@/theme';
+import styles from './Home.module.css';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
-
-export const HomeScreen: FC<Props> = ({ navigation }) => {
+export const Home: FC = () => {
+  const navigate = useNavigate();
   const { decks, loadDecks } = useDeckStore();
 
   useEffect(() => {
     loadDecks();
   }, []);
 
-  const handleDeckPress = (deckId: string) => {
-    navigation.navigate('DeckDetail', { deckId });
+  const handleDeckClick = (deckId: string) => {
+    navigate(`/deck/${deckId}`);
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      {/* Screen Header */}
-      <View style={styles.header}>
-        <Text style={styles.title}>My Decks</Text>
-        <Text style={styles.subtitle}>Choose a deck to start studying</Text>
-      </View>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <h1 className={styles.title}>My Decks</h1>
+        <p className={styles.subtitle}>Choose a deck to start studying</p>
+      </header>
 
-      {/* Deck List */}
-      <FlatList
-        data={decks}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
+      <div className={styles.deckGrid}>
+        {decks.map((deck) => (
           <DeckCard
-            deck={item}
-            onPress={() => handleDeckPress(item.id)}
+            key={deck.id}
+            deck={deck}
+            onClick={() => handleDeckClick(deck.id)}
           />
-        )}
-        contentContainerStyle={styles.list}
-        showsVerticalScrollIndicator={false}
-      />
-    </SafeAreaView>
+        ))}
+      </div>
+    </div>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.neutral.gray100, // Ghost white background for subtle depth
-  },
-  header: {
-    paddingHorizontal: spacing.lg,
-    paddingTop: spacing.xl,
-    paddingBottom: spacing.md,
-  },
-  title: {
-    ...typography.h1,
-    marginBottom: spacing.xs,
-  },
-  subtitle: {
-    ...typography.body.regular,
-    color: colors.neutral.gray500,
-  },
-  list: {
-    padding: spacing.md,
-    paddingTop: 0,
-  },
-});
 ```
 
 **DeckCard Component Design:**
 ```typescript
 // src/components/cards/DeckCard.tsx
-import React, { FC, memo } from 'react';
-import { Pressable, View, Text, StyleSheet } from 'react-native';
+import { FC, memo } from 'react';
 import { Deck } from '@/types';
-import { colors, spacing, typography, shadows, borderRadius } from '@/theme';
+import styles from './DeckCard.module.css';
 
 interface DeckCardProps {
   deck: Deck;
-  onPress: () => void;
+  onClick: () => void;
 }
 
-export const DeckCard: FC<DeckCardProps> = memo(({ deck, onPress }) => {
+export const DeckCard: FC<DeckCardProps> = memo(({ deck, onClick }) => {
   const difficultyColor = {
-    beginner: colors.semantic.success,
-    intermediate: colors.semantic.warning,
-    advanced: colors.semantic.error,
-    beginner_to_intermediate: colors.semantic.info,
+    beginner: 'var(--semantic-success)',
+    intermediate: 'var(--semantic-warning)',
+    advanced: 'var(--semantic-error)',
+    beginner_to_intermediate: 'var(--semantic-info)',
   };
 
   return (
-    <Pressable
-      style={({ pressed }) => [
-        styles.container,
-        pressed && styles.pressed,
-      ]}
-      onPress={onPress}
+    <article
+      className={styles.card}
+      onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === 'Enter' && onClick()}
     >
-      {/* Category Badge */}
-      <View style={styles.categoryBadge}>
-        <Text style={styles.categoryText}>{deck.metadata.category}</Text>
-      </View>
+      <div className={styles.categoryBadge}>
+        {deck.metadata.category}
+      </div>
 
-      {/* Main Content */}
-      <View style={styles.content}>
-        <Text style={styles.deckName}>{deck.metadata.deck_name}</Text>
-        <Text style={styles.description} numberOfLines={2}>
+      <div className={styles.content}>
+        <h2 className={styles.deckName}>{deck.metadata.deck_name}</h2>
+        <p className={styles.description}>
           {deck.metadata.description}
-        </Text>
+        </p>
 
-        {/* Metadata Row */}
-        <View style={styles.metadataRow}>
-          <View style={styles.metadataItem}>
-            <Text style={styles.metadataLabel}>Cards</Text>
-            <Text style={styles.metadataValue}>{deck.metadata.card_count}</Text>
-          </View>
+        <div className={styles.metadataRow}>
+          <div className={styles.metadataItem}>
+            <span className={styles.label}>Cards</span>
+            <span className={styles.value}>{deck.metadata.card_count}</span>
+          </div>
 
-          <View style={styles.metadataItem}>
-            <Text style={styles.metadataLabel}>Sides</Text>
-            <Text style={styles.metadataValue}>{deck.metadata.available_sides}</Text>
-          </View>
+          <div className={styles.metadataItem}>
+            <span className={styles.label}>Sides</span>
+            <span className={styles.value}>{deck.metadata.available_sides}</span>
+          </div>
 
-          <View style={[
-            styles.difficultyBadge,
-            { backgroundColor: difficultyColor[deck.metadata.difficulty] }
-          ]}>
-            <Text style={styles.difficultyText}>
-              {deck.metadata.difficulty.replace('_', ' ')}
-            </Text>
-          </View>
-        </View>
-      </View>
-    </Pressable>
+          <div
+            className={styles.difficultyBadge}
+            style={{ backgroundColor: difficultyColor[deck.metadata.difficulty] }}
+          >
+            {deck.metadata.difficulty.replace('_', ' ')}
+          </div>
+        </div>
+      </div>
+    </article>
   );
 });
+```
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.neutral.white,
-    borderRadius: borderRadius.lg,
-    marginBottom: spacing.md,
-    ...shadows.md,
-  },
-  pressed: {
-    opacity: 0.95,
-    transform: [{ scale: 0.98 }],
-  },
-  categoryBadge: {
-    position: 'absolute',
-    top: spacing.md,
-    right: spacing.md,
-    backgroundColor: colors.primary.light,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    borderRadius: borderRadius.full,
-  },
-  categoryText: {
-    ...typography.body.small,
-    color: colors.neutral.white,
-    fontWeight: '600',
-  },
-  content: {
-    padding: spacing.lg,
-  },
-  deckName: {
-    ...typography.h3,
-    marginBottom: spacing.xs,
-    paddingRight: spacing.xxl, // Space for category badge
-  },
-  description: {
-    ...typography.body.regular,
-    color: colors.neutral.gray500,
-    marginBottom: spacing.md,
-  },
-  metadataRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  metadataItem: {
-    marginRight: spacing.lg,
-  },
-  metadataLabel: {
-    ...typography.body.small,
-    color: colors.neutral.gray400,
-    marginBottom: 2,
-  },
-  metadataValue: {
-    ...typography.body.large,
-    fontWeight: '600',
-    color: colors.neutral.gray700,
-  },
-  difficultyBadge: {
-    marginLeft: 'auto',
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    borderRadius: borderRadius.sm,
-  },
-  difficultyText: {
-    ...typography.body.small,
-    color: colors.neutral.white,
-    fontWeight: '600',
-    textTransform: 'capitalize',
-  },
-});
+**CSS Module for DeckCard:**
+```css
+/* src/components/cards/DeckCard.module.css */
+.card {
+  background: var(--neutral-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.categoryBadge {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  background: var(--primary-light);
+  color: var(--neutral-white);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.content {
+  padding: var(--space-6);
+}
+
+.deckName {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  margin: 0 0 var(--space-2) 0;
+  padding-right: var(--space-16);
+  color: var(--neutral-gray-800);
+}
+
+.description {
+  color: var(--neutral-gray-500);
+  margin: 0 0 var(--space-4) 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.metadataRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.metadataItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: var(--text-sm);
+  color: var(--neutral-gray-400);
+  margin-bottom: var(--space-1);
+}
+
+.value {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--neutral-gray-700);
+}
+
+.difficultyBadge {
+  margin-left: auto;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--neutral-white);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: var(--bg-secondary);
+  }
+
+  .deckName {
+    color: var(--text-primary);
+  }
+
+  .description {
+    color: var(--text-secondary);
+  }
+
+  .value {
+    color: var(--text-primary);
+  }
+}
 ```
 
 **Deck Data Loading System:**
 ```typescript
 // src/utils/deckLoader.ts
-// Dynamic JSON deck loader that transforms JSON to match our TypeScript model
-// This allows easy deck sharing and import/export functionality
-
 import { Deck } from '@/types';
-
-interface RawDeckJSON {
-  deck_id?: string;  // Optional, will use 'id' if present
-  id?: string;
-  metadata: {
-    deck_name: string;
-    description: string;
-    category: string;
-    available_levels: number[];
-    available_sides: number;
-    card_count: number;
-    difficulty: string;
-    tags: string[];
-    version: string;
-    created_date: string;
-    last_updated: string;
-  };
-  content: Array<{
-    card_id?: string;  // Will be removed
-    idx: number;
-    name: string;
-    side_a: string;
-    side_b: string;
-    side_c?: string;
-    side_d?: string;
-    side_e?: string;
-    side_f?: string;
-    level: number;
-  }>;
-}
 
 export const loadDeckFromJSON = async (jsonPath: string): Promise<Deck> => {
   try {
-    // Import JSON deck dynamically
-    const rawDeck: RawDeckJSON = await import(jsonPath);
+    const response = await fetch(jsonPath);
+    const rawDeck = await response.json();
 
-    // Transform to our Deck model
     const deck: Deck = {
-      // Use 'id' or 'deck_id' from JSON, or generate from filename
-      id: rawDeck.id || rawDeck.deck_id || jsonPath.split('/').pop()?.replace('.json', '') || 'unknown',
+      id: rawDeck.id || rawDeck.deck_id || 'unknown',
       metadata: {
         ...rawDeck.metadata,
-        // Ensure dates are in correct format
         created_date: rawDeck.metadata.created_date.split('T')[0],
         last_updated: rawDeck.metadata.last_updated.split('T')[0],
       },
-      content: rawDeck.content.map((card, index) => ({
-        // Ensure idx starts at 0 and increments properly
+      content: rawDeck.content.map((card: any, index: number) => ({
         idx: index,
         name: card.name,
         side_a: card.side_a,
@@ -587,7 +463,6 @@ export const loadDeckFromJSON = async (jsonPath: string): Promise<Deck> => {
         side_e: card.side_e,
         side_f: card.side_f,
         level: card.level,
-        // Remove card_id if present (not in our model)
       })),
     };
 
@@ -598,10 +473,9 @@ export const loadDeckFromJSON = async (jsonPath: string): Promise<Deck> => {
   }
 };
 
-// Load all decks from assets
 export const loadAllDecks = async (): Promise<Deck[]> => {
   const deckPaths = [
-    '../assets/decks/chinese_chpt9.json',
+    '/data/decks/chinese_chpt9.json',
     // Add more deck paths as they're added
   ];
 
@@ -618,7 +492,6 @@ export const loadAllDecks = async (): Promise<Deck[]> => {
 // src/store/deckStore.ts
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Deck } from '@/types';
 import { loadAllDecks } from '@/utils/deckLoader';
 
@@ -630,7 +503,7 @@ interface DeckStore {
 
   loadDecks: () => Promise<void>;
   selectDeck: (deckId: string) => void;
-  importDeck: (jsonPath: string) => Promise<void>;
+  importDeck: (jsonData: string) => Promise<void>;
 }
 
 export const useDeckStore = create<DeckStore>()(
@@ -644,7 +517,6 @@ export const useDeckStore = create<DeckStore>()(
       loadDecks: async () => {
         set({ isLoading: true, error: null });
         try {
-          // Load all decks from JSON files
           const loadedDecks = await loadAllDecks();
           set({ decks: loadedDecks, isLoading: false });
         } catch (error) {
@@ -660,16 +532,20 @@ export const useDeckStore = create<DeckStore>()(
         set({ activeDeck: deck || null });
       },
 
-      importDeck: async (jsonPath: string) => {
-        // Future feature: Import deck from file system or URL
-        // This enables deck sharing functionality
+      importDeck: async (jsonData: string) => {
+        try {
+          const deck = JSON.parse(jsonData);
+          set(state => ({
+            decks: [...state.decks, deck]
+          }));
+        } catch (error) {
+          set({ error: 'Failed to import deck' });
+        }
       },
     }),
     {
       name: 'deck-store',
-      storage: AsyncStorage,
       partialize: (state) => ({
-        // Only persist deck metadata, not full content
         decks: state.decks.map(d => ({
           id: d.id,
           metadata: d.metadata,
@@ -680,482 +556,139 @@ export const useDeckStore = create<DeckStore>()(
 );
 ```
 
-**Note:** The Chinese Chapter 9 deck JSON file (`pwa/assets/decks/chinese_chpt9.json`) remains unchanged and serves as the data source. The transformation happens at runtime when loading the deck, ensuring:
-- Easy deck import/export
-- Simple deck sharing between users
-- Backward compatibility with different JSON formats
-- Clean TypeScript typing in the application
-
 **Implementation steps:**
-1. Create HomeScreen with FlatList
-2. Build DeckCard component with proper styling
-3. Convert Chinese deck JSON to TypeScript
-4. Implement deck loading in Zustand store
-5. Add navigation from Home to DeckDetail
-6. Test deck display and navigation
+1. ✅ Create Home page with responsive grid layout
+2. ✅ Build DeckCard component with proper styling
+3. ✅ Set up JSON deck loading system
+4. ✅ Implement deck loading in Zustand store
+5. ✅ Add navigation from Home to Deck detail
+6. ✅ Test deck display and navigation
 
 **Testing:**
 ```typescript
-describe('HomeScreen', () => {
+describe('Home Page', () => {
   it('should display list of decks', () => {
     // Test deck list rendering
   });
 
-  it('should navigate to deck detail on press', () => {
+  it('should navigate to deck detail on click', () => {
     // Test navigation
+  });
+
+  it('should be keyboard accessible', () => {
+    // Test keyboard navigation
   });
 });
 ```
 
-**Commit**: `feat(home): implement home screen with deck management`
+**Commit**: `feat(home): implement home page with deck management`
 
-### Phase 3: Flashcards Mode Implementation (5 points)
+### Phase 3: Flashcards Mode Implementation (5 points) ⚠️ PARTIALLY COMPLETED
 
 **Files to create/modify:**
-- `src/screens/FlashcardsScreen.tsx` - Main flashcards screen
-- `src/components/cards/FlashCard.tsx` - Swipeable flash card
+- `src/pages/Flashcards.tsx` - Main flashcards page
+- `src/components/cards/FlashCard.tsx` - Flipable flash card
 - `src/components/modes/FlashcardsSettings.tsx` - Settings modal
 - `src/hooks/useFlashcards.ts` - Flashcards logic hook
 - `src/store/sessionStore.ts` - Session state management
-- `src/utils/gestures.ts` - Swipe gesture handlers
+- `src/utils/gestures.ts` - Touch/mouse gesture handlers
 
-**Flashcards Screen:**
+**Flashcards Page:**
 ```typescript
-// src/screens/FlashcardsScreen.tsx
-import React, { FC, useState } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-} from 'react-native-reanimated';
+// src/pages/Flashcards.tsx
+import { FC, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FlashCard } from '@/components/cards/FlashCard';
 import { useFlashcards } from '@/hooks/useFlashcards';
+import styles from './Flashcards.module.css';
 
-export const FlashcardsScreen: FC<Props> = ({ route, navigation }) => {
-  const { deckId } = route.params;
+export const Flashcards: FC = () => {
+  const { id } = useParams<{ id: string }>();
   const {
     currentCard,
     isFlipped,
     correctCount,
     incorrectCount,
     flipCard,
-    handleSwipeLeft,
-    handleSwipeRight,
+    handleCorrect,
+    handleIncorrect,
     settings,
     updateSettings,
-  } = useFlashcards(deckId);
+  } = useFlashcards(id!);
 
-  // Swipe gesture implementation
-  // Flip animation implementation
-  // Progress counters display
-  // Settings modal
+  const handleKeyDown = (e: KeyboardEvent) => {
+    switch(e.key) {
+      case ' ':
+      case 'Enter':
+        flipCard();
+        break;
+      case 'ArrowLeft':
+        handleIncorrect();
+        break;
+      case 'ArrowRight':
+        handleCorrect();
+        break;
+    }
+  };
 
   return (
-    <GestureHandlerRootView style={styles.container}>
+    <div className={styles.container}>
       {/* Progress counters */}
-      <View style={styles.progressBar}>
-        <Text style={styles.incorrectCount}>{incorrectCount}</Text>
-        <Text style={styles.correctCount}>{correctCount}</Text>
-      </View>
+      <div className={styles.progressBar}>
+        <div className={styles.incorrectCount}>
+          ✗ {incorrectCount}
+        </div>
+        <div className={styles.correctCount}>
+          ✓ {correctCount}
+        </div>
+      </div>
 
-      {/* Flashcard with swipe gestures */}
-      <FlashCard
-        card={currentCard}
-        isFlipped={isFlipped}
-        frontSides={settings.frontSides}
-        backSides={settings.backSides}
-        onFlip={flipCard}
-        onSwipeLeft={handleSwipeLeft}
-        onSwipeRight={handleSwipeRight}
-      />
+      {/* Flashcard with animations */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentCard?.idx}
+          initial={{ x: 300, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -300, opacity: 0 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        >
+          <FlashCard
+            card={currentCard}
+            isFlipped={isFlipped}
+            frontSides={settings.frontSides}
+            backSides={settings.backSides}
+            onFlip={flipCard}
+            onSwipeLeft={handleIncorrect}
+            onSwipeRight={handleCorrect}
+          />
+        </motion.div>
+      </AnimatePresence>
 
       {/* Settings button */}
-      <Pressable style={styles.settingsButton} onPress={openSettings}>
-        <Text>Settings</Text>
-      </Pressable>
-    </GestureHandlerRootView>
+      <button
+        className={styles.settingsButton}
+        onClick={() => setSettingsOpen(true)}
+        aria-label="Settings"
+      >
+        ⚙️
+      </button>
+    </div>
   );
 };
-```
-
-**Flashcards Settings Modal:**
-```typescript
-// src/components/modes/FlashcardsSettings.tsx
-import React, { FC } from 'react';
-import {
-  Modal,
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Switch,
-  Pressable,
-} from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import { colors, spacing, typography, borderRadius, shadows } from '@/theme';
-
-interface FlashcardsSettingsProps {
-  visible: boolean;
-  onClose: () => void;
-  settings: FlashcardsSettings;
-  onUpdateSettings: (settings: FlashcardsSettings) => void;
-  availableSides: number;
-}
-
-interface FlashcardsSettings {
-  frontSides: string[];     // Which sides to show on front
-  backSides: string[];      // Which sides to show on back
-  enableTimer: boolean;     // Enable auto-swipe timer
-  timerSeconds: number;     // Seconds before auto-swipe left
-  enableAudio: boolean;     // Enable text-to-speech
-  groupSides: {            // Side grouping preferences
-    [key: string]: string[];
-  };
-}
-
-export const FlashcardsSettingsModal: FC<FlashcardsSettingsProps> = ({
-  visible,
-  onClose,
-  settings,
-  onUpdateSettings,
-  availableSides,
-}) => {
-  // Available sides based on deck (side_a through side_f maximum)
-  const sideOptions = ['side_a', 'side_b', 'side_c', 'side_d', 'side_e', 'side_f']
-    .slice(0, availableSides);
-
-  return (
-    <Modal
-      visible={visible}
-      animationType="slide"
-      presentationStyle="pageSheet"
-      onRequestClose={onClose}
-    >
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Flashcard Settings</Text>
-          <Pressable onPress={onClose} style={styles.closeButton}>
-            <Text style={styles.closeText}>Done</Text>
-          </Pressable>
-        </View>
-
-        <ScrollView style={styles.content}>
-          {/* Front Side Configuration */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Card Front</Text>
-            <Text style={styles.sectionDescription}>
-              Select which sides appear on the front of the card
-            </Text>
-            <View style={styles.sideSelector}>
-              {sideOptions.map((side) => (
-                <Pressable
-                  key={side}
-                  style={[
-                    styles.sideOption,
-                    settings.frontSides.includes(side) && styles.sideOptionSelected
-                  ]}
-                  onPress={() => toggleSide('front', side)}
-                >
-                  <Text style={[
-                    styles.sideOptionText,
-                    settings.frontSides.includes(side) && styles.sideOptionTextSelected
-                  ]}>
-                    {side.replace('_', ' ').toUpperCase()}
-                  </Text>
-                </Pressable>
-              ))}
-            </View>
-            <Text style={styles.hint}>
-              Example: Show Chinese characters (Side C) on front
-            </Text>
-          </View>
-
-          {/* Back Side Configuration */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Card Back</Text>
-            <Text style={styles.sectionDescription}>
-              Select which sides appear on the back of the card
-            </Text>
-            <View style={styles.sideSelector}>
-              {sideOptions.map((side) => (
-                <Pressable
-                  key={side}
-                  style={[
-                    styles.sideOption,
-                    settings.backSides.includes(side) && styles.sideOptionSelected
-                  ]}
-                  onPress={() => toggleSide('back', side)}
-                >
-                  <Text style={[
-                    styles.sideOptionText,
-                    settings.backSides.includes(side) && styles.sideOptionTextSelected
-                  ]}>
-                    {side.replace('_', ' ').toUpperCase()}
-                  </Text>
-                </Pressable>
-              ))}
-            </View>
-            <Text style={styles.hint}>
-              Example: Show pinyin (Side B) + English (Side A) together on back
-            </Text>
-          </View>
-
-          {/* Side Grouping */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Side Grouping</Text>
-            <Text style={styles.sectionDescription}>
-              Always show these sides together when selected
-            </Text>
-            <View style={styles.groupingOption}>
-              <Text style={styles.groupingLabel}>Group Chinese + Pinyin</Text>
-              <Switch
-                value={settings.groupSides['chinese_pinyin']?.includes('side_b')}
-                onValueChange={(value) => {
-                  // Group side_b and side_c together
-                  const newGrouping = value
-                    ? { ...settings.groupSides, chinese_pinyin: ['side_b', 'side_c'] }
-                    : { ...settings.groupSides, chinese_pinyin: [] };
-                  onUpdateSettings({ ...settings, groupSides: newGrouping });
-                }}
-                trackColor={{ false: colors.neutral.gray300, true: colors.primary.light }}
-                thumbColor={colors.neutral.white}
-              />
-            </View>
-          </View>
-
-          {/* Timer Settings */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Timer</Text>
-            <View style={styles.timerOption}>
-              <Text style={styles.optionLabel}>Enable Timer</Text>
-              <Switch
-                value={settings.enableTimer}
-                onValueChange={(value) =>
-                  onUpdateSettings({ ...settings, enableTimer: value })
-                }
-                trackColor={{ false: colors.neutral.gray300, true: colors.primary.light }}
-                thumbColor={colors.neutral.white}
-              />
-            </View>
-            {settings.enableTimer && (
-              <View style={styles.timerDuration}>
-                <Text style={styles.optionLabel}>Seconds per card</Text>
-                <Picker
-                  selectedValue={settings.timerSeconds}
-                  style={styles.picker}
-                  onValueChange={(value) =>
-                    onUpdateSettings({ ...settings, timerSeconds: value })
-                  }
-                >
-                  <Picker.Item label="10 sec" value={10} />
-                  <Picker.Item label="15 sec" value={15} />
-                  <Picker.Item label="20 sec" value={20} />
-                  <Picker.Item label="30 sec" value={30} />
-                  <Picker.Item label="45 sec" value={45} />
-                  <Picker.Item label="60 sec" value={60} />
-                </Picker>
-                <Text style={styles.hint}>
-                  Card will auto-swipe left (missed) after timer expires
-                </Text>
-              </View>
-            )}
-          </View>
-
-          {/* Audio Settings */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Audio</Text>
-            <View style={styles.audioOption}>
-              <Text style={styles.optionLabel}>Text-to-Speech</Text>
-              <Switch
-                value={settings.enableAudio}
-                onValueChange={(value) =>
-                  onUpdateSettings({ ...settings, enableAudio: value })
-                }
-                trackColor={{ false: colors.neutral.gray300, true: colors.primary.light }}
-                thumbColor={colors.neutral.white}
-              />
-            </View>
-            <Text style={styles.hint}>
-              Tap the speaker icon on cards to hear pronunciation
-            </Text>
-          </View>
-
-          {/* Preset Configurations */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Quick Presets</Text>
-            <View style={styles.presets}>
-              <Pressable
-                style={styles.presetButton}
-                onPress={() => applyPreset('englishToChinese')}
-              >
-                <Text style={styles.presetButtonText}>English → Chinese</Text>
-              </Pressable>
-              <Pressable
-                style={styles.presetButton}
-                onPress={() => applyPreset('chineseToEnglish')}
-              >
-                <Text style={styles.presetButtonText}>Chinese → English</Text>
-              </Pressable>
-              <Pressable
-                style={styles.presetButton}
-                onPress={() => applyPreset('comprehensive')}
-              >
-                <Text style={styles.presetButtonText}>All Sides</Text>
-              </Pressable>
-            </View>
-          </View>
-        </ScrollView>
-      </View>
-    </Modal>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.neutral.gray100,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: spacing.lg,
-    backgroundColor: colors.neutral.white,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.neutral.gray200,
-  },
-  title: {
-    ...typography.h2,
-  },
-  closeButton: {
-    padding: spacing.sm,
-  },
-  closeText: {
-    ...typography.body.large,
-    color: colors.primary.main,
-    fontWeight: '600',
-  },
-  content: {
-    flex: 1,
-  },
-  section: {
-    backgroundColor: colors.neutral.white,
-    marginTop: spacing.md,
-    padding: spacing.lg,
-  },
-  sectionTitle: {
-    ...typography.h3,
-    marginBottom: spacing.xs,
-  },
-  sectionDescription: {
-    ...typography.body.regular,
-    color: colors.neutral.gray500,
-    marginBottom: spacing.md,
-  },
-  sideSelector: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: spacing.sm,
-  },
-  sideOption: {
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    borderRadius: borderRadius.full,
-    backgroundColor: colors.neutral.gray100,
-    borderWidth: 2,
-    borderColor: colors.neutral.gray200,
-  },
-  sideOptionSelected: {
-    backgroundColor: colors.primary.light,
-    borderColor: colors.primary.main,
-  },
-  sideOptionText: {
-    ...typography.body.regular,
-    color: colors.neutral.gray600,
-  },
-  sideOptionTextSelected: {
-    color: colors.neutral.white,
-    fontWeight: '600',
-  },
-  hint: {
-    ...typography.body.small,
-    color: colors.neutral.gray400,
-    marginTop: spacing.sm,
-    fontStyle: 'italic',
-  },
-  groupingOption: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: spacing.sm,
-  },
-  groupingLabel: {
-    ...typography.body.regular,
-  },
-  timerOption: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: spacing.sm,
-  },
-  timerDuration: {
-    marginTop: spacing.md,
-  },
-  optionLabel: {
-    ...typography.body.regular,
-  },
-  picker: {
-    height: 50,
-    marginVertical: spacing.sm,
-  },
-  audioOption: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: spacing.sm,
-  },
-  presets: {
-    flexDirection: 'row',
-    gap: spacing.sm,
-  },
-  presetButton: {
-    flex: 1,
-    paddingVertical: spacing.md,
-    backgroundColor: colors.primary.main,
-    borderRadius: borderRadius.md,
-    alignItems: 'center',
-  },
-  presetButtonText: {
-    ...typography.body.regular,
-    color: colors.neutral.white,
-    fontWeight: '600',
-  },
-});
 ```
 
 **FlashCard Component Design:**
 ```typescript
 // src/components/cards/FlashCard.tsx
-import React, { FC } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
-import Animated, {
-  useAnimatedStyle,
-  interpolate,
-  withTiming,
-  withSpring,
-  useSharedValue,
-  runOnJS,
-} from 'react-native-reanimated';
-import {
-  PanGestureHandler,
-  PanGestureHandlerGestureEvent,
-} from 'react-native-gesture-handler';
-import { colors, spacing, typography, shadows, borderRadius } from '@/theme';
+import { FC, useState } from 'react';
+import { motion } from 'framer-motion';
+import { Card } from '@/types';
+import { useSwipeGesture } from '@/hooks/useSwipeGesture';
+import styles from './FlashCard.module.css';
 
 interface FlashCardProps {
-  card: Card;
+  card: Card | null;
   isFlipped: boolean;
   frontSides: string[];
   backSides: string[];
@@ -1173,271 +706,433 @@ export const FlashCard: FC<FlashCardProps> = ({
   onSwipeLeft,
   onSwipeRight,
 }) => {
-  const translateX = useSharedValue(0);
-  const translateY = useSharedValue(0);
-  const rotation = useSharedValue(0);
+  const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
 
-  // Swipe gesture handler
-  const gestureHandler = useAnimatedGestureHandler<PanGestureHandlerGestureEvent>({
-    onActive: (event) => {
-      translateX.value = event.translationX;
-      translateY.value = event.translationY * 0.1; // Subtle vertical movement
-      rotation.value = interpolate(
-        event.translationX,
-        [-200, 0, 200],
-        [-15, 0, 15] // Card tilts as it's swiped
-      );
+  const { handlers, dragX } = useSwipeGesture({
+    onSwipeLeft: () => {
+      setSwipeDirection('left');
+      onSwipeLeft();
     },
-    onEnd: (event) => {
-      const SWIPE_THRESHOLD = 120;
-
-      if (event.translationX > SWIPE_THRESHOLD) {
-        // Swipe right - correct
-        translateX.value = withSpring(500);
-        runOnJS(onSwipeRight)();
-      } else if (event.translationX < -SWIPE_THRESHOLD) {
-        // Swipe left - incorrect
-        translateX.value = withSpring(-500);
-        runOnJS(onSwipeLeft)();
-      } else {
-        // Return to center with spring animation
-        translateX.value = withSpring(0);
-        translateY.value = withSpring(0);
-        rotation.value = withSpring(0);
-      }
+    onSwipeRight: () => {
+      setSwipeDirection('right');
+      onSwipeRight();
     },
+    threshold: 100,
   });
 
-  // Card animation style
-  const cardAnimatedStyle = useAnimatedStyle(() => ({
-    transform: [
-      { translateX: translateX.value },
-      { translateY: translateY.value },
-      { rotateZ: `${rotation.value}deg` },
-    ],
-  }));
+  if (!card) return null;
 
-  // Flip animation style
-  const flipAnimatedStyle = useAnimatedStyle(() => {
-    const rotateY = interpolate(
-      isFlipped ? 1 : 0,
-      [0, 1],
-      [0, 180]
-    );
-
-    return {
-      transform: [{ rotateY: withTiming(`${rotateY}deg`, { duration: 300 }) }],
-      backfaceVisibility: 'hidden',
-    };
-  });
-
-  // Swipe indicator overlay colors
-  const swipeOverlayStyle = useAnimatedStyle(() => {
-    const rightOpacity = interpolate(
-      translateX.value,
-      [0, 100],
-      [0, 1],
-      'clamp'
-    );
-    const leftOpacity = interpolate(
-      translateX.value,
-      [-100, 0],
-      [1, 0],
-      'clamp'
-    );
-
-    return {
-      // Green overlay for correct (right swipe)
-      rightOverlay: {
-        opacity: rightOpacity,
-        backgroundColor: colors.semantic.success,
-      },
-      // Red overlay for incorrect (left swipe)
-      leftOverlay: {
-        opacity: leftOpacity,
-        backgroundColor: colors.semantic.error,
-      },
-    };
-  });
+  const renderSides = (sides: string[]) => {
+    return sides.map(side => (
+      <div key={side} className={styles.cardText}>
+        {card[side as keyof Card]}
+      </div>
+    ));
+  };
 
   return (
-    <PanGestureHandler onGestureEvent={gestureHandler}>
-      <Animated.View style={[styles.cardContainer, cardAnimatedStyle]}>
-        <Pressable onPress={onFlip} style={styles.cardPressable}>
-          <Animated.View style={[styles.card, flipAnimatedStyle]}>
-            {/* Front of card */}
-            {!isFlipped && (
-              <View style={styles.cardContent}>
-                <Text style={styles.sideLabel}>Front</Text>
-                {frontSides.map((side) => (
-                  <Text key={side} style={styles.cardText}>
-                    {card[side as keyof Card]}
-                  </Text>
-                ))}
-              </View>
-            )}
+    <motion.div
+      className={styles.cardContainer}
+      style={{ x: dragX }}
+      drag="x"
+      dragConstraints={{ left: 0, right: 0 }}
+      {...handlers}
+    >
+      <div
+        className={styles.card}
+        onClick={onFlip}
+        style={{
+          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+        }}
+      >
+        {/* Front of card */}
+        <div className={styles.cardFace}>
+          <span className={styles.sideLabel}>Front</span>
+          {renderSides(frontSides)}
+        </div>
 
-            {/* Back of card */}
-            {isFlipped && (
-              <View style={[styles.cardContent, styles.cardBack]}>
-                <Text style={styles.sideLabel}>Back</Text>
-                {backSides.map((side) => (
-                  <Text key={side} style={styles.cardText}>
-                    {card[side as keyof Card]}
-                  </Text>
-                ))}
-              </View>
-            )}
+        {/* Back of card */}
+        <div className={`${styles.cardFace} ${styles.cardBack}`}>
+          <span className={styles.sideLabel}>Back</span>
+          {renderSides(backSides)}
+        </div>
 
-            {/* Swipe indicators */}
-            <Animated.View
-              style={[styles.swipeOverlay, swipeOverlayStyle.rightOverlay]}
-              pointerEvents="none"
-            >
-              <Text style={styles.swipeText}>✓</Text>
-            </Animated.View>
-
-            <Animated.View
-              style={[styles.swipeOverlay, swipeOverlayStyle.leftOverlay]}
-              pointerEvents="none"
-            >
-              <Text style={styles.swipeText}>✗</Text>
-            </Animated.View>
-          </Animated.View>
-        </Pressable>
-      </Animated.View>
-    </PanGestureHandler>
+        {/* Swipe indicators */}
+        {swipeDirection === 'left' && (
+          <div className={`${styles.swipeOverlay} ${styles.incorrect}`}>
+            <span className={styles.swipeIcon}>✗</span>
+          </div>
+        )}
+        {swipeDirection === 'right' && (
+          <div className={`${styles.swipeOverlay} ${styles.correct}`}>
+            <span className={styles.swipeIcon}>✓</span>
+          </div>
+        )}
+      </div>
+    </motion.div>
   );
 };
+```
 
-const styles = StyleSheet.create({
-  cardContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  cardPressable: {
-    width: '90%',
-    aspectRatio: 0.65, // Classic flashcard proportions
-  },
-  card: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: colors.neutral.white,
-    borderRadius: borderRadius.xl,
-    ...shadows.lg,
-    position: 'relative',
-  },
-  cardContent: {
-    flex: 1,
-    padding: spacing.xl,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  cardBack: {
-    transform: [{ rotateY: '180deg' }],
-  },
-  sideLabel: {
-    ...typography.body.small,
-    color: colors.neutral.gray400,
-    position: 'absolute',
-    top: spacing.md,
-    right: spacing.md,
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-  },
-  cardText: {
-    ...typography.card.primary,
-    textAlign: 'center',
-    marginVertical: spacing.sm,
-  },
-  swipeOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    borderRadius: borderRadius.xl,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  swipeText: {
-    fontSize: 72,
-    fontWeight: 'bold',
-    color: colors.neutral.white,
-  },
-});
+**CSS for FlashCard:**
+```css
+/* src/components/cards/FlashCard.module.css */
+.cardContainer {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: var(--neutral-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  cursor: pointer;
+}
+
+.cardFace {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+  border-radius: var(--radius-xl);
+}
+
+.cardBack {
+  transform: rotateY(180deg);
+}
+
+.sideLabel {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  color: var(--neutral-gray-400);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cardText {
+  font-size: var(--text-2xl);
+  text-align: center;
+  margin: var(--space-2) 0;
+  color: var(--neutral-gray-800);
+}
+
+.swipeOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--radius-xl);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s;
+}
+
+.swipeOverlay.correct {
+  background: rgba(16, 185, 129, 0.2);
+}
+
+.swipeOverlay.incorrect {
+  background: rgba(239, 68, 68, 0.2);
+}
+
+.swipeIcon {
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--neutral-white);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .card {
+    aspect-ratio: 1/1.4;
+  }
+
+  .cardText {
+    font-size: var(--text-xl);
+  }
+}
 ```
 
 **Progress Counter UI:**
+```css
+/* Part of Flashcards.module.css */
+.progressBar {
+  position: fixed;
+  top: var(--space-4);
+  left: var(--space-4);
+  right: var(--space-4);
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.incorrectCount,
+.correctCount {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--neutral-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.incorrectCount {
+  background: var(--semantic-error);
+}
+
+.correctCount {
+  background: var(--semantic-success);
+}
+
+.settingsButton {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--primary-main);
+  color: var(--neutral-white);
+  border: none;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xl);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.settingsButton:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-lg);
+}
+
+.settingsButton:focus-visible {
+  outline: 2px solid var(--primary-dark);
+  outline-offset: 2px;
+}
+```
+
+**Flashcards Settings Modal:**
 ```typescript
-// Part of FlashcardsScreen.tsx
-const styles = StyleSheet.create({
-  progressBar: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: spacing.lg,
-    paddingTop: spacing.xl,
-    zIndex: 10,
-  },
-  incorrectCount: {
-    backgroundColor: colors.semantic.error,
-    color: colors.neutral.white,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    borderRadius: borderRadius.full,
-    fontSize: typography.body.large.fontSize,
-    fontWeight: '600',
-    overflow: 'hidden',
-    ...shadows.sm,
-  },
-  correctCount: {
-    backgroundColor: colors.semantic.success,
-    color: colors.neutral.white,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    borderRadius: borderRadius.full,
-    fontSize: typography.body.large.fontSize,
-    fontWeight: '600',
-    overflow: 'hidden',
-    ...shadows.sm,
-  },
-  settingsButton: {
-    position: 'absolute',
-    bottom: spacing.xl,
-    right: spacing.lg,
-    backgroundColor: colors.primary.main,
-    width: 56,
-    height: 56,
-    borderRadius: borderRadius.full,
-    justifyContent: 'center',
-    alignItems: 'center',
-    ...shadows.md,
-  },
-});
+// src/components/modes/FlashcardsSettings.tsx
+import { FC } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import styles from './FlashcardsSettings.module.css';
+
+interface FlashcardsSettingsProps {
+  visible: boolean;
+  onClose: () => void;
+  settings: FlashcardsSettings;
+  onUpdateSettings: (settings: FlashcardsSettings) => void;
+  availableSides: number;
+}
+
+interface FlashcardsSettings {
+  frontSides: string[];
+  backSides: string[];
+  enableTimer: boolean;
+  timerSeconds: number;
+  enableAudio: boolean;
+  groupSides: Record<string, string[]>;
+}
+
+export const FlashcardsSettingsModal: FC<FlashcardsSettingsProps> = ({
+  visible,
+  onClose,
+  settings,
+  onUpdateSettings,
+  availableSides,
+}) => {
+  const sideOptions = ['side_a', 'side_b', 'side_c', 'side_d', 'side_e', 'side_f']
+    .slice(0, availableSides);
+
+  const toggleSide = (type: 'front' | 'back', side: string) => {
+    const key = type === 'front' ? 'frontSides' : 'backSides';
+    const current = settings[key];
+    const updated = current.includes(side)
+      ? current.filter(s => s !== side)
+      : [...current, side];
+
+    onUpdateSettings({
+      ...settings,
+      [key]: updated
+    });
+  };
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <>
+          <motion.div
+            className={styles.overlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+          />
+          <motion.div
+            className={styles.modal}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+          >
+            <header className={styles.header}>
+              <h2 className={styles.title}>Flashcard Settings</h2>
+              <button className={styles.closeButton} onClick={onClose}>
+                Done
+              </button>
+            </header>
+
+            <div className={styles.content}>
+              {/* Front Side Configuration */}
+              <section className={styles.section}>
+                <h3 className={styles.sectionTitle}>Card Front</h3>
+                <p className={styles.sectionDescription}>
+                  Select which sides appear on the front of the card
+                </p>
+                <div className={styles.sideSelector}>
+                  {sideOptions.map((side) => (
+                    <button
+                      key={side}
+                      className={`${styles.sideOption} ${
+                        settings.frontSides.includes(side) ? styles.selected : ''
+                      }`}
+                      onClick={() => toggleSide('front', side)}
+                    >
+                      {side.replace('_', ' ').toUpperCase()}
+                    </button>
+                  ))}
+                </div>
+              </section>
+
+              {/* Back Side Configuration */}
+              <section className={styles.section}>
+                <h3 className={styles.sectionTitle}>Card Back</h3>
+                <p className={styles.sectionDescription}>
+                  Select which sides appear on the back of the card
+                </p>
+                <div className={styles.sideSelector}>
+                  {sideOptions.map((side) => (
+                    <button
+                      key={side}
+                      className={`${styles.sideOption} ${
+                        settings.backSides.includes(side) ? styles.selected : ''
+                      }`}
+                      onClick={() => toggleSide('back', side)}
+                    >
+                      {side.replace('_', ' ').toUpperCase()}
+                    </button>
+                  ))}
+                </div>
+              </section>
+
+              {/* Timer Settings */}
+              <section className={styles.section}>
+                <h3 className={styles.sectionTitle}>Timer</h3>
+                <label className={styles.toggle}>
+                  <input
+                    type="checkbox"
+                    checked={settings.enableTimer}
+                    onChange={(e) => onUpdateSettings({
+                      ...settings,
+                      enableTimer: e.target.checked
+                    })}
+                  />
+                  <span>Enable auto-advance timer</span>
+                </label>
+                {settings.enableTimer && (
+                  <label className={styles.select}>
+                    <span>Seconds per card</span>
+                    <select
+                      value={settings.timerSeconds}
+                      onChange={(e) => onUpdateSettings({
+                        ...settings,
+                        timerSeconds: Number(e.target.value)
+                      })}
+                    >
+                      <option value={10}>10 sec</option>
+                      <option value={15}>15 sec</option>
+                      <option value={20}>20 sec</option>
+                      <option value={30}>30 sec</option>
+                    </select>
+                  </label>
+                )}
+              </section>
+
+              {/* Quick Presets */}
+              <section className={styles.section}>
+                <h3 className={styles.sectionTitle}>Quick Presets</h3>
+                <div className={styles.presets}>
+                  <button
+                    className={styles.presetButton}
+                    onClick={() => applyPreset('englishToChinese')}
+                  >
+                    English → Chinese
+                  </button>
+                  <button
+                    className={styles.presetButton}
+                    onClick={() => applyPreset('chineseToEnglish')}
+                  >
+                    Chinese → English
+                  </button>
+                  <button
+                    className={styles.presetButton}
+                    onClick={() => applyPreset('comprehensive')}
+                  >
+                    All Sides
+                  </button>
+                </div>
+              </section>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+};
 ```
 
 **Implementation steps:**
-1. Create FlashcardsScreen with gesture handling
-2. Implement FlashCard with flip animation (300ms, 3D transform)
-3. Add swipe gesture recognition (left/right)
-4. Build settings modal for side configuration
-5. Implement progress tracking and display
-6. Add auto-restart with missed cards functionality
+1. ✅ Create Flashcards page with gesture handling
+2. ✅ Implement FlashCard with flip animation (CSS transforms)
+3. ⚠️ Add swipe gesture recognition using Framer Motion (keyboard only, no swipe yet)
+4. 🚧 Build settings modal for side configuration (in progress)
+5. ⚠️ Implement progress tracking and display (basic implementation, needs persistence)
+6. ❌ Add auto-restart with missed cards functionality
 
 **Testing:**
 ```typescript
 describe('Flashcards Mode', () => {
-  it('should flip card on tap', () => {
+  it('should flip card on click', () => {
     // Test flip animation
   });
 
-  it('should track swipe gestures', () => {
-    // Test left/right swipes
+  it('should track keyboard navigation', () => {
+    // Test arrow keys and spacebar
   });
 
   it('should update progress counters', () => {
@@ -1447,33 +1142,80 @@ describe('Flashcards Mode', () => {
   it('should restart with missed cards', () => {
     // Test auto-restart functionality
   });
+
+  it('should be mobile responsive', () => {
+    // Test on different viewport sizes
+  });
 });
 ```
 
-**Platform Testing:**
+**Browser Testing:**
 ```bash
-# iOS
-npm run ios
-# Test swipe gestures on iPhone simulator
+# Development
+npm run dev
+# Test on different browsers and devices
 
-# Android
-npm run android
-# Test on Android emulator
+# Build
+npm run build
+npm run preview
 
-# Web PWA
-npm run web
-# Test in mobile browser
+# Lighthouse audit
+npx lighthouse http://localhost:5173 --view
 ```
 
 **Commit**: `feat(flashcards): implement complete flashcards mode with gestures`
 
+## Additional Implementations (Added 2025-01-22)
+
+### Completed
+1. **PWA Icons and Manifest** ✅
+   - Generated all icon sizes from SVG (16x16 to 512x512)
+   - Created Web App Manifest with full PWA configuration
+   - Added favicon and Apple Touch icons
+   - Configured meta tags for social sharing
+   - Ready for PWA installation
+
+## Required Improvements (Added 2025-01-22)
+
+### High Priority Enhancements
+1. **Card-to-Card Animations** ❌
+   - Add smooth slide/fade transitions between cards
+   - Use Framer Motion for spring animations
+   - Implement swipe gesture animations
+
+2. **Home Page Polish** ❌
+   - Enhance visual design with gradients and shadows
+   - Add hero section with app branding
+   - Improve deck card design with hover effects
+   - Add empty state illustration
+   - Implement skeleton loaders
+
+3. **Progress Persistence** ❌
+   - Save session state to localStorage
+   - Resume from last card on return
+   - Track cumulative statistics across sessions
+   - Add session history view
+
+4. **Progress Counter UI** ❌
+   - Add fixed header with correct/incorrect counts
+   - Visual progress bar showing deck completion
+   - Real-time updates with animations
+   - Session statistics summary
+
+5. **Design System Adherence** ⚠️
+   - Audit current implementation against spec.md
+   - Centralize all colors in theme.css
+   - Ensure consistent spacing using CSS variables
+   - Verify responsive breakpoints match spec
+
 ## Testing Strategy
 
 ### Unit Tests
-- Test file: `__tests__/screens/FlashcardsScreen.test.tsx`
+- Test file: `src/__tests__/pages/Flashcards.test.tsx`
 - Key scenarios:
   - Card flipping animation
-  - Swipe gesture recognition
+  - Keyboard navigation
+  - Touch/mouse gestures
   - Progress tracking
   - Settings persistence
   - Deck completion and restart
@@ -1481,13 +1223,12 @@ npm run web
 ### Component Tests
 ```typescript
 describe('FlashCard Component', () => {
-  it.each(['ios', 'android'])('should render on %s', (platform) => {
-    Platform.OS = platform;
-    // Test platform-specific rendering
+  it('should render correctly', () => {
+    // Test component rendering
   });
 
-  it('should handle touch interactions', () => {
-    // Test tap to flip
+  it('should handle click interactions', () => {
+    // Test flip on click
   });
 
   it('should animate at 60 FPS', () => {
@@ -1497,144 +1238,170 @@ describe('FlashCard Component', () => {
 ```
 
 ### Integration Tests
-- Navigation flow from Home → DeckDetail → Flashcards
-- State persistence with AsyncStorage
+- Navigation flow from Home → Deck → Flashcards
+- State persistence with localStorage
 - Zustand store integration
 
-### E2E Tests (Detox)
+### E2E Tests (Playwright)
 ```typescript
 describe('Flashcards E2E', () => {
   it('should complete full flashcard session', async () => {
-    await element(by.id('deck-chinese-chpt9')).tap();
-    await element(by.id('start-flashcards')).tap();
+    await page.goto('/');
+    await page.click('[data-testid="deck-chinese-chpt9"]');
+    await page.click('[data-testid="start-flashcards"]');
 
-    // Swipe through cards
-    await element(by.id('flashcard')).swipe('right');
+    // Test card interactions
+    await page.keyboard.press('Space');
+    await page.keyboard.press('ArrowRight');
 
     // Verify progress
-    await expect(element(by.id('correct-count'))).toHaveText('1');
+    await expect(page.locator('[data-testid="correct-count"]')).toContainText('1');
   });
 });
 ```
 
 ### Performance Tests
 - FPS during flip animations: 60 FPS target
-- Memory usage during session: <100MB
-- Initial load time: <3 seconds
+- First Contentful Paint: <1.5s
+- Lighthouse score: >90
 
-## Platform-Specific Considerations
+## Browser-Specific Considerations
 
-### iOS
-- Safe area handling for notch devices
-- Haptic feedback on swipe actions
-- iOS-specific gesture feel
+### Desktop
+- Hover states for better UX
+- Keyboard shortcuts prominently displayed
+- Larger touch targets for trackpad users
 
-### Android
-- Back button handling in flashcards mode
-- Material Design ripple effects
-- Android gesture navigation compatibility
+### Mobile
+- Touch gesture zones clearly defined
+- Swipe indicators for discoverability
+- Responsive card sizing
+
+### Tablet
+- Optimized layout for landscape/portrait
+- Touch and keyboard support
+- Appropriate font sizing
 
 ## Documentation Updates Required
 1. `docs/spec.md` - Mark Phase 1 features as implemented
 2. `README.md` - Add setup and run instructions
-3. Component JSDoc documentation
+3. Component documentation with Storybook
 
 ## Success Criteria
-1. App loads in <3 seconds on older devices
+1. App loads in <1.5 seconds
 2. Flashcard animations run at 60 FPS
-3. Swipe gestures feel natural and responsive
+3. Keyboard and touch navigation work seamlessly
 4. Progress tracking works accurately
 5. Settings persist between sessions
+6. Lighthouse score >90
 
 ## Dependencies
-- react-native: ^0.74.x
-- expo: ^51.x
-- react-navigation: ^6.x
+- react: ^18.3.x
+- react-dom: ^18.3.x
+- vite: ^5.x
+- typescript: ^5.x
+- react-router-dom: ^6.x
 - zustand: ^4.x
-- react-native-reanimated: ^3.x
-- react-native-gesture-handler: ^2.x
-- @react-native-async-storage/async-storage: ^1.x
+- framer-motion: ^11.x
+- vitest: ^1.x
+- @testing-library/react: ^14.x
 
 ## Risks & Mitigations
-1. **Risk**: Gesture conflicts on Android
-   **Mitigation**: Test extensively on Android devices, implement gesture zones
+1. **Risk**: Browser compatibility issues
+   **Mitigation**: Test on all major browsers, use autoprefixer
 
 2. **Risk**: Animation performance on older devices
-   **Mitigation**: Use native driver, optimize with InteractionManager
+   **Mitigation**: Use CSS transforms, GPU acceleration, reduce motion option
 
-3. **Risk**: Memory leaks from animations
-   **Mitigation**: Proper cleanup in useEffect, use React.memo
+3. **Risk**: Touch gesture conflicts on mobile
+   **Mitigation**: Clear gesture zones, visual feedback
 
 ## Accessibility Requirements
-- Screen reader announces card content
-- Minimum touch target 44x44 (iOS) / 48x48 (Android)
+- Full keyboard navigation with visible focus indicators
+- Screen reader announcements for card content
 - High contrast mode support
-- Alternative to swipe gestures (buttons)
+- Reduced motion option respects prefers-reduced-motion
+- Semantic HTML structure
 
 ## Release & Deployment Guide
 
 ### Build Configuration
-- Update `app.json` with app metadata
-- Configure PWA manifest for web
-- Set up app icons and splash screens
+- Configure `vite.config.ts` with PWA plugin
+- Set up Web App Manifest
+- Configure Service Worker with Workbox
 
 ### Testing Checklist
 - [ ] Unit tests passing
 - [ ] Type checking passes
 - [ ] Linting passes
-- [ ] Manual testing on iOS simulator
-- [ ] Manual testing on Android emulator
-- [ ] PWA testing in mobile browser
+- [ ] Browser testing (Chrome, Firefox, Safari, Edge)
+- [ ] Mobile testing (iOS Safari, Chrome Android)
+- [ ] Lighthouse audit >90
+- [ ] Accessibility audit (axe DevTools)
 - [ ] Performance profiling complete
-- [ ] Accessibility audit complete
 
 ### Release Process
 1. Run full test suite
-2. Build for iOS: `expo build:ios`
-3. Build for Android: `expo build:android`
-4. Build for Web: `expo export:web`
-5. Deploy PWA to hosting service
+2. Build production bundle: `npm run build`
+3. Test production build: `npm run preview`
+4. Deploy to hosting service (Vercel/Netlify)
+5. Test deployed version
 
 ### Rollback Strategy
 - Keep previous build artifacts
-- Feature flag for flashcards if issues found
+- Version deployments
 - Quick revert procedure documented
 
-## Mobile-Specific Implementation Details
+## PWA Implementation Details
 
-### State Persistence
-```typescript
-// Use AsyncStorage for offline capability
-import AsyncStorage from '@react-native-async-storage/async-storage';
+### Service Worker
+```javascript
+// Basic offline caching with Workbox
+import { precacheAndRoute } from 'workbox-precaching';
+import { registerRoute } from 'workbox-routing';
+import { StaleWhileRevalidate } from 'workbox-strategies';
 
-// Persist settings and progress
-const saveSettings = async (settings: FlashcardsSettings) => {
-  await AsyncStorage.setItem('flashcards_settings', JSON.stringify(settings));
-};
+precacheAndRoute(self.__WB_MANIFEST);
+
+registerRoute(
+  ({ request }) => request.destination === 'document',
+  new StaleWhileRevalidate()
+);
 ```
 
-### Gesture Handling
-```typescript
-// Pan gesture for swipes
-const panGesture = Gesture.Pan()
-  .onUpdate((event) => {
-    translateX.value = event.translationX;
-  })
-  .onEnd((event) => {
-    if (event.translationX > SWIPE_THRESHOLD) {
-      runOnJS(onSwipeRight)();
-    } else if (event.translationX < -SWIPE_THRESHOLD) {
-      runOnJS(onSwipeLeft)();
+### Web App Manifest
+```json
+{
+  "name": "Quizly - Flashcard Learning",
+  "short_name": "Quizly",
+  "theme_color": "#4A90E2",
+  "background_color": "#FFFFFF",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
-  });
+  ]
+}
 ```
 
 ### Performance Optimizations
-- Use `React.memo` for FlashCard component
-- Implement `getItemLayout` for any lists
-- Use `InteractionManager` for heavy operations
-- Preload next card while current is displayed
+- Code splitting with React.lazy()
+- Image optimization with WebP/AVIF
+- Font subsetting for Chinese characters
+- Critical CSS inlining
+- Preload key resources
 
 ---
 
-*This ticket establishes the foundation for Quizly with the core infrastructure and first learning mode. Subsequent tickets will add Learn, Match, and Test modes.*
+*This ticket establishes the foundation for Quizly as a modern web application with the core infrastructure and first learning mode. Subsequent tickets will add Learn, Match, and Test modes.*

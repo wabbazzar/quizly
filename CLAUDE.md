@@ -2,7 +2,7 @@
 
 ## 🎯 Project Overview
 
-Quizly is a high-performance, mobile-first Progressive Web Application (PWA) built with React Native that provides an advanced flashcard and learning system. This document contains critical guidelines for maintaining code quality, consistency, and the project specification.
+Quizly is a high-performance, mobile-first Progressive Web Application (PWA) built with React and Vite that provides an advanced flashcard and learning system. This document contains critical guidelines for maintaining code quality, consistency, and the project specification.
 
 ## 📋 CRITICAL: Specification Maintenance
 
@@ -42,14 +42,18 @@ quizly2/
 │   │   ├── cards/      # Card-specific components
 │   │   ├── modes/      # Learning mode components
 │   │   └── ui/         # UI primitives
-│   ├── screens/        # Screen components
+│   ├── pages/          # Page components
 │   ├── hooks/          # Custom React hooks
 │   ├── services/       # API and data services
 │   ├── store/          # Zustand state management
 │   ├── types/          # TypeScript definitions
 │   ├── utils/          # Utility functions
-│   ├── theme/          # Design system
-│   └── navigation/     # React Navigation config
+│   ├── styles/         # Global styles and theme
+│   │   ├── theme.css   # CSS custom properties
+│   │   └── global.css  # Global styles
+│   └── router/         # React Router config
+├── public/
+│   └── data/           # Static JSON data files
 ├── docs/
 │   ├── spec.md         # PROJECT SPECIFICATION (KEEP UPDATED!)
 │   └── tickets/        # Feature tickets
@@ -60,45 +64,45 @@ quizly2/
 
 ## 🎨 Design System & Styling
 
-### Color Palette (from spec.md)
-```typescript
-const colors = {
-  primary: {
-    main: '#4A90E2',
-    light: '#6BA5E9',
-    dark: '#3A7BC8',
-  },
-  secondary: {
-    main: '#50E3C2',
-    light: '#6FEBD0',
-    dark: '#3DCBAA',
-  },
-  neutral: {
-    white: '#FFFFFF',
-    gray100: '#F7F8FA',
-    gray200: '#E5E7EB',
-    gray300: '#D1D5DB',
-    gray400: '#9CA3AF',
-    gray500: '#6B7280',
-    gray600: '#4B5563',
-    gray700: '#374151',
-    gray800: '#1F2937',
-    black: '#000000',
-  },
-  semantic: {
-    success: '#10B981',
-    warning: '#F59E0B',
-    error: '#EF4444',
-    info: '#3B82F6',
-  }
-};
+### CSS Custom Properties (from spec.md)
+```css
+:root {
+  /* Primary Colors */
+  --primary-main: #4A90E2;
+  --primary-light: #6BA5E9;
+  --primary-dark: #3A7BC8;
+
+  /* Secondary Colors */
+  --secondary-main: #50E3C2;
+  --secondary-light: #6FEBD0;
+  --secondary-dark: #3DCBAA;
+
+  /* Neutral Colors */
+  --neutral-white: #FFFFFF;
+  --neutral-gray-100: #F7F8FA;
+  --neutral-gray-200: #E5E7EB;
+  --neutral-gray-300: #D1D5DB;
+  --neutral-gray-400: #9CA3AF;
+  --neutral-gray-500: #6B7280;
+  --neutral-gray-600: #4B5563;
+  --neutral-gray-700: #374151;
+  --neutral-gray-800: #1F2937;
+  --neutral-black: #000000;
+
+  /* Semantic Colors */
+  --semantic-success: #10B981;
+  --semantic-warning: #F59E0B;
+  --semantic-error: #EF4444;
+  --semantic-info: #3B82F6;
+}
 ```
 
 ### Component Styling Rules
-- **Always use StyleSheet.create()** for performance
+- **Always use CSS Modules** for component-specific styles
+- **Use CSS custom properties** for theming
 - **Never use inline styles** except for dynamic values
-- **Maintain consistent spacing** using the spacing system
-- **Ensure touch targets** are ≥44px (iOS) / ≥48px (Android)
+- **Maintain mobile-first approach** with responsive design
+- **Ensure WCAG AA compliance** for accessibility
 
 ## 💾 Data Models & Types
 
@@ -117,6 +121,8 @@ The app supports cards with 2-6 sides (configurable):
 
 Example component structure:
 ```typescript
+import { FC, memo } from 'react';
+
 interface ComponentProps {
   // Properly typed props
 }
@@ -138,34 +144,40 @@ export const ComponentName: FC<ComponentProps> = memo(({
 4. **Add edge cases**
 
 ### Testing Requirements
-- **Unit tests**: >80% coverage target
-- **Component tests**: React Native Testing Library
-- **Platform tests**: Test iOS and Android separately
-- **E2E tests**: Critical user flows with Detox
+- **Unit tests**: >80% coverage target (Vitest)
+- **Component tests**: React Testing Library
+- **E2E tests**: Playwright for critical flows
+- **Performance tests**: Lighthouse >90
 
-### Platform Testing Pattern
+### Testing Pattern
 ```typescript
-it.each(['ios', 'android'])('should work on %s', (platform) => {
-  Platform.OS = platform as 'ios' | 'android';
-  // Test implementation
+import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+
+describe('ComponentName', () => {
+  it('should render correctly', () => {
+    render(<ComponentName />);
+    expect(screen.getByText('Expected Text')).toBeInTheDocument();
+  });
 });
 ```
 
 ## 🚀 Performance Requirements
 
 ### Target Metrics (from spec.md)
-- **Time to Interactive**: <3 seconds
-- **Frame Rate**: 60 FPS for all animations
-- **Memory Usage**: <200MB active
-- **Bundle Size**: <5MB initial download
-- **Offline Start**: <1 second
+- **First Contentful Paint**: <1.5s
+- **Time to Interactive**: <3.5s
+- **Largest Contentful Paint**: <2.5s
+- **Cumulative Layout Shift**: <0.1
+- **Bundle Size**: <200KB initial JS
+- **Lighthouse Score**: >90
 
 ### Optimization Checklist
 - [ ] Use `React.memo` for expensive components
-- [ ] Implement `FlatList` with proper props
-- [ ] Use `InteractionManager` for heavy operations
-- [ ] Optimize images with proper sizing
-- [ ] Use `react-native-reanimated` for animations
+- [ ] Implement code splitting with `React.lazy()`
+- [ ] Use CSS transforms for animations
+- [ ] Optimize images with WebP/AVIF
+- [ ] Implement virtual scrolling for long lists
 
 ## 📝 Development Workflow
 
@@ -190,7 +202,7 @@ claude --agent test-critic "Review tests for [component]"
 <type>(<scope>): <subject under 50 chars>
 
 Types: feat, fix, docs, style, refactor, test, chore
-Scopes: components, screens, navigation, store, types, tests
+Scopes: components, pages, router, store, types, tests
 ```
 
 **NEVER include AI signatures in commits:**
@@ -200,7 +212,7 @@ Scopes: components, screens, navigation, store, types, tests
 ## 🎮 Learning Modes Implementation
 
 ### Four Core Modes (from spec.md)
-1. **Flashcards**: Swipe-based with configurable sides
+1. **Flashcards**: Click/tap to flip, keyboard/swipe navigation
 2. **Learn**: Multiple choice + free text with progression
 3. **Match**: Grid-based matching game
 4. **Test**: Formal assessment with various question types
@@ -227,8 +239,11 @@ interface AppStore {
   // User preferences
   preferences: UserPreferences;
 
+  // UI state
+  theme: 'light' | 'dark' | 'auto';
+
   // Actions
-  loadDecks: () => void;
+  loadDecks: () => Promise<void>;
   selectDeck: (id: string) => void;
   startSession: (mode: string, settings: ModeSettings) => void;
   updateProgress: (correct: boolean, cardIdx: number) => void;
@@ -236,43 +251,62 @@ interface AppStore {
 ```
 
 ### Persistence Rules
-- Use AsyncStorage for offline data
-- Persist user preferences
-- Cache deck data locally
-- Store session progress
+- Use localStorage for user preferences
+- Use IndexedDB for deck data
+- Cache active session in memory
+- Implement Service Worker for offline support
 
-## 📱 Platform-Specific Considerations
+## 📱 Responsive Design
 
-### iOS vs Android
-```typescript
-const styles = StyleSheet.create({
-  shadow: Platform.select({
-    ios: {
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-    },
-    android: {
-      elevation: 4,
-    },
-  }),
-});
+### Breakpoints
+```css
+/* Mobile First Approach */
+--breakpoint-sm: 640px;   /* Small tablets */
+--breakpoint-md: 768px;   /* Tablets */
+--breakpoint-lg: 1024px;  /* Small laptops */
+--breakpoint-xl: 1280px;  /* Desktops */
+--breakpoint-2xl: 1536px; /* Large screens */
+```
+
+### CSS Modules Pattern
+```css
+/* Component.module.css */
+.container {
+  padding: var(--space-4);
+}
+
+/* Tablet and up */
+@media (min-width: 768px) {
+  .container {
+    padding: var(--space-6);
+  }
+}
+
+/* Desktop and up */
+@media (min-width: 1024px) {
+  .container {
+    padding: var(--space-8);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
 ```
 
 ### Accessibility Requirements
-- Screen reader support (VoiceOver/TalkBack)
-- Minimum touch targets
-- WCAG AA compliance
-- Proper ARIA labels
+- Full keyboard navigation
+- Screen reader support with ARIA
+- Focus visible indicators
+- High contrast mode support
+- Reduced motion support
+- Semantic HTML structure
 
 ## 🚫 Common Pitfalls to Avoid
 
-1. **Never use inline functions in props** - causes re-renders
+1. **Never use inline event handlers** - use proper event delegation
 2. **Never skip React.memo** for list items
 3. **Never use index as key** in dynamic lists
-4. **Never ignore platform differences**
-5. **Never ship without testing both platforms**
+4. **Never ignore TypeScript errors**
+5. **Never ship without browser testing**
 
 ## ✅ Pre-Commit Checklist
 
@@ -290,6 +324,9 @@ npm test
 # Build verification
 npm run build
 
+# Lighthouse audit (for UI changes)
+npm run lighthouse
+
 # Update spec.md if needed
 git add docs/spec.md
 ```
@@ -305,77 +342,77 @@ git add docs/spec.md
 ### Weekly Tasks
 - Review bundle size
 - Check for dependency updates
-- Test on real devices
+- Test on different browsers
 - Update documentation
 
 ## 🎯 Phase 1 Priorities
 
 Current focus areas (from spec.md):
 1. Core infrastructure setup ✅
-2. Navigation system implementation
-3. Theme system and design tokens
+2. React Router configuration
+3. Theme system with CSS custom properties
 4. Deck management features
 5. All four learning modes
-6. Settings and persistence
+6. PWA features and offline support
 
 ## 📚 Quick References
 
 ### Key Files
 - `docs/spec.md` - Complete project specification
 - `src/types/index.ts` - All TypeScript interfaces
-- `src/theme/index.ts` - Design system tokens
+- `src/styles/theme.css` - CSS custom properties
 - `src/store/index.ts` - State management
 
 ### Testing Commands
 ```bash
 npm test                    # Run all tests
-npm test -- --coverage      # With coverage
-npm test ComponentName      # Specific component
-npm run test:e2e           # E2E tests
+npm run test:coverage       # With coverage
+npm run test:watch         # Watch mode
+npm run test:e2e           # E2E tests with Playwright
 ```
 
 ### Development Commands
 ```bash
-npm start                   # Start Metro bundler on port 8081
-npm run ios                # iOS simulator
-npm run android            # Android emulator
+npm run dev                # Start Vite dev server (port 5173)
+npm run build              # Production build
+npm run preview            # Preview production build
 npm run type-check         # TypeScript validation
 npm run lint              # ESLint check
+npm run lighthouse        # Performance audit
 ```
 
 ### Dev Server Configuration
-**IMPORTANT**: The development server runs on port **8081** instead of the standard 8080 to avoid conflicts with other local services.
+**IMPORTANT**: The development server runs on port **5173** (Vite default).
 
-To configure this in your project:
-```json
-// metro.config.js
-module.exports = {
+```javascript
+// vite.config.ts
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
   server: {
-    port: 8081,
+    port: 5173,
+    open: true,
   },
-  // ... other config
-};
-```
-
-If you need to manually specify the port:
-```bash
-npx react-native start --port 8081
+});
 ```
 
 ## 🎓 Learning Resources
 
-- React Native docs: Use Context7 MCP for latest patterns
+- React docs: Use Context7 MCP for latest patterns
+- Vite docs: https://vitejs.dev/
 - Testing patterns: See `.claude/agents/test-writer.md`
 - Code quality: See `.claude/agents/code-quality-assessor.md`
-- Debugging: See `.claude/agents/debugger.md`
+- Performance: Run `npm run lighthouse`
 
 ## 💡 Important Reminders
 
 1. **ALWAYS update spec.md** when requirements change
-2. **ALWAYS write complete functions**, not snippets
-3. **ALWAYS test on both platforms**
+2. **ALWAYS write complete components**, not snippets
+3. **ALWAYS test on multiple browsers**
 4. **ALWAYS use proper TypeScript types**
-5. **ALWAYS follow the design system**
+5. **ALWAYS follow the CSS custom properties system**
 6. **NEVER commit without running tests**
 7. **NEVER include AI attribution in commits**
 8. **NEVER use `any` type**
@@ -388,6 +425,20 @@ npx react-native start --port 8081
 3. Use appropriate agent for help
 4. Test incrementally
 5. Update documentation
+
+## 🌐 Browser Support
+
+### Minimum Requirements
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
+
+### Progressive Enhancement
+- Core functionality works without JavaScript
+- Enhanced features with JavaScript enabled
+- Offline support with Service Worker
+- Install as PWA on supported platforms
 
 ---
 

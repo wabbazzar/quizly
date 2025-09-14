@@ -1,7 +1,4 @@
-/**
- * Core TypeScript interfaces for Quizly
- */
-
+// Deck Metadata
 export interface DeckMetadata {
   deck_name: string;
   description: string;
@@ -16,6 +13,7 @@ export interface DeckMetadata {
   last_updated: string;
 }
 
+// Card Structure
 export interface Card {
   idx: number;
   name: string;
@@ -28,38 +26,52 @@ export interface Card {
   level: number;
 }
 
+// Complete Deck
 export interface Deck {
   id: string;
   metadata: DeckMetadata;
   content: Card[];
 }
 
-export interface FlashcardsSettings {
-  frontSides: string[];     // Which sides to show on front
-  backSides: string[];      // Which sides to show on back
-  enableTimer: boolean;     // Enable auto-swipe timer
-  timerSeconds: number;     // Seconds before auto-swipe left
-  enableAudio: boolean;     // Enable text-to-speech
-  groupSides: {            // Side grouping preferences
-    [key: string]: string[];
-  };
-}
-
+// Learning Session State
 export interface SessionState {
-  mode: 'flashcards' | 'learn' | 'match' | 'test';
   deckId: string;
-  startTime: Date;
+  mode: 'flashcards' | 'learn' | 'match' | 'test';
   currentCardIndex: number;
   correctCount: number;
   incorrectCount: number;
   missedCards: number[];
-  settings: FlashcardsSettings;
+  startTime: number;
+  settings: ModeSettings;
 }
 
+// Mode Settings
+export interface ModeSettings {
+  frontSides: string[];  // e.g., ['side_a']
+  backSides: string[];   // e.g., ['side_b', 'side_c']
+  cardsPerRound: number;
+  enableTimer: boolean;
+  timerSeconds?: number;
+  enableAudio: boolean;
+  randomize: boolean;
+  progressionMode: 'sequential' | 'level' | 'random';
+}
+
+// Flashcards specific settings
+export interface FlashcardsSettings {
+  frontSides: string[];
+  backSides: string[];
+  enableTimer: boolean;
+  timerSeconds: number;
+  enableAudio: boolean;
+  groupSides: Record<string, string[]>;
+}
+
+// User Preferences
 export interface UserPreferences {
-  defaultFrontSides: string[];
-  defaultBackSides: string[];
-  enableHaptics: boolean;
-  enableSound: boolean;
   theme: 'light' | 'dark' | 'auto';
+  reducedMotion: boolean;
+  fontSize: 'small' | 'medium' | 'large';
+  defaultMode: 'flashcards' | 'learn' | 'match' | 'test';
+  soundEnabled: boolean;
 }

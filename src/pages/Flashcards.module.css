@@ -1,0 +1,258 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3);
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+}
+
+.backButton,
+.settingsButton {
+  background: none;
+  border: none;
+  font-size: var(--text-lg);
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  transition: background-color 0.2s;
+}
+
+.backButton:hover,
+.settingsButton:hover {
+  background: var(--bg-hover);
+}
+
+.deckInfo {
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+}
+
+.deckTitle {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardCounter {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-top: var(--space-1);
+}
+
+.progressSection {
+  padding: var(--space-2) var(--space-4);
+  background: var(--bg-secondary);
+  flex-shrink: 0;
+}
+
+.progressBar {
+  height: 4px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  position: relative;
+  margin-bottom: var(--space-2);
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--primary-main);
+  transition: width 0.3s ease;
+}
+
+.progressStats {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+}
+
+.incorrectStat {
+  color: var(--error);
+}
+
+.correctStat {
+  color: var(--success);
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  position: relative;
+  overflow: hidden;
+}
+
+.cardWrapper {
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  cursor: grab;
+}
+
+.cardWrapper:active {
+  cursor: grabbing;
+}
+
+.swipeIndicator {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 4rem;
+  font-weight: bold;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.swipeIndicator.incorrect {
+  left: var(--space-4);
+  color: var(--error);
+}
+
+.swipeIndicator.correct {
+  right: var(--space-4);
+  color: var(--success);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--bg-secondary);
+  flex-shrink: 0;
+}
+
+.navButton {
+  background: var(--bg-tertiary);
+  border: none;
+  color: var(--text-primary);
+  font-size: var(--text-2xl);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navButton:hover:not(:disabled) {
+  background: var(--primary-light);
+  transform: scale(1.1);
+}
+
+.navButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.actionButtons {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.flipButton,
+.markButton {
+  padding: var(--space-3) var(--space-4);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.flipButton {
+  background: var(--primary-main);
+  color: var(--text-primary-on-dark);
+}
+
+.flipButton:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.markButton {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.markButton.correct {
+  color: var(--success);
+}
+
+.markButton.incorrect {
+  color: var(--error);
+}
+
+.markButton:hover {
+  transform: translateY(-1px);
+}
+
+.markButton.correct:hover {
+  background: var(--success-light);
+}
+
+.markButton.incorrect:hover {
+  background: var(--error-light);
+}
+
+
+@media (max-width: 768px) {
+  .container {
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .header {
+    padding: var(--space-2);
+  }
+
+  .deckTitle {
+    font-size: var(--text-base);
+  }
+
+  .main {
+    padding: var(--space-2);
+  }
+
+  .controls {
+    padding: var(--space-2);
+    gap: var(--space-2);
+  }
+
+  .actionButtons {
+    gap: var(--space-2);
+  }
+
+  .markButton,
+  .flipButton {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-sm);
+  }
+
+  .navButton {
+    display: none;
+  }
+}

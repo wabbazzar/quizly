@@ -1,0 +1,117 @@
+.container {
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+.header {
+  background: linear-gradient(135deg, var(--primary-main), var(--primary-dark));
+  color: var(--text-primary-on-dark);
+  padding: var(--space-8) var(--space-4);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+
+.title {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-2);
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: var(--text-lg);
+  opacity: 0.9;
+}
+
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4);
+}
+
+.deckSection {
+  margin-bottom: var(--space-8);
+}
+
+.sectionTitle {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-6);
+}
+
+.deckGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-6);
+}
+
+.emptyState {
+  text-align: center;
+  padding: var(--space-12) var(--space-4);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--border-color);
+}
+
+.emptyState p {
+  font-size: var(--text-xl);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.emptyHint {
+  font-size: var(--text-base);
+  color: var(--text-tertiary);
+}
+
+.errorContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  text-align: center;
+}
+
+.errorContainer h2 {
+  font-size: var(--text-2xl);
+  color: var(--error);
+  margin-bottom: var(--space-4);
+}
+
+.errorContainer p {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-6);
+}
+
+.retryButton {
+  background: var(--primary-main);
+  color: var(--text-primary-on-dark);
+  border: none;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.retryButton:hover {
+  background: var(--primary-dark);
+}
+
+@media (max-width: 768px) {
+  .deckGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: var(--text-3xl);
+  }
+
+  .subtitle {
+    font-size: var(--text-base);
+  }
+}
