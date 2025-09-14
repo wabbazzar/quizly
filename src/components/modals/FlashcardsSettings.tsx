@@ -25,7 +25,7 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
 
   if (!deck) return null;
 
-  const availableSides = [];
+  const availableSides: string[] = [];
   if (deck.content[0].side_a) availableSides.push('side_a');
   if (deck.content[0].side_b) availableSides.push('side_b');
   if (deck.content[0].side_c) availableSides.push('side_c');
@@ -33,13 +33,10 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
   if (deck.content[0].side_e) availableSides.push('side_e');
   if (deck.content[0].side_f) availableSides.push('side_f');
 
-  const sideLabels: Record<string, string> = {
-    side_a: 'Side A (English)',
-    side_b: 'Side B (Pinyin)',
-    side_c: 'Side C (Character)',
-    side_d: 'Side D (Definition)',
-    side_e: 'Side E',
-    side_f: 'Side F',
+  // Generic side labels without assumptions about content
+  const getSideLabel = (side: string): string => {
+    const sideIndex = side.split('_')[1]?.toUpperCase();
+    return `Side ${sideIndex}`;
   };
 
   const toggleSide = (type: 'front' | 'back', side: string) => {
@@ -58,21 +55,26 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
 
   const applyPreset = (preset: string) => {
     switch (preset) {
-      case 'englishToChinese':
-        setLocalFrontSides(['side_a']);
-        setLocalBackSides(['side_b', 'side_c']);
+      case 'simple':
+        // First side on front, second side on back
+        setLocalFrontSides([availableSides[0] || 'side_a']);
+        setLocalBackSides([availableSides[1] || 'side_b']);
         break;
-      case 'chineseToEnglish':
-        setLocalFrontSides(['side_c']);
-        setLocalBackSides(['side_a', 'side_d']);
-        break;
-      case 'pinyinToCharacter':
-        setLocalFrontSides(['side_b']);
-        setLocalBackSides(['side_c']);
+      case 'reverse':
+        // Second side on front, first side on back
+        setLocalFrontSides([availableSides[1] || 'side_b']);
+        setLocalBackSides([availableSides[0] || 'side_a']);
         break;
       case 'comprehensive':
-        setLocalFrontSides(['side_a']);
-        setLocalBackSides(['side_b', 'side_c', 'side_d']);
+        // First side on front, all others on back
+        setLocalFrontSides([availableSides[0] || 'side_a']);
+        setLocalBackSides(availableSides.slice(1));
+        break;
+      case 'multifront':
+        // First two sides on front, rest on back
+        const frontCount = Math.min(2, availableSides.length);
+        setLocalFrontSides(availableSides.slice(0, frontCount));
+        setLocalBackSides(availableSides.slice(frontCount));
         break;
     }
   };
@@ -117,27 +119,31 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
                 <div className={styles.presets}>
                   <button
                     className={styles.presetButton}
-                    onClick={() => applyPreset('englishToChinese')}
+                    onClick={() => applyPreset('simple')}
+                    title="Show first side on front, second on back"
                   >
-                    English → Chinese
+                    Simple (A → B)
                   </button>
                   <button
                     className={styles.presetButton}
-                    onClick={() => applyPreset('chineseToEnglish')}
+                    onClick={() => applyPreset('reverse')}
+                    title="Show second side on front, first on back"
                   >
-                    Chinese → English
-                  </button>
-                  <button
-                    className={styles.presetButton}
-                    onClick={() => applyPreset('pinyinToCharacter')}
-                  >
-                    Pinyin → Character
+                    Reverse (B → A)
                   </button>
                   <button
                     className={styles.presetButton}
                     onClick={() => applyPreset('comprehensive')}
+                    title="Show first side on front, all others on back"
                   >
-                    All Sides
+                    Comprehensive
+                  </button>
+                  <button
+                    className={styles.presetButton}
+                    onClick={() => applyPreset('multifront')}
+                    title="Show multiple sides on both front and back"
+                  >
+                    Multi-Side
                   </button>
                 </div>
               </section>
@@ -157,7 +163,7 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
                       }`}
                       onClick={() => toggleSide('front', side)}
                     >
-                      {sideLabels[side]}
+                      {getSideLabel(side)}
                     </button>
                   ))}
                 </div>
@@ -178,7 +184,7 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
                       }`}
                       onClick={() => toggleSide('back', side)}
                     >
-                      {sideLabels[side]}
+                      {getSideLabel(side)}
                     </button>
                   ))}
                 </div>

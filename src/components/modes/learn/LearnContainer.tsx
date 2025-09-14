@@ -1,6 +1,9 @@
 import { FC, useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Deck, LearnModeSettings, LearnSessionState, LearnSessionResults, Question } from '@/types';
+import { Deck, LearnModeSettings, LearnSessionState, LearnSessionResults } from '@/types';
+import { useQuestionGenerator } from '@/hooks/useQuestionGenerator';
+import { useCardScheduler } from '@/hooks/useCardScheduler';
+import { TextMatcher } from '@/utils/textMatching';
 import styles from './LearnContainer.module.css';
 
 interface LearnContainerProps {
@@ -31,6 +34,11 @@ const LearnContainer: FC<LearnContainerProps> = ({
   const [isLoading, setIsLoading] = useState(true);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
+  const [userTextInput, setUserTextInput] = useState('');
+
+  // Use the new hooks
+  const questionGenerator = useQuestionGenerator(deck, settings);
+  const scheduler = useCardScheduler(settings);
 
   // Initialize session with cards
   useEffect(() => {
@@ -41,23 +49,13 @@ const LearnContainer: FC<LearnContainerProps> = ({
 
       const roundCards = cards.slice(0, settings.cardsPerRound);
 
-      // For now, create a simple multiple choice question from the first card
-      // This will be replaced with proper question generation in Phase 2
-      const firstQuestion: Question = {
-        id: '1',
-        type: 'multiple_choice',
-        cardIndex: 0,
-        questionText: roundCards[0]?.side_a || '',
-        questionSides: ['side_a'],
-        correctAnswer: roundCards[0]?.side_b || '',
-        options: generateMockOptions(roundCards[0]?.side_b || '', deck.content),
-        difficulty: 1,
-      };
+      // Generate questions using the new generator
+      questionGenerator.generateRound(roundCards);
 
       setSessionState(prev => ({
         ...prev,
         roundCards,
-        currentQuestion: firstQuestion,
+        currentQuestion: questionGenerator.currentQuestion,
         responseStartTime: Date.now(),
       }));
 
@@ -67,17 +65,16 @@ const LearnContainer: FC<LearnContainerProps> = ({
     initializeSession();
   }, [deck, settings]);
 
-  // Mock function to generate options (will be replaced in Phase 2)
-  const generateMockOptions = (correctAnswer: string, allCards: any[]): string[] => {
-    const options = [correctAnswer];
-    const otherAnswers = allCards
-      .map(c => c.side_b)
-      .filter(answer => answer !== correctAnswer)
-      .slice(0, 3);
-
-    options.push(...otherAnswers);
-    return options.sort(() => Math.random() - 0.5);
-  };
+  // Update current question when generator changes
+  useEffect(() => {
+    if (questionGenerator.currentQuestion) {
+      setSessionState(prev => ({
+        ...prev,
+        currentQuestion: questionGenerator.currentQuestion,
+        questionIndex: questionGenerator.currentQuestionIndex,
+      }));
+    }
+  }, [questionGenerator.currentQuestion, questionGenerator.currentQuestionIndex]);
 
   const handleAnswer = useCallback((answer: string, isCorrect: boolean) => {
     // Prevent multiple selections
@@ -85,6 +82,20 @@ const LearnContainer: FC<LearnContainerProps> = ({
 
     setSelectedAnswer(answer);
     setShowFeedback(true);
+
+    const responseTime = Date.now() - sessionState.responseStartTime;
+    const cardId = `card_${sessionState.currentQuestion?.cardIndex}`;
+
+    // Track missed cards for scheduling
+    if (!isCorrect && sessionState.currentQuestion) {
+      scheduler.trackMissedCard(
+        cardId,
+        sessionState.currentQuestion.cardIndex,
+        responseTime
+      );
+    } else if (isCorrect) {
+      scheduler.markCardCorrect(cardId);
+    }
 
     setSessionState(prev => {
       const newCorrectCards = new Set(prev.correctCards);
@@ -112,14 +123,15 @@ const LearnContainer: FC<LearnContainerProps> = ({
     setTimeout(() => {
       handleNextQuestion();
     }, 1500);
-  }, [selectedAnswer, showFeedback]);
+  }, [selectedAnswer, showFeedback, sessionState.responseStartTime, sessionState.currentQuestion, scheduler]);
 
   const handleNextQuestion = useCallback(() => {
     // Reset selection state for new question
     setSelectedAnswer(null);
     setShowFeedback(false);
+    setUserTextInput('');
 
-    if (sessionState.questionIndex >= sessionState.roundCards.length - 1) {
+    if (!questionGenerator.hasNext) {
       // Session complete
       const results: LearnSessionResults = {
         deckId: deck.id,
@@ -136,29 +148,15 @@ const LearnContainer: FC<LearnContainerProps> = ({
 
       onComplete(results);
     } else {
-      // Generate next question (simplified for now)
-      const nextIndex = sessionState.questionIndex + 1;
-      const nextCard = sessionState.roundCards[nextIndex];
-
-      const nextQuestion: Question = {
-        id: `${nextIndex + 1}`,
-        type: 'multiple_choice',
-        cardIndex: nextIndex,
-        questionText: nextCard.side_a,
-        questionSides: ['side_a'],
-        correctAnswer: nextCard.side_b,
-        options: generateMockOptions(nextCard.side_b, deck.content),
-        difficulty: 1,
-      };
+      // Move to next question using the generator
+      questionGenerator.nextQuestion();
 
       setSessionState(prev => ({
         ...prev,
-        questionIndex: nextIndex,
-        currentQuestion: nextQuestion,
         responseStartTime: Date.now(),
       }));
     }
-  }, [sessionState, deck, onComplete]);
+  }, [questionGenerator, sessionState, deck, onComplete]);
 
   if (isLoading || !sessionState.currentQuestion) {
     return (
@@ -210,7 +208,7 @@ const LearnContainer: FC<LearnContainerProps> = ({
               {sessionState.currentQuestion.questionText}
             </h2>
 
-            {/* Multiple Choice Options (simplified for Phase 1) */}
+            {/* Multiple Choice Options */}
             {sessionState.currentQuestion.type === 'multiple_choice' && (
               <div className={styles.optionsGrid}>
                 {sessionState.currentQuestion.options?.map((option, index) => {
@@ -237,6 +235,54 @@ const LearnContainer: FC<LearnContainerProps> = ({
                     </button>
                   );
                 })}
+              </div>
+            )}
+
+            {/* Free Text Input */}
+            {sessionState.currentQuestion.type === 'free_text' && (
+              <div className={styles.freeTextContainer}>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (!userTextInput.trim() || showFeedback) return;
+
+                    const acceptedAnswers = [
+                      sessionState.currentQuestion?.correctAnswer || '',
+                      ...(sessionState.currentQuestion?.acceptedAnswers || [])
+                    ];
+                    const isCorrect = TextMatcher.isMatch(userTextInput, acceptedAnswers);
+                    handleAnswer(userTextInput, isCorrect);
+                  }}
+                  className={styles.freeTextForm}
+                >
+                  <input
+                    type="text"
+                    value={userTextInput}
+                    onChange={(e) => setUserTextInput(e.target.value)}
+                    className={`${styles.textInput} ${
+                      showFeedback && selectedAnswer === userTextInput
+                        ? TextMatcher.isMatch(userTextInput, [sessionState.currentQuestion?.correctAnswer || ''])
+                          ? styles.correct
+                          : styles.incorrect
+                        : ''
+                    }`}
+                    placeholder="Type your answer..."
+                    disabled={showFeedback}
+                    autoComplete="off"
+                  />
+                  <button
+                    type="submit"
+                    className={styles.submitButton}
+                    disabled={!userTextInput.trim() || showFeedback}
+                  >
+                    Submit
+                  </button>
+                </form>
+                {showFeedback && !TextMatcher.isMatch(userTextInput, [sessionState.currentQuestion?.correctAnswer || '']) && (
+                  <div className={styles.correctAnswerHint}>
+                    Correct answer: {sessionState.currentQuestion?.correctAnswer}
+                  </div>
+                )}
               </div>
             )}
           </motion.div>

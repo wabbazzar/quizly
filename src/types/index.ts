@@ -121,6 +121,53 @@ export interface LearnSessionResults {
   strugglingCards: number[];
 }
 
+// Scheduling System Types
+export interface MissedCard {
+  cardId: string;
+  cardIndex: number;
+  missCount: number;
+  lastSeen: number;
+  difficulty: number; // 0-1, calculated from error rate
+  responseTime: number;
+}
+
+export interface SchedulerConfig {
+  algorithm: 'smart_spaced' | 'leitner_box';
+  aggressiveness: 'gentle' | 'balanced' | 'intensive';
+  minSpacing: number;        // Minimum cards between reviews
+  maxSpacing: number;        // Maximum spacing
+  clusterLimit: number;      // Max consecutive missed cards
+  progressRatio: number;     // Min % of new cards
+  difficultyWeight: number;  // How much difficulty affects spacing (0-1)
+}
+
+export interface SchedulingAlgorithm {
+  name: string;
+  description: string;
+  schedule(
+    missedCards: MissedCard[],
+    upcomingCards: Card[],
+    config: SchedulerConfig
+  ): Card[];
+}
+
+// Question Generation Types
+export interface QuestionGeneratorOptions {
+  questionTypes: ('multiple_choice' | 'free_text')[];
+  frontSides: string[];
+  backSides: string[];
+  difficulty: number;
+  excludeCards?: Set<number>;
+}
+
+// Text Matching Options
+export interface TextMatchOptions {
+  caseSensitive: boolean;
+  allowTypos: boolean;
+  maxEditDistance: number;
+  synonyms?: Map<string, string[]>;
+}
+
 // User Preferences
 export interface UserPreferences {
   theme: 'light' | 'dark' | 'auto';

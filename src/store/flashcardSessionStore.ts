@@ -20,7 +20,7 @@ interface FlashcardSessionStore {
 }
 
 const DEFAULT_FRONT_SIDES = ['side_a'];
-const DEFAULT_BACK_SIDES = ['side_b', 'side_c', 'side_d'];
+const DEFAULT_BACK_SIDES = ['side_b'];
 const SESSION_EXPIRY_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 
 export const useFlashcardSessionStore = create<FlashcardSessionStore>()(

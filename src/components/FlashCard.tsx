@@ -16,28 +16,17 @@ const FlashCard: FC<FlashCardProps> = ({
   isFlipped,
   onFlip,
   frontSides = ['side_a'],
-  backSides = ['side_b', 'side_c', 'side_d'],
+  backSides = ['side_b'],
 }) => {
-  const sideLabels: Record<string, string> = {
-    side_a: 'English',
-    side_b: 'Pinyin',
-    side_c: 'Character',
-    side_d: 'Definition',
-    side_e: 'Extra',
-    side_f: 'Notes',
-  };
-
   const frontContent = frontSides
     .filter(side => card[side as keyof Card])
     .map(side => ({
-      label: sideLabels[side] || side,
       content: card[side as keyof Card] as string,
     }));
 
   const backContent = backSides
     .filter(side => card[side as keyof Card])
     .map(side => ({
-      label: sideLabels[side] || side,
       content: card[side as keyof Card] as string,
     }));
 
@@ -54,9 +43,6 @@ const FlashCard: FC<FlashCardProps> = ({
           <div className={styles.cardContent}>
             {frontContent.map((item, index) => (
               <div key={index} className={styles.contentItem}>
-                {item.label && (
-                  <div className={styles.label}>{item.label}</div>
-                )}
                 <div className={styles.text}>{item.content}</div>
               </div>
             ))}
@@ -71,9 +57,6 @@ const FlashCard: FC<FlashCardProps> = ({
           <div className={styles.cardContent}>
             {backContent.map((item, index) => (
               <div key={index} className={styles.contentItem}>
-                {item.label && (
-                  <div className={styles.label}>{item.label}</div>
-                )}
                 <div className={styles.text}>{item.content}</div>
               </div>
             ))}

@@ -37,6 +37,15 @@ const Learn: FC = () => {
     }
   }, [deckId, loadDeck]);
 
+  // Prevent body scrolling on mobile
+  useEffect(() => {
+    document.body.classList.add('no-scroll');
+
+    return () => {
+      document.body.classList.remove('no-scroll');
+    };
+  }, []);
+
   const handleComplete = (results: LearnSessionResults) => {
     // Navigate to results page or back to deck
     navigate(`/deck/${deckId}/results`, { state: { results } });
