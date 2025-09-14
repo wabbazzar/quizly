@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "Quizly",
+    "slug": "quizly",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F7F8FA"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.quizly.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#F7F8FA"
+      },
+      "package": "com.quizly.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "output": "static",
+      "name": "Quizly",
+      "shortName": "Quizly",
+      "description": "Advanced flashcard and learning system",
+      "themeColor": "#4A90E2",
+      "backgroundColor": "#F7F8FA",
+      "display": "standalone",
+      "startUrl": "/"
+    },
+    "plugins": [
+      "expo-router"
+    ]
+  }
+}
