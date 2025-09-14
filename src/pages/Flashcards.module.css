@@ -25,12 +25,19 @@
   cursor: pointer;
   padding: var(--space-2);
   border-radius: var(--radius-md);
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.backButton:hover,
+.backButton:hover {
+  background: var(--bg-hover);
+}
+
 .settingsButton:hover {
   background: var(--bg-hover);
+  transform: rotate(45deg);
 }
 
 .deckInfo {

@@ -5,6 +5,7 @@ import { useDeckStore } from '@/store/deckStore';
 import FlashCard from '@/components/FlashCard';
 import FlashcardsSettings from '@/components/modals/FlashcardsSettings';
 import LoadingScreen from '@/components/common/LoadingScreen';
+import SettingsIcon from '@/components/icons/SettingsIcon';
 import styles from './Flashcards.module.css';
 
 const Flashcards: FC = () => {
@@ -65,7 +66,7 @@ const Flashcards: FC = () => {
       handleNext();
       setSwipeDirection(null);
       x.set(0);
-    }, 300);
+    }, 400);
   }, [currentCardIndex, handleNext, x]);
 
   const handleDragEnd = useCallback((event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
@@ -143,7 +144,7 @@ const Flashcards: FC = () => {
           onClick={() => setShowSettings(true)}
           aria-label="Settings"
         >
-          ⚙️
+          <SettingsIcon size={20} />
         </button>
       </header>
 
@@ -169,14 +170,20 @@ const Flashcards: FC = () => {
           onDragEnd={handleDragEnd}
           style={{ x, opacity, rotate }}
           animate={swipeDirection ? {
-            x: swipeDirection === 'right' ? 300 : -300,
-            opacity: 0
+            x: swipeDirection === 'right' ? window.innerWidth : -window.innerWidth,
+            opacity: 0,
+            rotate: swipeDirection === 'right' ? 20 : -20
           } : {
             x: 0,
             opacity: 1,
             rotate: 0
           }}
-          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          transition={{
+            type: 'spring',
+            stiffness: 200,
+            damping: 25,
+            duration: 0.4
+          }}
         >
           <FlashCard
             card={currentCard}

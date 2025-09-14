@@ -194,8 +194,22 @@
 
 @media (max-width: 640px) {
   .modal {
-    width: 95%;
-    max-height: 85vh;
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+    width: 100%;
+    max-height: 80vh;
+    max-height: 80dvh;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    margin: 0;
+  }
+
+  .content {
+    max-height: 50vh;
+    max-height: 50dvh;
   }
 
   .presets {
@@ -203,11 +217,14 @@
   }
 
   .footer {
-    flex-direction: column-reverse;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: var(--space-3);
   }
 
   .cancelButton,
   .saveButton {
-    width: 100%;
+    flex: 1;
+    max-width: 48%;
   }
 }
