@@ -67,6 +67,60 @@ export interface FlashcardsSettings {
   groupSides: Record<string, string[]>;
 }
 
+// Learn Mode Specific Types
+export interface LearnModeSettings extends ModeSettings {
+  questionTypes: ('multiple_choice' | 'free_text')[];
+  adaptiveDifficulty: boolean;
+  cardsPerRound: number;
+  masteryThreshold: number;
+
+  // Scheduling configuration
+  schedulingAlgorithm?: 'smart_spaced' | 'leitner_box';
+  aggressiveness?: 'gentle' | 'balanced' | 'intensive';
+  minSpacing?: number;
+  maxSpacing?: number;
+  clusterLimit?: number;
+  progressRatio?: number;
+  difficultyWeight?: number;
+}
+
+export interface LearnSessionState {
+  currentQuestion: Question | null;
+  questionIndex: number;
+  roundCards: Card[];
+  correctCards: Set<number>;
+  incorrectCards: Set<number>;
+  currentStreak: number;
+  maxStreak: number;
+  startTime: number;
+  responseStartTime: number;
+}
+
+export interface Question {
+  id: string;
+  type: 'multiple_choice' | 'free_text';
+  cardIndex: number;
+  questionText: string;
+  questionSides: string[];
+  correctAnswer: string;
+  options?: string[]; // For multiple choice
+  acceptedAnswers?: string[]; // For free text
+  difficulty: number;
+}
+
+export interface LearnSessionResults {
+  deckId: string;
+  totalQuestions: number;
+  correctAnswers: number;
+  incorrectAnswers: number;
+  accuracy: number;
+  averageResponseTime: number;
+  maxStreak: number;
+  duration: number;
+  masteredCards: number[];
+  strugglingCards: number[];
+}
+
 // User Preferences
 export interface UserPreferences {
   theme: 'light' | 'dark' | 'auto';

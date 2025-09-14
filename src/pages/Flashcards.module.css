@@ -1,9 +1,12 @@
 .container {
   height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for mobile */
   display: flex;
   flex-direction: column;
   background: var(--bg-primary);
   overflow: hidden;
+  position: fixed;
+  inset: 0;
 }
 
 .header {
@@ -109,6 +112,7 @@
   position: relative;
   overflow: hidden;
   perspective: 1000px;
+  min-height: 0; /* Important for flexbox children */
 }
 
 .cardWrapper {
@@ -118,6 +122,9 @@
   cursor: grab;
   transform-style: preserve-3d;
   will-change: transform, opacity;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cardWrapper:active {
@@ -237,6 +244,7 @@
   .container {
     height: 100vh;
     height: 100dvh;
+    touch-action: pan-x; /* Allow horizontal swipe but prevent vertical scroll */
   }
 
   .header {
@@ -249,6 +257,8 @@
 
   .main {
     padding: var(--space-2);
+    min-height: 0;
+    flex: 1 1 auto;
   }
 
   .controls {

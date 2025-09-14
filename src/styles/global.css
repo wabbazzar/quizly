@@ -25,6 +25,16 @@ body {
   min-height: 100vh;
   /* Ensure body fills viewport including safe areas */
   min-height: -webkit-fill-available;
+  /* Prevent overscroll bounce on iOS */
+  overscroll-behavior: none;
+}
+
+/* Prevent scrolling when flashcards page is active */
+body.no-scroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }
 
 #root {

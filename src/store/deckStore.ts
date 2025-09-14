@@ -6,10 +6,12 @@ import { loadAllDecks } from '@/utils/deckLoader';
 interface DeckStore {
   decks: Deck[];
   activeDeck: Deck | null;
+  currentDeck: Deck | null;
   isLoading: boolean;
   error: string | null;
 
   loadDecks: () => Promise<void>;
+  loadDeck: (deckId: string) => Promise<void>;
   selectDeck: (deckId: string) => void;
   importDeck: (jsonData: string) => Promise<void>;
   clearError: () => void;
@@ -20,6 +22,7 @@ export const useDeckStore = create<DeckStore>()(
     (set, get) => ({
       decks: [],
       activeDeck: null,
+      currentDeck: null,
       isLoading: false,
       error: null,
 
@@ -34,6 +37,34 @@ export const useDeckStore = create<DeckStore>()(
             isLoading: false
           });
           console.error('Error loading decks:', error);
+        }
+      },
+
+      loadDeck: async (deckId: string) => {
+        set({ isLoading: true, error: null });
+        try {
+          // First check if deck is already loaded
+          let deck = get().decks.find(d => d.id === deckId);
+
+          if (!deck) {
+            // If not in memory, load all decks and find the one we need
+            const loadedDecks = await loadAllDecks();
+            deck = loadedDecks.find(d => d.id === deckId);
+
+            if (deck) {
+              set({ decks: loadedDecks, currentDeck: deck, isLoading: false });
+            } else {
+              set({ error: 'Deck not found', isLoading: false });
+            }
+          } else {
+            set({ currentDeck: deck, isLoading: false });
+          }
+        } catch (error) {
+          set({
+            error: 'Failed to load deck',
+            isLoading: false
+          });
+          console.error('Error loading deck:', error);
         }
       },
 

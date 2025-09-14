@@ -1,21 +1,39 @@
-import { FC, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FC, useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useDeckStore } from '@/store/deckStore';
-import DeckCard from '@/components/DeckCard';
+import EnhancedDeckCard from '@/components/EnhancedDeckCard';
 import LoadingScreen from '@/components/common/LoadingScreen';
 import styles from './Home.module.css';
 
+interface DeckProgress {
+  overall: number;
+  byMode: Record<string, number>;
+  lastStudied?: Date;
+}
+
 const Home: FC = () => {
-  const navigate = useNavigate();
   const { decks, isLoading, error, loadDecks, selectDeck } = useDeckStore();
+  const [deckProgress] = useState<Record<string, DeckProgress>>({});
 
   useEffect(() => {
     loadDecks();
   }, [loadDecks]);
 
-  const handleDeckSelect = (deckId: string) => {
+  const handleModeSelect = (deckId: string, _mode: string) => {
     selectDeck(deckId);
-    navigate(`/flashcards/${deckId}`);
+    // Mode navigation is handled by EnhancedDeckCard
+  };
+
+  const getProgressForDeck = (deckId: string): DeckProgress => {
+    return deckProgress[deckId] || {
+      overall: 0,
+      byMode: {
+        flashcards: 0,
+        learn: 0,
+        match: 0,
+        test: 0,
+      },
+    };
   };
 
   if (isLoading) {
@@ -36,30 +54,72 @@ const Home: FC = () => {
 
   return (
     <div className={styles.container}>
+      {/* Hero Section */}
       <header className={styles.header}>
-        <h1 className={styles.title}>Quizly</h1>
-        <p className={styles.subtitle}>Master your learning with interactive flashcards</p>
+        <motion.h1
+          className={styles.title}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Welcome to Quizly
+        </motion.h1>
+        <motion.p
+          className={styles.subtitle}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          Choose a deck and select your preferred learning mode
+        </motion.p>
       </header>
 
       <main className={styles.main}>
         <section className={styles.deckSection}>
-          <h2 className={styles.sectionTitle}>Available Decks</h2>
+          <motion.h2
+            className={styles.sectionTitle}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            Available Decks
+          </motion.h2>
 
           {decks.length === 0 ? (
-            <div className={styles.emptyState}>
+            <motion.div
+              className={styles.emptyState}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
               <p>No decks available</p>
               <p className={styles.emptyHint}>Import a deck to get started</p>
-            </div>
+            </motion.div>
           ) : (
-            <div className={styles.deckGrid}>
-              {decks.map((deck) => (
-                <DeckCard
-                  key={deck.id}
-                  deck={deck}
-                  onSelect={handleDeckSelect}
-                />
-              ))}
-            </div>
+            <motion.div
+              className={styles.deckGrid}
+              layout
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <AnimatePresence mode="popLayout">
+                {decks.map((deck, index) => (
+                  <motion.div
+                    key={deck.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                  >
+                    <EnhancedDeckCard
+                      deck={deck}
+                      progress={getProgressForDeck(deck.id)}
+                      onModeSelect={handleModeSelect}
+                    />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
           )}
         </section>
       </main>

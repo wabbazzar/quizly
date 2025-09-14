@@ -50,6 +50,15 @@ const Flashcards: FC = () => {
     }
   }, [deckId, decks, selectDeck, navigate, getSession]);
 
+  // Prevent body scrolling on mobile
+  useEffect(() => {
+    document.body.classList.add('no-scroll');
+
+    return () => {
+      document.body.classList.remove('no-scroll');
+    };
+  }, []);
+
   // Save session whenever progress changes
   useEffect(() => {
     if (deckId && !isInitialMount.current) {

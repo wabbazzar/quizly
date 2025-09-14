@@ -1,0 +1,54 @@
+.learnPage {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.errorContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  text-align: center;
+}
+
+.errorContainer h2 {
+  font-size: var(--text-2xl);
+  color: var(--semantic-error);
+  margin-bottom: var(--space-4);
+}
+
+.errorContainer p {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-6);
+  font-size: var(--text-lg);
+}
+
+.backButton {
+  background: var(--primary-main);
+  color: var(--text-primary-on-dark);
+  border: none;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: background-color var(--transition-base);
+}
+
+.backButton:hover {
+  background: var(--primary-dark);
+}
+
+.backButton:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .learnPage {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
