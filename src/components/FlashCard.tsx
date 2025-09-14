@@ -7,8 +7,6 @@ interface FlashCardProps {
   card: Card;
   isFlipped: boolean;
   onFlip: () => void;
-  showFront: boolean;
-  showBack: boolean;
   frontSides?: string[];
   backSides?: string[];
 }
@@ -17,8 +15,6 @@ const FlashCard: FC<FlashCardProps> = ({
   card,
   isFlipped,
   onFlip,
-  showFront,
-  showBack,
   frontSides = ['side_a'],
   backSides = ['side_b', 'side_c', 'side_d'],
 }) => {

@@ -1,7 +1,8 @@
-import { FC, useState, useEffect, useCallback } from 'react';
+import { FC, useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { motion, useMotionValue, useTransform, PanInfo } from 'framer-motion';
+import { motion, PanInfo, AnimatePresence } from 'framer-motion';
 import { useDeckStore } from '@/store/deckStore';
+import { useFlashcardSessionStore, DEFAULT_FRONT_SIDES, DEFAULT_BACK_SIDES } from '@/store/flashcardSessionStore';
 import FlashCard from '@/components/FlashCard';
 import FlashcardsSettings from '@/components/modals/FlashcardsSettings';
 import LoadingScreen from '@/components/common/LoadingScreen';
@@ -12,45 +13,70 @@ const Flashcards: FC = () => {
   const { deckId } = useParams<{ deckId: string }>();
   const navigate = useNavigate();
   const { decks, activeDeck, selectDeck } = useDeckStore();
+  const { getSession, saveSession } = useFlashcardSessionStore();
+  const isInitialMount = useRef(true);
 
+  // Initialize state from persisted session or defaults
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [frontSides, setFrontSides] = useState(['side_a']);
-  const [backSides, setBackSides] = useState(['side_b', 'side_c', 'side_d']);
+  const [frontSides, setFrontSides] = useState(DEFAULT_FRONT_SIDES);
+  const [backSides, setBackSides] = useState(DEFAULT_BACK_SIDES);
   const [progress, setProgress] = useState<{ [key: number]: 'correct' | 'incorrect' | null }>({});
   const [showSettings, setShowSettings] = useState(false);
   const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
 
-  const x = useMotionValue(0);
-  const opacity = useTransform(x, [-200, 0, 200], [0.5, 1, 0.5]);
-  const rotate = useTransform(x, [-200, 0, 200], [-20, 0, 20]);
 
+  // Load deck and restore session on mount
   useEffect(() => {
-    if (deckId && !activeDeck) {
+    if (deckId) {
       const deck = decks.find(d => d.id === deckId);
       if (deck) {
         selectDeck(deckId);
+
+        // Only restore session on initial mount
+        if (isInitialMount.current) {
+          const session = getSession(deckId);
+          if (session) {
+            setCurrentCardIndex(session.currentCardIndex);
+            setProgress(session.progress);
+            setFrontSides(session.frontSides);
+            setBackSides(session.backSides);
+          }
+          isInitialMount.current = false;
+        }
       } else {
         navigate('/');
       }
     }
-  }, [deckId, activeDeck, decks, selectDeck, navigate]);
+  }, [deckId, decks, selectDeck, navigate, getSession]);
+
+  // Save session whenever progress changes
+  useEffect(() => {
+    if (deckId && !isInitialMount.current) {
+      saveSession({
+        deckId,
+        currentCardIndex,
+        progress,
+        frontSides,
+        backSides,
+        lastAccessed: Date.now()
+      });
+    }
+  }, [deckId, currentCardIndex, progress, frontSides, backSides, saveSession]);
 
   const handleNext = useCallback(() => {
     if (activeDeck && currentCardIndex < activeDeck.content.length - 1) {
       setCurrentCardIndex(prev => prev + 1);
       setIsFlipped(false);
-      x.set(0);
     }
-  }, [activeDeck, currentCardIndex, x]);
+  }, [activeDeck, currentCardIndex]);
 
   const handlePrevious = useCallback(() => {
     if (currentCardIndex > 0) {
       setCurrentCardIndex(prev => prev - 1);
       setIsFlipped(false);
-      x.set(0);
     }
-  }, [currentCardIndex, x]);
+  }, [currentCardIndex]);
 
   const handleFlip = useCallback(() => {
     setIsFlipped(prev => !prev);
@@ -65,11 +91,10 @@ const Flashcards: FC = () => {
     setTimeout(() => {
       handleNext();
       setSwipeDirection(null);
-      x.set(0);
     }, 400);
-  }, [currentCardIndex, handleNext, x]);
+  }, [currentCardIndex, handleNext]);
 
-  const handleDragEnd = useCallback((event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+  const handleDragEnd = useCallback((_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const threshold = 100;
     if (Math.abs(info.offset.x) > threshold) {
       if (info.offset.x > 0) {
@@ -77,10 +102,8 @@ const Flashcards: FC = () => {
       } else {
         markCard('incorrect');
       }
-    } else {
-      x.set(0);
     }
-  }, [markCard, x]);
+  }, [markCard]);
 
   const updateSettings = useCallback((newFrontSides: string[], newBackSides: string[]) => {
     setFrontSides(newFrontSides);
@@ -128,7 +151,10 @@ const Flashcards: FC = () => {
       <header className={styles.header}>
         <button
           className={styles.backButton}
-          onClick={() => navigate('/')}
+          onClick={() => {
+            // Session is automatically saved via useEffect
+            navigate('/');
+          }}
           aria-label="Back to decks"
         >
           ← Back
@@ -162,53 +188,54 @@ const Flashcards: FC = () => {
       </div>
 
       <main className={styles.main}>
-        <motion.div
-          className={styles.cardWrapper}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={1}
-          onDragEnd={handleDragEnd}
-          style={{ x, opacity, rotate }}
-          animate={swipeDirection ? {
-            x: swipeDirection === 'right' ? window.innerWidth : -window.innerWidth,
-            opacity: 0,
-            rotate: swipeDirection === 'right' ? 20 : -20
-          } : {
-            x: 0,
-            opacity: 1,
-            rotate: 0
-          }}
-          transition={{
-            type: 'spring',
-            stiffness: 200,
-            damping: 25,
-            duration: 0.4
-          }}
-        >
-          <FlashCard
-            card={currentCard}
-            isFlipped={isFlipped}
-            onFlip={handleFlip}
-            showFront={true}
-            showBack={true}
-            frontSides={frontSides}
-            backSides={backSides}
-          />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentCardIndex}
+            className={styles.cardWrapper}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={handleDragEnd}
+            initial={{ y: window.innerHeight, opacity: 0 }}
+            animate={{
+              y: 0,
+              opacity: 1,
+              x: swipeDirection === 'right' ? window.innerWidth : swipeDirection === 'left' ? -window.innerWidth : 0,
+              rotate: swipeDirection === 'right' ? 20 : swipeDirection === 'left' ? -20 : 0
+            }}
+            exit={{
+              opacity: 0,
+              transition: { duration: 0.2 }
+            }}
+            transition={{
+              type: 'spring',
+              stiffness: 300,
+              damping: 30
+            }}
+          >
+              <FlashCard
+                card={currentCard}
+                isFlipped={isFlipped}
+                onFlip={handleFlip}
+                frontSides={frontSides}
+                backSides={backSides}
+              />
 
-          {/* Swipe indicators */}
-          <motion.div
-            className={`${styles.swipeIndicator} ${styles.incorrect}`}
-            animate={{ opacity: x.get() < -50 ? 1 : 0 }}
-          >
-            ✗
-          </motion.div>
-          <motion.div
-            className={`${styles.swipeIndicator} ${styles.correct}`}
-            animate={{ opacity: x.get() > 50 ? 1 : 0 }}
-          >
-            ✓
-          </motion.div>
-        </motion.div>
+              {/* Swipe indicators */}
+              <div
+                className={`${styles.swipeIndicator} ${styles.incorrect}`}
+                style={{ opacity: swipeDirection === 'left' ? 1 : 0 }}
+              >
+                ✗
+              </div>
+              <div
+                className={`${styles.swipeIndicator} ${styles.correct}`}
+                style={{ opacity: swipeDirection === 'right' ? 1 : 0 }}
+              >
+                ✓
+              </div>
+            </motion.div>
+        </AnimatePresence>
       </main>
 
       <div className={styles.controls}>

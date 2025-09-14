@@ -29,6 +29,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
 }
 
 .backButton:hover {
@@ -105,6 +108,7 @@
   padding: var(--space-4);
   position: relative;
   overflow: hidden;
+  perspective: 1000px;
 }
 
 .cardWrapper {
@@ -112,6 +116,8 @@
   max-width: 600px;
   position: relative;
   cursor: grab;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
 }
 
 .cardWrapper:active {
@@ -145,6 +151,7 @@
   justify-content: center;
   gap: var(--space-3);
   padding: var(--space-3);
+  padding-bottom: calc(var(--space-3) + env(safe-area-inset-bottom, 0px));
   background: var(--bg-secondary);
   flex-shrink: 0;
 }
@@ -246,6 +253,7 @@
 
   .controls {
     padding: var(--space-2);
+    padding-bottom: calc(var(--space-2) + env(safe-area-inset-bottom, 0px));
     gap: var(--space-2);
   }
 
