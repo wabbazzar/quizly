@@ -24,6 +24,9 @@
   z-index: 1000;
   display: flex;
   flex-direction: column;
+  margin: 0;
+  right: auto;
+  bottom: auto;
 }
 
 .header {
@@ -340,6 +343,10 @@
 /* Mobile responsive */
 @media (max-width: 640px) {
   .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: none;
     width: 100%;
     height: 100%;
     max-width: 100%;

@@ -20,15 +20,19 @@ const LearnSettings: FC<LearnSettingsProps> = ({
 }) => {
   const [localSettings, setLocalSettings] = useState<LearnModeSettings>(settings);
 
-  if (!deck) return null;
+  // Check if deck and deck content exist
+  if (!deck || !deck.content || deck.content.length === 0) return null;
 
   const availableSides: string[] = [];
-  if (deck.content[0].side_a) availableSides.push('side_a');
-  if (deck.content[0].side_b) availableSides.push('side_b');
-  if (deck.content[0].side_c) availableSides.push('side_c');
-  if (deck.content[0].side_d) availableSides.push('side_d');
-  if (deck.content[0].side_e) availableSides.push('side_e');
-  if (deck.content[0].side_f) availableSides.push('side_f');
+  const firstCard = deck.content[0];
+
+  // Safely check for available sides
+  if (firstCard?.side_a) availableSides.push('side_a');
+  if (firstCard?.side_b) availableSides.push('side_b');
+  if (firstCard?.side_c) availableSides.push('side_c');
+  if (firstCard?.side_d) availableSides.push('side_d');
+  if (firstCard?.side_e) availableSides.push('side_e');
+  if (firstCard?.side_f) availableSides.push('side_f');
 
   // Get side labels from deck metadata or fallback to generic labels
   const getSideLabel = (side: string): string => {
@@ -113,9 +117,9 @@ const LearnSettings: FC<LearnSettingsProps> = ({
           />
           <motion.div
             className={styles.modal}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
           >
             <header className={styles.header}>
               <h2 className={styles.title}>Learn Mode Settings</h2>
@@ -307,14 +311,12 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                       value={localSettings.schedulingAlgorithm}
                       onChange={(e) => setLocalSettings({
                         ...localSettings,
-                        schedulingAlgorithm: e.target.value as 'adaptive' | 'spaced_repetition' | 'random' | 'sequential'
+                        schedulingAlgorithm: e.target.value as 'smart_spaced' | 'leitner_box'
                       })}
                       className={styles.select}
                     >
-                      <option value="adaptive">Adaptive (Smart)</option>
-                      <option value="spaced_repetition">Spaced Repetition</option>
-                      <option value="random">Random</option>
-                      <option value="sequential">Sequential</option>
+                      <option value="smart_spaced">Smart Spaced (Adaptive)</option>
+                      <option value="leitner_box">Leitner Box System</option>
                     </select>
                   </label>
                 </div>
