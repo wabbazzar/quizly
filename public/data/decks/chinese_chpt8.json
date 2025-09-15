@@ -34,8 +34,8 @@
       "idx": 0,
       "name": "measure_word_for_essays_articles_etc",
       "side_a": "(measure word for essays, articles, etc.)",
-      "side_b": "piąn",
-      "side_c": "ῇ",
+      "side_b": "piǎn",
+      "side_c": "篇",
       "side_d": "m",
       "level": 1
     },
@@ -45,7 +45,7 @@
       "name": "diary",
       "side_a": "diary",
       "side_b": "rìjì",
-      "side_c": "ᅺ崐",
+      "side_c": "日记",
       "side_d": "n",
       "level": 1
     },
@@ -55,7 +55,7 @@
       "name": "tired",
       "side_a": "tired",
       "side_b": "lèi",
-      "side_c": "₲",
+      "side_c": "累",
       "side_d": "adj",
       "level": 1
     },
@@ -64,8 +64,8 @@
       "idx": 3,
       "name": "vo_to_get_up",
       "side_a": "vo to get up",
-      "side_b": "qכ",
-      "side_c": "㑌ಉ",
+      "side_b": "qǐ",
+      "side_c": "起床",
       "side_d": "chuáng",
       "level": 1
     },
@@ -74,8 +74,8 @@
       "idx": 4,
       "name": "vo_to_take_a_bath_shower",
       "side_a": "vo to take a bath/shower",
-      "side_b": "xכ",
-      "side_c": "ᘺ៿",
+      "side_b": "xǐ",
+      "side_c": "洗澡",
       "side_d": "zיo",
       "level": 1
     },
@@ -84,8 +84,8 @@
       "idx": 5,
       "name": "breakfast",
       "side_a": "breakfast",
-      "side_b": "zיofàn",
-      "side_c": "ᅽ櫍",
+      "side_b": "zǎofàn",
+      "side_c": "早饭",
       "side_d": "n",
       "level": 1
     },
@@ -94,8 +94,8 @@
       "idx": 6,
       "name": "simultaneously_at_the_same_time",
       "side_a": "simultaneously; at the same time",
-      "side_b": "yìbiąn",
-      "side_c": "ɺ愙",
+      "side_b": "yìbiǎn",
+      "side_c": "一边",
       "side_d": "adv",
       "level": 1
     },
@@ -105,7 +105,7 @@
       "name": "classroom",
       "side_a": "classroom",
       "side_b": "jiàoshì",
-      "side_c": "ᄞા",
+      "side_c": "教室",
       "side_d": "n",
       "level": 1
     },
@@ -114,8 +114,8 @@
       "idx": 8,
       "name": "pronunciation",
       "side_a": "pronunciation",
-      "side_b": "fąyĨn",
-      "side_c": "┱ㅠ",
+      "side_b": "fǎyīn",
+      "side_c": "发音",
       "side_d": "n",
       "level": 1
     },
@@ -124,8 +124,8 @@
       "idx": 9,
       "name": "new",
       "side_a": "new",
-      "side_b": "xĨn",
-      "side_c": "ᅘ",
+      "side_b": "xīn",
+      "side_c": "新",
       "side_d": "adj",
       "level": 1
     },
@@ -134,8 +134,8 @@
       "idx": 10,
       "name": "computer",
       "side_a": "computer",
-      "side_b": "diànnיo",
-      "side_c": "䚕剱",
+      "side_b": "diànnǎo",
+      "side_c": "电脑",
       "side_d": "n",
       "level": 1
     },
@@ -144,8 +144,8 @@
       "idx": 11,
       "name": "noon",
       "side_a": "noon",
-      "side_b": "zhņngwן",
-      "side_c": "ʑ֘",
+      "side_b": "zhōngwǔ",
+      "side_c": "中午",
       "side_d": "n",
       "level": 1
     },
@@ -154,8 +154,8 @@
       "idx": 12,
       "name": "dining_room_cafeteria",
       "side_a": "dining room, cafeteria",
-      "side_b": "cąntĨng",
-      "side_c": "㇯ⓥ",
+      "side_b": "cǎntīng",
+      "side_c": "餐厅",
       "side_d": "n",
       "level": 1
     },
@@ -164,8 +164,8 @@
       "idx": 13,
       "name": "lunch_midday_meal",
       "side_a": "lunch, midday meal",
-      "side_b": "wןfàn",
-      "side_c": "֘櫍",
+      "side_b": "wǔfàn",
+      "side_c": "午饭",
       "side_d": "n",
       "level": 1
     },
@@ -175,7 +175,7 @@
       "name": "vo_to_go_online_to_surf_the_internet",
       "side_a": "vo to go online; to surf the internet",
       "side_b": "shàng",
-      "side_c": "ʀ⇑",
+      "side_c": "上网",
       "side_d": "wיng",
       "level": 1
     },
@@ -185,7 +185,7 @@
       "name": "dormitory",
       "side_a": "dormitory",
       "side_b": "sùshè",
-      "side_c": "્⎤",
+      "side_c": "宿舍",
       "side_d": "n",
       "level": 1
     },
@@ -195,7 +195,7 @@
       "name": "there",
       "side_a": "there",
       "side_b": "nàr",
-      "side_c": "⴨ѽ",
+      "side_c": "那儿",
       "side_d": "pr",
       "level": 1
     },
@@ -205,7 +205,7 @@
       "name": "in_the_middle_of_doing_something",
       "side_a": "in the middle of (doing something)",
       "side_b": "zhèngzài",
-      "side_c": "ᔌ߱",
+      "side_c": "正在",
       "side_d": "adv",
       "level": 1
     },
@@ -214,8 +214,8 @@
       "idx": 18,
       "name": "before",
       "side_a": "before",
-      "side_b": "yכqián",
-      "side_c": "˫Ԋ",
+      "side_b": "yǐqián",
+      "side_c": "以前",
       "side_d": "t",
       "level": 1
     },
@@ -225,7 +225,7 @@
       "name": "to_tell",
       "side_a": "to tell",
       "side_b": "gàosu",
-      "side_c": "ب崩",
+      "side_c": "告诉",
       "side_d": "v",
       "level": 1
     },
@@ -234,8 +234,8 @@
       "idx": 20,
       "name": "already",
       "side_a": "already",
-      "side_b": "yכjĨng",
-      "side_c": "఩倯",
+      "side_b": "yǐjīng",
+      "side_c": "已经",
       "side_d": "adv",
       "level": 1
     },
@@ -244,8 +244,8 @@
       "idx": 21,
       "name": "to_know",
       "side_a": "to know",
-      "side_b": "zhĨdao",
-      "side_c": "ᵧⳬ",
+      "side_b": "zhīdao",
+      "side_c": "知道",
       "side_d": "v",
       "level": 1
     }
