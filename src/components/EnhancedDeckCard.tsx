@@ -228,7 +228,7 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(({
           >
             <mode.icon className={styles.modeIcon} />
             <span className={styles.modeLabel}>{mode.label}</span>
-            {progress.byMode[mode.id] && progress.byMode[mode.id] > 0 && (
+            {progress.byMode[mode.id] > 0 && (
               <motion.span
                 className={styles.modeProgress}
                 initial={{ opacity: 0 }}

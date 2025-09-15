@@ -1,8 +1,8 @@
 {
   "id": "chinese_chpt5",
   "metadata": {
-    "deck_name": "Chinese Chapter 5",
-    "description": "Vocabulary for Chapter 5",
+    "deck_name": "Chinese Chapter 5 - Visiting & Introductions",
+    "description": "Essential Chinese vocabulary for visiting friends, formal introductions, and polite expressions",
     "category": "Language Learning",
     "available_levels": [1, 2, 3],
     "available_sides": 4,
@@ -14,7 +14,7 @@
     },
     "card_count": 9,
     "difficulty": "beginner",
-    "tags": ["chinese", "mandarin", "chapter5", "vocabulary"],
+    "tags": ["chinese", "mandarin", "visiting", "introductions", "politeness", "chapter5"],
     "version": "1.0.0",
     "created_date": "2025-09-14T00:00:00Z",
     "last_updated": "2025-09-14T00:00:00Z"
@@ -37,7 +37,7 @@
       "side_a": "to enter",
       "side_b": "jìn",
       "side_c": "进",
-      "side_d": "verb",
+      "side_d": "To go into a place or room",
       "level": 1
     },
     {
@@ -57,7 +57,7 @@
       "side_a": "to come in",
       "side_b": "jìn lai",
       "side_c": "进来",
-      "side_d": "verb complement",
+      "side_d": "Invitation to enter; directional verb phrase",
       "level": 1
     },
     {
@@ -77,7 +77,7 @@
       "side_a": "to introduce",
       "side_b": "jièshào",
       "side_c": "介绍",
-      "side_d": "verb",
+      "side_d": "To present someone to another person",
       "level": 1
     },
     {
@@ -97,7 +97,7 @@
       "side_a": "happy, pleased",
       "side_b": "gāoxìng",
       "side_c": "高兴",
-      "side_d": "adjective",
+      "side_d": "Feeling of joy or satisfaction",
       "level": 1
     },
     {
@@ -107,7 +107,7 @@
       "side_a": "pretty",
       "side_b": "piàoliang",
       "side_c": "漂亮",
-      "side_d": "adjective",
+      "side_d": "Attractive or beautiful in appearance"
       "level": 1
     }
   ]

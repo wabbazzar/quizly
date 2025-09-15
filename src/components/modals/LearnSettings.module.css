@@ -218,6 +218,17 @@
   accent-color: var(--primary-main);
 }
 
+.settingDescription {
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  background: var(--neutral-gray-100);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--neutral-gray-600);
+  line-height: 1.5;
+  font-style: italic;
+}
+
 .footer {
   display: flex;
   justify-content: flex-end;

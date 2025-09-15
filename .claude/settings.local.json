@@ -56,7 +56,11 @@
       "Bash(do echo \"$f:\")",
       "Bash(done)",
       "Bash(do echo \"Chapter $i:\")",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(kill:*)",
+      "Bash(npx vite build:*)",
+      "Bash(cat:*)",
+      "Bash(npx playwright test:*)"
     ],
     "deny": [],
     "ask": []

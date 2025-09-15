@@ -29,6 +29,8 @@ const defaultLearnSettings: LearnModeSettings = {
   progressionMode: 'sequential',
   questionTypeMix: 'auto',
   timerSeconds: 30,
+  progressiveLearning: 'spaced',
+  progressiveLearningSpacing: 3,
 };
 
 const Learn: FC = () => {

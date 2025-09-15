@@ -1,8 +1,8 @@
 {
   "id": "chinese_chpt4",
   "metadata": {
-    "deck_name": "Chinese Chapter 4",
-    "description": "Vocabulary for Chapter 4",
+    "deck_name": "Chinese Chapter 4 - Hobbies & Activities",
+    "description": "Essential Chinese vocabulary for hobbies, recreational activities, and entertainment",
     "category": "Language Learning",
     "available_levels": [1, 2, 3],
     "available_sides": 4,
@@ -14,7 +14,7 @@
     },
     "card_count": 20,
     "difficulty": "beginner",
-    "tags": ["chinese", "mandarin", "chapter4", "vocabulary"],
+    "tags": ["chinese", "mandarin", "hobbies", "activities", "entertainment", "chapter4"],
     "version": "1.0.0",
     "created_date": "2025-09-14T00:00:00Z",
     "last_updated": "2025-09-14T00:00:00Z"
@@ -37,7 +37,7 @@
       "side_a": "to play ball",
       "side_b": "dǎ qiú",
       "side_c": "打球",
-      "side_d": "verb object",
+      "side_d": "To play ball sports like basketball, tennis",
       "level": 1
     },
     {
@@ -47,7 +47,7 @@
       "side_a": "to watch; to look; to read",
       "side_b": "kàn",
       "side_c": "看",
-      "side_d": "verb",
+      "side_d": "Multi-purpose verb for visual activities",
       "level": 1
     },
     {
@@ -67,7 +67,7 @@
       "side_a": "to sing (a song)",
       "side_b": "chàng gē",
       "side_c": "唱歌",
-      "side_d": "verb object",
+      "side_d": "Musical activity of singing songs",
       "level": 1
     },
     {
@@ -77,7 +77,7 @@
       "side_a": "to dance",
       "side_b": "tiào wǔ",
       "side_c": "跳舞",
-      "side_d": "verb object",
+      "side_d": "Performing rhythmic movements to music",
       "level": 1
     },
     {
@@ -97,7 +97,7 @@
       "side_a": "music",
       "side_b": "yīnyuè",
       "side_c": "音乐",
-      "side_d": "noun",
+      "side_d": "Art form using organized sound and rhythm"
       "level": 1
     },
     {

@@ -21,6 +21,7 @@ export const useQuestionGenerator = (
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [correctMCCards, setCorrectMCCards] = useState<Set<number>>(new Set());
+  const [cardQuestionCounts, setCardQuestionCounts] = useState<Map<number, number>>(new Map());
 
   const generateRound = useCallback((cards: Card[]) => {
     const newQuestions = QuestionGenerator.generateQuestions(cards, {
@@ -36,6 +37,7 @@ export const useQuestionGenerator = (
     setQuestions(newQuestions);
     setCurrentQuestionIndex(0);
     setCorrectMCCards(new Set());
+    setCardQuestionCounts(new Map());
   }, [settings]);
 
   const addFollowUpQuestion = useCallback((cardIndex: number, parentQuestionId: string) => {
@@ -71,26 +73,71 @@ export const useQuestionGenerator = (
     }
   }, [questions, currentQuestionIndex, settings]);
 
+  const shouldAddFollowUp = useCallback((cardIndex: number): boolean => {
+    // Don't add follow-up if free text is not enabled
+    if (!settings.questionTypes?.includes('free_text')) return false;
+
+    // Get progressive learning configuration
+    const progressiveLearning = settings.progressiveLearning ?? 'spaced';
+    const minSpacing = settings.progressiveLearningSpacing ?? 3;
+
+    if (progressiveLearning === 'disabled') return false;
+
+    if (progressiveLearning === 'immediate') {
+      // Only add follow-up if we haven't already asked a free text for this card
+      const count = cardQuestionCounts.get(cardIndex) || 0;
+      return count < 2; // Allow 1 MC + 1 FT max per card
+    }
+
+    if (progressiveLearning === 'spaced') {
+      // Check if there's sufficient spacing since last question for this card
+      const questionsSinceCard = questions
+        .slice(Math.max(0, currentQuestionIndex - minSpacing), currentQuestionIndex)
+        .filter(q => q.cardIndex === cardIndex).length;
+
+      // Only add if we haven't seen this card recently
+      return questionsSinceCard === 0;
+    }
+
+    if (progressiveLearning === 'random') {
+      // 30% chance of adding a follow-up
+      return Math.random() < 0.3;
+    }
+
+    return false;
+  }, [settings, cardQuestionCounts, questions, currentQuestionIndex]);
+
   const nextQuestion = useCallback(() => {
     const currentQ = questions[currentQuestionIndex];
+
+    // Update card question count
+    if (currentQ) {
+      setCardQuestionCounts(prev => {
+        const newCounts = new Map(prev);
+        newCounts.set(currentQ.cardIndex, (prev.get(currentQ.cardIndex) || 0) + 1);
+        return newCounts;
+      });
+    }
 
     // Check if we should add a follow-up question for correctly answered MC
     if (currentQ &&
         currentQ.type === 'multiple_choice' &&
         !currentQ.isFollowUp &&
         correctMCCards.has(currentQ.cardIndex) &&
-        !questions[currentQuestionIndex + 1]?.isFollowUp) {
+        !questions[currentQuestionIndex + 1]?.isFollowUp &&
+        shouldAddFollowUp(currentQ.cardIndex)) {
       // Add a follow-up free text question
       addFollowUpQuestion(currentQ.cardIndex, currentQ.id);
     }
 
     setCurrentQuestionIndex(prev => Math.min(prev + 1, questions.length - 1));
-  }, [questions, currentQuestionIndex, correctMCCards, addFollowUpQuestion]);
+  }, [questions, currentQuestionIndex, correctMCCards, addFollowUpQuestion, shouldAddFollowUp]);
 
   const reset = useCallback(() => {
     setQuestions([]);
     setCurrentQuestionIndex(0);
     setCorrectMCCards(new Set());
+    setCardQuestionCounts(new Map());
   }, []);
 
   const currentQuestion = useMemo(() => {

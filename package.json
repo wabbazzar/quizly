@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/generate-deck-manifest.js && vite",
-    "build": "node scripts/generate-deck-manifest.js && tsc -b && vite build --base /quizly/",
+    "build": "node scripts/generate-deck-manifest.js && tsc -b && vite build",
+    "build:gh-pages": "node scripts/generate-deck-manifest.js && tsc -b && vite build --base /quizly/ && node scripts/fix-gh-pages-manifest.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "type-check": "tsc --noEmit",

@@ -1,8 +1,8 @@
 {
   "id": "chinese_chpt2",
   "metadata": {
-    "deck_name": "Chinese Chapter 2",
-    "description": "Vocabulary for Chapter 2",
+    "deck_name": "Chinese Chapter 2 - Family & Relationships",
+    "description": "Essential Chinese vocabulary for family members, relationships, and basic descriptions",
     "category": "Language Learning",
     "available_levels": [1, 2, 3],
     "available_sides": 4,
@@ -14,7 +14,7 @@
     },
     "card_count": 21,
     "difficulty": "beginner",
-    "tags": ["chinese", "mandarin", "chapter2", "vocabulary"],
+    "tags": ["chinese", "mandarin", "family", "relationships", "chapter2"],
     "version": "1.0.0",
     "created_date": "2025-09-14T00:00:00Z",
     "last_updated": "2025-09-14T00:00:00Z"
@@ -27,7 +27,7 @@
       "side_a": "that",
       "side_b": "nà",
       "side_c": "那",
-      "side_d": "pronoun",
+      "side_d": "Demonstrative pronoun pointing to distant objects",
       "level": 1
     },
     {
@@ -37,7 +37,7 @@
       "side_a": "(a possessive or descriptive particle)",
       "side_b": "de",
       "side_c": "的",
-      "side_d": "particle",
+      "side_d": "Possessive marker showing ownership or relationship",
       "level": 1
     },
     {
@@ -47,7 +47,7 @@
       "side_a": "picture; photo",
       "side_b": "zhàopiàn",
       "side_c": "照片",
-      "side_d": "noun",
+      "side_d": "Photograph or picture of people or objects",
       "level": 1
     },
     {
@@ -67,7 +67,7 @@
       "side_a": "father, dad",
       "side_b": "bàba",
       "side_c": "爸爸",
-      "side_d": "noun",
+      "side_d": "Informal term for father or dad",
       "level": 1
     },
     {
@@ -77,7 +77,7 @@
       "side_a": "mother, mom",
       "side_b": "māma",
       "side_c": "妈妈",
-      "side_d": "noun",
+      "side_d": "Informal term for mother or mom"
       "level": 1
     },
     {
@@ -87,7 +87,7 @@
       "side_a": "(measure word for many common everyday objects)",
       "side_b": "gè",
       "side_c": "个",
-      "side_d": "measure word",
+      "side_d": "Universal measure word for people and general objects",
       "level": 1
     },
     {
@@ -107,7 +107,7 @@
       "side_a": "child",
       "side_b": "háizi",
       "side_c": "孩子",
-      "side_d": "noun",
+      "side_d": "Young person, offspring",
       "level": 1
     },
     {
@@ -137,7 +137,7 @@
       "side_a": "older sister",
       "side_b": "jiějie",
       "side_c": "姐姐",
-      "side_d": "noun",
+      "side_d": "Elder female sibling",
       "level": 1
     },
     {
@@ -157,7 +157,7 @@
       "side_a": "younger brother",
       "side_b": "dìdi",
       "side_c": "弟弟",
-      "side_d": "noun",
+      "side_d": "Younger male sibling",
       "level": 1
     },
     {
@@ -187,7 +187,7 @@
       "side_a": "son",
       "side_b": "érzi",
       "side_c": "儿子",
-      "side_d": "noun",
+      "side_d": "Male offspring or child"
       "level": 1
     },
     {

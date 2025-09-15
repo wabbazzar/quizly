@@ -44,8 +44,11 @@ function App() {
     }
   }, [wasRestored, isIOS, isPWA, isRestoring]);
 
+  // Get the base URL from Vite's configuration
+  const basename = import.meta.env.BASE_URL || '/';
+
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <RestorationOverlay isVisible={isRestoring} />
       <AppRouter key={resumeCount} />
     </BrowserRouter>

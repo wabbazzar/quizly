@@ -262,7 +262,7 @@ const LearnContainer: FC<LearnContainerProps> = ({
     });
 
     // Don't auto-advance - let user control when to move to next question
-  }, [showFeedback, sessionState, scheduler, questionGenerator]);
+  }, [showFeedback, sessionState, scheduler, questionGenerator, strugglingCardIndices]);
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -317,7 +317,7 @@ const LearnContainer: FC<LearnContainerProps> = ({
         responseStartTime: Date.now(),
       }));
     }
-  }, [questionGenerator, sessionState, deck, onComplete]);
+  }, [questionGenerator, sessionState, deck, onComplete, masteredCardIndices, strugglingCardIndices]);
 
   // Check for empty deck content
   if (!deck.content || deck.content.length === 0) {

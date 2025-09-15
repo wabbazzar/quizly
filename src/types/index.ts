@@ -90,6 +90,10 @@ export interface LearnModeSettings extends ModeSettings {
   questionTypeMix?: 'auto' | 'multiple_choice' | 'free_text' | 'mixed';
   timerSeconds?: number;
 
+  // Progressive learning configuration
+  progressiveLearning?: 'disabled' | 'immediate' | 'spaced' | 'random';
+  progressiveLearningSpacing?: number; // Minimum questions between free text for same card
+
   // Scheduling configuration
   schedulingAlgorithm?: 'smart_spaced' | 'leitner_box';
   aggressiveness?: 'gentle' | 'balanced' | 'intensive';

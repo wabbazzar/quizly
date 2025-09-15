@@ -4,6 +4,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 import path from 'path';
 // https://vite.dev/config/
 export default defineConfig({
+    base: '/',
     plugins: [
         react(),
         VitePWA({
@@ -154,6 +155,13 @@ export default defineConfig({
     },
     server: {
         port: 5173,
-        open: true
+        open: true,
+        // Handle client-side routing - serve index.html for all routes
+        historyApiFallback: true
+    },
+    preview: {
+        port: 4173,
+        // Also handle client-side routing in preview mode
+        historyApiFallback: true
     }
 });

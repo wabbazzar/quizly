@@ -321,6 +321,60 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                   </label>
                 </div>
               </section>
+
+              {/* Progressive Learning Settings */}
+              <section className={styles.section}>
+                <h3 className={styles.sectionTitle}>Progressive Learning</h3>
+                <p className={styles.sectionDescription}>
+                  Control how free text questions follow multiple choice
+                </p>
+                <div className={styles.generalSettings}>
+                  <label className={styles.settingRow}>
+                    <span>Progressive mode</span>
+                    <select
+                      value={localSettings.progressiveLearning || 'spaced'}
+                      onChange={(e) => setLocalSettings({
+                        ...localSettings,
+                        progressiveLearning: e.target.value as 'disabled' | 'immediate' | 'spaced' | 'random'
+                      })}
+                      className={styles.select}
+                    >
+                      <option value="disabled">Disabled (No follow-ups)</option>
+                      <option value="immediate">Immediate (Right after MC)</option>
+                      <option value="spaced">Spaced (With gap)</option>
+                      <option value="random">Random (30% chance)</option>
+                    </select>
+                  </label>
+
+                  {localSettings.progressiveLearning === 'spaced' && (
+                    <label className={styles.settingRow}>
+                      <span>Minimum spacing</span>
+                      <input
+                        type="number"
+                        min="1"
+                        max="10"
+                        value={localSettings.progressiveLearningSpacing || 3}
+                        onChange={(e) => setLocalSettings({
+                          ...localSettings,
+                          progressiveLearningSpacing: Math.max(1, Math.min(10, parseInt(e.target.value) || 3))
+                        })}
+                        className={styles.numberInput}
+                      />
+                    </label>
+                  )}
+
+                  <p className={styles.settingDescription}>
+                    {localSettings.progressiveLearning === 'disabled' &&
+                      "Free text questions won't automatically follow multiple choice."}
+                    {localSettings.progressiveLearning === 'immediate' &&
+                      "Each correctly answered MC will be immediately followed by a free text version."}
+                    {localSettings.progressiveLearning === 'spaced' &&
+                      `Free text will appear after ${localSettings.progressiveLearningSpacing || 3} other questions.`}
+                    {localSettings.progressiveLearning === 'random' &&
+                      "30% chance of getting a free text follow-up after correct MC."}
+                  </p>
+                </div>
+              </section>
             </div>
 
             <footer className={styles.footer}>
