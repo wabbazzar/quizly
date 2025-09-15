@@ -1,6 +1,6 @@
 import { FC, memo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Deck } from '@/types';
 import {
   FlashcardsIcon,
@@ -97,6 +97,7 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(({
   onModeSelect,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [notification, setNotification] = useState<string | null>(null);
   const navigate = useNavigate();
   const { metadata } = deck;
 
@@ -137,6 +138,14 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(({
 
   const handleModeClick = (e: React.MouseEvent, mode: ModeConfig) => {
     e.stopPropagation();
+
+    // Show "Coming Soon" notification for Match and Test modes
+    if (mode.id === 'match' || mode.id === 'test') {
+      setNotification(`${mode.label} mode coming soon!`);
+      setTimeout(() => setNotification(null), 3000);
+      return;
+    }
+
     onModeSelect?.(deck.id, mode.id);
     navigate(mode.route);
   };
@@ -156,6 +165,20 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(({
       onClick={handleCardClick}
       layout
     >
+      {/* Coming Soon Notification */}
+      <AnimatePresence>
+        {notification && (
+          <motion.div
+            className={styles.notification}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            {notification}
+          </motion.div>
+        )}
+      </AnimatePresence>
       {/* Progress Ring */}
       {progress.overall > 0 && (
         <div className={styles.progressRing}>
