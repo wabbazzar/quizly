@@ -113,14 +113,18 @@ const Flashcards: FC = () => {
     const missedIndices = getMissedCardIndices(session);
     const totalCards = isMissedCardsRound ? cardOrder.length : activeDeck.content.length;
     const correctCards = Object.values(progress).filter(p => p === 'correct').length;
-    const incorrectCards = missedIndices.length;
+    const incorrectCards = Object.values(progress).filter(p => p === 'incorrect').length;
+
+    // Calculate accuracy based on cards actually answered, not total deck size
+    const cardsAnswered = correctCards + incorrectCards;
+    const accuracy = cardsAnswered > 0 ? (correctCards / cardsAnswered) * 100 : 0;
 
     const results: FlashcardSessionResults = {
       deckId,
       totalCards,
       correctCards,
       incorrectCards,
-      accuracy: (correctCards / totalCards) * 100,
+      accuracy,
       roundNumber,
       isComplete: incorrectCards === 0,
       missedCardIndices: missedIndices,

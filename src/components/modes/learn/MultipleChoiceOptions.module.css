@@ -161,6 +161,37 @@
   }
 }
 
+/* Keyboard Hint */
+.keyboardHint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: var(--neutral-gray-50);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--neutral-gray-600);
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.keyboardHint:hover {
+  opacity: 1;
+}
+
+.hintIcon {
+  font-size: var(--text-base);
+}
+
+/* Hide keyboard hint on mobile/touch devices */
+@media (pointer: coarse) {
+  .keyboardHint {
+    display: none;
+  }
+}
+
 /* Touch Target Size for Accessibility */
 @media (pointer: coarse) {
   .option {
