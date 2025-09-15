@@ -113,6 +113,16 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
+
+  /* Default theme colors (fallback for iOS PWA) */
+  --bg-primary: var(--neutral-white);
+  --bg-secondary: var(--neutral-gray-100);
+  --bg-tertiary: var(--neutral-gray-200);
+  --text-primary: var(--neutral-gray-800);
+  --text-secondary: var(--neutral-gray-600);
+  --text-tertiary: var(--neutral-gray-500);
+  --text-primary-on-dark: var(--neutral-white);
+  --border-color: var(--neutral-gray-200);
 }
 
 /* Dark Mode Variables */

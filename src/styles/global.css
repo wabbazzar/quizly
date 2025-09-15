@@ -13,6 +13,9 @@ html {
   text-rendering: optimizeLegibility;
   /* Support for safe areas on iOS */
   padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+  /* Prevent horizontal scroll on mobile */
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {
@@ -27,6 +30,10 @@ body {
   min-height: -webkit-fill-available;
   /* Prevent overscroll bounce on iOS */
   overscroll-behavior: none;
+  /* Prevent horizontal scroll */
+  overflow-x: hidden;
+  max-width: 100vw;
+  position: relative;
 }
 
 /* Prevent scrolling when flashcards page is active */
