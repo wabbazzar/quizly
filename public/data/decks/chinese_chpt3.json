@@ -1,8 +1,8 @@
 {
   "id": "chinese_chpt3",
   "metadata": {
-    "deck_name": "Chinese Chapter 3 - Dates, Time & Age",
-    "description": "Essential Chinese vocabulary for dates, time expressions, age, and basic social interactions",
+    "deck_name": "Chinese Chapter 3 - Time & Dates",
+    "description": "Vocabulary for Chapter 3",
     "category": "Language Learning",
     "available_levels": [1, 2, 3],
     "available_sides": 4,
@@ -14,7 +14,7 @@
     },
     "card_count": 29,
     "difficulty": "beginner",
-    "tags": ["chinese", "mandarin", "dates", "time", "age", "chapter3"],
+    "tags": ["chinese", "mandarin", "chapter3", "vocabulary"],
     "version": "1.0.0",
     "created_date": "2025-09-14T00:00:00Z",
     "last_updated": "2025-09-14T00:00:00Z"
@@ -27,7 +27,7 @@
       "side_a": "September",
       "side_b": "jiǔyuè",
       "side_c": "九月",
-      "side_d": "Ninth month of the year",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -97,7 +97,7 @@
       "side_a": "birthday",
       "side_b": "shēngrì",
       "side_c": "生日",
-      "side_d": "Day of birth; anniversary of birth",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -107,7 +107,7 @@
       "side_a": "this year",
       "side_b": "jīnnián",
       "side_c": "今年",
-      "side_d": "Current year; the present year",
+      "side_d": "time word",
       "level": 1
     },
     {
@@ -147,7 +147,7 @@
       "side_a": "year (of age)",
       "side_b": "suì",
       "side_c": "岁",
-      "side_d": "Counter for years of age",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -157,7 +157,7 @@
       "side_a": "to eat",
       "side_b": "chī",
       "side_c": "吃",
-      "side_d": "To consume food; basic eating verb"
+      "side_d": "verb",
       "level": 1
     },
     {

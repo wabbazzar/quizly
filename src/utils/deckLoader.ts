@@ -87,9 +87,13 @@ const validateCard = (card: any, index: number): Card | null => {
 
 export const loadDeckFromJSON = async (jsonPath: string): Promise<Deck | null> => {
   try {
-    const response = await fetch(jsonPath);
+    // Prepend base URL if path starts with /
+    const fullPath = jsonPath.startsWith('/')
+      ? `${import.meta.env.BASE_URL}${jsonPath.slice(1)}`
+      : jsonPath;
+    const response = await fetch(fullPath);
     if (!response.ok) {
-      console.error(`Failed to load deck from ${jsonPath}: ${response.status}`);
+      console.error(`Failed to load deck from ${fullPath}: ${response.status}`);
       return null;
     }
 
@@ -145,7 +149,7 @@ export const loadAllDecks = async (): Promise<Deck[]> => {
   try {
     // First, try to fetch a directory listing (if server provides it)
     // Otherwise fall back to trying known deck patterns
-    const decksBasePath = '/data/decks/';
+    const decksBasePath = `${import.meta.env.BASE_URL}data/decks/`;
 
     // Try to fetch the directory listing or use a predefined manifest
     const deckFiles = await discoverDeckFiles(decksBasePath);
