@@ -1,0 +1,226 @@
+{
+  "id": "chinese_chpt4",
+  "metadata": {
+    "deck_name": "Chinese Chapter 4",
+    "description": "Vocabulary for Chapter 4",
+    "category": "Language Learning",
+    "available_levels": [1, 2, 3],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 20,
+    "difficulty": "beginner",
+    "tags": ["chinese", "mandarin", "chapter4", "vocabulary"],
+    "version": "1.0.0",
+    "created_date": "2025-09-14T00:00:00Z",
+    "last_updated": "2025-09-14T00:00:00Z"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "weekend",
+      "side_a": "weekend",
+      "side_b": "zhōumò",
+      "side_c": "周末",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "play_ball",
+      "side_a": "to play ball",
+      "side_b": "dǎ qiú",
+      "side_c": "打球",
+      "side_d": "verb object",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "watch_look_read",
+      "side_a": "to watch; to look; to read",
+      "side_b": "kàn",
+      "side_c": "看",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "television",
+      "side_a": "television",
+      "side_b": "diànshì",
+      "side_c": "电视",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "sing_song",
+      "side_a": "to sing (a song)",
+      "side_b": "chàng gē",
+      "side_c": "唱歌",
+      "side_d": "verb object",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "dance",
+      "side_a": "to dance",
+      "side_b": "tiào wǔ",
+      "side_c": "跳舞",
+      "side_d": "verb object",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "listen",
+      "side_a": "to listen",
+      "side_b": "tīng",
+      "side_c": "听",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "music",
+      "side_a": "music",
+      "side_b": "yīnyuè",
+      "side_c": "音乐",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "book",
+      "side_a": "book",
+      "side_b": "shū",
+      "side_c": "书",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "right_correct",
+      "side_a": "right; correct",
+      "side_b": "duì",
+      "side_c": "对",
+      "side_d": "adjective",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "some",
+      "side_a": "some",
+      "side_b": "yǒude",
+      "side_c": "有的",
+      "side_d": "pronoun",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "time_moment",
+      "side_a": "(a point in) time; moment; (a duration of) time",
+      "side_b": "shíhou",
+      "side_c": "时候",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "movie",
+      "side_a": "movie",
+      "side_b": "diànyǐng",
+      "side_c": "电影",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "often",
+      "side_a": "often",
+      "side_b": "chángcháng",
+      "side_c": "常常",
+      "side_d": "adverb",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "in_that_case_then",
+      "side_a": "in that case; then",
+      "side_b": "nà",
+      "side_c": "那",
+      "side_d": "conjunction",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "go",
+      "side_a": "to go",
+      "side_b": "qù",
+      "side_c": "去",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-017",
+      "idx": 16,
+      "name": "foreign_country",
+      "side_a": "foreign country",
+      "side_b": "wàiguó",
+      "side_c": "外国",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-018",
+      "idx": 17,
+      "name": "invite_treat",
+      "side_a": "to invite someone (to dinner, coffee, etc.); to play the host",
+      "side_b": "qǐng kè",
+      "side_c": "请客",
+      "side_d": "verb object",
+      "level": 1
+    },
+    {
+      "card_id": "card-019",
+      "idx": 18,
+      "name": "yesterday",
+      "side_a": "yesterday",
+      "side_b": "zuótiān",
+      "side_c": "昨天",
+      "side_d": "time word",
+      "level": 1
+    },
+    {
+      "card_id": "card-020",
+      "idx": 19,
+      "name": "so",
+      "side_a": "so",
+      "side_b": "suǒyǐ",
+      "side_c": "所以",
+      "side_d": "conjunction",
+      "level": 1
+    }
+  ]
+}
+
+

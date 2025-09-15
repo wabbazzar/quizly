@@ -1,0 +1,176 @@
+{
+  "id": "chinese_chpt6",
+  "metadata": {
+    "deck_name": "Chinese Chapter 6",
+    "description": "Vocabulary for Chapter 6",
+    "category": "Language Learning",
+    "available_levels": [1, 2, 3],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 15,
+    "difficulty": "beginner",
+    "tags": ["chinese", "mandarin", "chapter6", "vocabulary"],
+    "version": "1.0.0",
+    "created_date": "2025-09-14T00:00:00Z",
+    "last_updated": "2025-09-14T00:00:00Z"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "to_for",
+      "side_a": "to; for",
+      "side_b": "gěi",
+      "side_c": "给",
+      "side_d": "preposition",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "make_phone_call",
+      "side_a": "to make a phone call",
+      "side_b": "dǎ diànhuà",
+      "side_c": "打电话",
+      "side_d": "verb object",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "hello_phone",
+      "side_a": "(on telephone) Hello!; Hey!",
+      "side_b": "wéi/wèi",
+      "side_c": "喂",
+      "side_d": "interjection",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "be_present",
+      "side_a": "to be present; to be at (a place)",
+      "side_b": "zài",
+      "side_c": "在",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "precisely",
+      "side_a": "precisely; exactly",
+      "side_b": "jiù",
+      "side_c": "就",
+      "side_d": "adverb",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "you_honorific",
+      "side_a": "you (honorific)",
+      "side_b": "nín",
+      "side_c": "您",
+      "side_d": "pronoun",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "which",
+      "side_a": "which",
+      "side_b": "nǎi/něi",
+      "side_c": "哪",
+      "side_d": "question pronoun",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "polite_measure",
+      "side_a": "(polite measure word for people)",
+      "side_b": "wèi",
+      "side_c": "位",
+      "side_d": "measure word",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "afternoon",
+      "side_a": "afternoon",
+      "side_b": "xiàwǔ",
+      "side_c": "下午",
+      "side_d": "time word",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "time",
+      "side_a": "time",
+      "side_b": "shíjiān",
+      "side_c": "时间",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "question_problem",
+      "side_a": "question; problem",
+      "side_b": "wèntí",
+      "side_c": "问题",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "want_will",
+      "side_a": "will, be going to; to want to, to have a desire to",
+      "side_b": "yào",
+      "side_c": "要",
+      "side_d": "modal verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "have_meeting",
+      "side_a": "to have a meeting",
+      "side_b": "kāi huì",
+      "side_c": "开会",
+      "side_d": "verb object",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "morning",
+      "side_a": "morning",
+      "side_b": "shàngwǔ",
+      "side_c": "上午",
+      "side_d": "time word",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "class_period",
+      "side_a": "(measure word for class periods)",
+      "side_b": "jié",
+      "side_c": "节",
+      "side_d": "measure word",
+      "level": 1
+    }
+  ]
+}
+
+

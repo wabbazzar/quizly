@@ -192,6 +192,20 @@
   cursor: not-allowed;
 }
 
+/* Desktop-first: ensure centering is explicit */
+@media (min-width: 641px) {
+  .modal {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 90% !important;
+    max-width: 600px !important;
+    height: auto !important;
+    border-radius: var(--radius-xl) !important;
+  }
+}
+
 @media (max-width: 640px) {
   .modal {
     position: fixed;

@@ -25,8 +25,15 @@ async function generateManifest() {
       file => file.endsWith('.json') && file !== 'manifest.json'
     );
 
-    // Sort alphabetically for consistency
-    deckFiles.sort();
+    // Sort by chapter number in descending order (10, 9, 8, 7, etc.)
+    deckFiles.sort((a, b) => {
+      // Extract chapter numbers from filenames like "chinese_chpt10.json"
+      const chapterA = parseInt(a.match(/chpt(\d+)/)?.[1] || '0');
+      const chapterB = parseInt(b.match(/chpt(\d+)/)?.[1] || '0');
+      
+      // Sort in descending order (highest chapter first)
+      return chapterB - chapterA;
+    });
 
     // Write the manifest
     await writeFile(

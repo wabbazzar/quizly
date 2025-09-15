@@ -5,6 +5,14 @@ export interface DeckMetadata {
   category: string;
   available_levels: number[];
   available_sides: number;
+  side_labels?: {
+    side_a?: string;
+    side_b?: string;
+    side_c?: string;
+    side_d?: string;
+    side_e?: string;
+    side_f?: string;
+  };
   card_count: number;
   difficulty: 'beginner' | 'intermediate' | 'advanced' | 'beginner_to_intermediate';
   tags: string[];

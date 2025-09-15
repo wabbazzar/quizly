@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Deck, LearnModeSettings, LearnSessionState, LearnSessionResults } from '@/types';
 import { useQuestionGenerator } from '@/hooks/useQuestionGenerator';
 import { useCardScheduler } from '@/hooks/useCardScheduler';
-import { TextMatcher } from '@/utils/textMatching';
+import { QuestionCard } from './QuestionCard';
 import styles from './LearnContainer.module.css';
 
 interface LearnContainerProps {
@@ -32,9 +32,8 @@ const LearnContainer: FC<LearnContainerProps> = ({
   });
 
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
-  const [userTextInput, setUserTextInput] = useState('');
+  const [feedback, setFeedback] = useState<{ isCorrect: boolean; correctAnswer?: string; explanation?: string } | undefined>(undefined);
 
   // Use the new hooks
   const questionGenerator = useQuestionGenerator(deck, settings);
@@ -76,12 +75,15 @@ const LearnContainer: FC<LearnContainerProps> = ({
     }
   }, [questionGenerator.currentQuestion, questionGenerator.currentQuestionIndex]);
 
-  const handleAnswer = useCallback((answer: string, isCorrect: boolean) => {
+  const handleAnswer = useCallback((_answer: string, isCorrect: boolean) => {
     // Prevent multiple selections
-    if (selectedAnswer || showFeedback) return;
+    if (showFeedback) return;
 
-    setSelectedAnswer(answer);
     setShowFeedback(true);
+    setFeedback({
+      isCorrect,
+      correctAnswer: sessionState.currentQuestion?.correctAnswer,
+    });
 
     const responseTime = Date.now() - sessionState.responseStartTime;
     const cardId = `card_${sessionState.currentQuestion?.cardIndex}`;
@@ -123,13 +125,12 @@ const LearnContainer: FC<LearnContainerProps> = ({
     setTimeout(() => {
       handleNextQuestion();
     }, 1500);
-  }, [selectedAnswer, showFeedback, sessionState.responseStartTime, sessionState.currentQuestion, scheduler]);
+  }, [showFeedback, sessionState.responseStartTime, sessionState.currentQuestion, scheduler]);
 
   const handleNextQuestion = useCallback(() => {
     // Reset selection state for new question
-    setSelectedAnswer(null);
     setShowFeedback(false);
-    setUserTextInput('');
+    setFeedback(undefined);
 
     if (!questionGenerator.hasNext) {
       // Session complete
@@ -196,95 +197,20 @@ const LearnContainer: FC<LearnContainerProps> = ({
       <main className={styles.mainContent}>
         <AnimatePresence mode="wait">
           <motion.div
-            key={sessionState.currentQuestion.id}
+            key={`${sessionState.currentQuestion.id}-${sessionState.questionIndex}`}
             className={styles.questionContainer}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.3 }}
           >
-            {/* Question Text */}
-            <h2 className={styles.questionText}>
-              {sessionState.currentQuestion.questionText}
-            </h2>
-
-            {/* Multiple Choice Options */}
-            {sessionState.currentQuestion.type === 'multiple_choice' && (
-              <div className={styles.optionsGrid}>
-                {sessionState.currentQuestion.options?.map((option, index) => {
-                  const isSelected = selectedAnswer === option;
-                  const isCorrect = option === sessionState.currentQuestion?.correctAnswer;
-                  const showCorrect = showFeedback && isCorrect;
-                  const showIncorrect = showFeedback && isSelected && !isCorrect;
-
-                  return (
-                    <button
-                      key={option}
-                      className={`${styles.optionButton} ${
-                        isSelected ? styles.selected : ''
-                      } ${showCorrect ? styles.correct : ''} ${
-                        showIncorrect ? styles.incorrect : ''
-                      }`}
-                      onClick={() => handleAnswer(option, isCorrect)}
-                      disabled={showFeedback}
-                    >
-                      <span className={styles.optionLetter}>
-                        {String.fromCharCode(65 + index)}
-                      </span>
-                      <span className={styles.optionText}>{option}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-
-            {/* Free Text Input */}
-            {sessionState.currentQuestion.type === 'free_text' && (
-              <div className={styles.freeTextContainer}>
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    if (!userTextInput.trim() || showFeedback) return;
-
-                    const acceptedAnswers = [
-                      sessionState.currentQuestion?.correctAnswer || '',
-                      ...(sessionState.currentQuestion?.acceptedAnswers || [])
-                    ];
-                    const isCorrect = TextMatcher.isMatch(userTextInput, acceptedAnswers);
-                    handleAnswer(userTextInput, isCorrect);
-                  }}
-                  className={styles.freeTextForm}
-                >
-                  <input
-                    type="text"
-                    value={userTextInput}
-                    onChange={(e) => setUserTextInput(e.target.value)}
-                    className={`${styles.textInput} ${
-                      showFeedback && selectedAnswer === userTextInput
-                        ? TextMatcher.isMatch(userTextInput, [sessionState.currentQuestion?.correctAnswer || ''])
-                          ? styles.correct
-                          : styles.incorrect
-                        : ''
-                    }`}
-                    placeholder="Type your answer..."
-                    disabled={showFeedback}
-                    autoComplete="off"
-                  />
-                  <button
-                    type="submit"
-                    className={styles.submitButton}
-                    disabled={!userTextInput.trim() || showFeedback}
-                  >
-                    Submit
-                  </button>
-                </form>
-                {showFeedback && !TextMatcher.isMatch(userTextInput, [sessionState.currentQuestion?.correctAnswer || '']) && (
-                  <div className={styles.correctAnswerHint}>
-                    Correct answer: {sessionState.currentQuestion?.correctAnswer}
-                  </div>
-                )}
-              </div>
-            )}
+            <QuestionCard
+              question={sessionState.currentQuestion}
+              onAnswer={handleAnswer}
+              showFeedback={showFeedback}
+              feedback={feedback}
+              disabled={showFeedback}
+            />
           </motion.div>
         </AnimatePresence>
 

@@ -162,9 +162,9 @@ const Flashcards: FC = () => {
           className={styles.backButton}
           onClick={() => {
             // Session is automatically saved via useEffect
-            navigate('/');
+            navigate(`/deck/${deckId}`);
           }}
-          aria-label="Back to decks"
+          aria-label="Back to deck"
         >
           ← Back
         </button>

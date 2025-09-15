@@ -52,7 +52,7 @@ const Learn: FC = () => {
   };
 
   const handleExit = () => {
-    navigate('/');
+    navigate(`/deck/${deckId}`);
   };
 
   if (isLoading) {
@@ -64,8 +64,8 @@ const Learn: FC = () => {
       <div className={styles.errorContainer}>
         <h2>Unable to Load Deck</h2>
         <p>{error || 'Deck not found'}</p>
-        <button onClick={() => navigate('/')} className={styles.backButton}>
-          Back to Home
+        <button onClick={() => navigate(`/deck/${deckId}`)} className={styles.backButton}>
+          Back to Deck
         </button>
       </div>
     );

@@ -1,0 +1,236 @@
+{
+  "id": "chinese_chpt2",
+  "metadata": {
+    "deck_name": "Chinese Chapter 2",
+    "description": "Vocabulary for Chapter 2",
+    "category": "Language Learning",
+    "available_levels": [1, 2, 3],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 21,
+    "difficulty": "beginner",
+    "tags": ["chinese", "mandarin", "chapter2", "vocabulary"],
+    "version": "1.0.0",
+    "created_date": "2025-09-14T00:00:00Z",
+    "last_updated": "2025-09-14T00:00:00Z"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "that",
+      "side_a": "that",
+      "side_b": "nà",
+      "side_c": "那",
+      "side_d": "pronoun",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "possessive_particle",
+      "side_a": "(a possessive or descriptive particle)",
+      "side_b": "de",
+      "side_c": "的",
+      "side_d": "particle",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "photo",
+      "side_a": "picture; photo",
+      "side_b": "zhàopiàn",
+      "side_c": "照片",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "this",
+      "side_a": "this",
+      "side_b": "zhè",
+      "side_c": "这",
+      "side_d": "pronoun",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "father",
+      "side_a": "father, dad",
+      "side_b": "bàba",
+      "side_c": "爸爸",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "mother",
+      "side_a": "mother, mom",
+      "side_b": "māma",
+      "side_c": "妈妈",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "measure_word",
+      "side_a": "(measure word for many common everyday objects)",
+      "side_b": "gè",
+      "side_c": "个",
+      "side_d": "measure word",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "female",
+      "side_a": "female",
+      "side_b": "nǚ",
+      "side_c": "女",
+      "side_d": "adjective",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "child",
+      "side_a": "child",
+      "side_b": "háizi",
+      "side_c": "孩子",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "who",
+      "side_a": "who",
+      "side_b": "shéi",
+      "side_c": "谁",
+      "side_d": "question pronoun",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "she",
+      "side_a": "she; her",
+      "side_b": "tā",
+      "side_c": "她",
+      "side_d": "pronoun",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "older_sister",
+      "side_a": "older sister",
+      "side_b": "jiějie",
+      "side_c": "姐姐",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "male",
+      "side_a": "male",
+      "side_b": "nán",
+      "side_c": "男",
+      "side_d": "adjective",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "younger_brother",
+      "side_a": "younger brother",
+      "side_b": "dìdi",
+      "side_c": "弟弟",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "he",
+      "side_a": "he; him",
+      "side_b": "tā",
+      "side_c": "他",
+      "side_d": "pronoun",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "eldest_brother",
+      "side_a": "eldest brother",
+      "side_b": "dàgē",
+      "side_c": "大哥",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-017",
+      "idx": 16,
+      "name": "son",
+      "side_a": "son",
+      "side_b": "érzi",
+      "side_c": "儿子",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-018",
+      "idx": 17,
+      "name": "have",
+      "side_a": "to have; to exist",
+      "side_b": "yǒu",
+      "side_c": "有",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-019",
+      "idx": 18,
+      "name": "daughter",
+      "side_a": "daughter",
+      "side_b": "nǚ'ér",
+      "side_c": "女儿",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-020",
+      "idx": 19,
+      "name": "not",
+      "side_a": "not",
+      "side_b": "méi",
+      "side_c": "没",
+      "side_d": "adverb",
+      "level": 1
+    },
+    {
+      "card_id": "card-021",
+      "idx": 20,
+      "name": "gao_wenzhong",
+      "side_a": "Gao Wenzhong (personal name)",
+      "side_b": "Gāo Wénzhōng",
+      "side_c": "高文中",
+      "side_d": "proper noun",
+      "level": 1
+    }
+  ]
+}
+
+

@@ -33,10 +33,31 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
   if (deck.content[0].side_e) availableSides.push('side_e');
   if (deck.content[0].side_f) availableSides.push('side_f');
 
-  // Generic side labels without assumptions about content
+  // Get side labels from deck metadata or fallback to generic labels
   const getSideLabel = (side: string): string => {
+    // Use actual side label from deck metadata if available
+    const label = deck.metadata?.side_labels?.[side as keyof typeof deck.metadata.side_labels];
+    if (label) {
+      // Capitalize first letter
+      return label.charAt(0).toUpperCase() + label.slice(1);
+    }
+
+    // Fallback to generic labels
     const sideIndex = side.split('_')[1]?.toUpperCase();
     return `Side ${sideIndex}`;
+  };
+
+  // Get shortened side label for preset buttons
+  const getShortSideLabel = (side: string): string => {
+    const label = deck.metadata?.side_labels?.[side as keyof typeof deck.metadata.side_labels];
+    if (label) {
+      // Capitalize first letter and keep it short
+      return label.charAt(0).toUpperCase() + label.slice(1);
+    }
+
+    // Fallback to single letter
+    const sideIndex = side.split('_')[1]?.toUpperCase();
+    return sideIndex || 'A';
   };
 
   const toggleSide = (type: 'front' | 'back', side: string) => {
@@ -120,21 +141,21 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
                   <button
                     className={styles.presetButton}
                     onClick={() => applyPreset('simple')}
-                    title="Show first side on front, second on back"
+                    title={`Show ${getSideLabel(availableSides[0] || 'side_a')} on front, ${getSideLabel(availableSides[1] || 'side_b')} on back`}
                   >
-                    Simple (A → B)
+                    Simple ({getShortSideLabel(availableSides[0] || 'side_a')} → {getShortSideLabel(availableSides[1] || 'side_b')})
                   </button>
                   <button
                     className={styles.presetButton}
                     onClick={() => applyPreset('reverse')}
-                    title="Show second side on front, first on back"
+                    title={`Show ${getSideLabel(availableSides[1] || 'side_b')} on front, ${getSideLabel(availableSides[0] || 'side_a')} on back`}
                   >
-                    Reverse (B → A)
+                    Reverse ({getShortSideLabel(availableSides[1] || 'side_b')} → {getShortSideLabel(availableSides[0] || 'side_a')})
                   </button>
                   <button
                     className={styles.presetButton}
                     onClick={() => applyPreset('comprehensive')}
-                    title="Show first side on front, all others on back"
+                    title={`Show ${getSideLabel(availableSides[0] || 'side_a')} on front, all others on back`}
                   >
                     Comprehensive
                   </button>

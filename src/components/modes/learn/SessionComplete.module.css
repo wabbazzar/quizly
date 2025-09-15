@@ -1,0 +1,371 @@
+.sessionComplete {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-light) 100%);
+}
+
+.container {
+  background: var(--neutral-white);
+  border-radius: 24px;
+  padding: var(--space-8);
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.emoji {
+  font-size: 72px;
+  margin-bottom: var(--space-4);
+  display: inline-block;
+}
+
+.title {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  margin: 0 0 var(--space-2) 0;
+  color: var(--neutral-gray-800);
+}
+
+.title.excellent {
+  color: var(--semantic-success);
+}
+
+.title.great {
+  color: var(--primary-main);
+}
+
+.title.good {
+  color: var(--secondary-main);
+}
+
+.title.fair {
+  color: var(--semantic-warning);
+}
+
+.title.needsWork {
+  color: var(--semantic-error);
+}
+
+.subtitle {
+  font-size: var(--text-lg);
+  color: var(--neutral-gray-600);
+  margin: 0;
+}
+
+/* Results Grid */
+.resultsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.resultCard {
+  background: var(--neutral-gray-50);
+  padding: var(--space-5);
+  border-radius: 16px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resultCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.resultValue {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--primary-main);
+  margin-bottom: var(--space-1);
+}
+
+.resultLabel {
+  font-size: var(--text-sm);
+  color: var(--neutral-gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Mastery Section */
+.masterySection {
+  background: var(--neutral-gray-50);
+  border-radius: 12px;
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.masteryItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+}
+
+.masteryItem + .masteryItem {
+  margin-top: var(--space-2);
+}
+
+.masteryIcon {
+  font-size: var(--text-xl);
+}
+
+.masteryIcon.mastered {
+  color: var(--semantic-success);
+}
+
+.masteryIcon.struggling {
+  color: var(--semantic-warning);
+}
+
+.masteryText {
+  color: var(--neutral-gray-700);
+  font-size: var(--text-base);
+}
+
+.masteryText strong {
+  color: var(--neutral-gray-800);
+  font-weight: var(--font-semibold);
+}
+
+/* Duration */
+.duration {
+  text-align: center;
+  color: var(--neutral-gray-600);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-6);
+}
+
+/* Action Buttons */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.actionButton {
+  padding: var(--space-4) var(--space-6);
+  border-radius: 12px;
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+}
+
+.actionButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.actionButton:active {
+  transform: translateY(0);
+}
+
+.actionButton.primary {
+  background: var(--primary-main);
+  color: var(--neutral-white);
+}
+
+.actionButton.primary:hover {
+  background: var(--primary-dark);
+}
+
+.actionButton.secondary {
+  background: var(--neutral-white);
+  color: var(--primary-main);
+  border: 2px solid var(--primary-main);
+}
+
+.actionButton.secondary:hover {
+  background: rgba(74, 144, 226, 0.05);
+}
+
+.actionButton.tertiary {
+  background: transparent;
+  color: var(--neutral-gray-600);
+  border: 2px solid var(--neutral-gray-300);
+}
+
+.actionButton.tertiary:hover {
+  background: var(--neutral-gray-50);
+  border-color: var(--neutral-gray-400);
+}
+
+/* Motivational Message */
+.motivationalMessage {
+  margin-top: var(--space-6);
+  padding: var(--space-4);
+  background: rgba(74, 144, 226, 0.05);
+  border-left: 4px solid var(--primary-main);
+  border-radius: 8px;
+  color: var(--neutral-gray-700);
+  font-size: var(--text-sm);
+  font-style: italic;
+  line-height: var(--leading-relaxed);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-6);
+    border-radius: 20px;
+  }
+
+  .emoji {
+    font-size: 56px;
+  }
+
+  .title {
+    font-size: var(--text-2xl);
+  }
+
+  .subtitle {
+    font-size: var(--text-base);
+  }
+
+  .resultsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+
+  .resultCard {
+    padding: var(--space-4);
+  }
+
+  .resultValue {
+    font-size: var(--text-xl);
+  }
+
+  .resultLabel {
+    font-size: 11px;
+  }
+
+  .actions {
+    gap: var(--space-2);
+  }
+
+  .actionButton {
+    padding: var(--space-3) var(--space-4);
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .resultsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .actions {
+    flex-direction: row;
+  }
+
+  .actionButton {
+    flex: 1;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .sessionComplete {
+    background: linear-gradient(135deg, var(--neutral-gray-800) 0%, var(--neutral-gray-700) 100%);
+  }
+
+  .container {
+    background: var(--neutral-gray-900);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .title {
+    color: var(--neutral-gray-100);
+  }
+
+  .subtitle {
+    color: var(--neutral-gray-400);
+  }
+
+  .resultCard {
+    background: var(--neutral-gray-800);
+  }
+
+  .resultValue {
+    color: var(--primary-light);
+  }
+
+  .resultLabel {
+    color: var(--neutral-gray-500);
+  }
+
+  .masterySection {
+    background: var(--neutral-gray-800);
+  }
+
+  .masteryText {
+    color: var(--neutral-gray-300);
+  }
+
+  .masteryText strong {
+    color: var(--neutral-gray-100);
+  }
+
+  .duration {
+    color: var(--neutral-gray-400);
+  }
+
+  .actionButton.secondary {
+    background: var(--neutral-gray-800);
+    border-color: var(--primary-light);
+    color: var(--primary-light);
+  }
+
+  .actionButton.tertiary {
+    color: var(--neutral-gray-400);
+    border-color: var(--neutral-gray-600);
+  }
+
+  .actionButton.tertiary:hover {
+    background: var(--neutral-gray-800);
+    border-color: var(--neutral-gray-500);
+  }
+
+  .motivationalMessage {
+    background: rgba(74, 144, 226, 0.1);
+    color: var(--neutral-gray-300);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .resultCard,
+  .actionButton {
+    transition: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .resultCard {
+    border: 2px solid var(--neutral-gray-800);
+  }
+
+  .actionButton {
+    border-width: 3px;
+  }
+}

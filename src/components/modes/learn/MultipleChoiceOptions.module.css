@@ -1,0 +1,236 @@
+.multipleChoice {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  padding: var(--space-4);
+  border: 2px solid var(--neutral-gray-200);
+  border-radius: 12px;
+  background: var(--neutral-white);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+  position: relative;
+  min-height: 60px;
+}
+
+.option:hover:not(.disabled):not(.selected) {
+  border-color: var(--primary-main);
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.15);
+  transform: translateX(4px);
+}
+
+.option:focus-visible {
+  outline: 2px solid var(--primary-main);
+  outline-offset: 2px;
+}
+
+.option.selected {
+  border-color: var(--primary-main);
+  background: rgba(74, 144, 226, 0.05);
+}
+
+.option.correct {
+  border-color: var(--semantic-success);
+  background: rgba(16, 185, 129, 0.05);
+  animation: correctPulse 0.3s ease;
+}
+
+.option.incorrect {
+  border-color: var(--semantic-error);
+  background: rgba(239, 68, 68, 0.05);
+  animation: incorrectShake 0.3s ease;
+}
+
+.option.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.optionLetter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--neutral-gray-100);
+  font-weight: var(--font-semibold);
+  margin-right: var(--space-3);
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.option.selected .optionLetter {
+  background: var(--primary-main);
+  color: var(--neutral-white);
+}
+
+.option.correct .optionLetter {
+  background: var(--semantic-success);
+  color: var(--neutral-white);
+}
+
+.option.incorrect .optionLetter {
+  background: var(--semantic-error);
+  color: var(--neutral-white);
+}
+
+.optionText {
+  flex: 1;
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--neutral-gray-800);
+}
+
+.statusIcon {
+  position: absolute;
+  right: var(--space-4);
+  font-size: var(--text-xl);
+  font-weight: bold;
+}
+
+.option.correct .statusIcon {
+  color: var(--semantic-success);
+}
+
+.option.incorrect .statusIcon {
+  color: var(--semantic-error);
+}
+
+/* Animations */
+@keyframes correctPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes incorrectShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .multipleChoice {
+    gap: var(--space-2);
+  }
+
+  .option {
+    padding: var(--space-3);
+    min-height: 56px;
+    border-radius: 10px;
+  }
+
+  .optionLetter {
+    width: 28px;
+    height: 28px;
+    font-size: var(--text-sm);
+    margin-right: var(--space-2);
+  }
+
+  .optionText {
+    font-size: var(--text-base);
+  }
+
+  .statusIcon {
+    right: var(--space-3);
+    font-size: var(--text-lg);
+  }
+
+  .option:hover:not(.disabled):not(.selected) {
+    transform: none;
+  }
+}
+
+/* Touch Target Size for Accessibility */
+@media (pointer: coarse) {
+  .option {
+    min-height: 48px;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .option {
+    transition: none;
+  }
+
+  .option.correct,
+  .option.incorrect {
+    animation: none;
+  }
+
+  .optionLetter {
+    transition: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .option {
+    border-width: 3px;
+  }
+
+  .option.selected,
+  .option.correct,
+  .option.incorrect {
+    background: transparent;
+  }
+
+  .optionLetter {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .option {
+    background: var(--neutral-gray-800);
+    border-color: var(--neutral-gray-600);
+  }
+
+  .option:hover:not(.disabled):not(.selected) {
+    border-color: var(--primary-light);
+    box-shadow: 0 2px 8px rgba(107, 165, 233, 0.25);
+  }
+
+  .optionText {
+    color: var(--neutral-gray-100);
+  }
+
+  .optionLetter {
+    background: var(--neutral-gray-700);
+    color: var(--neutral-gray-200);
+  }
+
+  .option.selected {
+    background: rgba(74, 144, 226, 0.1);
+  }
+
+  .option.correct {
+    background: rgba(16, 185, 129, 0.1);
+  }
+
+  .option.incorrect {
+    background: rgba(239, 68, 68, 0.1);
+  }
+}

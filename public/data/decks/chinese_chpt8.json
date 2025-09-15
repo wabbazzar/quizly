@@ -1,0 +1,253 @@
+{
+  "id": "chinese_chpt8",
+  "metadata": {
+    "deck_name": "Chinese Chapter 8",
+    "description": "Vocabulary for Chapter 8",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 22,
+    "difficulty": "beginner",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "chapter8",
+      "vocabulary"
+    ],
+    "version": "1.0.0",
+    "created_date": "2025-09-14T00:00:00Z",
+    "last_updated": "2025-09-14T23:42:59.769Z"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "measure_word_for_essays_articles_etc",
+      "side_a": "(measure word for essays, articles, etc.)",
+      "side_b": "piąn",
+      "side_c": "ῇ",
+      "side_d": "m",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "diary",
+      "side_a": "diary",
+      "side_b": "rìjì",
+      "side_c": "ᅺ崐",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "tired",
+      "side_a": "tired",
+      "side_b": "lèi",
+      "side_c": "₲",
+      "side_d": "adj",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "vo_to_get_up",
+      "side_a": "vo to get up",
+      "side_b": "qכ",
+      "side_c": "㑌ಉ",
+      "side_d": "chuáng",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "vo_to_take_a_bath_shower",
+      "side_a": "vo to take a bath/shower",
+      "side_b": "xכ",
+      "side_c": "ᘺ៿",
+      "side_d": "zיo",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "breakfast",
+      "side_a": "breakfast",
+      "side_b": "zיofàn",
+      "side_c": "ᅽ櫍",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "simultaneously_at_the_same_time",
+      "side_a": "simultaneously; at the same time",
+      "side_b": "yìbiąn",
+      "side_c": "ɺ愙",
+      "side_d": "adv",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "classroom",
+      "side_a": "classroom",
+      "side_b": "jiàoshì",
+      "side_c": "ᄞા",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "pronunciation",
+      "side_a": "pronunciation",
+      "side_b": "fąyĨn",
+      "side_c": "┱ㅠ",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "new",
+      "side_a": "new",
+      "side_b": "xĨn",
+      "side_c": "ᅘ",
+      "side_d": "adj",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "computer",
+      "side_a": "computer",
+      "side_b": "diànnיo",
+      "side_c": "䚕剱",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "noon",
+      "side_a": "noon",
+      "side_b": "zhņngwן",
+      "side_c": "ʑ֘",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "dining_room_cafeteria",
+      "side_a": "dining room, cafeteria",
+      "side_b": "cąntĨng",
+      "side_c": "㇯ⓥ",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "lunch_midday_meal",
+      "side_a": "lunch, midday meal",
+      "side_b": "wןfàn",
+      "side_c": "֘櫍",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "vo_to_go_online_to_surf_the_internet",
+      "side_a": "vo to go online; to surf the internet",
+      "side_b": "shàng",
+      "side_c": "ʀ⇑",
+      "side_d": "wיng",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "dormitory",
+      "side_a": "dormitory",
+      "side_b": "sùshè",
+      "side_c": "્⎤",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-017",
+      "idx": 16,
+      "name": "there",
+      "side_a": "there",
+      "side_b": "nàr",
+      "side_c": "⴨ѽ",
+      "side_d": "pr",
+      "level": 1
+    },
+    {
+      "card_id": "card-018",
+      "idx": 17,
+      "name": "in_the_middle_of_doing_something",
+      "side_a": "in the middle of (doing something)",
+      "side_b": "zhèngzài",
+      "side_c": "ᔌ߱",
+      "side_d": "adv",
+      "level": 1
+    },
+    {
+      "card_id": "card-019",
+      "idx": 18,
+      "name": "before",
+      "side_a": "before",
+      "side_b": "yכqián",
+      "side_c": "˫Ԋ",
+      "side_d": "t",
+      "level": 1
+    },
+    {
+      "card_id": "card-020",
+      "idx": 19,
+      "name": "to_tell",
+      "side_a": "to tell",
+      "side_b": "gàosu",
+      "side_c": "ب崩",
+      "side_d": "v",
+      "level": 1
+    },
+    {
+      "card_id": "card-021",
+      "idx": 20,
+      "name": "already",
+      "side_a": "already",
+      "side_b": "yכjĨng",
+      "side_c": "఩倯",
+      "side_d": "adv",
+      "level": 1
+    },
+    {
+      "card_id": "card-022",
+      "idx": 21,
+      "name": "to_know",
+      "side_a": "to know",
+      "side_b": "zhĨdao",
+      "side_c": "ᵧⳬ",
+      "side_d": "v",
+      "level": 1
+    }
+  ]
+}

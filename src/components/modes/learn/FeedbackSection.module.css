@@ -1,0 +1,225 @@
+.feedbackSection {
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  border-radius: 12px;
+  border: 2px solid;
+  animation: fadeIn 0.3s ease;
+  transition: all 0.2s ease;
+}
+
+.feedbackSection.correct {
+  background: rgba(16, 185, 129, 0.05);
+  border-color: var(--semantic-success);
+}
+
+.feedbackSection.incorrect {
+  background: rgba(239, 68, 68, 0.05);
+  border-color: var(--semantic-error);
+}
+
+.feedbackHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.feedbackIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: var(--text-lg);
+}
+
+.correct .feedbackIcon {
+  background: var(--semantic-success);
+  color: var(--neutral-white);
+}
+
+.incorrect .feedbackIcon {
+  background: var(--semantic-error);
+  color: var(--neutral-white);
+}
+
+.feedbackTitle {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--neutral-gray-800);
+}
+
+.correct .feedbackTitle {
+  color: var(--semantic-success);
+}
+
+.incorrect .feedbackTitle {
+  color: var(--semantic-error);
+}
+
+.feedbackContent {
+  margin-left: calc(28px + var(--space-2));
+}
+
+.correctAnswerWrapper {
+  margin-bottom: var(--space-3);
+  padding: var(--space-3);
+  background: var(--neutral-white);
+  border-radius: 8px;
+  border: 1px solid var(--neutral-gray-200);
+}
+
+.correctAnswerLabel {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--neutral-gray-600);
+  margin-bottom: var(--space-1);
+  font-weight: var(--font-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.correctAnswerText {
+  display: block;
+  font-size: var(--text-base);
+  color: var(--neutral-gray-800);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-relaxed);
+}
+
+.explanationWrapper {
+  margin-bottom: var(--space-2);
+}
+
+.explanationText {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--neutral-gray-700);
+  line-height: var(--leading-relaxed);
+}
+
+.encouragement {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--neutral-gray-600);
+  font-style: italic;
+  line-height: var(--leading-relaxed);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .feedbackSection {
+    padding: var(--space-3);
+    border-radius: 10px;
+  }
+
+  .feedbackIcon {
+    width: 24px;
+    height: 24px;
+    font-size: var(--text-base);
+  }
+
+  .feedbackTitle {
+    font-size: var(--text-base);
+  }
+
+  .feedbackContent {
+    margin-left: calc(24px + var(--space-2));
+  }
+
+  .correctAnswerWrapper {
+    padding: var(--space-2);
+  }
+
+  .correctAnswerLabel {
+    font-size: 11px;
+  }
+
+  .correctAnswerText {
+    font-size: var(--text-base);
+  }
+
+  .explanationText,
+  .encouragement {
+    font-size: var(--text-sm);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .feedbackSection {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .feedbackSection {
+    border-width: 3px;
+  }
+
+  .feedbackSection.correct,
+  .feedbackSection.incorrect {
+    background: transparent;
+  }
+
+  .correctAnswerWrapper {
+    border-width: 2px;
+  }
+
+  .feedbackIcon {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .feedbackSection.correct {
+    background: rgba(16, 185, 129, 0.1);
+  }
+
+  .feedbackSection.incorrect {
+    background: rgba(239, 68, 68, 0.1);
+  }
+
+  .feedbackTitle {
+    color: var(--neutral-gray-100);
+  }
+
+  .correctAnswerWrapper {
+    background: var(--neutral-gray-800);
+    border-color: var(--neutral-gray-600);
+  }
+
+  .correctAnswerLabel {
+    color: var(--neutral-gray-400);
+  }
+
+  .correctAnswerText {
+    color: var(--neutral-gray-100);
+  }
+
+  .explanationText {
+    color: var(--neutral-gray-300);
+  }
+
+  .encouragement {
+    color: var(--neutral-gray-400);
+  }
+}

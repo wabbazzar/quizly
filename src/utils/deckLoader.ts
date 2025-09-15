@@ -40,6 +40,16 @@ const validateMetadata = (metadata: any): DeckMetadata | null => {
     available_sides: typeof metadata.available_sides === 'number'
       ? Math.min(6, Math.max(2, metadata.available_sides))
       : 2,
+    side_labels: metadata.side_labels && typeof metadata.side_labels === 'object'
+      ? {
+          side_a: metadata.side_labels.side_a ? sanitizeString(metadata.side_labels.side_a) : undefined,
+          side_b: metadata.side_labels.side_b ? sanitizeString(metadata.side_labels.side_b) : undefined,
+          side_c: metadata.side_labels.side_c ? sanitizeString(metadata.side_labels.side_c) : undefined,
+          side_d: metadata.side_labels.side_d ? sanitizeString(metadata.side_labels.side_d) : undefined,
+          side_e: metadata.side_labels.side_e ? sanitizeString(metadata.side_labels.side_e) : undefined,
+          side_f: metadata.side_labels.side_f ? sanitizeString(metadata.side_labels.side_f) : undefined,
+        }
+      : undefined,
     card_count: typeof metadata.card_count === 'number' ? metadata.card_count : 0,
     difficulty: metadata.difficulty,
     tags: Array.isArray(metadata.tags)
