@@ -52,6 +52,13 @@
   margin: 0;
 }
 
+.completionMessage {
+  font-size: var(--text-base);
+  color: var(--neutral-gray-600);
+  margin-top: var(--space-2);
+  text-align: center;
+}
+
 /* Main Score */
 .mainScore {
   text-align: center;

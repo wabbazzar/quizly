@@ -36,6 +36,11 @@ const LearnContainer: FC<LearnContainerProps> = ({
     responseStartTime: Date.now(),
   });
 
+  // Track unique cards that have been mastered (answered correctly)
+  const [masteredCardIndices, setMasteredCardIndices] = useState<Set<number>>(new Set());
+  // Track unique cards that have been answered incorrectly
+  const [strugglingCardIndices, setStrugglingCardIndices] = useState<Set<number>>(new Set());
+
   const [isLoading, setIsLoading] = useState(true);
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedback, setFeedback] = useState<{ isCorrect: boolean; correctAnswer?: string; explanation?: string } | undefined>(undefined);
@@ -67,6 +72,9 @@ const LearnContainer: FC<LearnContainerProps> = ({
         startTime: Date.now(),
         responseStartTime: Date.now(),
       });
+      // Reset card tracking
+      setMasteredCardIndices(new Set());
+      setStrugglingCardIndices(new Set());
     }
 
     const initializeSession = () => {
@@ -152,6 +160,16 @@ const LearnContainer: FC<LearnContainerProps> = ({
       // Mark as correct in scheduler
       scheduler.markCardCorrect(cardId);
 
+      // Track the actual card as mastered
+      if (sessionState.currentQuestion?.cardIndex !== undefined) {
+        setMasteredCardIndices(prev => new Set(prev).add(sessionState.currentQuestion!.cardIndex));
+        setStrugglingCardIndices(prev => {
+          const newSet = new Set(prev);
+          newSet.delete(sessionState.currentQuestion!.cardIndex);
+          return newSet;
+        });
+      }
+
       // Update session state
       setSessionState(prev => {
         const newCorrectCards = new Set(prev.correctCards);
@@ -202,13 +220,22 @@ const LearnContainer: FC<LearnContainerProps> = ({
         sessionState.currentQuestion.cardIndex,
         responseTime
       );
-    } else if (isCorrect) {
+      // Track the actual card as struggling
+      if (sessionState.currentQuestion) {
+        setStrugglingCardIndices(prev => new Set(prev).add(sessionState.currentQuestion!.cardIndex));
+      }
+    } else if (isCorrect && sessionState.currentQuestion) {
       scheduler.markCardCorrect(cardId);
+      // Track the actual card as mastered (only if not already struggling)
+      const currentCardIndex = sessionState.currentQuestion.cardIndex;
+      if (!strugglingCardIndices.has(currentCardIndex)) {
+        setMasteredCardIndices(prev => new Set(prev).add(currentCardIndex));
+      }
 
       // Mark MC question as correct for progressive learning
-      if (sessionState.currentQuestion?.type === 'multiple_choice' &&
-          !sessionState.currentQuestion?.isFollowUp) {
-        questionGenerator.markMCCorrect(sessionState.currentQuestion.cardIndex);
+      if (sessionState.currentQuestion.type === 'multiple_choice' &&
+          !sessionState.currentQuestion.isFollowUp) {
+        questionGenerator.markMCCorrect(currentCardIndex);
       }
     }
 
@@ -257,18 +284,27 @@ const LearnContainer: FC<LearnContainerProps> = ({
     setFeedback(undefined);
 
     if (!questionGenerator.hasNext) {
-      // Session complete
+      // Session complete - use unique card counts
+      const uniqueCardsAttempted = new Set([...masteredCardIndices, ...strugglingCardIndices]).size;
+      const correctCount = masteredCardIndices.size;
+      const incorrectCount = strugglingCardIndices.size;
+
+      // Calculate accuracy based on unique cards, not questions
+      const accuracy = uniqueCardsAttempted > 0
+        ? (correctCount / uniqueCardsAttempted) * 100
+        : 0;
+
       const results: LearnSessionResults = {
         deckId: deck.id,
-        totalQuestions: sessionState.roundCards.length,
-        correctAnswers: sessionState.correctCards.size,
-        incorrectAnswers: sessionState.incorrectCards.size,
-        accuracy: (sessionState.correctCards.size / sessionState.roundCards.length) * 100,
+        totalQuestions: uniqueCardsAttempted, // Use unique cards count
+        correctAnswers: correctCount,
+        incorrectAnswers: incorrectCount,
+        accuracy,
         averageResponseTime: 0, // Will be calculated properly in Phase 4
         maxStreak: sessionState.maxStreak,
         duration: Date.now() - sessionState.startTime,
-        masteredCards: Array.from(sessionState.correctCards),
-        strugglingCards: Array.from(sessionState.incorrectCards),
+        masteredCards: Array.from(masteredCardIndices),
+        strugglingCards: Array.from(strugglingCardIndices),
       };
 
       onComplete(results);

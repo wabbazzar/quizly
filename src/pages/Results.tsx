@@ -47,6 +47,17 @@ const Results: FC = () => {
   };
 
   const handleTryAgain = () => {
+    // Check if there are any cards left to learn
+    const totalDeckCards = currentDeck?.content?.length || 0;
+    const masteredCount = results.masteredCards?.length || 0;
+
+    // If all cards in the deck are mastered, show a message
+    if (totalDeckCards > 0 && masteredCount >= totalDeckCards) {
+      alert('🎉 Congratulations! You have mastered all cards in this deck!');
+      navigate(`/deck/${deckId}`);
+      return;
+    }
+
     // Pass mastered cards to exclude them from the next session
     navigate(`/learn/${deckId}`, {
       state: {
@@ -68,8 +79,21 @@ const Results: FC = () => {
       <div className={styles.resultsContainer}>
         {/* Performance Header */}
         <div className={styles.performanceHeader}>
-          <div className={styles.performanceEmoji}>{getPerformanceEmoji()}</div>
-          <h1 className={styles.performanceMessage}>{getPerformanceMessage()}</h1>
+          <div className={styles.performanceEmoji}>
+            {currentDeck && results.masteredCards?.length >= currentDeck.content.length
+              ? '🏆'
+              : getPerformanceEmoji()}
+          </div>
+          <h1 className={styles.performanceMessage}>
+            {currentDeck && results.masteredCards?.length >= currentDeck.content.length
+              ? 'Deck Fully Mastered!'
+              : getPerformanceMessage()}
+          </h1>
+          {currentDeck && results.masteredCards?.length >= currentDeck.content.length && (
+            <p className={styles.completionMessage}>
+              Congratulations! You've mastered all {currentDeck.content.length} cards in this deck!
+            </p>
+          )}
         </div>
 
         {/* Main Score */}
@@ -129,7 +153,12 @@ const Results: FC = () => {
             onClick={handleTryAgain}
             className={`${styles.actionButton} ${styles.primaryButton}`}
           >
-            Try Again
+            {currentDeck && results.masteredCards?.length >= currentDeck.content.length
+              ? 'View Deck'
+              : results.masteredCards?.length > 0
+              ? 'Continue with New Cards'
+              : 'Try Again'
+            }
           </button>
           <button
             onClick={handleBackToDeck}
