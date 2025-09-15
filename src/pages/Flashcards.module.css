@@ -68,6 +68,16 @@
   margin-top: var(--space-1);
 }
 
+.missedCardsIndicator {
+  color: var(--semantic-warning);
+  font-weight: var(--font-semibold);
+}
+
+.roundIndicator {
+  color: var(--secondary-main);
+  font-weight: var(--font-semibold);
+}
+
 .progressSection {
   padding: var(--space-2) var(--space-4);
   background: var(--bg-secondary);

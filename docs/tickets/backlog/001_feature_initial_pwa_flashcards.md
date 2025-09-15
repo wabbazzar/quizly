@@ -1120,9 +1120,9 @@ export const FlashcardsSettingsModal: FC<FlashcardsSettingsProps> = ({
 1. ✅ Create Flashcards page with gesture handling
 2. ✅ Implement FlashCard with flip animation (CSS transforms)
 3. ⚠️ Add swipe gesture recognition using Framer Motion (keyboard only, no swipe yet)
-4. 🚧 Build settings modal for side configuration (in progress)
-5. ⚠️ Implement progress tracking and display (basic implementation, needs persistence)
-6. ❌ Add auto-restart with missed cards functionality
+4. ✅ Build settings modal for side configuration
+5. ✅ Implement progress tracking and display (with persistence)
+6. ✅ Add auto-restart with missed cards functionality
 
 **Testing:**
 ```typescript
@@ -1174,6 +1174,14 @@ npx lighthouse http://localhost:5173 --view
    - Added favicon and Apple Touch icons
    - Configured meta tags for social sharing
    - Ready for PWA installation
+
+2. **Flashcards Completion Modal with Missed Cards** ✅ (Added 2025-09-15)
+   - Created FlashcardsCompletionModal component similar to Results page
+   - Added round tracking and completion detection
+   - Implemented reshuffling of missed cards for focused review
+   - Users can continue with only missed cards or restart full deck
+   - Multiple round support with round number display
+   - Session persistence with progress tracking
 
 ## Required Improvements (Added 2025-01-22)
 

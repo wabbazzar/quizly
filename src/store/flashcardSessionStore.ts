@@ -8,6 +8,10 @@ interface FlashcardSession {
   frontSides: string[];
   backSides: string[];
   lastAccessed: number;
+  roundNumber: number;
+  cardOrder: number[]; // Current order of cards (for shuffling missed cards)
+  startTime: number;
+  isMissedCardsRound: boolean; // True if current round is missed cards only
 }
 
 interface FlashcardSessionStore {
@@ -17,6 +21,9 @@ interface FlashcardSessionStore {
   saveSession: (session: FlashcardSession) => void;
   clearSession: (deckId: string) => void;
   clearOldSessions: () => void;
+  startNewRound: (deckId: string, totalCards: number) => FlashcardSession;
+  startMissedCardsRound: (deckId: string, missedCardIndices: number[]) => FlashcardSession;
+  getMissedCardIndices: (session: FlashcardSession) => number[];
 }
 
 const DEFAULT_FRONT_SIDES = ['side_a'];
@@ -76,6 +83,70 @@ export const useFlashcardSessionStore = create<FlashcardSessionStore>()(
 
           return { sessions: newSessions };
         });
+      },
+
+      startNewRound: (deckId: string, totalCards: number) => {
+        const existingSession = get().getSession(deckId);
+        const newSession: FlashcardSession = {
+          deckId,
+          currentCardIndex: 0,
+          progress: {},
+          frontSides: existingSession?.frontSides || DEFAULT_FRONT_SIDES,
+          backSides: existingSession?.backSides || DEFAULT_BACK_SIDES,
+          lastAccessed: Date.now(),
+          roundNumber: (existingSession?.roundNumber || 0) + 1,
+          cardOrder: Array.from({ length: totalCards }, (_, i) => i),
+          startTime: Date.now(),
+          isMissedCardsRound: false
+        };
+
+        get().saveSession(newSession);
+        return newSession;
+      },
+
+      startMissedCardsRound: (deckId: string, missedCardIndices: number[]) => {
+        const existingSession = get().getSession(deckId);
+
+        // Shuffle the missed cards for variety
+        const shuffled = [...missedCardIndices].sort(() => Math.random() - 0.5);
+
+        const newSession: FlashcardSession = {
+          deckId,
+          currentCardIndex: 0,
+          progress: {},
+          frontSides: existingSession?.frontSides || DEFAULT_FRONT_SIDES,
+          backSides: existingSession?.backSides || DEFAULT_BACK_SIDES,
+          lastAccessed: Date.now(),
+          roundNumber: (existingSession?.roundNumber || 0) + 1,
+          cardOrder: shuffled,
+          startTime: Date.now(),
+          isMissedCardsRound: true
+        };
+
+        get().saveSession(newSession);
+        return newSession;
+      },
+
+      getMissedCardIndices: (session: FlashcardSession) => {
+        const missedIndices: number[] = [];
+
+        if (session.isMissedCardsRound) {
+          // For missed cards round, check progress against the card order
+          session.cardOrder.forEach((originalIndex, currentIndex) => {
+            if (session.progress[currentIndex] === 'incorrect' || !session.progress[currentIndex]) {
+              missedIndices.push(originalIndex);
+            }
+          });
+        } else {
+          // For regular round, check all cards
+          Object.entries(session.progress).forEach(([index, status]) => {
+            if (status === 'incorrect') {
+              missedIndices.push(parseInt(index));
+            }
+          });
+        }
+
+        return missedIndices;
       }
     }),
     {

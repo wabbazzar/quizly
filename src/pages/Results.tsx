@@ -1,15 +1,25 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { LearnSessionResults } from '@/types';
+import { useDeckStore } from '@/store/deckStore';
+import ReviewCard from '@/components/cards/ReviewCard';
 import styles from './Results.module.css';
 
 const Results: FC = () => {
   const { deckId } = useParams<{ deckId: string }>();
   const navigate = useNavigate();
   const location = useLocation();
+  const { currentDeck, loadDeck } = useDeckStore();
 
   // Get results from navigation state
   const results = location.state?.results as LearnSessionResults | undefined;
+
+  // Load deck if not already loaded
+  useEffect(() => {
+    if (deckId && !currentDeck) {
+      loadDeck(deckId);
+    }
+  }, [deckId, currentDeck, loadDeck]);
 
   if (!results) {
     // If no results (e.g., direct navigation), redirect to home
@@ -37,7 +47,12 @@ const Results: FC = () => {
   };
 
   const handleTryAgain = () => {
-    navigate(`/learn/${deckId}`);
+    // Pass mastered cards to exclude them from the next session
+    navigate(`/learn/${deckId}`, {
+      state: {
+        excludeCards: results.masteredCards || []
+      }
+    });
   };
 
   const handleBackToDeck = () => {
@@ -129,6 +144,28 @@ const Results: FC = () => {
             Home
           </button>
         </div>
+
+        {/* Missed Cards Section */}
+        {currentDeck && results.strugglingCards && results.strugglingCards.length > 0 && (
+          <div className={styles.missedCardsSection}>
+            <h2 className={styles.missedCardsTitle}>Cards to Review</h2>
+            <div className={styles.missedCardsGrid}>
+              {results.strugglingCards.map((cardIndex) => {
+                const card = currentDeck.content[cardIndex];
+                if (!card) return null;
+                return (
+                  <ReviewCard
+                    key={cardIndex}
+                    card={card}
+                    frontSides={['side_a']}
+                    backSides={['side_b']}
+                    showBothSides={true}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -434,3 +434,34 @@
     width: 100%;
   }
 }
+
+/* Navigation Buttons */
+.navigationButtons {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.nextButton {
+  padding: var(--space-3) var(--space-6);
+  background: var(--primary-main);
+  color: var(--neutral-white);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+}
+
+.nextButton:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.nextButton:active {
+  transform: translateY(0);
+}

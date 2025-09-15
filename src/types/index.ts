@@ -139,6 +139,19 @@ export interface LearnSessionResults {
   strugglingCards: number[];
 }
 
+export interface FlashcardSessionResults {
+  deckId: string;
+  totalCards: number;
+  correctCards: number;
+  incorrectCards: number;
+  accuracy: number;
+  roundNumber: number;
+  isComplete: boolean;
+  missedCardIndices: number[];
+  startTime: number;
+  endTime: number;
+}
+
 // Scheduling System Types
 export interface MissedCard {
   cardId: string;

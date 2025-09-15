@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useDeckStore } from '@/store/deckStore';
 import LoadingScreen from '@/components/common/LoadingScreen';
 import LearnContainer from '@/components/modes/learn/LearnContainer';
@@ -34,7 +34,11 @@ const defaultLearnSettings: LearnModeSettings = {
 const Learn: FC = () => {
   const { deckId } = useParams<{ deckId: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const { currentDeck, loadDeck, isLoading, error } = useDeckStore();
+
+  // Get excluded cards from navigation state (for Try Again functionality)
+  const excludeCards = location.state?.excludeCards as number[] | undefined;
 
   // Load settings from localStorage or use defaults
   const [settings, setSettings] = useState<LearnModeSettings>(() => {
@@ -102,10 +106,20 @@ const Learn: FC = () => {
     return <LoadingScreen />;
   }
 
+  // Filter deck content if excludeCards is provided
+  const filteredDeck = excludeCards && excludeCards.length > 0
+    ? {
+        ...currentDeck,
+        content: currentDeck.content.filter(
+          (_card, index) => !excludeCards.includes(index)
+        )
+      }
+    : currentDeck;
+
   return (
     <div className={styles.learnPage}>
       <LearnContainer
-        deck={currentDeck}
+        deck={filteredDeck}
         settings={settings}
         onComplete={handleComplete}
         onExit={handleExit}

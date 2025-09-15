@@ -1,31 +1,33 @@
-.resultsPage {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-light) 100%);
-  padding: var(--space-4);
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  backdrop-filter: blur(4px);
 }
 
-.resultsContainer {
+/* Modal Container */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: var(--neutral-white);
   border-radius: var(--radius-2xl);
   padding: var(--space-8);
+  width: 90%;
   max-width: 500px;
-  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
   box-shadow: var(--shadow-2xl);
-  animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  z-index: 1001;
+  margin: 0;
+  right: auto;
+  bottom: auto;
 }
 
 /* Performance Header */
@@ -49,7 +51,14 @@
   font-size: var(--text-2xl);
   font-weight: var(--font-bold);
   color: var(--neutral-gray-800);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.roundMessage {
+  font-size: var(--text-base);
+  color: var(--neutral-gray-600);
   margin: 0;
+  line-height: 1.5;
 }
 
 /* Main Score */
@@ -112,34 +121,34 @@
   color: var(--neutral-gray-600);
 }
 
-/* Additional Stats */
-.additionalStats {
-  background: var(--neutral-gray-50);
-  border-radius: var(--radius-lg);
-  padding: var(--space-4);
-  margin-bottom: var(--space-6);
-}
-
-.statRow {
+/* Round Info */
+.roundInfo {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: var(--space-2) 0;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
 }
 
-.statRow:not(:last-child) {
-  border-bottom: 1px solid var(--neutral-gray-200);
-}
-
-.statRowLabel {
-  font-size: var(--text-base);
-  color: var(--neutral-gray-600);
-}
-
-.statRowValue {
-  font-size: var(--text-base);
-  font-weight: var(--font-semibold);
+.roundBadge {
+  background: var(--secondary-light);
   color: var(--neutral-gray-800);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+}
+
+.missedCardsInfo {
+  background: var(--semantic-warning);
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--semantic-warning);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  border: 1px solid var(--semantic-warning);
 }
 
 /* Action Buttons */
@@ -171,6 +180,11 @@
   box-shadow: var(--shadow-lg);
 }
 
+.primaryButton:focus-visible {
+  outline: 2px solid var(--primary-dark);
+  outline-offset: 2px;
+}
+
 .secondaryButton {
   background: var(--neutral-gray-200);
   color: var(--neutral-gray-800);
@@ -179,6 +193,11 @@
 .secondaryButton:hover {
   background: var(--neutral-gray-300);
   transform: translateY(-2px);
+}
+
+.secondaryButton:focus-visible {
+  outline: 2px solid var(--neutral-gray-400);
+  outline-offset: 2px;
 }
 
 .tertiaryButton {
@@ -192,9 +211,14 @@
   border-color: var(--neutral-gray-400);
 }
 
+.tertiaryButton:focus-visible {
+  outline: 2px solid var(--neutral-gray-400);
+  outline-offset: 2px;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
-  .resultsContainer {
+  .modal {
     padding: var(--space-6);
   }
 
@@ -221,59 +245,98 @@
   .statCard {
     padding: var(--space-3);
   }
+
+  .roundInfo {
+    gap: var(--space-2);
+  }
 }
 
-/* Missed Cards Section */
-.missedCardsSection {
-  margin-top: var(--space-8);
-  padding-top: var(--space-8);
-  border-top: 2px solid var(--neutral-gray-200);
-}
-
-.missedCardsTitle {
-  font-size: var(--text-xl);
-  font-weight: var(--font-semibold);
-  color: var(--neutral-gray-800);
-  margin-bottom: var(--space-4);
-  text-align: center;
-}
-
-.missedCardsGrid {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  max-height: 400px;
-  overflow-y: auto;
-  padding: var(--space-2);
-  border-radius: var(--radius-lg);
-}
-
-.missedCardsGrid::-webkit-scrollbar {
-  width: 8px;
-}
-
-.missedCardsGrid::-webkit-scrollbar-track {
-  background: var(--neutral-gray-100);
-  border-radius: var(--radius-sm);
-}
-
-.missedCardsGrid::-webkit-scrollbar-thumb {
-  background: var(--neutral-gray-400);
-  border-radius: var(--radius-sm);
-}
-
-.missedCardsGrid::-webkit-scrollbar-thumb:hover {
-  background: var(--neutral-gray-500);
-}
-
-/* Mobile adjustments for missed cards */
-@media (max-width: 768px) {
-  .missedCardsSection {
-    margin-top: var(--space-6);
-    padding-top: var(--space-6);
+/* Very narrow screens - full screen modal */
+@media (max-width: 640px) {
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 0;
+    padding: var(--space-4);
+    overflow-y: auto;
   }
 
-  .missedCardsGrid {
-    max-height: 300px;
+  .performanceHeader {
+    margin-bottom: var(--space-4);
+  }
+
+  .mainScore {
+    margin-bottom: var(--space-4);
+  }
+
+  .statsGrid {
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .roundInfo {
+    margin-bottom: var(--space-4);
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .modal {
+    background: var(--neutral-gray-800);
+    color: var(--neutral-gray-100);
+  }
+
+  .performanceMessage {
+    color: var(--neutral-gray-100);
+  }
+
+  .roundMessage {
+    color: var(--neutral-gray-300);
+  }
+
+  .accuracyLabel {
+    color: var(--neutral-gray-400);
+  }
+
+  .statCard {
+    background: var(--neutral-gray-700);
+  }
+
+  .statValue {
+    color: var(--neutral-gray-100);
+  }
+
+  .statLabel {
+    color: var(--neutral-gray-400);
+  }
+
+  .roundBadge {
+    background: var(--secondary-dark);
+    color: var(--neutral-gray-100);
+  }
+
+  .secondaryButton {
+    background: var(--neutral-gray-700);
+    color: var(--neutral-gray-100);
+  }
+
+  .secondaryButton:hover {
+    background: var(--neutral-gray-600);
+  }
+
+  .tertiaryButton {
+    color: var(--neutral-gray-300);
+    border-color: var(--neutral-gray-600);
+  }
+
+  .tertiaryButton:hover {
+    background: var(--neutral-gray-700);
+    border-color: var(--neutral-gray-500);
   }
 }

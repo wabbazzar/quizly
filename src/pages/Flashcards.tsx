@@ -3,8 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion, PanInfo, AnimatePresence } from 'framer-motion';
 import { useDeckStore } from '@/store/deckStore';
 import { useFlashcardSessionStore, DEFAULT_FRONT_SIDES, DEFAULT_BACK_SIDES } from '@/store/flashcardSessionStore';
+import { FlashcardSessionResults } from '@/types';
 import FlashCard from '@/components/FlashCard';
 import FlashcardsSettings from '@/components/modals/FlashcardsSettings';
+import FlashcardsCompletionModal from '@/components/modals/FlashcardsCompletionModal';
 import LoadingScreen from '@/components/common/LoadingScreen';
 import SettingsIcon from '@/components/icons/SettingsIcon';
 import styles from './Flashcards.module.css';
@@ -13,7 +15,7 @@ const Flashcards: FC = () => {
   const { deckId } = useParams<{ deckId: string }>();
   const navigate = useNavigate();
   const { decks, activeDeck, selectDeck } = useDeckStore();
-  const { getSession, saveSession } = useFlashcardSessionStore();
+  const { getSession, saveSession, startNewRound, startMissedCardsRound, getMissedCardIndices } = useFlashcardSessionStore();
   const isInitialMount = useRef(true);
 
   // Initialize state from persisted session or defaults
@@ -24,6 +26,12 @@ const Flashcards: FC = () => {
   const [progress, setProgress] = useState<{ [key: number]: 'correct' | 'incorrect' | null }>({});
   const [showSettings, setShowSettings] = useState(false);
   const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
+  const [roundNumber, setRoundNumber] = useState(1);
+  const [cardOrder, setCardOrder] = useState<number[]>([]);
+  const [startTime, setStartTime] = useState(Date.now());
+  const [isMissedCardsRound, setIsMissedCardsRound] = useState(false);
+  const [showCompletionModal, setShowCompletionModal] = useState(false);
+  const [completionResults, setCompletionResults] = useState<FlashcardSessionResults | null>(null);
 
 
   // Load deck and restore session on mount
@@ -41,6 +49,14 @@ const Flashcards: FC = () => {
             setProgress(session.progress);
             setFrontSides(session.frontSides);
             setBackSides(session.backSides);
+            setRoundNumber(session.roundNumber || 1);
+            setCardOrder(session.cardOrder || Array.from({ length: deck.content.length }, (_, i) => i));
+            setStartTime(session.startTime || Date.now());
+            setIsMissedCardsRound(session.isMissedCardsRound || false);
+          } else {
+            // Initialize new session
+            setCardOrder(Array.from({ length: deck.content.length }, (_, i) => i));
+            setStartTime(Date.now());
           }
           isInitialMount.current = false;
         }
@@ -68,17 +84,67 @@ const Flashcards: FC = () => {
         progress,
         frontSides,
         backSides,
-        lastAccessed: Date.now()
+        lastAccessed: Date.now(),
+        roundNumber,
+        cardOrder,
+        startTime,
+        isMissedCardsRound
       });
     }
-  }, [deckId, currentCardIndex, progress, frontSides, backSides, saveSession]);
+  }, [deckId, currentCardIndex, progress, frontSides, backSides, saveSession, roundNumber, cardOrder, startTime, isMissedCardsRound]);
+
+  // Define handleDeckCompletion before handleNext since handleNext depends on it
+  const handleDeckCompletion = useCallback(() => {
+    if (!activeDeck || !deckId) return;
+
+    const session = {
+      deckId,
+      currentCardIndex,
+      progress,
+      frontSides,
+      backSides,
+      lastAccessed: Date.now(),
+      roundNumber,
+      cardOrder,
+      startTime,
+      isMissedCardsRound
+    };
+
+    const missedIndices = getMissedCardIndices(session);
+    const totalCards = isMissedCardsRound ? cardOrder.length : activeDeck.content.length;
+    const correctCards = Object.values(progress).filter(p => p === 'correct').length;
+    const incorrectCards = missedIndices.length;
+
+    const results: FlashcardSessionResults = {
+      deckId,
+      totalCards,
+      correctCards,
+      incorrectCards,
+      accuracy: (correctCards / totalCards) * 100,
+      roundNumber,
+      isComplete: incorrectCards === 0,
+      missedCardIndices: missedIndices,
+      startTime,
+      endTime: Date.now()
+    };
+
+    setCompletionResults(results);
+    setShowCompletionModal(true);
+  }, [activeDeck, deckId, currentCardIndex, progress, frontSides, backSides, roundNumber, cardOrder, startTime, isMissedCardsRound, getMissedCardIndices]);
 
   const handleNext = useCallback(() => {
-    if (activeDeck && currentCardIndex < activeDeck.content.length - 1) {
+    if (!activeDeck) return;
+
+    const totalCards = isMissedCardsRound ? cardOrder.length : activeDeck.content.length;
+
+    if (currentCardIndex < totalCards - 1) {
       setCurrentCardIndex(prev => prev + 1);
       setIsFlipped(false);
+    } else {
+      // Deck completion - show modal
+      handleDeckCompletion();
     }
-  }, [activeDeck, currentCardIndex]);
+  }, [activeDeck, currentCardIndex, isMissedCardsRound, cardOrder, handleDeckCompletion]);
 
   const handlePrevious = useCallback(() => {
     if (currentCardIndex > 0) {
@@ -102,6 +168,44 @@ const Flashcards: FC = () => {
       setSwipeDirection(null);
     }, 400);
   }, [currentCardIndex, handleNext]);
+
+  const handleContinueWithMissed = useCallback(() => {
+    if (!completionResults || !deckId || !activeDeck) return;
+
+    const newSession = startMissedCardsRound(deckId, completionResults.missedCardIndices);
+
+    // Update local state from new session
+    setCurrentCardIndex(0);
+    setIsFlipped(false);
+    setProgress({});
+    setRoundNumber(newSession.roundNumber);
+    setCardOrder(newSession.cardOrder);
+    setStartTime(newSession.startTime);
+    setIsMissedCardsRound(true);
+    setShowCompletionModal(false);
+    setCompletionResults(null);
+  }, [completionResults, deckId, activeDeck, startMissedCardsRound]);
+
+  const handleStartNewRound = useCallback(() => {
+    if (!deckId || !activeDeck) return;
+
+    const newSession = startNewRound(deckId, activeDeck.content.length);
+
+    // Update local state from new session
+    setCurrentCardIndex(0);
+    setIsFlipped(false);
+    setProgress({});
+    setRoundNumber(newSession.roundNumber);
+    setCardOrder(newSession.cardOrder);
+    setStartTime(newSession.startTime);
+    setIsMissedCardsRound(false);
+    setShowCompletionModal(false);
+    setCompletionResults(null);
+  }, [deckId, activeDeck, startNewRound]);
+
+  const handleBackToDeck = useCallback(() => {
+    navigate(`/deck/${deckId}`);
+  }, [navigate, deckId]);
 
   const handleDragEnd = useCallback((_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const threshold = 100;
@@ -150,8 +254,11 @@ const Flashcards: FC = () => {
     return <LoadingScreen />;
   }
 
-  const currentCard = activeDeck.content[currentCardIndex];
-  const progressPercentage = (Object.keys(progress).length / activeDeck.content.length) * 100;
+  // Get the actual card based on whether we're in a missed cards round
+  const actualCardIndex = isMissedCardsRound ? cardOrder[currentCardIndex] : currentCardIndex;
+  const currentCard = activeDeck.content[actualCardIndex];
+  const totalCards = isMissedCardsRound ? cardOrder.length : activeDeck.content.length;
+  const progressPercentage = (Object.keys(progress).length / totalCards) * 100;
   const correctCount = Object.values(progress).filter(p => p === 'correct').length;
   const incorrectCount = Object.values(progress).filter(p => p === 'incorrect').length;
 
@@ -171,7 +278,13 @@ const Flashcards: FC = () => {
         <div className={styles.deckInfo}>
           <h1 className={styles.deckTitle}>{activeDeck.metadata.deck_name}</h1>
           <div className={styles.cardCounter}>
-            Card {currentCardIndex + 1} of {activeDeck.content.length}
+            {isMissedCardsRound && (
+              <span className={styles.missedCardsIndicator}>Review: </span>
+            )}
+            Card {currentCardIndex + 1} of {totalCards}
+            {roundNumber > 1 && (
+              <span className={styles.roundIndicator}> • Round {roundNumber}</span>
+            )}
           </div>
         </div>
         <button
@@ -284,7 +397,7 @@ const Flashcards: FC = () => {
         <button
           className={styles.navButton}
           onClick={handleNext}
-          disabled={currentCardIndex === activeDeck.content.length - 1}
+          disabled={currentCardIndex === totalCards - 1}
           aria-label="Next card"
         >
           →
@@ -298,6 +411,15 @@ const Flashcards: FC = () => {
         frontSides={frontSides}
         backSides={backSides}
         onUpdateSettings={updateSettings}
+      />
+
+      <FlashcardsCompletionModal
+        visible={showCompletionModal}
+        results={completionResults}
+        onContinueWithMissed={handleContinueWithMissed}
+        onStartNewRound={handleStartNewRound}
+        onBackToDeck={handleBackToDeck}
+        onClose={() => setShowCompletionModal(false)}
       />
     </div>
   );

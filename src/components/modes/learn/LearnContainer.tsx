@@ -42,7 +42,7 @@ const LearnContainer: FC<LearnContainerProps> = ({
   const questionGenerator = useQuestionGenerator(deck, settings);
   const scheduler = useCardScheduler(settings);
 
-  // Initialize session with cards
+  // Initialize session with cards - only on deck change
   useEffect(() => {
     const initializeSession = () => {
       // Check if deck has content (this is now handled by parent, but keep as safety check)
@@ -103,7 +103,9 @@ const LearnContainer: FC<LearnContainerProps> = ({
     };
 
     initializeSession();
-  }, [deck, settings, questionGenerator]);
+    // Only re-initialize when deck changes, not settings
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [deck.id]);
 
   // Update current question when generator changes
   useEffect(() => {
@@ -117,7 +119,46 @@ const LearnContainer: FC<LearnContainerProps> = ({
   }, [questionGenerator.currentQuestion, questionGenerator.currentQuestionIndex]);
 
   const handleAnswer = useCallback((_answer: string, isCorrect: boolean) => {
-    // Prevent multiple selections
+    // If we already have feedback and this is a correction (marking as correct)
+    if (showFeedback && isCorrect) {
+      // Update the state to reflect the corrected answer
+      const cardId = `card_${sessionState.currentQuestion?.cardIndex}`;
+
+      // Mark as correct in scheduler
+      scheduler.markCardCorrect(cardId);
+
+      // Update session state
+      setSessionState(prev => {
+        const newCorrectCards = new Set(prev.correctCards);
+        const newIncorrectCards = new Set(prev.incorrectCards);
+
+        // Move from incorrect to correct
+        newIncorrectCards.delete(prev.questionIndex);
+        newCorrectCards.add(prev.questionIndex);
+
+        // Restore streak
+        const newStreak = prev.currentStreak + 1;
+        const newMaxStreak = Math.max(prev.maxStreak, newStreak);
+
+        return {
+          ...prev,
+          correctCards: newCorrectCards,
+          incorrectCards: newIncorrectCards,
+          currentStreak: newStreak,
+          maxStreak: newMaxStreak,
+        };
+      });
+
+      // Update feedback to show it's now correct
+      setFeedback({
+        isCorrect: true,
+        correctAnswer: sessionState.currentQuestion?.correctAnswer,
+      });
+
+      return;
+    }
+
+    // Prevent multiple initial selections
     if (showFeedback) return;
 
     setShowFeedback(true);
@@ -168,12 +209,22 @@ const LearnContainer: FC<LearnContainerProps> = ({
       };
     });
 
-    // Move to next question after a delay
-    setTimeout(() => {
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      handleNextQuestion();
-    }, 1500);
+    // Don't auto-advance - let user control when to move to next question
   }, [showFeedback, sessionState, scheduler, questionGenerator]);
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Allow Enter key to proceed to next question when feedback is shown
+      if (e.key === 'Enter' && showFeedback) {
+        e.preventDefault();
+        handleNextQuestion();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showFeedback]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleNextQuestion = useCallback(() => {
     // Reset selection state for new question
@@ -277,6 +328,24 @@ const LearnContainer: FC<LearnContainerProps> = ({
               feedback={feedback}
               disabled={showFeedback}
             />
+
+            {/* Next button appears after feedback */}
+            {showFeedback && (
+              <motion.div
+                className={styles.navigationButtons}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <button
+                  onClick={handleNextQuestion}
+                  className={styles.nextButton}
+                  aria-label="Next question"
+                >
+                  Next →
+                </button>
+              </motion.div>
+            )}
           </motion.div>
         </AnimatePresence>
 
