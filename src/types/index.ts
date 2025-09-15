@@ -82,8 +82,16 @@ export interface LearnModeSettings extends ModeSettings {
   cardsPerRound: number;
   masteryThreshold: number;
 
+  // Side configuration
+  questionSides: string[];
+  answerSides: string[];
+
+  // Question configuration
+  questionTypeMix?: 'auto' | 'multiple_choice' | 'free_text' | 'mixed';
+  timerSeconds?: number;
+
   // Scheduling configuration
-  schedulingAlgorithm?: 'smart_spaced' | 'leitner_box';
+  schedulingAlgorithm?: 'smart_spaced' | 'leitner_box' | 'adaptive' | 'spaced_repetition' | 'random' | 'sequential';
   aggressiveness?: 'gentle' | 'balanced' | 'intensive';
   minSpacing?: number;
   maxSpacing?: number;

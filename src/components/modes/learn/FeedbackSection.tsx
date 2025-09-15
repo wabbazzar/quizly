@@ -45,18 +45,6 @@ export const FeedbackSection: FC<FeedbackSectionProps> = memo(({
             <p className={styles.explanationText}>{explanation}</p>
           </div>
         )}
-
-        {isCorrect && !explanation && (
-          <p className={styles.encouragement}>
-            Great job! Keep up the excellent work.
-          </p>
-        )}
-
-        {!isCorrect && !explanation && (
-          <p className={styles.encouragement}>
-            Don&apos;t worry, you&apos;ll get it next time! Keep practicing.
-          </p>
-        )}
       </div>
     </div>
   );

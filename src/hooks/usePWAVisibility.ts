@@ -238,6 +238,8 @@ export function usePWAVisibility() {
 
       return () => clearTimeout(timer);
     }
+    // Return undefined when condition is not met
+    return undefined;
   }, [state.wasRestored, state.isRestoring]);
 
   return {

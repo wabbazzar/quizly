@@ -15,8 +15,16 @@ interface UseCardSchedulerReturn {
 
 export const useCardScheduler = (settings: LearnModeSettings): UseCardSchedulerReturn => {
   const [missedCards, setMissedCards] = useState<Map<string, MissedCard>>(new Map());
+
+  // Map scheduling algorithm to supported ones
+  const getValidAlgorithm = (algorithm?: string): 'smart_spaced' | 'leitner_box' => {
+    if (algorithm === 'leitner_box') return 'leitner_box';
+    // Default all other options to smart_spaced for now
+    return 'smart_spaced';
+  };
+
   const [currentAlgorithm, setCurrentAlgorithm] = useState<'smart_spaced' | 'leitner_box'>(
-    settings.schedulingAlgorithm || 'smart_spaced'
+    getValidAlgorithm(settings.schedulingAlgorithm)
   );
 
   const scheduler = useMemo(() => {

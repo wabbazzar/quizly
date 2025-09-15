@@ -1,8 +1,9 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDeckStore } from '@/store/deckStore';
 import LoadingScreen from '@/components/common/LoadingScreen';
 import LearnContainer from '@/components/modes/learn/LearnContainer';
+import LearnSettings from '@/components/modals/LearnSettings';
 import { LearnModeSettings, LearnSessionResults } from '@/types';
 import styles from './Learn.module.css';
 
@@ -18,18 +19,24 @@ const defaultLearnSettings: LearnModeSettings = {
   clusterLimit: 2,
   progressRatio: 0.3,
   difficultyWeight: 0.5,
+  questionSides: ['side_a'],
+  answerSides: ['side_b'],
   frontSides: ['side_a'],
   backSides: ['side_b'],
   enableTimer: false,
   enableAudio: false,
   randomize: true,
   progressionMode: 'sequential',
+  questionTypeMix: 'auto',
+  timerSeconds: 30,
 };
 
 const Learn: FC = () => {
   const { deckId } = useParams<{ deckId: string }>();
   const navigate = useNavigate();
   const { currentDeck, loadDeck, isLoading, error } = useDeckStore();
+  const [settings, setSettings] = useState<LearnModeSettings>(defaultLearnSettings);
+  const [showSettings, setShowSettings] = useState(false);
 
   useEffect(() => {
     if (deckId) {
@@ -75,9 +82,17 @@ const Learn: FC = () => {
     <div className={styles.learnPage}>
       <LearnContainer
         deck={currentDeck}
-        settings={defaultLearnSettings}
+        settings={settings}
         onComplete={handleComplete}
         onExit={handleExit}
+        onOpenSettings={() => setShowSettings(true)}
+      />
+      <LearnSettings
+        visible={showSettings}
+        onClose={() => setShowSettings(false)}
+        deck={currentDeck}
+        settings={settings}
+        onUpdateSettings={setSettings}
       />
     </div>
   );

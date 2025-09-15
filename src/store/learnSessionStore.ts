@@ -40,6 +40,8 @@ interface LearnSessionStore {
 const defaultLearnSettings: LearnModeSettings = {
   frontSides: ['side_a'],
   backSides: ['side_b'],
+  questionSides: ['side_a'],
+  answerSides: ['side_b'],
   cardsPerRound: 20,
   enableTimer: false,
   timerSeconds: 30,
@@ -56,6 +58,7 @@ const defaultLearnSettings: LearnModeSettings = {
   clusterLimit: 2,
   progressRatio: 0.3,
   difficultyWeight: 0.5,
+  questionTypeMix: 'auto',
 };
 
 export const useLearnSessionStore = create<LearnSessionStore>()(

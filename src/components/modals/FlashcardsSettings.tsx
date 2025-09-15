@@ -91,12 +91,13 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
         setLocalFrontSides([availableSides[0] || 'side_a']);
         setLocalBackSides(availableSides.slice(1));
         break;
-      case 'multifront':
+      case 'multifront': {
         // First two sides on front, rest on back
         const frontCount = Math.min(2, availableSides.length);
         setLocalFrontSides(availableSides.slice(0, frontCount));
         setLocalBackSides(availableSides.slice(frontCount));
         break;
+      }
     }
   };
 

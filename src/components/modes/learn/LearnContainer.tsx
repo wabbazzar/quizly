@@ -11,6 +11,7 @@ interface LearnContainerProps {
   settings: LearnModeSettings;
   onComplete: (results: LearnSessionResults) => void;
   onExit: () => void;
+  onOpenSettings: () => void;
 }
 
 const LearnContainer: FC<LearnContainerProps> = ({
@@ -18,6 +19,7 @@ const LearnContainer: FC<LearnContainerProps> = ({
   settings,
   onComplete,
   onExit,
+  onOpenSettings,
 }) => {
   const [sessionState, setSessionState] = useState<LearnSessionState>({
     currentQuestion: null,
@@ -178,8 +180,13 @@ const LearnContainer: FC<LearnContainerProps> = ({
           ← Exit
         </button>
         <div className={styles.deckName}>{deck.metadata.deck_name}</div>
-        <div className={styles.stats}>
-          {sessionState.questionIndex + 1} / {sessionState.roundCards.length}
+        <div className={styles.headerRight}>
+          <div className={styles.stats}>
+            {sessionState.questionIndex + 1} / {sessionState.roundCards.length}
+          </div>
+          <button onClick={onOpenSettings} className={styles.settingsButton} aria-label="Settings">
+            ⚙️
+          </button>
         </div>
       </header>
 
