@@ -237,23 +237,6 @@
   border-radius: var(--radius-sm);
 }
 
-/* Coming Soon Notification */
-.notification {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--neutral-gray-800);
-  color: var(--neutral-white);
-  padding: var(--space-3) var(--space-5);
-  border-radius: var(--radius-lg);
-  font-size: var(--text-sm);
-  font-weight: var(--font-medium);
-  box-shadow: var(--shadow-xl);
-  z-index: 10;
-  white-space: nowrap;
-  pointer-events: none;
-}
 
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
@@ -271,11 +254,6 @@
 
   .tag {
     background: var(--neutral-gray-700);
-  }
-
-  .notification {
-    background: var(--neutral-gray-200);
-    color: var(--neutral-gray-800);
   }
 }
 

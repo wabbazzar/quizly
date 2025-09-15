@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useDeckStore } from '@/store/deckStore';
+import { useNotificationStore } from '@/store/notificationStore';
 import { Card } from '@/types';
 import LoadingScreen from '@/components/common/LoadingScreen';
 import {
@@ -26,6 +27,7 @@ const Deck: FC = () => {
   const { deckId } = useParams<{ deckId: string }>();
   const navigate = useNavigate();
   const { currentDeck, loadDeck, isLoading, error } = useDeckStore();
+  const { showNotification } = useNotificationStore();
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const [showCardModal, setShowCardModal] = useState(false);
 
@@ -71,6 +73,16 @@ const Deck: FC = () => {
   ];
 
   const handleModeClick = (mode: ModeCard) => {
+    // Show "Coming Soon" notification for Match and Test modes
+    if (mode.id === 'match' || mode.id === 'test') {
+      showNotification({
+        message: `${mode.label} mode coming soon!`,
+        type: 'coming-soon',
+        icon: '🚀',
+        duration: 3000,
+      });
+      return;
+    }
     navigate(mode.route);
   };
 

@@ -2,6 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { useEffect } from 'react';
 import { AppRouter } from './router/AppRouter';
 import { usePWAVisibility } from './hooks/usePWAVisibility';
+import Notification from './components/common/Notification';
 
 // Simple loading indicator for iOS PWA restoration
 function RestorationOverlay({ isVisible }: { isVisible: boolean }) {
@@ -25,6 +26,7 @@ function RestorationOverlay({ isVisible }: { isVisible: boolean }) {
   );
 }
 
+// Main App component with global notification support
 function App() {
   const { wasRestored, resumeCount, isIOS, isPWA, isRestoring } = usePWAVisibility();
 
@@ -50,6 +52,7 @@ function App() {
   return (
     <BrowserRouter basename={basename}>
       <RestorationOverlay isVisible={isRestoring} />
+      <Notification />
       <AppRouter key={resumeCount} />
     </BrowserRouter>
   );
