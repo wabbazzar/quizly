@@ -35,11 +35,30 @@ const Learn: FC = () => {
   const { deckId } = useParams<{ deckId: string }>();
   const navigate = useNavigate();
   const { currentDeck, loadDeck, isLoading, error } = useDeckStore();
-  const [settings, setSettings] = useState<LearnModeSettings>(defaultLearnSettings);
+
+  // Load settings from localStorage or use defaults
+  const [settings, setSettings] = useState<LearnModeSettings>(() => {
+    const savedSettings = localStorage.getItem('learnModeSettings');
+    if (savedSettings) {
+      try {
+        return { ...defaultLearnSettings, ...JSON.parse(savedSettings) };
+      } catch (e) {
+        console.error('Failed to parse saved settings:', e);
+      }
+    }
+    return defaultLearnSettings;
+  });
+
   const [showSettings, setShowSettings] = useState(false);
+
+  // Save settings to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('learnModeSettings', JSON.stringify(settings));
+  }, [settings]);
 
   useEffect(() => {
     if (deckId) {
+      // Always reload the deck to ensure fresh data after refresh
       loadDeck(deckId);
     }
   }, [deckId, loadDeck]);
@@ -76,6 +95,11 @@ const Learn: FC = () => {
         </button>
       </div>
     );
+  }
+
+  // Check if deck content is loaded
+  if (!currentDeck.content || currentDeck.content.length === 0) {
+    return <LoadingScreen />;
   }
 
   return (

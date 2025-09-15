@@ -16,6 +16,7 @@ interface LearnSessionOptions {
   questionTypes: ('multiple_choice' | 'free_text')[];
   adaptiveDifficulty: boolean;
   masteryThreshold: number;
+  progressiveLearning?: boolean; // Enable progressive learning (free text after correct MC)
 }
 
 export const useLearnSession = (
@@ -48,6 +49,7 @@ export const useLearnSession = (
   const [questions, setQuestions] = useState<Question[]>([]);
   const [isComplete, setIsComplete] = useState(false);
   const [responseTimes, setResponseTimes] = useState<number[]>([]);
+  const [correctMCCards, setCorrectMCCards] = useState<Set<number>>(new Set()); // Track cards that had correct MC answers
 
   const scheduler = useCardScheduler({
     schedulingAlgorithm: 'smart_spaced',
@@ -63,12 +65,13 @@ export const useLearnSession = (
   const startRound = useCallback((cards: Card[]) => {
     const roundCards = cards.slice(0, options.cardsPerRound);
 
-    // Generate questions from cards
+    // Generate questions from cards - start with mostly multiple choice
     const newQuestions = QuestionGenerator.generateQuestions(roundCards, {
       questionTypes: options.questionTypes,
       frontSides: ['side_a'],
       backSides: ['side_b'],
       difficulty: 1,
+      forceMultipleChoice: options.progressiveLearning, // Force MC if progressive learning is on
     });
 
     setQuestions(newQuestions);
@@ -152,6 +155,12 @@ export const useLearnSession = (
         if (isCorrect) {
           newCorrectCards.add(sessionState.currentQuestion.cardIndex);
           scheduler.markCardCorrect(`card_${sessionState.currentQuestion.cardIndex}`);
+
+          // Track MC correct answers for progressive learning
+          if (sessionState.currentQuestion.type === 'multiple_choice' &&
+              !sessionState.currentQuestion.isFollowUp) {
+            setCorrectMCCards(prev => new Set(prev).add(sessionState.currentQuestion!.cardIndex));
+          }
         } else {
           newIncorrectCards.add(sessionState.currentQuestion.cardIndex);
         }
@@ -170,8 +179,62 @@ export const useLearnSession = (
     });
   }, [sessionState, options, scheduler, responseTimes]);
 
+  // Generate follow-up free text question for correctly answered MC
+  const generateFollowUpQuestion = useCallback((originalQuestion: Question): Question | null => {
+    if (!options.progressiveLearning || !options.questionTypes.includes('free_text')) {
+      return null;
+    }
+
+    const card = sessionState.roundCards[originalQuestion.cardIndex];
+    if (!card) return null;
+
+    // Generate a free text follow-up question
+    const followUpQuestion = QuestionGenerator.generateFreeText(
+      card,
+      { front: ['side_a'], back: ['side_b'] },
+      originalQuestion.cardIndex
+    );
+
+    return {
+      ...followUpQuestion,
+      id: `ft_followup_${originalQuestion.id}_${Date.now()}`,
+      isFollowUp: true,
+      parentQuestionId: originalQuestion.id,
+      questionText: `Now type the answer: ${followUpQuestion.questionText}`,
+    };
+  }, [options, sessionState.roundCards]);
+
   // Move to next question
   const nextQuestion = useCallback(() => {
+    const currentQ = sessionState.currentQuestion;
+
+    // Check if we should generate a follow-up free text question
+    if (options.progressiveLearning &&
+        currentQ &&
+        currentQ.type === 'multiple_choice' &&
+        !currentQ.isFollowUp &&
+        correctMCCards.has(currentQ.cardIndex)) {
+
+      // Generate and insert a follow-up free text question
+      const followUpQ = generateFollowUpQuestion(currentQ);
+      if (followUpQ) {
+        // Insert the follow-up question immediately
+        setQuestions(prev => {
+          const newQuestions = [...prev];
+          newQuestions.splice(sessionState.questionIndex + 1, 0, followUpQ);
+          return newQuestions;
+        });
+
+        setSessionState(prev => ({
+          ...prev,
+          questionIndex: prev.questionIndex + 1,
+          currentQuestion: followUpQ,
+          responseStartTime: Date.now(),
+        }));
+        return;
+      }
+    }
+
     const hasNext = sessionState.questionIndex < questions.length - 1;
 
     if (hasNext) {
@@ -185,7 +248,7 @@ export const useLearnSession = (
       // Session complete
       setIsComplete(true);
     }
-  }, [sessionState.questionIndex, questions]);
+  }, [sessionState, questions, options.progressiveLearning, correctMCCards, generateFollowUpQuestion]);
 
   // Get session results
   const getResults = useCallback((): LearnSessionResults => {
@@ -235,6 +298,7 @@ export const useLearnSession = (
     setQuestions([]);
     setIsComplete(false);
     setResponseTimes([]);
+    setCorrectMCCards(new Set());
   }, []);
 
   // Initialize session on mount

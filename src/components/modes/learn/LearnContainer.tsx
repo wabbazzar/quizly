@@ -4,6 +4,7 @@ import { Deck, LearnModeSettings, LearnSessionState, LearnSessionResults } from 
 import { useQuestionGenerator } from '@/hooks/useQuestionGenerator';
 import { useCardScheduler } from '@/hooks/useCardScheduler';
 import { QuestionCard } from './QuestionCard';
+import SettingsIcon from '@/components/icons/SettingsIcon';
 import styles from './LearnContainer.module.css';
 
 interface LearnContainerProps {
@@ -44,9 +45,47 @@ const LearnContainer: FC<LearnContainerProps> = ({
   // Initialize session with cards
   useEffect(() => {
     const initializeSession = () => {
-      const cards = settings.randomize
-        ? [...deck.content].sort(() => Math.random() - 0.5)
-        : [...deck.content];
+      // Check if deck has content (this is now handled by parent, but keep as safety check)
+      if (!deck.content || deck.content.length === 0) {
+        setIsLoading(false);
+        return;
+      }
+
+      // Select cards based on progression mode
+      let cards = [...deck.content];
+
+      switch (settings.progressionMode) {
+        case 'sequential':
+          // Keep original order
+          break;
+        case 'level':
+          // Sort by level, then by index within level
+          cards.sort((a, b) => {
+            if (a.level !== b.level) return a.level - b.level;
+            return a.idx - b.idx;
+          });
+          break;
+        case 'random':
+        default:
+          // Randomize
+          cards.sort(() => Math.random() - 0.5);
+          break;
+      }
+
+      // Apply additional randomization if settings.randomize is true
+      if (settings.randomize && settings.progressionMode !== 'random') {
+        // Partial shuffle within groups
+        cards = cards.map((card, i) => ({ card, sort: Math.random(), originalIndex: i }))
+          .sort((a, b) => {
+            // Keep general order but add some randomness
+            const groupSize = 5;
+            const aGroup = Math.floor(a.originalIndex / groupSize);
+            const bGroup = Math.floor(b.originalIndex / groupSize);
+            if (aGroup !== bGroup) return aGroup - bGroup;
+            return a.sort - b.sort;
+          })
+          .map(item => item.card);
+      }
 
       const roundCards = cards.slice(0, settings.cardsPerRound);
 
@@ -64,7 +103,7 @@ const LearnContainer: FC<LearnContainerProps> = ({
     };
 
     initializeSession();
-  }, [deck, settings]);
+  }, [deck, settings, questionGenerator]);
 
   // Update current question when generator changes
   useEffect(() => {
@@ -99,6 +138,12 @@ const LearnContainer: FC<LearnContainerProps> = ({
       );
     } else if (isCorrect) {
       scheduler.markCardCorrect(cardId);
+
+      // Mark MC question as correct for progressive learning
+      if (sessionState.currentQuestion?.type === 'multiple_choice' &&
+          !sessionState.currentQuestion?.isFollowUp) {
+        questionGenerator.markMCCorrect(sessionState.currentQuestion.cardIndex);
+      }
     }
 
     setSessionState(prev => {
@@ -125,9 +170,10 @@ const LearnContainer: FC<LearnContainerProps> = ({
 
     // Move to next question after a delay
     setTimeout(() => {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       handleNextQuestion();
     }, 1500);
-  }, [showFeedback, sessionState.responseStartTime, sessionState.currentQuestion, scheduler]);
+  }, [showFeedback, sessionState, scheduler, questionGenerator]);
 
   const handleNextQuestion = useCallback(() => {
     // Reset selection state for new question
@@ -161,6 +207,19 @@ const LearnContainer: FC<LearnContainerProps> = ({
     }
   }, [questionGenerator, sessionState, deck, onComplete]);
 
+  // Check for empty deck content
+  if (!deck.content || deck.content.length === 0) {
+    return (
+      <div className={styles.errorContainer}>
+        <h2>No Cards Available</h2>
+        <p>This deck doesn&apos;t have any cards yet.</p>
+        <button onClick={onExit} className={styles.backButton}>
+          Back to Deck
+        </button>
+      </div>
+    );
+  }
+
   if (isLoading || !sessionState.currentQuestion) {
     return (
       <div className={styles.loadingContainer}>
@@ -185,7 +244,7 @@ const LearnContainer: FC<LearnContainerProps> = ({
             {sessionState.questionIndex + 1} / {sessionState.roundCards.length}
           </div>
           <button onClick={onOpenSettings} className={styles.settingsButton} aria-label="Settings">
-            ⚙️
+            <SettingsIcon size={20} />
           </button>
         </div>
       </header>

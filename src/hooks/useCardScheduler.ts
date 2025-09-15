@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { Card, MissedCard, LearnModeSettings, SchedulerConfig } from '@/types';
 import { CardSchedulerFactory } from '@/services/cardScheduler';
 
@@ -26,6 +26,14 @@ export const useCardScheduler = (settings: LearnModeSettings): UseCardSchedulerR
   const [currentAlgorithm, setCurrentAlgorithm] = useState<'smart_spaced' | 'leitner_box'>(
     getValidAlgorithm(settings.schedulingAlgorithm)
   );
+
+  // Update algorithm when settings change
+  useEffect(() => {
+    const newAlgorithm = getValidAlgorithm(settings.schedulingAlgorithm);
+    if (newAlgorithm !== currentAlgorithm) {
+      setCurrentAlgorithm(newAlgorithm);
+    }
+  }, [settings.schedulingAlgorithm, currentAlgorithm]);
 
   const scheduler = useMemo(() => {
     return CardSchedulerFactory.getScheduler(currentAlgorithm);

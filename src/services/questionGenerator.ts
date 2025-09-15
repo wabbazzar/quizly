@@ -16,7 +16,10 @@ export class QuestionGenerator {
         return;
       }
 
-      const questionType = this.selectQuestionType(options.questionTypes);
+      // Generate initial questions as multiple choice primarily
+      // Free text will be added dynamically after correct MC answers
+      const questionType = options.forceMultipleChoice ? 'multiple_choice' :
+                          this.selectQuestionType(options.questionTypes, options.questionTypeMix);
 
       if (questionType === 'multiple_choice') {
         questions.push(this.generateMultipleChoice(
@@ -67,7 +70,7 @@ export class QuestionGenerator {
   /**
    * Generate a free text question from a card
    */
-  static generateFreeText(
+  public static generateFreeText(
     card: Card,
     sides: { front: string[]; back: string[] },
     cardIndex: number
@@ -235,13 +238,27 @@ export class QuestionGenerator {
   /**
    * Select a question type based on configured probabilities
    */
-  private static selectQuestionType(types: ('multiple_choice' | 'free_text')[]): 'multiple_choice' | 'free_text' {
+  private static selectQuestionType(
+    types: ('multiple_choice' | 'free_text')[],
+    mix?: 'auto' | 'multiple_choice' | 'free_text' | 'mixed'
+  ): 'multiple_choice' | 'free_text' {
+    // Handle explicit type selection
+    if (mix === 'multiple_choice') return 'multiple_choice';
+    if (mix === 'free_text') return 'free_text';
+
+    // If only one type is available, use it
     if (types.length === 1) {
       return types[0];
     }
 
-    // Default to 70% multiple choice, 30% free text
-    return Math.random() < 0.7 ? 'multiple_choice' : 'free_text';
+    // Handle probability-based selection
+    let mcProbability = 0.8; // Default 80% MC, 20% text for 'auto'
+
+    if (mix === 'mixed') {
+      mcProbability = 0.5; // 50/50 split for 'mixed'
+    }
+
+    return Math.random() < mcProbability ? 'multiple_choice' : 'free_text';
   }
 
   /**

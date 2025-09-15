@@ -91,7 +91,7 @@ export interface LearnModeSettings extends ModeSettings {
   timerSeconds?: number;
 
   // Scheduling configuration
-  schedulingAlgorithm?: 'smart_spaced' | 'leitner_box' | 'adaptive' | 'spaced_repetition' | 'random' | 'sequential';
+  schedulingAlgorithm?: 'smart_spaced' | 'leitner_box';
   aggressiveness?: 'gentle' | 'balanced' | 'intensive';
   minSpacing?: number;
   maxSpacing?: number;
@@ -122,6 +122,8 @@ export interface Question {
   options?: string[]; // For multiple choice
   acceptedAnswers?: string[]; // For free text
   difficulty: number;
+  isFollowUp?: boolean; // True if this is a free text follow-up to a correct MC answer
+  parentQuestionId?: string; // ID of the multiple choice question this follows
 }
 
 export interface LearnSessionResults {
@@ -174,6 +176,8 @@ export interface QuestionGeneratorOptions {
   backSides: string[];
   difficulty: number;
   excludeCards?: Set<number>;
+  forceMultipleChoice?: boolean; // Force multiple choice for initial questions
+  questionTypeMix?: 'auto' | 'multiple_choice' | 'free_text' | 'mixed'; // Control question type distribution
 }
 
 // Text Matching Options
