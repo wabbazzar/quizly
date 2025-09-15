@@ -7,6 +7,7 @@ interface DeckStore {
   decks: Deck[];
   activeDeck: Deck | null;
   currentDeck: Deck | null;
+  currentDeckId?: string;
   isLoading: boolean;
   error: string | null;
 
@@ -15,6 +16,7 @@ interface DeckStore {
   selectDeck: (deckId: string) => void;
   importDeck: (jsonData: string) => Promise<void>;
   clearError: () => void;
+  rehydrateCurrentDeck: () => Promise<void>;
 }
 
 export const useDeckStore = create<DeckStore>()(
@@ -41,7 +43,7 @@ export const useDeckStore = create<DeckStore>()(
       },
 
       loadDeck: async (deckId: string) => {
-        set({ isLoading: true, error: null });
+        set({ isLoading: true, error: null, currentDeckId: deckId });
         try {
           // First check if deck is already loaded
           let deck = get().decks.find(d => d.id === deckId);
@@ -52,17 +54,18 @@ export const useDeckStore = create<DeckStore>()(
             deck = loadedDecks.find(d => d.id === deckId);
 
             if (deck) {
-              set({ decks: loadedDecks, currentDeck: deck, isLoading: false });
+              set({ decks: loadedDecks, currentDeck: deck, currentDeckId: deckId, isLoading: false });
             } else {
-              set({ error: 'Deck not found', isLoading: false });
+              set({ error: 'Deck not found', isLoading: false, currentDeckId: undefined });
             }
           } else {
-            set({ currentDeck: deck, isLoading: false });
+            set({ currentDeck: deck, currentDeckId: deckId, isLoading: false });
           }
         } catch (error) {
           set({
             error: 'Failed to load deck',
-            isLoading: false
+            isLoading: false,
+            currentDeckId: undefined
           });
           console.error('Error loading deck:', error);
         }
@@ -89,16 +92,24 @@ export const useDeckStore = create<DeckStore>()(
         }
       },
 
-      clearError: () => set({ error: null })
+      clearError: () => set({ error: null }),
+
+      rehydrateCurrentDeck: async () => {
+        const currentDeckId = get().currentDeckId;
+        if (currentDeckId && !get().currentDeck) {
+          await get().loadDeck(currentDeckId);
+        }
+      }
     }),
     {
       name: 'deck-store',
       partialize: (state) => ({
-        // Only persist deck metadata, not full content
+        // Persist deck metadata and currentDeck ID
         decks: state.decks.map(d => ({
           id: d.id,
           metadata: d.metadata,
         })),
+        currentDeckId: state.currentDeck?.id,
       }),
     }
   )
