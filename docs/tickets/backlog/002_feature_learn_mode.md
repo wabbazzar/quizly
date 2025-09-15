@@ -1779,7 +1779,7 @@ export const LearnProgress: FC<LearnProgressProps> = memo(({
       <div className={styles.progressBar} role="progressbar" aria-valuenow={progressPercentage} aria-valuemin={0} aria-valuemax={100}>
         <div
           className={styles.progressFill}
-          style={{ width: `${progressPercentage}%` }}
+          style=&#123;&#123; width: `$&#123;progressPercentage&#125;%` &#125;&#125;
         />
       </div>
 
