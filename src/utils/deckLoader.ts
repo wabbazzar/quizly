@@ -87,13 +87,10 @@ const validateCard = (card: any, index: number): Card | null => {
 
 export const loadDeckFromJSON = async (jsonPath: string): Promise<Deck | null> => {
   try {
-    // Prepend base URL if path starts with /
-    const fullPath = jsonPath.startsWith('/')
-      ? `${import.meta.env.BASE_URL}${jsonPath.slice(1)}`
-      : jsonPath;
-    const response = await fetch(fullPath);
+    // Don't modify the path - it should already be correct from the caller
+    const response = await fetch(jsonPath);
     if (!response.ok) {
-      console.error(`Failed to load deck from ${fullPath}: ${response.status}`);
+      console.error(`Failed to load deck from ${jsonPath}: ${response.status}`);
       return null;
     }
 
