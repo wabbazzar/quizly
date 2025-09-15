@@ -22,6 +22,8 @@ const LearnContainer: FC<LearnContainerProps> = ({
   onExit,
   onOpenSettings,
 }) => {
+  // Track settings changes to trigger re-initialization
+  const [lastSettingsKey, setLastSettingsKey] = useState(() => JSON.stringify(settings));
   const [sessionState, setSessionState] = useState<LearnSessionState>({
     currentQuestion: null,
     questionIndex: 0,
@@ -42,8 +44,31 @@ const LearnContainer: FC<LearnContainerProps> = ({
   const questionGenerator = useQuestionGenerator(deck, settings);
   const scheduler = useCardScheduler(settings);
 
-  // Initialize session with cards - only on deck change
+  // Initialize session with cards - on deck change OR settings change
   useEffect(() => {
+    const currentSettingsKey = JSON.stringify(settings);
+    const settingsChanged = currentSettingsKey !== lastSettingsKey;
+
+    // If settings changed, update the key and re-initialize
+    if (settingsChanged) {
+      setLastSettingsKey(currentSettingsKey);
+      setIsLoading(true);
+      setShowFeedback(false);
+      setFeedback(undefined);
+      // Reset session state
+      setSessionState({
+        currentQuestion: null,
+        questionIndex: 0,
+        roundCards: [],
+        correctCards: new Set(),
+        incorrectCards: new Set(),
+        currentStreak: 0,
+        maxStreak: 0,
+        startTime: Date.now(),
+        responseStartTime: Date.now(),
+      });
+    }
+
     const initializeSession = () => {
       // Check if deck has content (this is now handled by parent, but keep as safety check)
       if (!deck.content || deck.content.length === 0) {
@@ -103,9 +128,9 @@ const LearnContainer: FC<LearnContainerProps> = ({
     };
 
     initializeSession();
-    // Only re-initialize when deck changes, not settings
+    // Re-initialize when deck or settings change
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deck.id]);
+  }, [deck.id, settings]);
 
   // Update current question when generator changes
   useEffect(() => {
