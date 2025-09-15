@@ -1,9 +1,12 @@
-/* Global Notification Styles */
+/* Global Notification Styles - Centered properly */
 .notification {
   position: fixed;
   top: var(--space-6);
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: fit-content;
+  max-width: min(90vw, 600px);
   z-index: 9999;
   background: var(--neutral-gray-800);
   color: var(--neutral-white);
@@ -13,7 +16,6 @@
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
   min-width: 200px;
-  max-width: 90vw;
   text-align: center;
   pointer-events: auto;
 }
@@ -92,6 +94,8 @@
     padding: var(--space-2) var(--space-4);
     font-size: var(--text-xs);
     min-width: 150px;
+    max-width: calc(100vw - var(--space-4) * 2);
+    margin: 0 var(--space-2);
   }
 
   .icon {
