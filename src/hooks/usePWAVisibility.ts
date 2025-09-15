@@ -129,8 +129,11 @@ export function usePWAVisibility() {
 
   // iOS-specific page restoration handling
   const handlePageShow = useCallback((event: PageTransitionEvent) => {
-    if (event.persisted || state.isIOS) {
-      console.log('iOS PWA: Page restored from cache or backgrounded');
+    if (event.persisted && state.isIOS && state.isPWA) {
+      console.log('iOS PWA: Page restored from cache');
+
+      // Restore app state
+      restoreAppState();
 
       setState((prev) => ({
         ...prev,
@@ -138,27 +141,10 @@ export function usePWAVisibility() {
         isVisible: true,
         lastVisibleTime: Date.now(),
         resumeCount: prev.resumeCount + 1,
-        isRestoring: true,
+        isRestoring: false,
       }));
-
-      // Restore app state
-      restoreAppState();
-
-      // Force visual refresh for iOS
-      setTimeout(() => {
-        // Force a repaint to prevent blank screen
-        document.body.style.transform = 'translateZ(0)';
-        document.body.style.webkitTransform = 'translateZ(0)';
-
-        setTimeout(() => {
-          document.body.style.transform = '';
-          document.body.style.webkitTransform = '';
-
-          setState((prev) => ({ ...prev, isRestoring: false }));
-        }, 50);
-      }, 10);
     }
-  }, [state.isIOS, restoreAppState]);
+  }, [state.isIOS, state.isPWA, restoreAppState]);
 
   // Enhanced focus handling for iOS PWA
   const handleFocus = useCallback(() => {
