@@ -12,12 +12,12 @@
       "side_c": "characters",
       "side_d": "description"
     },
-    "card_count": 29,
+    "card_count": 54,
     "difficulty": "intermediate",
     "tags": ["chinese", "mandarin", "shopping", "vocabulary", "chapter9"],
     "version": "1.0.0",
     "created_date": "2025-01-22T10:00:00Z",
-    "last_updated": "2025-01-22T10:00:00Z"
+    "last_updated": "2025-01-22T16:00:00Z"
   },
   "content": [
     {
@@ -329,6 +329,226 @@
       "side_c": "找(钱)",
       "side_d": "To return money to a customer",
       "level": 2
+    },
+    {
+      "card_id": "card-032",
+      "idx": 31,
+      "name": "measure_word_pair",
+      "side_a": "Measure word for a pair",
+      "side_b": "shuāng",
+      "side_c": "双",
+      "side_d": "Classifier for pairs of items",
+      "level": 2
+    },
+    {
+      "card_id": "card-033",
+      "idx": 32,
+      "name": "shoes",
+      "side_a": "Shoes",
+      "side_b": "xié",
+      "side_c": "鞋",
+      "side_d": "Footwear worn to protect feet",
+      "level": 1
+    },
+    {
+      "card_id": "card-034",
+      "idx": 33,
+      "name": "exchange",
+      "side_a": "To exchange; to change",
+      "side_b": "huàn",
+      "side_c": "换",
+      "side_d": "To trade or replace something",
+      "level": 2
+    },
+    {
+      "card_id": "card-035",
+      "idx": 34,
+      "name": "same",
+      "side_a": "Same; alike",
+      "side_b": "yíyàng",
+      "side_c": "一样",
+      "side_d": "Identical or similar",
+      "level": 2
+    },
+    {
+      "card_id": "card-036",
+      "idx": 35,
+      "name": "although",
+      "side_a": "Although",
+      "side_b": "suīrán",
+      "side_c": "虽然",
+      "side_d": "Despite the fact that; even though",
+      "level": 3
+    },
+    {
+      "card_id": "card-037",
+      "idx": 36,
+      "name": "big_small_size",
+      "side_a": "Size",
+      "side_b": "dàxiǎo",
+      "side_c": "大小",
+      "side_d": "The dimensions or magnitude of something",
+      "level": 2
+    },
+    {
+      "card_id": "card-038",
+      "idx": 37,
+      "name": "brown_coffee_color",
+      "side_a": "Brown; coffee color",
+      "side_b": "kāfēisè",
+      "side_c": "咖啡色",
+      "side_d": "The color brown, like coffee",
+      "level": 2
+    },
+    {
+      "card_id": "card-039",
+      "idx": 38,
+      "name": "measure_word_kinds",
+      "side_a": "Measure word for kinds, sorts, types",
+      "side_b": "zhǒng",
+      "side_c": "种",
+      "side_d": "Classifier for varieties or types",
+      "level": 2
+    },
+    {
+      "card_id": "card-040",
+      "idx": 39,
+      "name": "black",
+      "side_a": "Black",
+      "side_b": "hēi",
+      "side_c": "黑",
+      "side_d": "The darkest color",
+      "level": 1
+    },
+    {
+      "card_id": "card-041",
+      "idx": 40,
+      "name": "style",
+      "side_a": "Style",
+      "side_b": "yàngzi",
+      "side_c": "样子",
+      "side_d": "Appearance or fashion",
+      "level": 2
+    },
+    {
+      "card_id": "card-042",
+      "idx": 41,
+      "name": "quite_rather",
+      "side_a": "Very; rather",
+      "side_b": "tǐng",
+      "side_c": "挺",
+      "side_d": "Quite or fairly (used before adjectives)",
+      "level": 2
+    },
+    {
+      "card_id": "card-043",
+      "idx": 42,
+      "name": "it_pronoun",
+      "side_a": "It",
+      "side_b": "tā",
+      "side_c": "它",
+      "side_d": "Third person pronoun for things",
+      "level": 1
+    },
+    {
+      "card_id": "card-044",
+      "idx": 43,
+      "name": "here_location",
+      "side_a": "Here",
+      "side_b": "zhèr",
+      "side_c": "这儿",
+      "side_d": "This place; at this location",
+      "level": 1
+    },
+    {
+      "card_id": "card-045",
+      "idx": 44,
+      "name": "swipe_card",
+      "side_a": "To pay with a credit card",
+      "side_b": "shuā kǎ",
+      "side_c": "刷卡",
+      "side_d": "To swipe or use a card for payment",
+      "level": 2
+    },
+    {
+      "card_id": "card-046",
+      "idx": 45,
+      "name": "brush_swipe",
+      "side_a": "To brush; to swipe",
+      "side_b": "shuā",
+      "side_c": "刷",
+      "side_d": "To clean with a brush or to swipe",
+      "level": 2
+    },
+    {
+      "card_id": "card-047",
+      "idx": 46,
+      "name": "card",
+      "side_a": "Card",
+      "side_b": "kǎ",
+      "side_c": "卡",
+      "side_d": "A plastic or paper card",
+      "level": 1
+    },
+    {
+      "card_id": "card-048",
+      "idx": 47,
+      "name": "receive_accept",
+      "side_a": "To receive; to accept",
+      "side_b": "shōu",
+      "side_c": "收",
+      "side_d": "To get or take something given",
+      "level": 2
+    },
+    {
+      "card_id": "card-049",
+      "idx": 48,
+      "name": "credit_card",
+      "side_a": "Credit card",
+      "side_b": "xìnyòngkǎ",
+      "side_c": "信用卡",
+      "side_d": "A payment card for credit transactions",
+      "level": 2
+    },
+    {
+      "card_id": "card-050",
+      "idx": 49,
+      "name": "however_but",
+      "side_a": "However; but",
+      "side_b": "búguò",
+      "side_c": "不过",
+      "side_d": "Nevertheless; however",
+      "level": 2
+    },
+    {
+      "card_id": "card-051",
+      "idx": 50,
+      "name": "again",
+      "side_a": "Again",
+      "side_b": "zài",
+      "side_c": "再",
+      "side_d": "Once more; another time",
+      "level": 1
+    },
+    {
+      "card_id": "card-052",
+      "idx": 51,
+      "name": "pay_money",
+      "side_a": "To pay money",
+      "side_b": "fù qián",
+      "side_c": "付钱",
+      "side_d": "To give money as payment",
+      "level": 2
+    },
+    {
+      "card_id": "card-053",
+      "idx": 52,
+      "name": "pay",
+      "side_a": "To pay",
+      "side_b": "fù",
+      "side_c": "付",
+      "side_d": "To give money for something",
+      "level": 1
     }
   ]
 }

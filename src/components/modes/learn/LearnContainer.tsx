@@ -1,6 +1,6 @@
 import { FC, useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Deck, LearnModeSettings, LearnSessionState, LearnSessionResults } from '@/types';
+import { Card, Deck, LearnModeSettings, LearnSessionState, LearnSessionResults } from '@/types';
 import { useQuestionGenerator } from '@/hooks/useQuestionGenerator';
 import { useCardScheduler } from '@/hooks/useCardScheduler';
 import { QuestionCard } from './QuestionCard';
@@ -10,6 +10,7 @@ import styles from './LearnContainer.module.css';
 interface LearnContainerProps {
   deck: Deck;
   settings: LearnModeSettings;
+  strugglingCardIndices?: number[];
   onComplete: (results: LearnSessionResults) => void;
   onExit: () => void;
   onOpenSettings: () => void;
@@ -18,6 +19,7 @@ interface LearnContainerProps {
 const LearnContainer: FC<LearnContainerProps> = ({
   deck,
   settings,
+  strugglingCardIndices: initialStrugglingCards,
   onComplete,
   onExit,
   onOpenSettings,
@@ -87,23 +89,47 @@ const LearnContainer: FC<LearnContainerProps> = ({
       // Select cards based on progression mode
       let cards = [...deck.content];
 
-      switch (settings.progressionMode) {
-        case 'sequential':
-          // Keep original order
-          break;
-        case 'level':
-          // Sort by level, then by index within level
-          cards.sort((a, b) => {
-            if (a.level !== b.level) return a.level - b.level;
-            return a.idx - b.idx;
-          });
-          break;
-        case 'random':
-        default:
-          // Randomize
-          cards.sort(() => Math.random() - 0.5);
-          break;
+      // Separate struggling cards and new cards if we have initial struggling cards
+      let priorityCards: Card[] = [];
+      let newCards: Card[] = [];
+
+      if (initialStrugglingCards && initialStrugglingCards.length > 0) {
+        // Find struggling cards in the current deck (they should exist)
+        priorityCards = cards.filter(card =>
+          initialStrugglingCards.includes(card.idx)
+        );
+        // Get remaining cards
+        newCards = cards.filter(card =>
+          !initialStrugglingCards.includes(card.idx)
+        );
+      } else {
+        newCards = cards;
       }
+
+      // Apply sorting to each group
+      const sortCards = (cardsToSort: Card[]) => {
+        switch (settings.progressionMode) {
+          case 'sequential':
+            // Keep original order
+            return cardsToSort;
+          case 'level':
+            // Sort by level, then by index within level
+            return cardsToSort.sort((a, b) => {
+              if (a.level !== b.level) return a.level - b.level;
+              return a.idx - b.idx;
+            });
+          case 'random':
+          default:
+            // Randomize
+            return cardsToSort.sort(() => Math.random() - 0.5);
+        }
+      };
+
+      priorityCards = sortCards(priorityCards);
+      newCards = sortCards(newCards);
+
+      // Combine: all struggling cards first, then fill with new cards up to cardsPerRound
+      cards = [...priorityCards, ...newCards];
 
       // Apply additional randomization if settings.randomize is true
       if (settings.randomize && settings.progressionMode !== 'random') {
@@ -223,14 +249,24 @@ const LearnContainer: FC<LearnContainerProps> = ({
       // Track the actual card as struggling
       if (sessionState.currentQuestion) {
         setStrugglingCardIndices(prev => new Set(prev).add(sessionState.currentQuestion!.cardIndex));
+        // Remove from mastered if it was previously mastered
+        setMasteredCardIndices(prev => {
+          const newSet = new Set(prev);
+          newSet.delete(sessionState.currentQuestion!.cardIndex);
+          return newSet;
+        });
       }
     } else if (isCorrect && sessionState.currentQuestion) {
       scheduler.markCardCorrect(cardId);
-      // Track the actual card as mastered (only if not already struggling)
+      // Track the actual card as mastered and remove from struggling
       const currentCardIndex = sessionState.currentQuestion.cardIndex;
-      if (!strugglingCardIndices.has(currentCardIndex)) {
-        setMasteredCardIndices(prev => new Set(prev).add(currentCardIndex));
-      }
+      setMasteredCardIndices(prev => new Set(prev).add(currentCardIndex));
+      // Remove from struggling since it's now mastered
+      setStrugglingCardIndices(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(currentCardIndex);
+        return newSet;
+      });
 
       // Mark MC question as correct for progressive learning
       if (sessionState.currentQuestion.type === 'multiple_choice' &&
@@ -262,7 +298,7 @@ const LearnContainer: FC<LearnContainerProps> = ({
     });
 
     // Don't auto-advance - let user control when to move to next question
-  }, [showFeedback, sessionState, scheduler, questionGenerator, strugglingCardIndices]);
+  }, [showFeedback, sessionState, scheduler, questionGenerator]);
 
   // Handle keyboard navigation
   useEffect(() => {

@@ -5,13 +5,14 @@ const sanitizeString = (str: any): string => {
   if (typeof str !== 'string') return '';
   // Basic HTML entity encoding for safety
   // Note: Forward slashes are safe and commonly used in pinyin (e.g., wéi/wèi)
+  // Note: Ampersands are safe for text content and commonly used in titles
   return str
-    .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#x27;');
     // Removed forward slash escaping as it's safe and breaks pinyin display
+    // Removed ampersand escaping as it's safe for text content and commonly used in titles
 };
 
 // Validate deck metadata structure

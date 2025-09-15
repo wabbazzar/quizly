@@ -58,10 +58,17 @@ const Results: FC = () => {
       return;
     }
 
-    // Pass mastered cards to exclude them from the next session
+    // For "Continue with New Cards": exclude only mastered cards
+    // This keeps struggling cards in the pool to be mixed with new cards
+    // For "Try Again": don't exclude any cards (when no cards were mastered)
+    const cardsToExclude = results.masteredCards?.length > 0
+      ? results.masteredCards
+      : [];
+
     navigate(`/learn/${deckId}`, {
       state: {
-        excludeCards: results.masteredCards || []
+        excludeCards: cardsToExclude,
+        strugglingCards: results.strugglingCards || []
       }
     });
   };

@@ -39,8 +39,9 @@ const Learn: FC = () => {
   const location = useLocation();
   const { currentDeck, loadDeck, isLoading, error } = useDeckStore();
 
-  // Get excluded cards from navigation state (for Try Again functionality)
+  // Get excluded cards and struggling cards from navigation state
   const excludeCards = location.state?.excludeCards as number[] | undefined;
+  const strugglingCards = location.state?.strugglingCards as number[] | undefined;
 
   // Load settings from localStorage or use defaults
   const [settings, setSettings] = useState<LearnModeSettings>(() => {
@@ -123,6 +124,7 @@ const Learn: FC = () => {
       <LearnContainer
         deck={filteredDeck}
         settings={settings}
+        strugglingCardIndices={strugglingCards}
         onComplete={handleComplete}
         onExit={handleExit}
         onOpenSettings={() => setShowSettings(true)}
