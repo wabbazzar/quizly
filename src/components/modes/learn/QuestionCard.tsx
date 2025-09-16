@@ -1,5 +1,5 @@
 import { FC, memo } from 'react';
-import { Question } from '@/types';
+import { Question, Card } from '@/types';
 import { MultipleChoiceOptions } from './MultipleChoiceOptions';
 import { FreeTextInput } from './FreeTextInput';
 import { FeedbackSection } from './FeedbackSection';
@@ -7,22 +7,27 @@ import styles from './QuestionCard.module.css';
 
 interface QuestionCardProps {
   question: Question;
+  card?: Card;
   onAnswer: (answer: string, isCorrect: boolean) => void;
   showFeedback: boolean;
   feedback?: {
     isCorrect: boolean;
     correctAnswer?: string;
     explanation?: string;
+    isMastered?: boolean;
   };
   disabled?: boolean;
+  onShowCardDetails?: () => void;
 }
 
 export const QuestionCard: FC<QuestionCardProps> = memo(({
   question,
+  card: _card,
   onAnswer,
   showFeedback,
   feedback,
   disabled = false,
+  onShowCardDetails,
 }) => {
   return (
     <article
@@ -75,6 +80,8 @@ export const QuestionCard: FC<QuestionCardProps> = memo(({
           isCorrect={feedback.isCorrect}
           correctAnswer={feedback.correctAnswer}
           explanation={feedback.explanation}
+          isMastered={feedback.isMastered}
+          onShowCardDetails={onShowCardDetails}
         />
       )}
     </article>

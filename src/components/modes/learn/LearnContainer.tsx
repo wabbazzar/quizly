@@ -3,7 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Card, Deck, LearnModeSettings, LearnSessionState, LearnSessionResults } from '@/types';
 import { useQuestionGenerator } from '@/hooks/useQuestionGenerator';
 import { useCardScheduler } from '@/hooks/useCardScheduler';
+import { useCardMasteryStore } from '@/store/cardMasteryStore';
 import { QuestionCard } from './QuestionCard';
+import CardDetailsModal from '@/components/modals/CardDetailsModal';
 import SettingsIcon from '@/components/icons/SettingsIcon';
 import styles from './LearnContainer.module.css';
 
@@ -14,6 +16,7 @@ interface LearnContainerProps {
   onComplete: (results: LearnSessionResults) => void;
   onExit: () => void;
   onOpenSettings: () => void;
+  deckId?: string;
 }
 
 const LearnContainer: FC<LearnContainerProps> = ({
@@ -23,6 +26,7 @@ const LearnContainer: FC<LearnContainerProps> = ({
   onComplete,
   onExit,
   onOpenSettings,
+  deckId,
 }) => {
   // Track settings changes to trigger re-initialization
   const [lastSettingsKey, setLastSettingsKey] = useState(() => JSON.stringify(settings));
@@ -42,14 +46,19 @@ const LearnContainer: FC<LearnContainerProps> = ({
   const [masteredCardIndices, setMasteredCardIndices] = useState<Set<number>>(new Set());
   // Track unique cards that have been answered incorrectly
   const [strugglingCardIndices, setStrugglingCardIndices] = useState<Set<number>>(new Set());
+  // Track cards that were newly mastered this session (reached threshold)
+  const [newlyMasteredCards, setNewlyMasteredCards] = useState<Set<number>>(new Set());
 
   const [isLoading, setIsLoading] = useState(true);
   const [showFeedback, setShowFeedback] = useState(false);
-  const [feedback, setFeedback] = useState<{ isCorrect: boolean; correctAnswer?: string; explanation?: string } | undefined>(undefined);
+  const [feedback, setFeedback] = useState<{ isCorrect: boolean; correctAnswer?: string; explanation?: string; isMastered?: boolean } | undefined>(undefined);
+  const [showCardDetailsModal, setShowCardDetailsModal] = useState(false);
+  const [currentCard, setCurrentCard] = useState<Card | null>(null);
 
   // Use the new hooks
   const questionGenerator = useQuestionGenerator(deck, settings);
   const scheduler = useCardScheduler(settings);
+  const { isCardMastered, mastery } = useCardMasteryStore();
 
   // Initialize session with cards - on deck change OR settings change
   useEffect(() => {
@@ -77,6 +86,7 @@ const LearnContainer: FC<LearnContainerProps> = ({
       // Reset card tracking
       setMasteredCardIndices(new Set());
       setStrugglingCardIndices(new Set());
+      setNewlyMasteredCards(new Set());
     }
 
     const initializeSession = () => {
@@ -158,6 +168,12 @@ const LearnContainer: FC<LearnContainerProps> = ({
         responseStartTime: Date.now(),
       }));
 
+      // Set the current card when we have a question
+      if (questionGenerator.currentQuestion && roundCards.length > 0) {
+        const cardIndex = questionGenerator.currentQuestion.cardIndex;
+        setCurrentCard(roundCards.find(c => c.idx === cardIndex) || null);
+      }
+
       setIsLoading(false);
     };
 
@@ -174,8 +190,15 @@ const LearnContainer: FC<LearnContainerProps> = ({
         currentQuestion: questionGenerator.currentQuestion,
         questionIndex: questionGenerator.currentQuestionIndex,
       }));
+
+      // Update the current card
+      const cardIndex = questionGenerator.currentQuestion.cardIndex;
+      const card = sessionState.roundCards.find(c => c.idx === cardIndex);
+      if (card) {
+        setCurrentCard(card);
+      }
     }
-  }, [questionGenerator.currentQuestion, questionGenerator.currentQuestionIndex]);
+  }, [questionGenerator.currentQuestion, questionGenerator.currentQuestionIndex, sessionState.roundCards]);
 
   const handleAnswer = useCallback((_answer: string, isCorrect: boolean) => {
     // If we already have feedback and this is a correction (marking as correct)
@@ -218,10 +241,15 @@ const LearnContainer: FC<LearnContainerProps> = ({
         };
       });
 
+      // Check if the card is now mastered
+      const isMastered = !!(deckId && sessionState.currentQuestion?.cardIndex !== undefined &&
+        isCardMastered(deckId, sessionState.currentQuestion.cardIndex));
+
       // Update feedback to show it's now correct
       setFeedback({
         isCorrect: true,
         correctAnswer: sessionState.currentQuestion?.correctAnswer,
+        isMastered,
       });
 
       return;
@@ -230,10 +258,31 @@ const LearnContainer: FC<LearnContainerProps> = ({
     // Prevent multiple initial selections
     if (showFeedback) return;
 
+    // Check if the card is mastered after this answer
+    let isMastered = false;
+
+    if (isCorrect && sessionState.currentQuestion && deckId) {
+      // Check current consecutive correct count from mastery store
+      const deckMastery = mastery[deckId];
+      const existingRecord = deckMastery?.masteredCards?.get(sessionState.currentQuestion.cardIndex);
+      const currentCount = existingRecord?.consecutiveCorrect || 0;
+
+      // Will be mastered after this correct answer?
+      isMastered = (currentCount + 1) >= (settings.masteryThreshold || 3);
+
+      if (isMastered && sessionState.currentQuestion.cardIndex !== undefined) {
+        // Track as newly mastered this session if it wasn't already mastered
+        if (currentCount < (settings.masteryThreshold || 3)) {
+          setNewlyMasteredCards(prev => new Set(prev).add(sessionState.currentQuestion!.cardIndex));
+        }
+      }
+    }
+
     setShowFeedback(true);
     setFeedback({
       isCorrect,
       correctAnswer: sessionState.currentQuestion?.correctAnswer,
+      isMastered,
     });
 
     const responseTime = Date.now() - sessionState.responseStartTime;
@@ -303,6 +352,16 @@ const LearnContainer: FC<LearnContainerProps> = ({
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore Enter originating from text inputs/textareas/contentEditable to avoid skipping feedback on submit
+      const target = e.target as HTMLElement | null;
+      const isTextInput = !!target && (
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        (target as any).isContentEditable === true
+      );
+
+      if (isTextInput) return;
+
       // Allow Enter key to proceed to next question when feedback is shown
       if (e.key === 'Enter' && showFeedback) {
         e.preventDefault();
@@ -318,6 +377,7 @@ const LearnContainer: FC<LearnContainerProps> = ({
     // Reset selection state for new question
     setShowFeedback(false);
     setFeedback(undefined);
+    setShowCardDetailsModal(false);
 
     if (!questionGenerator.hasNext) {
       // Session complete - properly track cards that were actually reviewed
@@ -350,8 +410,9 @@ const LearnContainer: FC<LearnContainerProps> = ({
         averageResponseTime: 0, // Will be calculated properly in Phase 4
         maxStreak: sessionState.maxStreak,
         duration: Date.now() - sessionState.startTime,
-        masteredCards: Array.from(actualMasteredCards),
+        passedCards: Array.from(actualMasteredCards),
         strugglingCards: Array.from(actualStrugglingCards),
+        masteredCards: Array.from(newlyMasteredCards), // Cards that reached mastery in this session
       };
 
       onComplete(results);
@@ -365,6 +426,10 @@ const LearnContainer: FC<LearnContainerProps> = ({
       }));
     }
   }, [questionGenerator, sessionState, deck, onComplete, masteredCardIndices, strugglingCardIndices]);
+
+  const handleShowCardDetails = useCallback(() => {
+    setShowCardDetailsModal(true);
+  }, []);
 
   // Check for empty deck content
   if (!deck.content || deck.content.length === 0) {
@@ -431,10 +496,12 @@ const LearnContainer: FC<LearnContainerProps> = ({
           >
             <QuestionCard
               question={sessionState.currentQuestion}
+              card={currentCard || undefined}
               onAnswer={handleAnswer}
               showFeedback={showFeedback}
               feedback={feedback}
               disabled={showFeedback}
+              onShowCardDetails={handleShowCardDetails}
             />
 
             {/* Next button appears after feedback */}
@@ -485,6 +552,15 @@ const LearnContainer: FC<LearnContainerProps> = ({
           <span className={styles.footerValue}>{sessionState.currentStreak}</span>
         </div>
       </footer>
+
+      {/* Card Details Modal */}
+      <CardDetailsModal
+        card={currentCard}
+        visible={showCardDetailsModal}
+        onClose={() => setShowCardDetailsModal(false)}
+        frontSides={settings.frontSides}
+        backSides={settings.backSides}
+      />
     </div>
   );
 };
