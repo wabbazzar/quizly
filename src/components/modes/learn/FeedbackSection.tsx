@@ -6,12 +6,16 @@ interface FeedbackSectionProps {
   isCorrect: boolean;
   correctAnswer?: string;
   explanation?: string;
+  isMastered?: boolean;
+  onShowCardDetails?: () => void;
 }
 
 export const FeedbackSection: FC<FeedbackSectionProps> = memo(({
   isCorrect,
   correctAnswer,
   explanation,
+  isMastered,
+  onShowCardDetails,
 }) => {
   return (
     <div
@@ -28,15 +32,35 @@ export const FeedbackSection: FC<FeedbackSectionProps> = memo(({
           {isCorrect ? '✓' : '✗'}
         </span>
         <h3 className={styles.feedbackTitle}>
-          {isCorrect ? 'Correct!' : 'Not quite right'}
+          {isCorrect ? (isMastered ? 'Card Mastered! 🎯' : 'Correct!') : 'Not quite right'}
         </h3>
       </div>
 
       <div className={styles.feedbackContent}>
         {!isCorrect && correctAnswer && (
-          <div className={styles.correctAnswerWrapper}>
+          <div
+            className={cn(
+              styles.correctAnswerWrapper,
+              onShowCardDetails && styles.clickable
+            )}
+            onClick={onShowCardDetails}
+            role={onShowCardDetails ? "button" : undefined}
+            tabIndex={onShowCardDetails ? 0 : undefined}
+            onKeyDown={onShowCardDetails ? (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onShowCardDetails();
+              }
+            } : undefined}
+            aria-label={onShowCardDetails ? "Click to view full card details" : undefined}
+          >
             <span className={styles.correctAnswerLabel}>Correct answer:</span>
             <span className={styles.correctAnswerText}>{correctAnswer}</span>
+            {onShowCardDetails && (
+              <span className={styles.viewDetailsHint} aria-hidden="true">
+                Click to view card details
+              </span>
+            )}
           </div>
         )}
 

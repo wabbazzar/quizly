@@ -70,6 +70,45 @@
   background: var(--neutral-white);
   border-radius: 8px;
   border: 1px solid var(--neutral-gray-200);
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.correctAnswerWrapper.clickable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.correctAnswerWrapper.clickable:hover {
+  background: var(--neutral-gray-50);
+  border-color: var(--primary-main);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.correctAnswerWrapper.clickable:focus {
+  outline: 2px solid var(--primary-main);
+  outline-offset: 2px;
+}
+
+.correctAnswerWrapper.clickable:active {
+  transform: translateY(0);
+}
+
+.viewDetailsHint {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--primary-main);
+  font-weight: var(--font-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.correctAnswerWrapper.clickable:hover .viewDetailsHint {
+  opacity: 1;
 }
 
 .correctAnswerLabel {
@@ -205,6 +244,15 @@
   .correctAnswerWrapper {
     background: var(--neutral-gray-800);
     border-color: var(--neutral-gray-600);
+  }
+
+  .correctAnswerWrapper.clickable:hover {
+    background: var(--neutral-gray-700);
+    border-color: var(--primary-light);
+  }
+
+  .viewDetailsHint {
+    color: var(--primary-light);
   }
 
   .correctAnswerLabel {
