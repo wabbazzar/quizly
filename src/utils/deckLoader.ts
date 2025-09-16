@@ -1,7 +1,7 @@
 import { Deck, DeckMetadata, Card } from '@/types';
 
 // Sanitization helper to prevent XSS
-const sanitizeString = (str: any): string => {
+const sanitizeString = (str: unknown): string => {
   if (typeof str !== 'string') return '';
   // Basic HTML entity encoding for safety
   // Note: Forward slashes are safe and commonly used in pinyin (e.g., wéi/wèi)
@@ -15,9 +15,14 @@ const sanitizeString = (str: any): string => {
     // Removed ampersand escaping as it's safe for text content and commonly used in titles
 };
 
+// Type guard to check if value is a record
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === 'object';
+}
+
 // Validate deck metadata structure
-const validateMetadata = (metadata: any): DeckMetadata | null => {
-  if (!metadata || typeof metadata !== 'object') return null;
+const validateMetadata = (metadata: unknown): DeckMetadata | null => {
+  if (!isRecord(metadata)) return null;
 
   // Required fields
   if (!metadata.deck_name || !metadata.description || !metadata.category) {
@@ -27,7 +32,7 @@ const validateMetadata = (metadata: any): DeckMetadata | null => {
 
   // Validate difficulty enum
   const validDifficulties = ['beginner', 'intermediate', 'advanced', 'beginner_to_intermediate'];
-  if (!validDifficulties.includes(metadata.difficulty)) {
+  if (typeof metadata.difficulty !== 'string' || !validDifficulties.includes(metadata.difficulty)) {
     console.warn(`Invalid difficulty: ${metadata.difficulty}`);
     return null;
   }
@@ -37,12 +42,12 @@ const validateMetadata = (metadata: any): DeckMetadata | null => {
     description: sanitizeString(metadata.description),
     category: sanitizeString(metadata.category),
     available_levels: Array.isArray(metadata.available_levels)
-      ? metadata.available_levels.filter((l: any) => typeof l === 'number')
+      ? metadata.available_levels.filter((l) => typeof l === 'number')
       : [1],
     available_sides: typeof metadata.available_sides === 'number'
       ? Math.min(6, Math.max(2, metadata.available_sides))
       : 2,
-    side_labels: metadata.side_labels && typeof metadata.side_labels === 'object'
+    side_labels: isRecord(metadata.side_labels)
       ? {
           side_a: metadata.side_labels.side_a ? sanitizeString(metadata.side_labels.side_a) : undefined,
           side_b: metadata.side_labels.side_b ? sanitizeString(metadata.side_labels.side_b) : undefined,
@@ -53,19 +58,19 @@ const validateMetadata = (metadata: any): DeckMetadata | null => {
         }
       : undefined,
     card_count: typeof metadata.card_count === 'number' ? metadata.card_count : 0,
-    difficulty: metadata.difficulty,
+    difficulty: metadata.difficulty as DeckMetadata['difficulty'],
     tags: Array.isArray(metadata.tags)
       ? metadata.tags.map(sanitizeString).filter(Boolean)
       : [],
     version: sanitizeString(metadata.version || '1.0.0'),
-    created_date: metadata.created_date ? metadata.created_date.split('T')[0] : new Date().toISOString().split('T')[0],
-    last_updated: metadata.last_updated ? metadata.last_updated.split('T')[0] : new Date().toISOString().split('T')[0],
+    created_date: typeof metadata.created_date === 'string' ? metadata.created_date.split('T')[0] : new Date().toISOString().split('T')[0],
+    last_updated: typeof metadata.last_updated === 'string' ? metadata.last_updated.split('T')[0] : new Date().toISOString().split('T')[0],
   };
 };
 
 // Validate and sanitize card data
-const validateCard = (card: any, index: number): Card | null => {
-  if (!card || typeof card !== 'object') return null;
+const validateCard = (card: unknown, index: number): Card | null => {
+  if (!isRecord(card)) return null;
 
   // Require at least side_a and side_b
   if (!card.side_a || !card.side_b) {
@@ -117,7 +122,7 @@ export const loadDeckFromJSON = async (jsonPath: string): Promise<Deck | null> =
     }
 
     const cards = rawDeck.content
-      .map((card: any, index: number) => validateCard(card, index))
+      .map((card: unknown, index: number) => validateCard(card, index))
       .filter(Boolean) as Card[];
 
     if (cards.length === 0) {

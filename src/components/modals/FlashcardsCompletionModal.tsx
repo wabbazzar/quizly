@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './FlashcardsCompletionModal.module.css';
 
@@ -32,14 +32,12 @@ const FlashcardsCompletionModal: FC<FlashcardsCompletionModalProps> = ({
   onBackToDeck,
   onClose,
 }) => {
-  if (!results) return null;
-
-  const accuracyPercentage = Math.round(results.accuracy);
-  const duration = results.endTime - results.startTime;
+  const accuracyPercentage = results ? Math.round(results.accuracy) : 0;
+  const duration = results ? results.endTime - results.startTime : 0;
   const timeInSeconds = Math.round(duration / 1000);
   const minutes = Math.floor(timeInSeconds / 60);
   const seconds = timeInSeconds % 60;
-  const hasMissedCards = results.missedCardIndices.length > 0;
+  const hasMissedCards = results ? results.missedCardIndices.length > 0 : false;
 
   const getPerformanceEmoji = () => {
     if (accuracyPercentage === 100) return '🏆';
@@ -67,6 +65,43 @@ const FlashcardsCompletionModal: FC<FlashcardsCompletionModalProps> = ({
       ? `Round ${results.roundNumber} complete! ${results.incorrectCards} card${results.incorrectCards === 1 ? '' : 's'} still need review.`
       : `Round ${results.roundNumber} complete! All cards mastered!`;
   };
+
+  // Keyboard shortcuts when modal is visible
+  // If there are missed cards: 1 = Continue with Missed, 2 = Start Full Deck Again, 3 = Back to Deck
+  // If no missed cards: 1 = Start New Round, 3 = Back to Deck
+  useEffect(() => {
+    if (!visible || !results) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore if typing in an input/textarea/contentEditable
+      const target = e.target as HTMLElement | null;
+      if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || (target as any).isContentEditable)) {
+        return;
+      }
+
+      const hasMissed = results.missedCardIndices.length > 0;
+
+      if (e.key === '1') {
+        e.preventDefault();
+        if (hasMissed) {
+          onContinueWithMissed();
+        } else {
+          onStartNewRound();
+        }
+      } else if (e.key === '2' && hasMissed) {
+        e.preventDefault();
+        onStartNewRound();
+      } else if (e.key === '3') {
+        e.preventDefault();
+        onBackToDeck();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [visible, results, onContinueWithMissed, onStartNewRound, onBackToDeck]);
+
+  if (!results) return null;
 
   return (
     <AnimatePresence>
@@ -142,12 +177,14 @@ const FlashcardsCompletionModal: FC<FlashcardsCompletionModalProps> = ({
                     onClick={onContinueWithMissed}
                     className={`${styles.actionButton} ${styles.primaryButton}`}
                   >
+                    <span className={styles.keyHint}>1</span>
                     Continue with Missed Cards ({results.incorrectCards})
                   </button>
                   <button
                     onClick={onStartNewRound}
                     className={`${styles.actionButton} ${styles.secondaryButton}`}
                   >
+                    <span className={styles.keyHint}>2</span>
                     Start Full Deck Again
                   </button>
                 </>
@@ -157,6 +194,7 @@ const FlashcardsCompletionModal: FC<FlashcardsCompletionModalProps> = ({
                     onClick={onStartNewRound}
                     className={`${styles.actionButton} ${styles.primaryButton}`}
                   >
+                    <span className={styles.keyHint}>1</span>
                     Start New Round
                   </button>
                 </>
@@ -165,6 +203,7 @@ const FlashcardsCompletionModal: FC<FlashcardsCompletionModalProps> = ({
                 onClick={onBackToDeck}
                 className={`${styles.actionButton} ${styles.tertiaryButton}`}
               >
+                <span className={styles.keyHint}>3</span>
                 Back to Deck
               </button>
             </div>

@@ -27,6 +27,10 @@ interface DeckProgress {
   overall: number;
   byMode: Record<string, number>;
   lastStudied?: Date;
+  totalCardsStudied: number;
+  streakDays: number;
+  masteredCards: number;
+  totalCards: number;
 }
 
 interface EnhancedDeckCardProps {
@@ -94,7 +98,14 @@ const DifficultyBadge: FC<{ level?: string }> = ({ level }) => {
 
 export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(({
   deck,
-  progress = { overall: 0, byMode: {} },
+  progress = {
+    overall: 0,
+    byMode: {},
+    totalCardsStudied: 0,
+    streakDays: 0,
+    masteredCards: 0,
+    totalCards: deck.content.length
+  },
   onModeSelect,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -170,7 +181,7 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(({
       onClick={handleCardClick}
       layout
     >
-      {/* Progress Ring */}
+      {/* Progress Ring - Shows mastery percentage of entire deck */}
       {progress.overall > 0 && (
         <div className={styles.progressRing}>
           <CircularProgress value={progress.overall} />
@@ -192,8 +203,14 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(({
       <div className={styles.stats}>
         <div className={styles.statItem}>
           <CardsIcon className={styles.statIcon} size={16} />
-          <span className={styles.statValue}>{metadata.card_count || deck.content.length}</span>
-          <span className={styles.statLabel}>cards</span>
+          <span className={styles.statValue}>
+            {progress.masteredCards > 0
+              ? `${progress.masteredCards}/${metadata.card_count || deck.content.length}`
+              : metadata.card_count || deck.content.length}
+          </span>
+          <span className={styles.statLabel}>
+            {progress.masteredCards > 0 ? 'mastered' : 'cards'}
+          </span>
         </div>
 
         {metadata.available_levels && metadata.available_levels.length > 0 && (

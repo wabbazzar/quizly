@@ -3,6 +3,10 @@ import { persist } from 'zustand/middleware';
 import { Deck } from '@/types';
 import { loadAllDecks } from '@/utils/deckLoader';
 
+interface MasteredCardsData {
+  [deckId: string]: number[]; // Array of card indices that are mastered
+}
+
 interface DeckStore {
   decks: Deck[];
   activeDeck: Deck | null;
@@ -10,6 +14,8 @@ interface DeckStore {
   currentDeckId?: string;
   isLoading: boolean;
   error: string | null;
+  masteredCards: MasteredCardsData;
+  shuffleMasteredCardsBack: boolean;
 
   loadDecks: () => Promise<void>;
   loadDeck: (deckId: string) => Promise<void>;
@@ -17,6 +23,10 @@ interface DeckStore {
   importDeck: (jsonData: string) => Promise<void>;
   clearError: () => void;
   rehydrateCurrentDeck: () => Promise<void>;
+  toggleCardMastered: (deckId: string, cardIdx: number) => void;
+  setMasteredCards: (deckId: string, cardIndices: number[]) => void;
+  getMasteredCardsForDeck: (deckId: string) => number[];
+  toggleShuffleMastered: () => void;
 }
 
 export const useDeckStore = create<DeckStore>()(
@@ -27,6 +37,8 @@ export const useDeckStore = create<DeckStore>()(
       currentDeck: null,
       isLoading: false,
       error: null,
+      masteredCards: {},
+      shuffleMasteredCardsBack: false,
 
       loadDecks: async () => {
         set({ isLoading: true, error: null });
@@ -99,6 +111,43 @@ export const useDeckStore = create<DeckStore>()(
         if (currentDeckId && !get().currentDeck) {
           await get().loadDeck(currentDeckId);
         }
+      },
+
+      toggleCardMastered: (deckId: string, cardIdx: number) => {
+        set(state => {
+          const currentMastered = state.masteredCards[deckId] || [];
+          const isCurrentlyMastered = currentMastered.includes(cardIdx);
+
+          const newMastered = isCurrentlyMastered
+            ? currentMastered.filter(idx => idx !== cardIdx)
+            : [...currentMastered, cardIdx];
+
+          return {
+            masteredCards: {
+              ...state.masteredCards,
+              [deckId]: newMastered
+            }
+          };
+        });
+      },
+
+      setMasteredCards: (deckId: string, cardIndices: number[]) => {
+        set(state => ({
+          masteredCards: {
+            ...state.masteredCards,
+            [deckId]: cardIndices
+          }
+        }));
+      },
+
+      getMasteredCardsForDeck: (deckId: string) => {
+        return get().masteredCards[deckId] || [];
+      },
+
+      toggleShuffleMastered: () => {
+        set(state => ({
+          shuffleMasteredCardsBack: !state.shuffleMasteredCardsBack
+        }));
       }
     }),
     {
@@ -110,6 +159,8 @@ export const useDeckStore = create<DeckStore>()(
           metadata: d.metadata,
         })),
         currentDeckId: state.currentDeck?.id,
+        masteredCards: state.masteredCards,
+        shuffleMasteredCardsBack: state.shuffleMasteredCardsBack,
       }),
     }
   )

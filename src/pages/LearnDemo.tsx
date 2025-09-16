@@ -51,7 +51,7 @@ const LearnDemo: FC = () => {
     correctAnswers: 0,
     currentStreak: 0,
     maxStreak: 0,
-    masteredCards: new Set(),
+    passedCards: new Set(),
     strugglingCards: new Set(),
     averageResponseTime: 3500,
   });
@@ -69,11 +69,11 @@ const LearnDemo: FC = () => {
       const newMaxStreak = Math.max(prev.maxStreak, newStreak);
       const newQuestionsAnswered = prev.questionsAnswered + 1;
 
-      const newMasteredCards = new Set(prev.masteredCards);
+      const newPassedCards = new Set(prev.passedCards);
       const newStrugglingCards = new Set(prev.strugglingCards);
 
       if (correct && newStreak >= 3) {
-        newMasteredCards.add(currentQuestion.cardIndex);
+        newPassedCards.add(currentQuestion.cardIndex);
         newStrugglingCards.delete(currentQuestion.cardIndex);
       } else if (!correct) {
         newStrugglingCards.add(currentQuestion.cardIndex);
@@ -85,7 +85,7 @@ const LearnDemo: FC = () => {
         correctAnswers: newCorrectAnswers,
         currentStreak: newStreak,
         maxStreak: newMaxStreak,
-        masteredCards: newMasteredCards,
+        passedCards: newPassedCards,
         strugglingCards: newStrugglingCards,
       };
     });

@@ -60,7 +60,8 @@
       "Bash(kill:*)",
       "Bash(npx vite build:*)",
       "Bash(cat:*)",
-      "Bash(npx playwright test:*)"
+      "Bash(npx playwright test:*)",
+      "Bash(npx vitest run:*)"
     ],
     "deny": [],
     "ask": []

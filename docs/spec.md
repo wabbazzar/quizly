@@ -165,6 +165,39 @@ interface ModeSettings {
   enableAudio: boolean;
   randomize: boolean;
   progressionMode: 'sequential' | 'level' | 'random';
+  masteryThreshold?: number;  // Number of consecutive correct answers for mastery
+}
+
+// Progress & Mastery Tracking
+interface CardMasteryRecord {
+  cardIndex: number;
+  masteredAt: Date;
+  attemptCount: number;
+  lastSeen: Date;
+  consecutiveCorrect: number;
+}
+
+interface DeckProgress {
+  overall: number;  // Percentage of cards mastered
+  byMode: Record<string, number>;  // Progress per mode
+  lastStudied?: Date;
+  totalCardsStudied: number;
+  streakDays: number;
+  masteredCards: number;  // Count of mastered cards
+  totalCards: number;
+}
+
+// Learn Session Results
+interface LearnSessionResults {
+  deckId: string;
+  totalQuestions: number;
+  correctAnswers: number;
+  incorrectAnswers: number;
+  accuracy: number;
+  maxStreak: number;
+  duration: number;
+  passedCards: number[];  // Cards answered correctly (session-level)
+  strugglingCards: number[];  // Cards answered incorrectly
 }
 ```
 
@@ -210,6 +243,78 @@ Minimum required fields for card sanitization:
 - Smooth CSS/Framer Motion animations
 - Syntax highlighting for code content
 - LaTeX/MathJax support for mathematical formulas
+
+## Progress Tracking & Mastery System
+
+### Two-Tier Mastery Architecture
+
+The application implements a two-tier mastery system to differentiate between short-term session performance and long-term learning retention:
+
+#### 1. Session-Level Performance (Passed Cards)
+- **Purpose**: Track immediate performance within a single learning session
+- **Scope**: Temporary, resets each session
+- **Tracking**: Cards passed/failed in current round (passedCards, strugglingCards)
+- **Use Case**: Determine which cards to review in the next round
+- **Storage**: In-memory during session
+- **Naming**: Uses "passed" to distinguish from true "mastery"
+
+#### 2. Persistent Card Mastery
+- **Purpose**: Track true mastery across multiple sessions
+- **Scope**: Persistent across all sessions and modes
+- **Requirement**: 3 consecutive correct answers to achieve mastery
+- **Reset**: Mastery lost on incorrect answer after achievement
+- **Storage**: localStorage via Zustand persist middleware
+- **Source of Truth**: `cardMasteryStore`
+
+### Progress Calculation
+
+#### Overall Deck Progress
+```typescript
+// Calculation hierarchy:
+1. Primary: Percentage of cards mastered (from cardMasteryStore)
+2. Fallback: Average of mode-specific progress
+3. Display: Progress ring on deck card shows mastery percentage
+```
+
+#### Mode-Specific Progress
+- Each mode tracks its own best performance percentage
+- Stored separately from mastery
+- Used for mode-specific statistics
+
+### Data Persistence Strategy
+
+#### Stores and Their Responsibilities
+
+1. **cardMasteryStore**
+   - Tracks individual card mastery status
+   - Maintains mastery history and attempt counts
+   - Persists across sessions
+   - Custom serialization for Map objects
+
+2. **progressStore**
+   - Aggregates overall deck progress
+   - Tracks study streaks and statistics
+   - Integrates with cardMasteryStore for mastery data
+   - Persists user progress metrics
+
+3. **learnSessionStore**
+   - Manages active learning session state
+   - Tracks session-specific performance
+   - Cleared on session completion
+   - Can pause/resume sessions
+
+### Implementation Details
+
+#### Mastery Threshold
+- **Default**: 3 consecutive correct answers
+- **Configurable**: Via `masteryThreshold` in mode settings
+- **Applied**: Consistently across all learning modes
+
+#### Progress Display
+- **Deck Card**: Shows overall mastery percentage (0-100%)
+- **Statistics**: "X/Y cards mastered" format
+- **Visual**: Circular progress indicator
+- **Color Coding**: Based on mastery level
 
 ## Learning Modes
 
@@ -622,7 +727,9 @@ chore: Build/tool updates
 - [x] React Router configuration
 - [x] Theme system with CSS custom properties
 - [x] Zustand store setup
-- [ ] localStorage/IndexedDB integration
+- [x] localStorage integration with persistence
+- [x] Progress tracking and mastery system
+- [ ] IndexedDB integration for large data
 - [ ] Service Worker for offline support
 
 #### 2. Deck Management

@@ -164,7 +164,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: var(--space-2);
   min-height: 48px;
+}
+
+/* Keyboard hint indicator */
+.keyHint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  flex-shrink: 0;
 }
 
 .actionButton:hover {
@@ -191,6 +207,12 @@
   border: 2px solid var(--primary-main);
 }
 
+.actionButton.secondary .keyHint {
+  background: var(--primary-light);
+  border-color: var(--primary-main);
+  color: var(--neutral-white);
+}
+
 .actionButton.secondary:hover {
   background: rgba(74, 144, 226, 0.05);
 }
@@ -199,6 +221,12 @@
   background: transparent;
   color: var(--neutral-gray-600);
   border: 2px solid var(--neutral-gray-300);
+}
+
+.actionButton.tertiary .keyHint {
+  background: var(--neutral-gray-200);
+  border-color: var(--neutral-gray-400);
+  color: var(--neutral-gray-700);
 }
 
 .actionButton.tertiary:hover {

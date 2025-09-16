@@ -1,12 +1,21 @@
 # Quizly Project Guidelines for Claude
 
-## 🎯 Project Overview
+## CRITICAL: Read spec.md Before Starting Any Work
+
+**⚠️ MANDATORY: Before implementing ANY feature or making ANY changes, you MUST:**
+1. Read and understand `docs/spec.md` completely
+2. Ensure your work aligns with the specification
+3. Update spec.md if requirements change during implementation
+
+The spec.md file is the single source of truth for all technical requirements and design decisions.
+
+## Project Overview
 
 Quizly is a high-performance, mobile-first Progressive Web Application (PWA) built with React and Vite that provides an advanced flashcard and learning system. This document contains critical guidelines for maintaining code quality, consistency, and the project specification.
 
-## 📋 CRITICAL: Specification Maintenance
+## CRITICAL: Specification Maintenance
 
-**⚠️ ALWAYS KEEP `docs/spec.md` UP TO DATE ⚠️**
+**ALWAYS KEEP `docs/spec.md` UP TO DATE**
 
 The specification document (`docs/spec.md`) is the single source of truth for this project. Any changes to:
 - Data models or TypeScript interfaces
@@ -32,7 +41,7 @@ The specification document (`docs/spec.md`) is the single source of truth for th
 3. Commit spec.md changes with the feature
 ```
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 quizly2/
@@ -62,7 +71,7 @@ quizly2/
 └── __tests__/          # Test files
 ```
 
-## 🎨 Design System & Styling
+## Design System & Styling
 
 ### CSS Custom Properties (from spec.md)
 ```css
@@ -104,7 +113,53 @@ quizly2/
 - **Maintain mobile-first approach** with responsive design
 - **Ensure WCAG AA compliance** for accessibility
 
-## 💾 Data Models & Types
+### Icon System Guidelines
+
+**CRITICAL: Never use emojis in the application. Always use proper icon components.**
+
+#### Icon Implementation Rules:
+1. **Create SVG icon components** in `src/components/icons/`
+2. **Use consistent sizing** with size prop (16, 20, 24 as standard sizes)
+3. **Support color inheritance** via currentColor
+4. **Maintain consistent stroke width** (2px for outline icons)
+5. **Include proper ARIA labels** for accessibility
+
+#### Icon Component Pattern:
+```typescript
+import { FC } from 'react';
+
+interface IconProps {
+  className?: string;
+  size?: number;
+  color?: string;
+}
+
+export const IconName: FC<IconProps> = ({
+  className,
+  size = 24,
+  color = 'currentColor'
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    {/* SVG paths */}
+  </svg>
+);
+```
+
+#### Icon Usage Guidelines:
+- Use semantic icon names (CheckCircleIcon, not CheckIcon)
+- Group related icons in the same file
+- Ensure icons work in both light and dark modes
+- Test icons at different sizes for clarity
+- Never use Unicode symbols or emoji characters
+
+## Data Models & Types
 
 ### CRITICAL: Multi-Sided Card System
 The app supports cards with 2-6 sides (configurable):
@@ -135,7 +190,7 @@ export const ComponentName: FC<ComponentProps> = memo(({
 });
 ```
 
-## 🧪 Testing Standards
+## Testing Standards
 
 ### Test-Driven Development
 1. **Write failing test first** for bugs
@@ -162,7 +217,7 @@ describe('ComponentName', () => {
 });
 ```
 
-## 🚀 Performance Requirements
+## Performance Requirements
 
 ### Target Metrics (from spec.md)
 - **First Contentful Paint**: <1.5s
@@ -179,7 +234,7 @@ describe('ComponentName', () => {
 - [ ] Optimize images with WebP/AVIF
 - [ ] Implement virtual scrolling for long lists
 
-## 📝 Development Workflow
+## Development Workflow
 
 ### Incremental Development
 1. **Work on ONE component at a time**
@@ -206,10 +261,11 @@ Scopes: components, pages, router, store, types, tests
 ```
 
 **NEVER include AI signatures in commits:**
-- ❌ "🤖 Generated with Claude Code"
-- ❌ "Co-Authored-By: Claude"
+- Never include "Generated with Claude Code"
+- Never include "Co-Authored-By: Claude"
+- Never use emojis in commit messages
 
-## 🎮 Learning Modes Implementation
+## Learning Modes Implementation
 
 ### Four Core Modes (from spec.md)
 1. **Flashcards**: Click/tap to flip, keyboard/swipe navigation
@@ -224,7 +280,7 @@ Each mode supports:
 - Progression settings (sequential, level-based, random)
 - Timer and audio options
 
-## 🔧 State Management
+## State Management
 
 ### Zustand Store Structure
 ```typescript
@@ -256,7 +312,7 @@ interface AppStore {
 - Cache active session in memory
 - Implement Service Worker for offline support
 
-## 📱 Responsive Design
+## Responsive Design
 
 ### Breakpoints
 ```css
@@ -300,7 +356,7 @@ interface AppStore {
 - Reduced motion support
 - Semantic HTML structure
 
-## 🚫 Common Pitfalls to Avoid
+## Common Pitfalls to Avoid
 
 1. **Never use inline event handlers** - use proper event delegation
 2. **Never skip React.memo** for list items
@@ -308,7 +364,7 @@ interface AppStore {
 4. **Never ignore TypeScript errors**
 5. **Never ship without browser testing**
 
-## ✅ Pre-Commit Checklist
+## Pre-Commit Checklist
 
 Before ANY commit:
 ```bash
@@ -331,7 +387,7 @@ npm run lighthouse
 git add docs/spec.md
 ```
 
-## 🔄 Continuous Maintenance
+## Continuous Maintenance
 
 ### Daily Tasks
 - Review and update spec.md
@@ -345,17 +401,17 @@ git add docs/spec.md
 - Test on different browsers
 - Update documentation
 
-## 🎯 Phase 1 Priorities
+## Phase 1 Priorities
 
 Current focus areas (from spec.md):
-1. Core infrastructure setup ✅
+1. Core infrastructure setup [Complete]
 2. React Router configuration
 3. Theme system with CSS custom properties
 4. Deck management features
 5. All four learning modes
 6. PWA features and offline support
 
-## 📚 Quick References
+## Quick References
 
 ### Key Files
 - `docs/spec.md` - Complete project specification
@@ -398,7 +454,7 @@ export default defineConfig({
 });
 ```
 
-## 🎓 Learning Resources
+## Learning Resources
 
 - React docs: Use Context7 MCP for latest patterns
 - Vite docs: https://vitejs.dev/
@@ -406,19 +462,22 @@ export default defineConfig({
 - Code quality: See `.claude/agents/code-quality-assessor.md`
 - Performance: Run `npm run lighthouse`
 
-## 💡 Important Reminders
+## Important Reminders
 
-1. **ALWAYS update spec.md** when requirements change
-2. **ALWAYS write complete components**, not snippets
-3. **ALWAYS test on multiple browsers**
-4. **ALWAYS use proper TypeScript types**
-5. **ALWAYS follow the CSS custom properties system**
-6. **NEVER commit without running tests**
-7. **NEVER include AI attribution in commits**
-8. **NEVER use `any` type**
-9. **NEVER ship broken code**
+1. **ALWAYS read spec.md before starting any work**
+2. **ALWAYS update spec.md** when requirements change
+3. **ALWAYS write complete components**, not snippets
+4. **ALWAYS test on multiple browsers**
+5. **ALWAYS use proper TypeScript types**
+6. **ALWAYS follow the CSS custom properties system**
+7. **NEVER use emojis** - always use proper icon components
+8. **NEVER commit without running tests**
+9. **NEVER include AI attribution in commits**
+10. **NEVER use `any` type**
+11. **NEVER ship broken code**
 
-## 🆘 When Stuck
+
+## When Stuck
 
 1. Review `docs/spec.md` for requirements
 2. Check existing components for patterns
@@ -426,7 +485,7 @@ export default defineConfig({
 4. Test incrementally
 5. Update documentation
 
-## 🌐 Browser Support
+## Browser Support
 
 ### Minimum Requirements
 - Chrome 90+

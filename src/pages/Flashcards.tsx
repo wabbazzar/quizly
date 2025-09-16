@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion, PanInfo, AnimatePresence } from 'framer-motion';
 import { useDeckStore } from '@/store/deckStore';
 import { useFlashcardSessionStore, DEFAULT_FRONT_SIDES, DEFAULT_BACK_SIDES } from '@/store/flashcardSessionStore';
+import { useProgressStore } from '@/store/progressStore';
 import { FlashcardSessionResults } from '@/types';
 import FlashCard from '@/components/FlashCard';
 import FlashcardsSettings from '@/components/modals/FlashcardsSettings';
@@ -16,6 +17,7 @@ const Flashcards: FC = () => {
   const navigate = useNavigate();
   const { decks, activeDeck, selectDeck } = useDeckStore();
   const { getSession, saveSession, startNewRound, startMissedCardsRound, getMissedCardIndices } = useFlashcardSessionStore();
+  const { updateDeckProgress } = useProgressStore();
   const isInitialMount = useRef(true);
 
   // Initialize state from persisted session or defaults
@@ -134,7 +136,18 @@ const Flashcards: FC = () => {
 
     setCompletionResults(results);
     setShowCompletionModal(true);
-  }, [activeDeck, deckId, currentCardIndex, progress, frontSides, backSides, roundNumber, cardOrder, startTime, isMissedCardsRound, getMissedCardIndices]);
+
+    // Update progress store with the session results
+    if (deckId) {
+      updateDeckProgress(
+        deckId,
+        'flashcards',
+        cardsAnswered,
+        correctCards,
+        cardsAnswered
+      );
+    }
+  }, [activeDeck, deckId, currentCardIndex, progress, frontSides, backSides, roundNumber, cardOrder, startTime, isMissedCardsRound, getMissedCardIndices, updateDeckProgress]);
 
   const handleNext = useCallback(() => {
     if (!activeDeck) return;

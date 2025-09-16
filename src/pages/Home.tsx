@@ -1,19 +1,14 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDeckStore } from '@/store/deckStore';
+import { useProgressStore } from '@/store/progressStore';
 import EnhancedDeckCard from '@/components/EnhancedDeckCard';
 import LoadingScreen from '@/components/common/LoadingScreen';
 import styles from './Home.module.css';
 
-interface DeckProgress {
-  overall: number;
-  byMode: Record<string, number>;
-  lastStudied?: Date;
-}
-
 const Home: FC = () => {
   const { decks, isLoading, error, loadDecks, selectDeck } = useDeckStore();
-  const [deckProgress] = useState<Record<string, DeckProgress>>({});
+  const { getDeckProgress } = useProgressStore();
 
   useEffect(() => {
     loadDecks();
@@ -22,18 +17,6 @@ const Home: FC = () => {
   const handleModeSelect = (deckId: string, _mode: string) => {
     selectDeck(deckId);
     // Mode navigation is handled by EnhancedDeckCard
-  };
-
-  const getProgressForDeck = (deckId: string): DeckProgress => {
-    return deckProgress[deckId] || {
-      overall: 0,
-      byMode: {
-        flashcards: 0,
-        learn: 0,
-        match: 0,
-        test: 0,
-      },
-    };
   };
 
   if (isLoading) {
@@ -113,7 +96,7 @@ const Home: FC = () => {
                   >
                     <EnhancedDeckCard
                       deck={deck}
-                      progress={getProgressForDeck(deck.id)}
+                      progress={getDeckProgress(deck.id)}
                       onModeSelect={handleModeSelect}
                     />
                   </motion.div>

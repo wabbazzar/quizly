@@ -65,7 +65,7 @@ test.describe('GitHub Pages Deployment', () => {
   });
 
   test('should load static assets with correct base path', async ({ page }) => {
-    const response = await page.goto(GH_PAGES_URL);
+    await page.goto(GH_PAGES_URL);
 
     // Intercept failed requests
     const failedRequests: string[] = [];

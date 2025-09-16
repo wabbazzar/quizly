@@ -1,7 +1,7 @@
-import { FC, memo } from 'react';
+import { FC, memo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { LearnSessionResults } from '@/types';
+import type { LearnSessionResults } from '@/types';
 import styles from './SessionComplete.module.css';
 
 interface SessionCompleteProps {
@@ -19,6 +19,35 @@ export const SessionComplete: FC<SessionCompleteProps> = memo(({
 }) => {
   const navigate = useNavigate();
 
+  // Check if the entire deck is mastered
+  const isDeckMastered = results.passedCards.length === results.totalQuestions &&
+                         results.strugglingCards.length === 0;
+
+  // Keyboard shortcuts: 1 = Practice Again (if not mastered), 2 = Back to Deck, 3 = Home
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore if typing in an input/textarea/contentEditable
+      const target = e.target as HTMLElement | null;
+      if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || (target as any).isContentEditable)) {
+        return;
+      }
+
+      if (e.key === '1' && !isDeckMastered) {
+        e.preventDefault();
+        onRetry();
+      } else if (e.key === '2') {
+        e.preventDefault();
+        onBackToDeck();
+      } else if (e.key === '3') {
+        e.preventDefault();
+        navigate('/');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onRetry, onBackToDeck, navigate, isDeckMastered]);
+
   const formatTime = (ms: number) => {
     const seconds = Math.floor(ms / 1000);
     const minutes = Math.floor(seconds / 60);
@@ -31,6 +60,10 @@ export const SessionComplete: FC<SessionCompleteProps> = memo(({
   };
 
   const getPerformanceMessage = () => {
+    if (isDeckMastered) {
+      return { message: 'Deck Mastered!', emoji: '🏆', color: 'excellent' };
+    }
+
     const accuracy = results.accuracy;
 
     if (accuracy >= 90) {
@@ -71,7 +104,9 @@ export const SessionComplete: FC<SessionCompleteProps> = memo(({
             {performance.message}
           </h1>
           <p className={styles.subtitle}>
-            You completed the Learn session for {deckName}
+            {isDeckMastered
+              ? `Congratulations! You've mastered all cards in ${deckName}!`
+              : `You completed the Learn session for ${deckName}`}
           </p>
         </header>
 
@@ -126,29 +161,40 @@ export const SessionComplete: FC<SessionCompleteProps> = memo(({
           </motion.div>
         </div>
 
-        {/* Card Mastery */}
-        {(results.masteredCards.length > 0 || results.strugglingCards.length > 0) && (
+        {/* Card Results */}
+        {(results.passedCards.length > 0 || results.strugglingCards.length > 0) && (
           <motion.div
             className={styles.masterySection}
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.7 }}
           >
-            {results.masteredCards.length > 0 && (
+            {isDeckMastered ? (
               <div className={styles.masteryItem}>
-                <span className={`${styles.masteryIcon} ${styles.mastered}`}>✨</span>
+                <span className={`${styles.masteryIcon} ${styles.mastered}`}>🏆</span>
                 <span className={styles.masteryText}>
-                  Mastered <strong>{results.masteredCards.length}</strong> cards
+                  Perfect! All <strong>{results.totalQuestions}</strong> cards mastered!
                 </span>
               </div>
-            )}
-            {results.strugglingCards.length > 0 && (
-              <div className={styles.masteryItem}>
-                <span className={`${styles.masteryIcon} ${styles.struggling}`}>📚</span>
-                <span className={styles.masteryText}>
-                  <strong>{results.strugglingCards.length}</strong> cards need more practice
-                </span>
-              </div>
+            ) : (
+              <>
+                {results.passedCards.length > 0 && (
+                  <div className={styles.masteryItem}>
+                    <span className={`${styles.masteryIcon} ${styles.mastered}`}>✨</span>
+                    <span className={styles.masteryText}>
+                      Passed <strong>{results.passedCards.length}</strong> cards
+                    </span>
+                  </div>
+                )}
+                {results.strugglingCards.length > 0 && (
+                  <div className={styles.masteryItem}>
+                    <span className={`${styles.masteryIcon} ${styles.struggling}`}>📚</span>
+                    <span className={styles.masteryText}>
+                      <strong>{results.strugglingCards.length}</strong> cards need more practice
+                    </span>
+                  </div>
+                )}
+              </>
             )}
           </motion.div>
         )}
@@ -170,18 +216,22 @@ export const SessionComplete: FC<SessionCompleteProps> = memo(({
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.9 }}
         >
-          <button
-            className={`${styles.actionButton} ${styles.primary}`}
-            onClick={onRetry}
-            data-testid="retry-button"
-          >
-            Practice Again
-          </button>
+          {!isDeckMastered && (
+            <button
+              className={`${styles.actionButton} ${styles.primary}`}
+              onClick={onRetry}
+              data-testid="retry-button"
+            >
+              <span className={styles.keyHint}>1</span>
+              Practice Again
+            </button>
+          )}
           <button
             className={`${styles.actionButton} ${styles.secondary}`}
             onClick={onBackToDeck}
             data-testid="back-button"
           >
+            <span className={styles.keyHint}>2</span>
             Back to Deck
           </button>
           <button
@@ -189,6 +239,7 @@ export const SessionComplete: FC<SessionCompleteProps> = memo(({
             onClick={() => navigate('/')}
             data-testid="home-button"
           >
+            <span className={styles.keyHint}>3</span>
             Home
           </button>
         </motion.div>

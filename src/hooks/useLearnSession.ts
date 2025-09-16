@@ -41,7 +41,7 @@ export const useLearnSession = (
     correctAnswers: 0,
     currentStreak: 0,
     maxStreak: 0,
-    masteredCards: new Set(),
+    passedCards: new Set(),
     strugglingCards: new Set(),
     averageResponseTime: 0,
   });
@@ -109,15 +109,16 @@ export const useLearnSession = (
 
       // Update mastered/struggling cards
       const cardIndex = sessionState.currentQuestion?.cardIndex;
-      const newMasteredCards = new Set(prev.masteredCards);
+      const newPassedCards = new Set(prev.passedCards);
       const newStrugglingCards = new Set(prev.strugglingCards);
 
       if (cardIndex !== undefined) {
-        if (isCorrect && newStreak >= options.masteryThreshold) {
-          newMasteredCards.add(cardIndex);
+        if (isCorrect) {
+          newPassedCards.add(cardIndex);
           newStrugglingCards.delete(cardIndex);
-        } else if (!isCorrect) {
+        } else {
           newStrugglingCards.add(cardIndex);
+          newPassedCards.delete(cardIndex);
           // Track missed card for scheduling
           const card = sessionState.roundCards[cardIndex];
           if (card) {
@@ -140,7 +141,7 @@ export const useLearnSession = (
         correctAnswers: newCorrectAnswers,
         currentStreak: newStreak,
         maxStreak: newMaxStreak,
-        masteredCards: newMasteredCards,
+        passedCards: newPassedCards,
         strugglingCards: newStrugglingCards,
         averageResponseTime: avgResponseTime,
       };
@@ -265,8 +266,9 @@ export const useLearnSession = (
       averageResponseTime: progress.averageResponseTime,
       maxStreak: progress.maxStreak,
       duration,
-      masteredCards: Array.from(progress.masteredCards),
+      passedCards: Array.from(progress.passedCards),
       strugglingCards: Array.from(progress.strugglingCards),
+      masteredCards: [], // Will be tracked separately in the component
     };
   }, [deck.id, sessionState.startTime, progress]);
 
@@ -290,7 +292,7 @@ export const useLearnSession = (
       correctAnswers: 0,
       currentStreak: 0,
       maxStreak: 0,
-      masteredCards: new Set(),
+      passedCards: new Set(),
       strugglingCards: new Set(),
       averageResponseTime: 0,
     });

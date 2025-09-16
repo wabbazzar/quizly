@@ -139,8 +139,9 @@ export interface LearnSessionResults {
   averageResponseTime: number;
   maxStreak: number;
   duration: number;
-  masteredCards: number[];
+  passedCards: number[];  // Cards answered correctly in this session
   strugglingCards: number[];
+  masteredCards: number[];  // Cards that reached mastery threshold during this session
 }
 
 export interface FlashcardSessionResults {

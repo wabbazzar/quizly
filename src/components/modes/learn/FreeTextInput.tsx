@@ -64,7 +64,7 @@ export const FreeTextInput: FC<FreeTextInputProps> = memo(({
           className={cn(
             styles.textInput,
             showFeedback && feedback?.isCorrect === true && styles.correct,
-            showFeedback && hasSubmitted && (feedback === undefined || feedback?.isCorrect === false) && styles.incorrect,
+            showFeedback && feedback?.isCorrect === false && styles.incorrect,
             disabled && styles.disabled
           )}
           placeholder="Type your answer..."
@@ -90,24 +90,22 @@ export const FreeTextInput: FC<FreeTextInputProps> = memo(({
         </button>
       </div>
 
-      {showFeedback && hasSubmitted && (
+      {showFeedback && feedback?.isCorrect === false && (
         <div id="feedback-message" className={styles.feedbackWrapper}>
-          {(feedback === undefined || feedback?.isCorrect === false) && (
-            <div className={styles.overrideSection}>
-              <p className={styles.overrideText}>
-                Think your answer was correct?
-              </p>
-              <button
-                type="button"
-                className={styles.overrideButton}
-                onClick={handleOverride}
-                aria-label="Mark my answer as correct"
-                data-testid="override-button"
-              >
-                Actually, I was correct
-              </button>
-            </div>
-          )}
+          <div className={styles.overrideSection}>
+            <p className={styles.overrideText}>
+              Think your answer was correct?
+            </p>
+            <button
+              type="button"
+              className={styles.overrideButton}
+              onClick={handleOverride}
+              aria-label="Mark my answer as correct"
+              data-testid="override-button"
+            >
+              Actually, I was correct
+            </button>
+          </div>
         </div>
       )}
     </form>

@@ -1,6 +1,8 @@
 import { FC, useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useDeckStore } from '@/store/deckStore';
+import { useProgressStore } from '@/store/progressStore';
+import { useCardMasteryStore } from '@/store/cardMasteryStore';
 import LoadingScreen from '@/components/common/LoadingScreen';
 import LearnContainer from '@/components/modes/learn/LearnContainer';
 import LearnSettings from '@/components/modals/LearnSettings';
@@ -37,11 +39,16 @@ const Learn: FC = () => {
   const { deckId } = useParams<{ deckId: string }>();
   const navigate = useNavigate();
   const location = useLocation();
-  const { currentDeck, loadDeck, isLoading, error } = useDeckStore();
+  const { currentDeck, loadDeck, isLoading, error, shuffleMasteredCardsBack } = useDeckStore();
+  const { updateDeckProgress } = useProgressStore();
+  const { updateCardAttempt, getMasteredCards } = useCardMasteryStore();
 
   // Get excluded cards and struggling cards from navigation state
   const excludeCards = location.state?.excludeCards as number[] | undefined;
   const strugglingCards = location.state?.strugglingCards as number[] | undefined;
+
+  // Get mastered cards for filtering from the NEW cardMasteryStore (unless shuffle back is enabled)
+  const masteredCards = deckId ? getMasteredCards(deckId) : [];
 
   // Load settings from localStorage or use defaults
   const [settings, setSettings] = useState<LearnModeSettings>(() => {
@@ -80,6 +87,36 @@ const Learn: FC = () => {
   }, []);
 
   const handleComplete = (results: LearnSessionResults) => {
+    // Update progress store with the session results
+    if (deckId && currentDeck) {
+      const totalCards = currentDeck.content.length;
+      const correctCards = results.correctAnswers;
+
+      // Update card mastery for each card that was answered correctly
+      // Pass the masteryThreshold from settings
+      const masteryThreshold = settings.masteryThreshold || 3;
+
+      if (results.passedCards) {
+        results.passedCards.forEach((cardIndex) => {
+          updateCardAttempt(deckId, cardIndex, true, totalCards, masteryThreshold);
+        });
+      }
+
+      if (results.strugglingCards) {
+        results.strugglingCards.forEach((cardIndex) => {
+          updateCardAttempt(deckId, cardIndex, false, totalCards, masteryThreshold);
+        });
+      }
+
+      updateDeckProgress(
+        deckId,
+        'learn',
+        results.totalQuestions,
+        correctCards,
+        results.totalQuestions
+      );
+    }
+
     // Navigate to results page or back to deck
     navigate(`/deck/${deckId}/results`, { state: { results } });
   };
@@ -109,12 +146,19 @@ const Learn: FC = () => {
     return <LoadingScreen />;
   }
 
-  // Filter deck content if excludeCards is provided
-  const filteredDeck = excludeCards && excludeCards.length > 0
+  // Filter deck content based on excludeCards and mastered cards
+  let cardsToExclude = excludeCards || [];
+
+  // If shuffle is NOT enabled, exclude mastered cards
+  if (!shuffleMasteredCardsBack && masteredCards.length > 0) {
+    cardsToExclude = [...new Set([...cardsToExclude, ...masteredCards])];
+  }
+
+  const filteredDeck = cardsToExclude.length > 0
     ? {
         ...currentDeck,
         content: currentDeck.content.filter(
-          (_card, index) => !excludeCards.includes(index)
+          (_card, index) => !cardsToExclude.includes(index)
         )
       }
     : currentDeck;
@@ -128,6 +172,7 @@ const Learn: FC = () => {
         onComplete={handleComplete}
         onExit={handleExit}
         onOpenSettings={() => setShowSettings(true)}
+        deckId={deckId}
       />
       <LearnSettings
         visible={showSettings}

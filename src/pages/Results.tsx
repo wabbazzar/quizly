@@ -52,20 +52,20 @@ const Results: FC = () => {
   const handleTryAgain = () => {
     // Check if there are any cards left to learn
     const totalDeckCards = currentDeck?.content?.length || 0;
-    const masteredCount = results.masteredCards?.length || 0;
+    const passedCount = results.passedCards?.length || 0;
 
-    // If all cards in the deck are mastered, show a message
-    if (totalDeckCards > 0 && masteredCount >= totalDeckCards) {
-      alert('🎉 Congratulations! You have mastered all cards in this deck!');
+    // If all cards in the deck are passed, show a message
+    if (totalDeckCards > 0 && passedCount >= totalDeckCards) {
+      alert('🎉 Congratulations! You have passed all cards in this deck!');
       navigate(`/deck/${deckId}`);
       return;
     }
 
-    // For "Continue with New Cards": exclude only mastered cards
+    // For "Continue with New Cards": exclude only passed cards
     // This keeps struggling cards in the pool to be mixed with new cards
-    // For "Try Again": don't exclude any cards (when no cards were mastered)
-    const cardsToExclude = results.masteredCards?.length > 0
-      ? results.masteredCards
+    // For "Try Again": don't exclude any cards (when no cards were passed)
+    const cardsToExclude = results.passedCards?.length > 0
+      ? results.passedCards
       : [];
 
     navigate(`/learn/${deckId}`, {
@@ -94,24 +94,62 @@ const Results: FC = () => {
     setTimeout(() => setSelectedCard(null), 300);
   };
 
+  // Keyboard shortcuts: 1 = Continue/Try Again, 2 = Back to Deck, 3 = Home
+  useEffect(() => {
+    const isEditableTarget = (el: EventTarget | null) => {
+      if (!(el instanceof HTMLElement)) return false;
+      const tag = el.tagName.toLowerCase();
+      return (
+        tag === 'input' ||
+        tag === 'textarea' ||
+        el.isContentEditable ||
+        tag === 'select'
+      );
+    };
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.repeat) return;
+      if (isEditableTarget(e.target)) return;
+      if (showCardModal) return; // avoid interfering while viewing a card
+
+      switch (e.key) {
+        case '1':
+          e.preventDefault();
+          handleTryAgain();
+          break;
+        case '2':
+          e.preventDefault();
+          handleBackToDeck();
+          break;
+        case '3':
+          e.preventDefault();
+          handleBackToHome();
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [handleTryAgain, handleBackToDeck, handleBackToHome, showCardModal]);
+
   return (
     <div className={styles.resultsPage}>
       <div className={styles.resultsContainer}>
         {/* Performance Header */}
         <div className={styles.performanceHeader}>
           <div className={styles.performanceEmoji}>
-            {currentDeck && results.masteredCards?.length >= currentDeck.content.length
+            {currentDeck && results.passedCards?.length >= currentDeck.content.length
               ? '🏆'
               : getPerformanceEmoji()}
           </div>
           <h1 className={styles.performanceMessage}>
-            {currentDeck && results.masteredCards?.length >= currentDeck.content.length
-              ? 'Deck Fully Mastered!'
+            {currentDeck && results.passedCards?.length >= currentDeck.content.length
+              ? 'All Cards Passed!'
               : getPerformanceMessage()}
           </h1>
-          {currentDeck && results.masteredCards?.length >= currentDeck.content.length && (
+          {currentDeck && results.passedCards?.length >= currentDeck.content.length && (
             <p className={styles.completionMessage}>
-              Congratulations! You've mastered all {currentDeck.content.length} cards in this deck!
+              Congratulations! You&apos;ve passed all {currentDeck.content.length} cards in this session!
             </p>
           )}
         </div>
@@ -153,16 +191,22 @@ const Results: FC = () => {
             <span className={styles.statRowLabel}>Total Questions:</span>
             <span className={styles.statRowValue}>{results.totalQuestions}</span>
           </div>
-          {results.masteredCards.length > 0 && (
+          {results.passedCards.length > 0 && (
             <div className={styles.statRow}>
-              <span className={styles.statRowLabel}>Mastered Cards:</span>
-              <span className={styles.statRowValue}>{results.masteredCards.length}</span>
+              <span className={styles.statRowLabel}>Cards Passed:</span>
+              <span className={styles.statRowValue}>{results.passedCards.length}</span>
             </div>
           )}
           {results.strugglingCards.length > 0 && (
             <div className={styles.statRow}>
               <span className={styles.statRowLabel}>Need Review:</span>
               <span className={styles.statRowValue}>{results.strugglingCards.length}</span>
+            </div>
+          )}
+          {results.masteredCards && results.masteredCards.length > 0 && (
+            <div className={styles.statRow}>
+              <span className={styles.statRowLabel}>Cards Mastered:</span>
+              <span className={styles.statRowValue}>{results.masteredCards.length}</span>
             </div>
           )}
         </div>
@@ -173,9 +217,9 @@ const Results: FC = () => {
             onClick={handleTryAgain}
             className={`${styles.actionButton} ${styles.primaryButton}`}
           >
-            {currentDeck && results.masteredCards?.length >= currentDeck.content.length
+            {currentDeck && results.passedCards?.length >= currentDeck.content.length
               ? 'View Deck'
-              : results.masteredCards?.length > 0
+              : results.passedCards?.length > 0
               ? 'Continue with New Cards'
               : 'Try Again'
             }

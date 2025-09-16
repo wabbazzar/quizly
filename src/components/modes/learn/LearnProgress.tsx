@@ -8,7 +8,7 @@ export interface LearnSessionProgress {
   correctAnswers: number;
   currentStreak: number;
   maxStreak: number;
-  masteredCards: Set<number>;
+  passedCards: Set<number>;  // Cards answered correctly in this session
   strugglingCards: Set<number>;
   averageResponseTime: number;
 }
@@ -121,7 +121,7 @@ export const LearnProgress: FC<LearnProgressProps> = memo(({
             <span className={styles.masteryLabel}>
               Mastered
               <strong className={styles.masteryCount}>
-                {progress.masteredCards.size}
+                {progress.passedCards.size}
               </strong>
             </span>
           </div>

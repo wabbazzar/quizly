@@ -1303,6 +1303,135 @@ describe('Flashcards E2E', () => {
 5. Settings persist between sessions
 6. Lighthouse score >90
 
+## Quality Improvement Criteria (Added 2025-09-15)
+
+### Code Quality Metrics
+1. **TypeScript Compliance** ✅
+   - Zero TypeScript errors (npm run type-check passes)
+   - No use of `any` type except for third-party integrations
+   - All props and state properly typed with interfaces
+   - Discriminated unions for complex state management
+
+2. **Linting Standards** ⚠️
+   - Zero ESLint errors (2 files with issues currently)
+   - Consistent code style across all components
+   - No unused variables or imports
+   - Proper error handling with try-catch blocks
+
+3. **Test Coverage Targets**
+   - Unit test coverage: >80% for all utility functions
+   - Component test coverage: >70% for all React components
+   - E2E test coverage: Critical user journeys tested
+   - Performance regression tests for animations
+
+### Performance Improvement Targets
+1. **Bundle Size Optimization**
+   - Initial JS bundle: <150KB (gzipped)
+   - CSS bundle: <30KB (gzipped)
+   - Lazy loading for all routes
+   - Tree shaking properly configured
+
+2. **Runtime Performance**
+   - Time to Interactive: <2.5s on 3G
+   - First Input Delay: <100ms
+   - Memory usage: <50MB for 100 card session
+   - No memory leaks in long sessions
+
+3. **Animation Performance**
+   - Consistent 60 FPS for card flip animations
+   - GPU acceleration for all transforms
+   - Reduced motion support for accessibility
+   - No janky animations on low-end devices
+
+### Architecture Improvements
+1. **Component Architecture**
+   - Proper separation of concerns (presentation vs logic)
+   - Custom hooks for reusable logic
+   - Consistent prop naming conventions
+   - No prop drilling beyond 2 levels
+
+2. **State Management**
+   - Clear separation between local and global state
+   - Zustand store properly typed and organized
+   - Optimistic updates for better UX
+   - Proper error boundary implementation
+
+3. **Code Organization**
+   - Clear folder structure following project guidelines
+   - Consistent file naming (PascalCase for components)
+   - Proper barrel exports for cleaner imports
+   - No circular dependencies
+
+### Security & Accessibility
+1. **Security Standards**
+   - Content Security Policy headers configured
+   - XSS protection for user inputs
+   - Secure localStorage usage with encryption for sensitive data
+   - HTTPS enforcement in production
+
+2. **Accessibility Compliance**
+   - WCAG 2.1 AA compliance verified
+   - Proper ARIA labels and roles
+   - Keyboard navigation for all interactive elements
+   - Screen reader tested with NVDA/JAWS
+
+3. **Internationalization Ready**
+   - Text content externalized to language files
+   - RTL language support structure
+   - Date/time formatting properly localized
+   - Number formatting for different locales
+
+### Development Experience
+1. **Developer Productivity**
+   - Hot Module Replacement working correctly
+   - Build time: <10s for development
+   - Clear error messages with stack traces
+   - Proper source maps for debugging
+
+2. **Code Documentation**
+   - JSDoc comments for all public APIs
+   - README files in each major directory
+   - Inline comments for complex logic
+   - Architecture decision records (ADRs)
+
+3. **CI/CD Pipeline Requirements**
+   - Pre-commit hooks for linting and formatting
+   - Automated testing on pull requests
+   - Build verification before merge
+   - Automated deployment to staging
+
+### Monitoring & Analytics
+1. **Error Tracking**
+   - Client-side error logging setup
+   - Performance monitoring integration
+   - User session replay capability
+   - Custom event tracking for key interactions
+
+2. **Performance Monitoring**
+   - Real User Monitoring (RUM) metrics
+   - Core Web Vitals tracking
+   - Custom performance marks
+   - Resource timing analysis
+
+### Maintenance & Scalability
+1. **Code Maintainability**
+   - Cyclomatic complexity: <10 per function
+   - Maximum file length: 300 lines
+   - DRY principle adherence
+   - SOLID principles followed
+
+2. **Scalability Considerations**
+   - Support for 10,000+ cards per deck
+   - Efficient pagination/virtualization
+   - Optimized database queries
+   - CDN integration for static assets
+
+3. **Technical Debt Management**
+   - TODO comments tracked and prioritized
+   - Deprecation warnings for outdated patterns
+   - Regular dependency updates
+   - Code quality metrics dashboard
+
 ## Dependencies
 - react: ^18.3.x
 - react-dom: ^18.3.x

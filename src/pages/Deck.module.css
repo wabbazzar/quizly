@@ -251,6 +251,60 @@
   gap: var(--space-2);
 }
 
+.dragHint {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+/* Cards Management Grid */
+.cardsManagement {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.cardCategory {
+  background: var(--bg-primary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  min-height: 300px;
+  transition: all var(--transition-base);
+}
+
+.categoryTitle {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.categoryIcon {
+  flex-shrink: 0;
+}
+
+.learningSection {
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.03), rgba(74, 144, 226, 0.01));
+}
+
+.masteredSection {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.03), rgba(16, 185, 129, 0.01));
+}
+
+.cardCategory.dragOver {
+  border-color: var(--primary-main);
+  background-color: rgba(74, 144, 226, 0.05);
+  box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1);
+}
+
 .cardsList {
   max-width: 1200px;
   margin: 0 auto;
@@ -269,11 +323,64 @@
   gap: var(--space-4);
   cursor: pointer;
   transition: all var(--transition-base);
+  position: relative;
 }
 
 .cardItem:hover {
   border-color: var(--primary-main);
   box-shadow: var(--shadow-sm);
+}
+
+.cardItem.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+}
+
+.cardDragHandle {
+  position: absolute;
+  left: var(--space-2);
+  color: var(--text-tertiary);
+  cursor: grab;
+  opacity: 0.6;
+  transition: opacity var(--transition-base);
+}
+
+.cardDragHandle:active {
+  cursor: grabbing;
+}
+
+.masteredCard {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(16, 185, 129, 0.02));
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.masterButton,
+.unmasterButton {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.masterButton:hover {
+  background: var(--semantic-success);
+  color: white;
+  border-color: var(--semantic-success);
+}
+
+.unmasterButton:hover {
+  background: var(--primary-main);
+  color: white;
+  border-color: var(--primary-main);
 }
 
 .cardNumber {
@@ -437,6 +544,15 @@
     overflow-x: hidden;
   }
 
+  .cardsManagement {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .cardCategory {
+    min-height: 200px;
+  }
+
   .cardSide {
     flex-direction: column;
     gap: var(--space-1);
@@ -464,6 +580,7 @@
   .cardItem {
     max-width: 100%;
     overflow-x: hidden;
+    padding-left: var(--space-8);
   }
 
   .modalContent {

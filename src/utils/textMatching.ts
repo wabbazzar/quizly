@@ -78,12 +78,51 @@ export class TextMatcher {
     // Remove common punctuation (but keep important ones like apostrophes in contractions)
     normalized = normalized.replace(/[.,;:!?()[\]{}"""''`]/g, '');
 
+    // Normalize pinyin tone marks to base letters
+    normalized = this.normalizePinyinTones(normalized);
+
     // Convert to lowercase unless case sensitive
     if (!preserveCase) {
       normalized = normalized.toLowerCase();
     }
 
     return normalized;
+  }
+
+  /**
+   * Normalize Chinese pinyin tone marks to base letters
+   */
+  private static normalizePinyinTones(text: string): string {
+    // Map of pinyin characters with tone marks to their base forms
+    const pinyinMap: { [key: string]: string } = {
+      // a tones
+      'ā': 'a', 'á': 'a', 'ǎ': 'a', 'à': 'a',
+      // e tones
+      'ē': 'e', 'é': 'e', 'ě': 'e', 'è': 'e',
+      // i tones
+      'ī': 'i', 'í': 'i', 'ǐ': 'i', 'ì': 'i',
+      // o tones
+      'ō': 'o', 'ó': 'o', 'ǒ': 'o', 'ò': 'o',
+      // u tones
+      'ū': 'u', 'ú': 'u', 'ǔ': 'u', 'ù': 'u',
+      // ü tones (u with umlaut)
+      'ǖ': 'ü', 'ǘ': 'ü', 'ǚ': 'ü', 'ǜ': 'ü', 'ü': 'u',
+      // Also normalize the plain ü to u for easier matching
+      'Ā': 'A', 'Á': 'A', 'Ǎ': 'A', 'À': 'A',
+      'Ē': 'E', 'É': 'E', 'Ě': 'E', 'È': 'E',
+      'Ī': 'I', 'Í': 'I', 'Ǐ': 'I', 'Ì': 'I',
+      'Ō': 'O', 'Ó': 'O', 'Ǒ': 'O', 'Ò': 'O',
+      'Ū': 'U', 'Ú': 'U', 'Ǔ': 'U', 'Ù': 'U',
+      'Ǖ': 'Ü', 'Ǘ': 'Ü', 'Ǚ': 'Ü', 'Ǜ': 'Ü', 'Ü': 'U',
+    };
+
+    // Replace each pinyin character with its base form
+    let result = text;
+    for (const [toned, base] of Object.entries(pinyinMap)) {
+      result = result.replace(new RegExp(toned, 'g'), base);
+    }
+
+    return result;
   }
 
   /**

@@ -1,6 +1,21 @@
 import { FC, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Deck, LearnModeSettings } from '@/types';
+import { useDeckStore } from '@/store/deckStore';
+import {
+  TrophyIcon,
+  ClockIcon,
+  SaveIcon,
+  InformationCircleIcon,
+} from '@/components/icons/StatusIcons';
+
+// Info Icon Component for tooltips
+const InfoTooltip: FC<{ text: string }> = ({ text }) => (
+  <span className={styles.infoIcon}>
+    <InformationCircleIcon size={16} />
+    <span className={styles.tooltip}>{text}</span>
+  </span>
+);
 import styles from './LearnSettings.module.css';
 
 interface LearnSettingsProps {
@@ -19,6 +34,7 @@ const LearnSettings: FC<LearnSettingsProps> = ({
   onUpdateSettings,
 }) => {
   const [localSettings, setLocalSettings] = useState<LearnModeSettings>(settings);
+  const { shuffleMasteredCardsBack, toggleShuffleMastered } = useDeckStore();
 
   // Check if deck and deck content exist
   if (!deck || !deck.content || deck.content.length === 0) return null;
@@ -133,6 +149,49 @@ const LearnSettings: FC<LearnSettingsProps> = ({
             </header>
 
             <div className={styles.content}>
+              {/* All Settings Are Now Persistent */}
+              <div className={styles.settingsNotice}>
+                <h3 className={styles.noticeTitle}>
+                  <SaveIcon size={20} className={styles.noticeIcon} />
+                  Settings Persistence
+                </h3>
+                <div className={styles.noticeContent}>
+                  <p>
+                    All settings are automatically saved and will persist across sessions.
+                    Your preferences will be remembered for this deck.
+                  </p>
+                </div>
+              </div>
+
+              {/* Mastery Settings Section */}
+              <section className={styles.section}>
+                <h3 className={styles.sectionTitle}>
+                  <TrophyIcon size={20} className={styles.sectionIcon} />
+                  Mastery Settings
+                </h3>
+                <div className={styles.generalSettings}>
+                  <label className={styles.settingRow}>
+                    <div>
+                      <span>
+                        Shuffle mastered cards back
+                        <InfoTooltip text="Periodically include mastered cards in learning sessions for review" />
+                      </span>
+                    </div>
+                    <input
+                      type="checkbox"
+                      checked={shuffleMasteredCardsBack}
+                      onChange={() => toggleShuffleMastered()}
+                      className={styles.checkbox}
+                    />
+                  </label>
+                  <div className={styles.infoBox}>
+                    <strong>Mastery Threshold:</strong> Cards are marked as mastered after {localSettings.masteryThreshold || 3} correct answers.
+                    <br />
+                    <small>You can manually manage mastered cards from the deck view.</small>
+                  </div>
+                </div>
+              </section>
+
               {/* Quick Presets */}
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}>Quick Presets</h3>
@@ -210,12 +269,20 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                 </div>
               </section>
 
-              {/* General Settings */}
+              {/* Learning Settings */}
               <section className={styles.section}>
-                <h3 className={styles.sectionTitle}>General Settings</h3>
+                <h3 className={styles.sectionTitle}>
+                  <ClockIcon size={20} className={styles.sectionIcon} />
+                  Learning Settings
+                </h3>
                 <div className={styles.generalSettings}>
                   <label className={styles.settingRow}>
-                    <span>Cards per round</span>
+                    <div>
+                      <span>
+                        Cards per round
+                        <InfoTooltip text="Number of cards to practice per session" />
+                      </span>
+                    </div>
                     <input
                       type="number"
                       min="5"
@@ -306,7 +373,12 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                   </label>
 
                   <label className={styles.settingRow}>
-                    <span>Scheduling algorithm</span>
+                    <div>
+                      <span>
+                        Scheduling algorithm
+                        <InfoTooltip text="How cards are scheduled for review" />
+                      </span>
+                    </div>
                     <select
                       value={localSettings.schedulingAlgorithm}
                       onChange={(e) => setLocalSettings({
@@ -319,15 +391,35 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                       <option value="leitner_box">Leitner Box System</option>
                     </select>
                   </label>
+
+                  <label className={styles.settingRow}>
+                    <div>
+                      <span>
+                        Mastery threshold
+                        <InfoTooltip text="Correct answers needed to master a card" />
+                      </span>
+                    </div>
+                    <input
+                      type="number"
+                      min="1"
+                      max="10"
+                      value={localSettings.masteryThreshold || 3}
+                      onChange={(e) => setLocalSettings({
+                        ...localSettings,
+                        masteryThreshold: Math.max(1, Math.min(10, parseInt(e.target.value) || 3))
+                      })}
+                      className={styles.numberInput}
+                    />
+                  </label>
                 </div>
               </section>
 
               {/* Progressive Learning Settings */}
               <section className={styles.section}>
-                <h3 className={styles.sectionTitle}>Progressive Learning</h3>
-                <p className={styles.sectionDescription}>
-                  Control how free text questions follow multiple choice
-                </p>
+                <h3 className={styles.sectionTitle}>
+                  Progressive Learning
+                  <InfoTooltip text="Control how free text questions follow multiple choice" />
+                </h3>
                 <div className={styles.generalSettings}>
                   <label className={styles.settingRow}>
                     <span>Progressive mode</span>
@@ -363,16 +455,6 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                     </label>
                   )}
 
-                  <p className={styles.settingDescription}>
-                    {localSettings.progressiveLearning === 'disabled' &&
-                      "Free text questions won't automatically follow multiple choice."}
-                    {localSettings.progressiveLearning === 'immediate' &&
-                      "Each correctly answered MC will be immediately followed by a free text version."}
-                    {localSettings.progressiveLearning === 'spaced' &&
-                      `Free text will appear after ${localSettings.progressiveLearningSpacing || 3} other questions.`}
-                    {localSettings.progressiveLearning === 'random' &&
-                      "30% chance of getting a free text follow-up after correct MC."}
-                  </p>
                 </div>
               </section>
             </div>

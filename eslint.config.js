@@ -37,6 +37,6 @@ export default tseslint.config(
       '@typescript-eslint/no-explicit-any': 'error',
     },
     files: ['**/*.{ts,tsx,js,jsx}'],
-    ignores: ['dist', 'node_modules', 'vite.config.ts', '*.config.js'],
+    ignores: ['dist', 'node_modules', 'vite.config.ts', '*.config.js', 'dev-dist/**', 'public/sw.js'],
   }
 );
