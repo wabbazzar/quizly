@@ -320,27 +320,38 @@ const LearnContainer: FC<LearnContainerProps> = ({
     setFeedback(undefined);
 
     if (!questionGenerator.hasNext) {
-      // Session complete - use unique card counts
-      const uniqueCardsAttempted = new Set([...masteredCardIndices, ...strugglingCardIndices]).size;
-      const correctCount = masteredCardIndices.size;
-      const incorrectCount = strugglingCardIndices.size;
+      // Session complete - properly track cards that were actually reviewed
+      // Get all unique cards that were actually shown in questions (not just in the round)
+      const reviewedCards = new Set(questionGenerator.questions.map(q => q.cardIndex));
+      const uniqueCardsAttempted = reviewedCards.size;
 
-      // Calculate accuracy based on unique cards, not questions
+      // Ensure we only count cards that were actually reviewed
+      const actualMasteredCards = new Set(
+        Array.from(masteredCardIndices).filter(idx => reviewedCards.has(idx))
+      );
+      const actualStrugglingCards = new Set(
+        Array.from(strugglingCardIndices).filter(idx => reviewedCards.has(idx))
+      );
+
+      const correctCount = actualMasteredCards.size;
+      const incorrectCount = actualStrugglingCards.size;
+
+      // Calculate accuracy based on unique cards that were reviewed
       const accuracy = uniqueCardsAttempted > 0
         ? (correctCount / uniqueCardsAttempted) * 100
         : 0;
 
       const results: LearnSessionResults = {
         deckId: deck.id,
-        totalQuestions: uniqueCardsAttempted, // Use unique cards count
+        totalQuestions: uniqueCardsAttempted, // Use unique cards that were reviewed
         correctAnswers: correctCount,
         incorrectAnswers: incorrectCount,
         accuracy,
         averageResponseTime: 0, // Will be calculated properly in Phase 4
         maxStreak: sessionState.maxStreak,
         duration: Date.now() - sessionState.startTime,
-        masteredCards: Array.from(masteredCardIndices),
-        strugglingCards: Array.from(strugglingCardIndices),
+        masteredCards: Array.from(actualMasteredCards),
+        strugglingCards: Array.from(actualStrugglingCards),
       };
 
       onComplete(results);

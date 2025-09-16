@@ -241,34 +241,52 @@ const Deck: FC = () => {
             <h3 className={styles.modalTitle}>Card Details</h3>
             <div className={styles.modalCard}>
               <div className={styles.modalSide}>
-                <h4>Side A (Front)</h4>
+                <h4>{currentDeck?.metadata?.side_labels?.side_a ?
+                  currentDeck.metadata.side_labels.side_a.charAt(0).toUpperCase() +
+                  currentDeck.metadata.side_labels.side_a.slice(1) :
+                  'Side A (Front)'}</h4>
                 <p>{selectedCard.side_a}</p>
               </div>
               <div className={styles.modalSide}>
-                <h4>Side B (Back)</h4>
+                <h4>{currentDeck?.metadata?.side_labels?.side_b ?
+                  currentDeck.metadata.side_labels.side_b.charAt(0).toUpperCase() +
+                  currentDeck.metadata.side_labels.side_b.slice(1) :
+                  'Side B (Back)'}</h4>
                 <p>{selectedCard.side_b}</p>
               </div>
               {selectedCard.side_c && (
                 <div className={styles.modalSide}>
-                  <h4>Side C (Extra)</h4>
+                  <h4>{currentDeck?.metadata?.side_labels?.side_c ?
+                    currentDeck.metadata.side_labels.side_c.charAt(0).toUpperCase() +
+                    currentDeck.metadata.side_labels.side_c.slice(1) :
+                    'Side C (Extra)'}</h4>
                   <p>{selectedCard.side_c}</p>
                 </div>
               )}
               {selectedCard.side_d && (
                 <div className={styles.modalSide}>
-                  <h4>Side D</h4>
+                  <h4>{currentDeck?.metadata?.side_labels?.side_d ?
+                    currentDeck.metadata.side_labels.side_d.charAt(0).toUpperCase() +
+                    currentDeck.metadata.side_labels.side_d.slice(1) :
+                    'Side D'}</h4>
                   <p>{selectedCard.side_d}</p>
                 </div>
               )}
               {selectedCard.side_e && (
                 <div className={styles.modalSide}>
-                  <h4>Side E</h4>
+                  <h4>{currentDeck?.metadata?.side_labels?.side_e ?
+                    currentDeck.metadata.side_labels.side_e.charAt(0).toUpperCase() +
+                    currentDeck.metadata.side_labels.side_e.slice(1) :
+                    'Side E'}</h4>
                   <p>{selectedCard.side_e}</p>
                 </div>
               )}
               {selectedCard.side_f && (
                 <div className={styles.modalSide}>
-                  <h4>Side F</h4>
+                  <h4>{currentDeck?.metadata?.side_labels?.side_f ?
+                    currentDeck.metadata.side_labels.side_f.charAt(0).toUpperCase() +
+                    currentDeck.metadata.side_labels.side_f.slice(1) :
+                    'Side F'}</h4>
                   <p>{selectedCard.side_f}</p>
                 </div>
               )}

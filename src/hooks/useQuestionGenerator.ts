@@ -84,19 +84,47 @@ export const useQuestionGenerator = (
     if (progressiveLearning === 'disabled') return false;
 
     if (progressiveLearning === 'immediate') {
-      // Only add follow-up if we haven't already asked a free text for this card
+      // Immediate mode should still respect spacing settings
+      // Only add follow-up if we haven't already asked for this card AND respect spacing
       const count = cardQuestionCounts.get(cardIndex) || 0;
-      return count < 2; // Allow 1 MC + 1 FT max per card
+
+      // For immediate mode with spacing, we ensure there's a gap
+      if (minSpacing > 1) {
+        // Must have at least (minSpacing - 1) other questions in between
+        const otherQuestionsSince = currentQuestionIndex -
+          questions.slice(0, currentQuestionIndex).reverse().findIndex(q => q.cardIndex === cardIndex);
+
+        return count < 2 && otherQuestionsSince >= minSpacing;
+      }
+
+      // If spacing is 1 or not set, allow immediate follow-up
+      return count < 2;
     }
 
     if (progressiveLearning === 'spaced') {
-      // Check if there's sufficient spacing since last question for this card
-      const questionsSinceCard = questions
-        .slice(Math.max(0, currentQuestionIndex - minSpacing), currentQuestionIndex)
-        .filter(q => q.cardIndex === cardIndex).length;
+      // For spaced mode, we need proper spacing between MC and FT for the same card
+      // This is called right after an MC question is answered correctly
 
-      // Only add if we haven't seen this card recently
-      return questionsSinceCard === 0;
+      // Find the most recent question for this card (should be the current MC question)
+      let lastCardQuestionIndex = -1;
+      for (let i = currentQuestionIndex; i >= 0; i--) {
+        if (questions[i].cardIndex === cardIndex && !questions[i].isFollowUp) {
+          lastCardQuestionIndex = i;
+          break;
+        }
+      }
+
+      // If we just answered this card's MC question (it's at currentQuestionIndex)
+      if (lastCardQuestionIndex === currentQuestionIndex) {
+        // Don't add follow-up immediately - need spacing in spaced mode
+        return false;
+      }
+
+      // Check if enough questions have passed since we last saw this card
+      const questionsSince = currentQuestionIndex - lastCardQuestionIndex;
+
+      // Only add follow-up if we have proper spacing
+      return questionsSince >= minSpacing;
     }
 
     if (progressiveLearning === 'random') {

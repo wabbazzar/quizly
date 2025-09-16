@@ -24,9 +24,6 @@
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  margin: 0;
-  right: auto;
-  bottom: auto;
 }
 
 .header {
@@ -280,6 +277,20 @@
 .saveButton:focus-visible {
   outline: 2px solid var(--primary-main);
   outline-offset: 2px;
+}
+
+/* Desktop-first: ensure centering is explicit */
+@media (min-width: 641px) {
+  .modal {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 90% !important;
+    max-width: 600px !important;
+    height: auto !important;
+    border-radius: var(--radius-xl) !important;
+  }
 }
 
 /* Dark mode support */

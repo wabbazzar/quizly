@@ -1,6 +1,7 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { LearnSessionResults } from '@/types';
+import { motion } from 'framer-motion';
+import { LearnSessionResults, Card } from '@/types';
 import { useDeckStore } from '@/store/deckStore';
 import ReviewCard from '@/components/cards/ReviewCard';
 import styles from './Results.module.css';
@@ -10,6 +11,8 @@ const Results: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { currentDeck, loadDeck } = useDeckStore();
+  const [selectedCard, setSelectedCard] = useState<Card | null>(null);
+  const [showCardModal, setShowCardModal] = useState(false);
 
   // Get results from navigation state
   const results = location.state?.results as LearnSessionResults | undefined;
@@ -79,6 +82,16 @@ const Results: FC = () => {
 
   const handleBackToHome = () => {
     navigate('/');
+  };
+
+  const handleCardClick = (card: Card) => {
+    setSelectedCard(card);
+    setShowCardModal(true);
+  };
+
+  const closeCardModal = () => {
+    setShowCardModal(false);
+    setTimeout(() => setSelectedCard(null), 300);
   };
 
   return (
@@ -190,17 +203,98 @@ const Results: FC = () => {
                 const card = currentDeck.content[cardIndex];
                 if (!card) return null;
                 return (
-                  <ReviewCard
+                  <div
                     key={cardIndex}
-                    card={card}
-                    frontSides={['side_a']}
-                    backSides={['side_b']}
-                    showBothSides={true}
-                  />
+                    onClick={() => handleCardClick(card)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <ReviewCard
+                      card={card}
+                      frontSides={['side_a']}
+                      backSides={['side_b']}
+                      showBothSides={true}
+                    />
+                  </div>
                 );
               })}
             </div>
           </div>
+        )}
+
+        {/* Card Modal */}
+        {showCardModal && selectedCard && (
+          <motion.div
+            className={styles.modalOverlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closeCardModal}
+          >
+            <motion.div
+              className={styles.modalContent}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button className={styles.closeButton} onClick={closeCardModal}>
+                ×
+              </button>
+              <h3 className={styles.modalTitle}>Card Details</h3>
+              <div className={styles.modalCard}>
+                <div className={styles.modalSide}>
+                  <h4>{currentDeck?.metadata?.side_labels?.side_a ?
+                    currentDeck.metadata.side_labels.side_a.charAt(0).toUpperCase() +
+                    currentDeck.metadata.side_labels.side_a.slice(1) :
+                    'Side A (Front)'}</h4>
+                  <p>{selectedCard.side_a}</p>
+                </div>
+                <div className={styles.modalSide}>
+                  <h4>{currentDeck?.metadata?.side_labels?.side_b ?
+                    currentDeck.metadata.side_labels.side_b.charAt(0).toUpperCase() +
+                    currentDeck.metadata.side_labels.side_b.slice(1) :
+                    'Side B (Back)'}</h4>
+                  <p>{selectedCard.side_b}</p>
+                </div>
+                {selectedCard.side_c && (
+                  <div className={styles.modalSide}>
+                    <h4>{currentDeck?.metadata?.side_labels?.side_c ?
+                      currentDeck.metadata.side_labels.side_c.charAt(0).toUpperCase() +
+                      currentDeck.metadata.side_labels.side_c.slice(1) :
+                      'Side C (Extra)'}</h4>
+                    <p>{selectedCard.side_c}</p>
+                  </div>
+                )}
+                {selectedCard.side_d && (
+                  <div className={styles.modalSide}>
+                    <h4>{currentDeck?.metadata?.side_labels?.side_d ?
+                      currentDeck.metadata.side_labels.side_d.charAt(0).toUpperCase() +
+                      currentDeck.metadata.side_labels.side_d.slice(1) :
+                      'Side D'}</h4>
+                    <p>{selectedCard.side_d}</p>
+                  </div>
+                )}
+                {selectedCard.side_e && (
+                  <div className={styles.modalSide}>
+                    <h4>{currentDeck?.metadata?.side_labels?.side_e ?
+                      currentDeck.metadata.side_labels.side_e.charAt(0).toUpperCase() +
+                      currentDeck.metadata.side_labels.side_e.slice(1) :
+                      'Side E'}</h4>
+                    <p>{selectedCard.side_e}</p>
+                  </div>
+                )}
+                {selectedCard.side_f && (
+                  <div className={styles.modalSide}>
+                    <h4>{currentDeck?.metadata?.side_labels?.side_f ?
+                      currentDeck.metadata.side_labels.side_f.charAt(0).toUpperCase() +
+                      currentDeck.metadata.side_labels.side_f.slice(1) :
+                      'Side F'}</h4>
+                    <p>{selectedCard.side_f}</p>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
         )}
       </div>
     </div>

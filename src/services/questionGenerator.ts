@@ -11,8 +11,8 @@ export class QuestionGenerator {
     const questions: Question[] = [];
     const usedCardIndices = new Set<number>();
 
-    cards.forEach((card, index) => {
-      if (options.excludeCards?.has(index)) {
+    cards.forEach((card) => {
+      if (options.excludeCards?.has(card.idx)) {
         return;
       }
 
@@ -26,17 +26,17 @@ export class QuestionGenerator {
           card,
           cards,
           { front: options.frontSides, back: options.backSides },
-          index
+          card.idx  // Use card's original index
         ));
       } else {
         questions.push(this.generateFreeText(
           card,
           { front: options.frontSides, back: options.backSides },
-          index
+          card.idx  // Use card's original index
         ));
       }
 
-      usedCardIndices.add(index);
+      usedCardIndices.add(card.idx);
     });
 
     return this.shuffleQuestions(questions, options.difficulty);
@@ -107,12 +107,13 @@ export class QuestionGenerator {
     allCards.forEach((card, index) => {
       if (index === excludeIndex) return;
 
-      answerSides.forEach(side => {
-        const value = (card as any)[side];
-        if (value && value !== correctAnswer && !potentialDistractors.includes(value)) {
-          potentialDistractors.push(value);
-        }
-      });
+      // Build the answer text the same way as the correct answer
+      // This ensures all options (correct and distractors) use the same format
+      const distractor = this.buildAnswerText(card, answerSides);
+
+      if (distractor && distractor !== correctAnswer && !potentialDistractors.includes(distractor)) {
+        potentialDistractors.push(distractor);
+      }
     });
 
     // Select 3 distractors, prioritizing semantic similarity

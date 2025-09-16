@@ -63,8 +63,8 @@ export const FreeTextInput: FC<FreeTextInputProps> = memo(({
           onKeyDown={handleKeyDown}
           className={cn(
             styles.textInput,
-            showFeedback && feedback?.isCorrect && styles.correct,
-            showFeedback && !feedback?.isCorrect && styles.incorrect,
+            showFeedback && feedback?.isCorrect === true && styles.correct,
+            showFeedback && hasSubmitted && (feedback === undefined || feedback?.isCorrect === false) && styles.incorrect,
             disabled && styles.disabled
           )}
           placeholder="Type your answer..."
@@ -90,9 +90,9 @@ export const FreeTextInput: FC<FreeTextInputProps> = memo(({
         </button>
       </div>
 
-      {showFeedback && (
+      {showFeedback && hasSubmitted && (
         <div id="feedback-message" className={styles.feedbackWrapper}>
-          {!feedback?.isCorrect && (
+          {(feedback === undefined || feedback?.isCorrect === false) && (
             <div className={styles.overrideSection}>
               <p className={styles.overrideText}>
                 Think your answer was correct?

@@ -284,3 +284,110 @@
     max-height: 300px;
   }
 }
+
+/* Card Details Modal */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--space-4);
+}
+
+.modalContent {
+  background: var(--neutral-white);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.closeButton {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  background: none;
+  border: none;
+  font-size: var(--text-3xl);
+  color: var(--neutral-gray-500);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  transition: all 0.2s;
+}
+
+.closeButton:hover {
+  background: var(--neutral-gray-100);
+  color: var(--neutral-gray-700);
+}
+
+.modalTitle {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--neutral-gray-800);
+  margin-bottom: var(--space-6);
+}
+
+.modalCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.modalSide {
+  padding: var(--space-4);
+  background: var(--neutral-gray-50);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--neutral-gray-200);
+}
+
+.modalSide h4 {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--neutral-gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2);
+}
+
+.modalSide p {
+  font-size: var(--text-lg);
+  color: var(--neutral-gray-800);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Mobile adjustments for modal */
+@media (max-width: 640px) {
+  .modalContent {
+    padding: var(--space-4);
+    max-height: 90vh;
+  }
+
+  .modalTitle {
+    font-size: var(--text-xl);
+  }
+
+  .modalSide {
+    padding: var(--space-3);
+  }
+
+  .modalSide p {
+    font-size: var(--text-base);
+  }
+}
