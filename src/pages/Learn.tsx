@@ -173,6 +173,7 @@ const Learn: FC = () => {
         onExit={handleExit}
         onOpenSettings={() => setShowSettings(true)}
         deckId={deckId}
+        allDeckCards={currentDeck.content}
       />
       <LearnSettings
         visible={showSettings}

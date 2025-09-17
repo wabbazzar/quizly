@@ -17,6 +17,8 @@ interface LearnContainerProps {
   onExit: () => void;
   onOpenSettings: () => void;
   deckId?: string;
+  // Full deck cards (unfiltered) for distractor generation pool
+  allDeckCards?: Card[];
 }
 
 const LearnContainer: FC<LearnContainerProps> = ({
@@ -27,6 +29,7 @@ const LearnContainer: FC<LearnContainerProps> = ({
   onExit,
   onOpenSettings,
   deckId,
+  allDeckCards,
 }) => {
   // Track settings changes to trigger re-initialization
   const [lastSettingsKey, setLastSettingsKey] = useState(() => JSON.stringify(settings));
@@ -159,7 +162,8 @@ const LearnContainer: FC<LearnContainerProps> = ({
       const roundCards = cards.slice(0, settings.cardsPerRound);
 
       // Generate questions using the new generator
-      questionGenerator.generateRound(roundCards);
+      // Use the full unfiltered deck for distractor selection when provided
+      questionGenerator.generateRound(roundCards, allDeckCards || deck.content);
 
       setSessionState(prev => ({
         ...prev,

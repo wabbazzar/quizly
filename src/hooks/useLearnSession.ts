@@ -10,6 +10,7 @@ import {
 import { LearnSessionProgress } from '@/components/modes/learn/LearnProgress';
 import { QuestionGenerator } from '@/services/questionGenerator';
 import { useCardScheduler } from './useCardScheduler';
+import { useCardMasteryStore } from '@/store/cardMasteryStore';
 
 interface LearnSessionOptions {
   cardsPerRound: number;
@@ -23,6 +24,7 @@ export const useLearnSession = (
   deck: Deck,
   options: LearnSessionOptions
 ) => {
+  const { getMasteredCards } = useCardMasteryStore();
   const [sessionState, setSessionState] = useState<LearnSessionState>({
     currentQuestion: null,
     questionIndex: 0,
@@ -65,14 +67,22 @@ export const useLearnSession = (
   const startRound = useCallback((cards: Card[]) => {
     const roundCards = cards.slice(0, options.cardsPerRound);
 
+    // Get mastered cards for the current deck
+    const masteredCardIndices = getMasteredCards(deck.id);
+
     // Generate questions from cards - start with mostly multiple choice
-    const newQuestions = QuestionGenerator.generateQuestions(roundCards, {
-      questionTypes: options.questionTypes,
-      frontSides: ['side_a'],
-      backSides: ['side_b'],
-      difficulty: 1,
-      forceMultipleChoice: options.progressiveLearning, // Force MC if progressive learning is on
-    });
+    const newQuestions = QuestionGenerator.generateQuestions(
+      roundCards,
+      {
+        questionTypes: options.questionTypes,
+        frontSides: ['side_a'],
+        backSides: ['side_b'],
+        difficulty: 1,
+        forceMultipleChoice: options.progressiveLearning, // Force MC if progressive learning is on
+      },
+      masteredCardIndices,
+      cards  // Pass all cards for distractor selection
+    );
 
     setQuestions(newQuestions);
     setSessionState(prev => ({
@@ -90,7 +100,7 @@ export const useLearnSession = (
     }));
 
     setIsComplete(false);
-  }, [options]);
+  }, [options, deck.id, getMasteredCards]);
 
   // Answer current question
   const answerQuestion = useCallback((

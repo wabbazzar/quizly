@@ -6,7 +6,9 @@ export class QuestionGenerator {
    */
   static generateQuestions(
     cards: Card[],
-    options: QuestionGeneratorOptions
+    options: QuestionGeneratorOptions,
+    masteredCardIndices?: number[],
+    allDeckCards?: Card[]
   ): Question[] {
     const questions: Question[] = [];
     const usedCardIndices = new Set<number>();
@@ -24,9 +26,10 @@ export class QuestionGenerator {
       if (questionType === 'multiple_choice') {
         questions.push(this.generateMultipleChoice(
           card,
-          cards,
+          allDeckCards || cards,  // Use all deck cards if available, otherwise use round cards
           { front: options.frontSides, back: options.backSides },
-          card.idx  // Use card's original index
+          card.idx,  // Use card's original index
+          masteredCardIndices
         ));
       } else {
         questions.push(this.generateFreeText(
@@ -49,11 +52,12 @@ export class QuestionGenerator {
     card: Card,
     allCards: Card[],
     sides: { front: string[]; back: string[] },
-    cardIndex: number
+    cardIndex: number,
+    masteredCardIndices?: number[]
   ): Question {
     const questionText = this.buildQuestionText(card, sides.front);
     const correctAnswer = this.buildAnswerText(card, sides.back);
-    const distractors = this.generateDistractors(correctAnswer, allCards, sides.back, cardIndex);
+    const distractors = this.generateDistractors(correctAnswer, allCards, sides.back, cardIndex, masteredCardIndices);
 
     return {
       id: `mc_${card.idx}_${Date.now()}`,
@@ -93,61 +97,111 @@ export class QuestionGenerator {
 
   /**
    * Generate distractor options for multiple choice questions
+   * Prioritizes non-mastered cards as distractors, falls back to mastered cards if needed
    */
   static generateDistractors(
     correctAnswer: string,
     allCards: Card[],
     answerSides: string[],
-    excludeIndex: number
+    excludeIndex: number,
+    masteredCardIndices?: number[]
   ): string[] {
     const distractors: string[] = [];
-    const potentialDistractors: string[] = [];
+    const nonMasteredDistractors: string[] = [];
+    const masteredDistractors: string[] = [];
+    const masteredSet = new Set(masteredCardIndices || []);
 
-    // Collect potential distractors from other cards
-    allCards.forEach((card, index) => {
-      if (index === excludeIndex) return;
+    // Collect potential distractors from other cards, separating by mastery status
+    allCards.forEach((card) => {
+      if (card.idx === excludeIndex) return;
 
       // Build the answer text the same way as the correct answer
       // This ensures all options (correct and distractors) use the same format
       const distractor = this.buildAnswerText(card, answerSides);
 
-      if (distractor && distractor !== correctAnswer && !potentialDistractors.includes(distractor)) {
-        potentialDistractors.push(distractor);
+      if (distractor && distractor !== correctAnswer) {
+        if (masteredSet.has(card.idx)) {
+          if (!masteredDistractors.includes(distractor)) {
+            masteredDistractors.push(distractor);
+          }
+        } else {
+          if (!nonMasteredDistractors.includes(distractor)) {
+            nonMasteredDistractors.push(distractor);
+          }
+        }
       }
     });
 
-    // Select 3 distractors, prioritizing semantic similarity
-    const similarityScores = potentialDistractors.map(distractor => ({
-      text: distractor,
-      similarity: this.calculateSimilarity(correctAnswer, distractor),
-    }));
+    // Debug logging
+    console.log('Distractor generation debug:', {
+      correctAnswer,
+      excludeIndex,
+      totalCardsProvided: allCards.length,
+      allCardIndices: allCards.map(c => c.idx),
+      masteredCardIndices: masteredCardIndices?.slice(0, 10),
+      nonMasteredCount: nonMasteredDistractors.length,
+      masteredCount: masteredDistractors.length,
+      nonMasteredDistractors: nonMasteredDistractors.slice(0, 5),
+      masteredDistractors: masteredDistractors.slice(0, 5),
+      // Check which cards are in both sets
+      cardsInBothSets: allCards.filter(c => masteredCardIndices?.includes(c.idx)).map(c => c.idx)
+    });
 
-    // Sort by similarity to get a mix of similar and different options
-    similarityScores.sort((a, b) => b.similarity - a.similarity);
+    // First, try to use only non-mastered distractors
+    const primaryPool = nonMasteredDistractors.length > 0 ? nonMasteredDistractors : [];
+    const fallbackPool = masteredDistractors;
 
-    // Take 1 similar, 1 medium, 1 different (if available)
-    if (similarityScores.length > 0) {
-      const indices = [
-        0, // Most similar
-        Math.floor(similarityScores.length / 2), // Medium similarity
-        similarityScores.length - 1, // Least similar
-      ];
+    // Helper function to select distractors from a pool
+    const selectFromPool = (pool: string[], needed: number): string[] => {
+      const selected: string[] = [];
 
-      indices.forEach(i => {
-        if (i < similarityScores.length && distractors.length < 3) {
-          distractors.push(similarityScores[i].text);
-        }
-      });
-    }
+      if (pool.length === 0) return selected;
 
-    // Fill remaining slots with random options if needed
-    while (distractors.length < 3 && potentialDistractors.length > distractors.length) {
-      const randomDistractor = potentialDistractors[
-        Math.floor(Math.random() * potentialDistractors.length)
-      ];
-      if (!distractors.includes(randomDistractor)) {
-        distractors.push(randomDistractor);
+      // Calculate similarity scores for the pool
+      const scores = pool.map(distractor => ({
+        text: distractor,
+        similarity: this.calculateSimilarity(correctAnswer, distractor),
+      }));
+
+      // Sort by similarity
+      scores.sort((a, b) => b.similarity - a.similarity);
+
+      // Try to get a mix of similar and different options
+      if (scores.length >= needed) {
+        const indices = [
+          0, // Most similar
+          Math.floor(scores.length / 2), // Medium similarity
+          scores.length - 1, // Least similar
+        ];
+
+        indices.forEach(i => {
+          if (i < scores.length && selected.length < needed) {
+            const text = scores[i].text;
+            if (!selected.includes(text)) {
+              selected.push(text);
+            }
+          }
+        });
       }
+
+      // Fill remaining slots randomly from the pool
+      while (selected.length < needed && selected.length < pool.length) {
+        const randomDistractor = pool[Math.floor(Math.random() * pool.length)];
+        if (!selected.includes(randomDistractor)) {
+          selected.push(randomDistractor);
+        }
+      }
+
+      return selected;
+    };
+
+    // Try to get 3 distractors from non-mastered cards first
+    distractors.push(...selectFromPool(primaryPool, 3));
+
+    // If we don't have enough, supplement with mastered cards
+    if (distractors.length < 3) {
+      const remaining = 3 - distractors.length;
+      distractors.push(...selectFromPool(fallbackPool, remaining));
     }
 
     // If still not enough distractors, generate generic ones

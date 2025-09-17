@@ -1,6 +1,7 @@
 import { useState, useCallback, useMemo } from 'react';
 import { Deck, Question, LearnModeSettings, Card } from '@/types';
 import { QuestionGenerator } from '@/services/questionGenerator';
+import { useCardMasteryStore } from '@/store/cardMasteryStore';
 
 interface UseQuestionGeneratorReturn {
   questions: Question[];
@@ -8,37 +9,46 @@ interface UseQuestionGeneratorReturn {
   currentQuestionIndex: number;
   hasNext: boolean;
   nextQuestion: () => void;
-  generateRound: (cards: Card[]) => void;
+  generateRound: (cards: Card[], allDeckCards?: Card[]) => void;
   reset: () => void;
   addFollowUpQuestion: (cardIndex: number, parentQuestionId: string) => void;
   markMCCorrect: (cardIndex: number) => void;
 }
 
 export const useQuestionGenerator = (
-  _deck: Deck,
+  deck: Deck,
   settings: LearnModeSettings
 ): UseQuestionGeneratorReturn => {
+  const { getMasteredCards } = useCardMasteryStore();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [correctMCCards, setCorrectMCCards] = useState<Set<number>>(new Set());
   const [cardQuestionCounts, setCardQuestionCounts] = useState<Map<number, number>>(new Map());
 
-  const generateRound = useCallback((cards: Card[]) => {
-    const newQuestions = QuestionGenerator.generateQuestions(cards, {
-      questionTypes: settings.questionTypes || ['multiple_choice'],
-      frontSides: settings.questionSides || settings.frontSides || ['side_a'],
-      backSides: settings.answerSides || settings.backSides || ['side_b'],
-      difficulty: 1, // Can be adjusted based on user performance
-      excludeCards: new Set(),
-      forceMultipleChoice: false, // Use questionTypeMix setting instead
-      questionTypeMix: settings.questionTypeMix || 'auto',
-    });
+  const generateRound = useCallback((cards: Card[], allDeckCards?: Card[]) => {
+    // Get mastered cards for the current deck
+    const masteredCardIndices = getMasteredCards(deck.id);
+
+    const newQuestions = QuestionGenerator.generateQuestions(
+      cards,
+      {
+        questionTypes: settings.questionTypes || ['multiple_choice'],
+        frontSides: settings.questionSides || settings.frontSides || ['side_a'],
+        backSides: settings.answerSides || settings.backSides || ['side_b'],
+        difficulty: 1, // Can be adjusted based on user performance
+        excludeCards: new Set(),
+        forceMultipleChoice: false, // Use questionTypeMix setting instead
+        questionTypeMix: settings.questionTypeMix || 'auto',
+      },
+      masteredCardIndices,
+      allDeckCards || cards  // Pass all deck cards if provided, otherwise use round cards
+    );
 
     setQuestions(newQuestions);
     setCurrentQuestionIndex(0);
     setCorrectMCCards(new Set());
     setCardQuestionCounts(new Map());
-  }, [settings]);
+  }, [settings, deck.id, getMasteredCards]);
 
   const addFollowUpQuestion = useCallback((cardIndex: number, parentQuestionId: string) => {
     // Only add follow-up if progressive learning is enabled
