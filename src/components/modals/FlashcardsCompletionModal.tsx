@@ -56,6 +56,7 @@ const FlashcardsCompletionModal: FC<FlashcardsCompletionModalProps> = ({
   };
 
   const getRoundMessage = () => {
+    if (!results) return '';
     if (results.roundNumber === 1) {
       return hasMissedCards
         ? `You completed Round ${results.roundNumber} with ${results.incorrectCards} card${results.incorrectCards === 1 ? '' : 's'} to review.`

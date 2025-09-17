@@ -145,6 +145,7 @@ const Deck: FC = () => {
 
     if (section === 'mastered' && !isMastered) {
       // Move to mastered (respect mastery store)
+      if (!currentDeck) return;
       markCardMastered(deckId, draggedIdx, currentDeck.content.length);
       showNotification({
         message: 'Card marked as mastered!',
@@ -172,7 +173,8 @@ const Deck: FC = () => {
     if (isMastered) {
       unmarkCardMastered(deckId, cardIdx);
     } else {
-      markCardMastered(deckId, cardIdx, currentDeck!.content.length);
+      if (!currentDeck) return;
+      markCardMastered(deckId, cardIdx, currentDeck.content.length);
     }
 
     showNotification({
