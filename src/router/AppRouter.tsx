@@ -1,26 +1,105 @@
-import { Routes, Route } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
-import LoadingScreen from '@/components/common/LoadingScreen';
-
-// Lazy load pages for code splitting
-const Home = lazy(() => import('@/pages/Home'));
-const Deck = lazy(() => import('@/pages/Deck'));
-const Flashcards = lazy(() => import('@/pages/Flashcards'));
-const Learn = lazy(() => import('@/pages/Learn'));
-const LearnDemo = lazy(() => import('@/pages/LearnDemo'));
-const Results = lazy(() => import('@/pages/Results'));
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { PageLazyBoundary } from '@/components/common/LazyLoadBoundary';
+import { ErrorBoundary } from '@/components/error/ErrorBoundary';
+import AppErrorPage from '@/pages/AppErrorPage';
+import ErrorPage from '@/pages/ErrorPage';
+import {
+  LazyHome,
+  LazyDeck,
+  LazyFlashcards,
+  LazyLearn,
+  LazyLearnDemo,
+  LazyResults,
+  preloadCriticalComponents,
+} from '@/utils/lazyImports';
 
 export function AppRouter() {
+  const location = useLocation();
+
+  // Preload critical components on router initialization
+  useEffect(() => {
+    preloadCriticalComponents().catch(error => {
+      console.warn('Failed to preload critical components:', error);
+    });
+  }, []);
+
   return (
-    <Suspense fallback={<LoadingScreen />}>
+    <ErrorBoundary
+      level="app"
+      fallback={AppErrorPage}
+      onError={(error, errorInfo) => {
+        console.error('App-level error:', error, errorInfo);
+      }}
+    >
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/deck/:deckId" element={<Deck />} />
-        <Route path="/deck/:deckId/results" element={<Results />} />
-        <Route path="/flashcards/:deckId" element={<Flashcards />} />
-        <Route path="/learn/:deckId" element={<Learn />} />
-        <Route path="/learn-demo" element={<LearnDemo />} />
+        <Route
+          path="/"
+          element={
+            <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
+              <PageLazyBoundary pageName="Home">
+                <LazyHome />
+              </PageLazyBoundary>
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/deck/:deckId"
+          element={
+            <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
+              <PageLazyBoundary pageName="Deck">
+                <LazyDeck />
+              </PageLazyBoundary>
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/deck/:deckId/results"
+          element={
+            <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
+              <PageLazyBoundary pageName="Results">
+                <LazyResults />
+              </PageLazyBoundary>
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/flashcards/:deckId"
+          element={
+            <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
+              <PageLazyBoundary pageName="Flashcards">
+                <LazyFlashcards />
+              </PageLazyBoundary>
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/learn/:deckId"
+          element={
+            <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
+              <PageLazyBoundary pageName="Learn">
+                <LazyLearn />
+              </PageLazyBoundary>
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/learn-demo"
+          element={
+            <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
+              <PageLazyBoundary pageName="Learn Demo">
+                <LazyLearnDemo />
+              </PageLazyBoundary>
+            </ErrorBoundary>
+          }
+        />
+
+        {/* Error handling routes */}
+        <Route path="/error" element={<ErrorPage />} />
+
+        {/* Catch-all route for 404 errors */}
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
-    </Suspense>
+    </ErrorBoundary>
   );
 }

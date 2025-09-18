@@ -1,0 +1,206 @@
+/* Error Fallback Styles */
+
+.errorCard {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+  border: 2px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-xl, 12px);
+  padding: var(--space-8, 2rem);
+  margin: var(--space-4, 1rem);
+  max-width: 600px;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorContent {
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+.errorIcon {
+  margin: 0 auto var(--space-6, 1.5rem);
+  color: var(--semantic-error, #EF4444);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconSvg {
+  width: 64px;
+  height: 64px;
+  color: var(--semantic-error, #EF4444);
+}
+
+.errorTitle {
+  font-size: var(--text-xl, 1.25rem);
+  font-weight: 600;
+  color: var(--text-primary, #1F2937);
+  margin: 0 0 var(--space-4, 1rem);
+  line-height: 1.4;
+}
+
+.errorMessage {
+  font-size: var(--text-base, 1rem);
+  color: var(--text-secondary, #6B7280);
+  margin: 0 0 var(--space-6, 1.5rem);
+  line-height: 1.6;
+}
+
+.errorDetails {
+  margin: var(--space-4, 1rem) 0;
+  text-align: left;
+  background: var(--bg-tertiary, #E5E7EB);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--border-color, #D1D5DB);
+}
+
+.errorDetails summary {
+  padding: var(--space-3, 0.75rem);
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-secondary, #6B7280);
+  user-select: none;
+}
+
+.errorDetails summary:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.errorStack {
+  padding: var(--space-3, 0.75rem);
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--text-primary, #1F2937);
+  background: var(--bg-primary, white);
+  border-top: 1px solid var(--border-color, #D1D5DB);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-x: auto;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.errorId {
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--text-tertiary, #9CA3AF);
+  margin: var(--space-4, 1rem) 0;
+}
+
+.errorId code {
+  background: var(--bg-tertiary, #E5E7EB);
+  padding: var(--space-1, 0.25rem) var(--space-2, 0.5rem);
+  border-radius: var(--radius-sm, 4px);
+  font-family: 'Courier New', monospace;
+  font-size: var(--text-xs, 0.75rem);
+}
+
+.buttonGroup {
+  display: flex;
+  gap: var(--space-3, 0.75rem);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-6, 1.5rem);
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .errorCard {
+    margin: var(--space-2, 0.5rem);
+    padding: var(--space-6, 1.5rem);
+    min-height: 160px;
+  }
+
+  .iconSvg {
+    width: 48px;
+    height: 48px;
+  }
+
+  .errorTitle {
+    font-size: var(--text-lg, 1.125rem);
+  }
+
+  .errorMessage {
+    font-size: var(--text-sm, 0.875rem);
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2, 0.5rem);
+  }
+
+  .buttonGroup > * {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .errorCard {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.08));
+    border-color: rgba(239, 68, 68, 0.3);
+  }
+
+  .errorTitle {
+    color: var(--text-primary-on-dark, white);
+  }
+
+  .errorMessage {
+    color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+  }
+
+  .errorDetails {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .errorDetails summary {
+    color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+  }
+
+  .errorDetails summary:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .errorStack {
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--text-primary-on-dark, white);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .errorId code {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* High contrast support */
+@media (prefers-contrast: high) {
+  .errorCard {
+    border-width: 3px;
+    border-color: var(--semantic-error, #EF4444);
+  }
+
+  .errorTitle {
+    color: var(--semantic-error, #EF4444);
+    font-weight: 700;
+  }
+
+  .errorDetails {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .errorCard {
+    transition: none;
+  }
+
+  .errorDetails summary:hover {
+    transition: none;
+  }
+}
