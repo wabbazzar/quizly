@@ -9,7 +9,6 @@ export const ModeSelector: FC<ModeSelectorProps> = memo(({
 }) => {
   return (
     <section className={styles.modesSection}>
-      <h2 className={styles.sectionTitle}>Choose Your Learning Mode</h2>
       <motion.div
         className={styles.modesGrid}
         initial={{ opacity: 0 }}
