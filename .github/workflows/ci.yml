@@ -1,0 +1,481 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+env:
+  NODE_VERSION: '20'
+  CACHE_VERSION: v1
+
+jobs:
+  # Job 1: Setup and Cache Management
+  setup:
+    name: Setup Dependencies
+    runs-on: ubuntu-latest
+    outputs:
+      cache-hit: ${{ steps.cache.outputs.cache-hit }}
+      node-modules-hash: ${{ steps.hash.outputs.hash }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Generate dependency hash
+        id: hash
+        run: |
+          echo "hash=${{ hashFiles('package-lock.json', 'package.json') }}" >> $GITHUB_OUTPUT
+
+      - name: Cache node modules
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ env.CACHE_VERSION }}-${{ steps.hash.outputs.hash }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.CACHE_VERSION }}-
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci --prefer-offline --no-audit
+
+      - name: Cache TypeScript build
+        uses: actions/cache@v4
+        with:
+          path: |
+            .tsbuildinfo
+            dist
+          key: ${{ runner.os }}-typescript-${{ env.CACHE_VERSION }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-typescript-${{ env.CACHE_VERSION }}-
+
+  # Job 2: Code Quality Checks (Parallel)
+  code-quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    needs: setup
+    strategy:
+      matrix:
+        check: [typescript, eslint, prettier, unused-deps]
+      fail-fast: false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Restore dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ env.CACHE_VERSION }}-${{ needs.setup.outputs.node-modules-hash }}
+
+      - name: TypeScript Check
+        if: matrix.check == 'typescript'
+        run: |
+          npm run type-check
+          echo "✅ TypeScript compilation successful"
+
+      - name: ESLint Check
+        if: matrix.check == 'eslint'
+        run: |
+          npm run lint -- --format=json --output-file=eslint-results.json || true
+          npm run lint
+          echo "✅ ESLint checks passed"
+
+      - name: Prettier Check
+        if: matrix.check == 'prettier'
+        run: |
+          npm run format:check
+          echo "✅ Code formatting is correct"
+
+      - name: Unused Dependencies Check
+        if: matrix.check == 'unused-deps'
+        run: |
+          npx depcheck --ignores="@types/*,vitest,@vitest/*,@playwright/*,@lhci/*"
+          echo "✅ No unused dependencies found"
+
+      - name: Upload ESLint results
+        if: matrix.check == 'eslint' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eslint-results
+          path: eslint-results.json
+
+  # Job 3: Security Scanning (Parallel)
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: setup
+    strategy:
+      matrix:
+        scan: [dependencies, code-analysis]
+      fail-fast: false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Restore dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ env.CACHE_VERSION }}-${{ needs.setup.outputs.node-modules-hash }}
+
+      - name: Security Audit (Dependencies)
+        if: matrix.scan == 'dependencies'
+        run: |
+          npm run security:audit
+          npx audit-ci --moderate
+          echo "✅ No moderate+ security vulnerabilities found"
+
+      - name: CodeQL Analysis Setup
+        if: matrix.scan == 'code-analysis'
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+
+      - name: Perform CodeQL Analysis
+        if: matrix.scan == 'code-analysis'
+        uses: github/codeql-action/analyze@v3
+
+  # Job 4: Unit Tests (Parallel)
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: setup
+    strategy:
+      matrix:
+        test-group: [components, services, utils, stores]
+      fail-fast: false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Restore dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ env.CACHE_VERSION }}-${{ needs.setup.outputs.node-modules-hash }}
+
+      - name: Run Unit Tests
+        run: |
+          npm run test:coverage -- --testPathPattern="__tests__/${{ matrix.test-group }}"
+        env:
+          CI: true
+
+      - name: Upload Coverage
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage/lcov.info
+          flags: ${{ matrix.test-group }}
+          name: ${{ matrix.test-group }}-coverage
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
+
+  # Job 5: Integration Tests
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: [setup, unit-tests]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Restore dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ env.CACHE_VERSION }}-${{ needs.setup.outputs.node-modules-hash }}
+
+      - name: Run Integration Tests
+        run: |
+          npm run test:integration
+        env:
+          CI: true
+
+      - name: Upload Integration Test Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-test-results
+          path: test-results/
+
+  # Job 6: E2E Tests (Multiple Browsers)
+  e2e-tests:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+    needs: [setup, integration-tests]
+    strategy:
+      matrix:
+        browser: [chromium, firefox, webkit]
+      fail-fast: false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Restore dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ env.CACHE_VERSION }}-${{ needs.setup.outputs.node-modules-hash }}
+
+      - name: Install Playwright Browsers
+        run: |
+          npx playwright install ${{ matrix.browser }} --with-deps
+
+      - name: Build Application
+        run: |
+          npm run ci:build
+
+      - name: Start Application Server
+        run: |
+          npm run preview &
+          sleep 10
+        env:
+          CI: true
+
+      - name: Run E2E Tests
+        run: |
+          npx playwright test --project=${{ matrix.browser }}
+        env:
+          CI: true
+
+      - name: Upload E2E Test Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: e2e-results-${{ matrix.browser }}
+          path: |
+            playwright-report/
+            test-results/
+
+  # Job 7: Performance Tests
+  performance-tests:
+    name: Performance Tests
+    runs-on: ubuntu-latest
+    needs: [setup, code-quality]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Restore dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ env.CACHE_VERSION }}-${{ needs.setup.outputs.node-modules-hash }}
+
+      - name: Build Application
+        run: |
+          npm run ci:build
+
+      - name: Start Application Server
+        run: |
+          npm run preview &
+          sleep 10
+
+      - name: Run Lighthouse CI
+        run: |
+          npm run test:performance
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+      - name: Upload Lighthouse Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-results
+          path: .lighthouseci/
+
+  # Job 8: Build Verification (Multiple Targets)
+  build:
+    name: Build Verification
+    runs-on: ubuntu-latest
+    needs: setup
+    strategy:
+      matrix:
+        build-type: [development, production, gh-pages]
+      fail-fast: false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Restore dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ env.CACHE_VERSION }}-${{ needs.setup.outputs.node-modules-hash }}
+
+      - name: Build Application
+        run: |
+          case "${{ matrix.build-type }}" in
+            "development")
+              npm run build
+              ;;
+            "production")
+              NODE_ENV=production npm run build
+              ;;
+            "gh-pages")
+              npm run build:gh-pages
+              ;;
+          esac
+
+      - name: Verify Build Output
+        run: |
+          echo "Verifying build output for ${{ matrix.build-type }}..."
+          if [ ! -d "dist" ]; then
+            echo "❌ Build output directory 'dist' not found"
+            exit 1
+          fi
+          if [ ! -f "dist/index.html" ]; then
+            echo "❌ index.html not found in build output"
+            exit 1
+          fi
+          echo "✅ Build verification successful"
+
+      - name: Bundle Analysis
+        if: matrix.build-type == 'production'
+        run: |
+          npm run build:analyze
+          echo "✅ Bundle analysis completed"
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.build-type }}
+          path: dist/
+
+  # Final Job: Quality Gate Summary
+  quality-gate:
+    name: Quality Gate Summary
+    runs-on: ubuntu-latest
+    needs: [code-quality, security, unit-tests, integration-tests, e2e-tests, performance-tests, build]
+    if: always()
+    steps:
+      - name: Check Quality Gate Status
+        run: |
+          echo "## 🎯 Quality Gate Summary" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+
+          if [[ "${{ needs.code-quality.result }}" == "success" ]]; then
+            echo "| Code Quality | ✅ Passed |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "| Code Quality | ❌ Failed |" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [[ "${{ needs.security.result }}" == "success" ]]; then
+            echo "| Security Scan | ✅ Passed |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "| Security Scan | ❌ Failed |" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [[ "${{ needs.unit-tests.result }}" == "success" ]]; then
+            echo "| Unit Tests | ✅ Passed |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "| Unit Tests | ❌ Failed |" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [[ "${{ needs.integration-tests.result }}" == "success" ]]; then
+            echo "| Integration Tests | ✅ Passed |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "| Integration Tests | ❌ Failed |" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [[ "${{ needs.e2e-tests.result }}" == "success" ]]; then
+            echo "| E2E Tests | ✅ Passed |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "| E2E Tests | ❌ Failed |" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [[ "${{ needs.performance-tests.result }}" == "success" ]]; then
+            echo "| Performance Tests | ✅ Passed |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "| Performance Tests | ❌ Failed |" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [[ "${{ needs.build.result }}" == "success" ]]; then
+            echo "| Build Verification | ✅ Passed |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "| Build Verification | ❌ Failed |" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Fail if any quality gate failed
+        if: |
+          needs.code-quality.result != 'success' ||
+          needs.security.result != 'success' ||
+          needs.unit-tests.result != 'success' ||
+          needs.integration-tests.result != 'success' ||
+          needs.e2e-tests.result != 'success' ||
+          needs.performance-tests.result != 'success' ||
+          needs.build.result != 'success'
+        run: |
+          echo "❌ One or more quality gates failed"
+          exit 1
+
+      - name: Success notification
+        if: success()
+        run: |
+          echo "✅ All quality gates passed successfully!"
+          echo "## 🚀 Ready for Deployment" >> $GITHUB_STEP_SUMMARY
+          echo "All quality checks have passed. The build is ready for deployment." >> $GITHUB_STEP_SUMMARY
