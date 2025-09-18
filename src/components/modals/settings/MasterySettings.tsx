@@ -15,9 +15,16 @@ interface ExtendedSectionProps extends SectionProps {
   onResetMastery?: () => void;
 }
 
-const MasterySettings: FC<ExtendedSectionProps> = ({ settings, onChange, deck, mode = 'flashcards', onResetMastery }) => {
+const MasterySettings: FC<ExtendedSectionProps> = ({
+  settings,
+  onChange,
+  deck,
+  mode = 'flashcards',
+  onResetMastery,
+}) => {
   const [isConfirming, setIsConfirming] = useState(false);
-  const { getMasteredCardsForDeck, shuffleMasteredCardsBack, toggleShuffleMastered } = useDeckStore();
+  const { getMasteredCardsForDeck, shuffleMasteredCardsBack, toggleShuffleMastered } =
+    useDeckStore();
   const masteredCount = deck ? getMasteredCardsForDeck(deck.id).length : 0;
 
   // For deck mode, show mastery management
@@ -44,12 +51,14 @@ const MasterySettings: FC<ExtendedSectionProps> = ({ settings, onChange, deck, m
 
         <div className={styles.resetBox}>
           <p className={styles.resetDescription}>
-            Reset the mastered card list for this deck. This will clear all mastery progress and allow you to restart learning from scratch.
+            Reset the mastered card list for this deck. This will clear all mastery progress and
+            allow you to restart learning from scratch.
           </p>
 
           {masteredCount > 0 && (
             <div className={styles.masteredInfo}>
-              Currently, {masteredCount} card{masteredCount === 1 ? ' is' : 's are'} mastered in this deck.
+              Currently, {masteredCount} card{masteredCount === 1 ? ' is' : 's are'} mastered in
+              this deck.
             </div>
           )}
 
@@ -108,7 +117,12 @@ const MasterySettings: FC<ExtendedSectionProps> = ({ settings, onChange, deck, m
               min="1"
               max="10"
               value={settings.masteryThreshold || 3}
-              onChange={(e) => onChange('masteryThreshold', Math.max(1, Math.min(10, parseInt(e.target.value) || 3)))}
+              onChange={e =>
+                onChange(
+                  'masteryThreshold',
+                  Math.max(1, Math.min(10, parseInt(e.target.value) || 3))
+                )
+              }
               className={styles.numberInput}
             />
           </label>
@@ -129,14 +143,17 @@ const MasterySettings: FC<ExtendedSectionProps> = ({ settings, onChange, deck, m
           </label>
 
           <div className={styles.infoBox}>
-            <strong>How mastery works:</strong> Cards are marked as mastered after {settings.masteryThreshold || 3} correct answers.
-            Once mastered, cards can be managed from the deck view.
+            <strong>How mastery works:</strong> Cards are marked as mastered after{' '}
+            {settings.masteryThreshold || 3} correct answers. Once mastered, cards can be managed
+            from the deck view.
           </div>
 
           {masteredCount > 0 && (
             <div className={styles.masteredStatus}>
               <TrophyIcon size={16} className={styles.statusIcon} />
-              <span>{masteredCount} card{masteredCount === 1 ? '' : 's'} mastered in this deck</span>
+              <span>
+                {masteredCount} card{masteredCount === 1 ? '' : 's'} mastered in this deck
+              </span>
             </div>
           )}
         </div>
@@ -155,7 +172,7 @@ const MasterySettings: FC<ExtendedSectionProps> = ({ settings, onChange, deck, m
             <input
               type="checkbox"
               checked={settings.includeMastered !== false}
-              onChange={(e) => onChange('includeMastered', e.target.checked)}
+              onChange={e => onChange('includeMastered', e.target.checked)}
               className={styles.checkbox}
             />
             <span className={styles.checkboxLabel}>Include mastered cards</span>
@@ -172,7 +189,8 @@ const MasterySettings: FC<ExtendedSectionProps> = ({ settings, onChange, deck, m
           <div className={styles.warningBox}>
             <span className={styles.warningIcon}>ℹ️</span>
             <span className={styles.warningText}>
-              {masteredCount} mastered card{masteredCount === 1 ? '' : 's'} will be excluded from this session
+              {masteredCount} mastered card{masteredCount === 1 ? '' : 's'} will be excluded from
+              this session
             </span>
           </div>
         )}

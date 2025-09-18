@@ -1,6 +1,7 @@
 # Ticket 001: Initial PWA Setup with Flashcards Mode
 
 ## Metadata
+
 - **Status**: In Progress
 - **Priority**: High
 - **Effort**: 15 points (3 phases x 5 points)
@@ -11,17 +12,25 @@
 ## User Stories
 
 ### Primary User Story
-As a language learner, I want to access flashcards on any device through my web browser so that I can study Chinese vocabulary anywhere.
+
+As a language learner, I want to access flashcards on any device through my web
+browser so that I can study Chinese vocabulary anywhere.
 
 ### Secondary User Stories
-- As a user, I want to see all available decks on the home screen so that I can choose what to study.
-- As a user, I want to click/tap or swipe through flashcards intuitively so that I can quickly review vocabulary.
-- As a user, I want to track my progress during a study session so that I know how well I'm doing.
-- As a user, I want to configure which card sides I see so that I can customize my learning experience.
+
+- As a user, I want to see all available decks on the home screen so that I can
+  choose what to study.
+- As a user, I want to click/tap or swipe through flashcards intuitively so that
+  I can quickly review vocabulary.
+- As a user, I want to track my progress during a study session so that I know
+  how well I'm doing.
+- As a user, I want to configure which card sides I see so that I can customize
+  my learning experience.
 
 ## Technical Requirements
 
 ### Functional Requirements
+
 1. Vite setup with React 18 and TypeScript strict mode
 2. Home page displaying deck list with metadata
 3. React Router v6 navigation with URL-based routing
@@ -31,6 +40,7 @@ As a language learner, I want to access flashcards on any device through my web 
 7. Chinese Chapter 9 deck integrated as sample data
 
 ### Non-Functional Requirements
+
 1. Performance: Lighthouse score >90, smooth 60 FPS animations
 2. Accessibility: WCAG AA compliance, full keyboard navigation
 3. Responsive: Mobile-first design working on all screen sizes
@@ -41,6 +51,7 @@ As a language learner, I want to access flashcards on any device through my web 
 ### Phase 1: Core Infrastructure & Routing (5 points) ✅ COMPLETED
 
 **Files to create/modify:**
+
 - `package.json` - Project dependencies and scripts
 - `tsconfig.json` - TypeScript configuration with strict mode
 - `vite.config.ts` - Vite configuration
@@ -52,6 +63,7 @@ As a language learner, I want to access flashcards on any device through my web 
 - `src/store/deckStore.ts` - Zustand store for deck management
 
 **Component Structure:**
+
 ```typescript
 // src/types/index.ts
 interface DeckMetadata {
@@ -61,7 +73,11 @@ interface DeckMetadata {
   available_levels: number[];
   available_sides: number;
   card_count: number;
-  difficulty: 'beginner' | 'intermediate' | 'advanced' | 'beginner_to_intermediate';
+  difficulty:
+    | 'beginner'
+    | 'intermediate'
+    | 'advanced'
+    | 'beginner_to_intermediate';
   tags: string[];
   version: string;
   created_date: string;
@@ -86,6 +102,7 @@ interface Deck {
 ```
 
 **Theme Implementation:**
+
 ```css
 /* src/styles/theme.css */
 
@@ -100,32 +117,32 @@ interface Deck {
 
 :root {
   /* Primary Colors */
-  --primary-main: #4A90E2;
-  --primary-light: #6BA5E9;
-  --primary-dark: #3A7BC8;
+  --primary-main: #4a90e2;
+  --primary-light: #6ba5e9;
+  --primary-dark: #3a7bc8;
 
   /* Secondary Colors */
-  --secondary-main: #50E3C2;
-  --secondary-light: #6FEBD0;
-  --secondary-dark: #3DCBAA;
+  --secondary-main: #50e3c2;
+  --secondary-light: #6febd0;
+  --secondary-dark: #3dcbaa;
 
   /* Neutral Colors */
-  --neutral-white: #FFFFFF;
-  --neutral-gray-100: #F7F8FA;
-  --neutral-gray-200: #E5E7EB;
-  --neutral-gray-300: #D1D5DB;
-  --neutral-gray-400: #9CA3AF;
-  --neutral-gray-500: #6B7280;
-  --neutral-gray-600: #4B5563;
+  --neutral-white: #ffffff;
+  --neutral-gray-100: #f7f8fa;
+  --neutral-gray-200: #e5e7eb;
+  --neutral-gray-300: #d1d5db;
+  --neutral-gray-400: #9ca3af;
+  --neutral-gray-500: #6b7280;
+  --neutral-gray-600: #4b5563;
   --neutral-gray-700: #374151;
-  --neutral-gray-800: #1F2937;
+  --neutral-gray-800: #1f2937;
   --neutral-black: #000000;
 
   /* Semantic Colors */
-  --semantic-success: #10B981;
-  --semantic-warning: #F59E0B;
-  --semantic-error: #EF4444;
-  --semantic-info: #3B82F6;
+  --semantic-success: #10b981;
+  --semantic-warning: #f59e0b;
+  --semantic-error: #ef4444;
+  --semantic-info: #3b82f6;
 
   /* Typography */
   --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -177,6 +194,7 @@ interface Deck {
 ```
 
 **Routing Setup:**
+
 ```typescript
 // src/router/AppRouter.tsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -202,6 +220,7 @@ export function AppRouter() {
 ```
 
 **Implementation steps:**
+
 1. ✅ Initialize Vite project with React TypeScript template
 2. ✅ Install core dependencies (react-router-dom, zustand, framer-motion, etc.)
 3. ✅ Configure TypeScript with strict mode
@@ -210,6 +229,7 @@ export function AppRouter() {
 6. ✅ Create Zustand store for deck management
 
 **Testing:**
+
 ```bash
 npm run type-check
 npm run lint
@@ -222,6 +242,7 @@ npm run build
 ### Phase 2: Home Screen & Deck Management (5 points) ✅ COMPLETED
 
 **Files to create/modify:**
+
 - `src/pages/Home.tsx` - Main deck list page
 - `src/components/cards/DeckCard.tsx` - Individual deck display
 - `src/hooks/useDeckData.ts` - Hook for deck data management
@@ -229,6 +250,7 @@ npm run build
 - `src/store/deckStore.ts` - Update with deck loading logic
 
 **Home Page Implementation:**
+
 ```typescript
 // src/pages/Home.tsx
 import { FC, useEffect } from 'react';
@@ -271,6 +293,7 @@ export const Home: FC = () => {
 ```
 
 **DeckCard Component Design:**
+
 ```typescript
 // src/components/cards/DeckCard.tsx
 import { FC, memo } from 'react';
@@ -333,6 +356,7 @@ export const DeckCard: FC<DeckCardProps> = memo(({ deck, onClick }) => {
 ```
 
 **CSS Module for DeckCard:**
+
 ```css
 /* src/components/cards/DeckCard.module.css */
 .card {
@@ -341,7 +365,9 @@ export const DeckCard: FC<DeckCardProps> = memo(({ deck, onClick }) => {
   box-shadow: var(--shadow-md);
   cursor: pointer;
   position: relative;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .card:hover,
@@ -437,6 +463,7 @@ export const DeckCard: FC<DeckCardProps> = memo(({ deck, onClick }) => {
 ```
 
 **Deck Data Loading System:**
+
 ```typescript
 // src/utils/deckLoader.ts
 import { Deck } from '@/types';
@@ -488,6 +515,7 @@ export const loadAllDecks = async (): Promise<Deck[]> => {
 ```
 
 **Store Integration:**
+
 ```typescript
 // src/store/deckStore.ts
 import { create } from 'zustand';
@@ -522,7 +550,7 @@ export const useDeckStore = create<DeckStore>()(
         } catch (error) {
           set({
             error: 'Failed to load decks',
-            isLoading: false
+            isLoading: false,
           });
         }
       },
@@ -536,7 +564,7 @@ export const useDeckStore = create<DeckStore>()(
         try {
           const deck = JSON.parse(jsonData);
           set(state => ({
-            decks: [...state.decks, deck]
+            decks: [...state.decks, deck],
           }));
         } catch (error) {
           set({ error: 'Failed to import deck' });
@@ -545,7 +573,7 @@ export const useDeckStore = create<DeckStore>()(
     }),
     {
       name: 'deck-store',
-      partialize: (state) => ({
+      partialize: state => ({
         decks: state.decks.map(d => ({
           id: d.id,
           metadata: d.metadata,
@@ -557,6 +585,7 @@ export const useDeckStore = create<DeckStore>()(
 ```
 
 **Implementation steps:**
+
 1. ✅ Create Home page with responsive grid layout
 2. ✅ Build DeckCard component with proper styling
 3. ✅ Set up JSON deck loading system
@@ -565,6 +594,7 @@ export const useDeckStore = create<DeckStore>()(
 6. ✅ Test deck display and navigation
 
 **Testing:**
+
 ```typescript
 describe('Home Page', () => {
   it('should display list of decks', () => {
@@ -586,6 +616,7 @@ describe('Home Page', () => {
 ### Phase 3: Flashcards Mode Implementation (5 points) ⚠️ PARTIALLY COMPLETED
 
 **Files to create/modify:**
+
 - `src/pages/Flashcards.tsx` - Main flashcards page
 - `src/components/cards/FlashCard.tsx` - Flipable flash card
 - `src/components/modes/FlashcardsSettings.tsx` - Settings modal
@@ -594,6 +625,7 @@ describe('Home Page', () => {
 - `src/utils/gestures.ts` - Touch/mouse gesture handlers
 
 **Flashcards Page:**
+
 ```typescript
 // src/pages/Flashcards.tsx
 import { FC, useState } from 'react';
@@ -679,6 +711,7 @@ export const Flashcards: FC = () => {
 ```
 
 **FlashCard Component Design:**
+
 ```typescript
 // src/components/cards/FlashCard.tsx
 import { FC, useState } from 'react';
@@ -775,6 +808,7 @@ export const FlashCard: FC<FlashCardProps> = ({
 ```
 
 **CSS for FlashCard:**
+
 ```css
 /* src/components/cards/FlashCard.module.css */
 .cardContainer {
@@ -859,8 +893,12 @@ export const FlashCard: FC<FlashCardProps> = ({
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Mobile responsive */
@@ -876,6 +914,7 @@ export const FlashCard: FC<FlashCardProps> = ({
 ```
 
 **Progress Counter UI:**
+
 ```css
 /* Part of Flashcards.module.css */
 .progressBar {
@@ -922,7 +961,9 @@ export const FlashCard: FC<FlashCardProps> = ({
   align-items: center;
   justify-content: center;
   font-size: var(--text-xl);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .settingsButton:hover {
@@ -937,6 +978,7 @@ export const FlashCard: FC<FlashCardProps> = ({
 ```
 
 **Flashcards Settings Modal:**
+
 ```typescript
 // src/components/modes/FlashcardsSettings.tsx
 import { FC } from 'react';
@@ -1117,14 +1159,17 @@ export const FlashcardsSettingsModal: FC<FlashcardsSettingsProps> = ({
 ```
 
 **Implementation steps:**
+
 1. ✅ Create Flashcards page with gesture handling
 2. ✅ Implement FlashCard with flip animation (CSS transforms)
-3. ⚠️ Add swipe gesture recognition using Framer Motion (keyboard only, no swipe yet)
+3. ⚠️ Add swipe gesture recognition using Framer Motion (keyboard only, no swipe
+   yet)
 4. ✅ Build settings modal for side configuration
 5. ✅ Implement progress tracking and display (with persistence)
 6. ✅ Add auto-restart with missed cards functionality
 
 **Testing:**
+
 ```typescript
 describe('Flashcards Mode', () => {
   it('should flip card on click', () => {
@@ -1150,6 +1195,7 @@ describe('Flashcards Mode', () => {
 ```
 
 **Browser Testing:**
+
 ```bash
 # Development
 npm run dev
@@ -1168,6 +1214,7 @@ npx lighthouse http://localhost:5173 --view
 ## Additional Implementations (Added 2025-01-22)
 
 ### Completed
+
 1. **PWA Icons and Manifest** ✅
    - Generated all icon sizes from SVG (16x16 to 512x512)
    - Created Web App Manifest with full PWA configuration
@@ -1186,6 +1233,7 @@ npx lighthouse http://localhost:5173 --view
 ## Required Improvements (Added 2025-01-22)
 
 ### High Priority Enhancements
+
 1. **Card-to-Card Animations** ❌
    - Add smooth slide/fade transitions between cards
    - Use Framer Motion for spring animations
@@ -1219,6 +1267,7 @@ npx lighthouse http://localhost:5173 --view
 ## Testing Strategy
 
 ### Unit Tests
+
 - Test file: `src/__tests__/pages/Flashcards.test.tsx`
 - Key scenarios:
   - Card flipping animation
@@ -1229,6 +1278,7 @@ npx lighthouse http://localhost:5173 --view
   - Deck completion and restart
 
 ### Component Tests
+
 ```typescript
 describe('FlashCard Component', () => {
   it('should render correctly', () => {
@@ -1246,11 +1296,13 @@ describe('FlashCard Component', () => {
 ```
 
 ### Integration Tests
+
 - Navigation flow from Home → Deck → Flashcards
 - State persistence with localStorage
 - Zustand store integration
 
 ### E2E Tests (Playwright)
+
 ```typescript
 describe('Flashcards E2E', () => {
   it('should complete full flashcard session', async () => {
@@ -1263,12 +1315,15 @@ describe('Flashcards E2E', () => {
     await page.keyboard.press('ArrowRight');
 
     // Verify progress
-    await expect(page.locator('[data-testid="correct-count"]')).toContainText('1');
+    await expect(page.locator('[data-testid="correct-count"]')).toContainText(
+      '1'
+    );
   });
 });
 ```
 
 ### Performance Tests
+
 - FPS during flip animations: 60 FPS target
 - First Contentful Paint: <1.5s
 - Lighthouse score: >90
@@ -1276,26 +1331,31 @@ describe('Flashcards E2E', () => {
 ## Browser-Specific Considerations
 
 ### Desktop
+
 - Hover states for better UX
 - Keyboard shortcuts prominently displayed
 - Larger touch targets for trackpad users
 
 ### Mobile
+
 - Touch gesture zones clearly defined
 - Swipe indicators for discoverability
 - Responsive card sizing
 
 ### Tablet
+
 - Optimized layout for landscape/portrait
 - Touch and keyboard support
 - Appropriate font sizing
 
 ## Documentation Updates Required
+
 1. `docs/spec.md` - Mark Phase 1 features as implemented
 2. `README.md` - Add setup and run instructions
 3. Component documentation with Storybook
 
 ## Success Criteria
+
 1. App loads in <1.5 seconds
 2. Flashcard animations run at 60 FPS
 3. Keyboard and touch navigation work seamlessly
@@ -1306,6 +1366,7 @@ describe('Flashcards E2E', () => {
 ## Quality Improvement Criteria (Added 2025-09-15)
 
 ### Code Quality Metrics
+
 1. **TypeScript Compliance** ✅
    - Zero TypeScript errors (npm run type-check passes)
    - No use of `any` type except for third-party integrations
@@ -1325,6 +1386,7 @@ describe('Flashcards E2E', () => {
    - Performance regression tests for animations
 
 ### Performance Improvement Targets
+
 1. **Bundle Size Optimization**
    - Initial JS bundle: <150KB (gzipped)
    - CSS bundle: <30KB (gzipped)
@@ -1344,6 +1406,7 @@ describe('Flashcards E2E', () => {
    - No janky animations on low-end devices
 
 ### Architecture Improvements
+
 1. **Component Architecture**
    - Proper separation of concerns (presentation vs logic)
    - Custom hooks for reusable logic
@@ -1363,6 +1426,7 @@ describe('Flashcards E2E', () => {
    - No circular dependencies
 
 ### Security & Accessibility
+
 1. **Security Standards**
    - Content Security Policy headers configured
    - XSS protection for user inputs
@@ -1382,6 +1446,7 @@ describe('Flashcards E2E', () => {
    - Number formatting for different locales
 
 ### Development Experience
+
 1. **Developer Productivity**
    - Hot Module Replacement working correctly
    - Build time: <10s for development
@@ -1401,6 +1466,7 @@ describe('Flashcards E2E', () => {
    - Automated deployment to staging
 
 ### Monitoring & Analytics
+
 1. **Error Tracking**
    - Client-side error logging setup
    - Performance monitoring integration
@@ -1414,6 +1480,7 @@ describe('Flashcards E2E', () => {
    - Resource timing analysis
 
 ### Maintenance & Scalability
+
 1. **Code Maintainability**
    - Cyclomatic complexity: <10 per function
    - Maximum file length: 300 lines
@@ -1433,6 +1500,7 @@ describe('Flashcards E2E', () => {
    - Code quality metrics dashboard
 
 ## Dependencies
+
 - react: ^18.3.x
 - react-dom: ^18.3.x
 - vite: ^5.x
@@ -1444,16 +1512,18 @@ describe('Flashcards E2E', () => {
 - @testing-library/react: ^14.x
 
 ## Risks & Mitigations
-1. **Risk**: Browser compatibility issues
-   **Mitigation**: Test on all major browsers, use autoprefixer
 
-2. **Risk**: Animation performance on older devices
-   **Mitigation**: Use CSS transforms, GPU acceleration, reduce motion option
+1. **Risk**: Browser compatibility issues **Mitigation**: Test on all major
+   browsers, use autoprefixer
 
-3. **Risk**: Touch gesture conflicts on mobile
-   **Mitigation**: Clear gesture zones, visual feedback
+2. **Risk**: Animation performance on older devices **Mitigation**: Use CSS
+   transforms, GPU acceleration, reduce motion option
+
+3. **Risk**: Touch gesture conflicts on mobile **Mitigation**: Clear gesture
+   zones, visual feedback
 
 ## Accessibility Requirements
+
 - Full keyboard navigation with visible focus indicators
 - Screen reader announcements for card content
 - High contrast mode support
@@ -1463,11 +1533,13 @@ describe('Flashcards E2E', () => {
 ## Release & Deployment Guide
 
 ### Build Configuration
+
 - Configure `vite.config.ts` with PWA plugin
 - Set up Web App Manifest
 - Configure Service Worker with Workbox
 
 ### Testing Checklist
+
 - [ ] Unit tests passing
 - [ ] Type checking passes
 - [ ] Linting passes
@@ -1478,6 +1550,7 @@ describe('Flashcards E2E', () => {
 - [ ] Performance profiling complete
 
 ### Release Process
+
 1. Run full test suite
 2. Build production bundle: `npm run build`
 3. Test production build: `npm run preview`
@@ -1485,6 +1558,7 @@ describe('Flashcards E2E', () => {
 5. Test deployed version
 
 ### Rollback Strategy
+
 - Keep previous build artifacts
 - Version deployments
 - Quick revert procedure documented
@@ -1492,6 +1566,7 @@ describe('Flashcards E2E', () => {
 ## PWA Implementation Details
 
 ### Service Worker
+
 ```javascript
 // Basic offline caching with Workbox
 import { precacheAndRoute } from 'workbox-precaching';
@@ -1507,6 +1582,7 @@ registerRoute(
 ```
 
 ### Web App Manifest
+
 ```json
 {
   "name": "Quizly - Flashcard Learning",
@@ -1533,6 +1609,7 @@ registerRoute(
 ```
 
 ### Performance Optimizations
+
 - Code splitting with React.lazy()
 - Image optimization with WebP/AVIF
 - Font subsetting for Chinese characters
@@ -1541,4 +1618,6 @@ registerRoute(
 
 ---
 
-*This ticket establishes the foundation for Quizly as a modern web application with the core infrastructure and first learning mode. Subsequent tickets will add Learn, Match, and Test modes.*
+_This ticket establishes the foundation for Quizly as a modern web application
+with the core infrastructure and first learning mode. Subsequent tickets will
+add Learn, Match, and Test modes._

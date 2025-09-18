@@ -84,27 +84,27 @@ const SideConfiguration: FC<ExtendedSectionProps> = ({ settings, onChange, deck,
       case 'front':
         return {
           title: 'Card Front',
-          description: 'Select which sides appear on the front of the card'
+          description: 'Select which sides appear on the front of the card',
         };
       case 'back':
         return {
           title: 'Card Back',
-          description: 'Select which sides appear on the back of the card'
+          description: 'Select which sides appear on the back of the card',
         };
       case 'question':
         return {
           title: 'Question Sides',
-          description: 'Select which sides to use for questions'
+          description: 'Select which sides to use for questions',
         };
       case 'answer':
         return {
           title: 'Answer Sides',
-          description: 'Select which sides to use for answers'
+          description: 'Select which sides to use for answers',
         };
       default:
         return {
           title: 'Side Configuration',
-          description: 'Select which sides to use'
+          description: 'Select which sides to use',
         };
     }
   };
@@ -131,17 +131,13 @@ const SideConfiguration: FC<ExtendedSectionProps> = ({ settings, onChange, deck,
             whileTap={{ scale: 0.95 }}
           >
             <span className={styles.sideLabel}>{getSideLabel(side)}</span>
-            {selectedSides.includes(side) && (
-              <span className={styles.checkmark}>✓</span>
-            )}
+            {selectedSides.includes(side) && <span className={styles.checkmark}>✓</span>}
           </motion.button>
         ))}
       </div>
 
       {selectedSides.length === 0 && (
-        <div className={styles.warning}>
-          ⚠️ At least one side must be selected
-        </div>
+        <div className={styles.warning}>⚠️ At least one side must be selected</div>
       )}
 
       {error && (

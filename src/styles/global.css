@@ -1,6 +1,8 @@
 /* CSS Reset and Global Styles */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -12,7 +14,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   /* Support for safe areas on iOS */
-  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0)
+    env(safe-area-inset-left, 0);
   /* Prevent horizontal scroll on mobile */
   overflow-x: hidden;
   max-width: 100vw;
@@ -52,7 +55,12 @@ body.no-scroll {
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   font-weight: var(--font-semibold);
   line-height: var(--leading-tight);
@@ -129,7 +137,9 @@ button:disabled {
 }
 
 /* Forms */
-input, textarea, select {
+input,
+textarea,
+select {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
@@ -141,21 +151,28 @@ input, textarea, select {
   transition: border-color var(--transition-fast);
 }
 
-input:focus, textarea:focus, select:focus {
+input:focus,
+textarea:focus,
+select:focus {
   outline: none;
   border-color: var(--primary-main);
   box-shadow: 0 0 0 3px rgb(74 144 226 / 0.1);
 }
 
 /* Lists */
-ul, ol {
+ul,
+ol {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 /* Images */
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
   height: auto;
@@ -222,7 +239,8 @@ table {
 
 /* Responsive spacing utilities */
 .p-safe {
-  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0)
+    env(safe-area-inset-left, 0);
 }
 
 .px-safe {

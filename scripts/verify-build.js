@@ -36,7 +36,7 @@ class BuildVerifier {
     this.checks.push({
       check,
       passed,
-      message
+      message,
     });
 
     if (!passed) {
@@ -70,11 +70,7 @@ class BuildVerifier {
    * Check for essential files
    */
   checkEssentialFiles() {
-    const essentialFiles = [
-      'index.html',
-      'assets',
-      'data'
-    ];
+    const essentialFiles = ['index.html', 'assets', 'data'];
 
     let allFound = true;
 
@@ -82,11 +78,7 @@ class BuildVerifier {
       const filePath = path.join(distPath, file);
       const exists = fs.existsSync(filePath);
 
-      this.logCheck(
-        `Essential file/directory: ${file}`,
-        exists,
-        exists ? 'Found' : 'Missing'
-      );
+      this.logCheck(`Essential file/directory: ${file}`, exists, exists ? 'Found' : 'Missing');
 
       if (!exists) {
         allFound = false;
@@ -100,8 +92,7 @@ class BuildVerifier {
    * Check HTML files
    */
   checkHtmlFiles() {
-    const htmlFiles = fs.readdirSync(distPath)
-      .filter(file => file.endsWith('.html'));
+    const htmlFiles = fs.readdirSync(distPath).filter(file => file.endsWith('.html'));
 
     if (htmlFiles.length === 0) {
       this.logCheck('HTML files present', false, 'No HTML files found');
@@ -168,11 +159,7 @@ class BuildVerifier {
       `Found ${jsFiles.length} JS files`
     );
 
-    this.logCheck(
-      'CSS assets present',
-      cssFiles.length > 0,
-      `Found ${cssFiles.length} CSS files`
-    );
+    this.logCheck('CSS assets present', cssFiles.length > 0, `Found ${cssFiles.length} CSS files`);
 
     // Check for source maps in development
     if (this.buildType === 'development') {
@@ -220,8 +207,8 @@ class BuildVerifier {
     // Bundle size thresholds (in KB)
     const thresholds = {
       js: 200, // 200KB
-      css: 50,  // 50KB
-      total: 300 // 300KB
+      css: 50, // 50KB
+      total: 300, // 300KB
     };
 
     this.logCheck(
@@ -348,7 +335,9 @@ class BuildVerifier {
     const assetsPath = path.join(distPath, 'assets');
     if (fs.existsSync(assetsPath)) {
       const jsFiles = fs.readdirSync(assetsPath).filter(file => file.endsWith('.js'));
-      const hasMinifiedJs = jsFiles.some(file => file.includes('.min.') || !file.includes('.js.map'));
+      const hasMinifiedJs = jsFiles.some(
+        file => file.includes('.min.') || !file.includes('.js.map')
+      );
 
       this.logCheck(
         'JavaScript files minified',
@@ -439,12 +428,15 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const buildType = process.argv[2] || 'production';
   const verifier = new BuildVerifier(buildType);
 
-  verifier.verify().then(success => {
-    process.exit(success ? 0 : 1);
-  }).catch(error => {
-    console.error('❌ Build verification failed:', error);
-    process.exit(1);
-  });
+  verifier
+    .verify()
+    .then(success => {
+      process.exit(success ? 0 : 1);
+    })
+    .catch(error => {
+      console.error('❌ Build verification failed:', error);
+      process.exit(1);
+    });
 }
 
 export default BuildVerifier;

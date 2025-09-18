@@ -3,7 +3,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion, PanInfo, AnimatePresence } from 'framer-motion';
 import { useDeckStore } from '@/store/deckStore';
 import { useCardMasteryStore } from '@/store/cardMasteryStore';
-import { useFlashcardSessionStore, DEFAULT_FRONT_SIDES, DEFAULT_BACK_SIDES } from '@/store/flashcardSessionStore';
+import {
+  useFlashcardSessionStore,
+  DEFAULT_FRONT_SIDES,
+  DEFAULT_BACK_SIDES,
+} from '@/store/flashcardSessionStore';
 import { useProgressStore } from '@/store/progressStore';
 import { FlashcardSessionResults } from '@/types';
 import FlashCard from '@/components/FlashCard';
@@ -19,7 +23,8 @@ const Flashcards: FC = () => {
   const { deckId } = useParams<{ deckId: string }>();
   const navigate = useNavigate();
   const { decks, activeDeck, selectDeck } = useDeckStore();
-  const { getSession, saveSession, startNewRound, startMissedCardsRound, getMissedCardIndices } = useFlashcardSessionStore();
+  const { getSession, saveSession, startNewRound, startMissedCardsRound, getMissedCardIndices } =
+    useFlashcardSessionStore();
   const { updateDeckProgress } = useProgressStore();
   const { updateSettings: updateStoredSettings } = useSettingsStore();
   const isInitialMount = useRef(true);
@@ -38,9 +43,10 @@ const Flashcards: FC = () => {
   const [isMissedCardsRound, setIsMissedCardsRound] = useState(false);
   const [showCompletionModal, setShowCompletionModal] = useState(false);
   const [completionResults, setCompletionResults] = useState<FlashcardSessionResults | null>(null);
-  const [progressionMode, setProgressionMode] = useState<'sequential' | 'shuffle' | 'level'>('shuffle');
+  const [progressionMode, setProgressionMode] = useState<'sequential' | 'shuffle' | 'level'>(
+    'shuffle'
+  );
   const [includeMastered, setIncludeMastered] = useState(true);
-
 
   // Load deck and restore session on mount
   useEffect(() => {
@@ -63,7 +69,8 @@ const Flashcards: FC = () => {
             setProgressionMode(session.progressionMode || 'shuffle');
 
             // Handle includeMastered and card order
-            const sessionIncludeMastered = session.includeMastered !== undefined ? session.includeMastered : true;
+            const sessionIncludeMastered =
+              session.includeMastered !== undefined ? session.includeMastered : true;
             setIncludeMastered(sessionIncludeMastered);
 
             // Validate card order against current mastered cards
@@ -73,13 +80,17 @@ const Flashcards: FC = () => {
 
               if (!sessionIncludeMastered && masteredIndices.length > 0) {
                 // Filter out mastered cards from the order
-                const filteredOrder = session.cardOrder.filter((idx: number) => !masteredIndices.includes(idx));
+                const filteredOrder = session.cardOrder.filter(
+                  (idx: number) => !masteredIndices.includes(idx)
+                );
                 setCardOrder(filteredOrder.length > 0 ? filteredOrder : session.cardOrder);
               } else {
                 setCardOrder(session.cardOrder);
               }
             } else {
-              setCardOrder(session.cardOrder || Array.from({ length: deck.content.length }, (_, i) => i));
+              setCardOrder(
+                session.cardOrder || Array.from({ length: deck.content.length }, (_, i) => i)
+              );
             }
           } else {
             // Initialize new session with shuffled cards (excluding mastered if needed)
@@ -134,48 +145,68 @@ const Flashcards: FC = () => {
         startTime,
         isMissedCardsRound,
         progressionMode,
-        includeMastered
+        includeMastered,
       });
     }
-  }, [deckId, currentCardIndex, progress, frontSides, backSides, saveSession, roundNumber, cardOrder, startTime, isMissedCardsRound, progressionMode, includeMastered]);
+  }, [
+    deckId,
+    currentCardIndex,
+    progress,
+    frontSides,
+    backSides,
+    saveSession,
+    roundNumber,
+    cardOrder,
+    startTime,
+    isMissedCardsRound,
+    progressionMode,
+    includeMastered,
+  ]);
 
   // Helper function to create card order based on progression mode
-  const createCardOrder = useCallback((deck: typeof activeDeck, mode: 'sequential' | 'shuffle' | 'level', excludeMastered: boolean = false): number[] => {
-    if (!deck || !deckId) return [];
+  const createCardOrder = useCallback(
+    (
+      deck: typeof activeDeck,
+      mode: 'sequential' | 'shuffle' | 'level',
+      excludeMastered: boolean = false
+    ): number[] => {
+      if (!deck || !deckId) return [];
 
-    let indices = Array.from({ length: deck.content.length }, (_, i) => i);
+      let indices = Array.from({ length: deck.content.length }, (_, i) => i);
 
-    // Filter out mastered cards if needed
-    if (excludeMastered) {
-      const { getMasteredCards } = useCardMasteryStore.getState();
-      const masteredIndices = getMasteredCards(deckId);
-      indices = indices.filter(i => !masteredIndices.includes(i));
-    }
+      // Filter out mastered cards if needed
+      if (excludeMastered) {
+        const { getMasteredCards } = useCardMasteryStore.getState();
+        const masteredIndices = getMasteredCards(deckId);
+        indices = indices.filter(i => !masteredIndices.includes(i));
+      }
 
-    switch (mode) {
-      case 'sequential':
-        return indices;
+      switch (mode) {
+        case 'sequential':
+          return indices;
 
-      case 'shuffle':
-        // Fisher-Yates shuffle
-        const shuffled = [...indices];
-        for (let i = shuffled.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-        }
-        return shuffled;
+        case 'shuffle':
+          // Fisher-Yates shuffle
+          const shuffled = [...indices];
+          for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+          }
+          return shuffled;
 
-      case 'level':
-        // Sort by level, then by index within each level
-        return indices.sort((a, b) => {
-          const levelDiff = deck.content[a].level - deck.content[b].level;
-          return levelDiff !== 0 ? levelDiff : a - b;
-        });
+        case 'level':
+          // Sort by level, then by index within each level
+          return indices.sort((a, b) => {
+            const levelDiff = deck.content[a].level - deck.content[b].level;
+            return levelDiff !== 0 ? levelDiff : a - b;
+          });
 
-      default:
-        return indices;
-    }
-  }, [deckId]);
+        default:
+          return indices;
+      }
+    },
+    [deckId]
+  );
 
   // Define handleDeckCompletion before handleNext since handleNext depends on it
   const handleDeckCompletion = useCallback(() => {
@@ -191,7 +222,7 @@ const Flashcards: FC = () => {
       roundNumber,
       cardOrder,
       startTime,
-      isMissedCardsRound
+      isMissedCardsRound,
     };
 
     const missedIndices = getMissedCardIndices(session);
@@ -213,7 +244,7 @@ const Flashcards: FC = () => {
       isComplete: incorrectCards === 0,
       missedCardIndices: missedIndices,
       startTime,
-      endTime: Date.now()
+      endTime: Date.now(),
     };
 
     setCompletionResults(results);
@@ -221,15 +252,22 @@ const Flashcards: FC = () => {
 
     // Update progress store with the session results
     if (deckId) {
-      updateDeckProgress(
-        deckId,
-        'flashcards',
-        cardsAnswered,
-        correctCards,
-        cardsAnswered
-      );
+      updateDeckProgress(deckId, 'flashcards', cardsAnswered, correctCards, cardsAnswered);
     }
-  }, [activeDeck, deckId, currentCardIndex, progress, frontSides, backSides, roundNumber, cardOrder, startTime, isMissedCardsRound, getMissedCardIndices, updateDeckProgress]);
+  }, [
+    activeDeck,
+    deckId,
+    currentCardIndex,
+    progress,
+    frontSides,
+    backSides,
+    roundNumber,
+    cardOrder,
+    startTime,
+    isMissedCardsRound,
+    getMissedCardIndices,
+    updateDeckProgress,
+  ]);
 
   const handleNext = useCallback(() => {
     if (!activeDeck) return;
@@ -256,17 +294,20 @@ const Flashcards: FC = () => {
     setIsFlipped(prev => !prev);
   }, []);
 
-  const markCard = useCallback((status: 'correct' | 'incorrect') => {
-    setProgress(prev => ({
-      ...prev,
-      [currentCardIndex]: status
-    }));
-    setSwipeDirection(status === 'correct' ? 'right' : 'left');
-    setTimeout(() => {
-      handleNext();
-      setSwipeDirection(null);
-    }, 400);
-  }, [currentCardIndex, handleNext]);
+  const markCard = useCallback(
+    (status: 'correct' | 'incorrect') => {
+      setProgress(prev => ({
+        ...prev,
+        [currentCardIndex]: status,
+      }));
+      setSwipeDirection(status === 'correct' ? 'right' : 'left');
+      setTimeout(() => {
+        handleNext();
+        setSwipeDirection(null);
+      }, 400);
+    },
+    [currentCardIndex, handleNext]
+  );
 
   const handleContinueWithMissed = useCallback(() => {
     if (!completionResults || !deckId || !activeDeck) return;
@@ -279,7 +320,10 @@ const Flashcards: FC = () => {
       orderedMissedIndices = [...missedIndices];
       for (let i = orderedMissedIndices.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [orderedMissedIndices[i], orderedMissedIndices[j]] = [orderedMissedIndices[j], orderedMissedIndices[i]];
+        [orderedMissedIndices[i], orderedMissedIndices[j]] = [
+          orderedMissedIndices[j],
+          orderedMissedIndices[i],
+        ];
       }
     } else if (progressionMode === 'level') {
       orderedMissedIndices = [...missedIndices].sort((a, b) => {
@@ -326,70 +370,91 @@ const Flashcards: FC = () => {
     navigate(`/deck/${deckId}`);
   }, [navigate, deckId]);
 
-  const handleDragEnd = useCallback((_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    const threshold = 100;
-    if (Math.abs(info.offset.x) > threshold) {
-      if (info.offset.x > 0) {
-        markCard('correct');
-      } else {
-        markCard('incorrect');
+  const handleDragEnd = useCallback(
+    (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+      const threshold = 100;
+      if (Math.abs(info.offset.x) > threshold) {
+        if (info.offset.x > 0) {
+          markCard('correct');
+        } else {
+          markCard('incorrect');
+        }
       }
-    }
-  }, [markCard]);
+    },
+    [markCard]
+  );
 
-  const updateSettings = useCallback((settings: FlashcardsSettings) => {
-    const newFrontSides = settings.frontSides || frontSides;
-    const newBackSides = settings.backSides || backSides;
-    const newProgressionMode = settings.progressionMode || progressionMode;
-    const newIncludeMastered = settings.includeMastered !== undefined ? settings.includeMastered : includeMastered;
+  const updateSettings = useCallback(
+    (settings: FlashcardsSettings) => {
+      const newFrontSides = settings.frontSides || frontSides;
+      const newBackSides = settings.backSides || backSides;
+      const newProgressionMode = settings.progressionMode || progressionMode;
+      const newIncludeMastered =
+        settings.includeMastered !== undefined ? settings.includeMastered : includeMastered;
 
-    setFrontSides(newFrontSides);
-    setBackSides(newBackSides);
-    setIsFlipped(false);
+      setFrontSides(newFrontSides);
+      setBackSides(newBackSides);
+      setIsFlipped(false);
 
-    // Check if we need to reorder cards
-    const shouldReorder = (newProgressionMode !== progressionMode) || (newIncludeMastered !== includeMastered);
+      // Check if we need to reorder cards
+      const shouldReorder =
+        newProgressionMode !== progressionMode || newIncludeMastered !== includeMastered;
 
-    if (shouldReorder && activeDeck && !isMissedCardsRound) {
-      setProgressionMode(newProgressionMode);
-      setIncludeMastered(newIncludeMastered);
+      if (shouldReorder && activeDeck && !isMissedCardsRound) {
+        setProgressionMode(newProgressionMode);
+        setIncludeMastered(newIncludeMastered);
 
-      const newOrder = createCardOrder(activeDeck, newProgressionMode, !newIncludeMastered);
-      setCardOrder(newOrder);
-      // Reset to first card when changing settings
-      setCurrentCardIndex(0);
-      setProgress({});
-    } else {
-      setProgressionMode(newProgressionMode);
-      setIncludeMastered(newIncludeMastered);
-    }
+        const newOrder = createCardOrder(activeDeck, newProgressionMode, !newIncludeMastered);
+        setCardOrder(newOrder);
+        // Reset to first card when changing settings
+        setCurrentCardIndex(0);
+        setProgress({});
+      } else {
+        setProgressionMode(newProgressionMode);
+        setIncludeMastered(newIncludeMastered);
+      }
 
-    // Save settings to store
-    if (deckId) {
-      updateStoredSettings(deckId, 'flashcards', settings);
-    }
-  }, [progressionMode, includeMastered, activeDeck, isMissedCardsRound, createCardOrder, frontSides, backSides, deckId, updateStoredSettings]);
+      // Save settings to store
+      if (deckId) {
+        updateStoredSettings(deckId, 'flashcards', settings);
+      }
+    },
+    [
+      progressionMode,
+      includeMastered,
+      activeDeck,
+      isMissedCardsRound,
+      createCardOrder,
+      frontSides,
+      backSides,
+      deckId,
+      updateStoredSettings,
+    ]
+  );
 
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    switch (e.key) {
-      case ' ':
-        e.preventDefault();
-        handleFlip();
-        break;
-      case 'ArrowRight':
-        handleNext();
-        break;
-      case 'ArrowLeft':
-        handlePrevious();
-        break;
-      case '1':
-        markCard('incorrect');
-        break;
-      case '2':
-        markCard('correct');
-        break;
-    }
-  }, [handleFlip, handleNext, handlePrevious, markCard]);
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      switch (e.key) {
+        case ' ':
+          e.preventDefault();
+          handleFlip();
+          break;
+        case 'ArrowRight':
+          handleNext();
+          break;
+        case 'ArrowLeft':
+          handlePrevious();
+          break;
+        case '1':
+          markCard('incorrect');
+          break;
+        case '2':
+          markCard('correct');
+          break;
+      }
+    },
+    [handleFlip, handleNext, handlePrevious, markCard]
+  );
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -422,16 +487,15 @@ const Flashcards: FC = () => {
         showSettings={true}
         subtitle={[
           isMissedCardsRound ? 'Review' : null,
-          roundNumber > 1 ? `Round ${roundNumber}` : null
-        ].filter(Boolean).join(' ')}
+          roundNumber > 1 ? `Round ${roundNumber}` : null,
+        ]
+          .filter(Boolean)
+          .join(' ')}
       />
 
       <div className={styles.progressSection}>
         <div className={styles.progressBar}>
-          <div
-            className={styles.progressFill}
-            style={{ width: `${progressPercentage}%` }}
-          />
+          <div className={styles.progressFill} style={{ width: `${progressPercentage}%` }} />
         </div>
         <div className={styles.progressStats}>
           <span className={styles.incorrectStat}>✗ {incorrectCount}</span>
@@ -452,41 +516,46 @@ const Flashcards: FC = () => {
             animate={{
               y: 0,
               opacity: 1,
-              x: swipeDirection === 'right' ? window.innerWidth : swipeDirection === 'left' ? -window.innerWidth : 0,
-              rotate: swipeDirection === 'right' ? 20 : swipeDirection === 'left' ? -20 : 0
+              x:
+                swipeDirection === 'right'
+                  ? window.innerWidth
+                  : swipeDirection === 'left'
+                    ? -window.innerWidth
+                    : 0,
+              rotate: swipeDirection === 'right' ? 20 : swipeDirection === 'left' ? -20 : 0,
             }}
             exit={{
               opacity: 0,
-              transition: { duration: 0.2 }
+              transition: { duration: 0.2 },
             }}
             transition={{
               type: 'spring',
               stiffness: 300,
-              damping: 30
+              damping: 30,
             }}
           >
-              <FlashCard
-                card={currentCard}
-                isFlipped={isFlipped}
-                onFlip={handleFlip}
-                frontSides={frontSides}
-                backSides={backSides}
-              />
+            <FlashCard
+              card={currentCard}
+              isFlipped={isFlipped}
+              onFlip={handleFlip}
+              frontSides={frontSides}
+              backSides={backSides}
+            />
 
-              {/* Swipe indicators */}
-              <div
-                className={`${styles.swipeIndicator} ${styles.incorrect}`}
-                style={{ opacity: swipeDirection === 'left' ? 1 : 0 }}
-              >
-                ✗
-              </div>
-              <div
-                className={`${styles.swipeIndicator} ${styles.correct}`}
-                style={{ opacity: swipeDirection === 'right' ? 1 : 0 }}
-              >
-                ✓
-              </div>
-            </motion.div>
+            {/* Swipe indicators */}
+            <div
+              className={`${styles.swipeIndicator} ${styles.incorrect}`}
+              style={{ opacity: swipeDirection === 'left' ? 1 : 0 }}
+            >
+              ✗
+            </div>
+            <div
+              className={`${styles.swipeIndicator} ${styles.correct}`}
+              style={{ opacity: swipeDirection === 'right' ? 1 : 0 }}
+            >
+              ✓
+            </div>
+          </motion.div>
         </AnimatePresence>
       </main>
 
@@ -508,11 +577,7 @@ const Flashcards: FC = () => {
           >
             ✗ Incorrect
           </button>
-          <button
-            className={styles.flipButton}
-            onClick={handleFlip}
-            aria-label="Flip card"
-          >
+          <button className={styles.flipButton} onClick={handleFlip} aria-label="Flip card">
             Flip
           </button>
           <button
@@ -539,17 +604,23 @@ const Flashcards: FC = () => {
         onClose={() => setShowSettings(false)}
         deck={activeDeck}
         mode="flashcards"
-        settings={{
-          frontSides,
-          backSides,
-          progressionMode,
-          includeMastered,
-          enableTimer: false,
-          timerSeconds: 30,
-          enableAudio: false,
-          groupSides: {}
-        } as FlashcardsSettings}
-        onUpdateSettings={updateSettings as (settings: FlashcardsSettings | LearnModeSettings | ModeSettings) => void}
+        settings={
+          {
+            frontSides,
+            backSides,
+            progressionMode,
+            includeMastered,
+            enableTimer: false,
+            timerSeconds: 30,
+            enableAudio: false,
+            groupSides: {},
+          } as FlashcardsSettings
+        }
+        onUpdateSettings={
+          updateSettings as (
+            settings: FlashcardsSettings | LearnModeSettings | ModeSettings
+          ) => void
+        }
       />
 
       <FlashcardsCompletionModal

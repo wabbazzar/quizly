@@ -26,7 +26,7 @@ const sizes = [
   { size: 180, name: 'apple-touch-icon.png' },
 
   // MS Tile
-  { size: 144, name: 'mstile-144x144.png' }
+  { size: 144, name: 'mstile-144x144.png' },
 ];
 
 async function generateIcons() {
@@ -46,19 +46,13 @@ async function generateIcons() {
   for (const { size, name } of sizes) {
     const outputPath = path.join(iconsPath, name);
 
-    await sharp(svgBuffer)
-      .resize(size, size)
-      .png()
-      .toFile(outputPath);
+    await sharp(svgBuffer).resize(size, size).png().toFile(outputPath);
 
     console.log(`✅ Generated ${name} (${size}x${size})`);
   }
 
   // Copy specific icons to root public for compatibility
-  await sharp(svgBuffer)
-    .resize(32, 32)
-    .png()
-    .toFile(path.join(publicPath, 'favicon.ico'));
+  await sharp(svgBuffer).resize(32, 32).png().toFile(path.join(publicPath, 'favicon.ico'));
 
   console.log('✅ Generated favicon.ico');
 
@@ -66,7 +60,7 @@ async function generateIcons() {
   await sharp(svgBuffer)
     .resize(512, 512, {
       fit: 'contain',
-      background: { r: 74, g: 144, b: 226, alpha: 1 } // Primary color
+      background: { r: 74, g: 144, b: 226, alpha: 1 }, // Primary color
     })
     .png()
     .toFile(path.join(iconsPath, 'icon-512x512-maskable.png'));

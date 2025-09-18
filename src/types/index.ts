@@ -56,8 +56,8 @@ export interface SessionState {
 
 // Mode Settings
 export interface ModeSettings {
-  frontSides: string[];  // e.g., ['side_a']
-  backSides: string[];   // e.g., ['side_b', 'side_c']
+  frontSides: string[]; // e.g., ['side_a']
+  backSides: string[]; // e.g., ['side_b', 'side_c']
   cardsPerRound: number;
   enableTimer: boolean;
   timerSeconds?: number | null;
@@ -137,9 +137,9 @@ export interface LearnSessionResults {
   averageResponseTime: number;
   maxStreak: number;
   duration: number;
-  passedCards: number[];  // Cards answered correctly in this session
+  passedCards: number[]; // Cards answered correctly in this session
   strugglingCards: number[];
-  masteredCards: number[];  // Cards that reached mastery threshold during this session
+  masteredCards: number[]; // Cards that reached mastery threshold during this session
 }
 
 export interface FlashcardSessionResults {
@@ -168,21 +168,17 @@ export interface MissedCard {
 export interface SchedulerConfig {
   algorithm: 'smart_spaced' | 'leitner_box';
   aggressiveness: 'gentle' | 'balanced' | 'intensive';
-  minSpacing: number;        // Minimum cards between reviews
-  maxSpacing: number;        // Maximum spacing
-  clusterLimit: number;      // Max consecutive missed cards
-  progressRatio: number;     // Min % of new cards
-  difficultyWeight: number;  // How much difficulty affects spacing (0-1)
+  minSpacing: number; // Minimum cards between reviews
+  maxSpacing: number; // Maximum spacing
+  clusterLimit: number; // Max consecutive missed cards
+  progressRatio: number; // Min % of new cards
+  difficultyWeight: number; // How much difficulty affects spacing (0-1)
 }
 
 export interface SchedulingAlgorithm {
   name: string;
   description: string;
-  schedule(
-    missedCards: MissedCard[],
-    upcomingCards: Card[],
-    config: SchedulerConfig
-  ): Card[];
+  schedule(missedCards: MissedCard[], upcomingCards: Card[], config: SchedulerConfig): Card[];
 }
 
 // Question Generation Types

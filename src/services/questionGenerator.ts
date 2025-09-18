@@ -13,30 +13,35 @@ export class QuestionGenerator {
     const questions: Question[] = [];
     const usedCardIndices = new Set<number>();
 
-    cards.forEach((card) => {
+    cards.forEach(card => {
       if (options.excludeCards?.has(card.idx)) {
         return;
       }
 
       // Generate initial questions as multiple choice primarily
       // Free text will be added dynamically after correct MC answers
-      const questionType = options.forceMultipleChoice ? 'multiple_choice' :
-                          this.selectQuestionType(options.questionTypes, options.questionTypeMix);
+      const questionType = options.forceMultipleChoice
+        ? 'multiple_choice'
+        : this.selectQuestionType(options.questionTypes, options.questionTypeMix);
 
       if (questionType === 'multiple_choice') {
-        questions.push(this.generateMultipleChoice(
-          card,
-          allDeckCards || cards,  // Use all deck cards if available, otherwise use round cards
-          { front: options.frontSides, back: options.backSides },
-          card.idx,  // Use card's original index
-          masteredCardIndices
-        ));
+        questions.push(
+          this.generateMultipleChoice(
+            card,
+            allDeckCards || cards, // Use all deck cards if available, otherwise use round cards
+            { front: options.frontSides, back: options.backSides },
+            card.idx, // Use card's original index
+            masteredCardIndices
+          )
+        );
       } else {
-        questions.push(this.generateFreeText(
-          card,
-          { front: options.frontSides, back: options.backSides },
-          card.idx  // Use card's original index
-        ));
+        questions.push(
+          this.generateFreeText(
+            card,
+            { front: options.frontSides, back: options.backSides },
+            card.idx // Use card's original index
+          )
+        );
       }
 
       usedCardIndices.add(card.idx);
@@ -57,7 +62,13 @@ export class QuestionGenerator {
   ): Question {
     const questionText = this.buildQuestionText(card, sides.front);
     const correctAnswer = this.buildAnswerText(card, sides.back);
-    const distractors = this.generateDistractors(correctAnswer, allCards, sides.back, cardIndex, masteredCardIndices);
+    const distractors = this.generateDistractors(
+      correctAnswer,
+      allCards,
+      sides.back,
+      cardIndex,
+      masteredCardIndices
+    );
 
     return {
       id: `mc_${card.idx}_${Date.now()}`,
@@ -112,7 +123,7 @@ export class QuestionGenerator {
     const masteredSet = new Set(masteredCardIndices || []);
 
     // Collect potential distractors from other cards, separating by mastery status
-    allCards.forEach((card) => {
+    allCards.forEach(card => {
       if (card.idx === excludeIndex) return;
 
       // Build the answer text the same way as the correct answer
@@ -131,7 +142,6 @@ export class QuestionGenerator {
         }
       }
     });
-
 
     // First, try to use only non-mastered distractors
     const primaryPool = nonMasteredDistractors.length > 0 ? nonMasteredDistractors : [];
@@ -315,7 +325,7 @@ export class QuestionGenerator {
 
     // Apply some randomization based on difficulty setting
     const shuffled = [...sorted];
-    const shuffleIntensity = 1 - (difficulty * 0.2); // Higher difficulty = less shuffle
+    const shuffleIntensity = 1 - difficulty * 0.2; // Higher difficulty = less shuffle
 
     for (let i = shuffled.length - 1; i > 0; i--) {
       if (Math.random() < shuffleIntensity) {

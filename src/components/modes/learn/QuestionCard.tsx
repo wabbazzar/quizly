@@ -20,72 +20,77 @@ interface QuestionCardProps {
   onShowCardDetails?: () => void;
 }
 
-export const QuestionCard: FC<QuestionCardProps> = memo(({
-  question,
-  card: _card,
-  onAnswer,
-  showFeedback,
-  feedback,
-  disabled = false,
-  onShowCardDetails,
-}) => {
-  return (
-    <article
-      className={styles.questionCard}
-      role="region"
-      aria-labelledby="question-text"
-      data-testid="question-card"
-      data-question-type={question.type}
-    >
-      <header className={styles.questionHeader}>
-        <h2 id="question-text" className={styles.questionText}>
-          {question.questionText}
-        </h2>
-        {question.difficulty && (
-          <div className={styles.difficultyIndicator} aria-label={`Difficulty: ${Math.round(question.difficulty * 100)}%`}>
+export const QuestionCard: FC<QuestionCardProps> = memo(
+  ({
+    question,
+    card: _card,
+    onAnswer,
+    showFeedback,
+    feedback,
+    disabled = false,
+    onShowCardDetails,
+  }) => {
+    return (
+      <article
+        className={styles.questionCard}
+        role="region"
+        aria-labelledby="question-text"
+        data-testid="question-card"
+        data-question-type={question.type}
+      >
+        <header className={styles.questionHeader}>
+          <h2 id="question-text" className={styles.questionText}>
+            {question.questionText}
+          </h2>
+          {question.difficulty && (
             <div
-              className={styles.difficultyBar}
-              style={{ width: `${question.difficulty * 100}%` }}
+              className={styles.difficultyIndicator}
+              aria-label={`Difficulty: ${Math.round(question.difficulty * 100)}%`}
+            >
+              <div
+                className={styles.difficultyBar}
+                style={{ width: `${question.difficulty * 100}%` }}
+              />
+            </div>
+          )}
+        </header>
+
+        <div className={styles.questionContent}>
+          {question.type === 'multiple_choice' ? (
+            <MultipleChoiceOptions
+              options={question.options!}
+              correctAnswer={question.correctAnswer}
+              onSelect={onAnswer}
+              showFeedback={showFeedback}
+              feedback={feedback}
+              disabled={disabled}
+              resetKey={question.id}
             />
-          </div>
-        )}
-      </header>
+          ) : (
+            <FreeTextInput
+              correctAnswer={question.correctAnswer}
+              acceptedAnswers={question.acceptedAnswers}
+              onSubmit={onAnswer}
+              showFeedback={showFeedback}
+              feedback={feedback}
+              disabled={disabled || showFeedback}
+              resetKey={question.id}
+            />
+          )}
+        </div>
 
-      <div className={styles.questionContent}>
-        {question.type === 'multiple_choice' ? (
-          <MultipleChoiceOptions
-            options={question.options!}
-            correctAnswer={question.correctAnswer}
-            onSelect={onAnswer}
-            showFeedback={showFeedback}
-            feedback={feedback}
-            disabled={disabled}
-            resetKey={question.id}
-          />
-        ) : (
-          <FreeTextInput
-            correctAnswer={question.correctAnswer}
-            acceptedAnswers={question.acceptedAnswers}
-            onSubmit={onAnswer}
-            showFeedback={showFeedback}
-            feedback={feedback}
-            disabled={disabled || showFeedback}
-            resetKey={question.id}
+        {showFeedback && feedback && (
+          <FeedbackSection
+            isCorrect={feedback.isCorrect}
+            correctAnswer={feedback.correctAnswer}
+            explanation={feedback.explanation}
+            isMastered={feedback.isMastered}
+            onShowCardDetails={onShowCardDetails}
           />
         )}
-      </div>
-
-      {showFeedback && feedback && (
-        <FeedbackSection
-          isCorrect={feedback.isCorrect}
-          correctAnswer={feedback.correctAnswer}
-          explanation={feedback.explanation}
-          isMastered={feedback.isMastered}
-          onShowCardDetails={onShowCardDetails}
-        />
-      )}
-    </article>
-  );
-});
+      </article>
+    );
+  }
+);
 
 QuestionCard.displayName = 'QuestionCard';

@@ -11,8 +11,8 @@ const sanitizeString = (str: unknown): string => {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#x27;');
-    // Removed forward slash escaping as it's safe and breaks pinyin display
-    // Removed ampersand escaping as it's safe for text content and commonly used in titles
+  // Removed forward slash escaping as it's safe and breaks pinyin display
+  // Removed ampersand escaping as it's safe for text content and commonly used in titles
 };
 
 // Type guard to check if value is a record
@@ -42,29 +42,46 @@ const validateMetadata = (metadata: unknown): DeckMetadata | null => {
     description: sanitizeString(metadata.description),
     category: sanitizeString(metadata.category),
     available_levels: Array.isArray(metadata.available_levels)
-      ? metadata.available_levels.filter((l) => typeof l === 'number')
+      ? metadata.available_levels.filter(l => typeof l === 'number')
       : [1],
-    available_sides: typeof metadata.available_sides === 'number'
-      ? Math.min(6, Math.max(2, metadata.available_sides))
-      : 2,
+    available_sides:
+      typeof metadata.available_sides === 'number'
+        ? Math.min(6, Math.max(2, metadata.available_sides))
+        : 2,
     side_labels: isRecord(metadata.side_labels)
       ? {
-          side_a: metadata.side_labels.side_a ? sanitizeString(metadata.side_labels.side_a) : undefined,
-          side_b: metadata.side_labels.side_b ? sanitizeString(metadata.side_labels.side_b) : undefined,
-          side_c: metadata.side_labels.side_c ? sanitizeString(metadata.side_labels.side_c) : undefined,
-          side_d: metadata.side_labels.side_d ? sanitizeString(metadata.side_labels.side_d) : undefined,
-          side_e: metadata.side_labels.side_e ? sanitizeString(metadata.side_labels.side_e) : undefined,
-          side_f: metadata.side_labels.side_f ? sanitizeString(metadata.side_labels.side_f) : undefined,
+          side_a: metadata.side_labels.side_a
+            ? sanitizeString(metadata.side_labels.side_a)
+            : undefined,
+          side_b: metadata.side_labels.side_b
+            ? sanitizeString(metadata.side_labels.side_b)
+            : undefined,
+          side_c: metadata.side_labels.side_c
+            ? sanitizeString(metadata.side_labels.side_c)
+            : undefined,
+          side_d: metadata.side_labels.side_d
+            ? sanitizeString(metadata.side_labels.side_d)
+            : undefined,
+          side_e: metadata.side_labels.side_e
+            ? sanitizeString(metadata.side_labels.side_e)
+            : undefined,
+          side_f: metadata.side_labels.side_f
+            ? sanitizeString(metadata.side_labels.side_f)
+            : undefined,
         }
       : undefined,
     card_count: typeof metadata.card_count === 'number' ? metadata.card_count : 0,
     difficulty: metadata.difficulty as DeckMetadata['difficulty'],
-    tags: Array.isArray(metadata.tags)
-      ? metadata.tags.map(sanitizeString).filter(Boolean)
-      : [],
+    tags: Array.isArray(metadata.tags) ? metadata.tags.map(sanitizeString).filter(Boolean) : [],
     version: sanitizeString(metadata.version || '1.0.0'),
-    created_date: typeof metadata.created_date === 'string' ? metadata.created_date.split('T')[0] : new Date().toISOString().split('T')[0],
-    last_updated: typeof metadata.last_updated === 'string' ? metadata.last_updated.split('T')[0] : new Date().toISOString().split('T')[0],
+    created_date:
+      typeof metadata.created_date === 'string'
+        ? metadata.created_date.split('T')[0]
+        : new Date().toISOString().split('T')[0],
+    last_updated:
+      typeof metadata.last_updated === 'string'
+        ? metadata.last_updated.split('T')[0]
+        : new Date().toISOString().split('T')[0],
   };
 };
 
@@ -165,9 +182,7 @@ export const loadAllDecks = async (): Promise<Deck[]> => {
     console.log(`Found ${deckFiles.length} deck files to load`);
 
     // Load all decks in parallel with sanitization
-    const deckPromises = deckFiles.map(file =>
-      loadDeckFromJSON(`${decksBasePath}${file}`)
-    );
+    const deckPromises = deckFiles.map(file => loadDeckFromJSON(`${decksBasePath}${file}`));
 
     const loadedDecks = await Promise.all(deckPromises);
 
@@ -200,13 +215,10 @@ async function discoverDeckFiles(basePath: string): Promise<string[]> {
     }
 
     // Filter for JSON files (extra safety check)
-    const deckFiles = manifest.filter(f =>
-      typeof f === 'string' && f.endsWith('.json')
-    );
+    const deckFiles = manifest.filter(f => typeof f === 'string' && f.endsWith('.json'));
 
     console.log(`Manifest loaded: ${deckFiles.length} deck files found`);
     return deckFiles;
-
   } catch (error) {
     console.error('Error loading deck manifest:', error);
     return [];

@@ -39,45 +39,43 @@ export const useCardScheduler = (settings: LearnModeSettings): UseCardSchedulerR
     return CardSchedulerFactory.getScheduler(currentAlgorithm);
   }, [currentAlgorithm]);
 
-  const config = useMemo<SchedulerConfig>(() => ({
-    algorithm: currentAlgorithm as 'smart_spaced' | 'leitner_box',
-    aggressiveness: settings.aggressiveness || 'balanced',
-    minSpacing: settings.minSpacing || 2,
-    maxSpacing: settings.maxSpacing || 8,
-    clusterLimit: settings.clusterLimit || 2,
-    progressRatio: settings.progressRatio || 0.3,
-    difficultyWeight: settings.difficultyWeight || 0.5,
-  }), [settings, currentAlgorithm]);
+  const config = useMemo<SchedulerConfig>(
+    () => ({
+      algorithm: currentAlgorithm as 'smart_spaced' | 'leitner_box',
+      aggressiveness: settings.aggressiveness || 'balanced',
+      minSpacing: settings.minSpacing || 2,
+      maxSpacing: settings.maxSpacing || 8,
+      clusterLimit: settings.clusterLimit || 2,
+      progressRatio: settings.progressRatio || 0.3,
+      difficultyWeight: settings.difficultyWeight || 0.5,
+    }),
+    [settings, currentAlgorithm]
+  );
 
-  const trackMissedCard = useCallback((
-    cardId: string,
-    cardIndex: number,
-    responseTime: number
-  ) => {
+  const trackMissedCard = useCallback((cardId: string, cardIndex: number, responseTime: number) => {
     setMissedCards(prev => {
       const newMap = new Map(prev);
       const existing = newMap.get(cardId);
 
-      const updated: MissedCard = existing ? {
-        ...existing,
-        missCount: existing.missCount + 1,
-        lastSeen: Date.now(),
-        responseTime,
-        difficulty: Math.min(1, existing.difficulty + 0.1),
-      } : {
-        cardId,
-        cardIndex,
-        missCount: 1,
-        lastSeen: Date.now(),
-        difficulty: 0.5,
-        responseTime,
-      };
+      const updated: MissedCard = existing
+        ? {
+            ...existing,
+            missCount: existing.missCount + 1,
+            lastSeen: Date.now(),
+            responseTime,
+            difficulty: Math.min(1, existing.difficulty + 0.1),
+          }
+        : {
+            cardId,
+            cardIndex,
+            missCount: 1,
+            lastSeen: Date.now(),
+            difficulty: 0.5,
+            responseTime,
+          };
 
       // Calculate difficulty based on miss count and response time
-      updated.difficulty = Math.min(1,
-        (updated.missCount * 0.2) +
-        (responseTime > 10000 ? 0.3 : 0)
-      );
+      updated.difficulty = Math.min(1, updated.missCount * 0.2 + (responseTime > 10000 ? 0.3 : 0));
 
       newMap.set(cardId, updated);
       return newMap;
@@ -107,12 +105,15 @@ export const useCardScheduler = (settings: LearnModeSettings): UseCardSchedulerR
     });
   }, []);
 
-  const scheduleCards = useCallback((upcomingCards: Card[]): Card[] => {
-    if (missedCards.size === 0) return upcomingCards;
+  const scheduleCards = useCallback(
+    (upcomingCards: Card[]): Card[] => {
+      if (missedCards.size === 0) return upcomingCards;
 
-    const missedArray = Array.from(missedCards.values());
-    return scheduler.schedule(missedArray, upcomingCards, config);
-  }, [missedCards, scheduler, config]);
+      const missedArray = Array.from(missedCards.values());
+      return scheduler.schedule(missedArray, upcomingCards, config);
+    },
+    [missedCards, scheduler, config]
+  );
 
   const changeAlgorithm = useCallback((algorithm: string) => {
     setCurrentAlgorithm(algorithm as 'smart_spaced' | 'leitner_box');

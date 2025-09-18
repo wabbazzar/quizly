@@ -22,20 +22,24 @@ const updateSW = registerSW({
 
     // Check for updates periodically
     if (registration) {
-      setInterval(() => {
-        registration.update();
-      }, 60 * 60 * 1000); // Check every hour
+      setInterval(
+        () => {
+          registration.update();
+        },
+        60 * 60 * 1000
+      ); // Check every hour
     }
   },
   onRegisterError(error) {
     console.error('Service Worker registration error:', error);
-  }
+  },
 });
 
 // iOS PWA specific handling - minimal event handling here since usePWAVisibility handles most lifecycle
-const isIOSPWA = /iPhone|iPad|iPod/i.test(navigator.userAgent) &&
-                 ((window.navigator as any).standalone === true ||
-                  window.matchMedia('(display-mode: standalone)').matches);
+const isIOSPWA =
+  /iPhone|iPad|iPod/i.test(navigator.userAgent) &&
+  ((window.navigator as any).standalone === true ||
+    window.matchMedia('(display-mode: standalone)').matches);
 
 if (isIOSPWA) {
   // Prevent iOS keyboard viewport issues
@@ -58,7 +62,8 @@ if (isIOSPWA) {
   const unloadTime = sessionStorage.getItem('quizly-ios-unload');
   if (unloadTime) {
     const timeSinceUnload = Date.now() - parseInt(unloadTime);
-    if (timeSinceUnload < 10000) { // Within 10 seconds, likely a refresh
+    if (timeSinceUnload < 10000) {
+      // Within 10 seconds, likely a refresh
       console.log('iOS PWA: Quick restart detected, clearing unload marker');
     }
     sessionStorage.removeItem('quizly-ios-unload');

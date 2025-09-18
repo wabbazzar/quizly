@@ -40,8 +40,13 @@
 }
 
 @keyframes bounce {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
 }
 
 .performanceMessage {
@@ -169,7 +174,6 @@
   justify-content: center;
   position: relative;
 }
-
 
 .primaryButton {
   background: var(--primary-main);

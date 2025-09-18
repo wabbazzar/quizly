@@ -92,7 +92,6 @@ describe('FlashCard Component', () => {
     expect(mockHandlers.onFlip).toHaveBeenCalledTimes(2);
   });
 
-
   it('should apply flipped styles when isFlipped is true', () => {
     render(
       <FlashCard

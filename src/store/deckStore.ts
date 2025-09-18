@@ -48,7 +48,7 @@ export const useDeckStore = create<DeckStore>()(
         } catch (error) {
           set({
             error: 'Failed to load decks',
-            isLoading: false
+            isLoading: false,
           });
           console.error('Error loading decks:', error);
         }
@@ -66,7 +66,12 @@ export const useDeckStore = create<DeckStore>()(
             deck = loadedDecks.find(d => d.id === deckId);
 
             if (deck) {
-              set({ decks: loadedDecks, currentDeck: deck, currentDeckId: deckId, isLoading: false });
+              set({
+                decks: loadedDecks,
+                currentDeck: deck,
+                currentDeckId: deckId,
+                isLoading: false,
+              });
             } else {
               set({ error: 'Deck not found', isLoading: false, currentDeckId: undefined });
             }
@@ -77,7 +82,7 @@ export const useDeckStore = create<DeckStore>()(
           set({
             error: 'Failed to load deck',
             isLoading: false,
-            currentDeckId: undefined
+            currentDeckId: undefined,
           });
           console.error('Error loading deck:', error);
         }
@@ -96,7 +101,7 @@ export const useDeckStore = create<DeckStore>()(
             throw new Error('Invalid deck format');
           }
           set(state => ({
-            decks: [...state.decks, deck]
+            decks: [...state.decks, deck],
           }));
         } catch (error) {
           set({ error: 'Failed to import deck' });
@@ -125,8 +130,8 @@ export const useDeckStore = create<DeckStore>()(
           return {
             masteredCards: {
               ...state.masteredCards,
-              [deckId]: newMastered
-            }
+              [deckId]: newMastered,
+            },
           };
         });
       },
@@ -135,8 +140,8 @@ export const useDeckStore = create<DeckStore>()(
         set(state => ({
           masteredCards: {
             ...state.masteredCards,
-            [deckId]: cardIndices
-          }
+            [deckId]: cardIndices,
+          },
         }));
       },
 
@@ -146,19 +151,19 @@ export const useDeckStore = create<DeckStore>()(
 
       toggleShuffleMastered: () => {
         set(state => ({
-          shuffleMasteredCardsBack: !state.shuffleMasteredCardsBack
+          shuffleMasteredCardsBack: !state.shuffleMasteredCardsBack,
         }));
-      }
+      },
     }),
     {
       name: 'deck-store',
-      partialize: (state) => ({
+      partialize: state => ({
         // Persist the current deck ID so we can reload it on refresh
         currentDeckId: state.currentDeck?.id,
         masteredCards: state.masteredCards,
         shuffleMasteredCardsBack: state.shuffleMasteredCardsBack,
       }),
-      onRehydrateStorage: () => (state) => {
+      onRehydrateStorage: () => state => {
         // After rehydration, if we have a currentDeckId, reload that deck
         if (state?.currentDeckId) {
           state.loadDeck(state.currentDeckId);

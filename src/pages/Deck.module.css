@@ -114,7 +114,6 @@
   font-size: var(--text-base);
 }
 
-
 /* Cards Section */
 .cardsSection {
   padding: var(--space-8) var(--space-4);
@@ -423,7 +422,6 @@
     font-size: var(--text-xs);
     padding: 2px var(--space-1);
   }
-
 
   .cardsManagement {
     grid-template-columns: 1fr;

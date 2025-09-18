@@ -9,15 +9,14 @@ interface PerformanceDashboardProps {
   onClose: () => void;
 }
 
-export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({
-  isOpen,
-  onClose,
-}) => {
+export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({ isOpen, onClose }) => {
   const { metrics, custom, generateReport } = usePerformanceMonitor();
   const { analysis, getReport } = useBundleAnalyzer();
   const { isAvailable: workerAvailable, pendingTasks } = useWorkerManager();
 
-  const [activeTab, setActiveTab] = useState<'overview' | 'vitals' | 'bundles' | 'workers'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'vitals' | 'bundles' | 'workers'>(
+    'overview'
+  );
   const [performanceReport, setPerformanceReport] = useState<any>(null);
   const [bundleReport, setBundleReport] = useState<any>(null);
 
@@ -123,23 +122,26 @@ export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({
       <div className={styles.vitalsChart}>
         <h3>Performance Metrics Timeline</h3>
         <div className={styles.timeline}>
-          {Object.entries(metrics).map(([key, metric]) => (
-            metric && (
-              <div key={key} className={styles.timelineItem}>
-                <div className={styles.metricName}>{key.toUpperCase()}</div>
-                <div className={styles.metricBar}>
-                  <div
-                    className={`${styles.metricFill} ${getMetricClass(metric.rating)}`}
-                    style={{ width: `${Math.min(100, (metric.value / getMetricThreshold(key)) * 100)}%` }}
-                  />
+          {Object.entries(metrics).map(
+            ([key, metric]) =>
+              metric && (
+                <div key={key} className={styles.timelineItem}>
+                  <div className={styles.metricName}>{key.toUpperCase()}</div>
+                  <div className={styles.metricBar}>
+                    <div
+                      className={`${styles.metricFill} ${getMetricClass(metric.rating)}`}
+                      style={{
+                        width: `${Math.min(100, (metric.value / getMetricThreshold(key)) * 100)}%`,
+                      }}
+                    />
+                  </div>
+                  <div className={styles.metricValue}>
+                    {metric.value.toFixed(key === 'cls' ? 3 : 0)}
+                    {key === 'cls' ? '' : 'ms'}
+                  </div>
                 </div>
-                <div className={styles.metricValue}>
-                  {metric.value.toFixed(key === 'cls' ? 3 : 0)}
-                  {key === 'cls' ? '' : 'ms'}
-                </div>
-              </div>
-            )
-          ))}
+              )
+          )}
         </div>
       </div>
 
@@ -182,14 +184,17 @@ export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({
 
       <div className={styles.chunksList}>
         <h3>Largest Chunks</h3>
-        {analysis?.initialChunks.concat(analysis.asyncChunks).slice(0, 10).map((chunk, _index) => (
-          <div key={chunk.name} className={styles.chunkItem}>
-            <span className={styles.chunkName}>{chunk.name}</span>
-            <span className={styles.chunkSize}>{(chunk.size / 1024).toFixed(0)}KB</span>
-            <span className={`${styles.chunkType} ${styles[chunk.type]}`}>{chunk.type}</span>
-            {chunk.cached && <span className={styles.cached}>cached</span>}
-          </div>
-        ))}
+        {analysis?.initialChunks
+          .concat(analysis.asyncChunks)
+          .slice(0, 10)
+          .map((chunk, _index) => (
+            <div key={chunk.name} className={styles.chunkItem}>
+              <span className={styles.chunkName}>{chunk.name}</span>
+              <span className={styles.chunkSize}>{(chunk.size / 1024).toFixed(0)}KB</span>
+              <span className={`${styles.chunkType} ${styles[chunk.type]}`}>{chunk.type}</span>
+              {chunk.cached && <span className={styles.cached}>cached</span>}
+            </div>
+          ))}
       </div>
 
       <div className={styles.bundleRecommendations}>
@@ -228,10 +233,14 @@ export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({
 
   const getMetricClass = (rating: string) => {
     switch (rating) {
-      case 'good': return styles.good;
-      case 'needs-improvement': return styles.fair;
-      case 'poor': return styles.poor;
-      default: return styles.unknown;
+      case 'good':
+        return styles.good;
+      case 'needs-improvement':
+        return styles.fair;
+      case 'poor':
+        return styles.poor;
+      default:
+        return styles.unknown;
     }
   };
 
@@ -250,7 +259,9 @@ export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({
     <div className={styles.dashboard}>
       <div className={styles.header}>
         <h2>Performance Dashboard</h2>
-        <button className={styles.closeButton} onClick={onClose}>×</button>
+        <button className={styles.closeButton} onClick={onClose}>
+          ×
+        </button>
       </div>
 
       <div className={styles.tabs}>

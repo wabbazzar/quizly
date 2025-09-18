@@ -10,7 +10,11 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   };
 }
 
-function AllTheProviders({ children, initialEntries = ['/'], routerProps }: {
+function AllTheProviders({
+  children,
+  initialEntries = ['/'],
+  routerProps,
+}: {
   children: React.ReactNode;
   initialEntries?: string[];
   routerProps?: CustomRenderOptions['routerProps'];
@@ -24,11 +28,7 @@ function AllTheProviders({ children, initialEntries = ['/'], routerProps }: {
 
 export function renderWithProviders(
   ui: ReactElement,
-  {
-    initialEntries = ['/'],
-    routerProps,
-    ...renderOptions
-  }: CustomRenderOptions = {}
+  { initialEntries = ['/'], routerProps, ...renderOptions }: CustomRenderOptions = {}
 ) {
   const Wrapper = ({ children }: { children: React.ReactNode }) => (
     <AllTheProviders initialEntries={initialEntries} routerProps={routerProps}>
@@ -59,11 +59,7 @@ export const queryByTestId = (container: HTMLElement, testId: string) => {
 };
 
 // Wait utilities
-export const waitForElement = async (
-  container: HTMLElement,
-  selector: string,
-  timeout = 1000
-) => {
+export const waitForElement = async (container: HTMLElement, selector: string, timeout = 1000) => {
   return new Promise<Element>((resolve, reject) => {
     const element = container.querySelector(selector);
     if (element) {
@@ -107,8 +103,12 @@ export const measureRenderTime = async (renderFn: () => void) => {
 };
 
 // Accessibility testing utilities
-export const checkAriaAttributes = (element: Element, expectedAttributes: Record<string, string>) => {
-  const results: { attribute: string; expected: string; actual: string | null; passed: boolean }[] = [];
+export const checkAriaAttributes = (
+  element: Element,
+  expectedAttributes: Record<string, string>
+) => {
+  const results: { attribute: string; expected: string; actual: string | null; passed: boolean }[] =
+    [];
 
   Object.entries(expectedAttributes).forEach(([attribute, expected]) => {
     const actual = element.getAttribute(attribute);
@@ -124,13 +124,18 @@ export const checkAriaAttributes = (element: Element, expectedAttributes: Record
 };
 
 // Mock data validation utilities
-export const validateMockData = <T extends Record<string, any>>(data: T, schema: Record<string, string>): boolean => {
+export const validateMockData = <T extends Record<string, any>>(
+  data: T,
+  schema: Record<string, string>
+): boolean => {
   for (const [key, expectedType] of Object.entries(schema)) {
     const value = data[key];
     const actualType = typeof value;
 
     if (actualType !== expectedType) {
-      console.error(`Invalid mock data: ${String(key)} expected ${expectedType}, got ${actualType}`);
+      console.error(
+        `Invalid mock data: ${String(key)} expected ${expectedType}, got ${actualType}`
+      );
       return false;
     }
   }

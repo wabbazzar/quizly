@@ -112,9 +112,7 @@ describe('useErrorHandler', () => {
         .mockRejectedValueOnce(testError)
         .mockResolvedValue('success');
 
-      const { result } = renderHook(() =>
-        useErrorHandler(mockAsyncFunction, { retryDelay: 0 })
-      );
+      const { result } = renderHook(() => useErrorHandler(mockAsyncFunction, { retryDelay: 0 }));
 
       const [wrappedFunction, errorState] = result.current;
 
@@ -231,10 +229,7 @@ describe('useErrorHandler', () => {
 
       expect(errorState.error).toBeInstanceOf(Error);
       expect(errorState.error?.message).toBe('String error');
-      expect(mockLogError).toHaveBeenCalledWith(
-        expect.any(Error),
-        expect.any(Object)
-      );
+      expect(mockLogError).toHaveBeenCalledWith(expect.any(Error), expect.any(Object));
     });
   });
 

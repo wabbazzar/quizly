@@ -8,7 +8,7 @@ test.describe('GitHub Pages Deployment', () => {
     // Test the actual GitHub Pages deployment
     const response = await page.goto(GH_PAGES_URL, {
       waitUntil: 'networkidle',
-      timeout: 30000
+      timeout: 30000,
     });
 
     // Check if the page loads successfully
@@ -47,7 +47,7 @@ test.describe('GitHub Pages Deployment', () => {
         return {
           ok: response.ok,
           status: response.status,
-          href: link.href
+          href: link.href,
         };
       }
       return null;
@@ -97,8 +97,8 @@ test.describe('GitHub Pages Deployment', () => {
     });
 
     // Check that no critical assets failed to load
-    const criticalFailures = failedRequests.filter(url =>
-      url.includes('.js') || url.includes('.css') || url.includes('index.html')
+    const criticalFailures = failedRequests.filter(
+      url => url.includes('.js') || url.includes('.css') || url.includes('index.html')
     );
 
     expect(criticalFailures).toHaveLength(0);

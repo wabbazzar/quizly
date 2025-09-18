@@ -19,7 +19,7 @@ class CacheOptimizer {
       totalOperations: 0,
       cacheHits: 0,
       cacheMisses: 0,
-      timeSaved: 0
+      timeSaved: 0,
     };
   }
 
@@ -30,14 +30,16 @@ class CacheOptimizer {
    * @returns {string} Generated cache key
    */
   generateCacheKey(files, prefix = 'cache') {
-    const hashes = files.map(file => {
-      const fullPath = path.resolve(projectRoot, file);
-      if (fs.existsSync(fullPath)) {
-        const content = fs.readFileSync(fullPath, 'utf8');
-        return crypto.createHash('sha256').update(content).digest('hex');
-      }
-      return '';
-    }).filter(Boolean);
+    const hashes = files
+      .map(file => {
+        const fullPath = path.resolve(projectRoot, file);
+        if (fs.existsSync(fullPath)) {
+          const content = fs.readFileSync(fullPath, 'utf8');
+          return crypto.createHash('sha256').update(content).digest('hex');
+        }
+        return '';
+      })
+      .filter(Boolean);
 
     if (hashes.length === 0) {
       console.warn(`⚠️  No valid files found for cache key generation: ${files.join(', ')}`);
@@ -76,7 +78,7 @@ class CacheOptimizer {
       'tsconfig.json',
       '.eslintrc.js',
       'src/main.tsx',
-      'index.html'
+      'index.html',
     ];
     return this.generateCacheKey(files, 'build-cache');
   }
@@ -86,10 +88,7 @@ class CacheOptimizer {
    * @returns {string} TypeScript cache key
    */
   generateTypeScriptKey() {
-    const files = [
-      'tsconfig.json',
-      'package.json'
-    ];
+    const files = ['tsconfig.json', 'package.json'];
 
     // Include TypeScript source files hash
     const srcFiles = this.getSourceFiles(['src/**/*.ts', 'src/**/*.tsx']);
@@ -101,12 +100,14 @@ class CacheOptimizer {
    * @returns {string} ESLint cache key
    */
   generateESLintKey() {
-    const files = [
-      '.eslintrc.js',
-      'package.json'
-    ];
+    const files = ['.eslintrc.js', 'package.json'];
 
-    const srcFiles = this.getSourceFiles(['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.js', 'src/**/*.jsx']);
+    const srcFiles = this.getSourceFiles([
+      'src/**/*.ts',
+      'src/**/*.tsx',
+      'src/**/*.js',
+      'src/**/*.jsx',
+    ]);
     return this.generateCacheKey([...files, ...srcFiles], 'eslint');
   }
 
@@ -127,11 +128,9 @@ class CacheOptimizer {
   getSourceFiles(patterns) {
     // Simplified: just return main entry points for demo
     // In production, you'd use a proper glob library
-    return [
-      'src/main.tsx',
-      'src/App.tsx',
-      'src/types/index.ts'
-    ].filter(file => fs.existsSync(path.resolve(projectRoot, file)));
+    return ['src/main.tsx', 'src/App.tsx', 'src/types/index.ts'].filter(file =>
+      fs.existsSync(path.resolve(projectRoot, file))
+    );
   }
 
   /**
@@ -144,42 +143,42 @@ class CacheOptimizer {
         key: this.generateNodeModulesKey(),
         paths: ['~/.npm', 'node_modules'],
         restoreKeys: [
-          `node-modules-${process.env.RUNNER_OS || 'unknown'}-${process.env.CACHE_VERSION || 'v1'}-`
+          `node-modules-${process.env.RUNNER_OS || 'unknown'}-${process.env.CACHE_VERSION || 'v1'}-`,
         ],
-        description: 'Node.js dependencies cache'
+        description: 'Node.js dependencies cache',
       },
       build: {
         key: this.generateBuildKey(),
         paths: ['dist', '.vite', 'node_modules/.vite'],
         restoreKeys: [
-          `build-cache-${process.env.RUNNER_OS || 'unknown'}-${process.env.CACHE_VERSION || 'v1'}-`
+          `build-cache-${process.env.RUNNER_OS || 'unknown'}-${process.env.CACHE_VERSION || 'v1'}-`,
         ],
-        description: 'Build artifacts and Vite cache'
+        description: 'Build artifacts and Vite cache',
       },
       typescript: {
         key: this.generateTypeScriptKey(),
         paths: ['.tsbuildinfo', 'dist/**/*.d.ts'],
         restoreKeys: [
-          `typescript-${process.env.RUNNER_OS || 'unknown'}-${process.env.CACHE_VERSION || 'v1'}-`
+          `typescript-${process.env.RUNNER_OS || 'unknown'}-${process.env.CACHE_VERSION || 'v1'}-`,
         ],
-        description: 'TypeScript compilation cache'
+        description: 'TypeScript compilation cache',
       },
       eslint: {
         key: this.generateESLintKey(),
         paths: ['.eslintcache'],
         restoreKeys: [
-          `eslint-${process.env.RUNNER_OS || 'unknown'}-${process.env.CACHE_VERSION || 'v1'}-`
+          `eslint-${process.env.RUNNER_OS || 'unknown'}-${process.env.CACHE_VERSION || 'v1'}-`,
         ],
-        description: 'ESLint results cache'
+        description: 'ESLint results cache',
       },
       playwright: {
         key: this.generatePlaywrightKey(),
         paths: ['~/.cache/ms-playwright'],
         restoreKeys: [
-          `playwright-${process.env.RUNNER_OS || 'unknown'}-${process.env.CACHE_VERSION || 'v1'}-`
+          `playwright-${process.env.RUNNER_OS || 'unknown'}-${process.env.CACHE_VERSION || 'v1'}-`,
         ],
-        description: 'Playwright browser binaries'
-      }
+        description: 'Playwright browser binaries',
+      },
     };
 
     // Store cache keys for efficiency tracking
@@ -196,8 +195,7 @@ class CacheOptimizer {
    */
   calculateCacheEfficiency() {
     const totalOperations = this.cacheKeys.size;
-    const cacheHitCount = Array.from(this.cacheHits.values())
-      .reduce((sum, hits) => sum + hits, 0);
+    const cacheHitCount = Array.from(this.cacheHits.values()).reduce((sum, hits) => sum + hits, 0);
 
     const efficiency = totalOperations > 0 ? (cacheHitCount / totalOperations) * 100 : 0;
 
@@ -206,7 +204,7 @@ class CacheOptimizer {
       totalOperations,
       cacheHits: cacheHitCount,
       cacheMisses: totalOperations - cacheHitCount,
-      estimatedTimeSaved: cacheHitCount * 60 // Estimate 60 seconds saved per cache hit
+      estimatedTimeSaved: cacheHitCount * 60, // Estimate 60 seconds saved per cache hit
     };
   }
 
@@ -219,23 +217,23 @@ class CacheOptimizer {
       dependencies: {
         trigger: 'package.json or package-lock.json changes',
         action: 'Warm node_modules cache after successful installs',
-        frequency: 'On dependency changes'
+        frequency: 'On dependency changes',
       },
       build: {
         trigger: 'Source code or configuration changes',
         action: 'Cache build artifacts after successful builds',
-        frequency: 'On each successful build'
+        frequency: 'On each successful build',
       },
       typescript: {
         trigger: 'TypeScript source changes',
         action: 'Cache .tsbuildinfo and type definitions',
-        frequency: 'On TypeScript compilation'
+        frequency: 'On TypeScript compilation',
       },
       browsers: {
         trigger: 'Playwright version changes',
         action: 'Cache browser binaries after installation',
-        frequency: 'On Playwright updates'
-      }
+        frequency: 'On Playwright updates',
+      },
     };
   }
 
@@ -277,13 +275,13 @@ class CacheOptimizer {
       key: config.key,
       paths: config.paths.join('\n'),
       restoreKeys: config.restoreKeys.join('\n'),
-      description: config.description
+      description: config.description,
     }));
 
     return {
       strategy,
       matrix,
-      include: matrix
+      include: matrix,
     };
   }
 

@@ -44,7 +44,8 @@ const DeckInformation: FC<SectionProps> = ({ deck }) => {
           <div className={styles.infoRow}>
             <span className={styles.infoLabel}>Difficulty:</span>
             <span className={styles.infoValue}>
-              {deck.metadata.difficulty.charAt(0).toUpperCase() + deck.metadata.difficulty.slice(1).replace('_', ' - ')}
+              {deck.metadata.difficulty.charAt(0).toUpperCase() +
+                deck.metadata.difficulty.slice(1).replace('_', ' - ')}
             </span>
           </div>
         )}
@@ -54,7 +55,9 @@ const DeckInformation: FC<SectionProps> = ({ deck }) => {
             <span className={styles.infoLabel}>Tags:</span>
             <div className={styles.tags}>
               {deck.metadata.tags.map((tag, index) => (
-                <span key={index} className={styles.tag}>{tag}</span>
+                <span key={index} className={styles.tag}>
+                  {tag}
+                </span>
               ))}
             </div>
           </div>

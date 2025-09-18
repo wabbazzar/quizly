@@ -139,11 +139,7 @@ const LearnSettings: FC<LearnSettingsProps> = ({
           >
             <header className={styles.header}>
               <h2 className={styles.title}>Learn Mode Settings</h2>
-              <button
-                className={styles.closeButton}
-                onClick={onClose}
-                aria-label="Close settings"
-              >
+              <button className={styles.closeButton} onClick={onClose} aria-label="Close settings">
                 ✕
               </button>
             </header>
@@ -157,8 +153,8 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                 </h3>
                 <div className={styles.noticeContent}>
                   <p>
-                    All settings are automatically saved and will persist across sessions.
-                    Your preferences will be remembered for this deck.
+                    All settings are automatically saved and will persist across sessions. Your
+                    preferences will be remembered for this deck.
                   </p>
                 </div>
               </div>
@@ -185,7 +181,8 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                     />
                   </label>
                   <div className={styles.infoBox}>
-                    <strong>Mastery Threshold:</strong> Cards are marked as mastered after {localSettings.masteryThreshold || 3} correct answers.
+                    <strong>Mastery Threshold:</strong> Cards are marked as mastered after{' '}
+                    {localSettings.masteryThreshold || 3} correct answers.
                     <br />
                     <small>You can manually manage mastered cards from the deck view.</small>
                   </div>
@@ -230,11 +227,9 @@ const LearnSettings: FC<LearnSettingsProps> = ({
               {/* Question Side Configuration */}
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}>Question Sides</h3>
-                <p className={styles.sectionDescription}>
-                  Select which sides to use for questions
-                </p>
+                <p className={styles.sectionDescription}>Select which sides to use for questions</p>
                 <div className={styles.sideSelector}>
-                  {availableSides.map((side) => (
+                  {availableSides.map(side => (
                     <button
                       key={side}
                       className={`${styles.sideOption} ${
@@ -251,11 +246,9 @@ const LearnSettings: FC<LearnSettingsProps> = ({
               {/* Answer Side Configuration */}
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}>Answer Sides</h3>
-                <p className={styles.sectionDescription}>
-                  Select which sides to use for answers
-                </p>
+                <p className={styles.sectionDescription}>Select which sides to use for answers</p>
                 <div className={styles.sideSelector}>
-                  {availableSides.map((side) => (
+                  {availableSides.map(side => (
                     <button
                       key={side}
                       className={`${styles.sideOption} ${
@@ -288,10 +281,12 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                       min="5"
                       max="50"
                       value={localSettings.cardsPerRound}
-                      onChange={(e) => setLocalSettings({
-                        ...localSettings,
-                        cardsPerRound: Math.max(5, Math.min(50, parseInt(e.target.value) || 10))
-                      })}
+                      onChange={e =>
+                        setLocalSettings({
+                          ...localSettings,
+                          cardsPerRound: Math.max(5, Math.min(50, parseInt(e.target.value) || 10)),
+                        })
+                      }
                       className={styles.numberInput}
                     />
                   </label>
@@ -301,10 +296,12 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                     <input
                       type="checkbox"
                       checked={localSettings.randomize}
-                      onChange={(e) => setLocalSettings({
-                        ...localSettings,
-                        randomize: e.target.checked
-                      })}
+                      onChange={e =>
+                        setLocalSettings({
+                          ...localSettings,
+                          randomize: e.target.checked,
+                        })
+                      }
                       className={styles.checkbox}
                     />
                   </label>
@@ -314,10 +311,12 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                     <input
                       type="checkbox"
                       checked={localSettings.enableTimer}
-                      onChange={(e) => setLocalSettings({
-                        ...localSettings,
-                        enableTimer: e.target.checked
-                      })}
+                      onChange={e =>
+                        setLocalSettings({
+                          ...localSettings,
+                          enableTimer: e.target.checked,
+                        })
+                      }
                       className={styles.checkbox}
                     />
                   </label>
@@ -330,10 +329,15 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                         min="10"
                         max="120"
                         value={localSettings.timerSeconds}
-                        onChange={(e) => setLocalSettings({
-                          ...localSettings,
-                          timerSeconds: Math.max(10, Math.min(120, parseInt(e.target.value) || 30))
-                        })}
+                        onChange={e =>
+                          setLocalSettings({
+                            ...localSettings,
+                            timerSeconds: Math.max(
+                              10,
+                              Math.min(120, parseInt(e.target.value) || 30)
+                            ),
+                          })
+                        }
                         className={styles.numberInput}
                       />
                     </label>
@@ -343,10 +347,16 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                     <span>Question type mix</span>
                     <select
                       value={localSettings.questionTypeMix}
-                      onChange={(e) => setLocalSettings({
-                        ...localSettings,
-                        questionTypeMix: e.target.value as 'auto' | 'multiple_choice' | 'free_text' | 'mixed'
-                      })}
+                      onChange={e =>
+                        setLocalSettings({
+                          ...localSettings,
+                          questionTypeMix: e.target.value as
+                            | 'auto'
+                            | 'multiple_choice'
+                            | 'free_text'
+                            | 'mixed',
+                        })
+                      }
                       className={styles.select}
                     >
                       <option value="auto">Auto (80% MC, 20% Text)</option>
@@ -360,10 +370,12 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                     <span>Progression mode</span>
                     <select
                       value={localSettings.progressionMode}
-                      onChange={(e) => setLocalSettings({
-                        ...localSettings,
-                        progressionMode: e.target.value as 'sequential' | 'level' | 'random'
-                      })}
+                      onChange={e =>
+                        setLocalSettings({
+                          ...localSettings,
+                          progressionMode: e.target.value as 'sequential' | 'level' | 'random',
+                        })
+                      }
                       className={styles.select}
                     >
                       <option value="sequential">Sequential</option>
@@ -381,10 +393,12 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                     </div>
                     <select
                       value={localSettings.schedulingAlgorithm}
-                      onChange={(e) => setLocalSettings({
-                        ...localSettings,
-                        schedulingAlgorithm: e.target.value as 'smart_spaced' | 'leitner_box'
-                      })}
+                      onChange={e =>
+                        setLocalSettings({
+                          ...localSettings,
+                          schedulingAlgorithm: e.target.value as 'smart_spaced' | 'leitner_box',
+                        })
+                      }
                       className={styles.select}
                     >
                       <option value="smart_spaced">Smart Spaced (Adaptive)</option>
@@ -404,10 +418,15 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                       min="1"
                       max="10"
                       value={localSettings.masteryThreshold || 3}
-                      onChange={(e) => setLocalSettings({
-                        ...localSettings,
-                        masteryThreshold: Math.max(1, Math.min(10, parseInt(e.target.value) || 3))
-                      })}
+                      onChange={e =>
+                        setLocalSettings({
+                          ...localSettings,
+                          masteryThreshold: Math.max(
+                            1,
+                            Math.min(10, parseInt(e.target.value) || 3)
+                          ),
+                        })
+                      }
                       className={styles.numberInput}
                     />
                   </label>
@@ -425,10 +444,16 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                     <span>Progressive mode</span>
                     <select
                       value={localSettings.progressiveLearning || 'spaced'}
-                      onChange={(e) => setLocalSettings({
-                        ...localSettings,
-                        progressiveLearning: e.target.value as 'disabled' | 'immediate' | 'spaced' | 'random'
-                      })}
+                      onChange={e =>
+                        setLocalSettings({
+                          ...localSettings,
+                          progressiveLearning: e.target.value as
+                            | 'disabled'
+                            | 'immediate'
+                            | 'spaced'
+                            | 'random',
+                        })
+                      }
                       className={styles.select}
                     >
                       <option value="disabled">Disabled (No follow-ups)</option>
@@ -446,30 +471,33 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                         min="1"
                         max="10"
                         value={localSettings.progressiveLearningSpacing || 3}
-                        onChange={(e) => setLocalSettings({
-                          ...localSettings,
-                          progressiveLearningSpacing: Math.max(1, Math.min(10, parseInt(e.target.value) || 3))
-                        })}
+                        onChange={e =>
+                          setLocalSettings({
+                            ...localSettings,
+                            progressiveLearningSpacing: Math.max(
+                              1,
+                              Math.min(10, parseInt(e.target.value) || 3)
+                            ),
+                          })
+                        }
                         className={styles.numberInput}
                       />
                     </label>
                   )}
-
                 </div>
               </section>
             </div>
 
             <footer className={styles.footer}>
-              <button
-                className={styles.cancelButton}
-                onClick={onClose}
-              >
+              <button className={styles.cancelButton} onClick={onClose}>
                 Cancel
               </button>
               <button
                 className={styles.saveButton}
                 onClick={handleSave}
-                disabled={localSettings.questionSides.length === 0 || localSettings.answerSides.length === 0}
+                disabled={
+                  localSettings.questionSides.length === 0 || localSettings.answerSides.length === 0
+                }
               >
                 Save Settings
               </button>

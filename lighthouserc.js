@@ -5,7 +5,7 @@ module.exports = {
         'http://localhost:5173',
         'http://localhost:5173/deck/typescript-fundamentals',
         'http://localhost:5173/flashcards/typescript-fundamentals',
-        'http://localhost:5173/learn/typescript-fundamentals'
+        'http://localhost:5173/learn/typescript-fundamentals',
       ],
       startServerCommand: 'npm run preview',
       startServerReadyPattern: 'Local:',
@@ -20,9 +20,9 @@ module.exports = {
           cpuSlowdownMultiplier: 1,
           requestLatencyMs: 0,
           downloadThroughputKbps: 0,
-          uploadThroughputKbps: 0
-        }
-      }
+          uploadThroughputKbps: 0,
+        },
+      },
     },
     assert: {
       assertions: {
@@ -56,7 +56,7 @@ module.exports = {
         'heading-order': ['error', { minScore: 1 }],
         'html-has-lang': ['error', { minScore: 1 }],
         'image-alt': ['error', { minScore: 1 }],
-        'label': ['error', { minScore: 1 }],
+        label: ['error', { minScore: 1 }],
         'link-name': ['error', { minScore: 1 }],
 
         // Best Practices
@@ -69,25 +69,25 @@ module.exports = {
         'document-title': ['error', { minScore: 1 }],
         'meta-description': ['error', { minScore: 1 }],
         'http-status-code': ['error', { minScore: 1 }],
-        'crawlable-anchors': ['error', { minScore: 1 }]
-      }
+        'crawlable-anchors': ['error', { minScore: 1 }],
+      },
     },
     upload: {
       target: 'temporary-public-storage',
       githubAppToken: process.env.LHCI_GITHUB_APP_TOKEN,
       githubApiHost: 'api.github.com',
-      githubStatusContextSuffix: '/lighthouse'
+      githubStatusContextSuffix: '/lighthouse',
     },
     server: {
       port: 9001,
       storage: {
         storageMethod: 'sql',
         sqlDialect: 'sqlite',
-        sqlDatabasePath: '.lighthouseci/lighthouse.db'
-      }
+        sqlDatabasePath: '.lighthouseci/lighthouse.db',
+      },
     },
     wizard: {
-      preset: 'ci'
-    }
-  }
+      preset: 'ci',
+    },
+  },
 };

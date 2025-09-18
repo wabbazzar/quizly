@@ -63,7 +63,7 @@ export class TextMatcher {
       return 0;
     }
 
-    return 1 - (distance / maxLength);
+    return 1 - distance / maxLength;
   }
 
   /**
@@ -96,24 +96,62 @@ export class TextMatcher {
     // Map of pinyin characters with tone marks to their base forms
     const pinyinMap: { [key: string]: string } = {
       // a tones
-      'ā': 'a', 'á': 'a', 'ǎ': 'a', 'à': 'a',
+      ā: 'a',
+      á: 'a',
+      ǎ: 'a',
+      à: 'a',
       // e tones
-      'ē': 'e', 'é': 'e', 'ě': 'e', 'è': 'e',
+      ē: 'e',
+      é: 'e',
+      ě: 'e',
+      è: 'e',
       // i tones
-      'ī': 'i', 'í': 'i', 'ǐ': 'i', 'ì': 'i',
+      ī: 'i',
+      í: 'i',
+      ǐ: 'i',
+      ì: 'i',
       // o tones
-      'ō': 'o', 'ó': 'o', 'ǒ': 'o', 'ò': 'o',
+      ō: 'o',
+      ó: 'o',
+      ǒ: 'o',
+      ò: 'o',
       // u tones
-      'ū': 'u', 'ú': 'u', 'ǔ': 'u', 'ù': 'u',
+      ū: 'u',
+      ú: 'u',
+      ǔ: 'u',
+      ù: 'u',
       // ü tones (u with umlaut)
-      'ǖ': 'ü', 'ǘ': 'ü', 'ǚ': 'ü', 'ǜ': 'ü', 'ü': 'u',
+      ǖ: 'ü',
+      ǘ: 'ü',
+      ǚ: 'ü',
+      ǜ: 'ü',
+      ü: 'u',
       // Also normalize the plain ü to u for easier matching
-      'Ā': 'A', 'Á': 'A', 'Ǎ': 'A', 'À': 'A',
-      'Ē': 'E', 'É': 'E', 'Ě': 'E', 'È': 'E',
-      'Ī': 'I', 'Í': 'I', 'Ǐ': 'I', 'Ì': 'I',
-      'Ō': 'O', 'Ó': 'O', 'Ǒ': 'O', 'Ò': 'O',
-      'Ū': 'U', 'Ú': 'U', 'Ǔ': 'U', 'Ù': 'U',
-      'Ǖ': 'Ü', 'Ǘ': 'Ü', 'Ǚ': 'Ü', 'Ǜ': 'Ü', 'Ü': 'U',
+      Ā: 'A',
+      Á: 'A',
+      Ǎ: 'A',
+      À: 'A',
+      Ē: 'E',
+      É: 'E',
+      Ě: 'E',
+      È: 'E',
+      Ī: 'I',
+      Í: 'I',
+      Ǐ: 'I',
+      Ì: 'I',
+      Ō: 'O',
+      Ó: 'O',
+      Ǒ: 'O',
+      Ò: 'O',
+      Ū: 'U',
+      Ú: 'U',
+      Ǔ: 'U',
+      Ù: 'U',
+      Ǖ: 'Ü',
+      Ǘ: 'Ü',
+      Ǚ: 'Ü',
+      Ǜ: 'Ü',
+      Ü: 'U',
     };
 
     // Replace each pinyin character with its base form
@@ -148,8 +186,8 @@ export class TextMatcher {
         } else {
           matrix[i][j] = Math.min(
             matrix[i - 1][j - 1] + 1, // substitution
-            matrix[i][j - 1] + 1,     // insertion
-            matrix[i - 1][j] + 1      // deletion
+            matrix[i][j - 1] + 1, // insertion
+            matrix[i - 1][j] + 1 // deletion
           );
         }
       }
@@ -223,16 +261,99 @@ export class TextMatcher {
 
     // Filter out common stop words
     const stopWords = new Set([
-      'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for',
-      'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'were', 'be',
-      'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will',
-      'would', 'should', 'could', 'may', 'might', 'must', 'can', 'shall',
-      'this', 'that', 'these', 'those', 'it', 'its', 'he', 'she', 'they',
-      'we', 'you', 'i', 'me', 'him', 'her', 'us', 'them', 'my', 'your',
-      'his', 'her', 'our', 'their', 'what', 'which', 'who', 'whom', 'whose',
-      'when', 'where', 'why', 'how', 'all', 'any', 'both', 'each', 'few',
-      'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only',
-      'own', 'same', 'so', 'than', 'too', 'very', 'just', 'now', 'also'
+      'the',
+      'a',
+      'an',
+      'and',
+      'or',
+      'but',
+      'in',
+      'on',
+      'at',
+      'to',
+      'for',
+      'of',
+      'with',
+      'by',
+      'from',
+      'as',
+      'is',
+      'was',
+      'are',
+      'were',
+      'be',
+      'been',
+      'being',
+      'have',
+      'has',
+      'had',
+      'do',
+      'does',
+      'did',
+      'will',
+      'would',
+      'should',
+      'could',
+      'may',
+      'might',
+      'must',
+      'can',
+      'shall',
+      'this',
+      'that',
+      'these',
+      'those',
+      'it',
+      'its',
+      'he',
+      'she',
+      'they',
+      'we',
+      'you',
+      'i',
+      'me',
+      'him',
+      'her',
+      'us',
+      'them',
+      'my',
+      'your',
+      'his',
+      'her',
+      'our',
+      'their',
+      'what',
+      'which',
+      'who',
+      'whom',
+      'whose',
+      'when',
+      'where',
+      'why',
+      'how',
+      'all',
+      'any',
+      'both',
+      'each',
+      'few',
+      'more',
+      'most',
+      'other',
+      'some',
+      'such',
+      'no',
+      'nor',
+      'not',
+      'only',
+      'own',
+      'same',
+      'so',
+      'than',
+      'too',
+      'very',
+      'just',
+      'now',
+      'also',
     ]);
 
     return words.filter(word => word.length > 2 && !stopWords.has(word));

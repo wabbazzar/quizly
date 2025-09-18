@@ -5,7 +5,12 @@
 
 import React from 'react';
 import type { Card } from '@/types';
-import type { WorkerMessage, WorkerResponse, CardStatistics, SearchResult } from '@/workers/cardProcessor.worker';
+import type {
+  WorkerMessage,
+  WorkerResponse,
+  CardStatistics,
+  SearchResult,
+} from '@/workers/cardProcessor.worker';
 
 interface WorkerTask {
   id: string;
@@ -29,10 +34,9 @@ class WorkerManager {
   private initWorker(): void {
     try {
       // Create worker from bundled file
-      this.worker = new Worker(
-        new URL('@/workers/cardProcessor.worker.ts', import.meta.url),
-        { type: 'module' }
-      );
+      this.worker = new Worker(new URL('@/workers/cardProcessor.worker.ts', import.meta.url), {
+        type: 'module',
+      });
 
       this.worker.onmessage = this.handleWorkerMessage.bind(this);
       this.worker.onerror = this.handleWorkerError.bind(this);
@@ -149,11 +153,7 @@ class WorkerManager {
   /**
    * Search cards with relevance scoring
    */
-  public async searchCards(
-    cards: Card[],
-    query: string,
-    limit = 50
-  ): Promise<SearchResult[]> {
+  public async searchCards(cards: Card[], query: string, limit = 50): Promise<SearchResult[]> {
     if (!query.trim() || cards.length === 0) {
       return [];
     }
@@ -178,11 +178,7 @@ class WorkerManager {
   /**
    * Generate quiz questions
    */
-  public async generateQuiz(
-    cards: Card[],
-    count: number,
-    options: any = {}
-  ): Promise<any[]> {
+  public async generateQuiz(cards: Card[], count: number, options: any = {}): Promise<any[]> {
     return this.sendMessage('GENERATE_QUIZ', {
       cards,
       count,
@@ -193,12 +189,14 @@ class WorkerManager {
   /**
    * Process multiple operations in batch
    */
-  public async batchProcess(operations: Array<{
-    type: string;
-    cards: Card[];
-    query?: string;
-    limit?: number;
-  }>): Promise<any[]> {
+  public async batchProcess(
+    operations: Array<{
+      type: string;
+      cards: Card[];
+      query?: string;
+      limit?: number;
+    }>
+  ): Promise<any[]> {
     return this.sendMessage('BATCH_PROCESS', { operations });
   }
 
@@ -319,11 +317,13 @@ class FallbackProcessor {
           cardIndex: index,
           card,
           score: 1,
-          matches: [{
-            field: 'side_a',
-            start: 0,
-            end: query.length,
-          }],
+          matches: [
+            {
+              field: 'side_a',
+              start: 0,
+              end: query.length,
+            },
+          ],
         });
       }
     });

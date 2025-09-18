@@ -15,10 +15,10 @@ interface NotificationStore {
   clearNotification: () => void;
 }
 
-export const useNotificationStore = create<NotificationStore>((set) => ({
+export const useNotificationStore = create<NotificationStore>(set => ({
   notification: null,
 
-  showNotification: (notification) => {
+  showNotification: notification => {
     set({ notification });
   },
 

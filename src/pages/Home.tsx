@@ -14,10 +14,13 @@ const Home: FC = () => {
     loadDecks();
   }, [loadDecks]);
 
-  const handleModeSelect = useCallback((deckId: string, _mode: string) => {
-    selectDeck(deckId);
-    // Mode navigation is handled by EnhancedDeckCard
-  }, [selectDeck]);
+  const handleModeSelect = useCallback(
+    (deckId: string, _mode: string) => {
+      selectDeck(deckId);
+      // Mode navigation is handled by EnhancedDeckCard
+    },
+    [selectDeck]
+  );
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -44,20 +47,14 @@ const Home: FC = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <h1 className={styles.title}>
-            Welcome to Quizly
-          </h1>
-          <p className={styles.subtitle}>
-            Choose a deck and select your preferred learning mode
-          </p>
+          <h1 className={styles.title}>Welcome to Quizly</h1>
+          <p className={styles.subtitle}>Choose a deck and select your preferred learning mode</p>
         </motion.div>
       </header>
 
       <main className={styles.main}>
         <section className={styles.deckSection}>
-          <h2 className={styles.sectionTitle}>
-            Available Decks
-          </h2>
+          <h2 className={styles.sectionTitle}>Available Decks</h2>
 
           {decks.length === 0 ? (
             <motion.div
@@ -77,7 +74,7 @@ const Home: FC = () => {
               transition={{ duration: 0.3 }}
             >
               <AnimatePresence mode="popLayout">
-                {decks.map((deck) => (
+                {decks.map(deck => (
                   <motion.div
                     key={deck.id}
                     layout

@@ -85,11 +85,7 @@ const CardDetailsModal: FC<CardDetailsModalProps> = ({
             <div className={styles.modalContent}>
               <header className={styles.modalHeader}>
                 <h2 className={styles.modalTitle}>Card Details</h2>
-                <button
-                  className={styles.closeButton}
-                  onClick={onClose}
-                  aria-label="Close modal"
-                >
+                <button className={styles.closeButton} onClick={onClose} aria-label="Close modal">
                   ×
                 </button>
               </header>
@@ -98,7 +94,9 @@ const CardDetailsModal: FC<CardDetailsModalProps> = ({
                 {/* Show configured front/back content */}
                 <section className={styles.configuredContent}>
                   <div className={styles.sideGroup}>
-                    <h3 className={styles.sideGroupTitle}>Front Side{frontContent.length > 1 ? 's' : ''}</h3>
+                    <h3 className={styles.sideGroupTitle}>
+                      Front Side{frontContent.length > 1 ? 's' : ''}
+                    </h3>
                     {frontContent.map((item, index) => (
                       <div key={index} className={styles.sideItem}>
                         <span className={styles.sideLabel}>{item.label}:</span>
@@ -108,7 +106,9 @@ const CardDetailsModal: FC<CardDetailsModalProps> = ({
                   </div>
 
                   <div className={styles.sideGroup}>
-                    <h3 className={styles.sideGroupTitle}>Back Side{backContent.length > 1 ? 's' : ''}</h3>
+                    <h3 className={styles.sideGroupTitle}>
+                      Back Side{backContent.length > 1 ? 's' : ''}
+                    </h3>
                     {backContent.map((item, index) => (
                       <div key={index} className={styles.sideItem}>
                         <span className={styles.sideLabel}>{item.label}:</span>
@@ -119,7 +119,7 @@ const CardDetailsModal: FC<CardDetailsModalProps> = ({
                 </section>
 
                 {/* Show all available sides if there are additional sides */}
-                {allSides.length > (frontContent.length + backContent.length) && (
+                {allSides.length > frontContent.length + backContent.length && (
                   <section className={styles.allSides}>
                     <h3 className={styles.allSidesTitle}>All Available Sides</h3>
                     <div className={styles.sidesGrid}>
@@ -155,10 +155,7 @@ const CardDetailsModal: FC<CardDetailsModalProps> = ({
               </div>
 
               <footer className={styles.modalFooter}>
-                <button
-                  className={styles.actionButton}
-                  onClick={onClose}
-                >
+                <button className={styles.actionButton} onClick={onClose}>
                   Close
                 </button>
               </footer>

@@ -99,13 +99,13 @@ const Learn: FC = () => {
       const masteryThreshold = settings.masteryThreshold || 3;
 
       if (results.passedCards) {
-        results.passedCards.forEach((cardIndex) => {
+        results.passedCards.forEach(cardIndex => {
           updateCardAttempt(deckId, cardIndex, true, totalCards, masteryThreshold);
         });
       }
 
       if (results.strugglingCards) {
-        results.strugglingCards.forEach((cardIndex) => {
+        results.strugglingCards.forEach(cardIndex => {
           updateCardAttempt(deckId, cardIndex, false, totalCards, masteryThreshold);
         });
       }
@@ -156,14 +156,13 @@ const Learn: FC = () => {
     cardsToExclude = [...new Set([...cardsToExclude, ...masteredCards])];
   }
 
-  const filteredDeck = cardsToExclude.length > 0
-    ? {
-        ...currentDeck,
-        content: currentDeck.content.filter(
-          (_card, index) => !cardsToExclude.includes(index)
-        )
-      }
-    : currentDeck;
+  const filteredDeck =
+    cardsToExclude.length > 0
+      ? {
+          ...currentDeck,
+          content: currentDeck.content.filter((_card, index) => !cardsToExclude.includes(index)),
+        }
+      : currentDeck;
 
   return (
     <div className={styles.learnPage}>
@@ -183,7 +182,7 @@ const Learn: FC = () => {
         deck={currentDeck}
         mode="learn"
         settings={settings}
-        onUpdateSettings={(newSettings) => {
+        onUpdateSettings={newSettings => {
           setSettings(newSettings as LearnModeSettings);
           if (deckId) {
             updateStoredSettings(deckId, 'learn', newSettings);

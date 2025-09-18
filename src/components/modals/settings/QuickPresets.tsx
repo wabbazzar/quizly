@@ -58,9 +58,7 @@ const QuickPresets: FC<SectionProps> = ({ settings, onChange, mode = 'flashcards
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className={styles.presetLabel}>
-              {preset.label}
-            </span>
+            <span className={styles.presetLabel}>{preset.label}</span>
           </motion.button>
         ))}
       </div>
@@ -105,7 +103,8 @@ const isPresetActive = (currentSettings: any, presetSettings: any, mode: string)
 
   if (mode === 'learn') {
     return (
-      JSON.stringify(currentSettings.questionSides) === JSON.stringify(presetSettings.questionSides) &&
+      JSON.stringify(currentSettings.questionSides) ===
+        JSON.stringify(presetSettings.questionSides) &&
       JSON.stringify(currentSettings.answerSides) === JSON.stringify(presetSettings.answerSides) &&
       currentSettings.questionTypeMix === presetSettings.questionTypeMix
     );

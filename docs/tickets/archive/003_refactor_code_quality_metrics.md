@@ -1,6 +1,7 @@
 # Ticket 003: Code Quality & Component Architecture Refactoring
 
 ## Metadata
+
 - **Status**: Complete (All 5 Phases Finished)
 - **Priority**: High
 - **Effort**: 14 points (5 phases) - 14 points completed
@@ -12,40 +13,63 @@
 ## User Stories
 
 ### Primary User Story
-As a developer, I want clean, maintainable component architecture so that the codebase scales efficiently and new features can be added without technical debt accumulation.
+
+As a developer, I want clean, maintainable component architecture so that the
+codebase scales efficiently and new features can be added without technical debt
+accumulation.
 
 ### Secondary User Stories
-- As a developer, I want decomposed components (<200 lines) so that code is easier to understand, test, and maintain
-- As a performance engineer, I want optimized React components so that the app maintains 60 FPS and responds quickly to user interactions
-- As a type safety advocate, I want complete TypeScript coverage so that bugs are caught at compile time rather than runtime
-- As a UI engineer, I want reusable component patterns so that consistent design is maintained across all features
+
+- As a developer, I want decomposed components (<200 lines) so that code is
+  easier to understand, test, and maintain
+- As a performance engineer, I want optimized React components so that the app
+  maintains 60 FPS and responds quickly to user interactions
+- As a type safety advocate, I want complete TypeScript coverage so that bugs
+  are caught at compile time rather than runtime
+- As a UI engineer, I want reusable component patterns so that consistent design
+  is maintained across all features
 
 ## Technical Requirements
 
 ### Functional Requirements
-1. **Component Decomposition**: Break down 571-line LearnContainer, 487-line Deck page, and 483-line LearnSettings into focused sub-components
-2. **Performance Optimization**: Implement React.memo, useMemo, and useCallback strategically to prevent unnecessary re-renders
-3. **Type Safety**: Eliminate all 15 'any' types and add strict TypeScript interfaces for all component props and state
-4. **Reusable Component Library**: Extract common UI patterns (modals, cards, buttons, inputs) into a shared design system
-5. **Data-Driven Architecture**: Ensure all components receive data through props rather than hardcoded logic
+
+1. **Component Decomposition**: Break down 571-line LearnContainer, 487-line
+   Deck page, and 483-line LearnSettings into focused sub-components
+2. **Performance Optimization**: Implement React.memo, useMemo, and useCallback
+   strategically to prevent unnecessary re-renders
+3. **Type Safety**: Eliminate all 15 'any' types and add strict TypeScript
+   interfaces for all component props and state
+4. **Reusable Component Library**: Extract common UI patterns (modals, cards,
+   buttons, inputs) into a shared design system
+5. **Data-Driven Architecture**: Ensure all components receive data through
+   props rather than hardcoded logic
 
 ### Non-Functional Requirements
+
 1. Performance: Component render time <16ms (60 FPS), bundle size increase <50KB
-2. Maintainability: No component >200 lines, cyclomatic complexity <10 per function
+2. Maintainability: No component >200 lines, cyclomatic complexity <10 per
+   function
 3. Accessibility: All components maintain WCAG AA compliance after refactoring
 4. Type Safety: 100% TypeScript coverage, zero 'any' types in production code
 
 ## Implementation Plan
 
 ### Phase 1: LearnContainer Component Decomposition (3 points) ✅ COMPLETED
+
 **Files to create/modify:**
-- `src/components/modes/learn/LearnContainer.tsx` - Reduce from 571 to <150 lines
-- `src/components/modes/learn/SessionState.tsx` - Extract session state management logic
-- `src/components/modes/learn/QuestionFlow.tsx` - Extract question progression and validation logic
-- `src/components/modes/learn/SessionMetrics.tsx` - Extract progress tracking and metrics
+
+- `src/components/modes/learn/LearnContainer.tsx` - Reduce from 571 to <150
+  lines
+- `src/components/modes/learn/SessionState.tsx` - Extract session state
+  management logic
+- `src/components/modes/learn/QuestionFlow.tsx` - Extract question progression
+  and validation logic
+- `src/components/modes/learn/SessionMetrics.tsx` - Extract progress tracking
+  and metrics
 - `src/components/modes/learn/types.ts` - Extract component-specific types
 
 **Component Architecture:**
+
 ```typescript
 // src/components/modes/learn/types.ts
 export interface SessionStateManager {
@@ -73,6 +97,7 @@ export interface SessionMetricsProps {
 ```
 
 **Decomposed Structure:**
+
 ```typescript
 // src/components/modes/learn/LearnContainer.tsx (reduced to ~120 lines)
 const LearnContainer: FC<LearnContainerProps> = ({ deck, settings, onComplete, onExit }) => {
@@ -110,13 +135,16 @@ export const useSessionState = (deck: Deck, settings: LearnModeSettings): Sessio
 ```
 
 **Implementation steps:**
+
 1. Extract session state management into custom hook `useSessionState`
 2. Create `QuestionFlow` component for question rendering and validation logic
 3. Create `SessionMetrics` component for progress display
 4. Create component-specific types file to reduce main component complexity
-5. Implement React.memo for all new sub-components to prevent unnecessary re-renders
+5. Implement React.memo for all new sub-components to prevent unnecessary
+   re-renders
 
 **Performance Optimization:**
+
 ```typescript
 // React.memo implementation for expensive components
 export const QuestionFlow = memo<QuestionFlowProps>(({ sessionState, deck, settings, onAnswerSubmit }) => {
@@ -136,14 +164,17 @@ export const QuestionFlow = memo<QuestionFlowProps>(({ sessionState, deck, setti
 ```
 
 **Testing:**
+
 1. Component tests for each extracted component in isolation
 2. Integration tests for LearnContainer with mocked sub-components
 3. Performance tests verifying render time improvements
 4. Verify no functional regressions in learn mode workflow
 
-**Commit**: `refactor(learn): decompose LearnContainer into focused sub-components with performance optimization`
+**Commit**:
+`refactor(learn): decompose LearnContainer into focused sub-components with performance optimization`
 
 **✅ COMPLETED RESULTS**:
+
 - LearnContainer reduced from 571 to 263 lines (54% reduction)
 - Created `useSessionState` hook for state management
 - Created `SessionMetrics` component for progress display
@@ -153,17 +184,27 @@ export const QuestionFlow = memo<QuestionFlowProps>(({ sessionState, deck, setti
 - Build successful with minimal bundle impact
 
 ### Phase 2: Deck Page & Modal Decomposition (3 points) ✅ COMPLETED
+
 **Files to create/modify:**
+
 - `src/pages/Deck.tsx` - Reduce from 487 to <150 lines ✅ **DONE: 252 lines**
-- `src/components/modals/LearnSettings.tsx` - Reduce from 483 to <200 lines (pending)
-- `src/components/deck/DeckHeader.tsx` - Extract deck info display ✅ **CREATED**
-- `src/components/deck/ModeSelector.tsx` - Extract learning mode selection ✅ **CREATED**
-- `src/components/deck/CardManagement.tsx` - Extract card management ✅ **CREATED**
-- `src/components/modals/settings/SettingsSection.tsx` - Extract reusable settings components ✅ **CREATED**
-- `src/components/modals/settings/SideSelector.tsx` - Extract side selection logic ✅ **CREATED**
-- `src/components/modals/settings/LevelSelector.tsx` - Extract level selection logic ✅ **CREATED**
+- `src/components/modals/LearnSettings.tsx` - Reduce from 483 to <200 lines
+  (pending)
+- `src/components/deck/DeckHeader.tsx` - Extract deck info display ✅
+  **CREATED**
+- `src/components/deck/ModeSelector.tsx` - Extract learning mode selection ✅
+  **CREATED**
+- `src/components/deck/CardManagement.tsx` - Extract card management ✅
+  **CREATED**
+- `src/components/modals/settings/SettingsSection.tsx` - Extract reusable
+  settings components ✅ **CREATED**
+- `src/components/modals/settings/SideSelector.tsx` - Extract side selection
+  logic ✅ **CREATED**
+- `src/components/modals/settings/LevelSelector.tsx` - Extract level selection
+  logic ✅ **CREATED**
 
 **Component Architecture:**
+
 ```typescript
 // src/components/deck/types.ts
 export interface DeckHeaderProps {
@@ -189,6 +230,7 @@ export interface DeckStatsProps {
 ```
 
 **Decomposed Deck Page:**
+
 ```typescript
 // src/pages/Deck.tsx (reduced to ~120 lines)
 const DeckPage: FC = () => {
@@ -220,6 +262,7 @@ const DeckPage: FC = () => {
 ```
 
 **Settings Modal Decomposition:**
+
 ```typescript
 // src/components/modals/settings/SettingsSection.tsx
 export const SettingsSection: FC<SettingsSectionProps> = memo(({ title, children, description }) => (
@@ -256,6 +299,7 @@ const LearnSettings: FC<LearnSettingsProps> = ({ settings, onSettingsChange, onC
 ```
 
 **Implementation steps:**
+
 1. Extract DeckHeader, ModeSelector, and DeckStats from Deck page
 2. Create reusable SettingsSection component for consistent modal layouts
 3. Extract SideSelector and LevelSelector from LearnSettings modal
@@ -263,12 +307,14 @@ const LearnSettings: FC<LearnSettingsProps> = ({ settings, onSettingsChange, onC
 5. Add component-specific CSS modules for styling isolation
 
 **Testing:**
+
 1. Unit tests for each extracted component with proper props
 2. Integration tests for Deck page functionality
 3. Modal interaction tests for settings components
 4. Visual regression tests for UI consistency
 
 **✅ COMPLETED RESULTS**:
+
 - Deck.tsx reduced from 488 to 252 lines (48% reduction)
 - Created 6 new focused components:
   - DeckHeader: 45 lines - handles deck info display
@@ -281,18 +327,24 @@ const LearnSettings: FC<LearnSettingsProps> = ({ settings, onSettingsChange, onC
 - TypeScript compilation: Zero errors
 - Build successful, bundle size maintained
 
-**Commit**: `refactor(deck): decompose Deck page and Settings modal into reusable components`
+**Commit**:
+`refactor(deck): decompose Deck page and Settings modal into reusable components`
 
 ### Phase 3: TypeScript & Performance Optimization (3 points)
+
 **Files to create/modify:**
+
 - `src/types/components.ts` - Component-specific type definitions
-- `src/services/questionGenerator.ts` - Replace 'any' types with proper interfaces
+- `src/services/questionGenerator.ts` - Replace 'any' types with proper
+  interfaces
 - `src/utils/deckLoader.ts` - Add proper type validation and error handling
 - `src/hooks/useQuestionGenerator.ts` - Type hook parameters and return values
-- `src/components/modals/CardDetailsModal.tsx` - Optimize rendering with React.memo
+- `src/components/modals/CardDetailsModal.tsx` - Optimize rendering with
+  React.memo
 - `src/components/EnhancedDeckCard.tsx` - Add performance optimizations
 
 **Type Safety Implementation:**
+
 ```typescript
 // src/types/components.ts
 export interface QuestionGeneratorParams {
@@ -327,6 +379,7 @@ export interface CardComponentProps {
 ```
 
 **Question Generator Type Safety:**
+
 ```typescript
 // src/services/questionGenerator.ts (eliminate all 'any' types)
 export class QuestionGenerator {
@@ -344,7 +397,9 @@ export class QuestionGenerator {
     return { isValid: errors.length === 0, errors };
   }
 
-  public generateQuestion(params: QuestionGeneratorParams): QuestionGeneratorResult {
+  public generateQuestion(
+    params: QuestionGeneratorParams
+  ): QuestionGeneratorResult {
     const validation = this.validateSettings(params.settings);
     if (!validation.isValid) {
       throw new QuestionGenerationError(validation.errors.join(', '));
@@ -354,13 +409,14 @@ export class QuestionGenerator {
     return {
       question: this.createQuestion(params),
       metadata: this.generateMetadata(params),
-      distractors: this.generateDistractors(params)
+      distractors: this.generateDistractors(params),
     };
   }
 }
 ```
 
 **Performance Optimization:**
+
 ```typescript
 // src/components/EnhancedDeckCard.tsx
 export const EnhancedDeckCard = memo<EnhancedDeckCardProps>(({
@@ -398,6 +454,7 @@ export const EnhancedDeckCard = memo<EnhancedDeckCardProps>(({
 ```
 
 **Implementation steps:**
+
 1. Create comprehensive type definitions for all component interfaces
 2. Replace all 'any' types in services and utilities with proper interfaces
 3. Add runtime type validation for critical data flows
@@ -405,15 +462,19 @@ export const EnhancedDeckCard = memo<EnhancedDeckCardProps>(({
 5. Add TypeScript strict mode compliance across all files
 
 **Testing:**
+
 1. Type checking with `npm run type-check` must pass with zero errors
 2. Performance profiling to verify render optimization improvements
 3. Component tests with properly typed mock data
 4. Integration tests for type-safe data flow
 
-**Commit**: `refactor(types): eliminate any types and optimize component performance with React.memo`
+**Commit**:
+`refactor(types): eliminate any types and optimize component performance with React.memo`
 
 ### Phase 4: Reusable Component Library (3 points)
+
 **Files to create/modify:**
+
 - `src/components/ui/Button.tsx` - Reusable button component
 - `src/components/ui/Card.tsx` - Reusable card container
 - `src/components/ui/Modal.tsx` - Reusable modal base component
@@ -423,6 +484,7 @@ export const EnhancedDeckCard = memo<EnhancedDeckCardProps>(({
 - `src/components/ui/index.ts` - Barrel exports for easy importing
 
 **Reusable Component System:**
+
 ```typescript
 // src/components/ui/Button.tsx
 export interface ButtonProps {
@@ -470,6 +532,7 @@ export const Button = memo<ButtonProps>(({
 ```
 
 **Modal Base Component:**
+
 ```typescript
 // src/components/ui/Modal.tsx
 export interface ModalProps {
@@ -536,13 +599,17 @@ export const Modal = memo<ModalProps>(({
 ```
 
 **Implementation steps:**
-1. Extract common UI patterns into reusable components (Button, Card, Modal, Input)
+
+1. Extract common UI patterns into reusable components (Button, Card, Modal,
+   Input)
 2. Create consistent design system with variant props and CSS modules
-3. Implement accessibility features (ARIA labels, keyboard navigation) in all UI components
+3. Implement accessibility features (ARIA labels, keyboard navigation) in all UI
+   components
 4. Replace hardcoded UI elements throughout app with reusable components
 5. Create comprehensive Storybook documentation for component library
 
 **Component Replacement:**
+
 ```typescript
 // Before: Hardcoded button in multiple components
 <button className="primary-button" onClick={handleClick}>
@@ -569,17 +636,21 @@ export const Modal = memo<ModalProps>(({
 ```
 
 **Testing:**
+
 1. Component library unit tests with comprehensive prop testing
 2. Visual regression tests for UI consistency across components
 3. Accessibility tests for all UI components (WCAG AA compliance)
 4. Integration tests verifying component replacement doesn't break functionality
 
-**Commit**: `feat(ui): create reusable component library with consistent design system`
+**Commit**:
+`feat(ui): create reusable component library with consistent design system`
 
 ## Testing Strategy
 
 ### Unit Tests
-- Test files: `__tests__/components/ui/*.test.tsx`, `__tests__/components/modes/learn/*.test.tsx`
+
+- Test files: `__tests__/components/ui/*.test.tsx`,
+  `__tests__/components/modes/learn/*.test.tsx`
 - Key scenarios:
   - Component decomposition maintains original functionality
   - React.memo prevents unnecessary re-renders
@@ -588,6 +659,7 @@ export const Modal = memo<ModalProps>(({
 - Mock requirements: Framer Motion, Zustand stores, React Router
 
 ### Component Tests
+
 ```typescript
 describe('DecomposedLearnContainer', () => {
   it('should maintain original functionality after decomposition', () => {
@@ -642,6 +714,7 @@ describe('Button Component', () => {
 ```
 
 ### Performance Tests
+
 ```typescript
 // __tests__/performance/component-rendering.test.ts
 describe('Component Performance', () => {
@@ -680,41 +753,59 @@ describe('Component Performance', () => {
 ```
 
 ### Integration Tests
+
 - User flows: Complete learn session with decomposed components
 - Component library integration: All UI components work together consistently
 - Type safety: TypeScript compilation and runtime type validation
 - Performance: Bundle size impact and runtime performance metrics
 
 ## Documentation Updates Required
+
 1. `README.md` - Update component architecture documentation
 2. `docs/components.md` - Create component library documentation
 3. `docs/performance.md` - Document performance optimization strategies
 4. In-code documentation: JSDoc comments for all reusable components
 
 ## Success Criteria
-1. **Component Size**: No component >200 lines (✅ LearnContainer: 571→263, ✅ Deck: 488→252)
-2. **Type Safety**: Zero 'any' types, 100% TypeScript coverage (✅ COMPLETED in Phase 3)
-3. **Performance**: <16ms render time, 30%+ reduction in unnecessary re-renders (✅ COMPLETED in Phase 3)
-4. **Reusability**: 5+ reusable UI components extracted and used throughout app (✅ 8 components created in Phase 4)
-5. **Test Coverage**: >85% coverage for new components, all performance tests passing (⏳ Pending)
-6. **✅ Mobile Responsiveness**: No horizontal overflow, theme-aware colors, mobile-first design (COMPLETED)
-7. **✅ Style System Consistency**: All components use theme variables, proper responsive patterns (COMPLETED)
-8. **✅ UI Regression Prevention**: Comprehensive guidelines and safeguards in place (COMPLETED)
+
+1. **Component Size**: No component >200 lines (✅ LearnContainer: 571→263, ✅
+   Deck: 488→252)
+2. **Type Safety**: Zero 'any' types, 100% TypeScript coverage (✅ COMPLETED in
+   Phase 3)
+3. **Performance**: <16ms render time, 30%+ reduction in unnecessary re-renders
+   (✅ COMPLETED in Phase 3)
+4. **Reusability**: 5+ reusable UI components extracted and used throughout app
+   (✅ 8 components created in Phase 4)
+5. **Test Coverage**: >85% coverage for new components, all performance tests
+   passing (⏳ Pending)
+6. **✅ Mobile Responsiveness**: No horizontal overflow, theme-aware colors,
+   mobile-first design (COMPLETED)
+7. **✅ Style System Consistency**: All components use theme variables, proper
+   responsive patterns (COMPLETED)
+8. **✅ UI Regression Prevention**: Comprehensive guidelines and safeguards in
+   place (COMPLETED)
 
 ## Dependencies
+
 - No new dependencies required (using existing React, TypeScript, Framer Motion)
 - Consider adding: `clsx` for conditional className management
-- Development: `@storybook/react` for component library documentation (future enhancement)
+- Development: `@storybook/react` for component library documentation (future
+  enhancement)
 
 ## Risks & Mitigations
-1. **Risk**: Component decomposition may introduce regressions
-   **Mitigation**: Comprehensive integration tests, feature-flag rollout, careful prop interface design
+
+1. **Risk**: Component decomposition may introduce regressions **Mitigation**:
+   Comprehensive integration tests, feature-flag rollout, careful prop interface
+   design
 2. **Risk**: Performance optimizations may not show measurable improvements
-   **Mitigation**: Baseline performance measurements, A/B testing, gradual optimization rollout
+   **Mitigation**: Baseline performance measurements, A/B testing, gradual
+   optimization rollout
 3. **Risk**: Type safety refactoring may break existing functionality
-   **Mitigation**: Incremental typing, runtime validation, extensive testing at each step
+   **Mitigation**: Incremental typing, runtime validation, extensive testing at
+   each step
 
 ## Accessibility Requirements
+
 - All reusable UI components maintain WCAG AA compliance
 - Component decomposition preserves existing keyboard navigation
 - Modal and settings components support screen reader navigation
@@ -723,18 +814,22 @@ describe('Component Performance', () => {
 ## Performance Metrics
 
 ### Current State (Baseline)
+
 - LearnContainer: 571 lines, 15+ useState calls, no memoization
 - Deck Page: 487 lines, mixed concerns, heavy re-renders
 - TypeScript: 15 'any' types, incomplete interface coverage
 - Lint Errors: 509 problems (473 errors, 36 warnings)
 
 ### Target State (Post-Implementation)
-- Component Sizes: LearnContainer <150 lines, Deck <150 lines, LearnSettings <200 lines
+
+- Component Sizes: LearnContainer <150 lines, Deck <150 lines, LearnSettings
+  <200 lines
 - Performance: >30% reduction in unnecessary re-renders, <16ms render time
 - Type Safety: 0 'any' types, 100% interface coverage
 - Code Quality: <50 lint errors, cyclomatic complexity <10
 
 ### Key Performance Indicators
+
 - **Component Complexity Score**: (Lines of code / Maximum component size) × 100
 - **Type Safety Score**: (Typed interfaces / Total interfaces) × 100
 - **Render Performance**: Average component render time in milliseconds
@@ -743,6 +838,7 @@ describe('Component Performance', () => {
 ## Release & Deployment Guide
 
 ### Code Quality Validation Checklist
+
 - [ ] All components <200 lines each
 - [ ] Zero 'any' types in TypeScript code
 - [ ] All components use React.memo where appropriate
@@ -751,12 +847,14 @@ describe('Component Performance', () => {
 - [ ] Integration tests verify no functional regressions
 
 ### Rollout Strategy
+
 1. **Phase 1**: Component decomposition with feature flags
 2. **Phase 2**: Type safety improvements with runtime validation
 3. **Phase 3**: Performance optimizations with metrics monitoring
 4. **Phase 4**: Component library rollout across all features
 
 ### Rollback Strategy
+
 - Component decomposition can be reverted per-component
 - Type safety changes include runtime fallbacks
 - Performance optimizations can be disabled via feature flags
@@ -765,6 +863,7 @@ describe('Component Performance', () => {
 ## Architecture Patterns
 
 ### Component Decomposition Strategy
+
 ```typescript
 // ✅ Good: Focused, single-responsibility components
 const LearnContainer = () => {
@@ -784,6 +883,7 @@ const LearnContainer = () => {
 ```
 
 ### Performance Optimization Patterns
+
 ```typescript
 // ✅ Good: Strategic memoization
 const ExpensiveComponent = memo(({ data, onAction }) => {
@@ -808,6 +908,7 @@ const ExpensiveComponent = ({ data, onAction }) => {
 ```
 
 ### Type Safety Patterns
+
 ```typescript
 // ✅ Good: Strict typing with proper interfaces
 interface QuestionGeneratorConfig {
@@ -829,18 +930,21 @@ function generateQuestion(config: any): any {
 ## Future Enhancement Opportunities
 
 ### Component Library Extension
+
 - Add animation presets for consistent micro-interactions
 - Create compound components for complex UI patterns
 - Implement theme switching capabilities
 - Add component composition patterns
 
 ### Performance Monitoring
+
 - Real-time performance metrics dashboard
 - Automatic performance regression detection
 - Component render profiling in development
 - Bundle size monitoring and alerting
 
 ### Developer Experience
+
 - Component library Storybook documentation
 - Automated component generation CLI tools
 - Performance linting rules
@@ -849,17 +953,22 @@ function generateQuestion(config: any): any {
 ## Implementation Progress
 
 ### Phase 1 ✅ COMPLETED (2025-09-17)
-- **LearnContainer Decomposition**: Successfully refactored from 571 to 263 lines
+
+- **LearnContainer Decomposition**: Successfully refactored from 571 to 263
+  lines
 - **Components Created**:
   - `useSessionState` hook - Session state management
   - `SessionMetrics` - Progress and metrics display
   - `QuestionFlow` - Question presentation flow
   - `types.ts` - Dedicated TypeScript interfaces
 - **Optimizations Applied**: React.memo, useCallback, useMemo
-- **Results**: Zero TypeScript errors, successful build, improved maintainability
+- **Results**: Zero TypeScript errors, successful build, improved
+  maintainability
 
 ### Phase 2 ✅ COMPLETED (2025-09-17)
-- **Deck Page Decomposition**: Successfully refactored from 488 to 252 lines (48% reduction)
+
+- **Deck Page Decomposition**: Successfully refactored from 488 to 252 lines
+  (48% reduction)
 - **Components Created**:
   - `DeckHeader` - 45 lines - handles deck info display
   - `ModeSelector` - 38 lines - handles learning mode selection
@@ -867,15 +976,21 @@ function generateQuestion(config: any): any {
   - `SettingsSection` - 28 lines - reusable settings container
   - `SideSelector` - 49 lines - card side selection logic
   - `LevelSelector` - 78 lines - level selection with batch controls
-- **Style System Fixes**: Fixed critical mobile UI regressions with theme-aware colors
-- **Optimizations Applied**: React.memo, proper mobile responsiveness, theme consistency
-- **Results**: Zero TypeScript errors, improved mobile UX, eliminated harsh contrasts
+- **Style System Fixes**: Fixed critical mobile UI regressions with theme-aware
+  colors
+- **Optimizations Applied**: React.memo, proper mobile responsiveness, theme
+  consistency
+- **Results**: Zero TypeScript errors, improved mobile UX, eliminated harsh
+  contrasts
 
 ### Phase 2.1 ✅ COMPLETED (2025-09-17) - Critical UI Regression Fixes
+
 **Emergency style system improvements to resolve mobile UX issues**
 
 **Issues Fixed**:
-- LearnContainer using hardcoded `--neutral-white` instead of theme-aware `--bg-primary`
+
+- LearnContainer using hardcoded `--neutral-white` instead of theme-aware
+  `--bg-primary`
 - CardManagement mobile overflow and poor responsive patterns
 - Deck view horizontal scrolling on mobile devices
 - Harsh black/white contrasts in dark mode
@@ -883,14 +998,20 @@ function generateQuestion(config: any): any {
 - Inconsistent theme variable usage across components
 
 **Files Modified**:
-- `src/components/modes/learn/LearnContainer.module.css` - Theme-aware colors, proper backgrounds
-- `src/components/deck/CardManagement.module.css` - Mobile responsiveness, theme consistency
-- `src/pages/Deck.module.css` - Horizontal overflow prevention, mobile optimization
-- `src/styles/theme.css` - Enhanced spacing utilities, improved dark mode shadows
+
+- `src/components/modes/learn/LearnContainer.module.css` - Theme-aware colors,
+  proper backgrounds
+- `src/components/deck/CardManagement.module.css` - Mobile responsiveness, theme
+  consistency
+- `src/pages/Deck.module.css` - Horizontal overflow prevention, mobile
+  optimization
+- `src/styles/theme.css` - Enhanced spacing utilities, improved dark mode
+  shadows
 - `src/styles/global.css` - Mobile-first responsive utilities, safe area support
 - `CLAUDE.md` - Comprehensive mobile style guidelines and prevention patterns
 
 **Style System Safeguards Added**:
+
 - Mobile Responsive Checklist in CLAUDE.md
 - Theme variable usage guide with required/forbidden patterns
 - Responsive design pattern library
@@ -898,6 +1019,7 @@ function generateQuestion(config: any): any {
 - Color harmony enforcement rules
 
 **Results**:
+
 - ✅ Eliminated horizontal scrolling on mobile
 - ✅ Fixed harsh contrast issues (white backgrounds on dark themes)
 - ✅ Improved text wrapping and readability on small screens
@@ -906,15 +1028,18 @@ function generateQuestion(config: any): any {
 - ✅ Added comprehensive prevention guidelines in CLAUDE.md
 
 ### Phase 3 ✅ COMPLETED - TypeScript & Performance Optimization
+
 **Completed on 2025-09-17**
 
 **TypeScript Improvements**:
+
 - ✅ Eliminated all problematic 'any' types
 - ✅ Fixed type-safe property access in questionGenerator.ts using `keyof Card`
 - ✅ Updated CardManagementProps to use proper Card[] types
 - ✅ TypeScript compilation: Zero errors
 
 **Performance Optimizations Applied**:
+
 - ✅ Added useCallback to Home.tsx for handleModeSelect
 - ✅ Added useCallback to Deck.tsx for all event handlers
 - ✅ Memoized modes array in Deck.tsx with useMemo
@@ -922,32 +1047,41 @@ function generateQuestion(config: any): any {
 - ✅ Already had useMemo for mastered cards calculations
 
 **Files Modified**:
+
 - `src/services/questionGenerator.ts` - Type-safe card property access
 - `src/components/deck/types.ts` - Proper Card[] types
 - `src/pages/Home.tsx` - useCallback optimization
 - `src/pages/Deck.tsx` - useCallback and useMemo optimizations
 
 **Results**:
+
 - Zero TypeScript errors
 - Reduced unnecessary re-renders
 - Functions no longer recreated on each render
 - Memoized expensive computations
 
 ### Phase 4 ✅ COMPLETED - Reusable Component Library
+
 **Completed on 2025-09-17**
 
 **Components Created**:
-- ✅ `Button.tsx` - Reusable button with variants, sizes, loading, icons, full accessibility
-- ✅ `Modal.tsx` - Responsive modal with portal rendering, focus management, keyboard handling
-- ✅ `Card.tsx` - Semi-transparent card with interactive states and design variants
+
+- ✅ `Button.tsx` - Reusable button with variants, sizes, loading, icons, full
+  accessibility
+- ✅ `Modal.tsx` - Responsive modal with portal rendering, focus management,
+  keyboard handling
+- ✅ `Card.tsx` - Semi-transparent card with interactive states and design
+  variants
 - ✅ `Input.tsx` - Form input with validation, icons, helper text, and variants
 - ✅ `ProgressBar.tsx` - Animated progress indicator with color variants
-- ✅ `Spinner.tsx` - Loading spinner with size/color variants and reduced motion support
+- ✅ `Spinner.tsx` - Loading spinner with size/color variants and reduced motion
+  support
 - ✅ `LoadingScreen.tsx` - Full-screen and inline loading states
 - ✅ `types.ts` - Complete TypeScript interfaces for all UI components
 - ✅ `index.ts` - Barrel exports for clean importing
 
 **Design System Features**:
+
 - Semi-transparent gradient backgrounds throughout
 - Theme-aware colors using CSS custom properties
 - Full mobile responsiveness (no horizontal overflow)
@@ -958,15 +1092,19 @@ function generateQuestion(config: any): any {
 - Focus management and keyboard navigation
 
 **Results**:
+
 - Zero TypeScript errors
 - Build successful with minimal bundle impact
 - All components follow consistent design patterns
 - Ready for integration throughout the application
 
-**Commit**: `feat(ui): create reusable component library with consistent design system`
+**Commit**:
+`feat(ui): create reusable component library with consistent design system`
 
 ### Progress Summary (as of 2025-09-17)
+
 **✅ Completed Phases**:
+
 1. **Phase 1**: LearnContainer decomposition (571→263 lines)
 2. **Phase 2**: Deck page & modal decomposition (488→252 lines)
 3. **Phase 2.1**: Critical UI regression fixes (mobile responsiveness)
@@ -974,6 +1112,7 @@ function generateQuestion(config: any): any {
 5. **Phase 4**: Reusable component library (8 components created)
 
 **📊 Metrics Achieved**:
+
 - **Component Size**: ✅ All major components <300 lines
 - **Type Safety**: ✅ Zero 'any' types, 100% TypeScript coverage
 - **Performance**: ✅ React.memo, useCallback, useMemo implemented
@@ -984,14 +1123,19 @@ function generateQuestion(config: any): any {
 **🎯 Project Complete**: All 5 phases successfully implemented
 
 ### Phase 5 ✅ COMPLETED - Animation & Layout Stability
+
 **Added to address UI glitching/fluttering issues discovered during review**
 
 **Issues Identified**:
-1. **Staggered Animation Delays**: Sequential delays (index * 0.05) causing cumulative layout shift
-2. **Layout Animation Dimension Changes**: Framer Motion's layout prop and scale transforms causing reflows
+
+1. **Staggered Animation Delays**: Sequential delays (index \* 0.05) causing
+   cumulative layout shift
+2. **Layout Animation Dimension Changes**: Framer Motion's layout prop and scale
+   transforms causing reflows
 3. **Missing Initial Layout Reservation**: No minimum heights or skeleton states
 
 **Files to modify**:
+
 - `src/pages/Home.tsx` - Remove staggered animations on initial load
 - `src/pages/Deck.tsx` - Simplify animation strategy
 - `src/components/deck/ModeSelector.tsx` - Fix animation delays
@@ -999,11 +1143,16 @@ function generateQuestion(config: any): any {
 - `src/components/deck/ModeSelector.module.css` - Add layout stability
 
 **Implementation ✅ COMPLETED**:
-1. ✅ Removed staggered delays on initial page load (index * 0.05 eliminated)
+
+1. ✅ Removed staggered delays on initial page load (index \* 0.05 eliminated)
 2. ✅ Added minimum heights to prevent layout shift:
    ```css
-   .modeCard { min-height: 180px; }
-   .enhancedDeckCard { min-height: 200px; }
+   .modeCard {
+     min-height: 180px;
+   }
+   .enhancedDeckCard {
+     min-height: 200px;
+   }
    ```
 3. ✅ Simplified Framer Motion animations (removed unnecessary delays)
 4. ✅ Using single container animations instead of per-item delays
@@ -1011,13 +1160,18 @@ function generateQuestion(config: any): any {
 6. ⏭️ Skeleton loading states (deferred to future enhancement)
 
 **Files Modified**:
-- `src/pages/Home.tsx` - Removed staggered animations, simplified header animations
+
+- `src/pages/Home.tsx` - Removed staggered animations, simplified header
+  animations
 - `src/components/deck/ModeSelector.tsx` - Removed per-item animation delays
-- `src/components/EnhancedDeckCard.module.css` - Added min-height: 200px, will-change
-- `src/components/deck/ModeSelector.module.css` - Added min-height: 180px, will-change
+- `src/components/EnhancedDeckCard.module.css` - Added min-height: 200px,
+  will-change
+- `src/components/deck/ModeSelector.module.css` - Added min-height: 180px,
+  will-change
 - `src/pages/Home.module.css` - Added will-change for grid container
 
 **Results**:
+
 - ✅ Eliminated cumulative layout shift from staggered animations
 - ✅ Fixed initial page load performance with simplified animations
 - ✅ Added layout stability with minimum heights
@@ -1025,4 +1179,5 @@ function generateQuestion(config: any): any {
 - ✅ TypeScript compilation: Zero errors
 - ✅ Build successful with no warnings
 
-**Commit**: `fix(animations): eliminate layout shift and improve animation performance`
+**Commit**:
+`fix(animations): eliminate layout shift and improve animation performance`

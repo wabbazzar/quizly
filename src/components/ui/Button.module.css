@@ -129,11 +129,11 @@
   transform: translate(-50%, -50%);
 }
 
-.button[aria-busy="true"] .content {
+.button[aria-busy='true'] .content {
   visibility: hidden;
 }
 
-.button[aria-busy="true"] .icon {
+.button[aria-busy='true'] .icon {
   visibility: hidden;
 }
 

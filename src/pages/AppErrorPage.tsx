@@ -5,12 +5,7 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import styles from '@/components/error/ErrorFallback.module.css';
 
-const AppErrorPage: FC<ErrorFallbackProps> = ({
-  error,
-  errorId,
-  onRetry,
-  onReload
-}) => {
+const AppErrorPage: FC<ErrorFallbackProps> = ({ error, errorId, onRetry, onReload }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -51,10 +46,10 @@ const AppErrorPage: FC<ErrorFallbackProps> = ({
             strokeWidth={2}
             className={styles.iconSvg}
           >
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M16 16s-1.5-2-4-2-4 2-4 2"/>
-            <line x1="9" y1="9" x2="9.01" y2="9"/>
-            <line x1="15" y1="9" x2="15.01" y2="9"/>
+            <circle cx="12" cy="12" r="10" />
+            <path d="M16 16s-1.5-2-4-2-4 2-4 2" />
+            <line x1="9" y1="9" x2="9.01" y2="9" />
+            <line x1="15" y1="9" x2="15.01" y2="9" />
           </svg>
         ),
         buttons: (
@@ -85,9 +80,9 @@ const AppErrorPage: FC<ErrorFallbackProps> = ({
           strokeWidth={2}
           className={styles.iconSvg}
         >
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="15" y1="9" x2="9" y2="15"/>
-          <line x1="9" y1="9" x2="15" y2="15"/>
+          <circle cx="12" cy="12" r="10" />
+          <line x1="15" y1="9" x2="9" y2="15" />
+          <line x1="9" y1="9" x2="15" y2="15" />
         </svg>
       ),
       buttons: (
@@ -109,27 +104,25 @@ const AppErrorPage: FC<ErrorFallbackProps> = ({
   const content = getErrorContent();
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 'var(--space-4, 1rem)',
-      background: 'var(--bg-secondary, #F7F8FA)',
-    }}>
+    <div
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 'var(--space-4, 1rem)',
+        background: 'var(--bg-secondary, #F7F8FA)',
+      }}
+    >
       <Card className={styles.errorCard}>
         <div className={styles.errorContent}>
           <div className={styles.errorIcon} role="img" aria-label="Error">
             {content.icon}
           </div>
 
-          <h1 className={styles.errorTitle}>
-            {content.title}
-          </h1>
+          <h1 className={styles.errorTitle}>{content.title}</h1>
 
-          <p className={styles.errorMessage}>
-            {content.message}
-          </p>
+          <p className={styles.errorMessage}>{content.message}</p>
 
           {displayError && import.meta.env.DEV && (
             <details className={styles.errorDetails}>

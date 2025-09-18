@@ -74,7 +74,7 @@
 }
 
 .resetButton:hover {
-  background: #DC8A04;
+  background: #dc8a04;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
 }
@@ -113,7 +113,7 @@
 }
 
 .confirmButton:hover {
-  background: #DC2626;
+  background: #dc2626;
   transform: translateY(-1px);
 }
 

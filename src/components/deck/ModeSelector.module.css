@@ -67,7 +67,7 @@
 }
 
 .modeCard.purple::before {
-  background: #8B5CF6;
+  background: #8b5cf6;
 }
 
 .modeCard.orange {
@@ -76,7 +76,7 @@
 }
 
 .modeCard.orange::before {
-  background: #F59E0B;
+  background: #f59e0b;
 }
 
 .modeIconWrapper {
@@ -102,12 +102,12 @@
 
 .modeCard.purple .modeIconWrapper {
   background: rgba(139, 92, 246, 0.1);
-  color: #8B5CF6;
+  color: #8b5cf6;
 }
 
 .modeCard.orange .modeIconWrapper {
   background: rgba(245, 158, 11, 0.1);
-  color: #F59E0B;
+  color: #f59e0b;
 }
 
 .modeIcon {

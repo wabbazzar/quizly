@@ -61,7 +61,7 @@ class BundleAnalyzer {
   private setupResourceObserver(): void {
     if (!('PerformanceObserver' in window)) return;
 
-    this.observer = new PerformanceObserver((list) => {
+    this.observer = new PerformanceObserver(list => {
       for (const entry of list.getEntries()) {
         if (entry.entryType === 'resource') {
           this.analyzeResource(entry as PerformanceResourceTiming);
@@ -143,14 +143,16 @@ class BundleAnalyzer {
     const originalImport = window.eval('import');
 
     if (typeof originalImport === 'function') {
-      window.eval('import = function(specifier) {' +
-        'const startTime = performance.now();' +
-        'return originalImport(specifier).then(module => {' +
+      window.eval(
+        'import = function(specifier) {' +
+          'const startTime = performance.now();' +
+          'return originalImport(specifier).then(module => {' +
           'const loadTime = performance.now() - startTime;' +
           'window.__bundleAnalyzer?.trackChunkLoad(specifier, loadTime);' +
           'return module;' +
-        '});' +
-      '}');
+          '});' +
+          '}'
+      );
     }
 
     // Make analyzer available globally for tracking
@@ -162,7 +164,9 @@ class BundleAnalyzer {
     const originalLazy = React.lazy;
 
     if (originalLazy) {
-      React.lazy = function<T extends React.ComponentType<any>>(factory: () => Promise<{ default: T }>) {
+      React.lazy = function <T extends React.ComponentType<any>>(
+        factory: () => Promise<{ default: T }>
+      ) {
         const trackedFactory = () => {
           const startTime = performance.now();
           return factory().then(module => {
@@ -200,9 +204,7 @@ class BundleAnalyzer {
     const totalSize = bundles.reduce((sum, b) => sum + b.size, 0);
     const gzipSize = bundles.reduce((sum, b) => sum + (b.gzipSize || 0), 0);
 
-    const loadTimes = bundles
-      .map(b => b.loadTime || 0)
-      .filter(t => t > 0);
+    const loadTimes = bundles.map(b => b.loadTime || 0).filter(t => t > 0);
 
     const cacheHits = bundles.filter(b => b.cached).length;
     const cacheHitRate = bundles.length > 0 ? (cacheHits / bundles.length) * 100 : 0;
@@ -219,35 +221,46 @@ class BundleAnalyzer {
       loadTimes: {
         fastest: Math.min(...loadTimes) || 0,
         slowest: Math.max(...loadTimes) || 0,
-        average: loadTimes.length > 0 ? loadTimes.reduce((sum, t) => sum + t, 0) / loadTimes.length : 0,
+        average:
+          loadTimes.length > 0 ? loadTimes.reduce((sum, t) => sum + t, 0) / loadTimes.length : 0,
       },
       cacheHitRate,
       recommendations,
     };
   }
 
-  private generateRecommendations(bundles: BundleInfo[], totalSize: number, gzipSize: number): string[] {
+  private generateRecommendations(
+    bundles: BundleInfo[],
+    totalSize: number,
+    gzipSize: number
+  ): string[] {
     const recommendations: string[] = [];
 
     // Bundle size recommendations
-    if (gzipSize > 200 * 1024) { // 200KB gzipped
+    if (gzipSize > 200 * 1024) {
+      // 200KB gzipped
       recommendations.push('Total bundle size exceeds 200KB gzipped - consider code splitting');
     }
 
-    if (totalSize > 1024 * 1024) { // 1MB raw
+    if (totalSize > 1024 * 1024) {
+      // 1MB raw
       recommendations.push('Large bundle size detected - implement aggressive lazy loading');
     }
 
     // Chunk analysis
     const largeChunks = bundles.filter(b => b.size > 100 * 1024); // 100KB
     if (largeChunks.length > 0) {
-      recommendations.push(`${largeChunks.length} chunks exceed 100KB - consider further splitting`);
+      recommendations.push(
+        `${largeChunks.length} chunks exceed 100KB - consider further splitting`
+      );
     }
 
     // Load time analysis
     const slowChunks = bundles.filter(b => (b.loadTime || 0) > 2000); // 2s
     if (slowChunks.length > 0) {
-      recommendations.push(`${slowChunks.length} chunks have slow load times - optimize network delivery`);
+      recommendations.push(
+        `${slowChunks.length} chunks have slow load times - optimize network delivery`
+      );
     }
 
     // Cache analysis
@@ -257,11 +270,10 @@ class BundleAnalyzer {
     }
 
     // Vendor chunk analysis
-    const vendorSize = bundles
-      .filter(b => b.type === 'vendor')
-      .reduce((sum, b) => sum + b.size, 0);
+    const vendorSize = bundles.filter(b => b.type === 'vendor').reduce((sum, b) => sum + b.size, 0);
 
-    if (vendorSize > 150 * 1024) { // 150KB
+    if (vendorSize > 150 * 1024) {
+      // 150KB
       recommendations.push('Large vendor bundle - consider splitting vendor dependencies');
     }
 
@@ -270,7 +282,8 @@ class BundleAnalyzer {
       .filter(b => b.type === 'initial')
       .reduce((sum, b) => sum + b.size, 0);
 
-    if (initialSize > 100 * 1024) { // 100KB
+    if (initialSize > 100 * 1024) {
+      // 100KB
       recommendations.push('Large initial bundle - move non-critical code to async chunks');
     }
 
@@ -314,9 +327,14 @@ class BundleAnalyzer {
     // Score based on chunk count
     if (analysis.chunkCount > 20) score -= 5;
 
-    const summary = score >= 90 ? 'Excellent bundle optimization' :
-                   score >= 75 ? 'Good bundle performance' :
-                   score >= 60 ? 'Bundle needs optimization' : 'Poor bundle performance';
+    const summary =
+      score >= 90
+        ? 'Excellent bundle optimization'
+        : score >= 75
+          ? 'Good bundle performance'
+          : score >= 60
+            ? 'Bundle needs optimization'
+            : 'Poor bundle performance';
 
     return {
       summary,

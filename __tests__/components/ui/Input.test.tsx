@@ -289,7 +289,7 @@ describe('Input Component', () => {
       expect(handleChange).toHaveBeenCalledTimes(1);
       expect(handleChange).toHaveBeenCalledWith(
         expect.objectContaining({
-          target: expect.objectContaining({ value: 'test value' })
+          target: expect.objectContaining({ value: 'test value' }),
         })
       );
     });
@@ -430,13 +430,7 @@ describe('Input Component', () => {
 
   describe('Accessibility', () => {
     it('should have proper ARIA attributes', () => {
-      render(
-        <Input
-          label="Username"
-          error="Required field"
-          id="username-input"
-        />
-      );
+      render(<Input label="Username" error="Required field" id="username-input" />);
 
       const input = screen.getByRole('textbox');
       const label = screen.getByText('Username');
@@ -511,7 +505,8 @@ describe('Input Component', () => {
     });
 
     it('should handle very long error messages', () => {
-      const longError = 'This is a very long error message that might wrap to multiple lines and should still be properly associated with the input field';
+      const longError =
+        'This is a very long error message that might wrap to multiple lines and should still be properly associated with the input field';
       render(<Input error={longError} />);
 
       const errorMessage = screen.getByText(longError);

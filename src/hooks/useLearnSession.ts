@@ -5,7 +5,7 @@ import {
   Question,
   LearnModeSettings,
   LearnSessionState,
-  LearnSessionResults
+  LearnSessionResults,
 } from '@/types';
 import { LearnSessionProgress } from '@/components/modes/learn/LearnProgress';
 import { QuestionGenerator } from '@/services/questionGenerator';
@@ -20,10 +20,7 @@ interface LearnSessionOptions {
   progressiveLearning?: boolean; // Enable progressive learning (free text after correct MC)
 }
 
-export const useLearnSession = (
-  deck: Deck,
-  options: LearnSessionOptions
-) => {
+export const useLearnSession = (deck: Deck, options: LearnSessionOptions) => {
   const { getMasteredCards } = useCardMasteryStore();
   const [sessionState, setSessionState] = useState<LearnSessionState>({
     currentQuestion: null,
@@ -64,168 +61,174 @@ export const useLearnSession = (
   } as LearnModeSettings);
 
   // Initialize session with cards
-  const startRound = useCallback((cards: Card[]) => {
-    const roundCards = cards.slice(0, options.cardsPerRound);
+  const startRound = useCallback(
+    (cards: Card[]) => {
+      const roundCards = cards.slice(0, options.cardsPerRound);
 
-    // Get mastered cards for the current deck
-    const masteredCardIndices = getMasteredCards(deck.id);
+      // Get mastered cards for the current deck
+      const masteredCardIndices = getMasteredCards(deck.id);
 
-    // Generate questions from cards - start with mostly multiple choice
-    const newQuestions = QuestionGenerator.generateQuestions(
-      roundCards,
-      {
-        questionTypes: options.questionTypes,
-        frontSides: ['side_a'],
-        backSides: ['side_b'],
-        difficulty: 1,
-        forceMultipleChoice: options.progressiveLearning, // Force MC if progressive learning is on
-      },
-      masteredCardIndices,
-      cards  // Pass all cards for distractor selection
-    );
+      // Generate questions from cards - start with mostly multiple choice
+      const newQuestions = QuestionGenerator.generateQuestions(
+        roundCards,
+        {
+          questionTypes: options.questionTypes,
+          frontSides: ['side_a'],
+          backSides: ['side_b'],
+          difficulty: 1,
+          forceMultipleChoice: options.progressiveLearning, // Force MC if progressive learning is on
+        },
+        masteredCardIndices,
+        cards // Pass all cards for distractor selection
+      );
 
-    setQuestions(newQuestions);
-    setSessionState(prev => ({
-      ...prev,
-      roundCards,
-      currentQuestion: newQuestions[0] || null,
-      questionIndex: 0,
-      responseStartTime: Date.now(),
-    }));
+      setQuestions(newQuestions);
+      setSessionState(prev => ({
+        ...prev,
+        roundCards,
+        currentQuestion: newQuestions[0] || null,
+        questionIndex: 0,
+        responseStartTime: Date.now(),
+      }));
 
-    setProgress(prev => ({
-      ...prev,
-      totalQuestions: newQuestions.length,
-      questionsAnswered: 0,
-    }));
+      setProgress(prev => ({
+        ...prev,
+        totalQuestions: newQuestions.length,
+        questionsAnswered: 0,
+      }));
 
-    setIsComplete(false);
-  }, [options, deck.id, getMasteredCards]);
+      setIsComplete(false);
+    },
+    [options, deck.id, getMasteredCards]
+  );
 
   // Answer current question
-  const answerQuestion = useCallback((
-    _answer: string,
-    isCorrect: boolean
-  ) => {
-    const responseTime = Date.now() - sessionState.responseStartTime;
-    setResponseTimes(prev => [...prev, responseTime]);
+  const answerQuestion = useCallback(
+    (_answer: string, isCorrect: boolean) => {
+      const responseTime = Date.now() - sessionState.responseStartTime;
+      setResponseTimes(prev => [...prev, responseTime]);
 
-    // Update progress
-    setProgress(prev => {
-      const newCorrectAnswers = isCorrect ? prev.correctAnswers + 1 : prev.correctAnswers;
-      const newStreak = isCorrect ? prev.currentStreak + 1 : 0;
-      const newMaxStreak = Math.max(prev.maxStreak, newStreak);
-      const newQuestionsAnswered = prev.questionsAnswered + 1;
+      // Update progress
+      setProgress(prev => {
+        const newCorrectAnswers = isCorrect ? prev.correctAnswers + 1 : prev.correctAnswers;
+        const newStreak = isCorrect ? prev.currentStreak + 1 : 0;
+        const newMaxStreak = Math.max(prev.maxStreak, newStreak);
+        const newQuestionsAnswered = prev.questionsAnswered + 1;
 
-      // Update mastered/struggling cards
-      const cardIndex = sessionState.currentQuestion?.cardIndex;
-      const newPassedCards = new Set(prev.passedCards);
-      const newStrugglingCards = new Set(prev.strugglingCards);
+        // Update mastered/struggling cards
+        const cardIndex = sessionState.currentQuestion?.cardIndex;
+        const newPassedCards = new Set(prev.passedCards);
+        const newStrugglingCards = new Set(prev.strugglingCards);
 
-      if (cardIndex !== undefined) {
-        if (isCorrect) {
-          newPassedCards.add(cardIndex);
-          newStrugglingCards.delete(cardIndex);
-        } else {
-          newStrugglingCards.add(cardIndex);
-          newPassedCards.delete(cardIndex);
-          // Track missed card for scheduling
-          const card = sessionState.roundCards[cardIndex];
-          if (card) {
-            scheduler.trackMissedCard(
-              `card_${cardIndex}`,
-              cardIndex,
-              responseTime
-            );
+        if (cardIndex !== undefined) {
+          if (isCorrect) {
+            newPassedCards.add(cardIndex);
+            newStrugglingCards.delete(cardIndex);
+          } else {
+            newStrugglingCards.add(cardIndex);
+            newPassedCards.delete(cardIndex);
+            // Track missed card for scheduling
+            const card = sessionState.roundCards[cardIndex];
+            if (card) {
+              scheduler.trackMissedCard(`card_${cardIndex}`, cardIndex, responseTime);
+            }
           }
         }
-      }
 
-      // Calculate average response time
-      const allResponseTimes = [...responseTimes, responseTime];
-      const avgResponseTime = allResponseTimes.reduce((a, b) => a + b, 0) / allResponseTimes.length;
+        // Calculate average response time
+        const allResponseTimes = [...responseTimes, responseTime];
+        const avgResponseTime =
+          allResponseTimes.reduce((a, b) => a + b, 0) / allResponseTimes.length;
 
-      return {
-        ...prev,
-        questionsAnswered: newQuestionsAnswered,
-        correctAnswers: newCorrectAnswers,
-        currentStreak: newStreak,
-        maxStreak: newMaxStreak,
-        passedCards: newPassedCards,
-        strugglingCards: newStrugglingCards,
-        averageResponseTime: avgResponseTime,
-      };
-    });
+        return {
+          ...prev,
+          questionsAnswered: newQuestionsAnswered,
+          correctAnswers: newCorrectAnswers,
+          currentStreak: newStreak,
+          maxStreak: newMaxStreak,
+          passedCards: newPassedCards,
+          strugglingCards: newStrugglingCards,
+          averageResponseTime: avgResponseTime,
+        };
+      });
 
-    // Update session state
-    setSessionState(prev => {
-      const newCorrectCards = new Set(prev.correctCards);
-      const newIncorrectCards = new Set(prev.incorrectCards);
+      // Update session state
+      setSessionState(prev => {
+        const newCorrectCards = new Set(prev.correctCards);
+        const newIncorrectCards = new Set(prev.incorrectCards);
 
-      if (sessionState.currentQuestion) {
-        if (isCorrect) {
-          newCorrectCards.add(sessionState.currentQuestion.cardIndex);
-          scheduler.markCardCorrect(`card_${sessionState.currentQuestion.cardIndex}`);
+        if (sessionState.currentQuestion) {
+          if (isCorrect) {
+            newCorrectCards.add(sessionState.currentQuestion.cardIndex);
+            scheduler.markCardCorrect(`card_${sessionState.currentQuestion.cardIndex}`);
 
-          // Track MC correct answers for progressive learning
-          if (sessionState.currentQuestion.type === 'multiple_choice' &&
-              !sessionState.currentQuestion.isFollowUp) {
-            setCorrectMCCards(prev => new Set(prev).add(sessionState.currentQuestion!.cardIndex));
+            // Track MC correct answers for progressive learning
+            if (
+              sessionState.currentQuestion.type === 'multiple_choice' &&
+              !sessionState.currentQuestion.isFollowUp
+            ) {
+              setCorrectMCCards(prev => new Set(prev).add(sessionState.currentQuestion!.cardIndex));
+            }
+          } else {
+            newIncorrectCards.add(sessionState.currentQuestion.cardIndex);
           }
-        } else {
-          newIncorrectCards.add(sessionState.currentQuestion.cardIndex);
         }
-      }
 
-      return {
-        ...prev,
-        correctCards: newCorrectCards,
-        incorrectCards: newIncorrectCards,
-        currentStreak: isCorrect ? prev.currentStreak + 1 : 0,
-        maxStreak: Math.max(
-          prev.maxStreak,
-          isCorrect ? prev.currentStreak + 1 : prev.currentStreak
-        ),
-      };
-    });
-  }, [sessionState, options, scheduler, responseTimes]);
+        return {
+          ...prev,
+          correctCards: newCorrectCards,
+          incorrectCards: newIncorrectCards,
+          currentStreak: isCorrect ? prev.currentStreak + 1 : 0,
+          maxStreak: Math.max(
+            prev.maxStreak,
+            isCorrect ? prev.currentStreak + 1 : prev.currentStreak
+          ),
+        };
+      });
+    },
+    [sessionState, options, scheduler, responseTimes]
+  );
 
   // Generate follow-up free text question for correctly answered MC
-  const generateFollowUpQuestion = useCallback((originalQuestion: Question): Question | null => {
-    if (!options.progressiveLearning || !options.questionTypes.includes('free_text')) {
-      return null;
-    }
+  const generateFollowUpQuestion = useCallback(
+    (originalQuestion: Question): Question | null => {
+      if (!options.progressiveLearning || !options.questionTypes.includes('free_text')) {
+        return null;
+      }
 
-    const card = sessionState.roundCards[originalQuestion.cardIndex];
-    if (!card) return null;
+      const card = sessionState.roundCards[originalQuestion.cardIndex];
+      if (!card) return null;
 
-    // Generate a free text follow-up question
-    const followUpQuestion = QuestionGenerator.generateFreeText(
-      card,
-      { front: ['side_a'], back: ['side_b'] },
-      originalQuestion.cardIndex
-    );
+      // Generate a free text follow-up question
+      const followUpQuestion = QuestionGenerator.generateFreeText(
+        card,
+        { front: ['side_a'], back: ['side_b'] },
+        originalQuestion.cardIndex
+      );
 
-    return {
-      ...followUpQuestion,
-      id: `ft_followup_${originalQuestion.id}_${Date.now()}`,
-      isFollowUp: true,
-      parentQuestionId: originalQuestion.id,
-      questionText: `Now type the answer: ${followUpQuestion.questionText}`,
-    };
-  }, [options, sessionState.roundCards]);
+      return {
+        ...followUpQuestion,
+        id: `ft_followup_${originalQuestion.id}_${Date.now()}`,
+        isFollowUp: true,
+        parentQuestionId: originalQuestion.id,
+        questionText: `Now type the answer: ${followUpQuestion.questionText}`,
+      };
+    },
+    [options, sessionState.roundCards]
+  );
 
   // Move to next question
   const nextQuestion = useCallback(() => {
     const currentQ = sessionState.currentQuestion;
 
     // Check if we should generate a follow-up free text question
-    if (options.progressiveLearning &&
-        currentQ &&
-        currentQ.type === 'multiple_choice' &&
-        !currentQ.isFollowUp &&
-        correctMCCards.has(currentQ.cardIndex)) {
-
+    if (
+      options.progressiveLearning &&
+      currentQ &&
+      currentQ.type === 'multiple_choice' &&
+      !currentQ.isFollowUp &&
+      correctMCCards.has(currentQ.cardIndex)
+    ) {
       // Generate and insert a follow-up free text question
       const followUpQ = generateFollowUpQuestion(currentQ);
       if (followUpQ) {
@@ -259,7 +262,13 @@ export const useLearnSession = (
       // Session complete
       setIsComplete(true);
     }
-  }, [sessionState, questions, options.progressiveLearning, correctMCCards, generateFollowUpQuestion]);
+  }, [
+    sessionState,
+    questions,
+    options.progressiveLearning,
+    correctMCCards,
+    generateFollowUpQuestion,
+  ]);
 
   // Get session results
   const getResults = useCallback((): LearnSessionResults => {
@@ -270,9 +279,8 @@ export const useLearnSession = (
       totalQuestions: progress.totalQuestions,
       correctAnswers: progress.correctAnswers,
       incorrectAnswers: progress.totalQuestions - progress.correctAnswers,
-      accuracy: progress.totalQuestions > 0
-        ? (progress.correctAnswers / progress.totalQuestions) * 100
-        : 0,
+      accuracy:
+        progress.totalQuestions > 0 ? (progress.correctAnswers / progress.totalQuestions) * 100 : 0,
       averageResponseTime: progress.averageResponseTime,
       maxStreak: progress.maxStreak,
       duration,

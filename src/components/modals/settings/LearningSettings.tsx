@@ -33,7 +33,9 @@ const LearningSettings: FC<SectionProps> = ({ settings, onChange }) => {
             min="5"
             max="50"
             value={settings.cardsPerRound || 10}
-            onChange={(e) => onChange('cardsPerRound', Math.max(5, Math.min(50, parseInt(e.target.value) || 10)))}
+            onChange={e =>
+              onChange('cardsPerRound', Math.max(5, Math.min(50, parseInt(e.target.value) || 10)))
+            }
             className={styles.numberInput}
           />
         </label>
@@ -43,7 +45,7 @@ const LearningSettings: FC<SectionProps> = ({ settings, onChange }) => {
           <span className={styles.label}>Question type mix</span>
           <select
             value={settings.questionTypeMix || 'auto'}
-            onChange={(e) => onChange('questionTypeMix', e.target.value)}
+            onChange={e => onChange('questionTypeMix', e.target.value)}
             className={styles.select}
           >
             <option value="auto">Auto (80% MC, 20% Text)</option>
@@ -63,7 +65,7 @@ const LearningSettings: FC<SectionProps> = ({ settings, onChange }) => {
           </div>
           <select
             value={settings.schedulingAlgorithm || 'smart_spaced'}
-            onChange={(e) => onChange('schedulingAlgorithm', e.target.value)}
+            onChange={e => onChange('schedulingAlgorithm', e.target.value)}
             className={styles.select}
           >
             <option value="smart_spaced">Smart Spaced (Adaptive)</option>
@@ -77,7 +79,7 @@ const LearningSettings: FC<SectionProps> = ({ settings, onChange }) => {
             <input
               type="checkbox"
               checked={settings.randomize !== false}
-              onChange={(e) => onChange('randomize', e.target.checked)}
+              onChange={e => onChange('randomize', e.target.checked)}
               className={styles.checkbox}
             />
             <span className={styles.checkboxLabel}>Randomize cards</span>
@@ -90,7 +92,7 @@ const LearningSettings: FC<SectionProps> = ({ settings, onChange }) => {
             <input
               type="checkbox"
               checked={settings.enableTimer === true}
-              onChange={(e) => onChange('enableTimer', e.target.checked)}
+              onChange={e => onChange('enableTimer', e.target.checked)}
               className={styles.checkbox}
             />
             <span className={styles.checkboxLabel}>Enable timer</span>
@@ -106,7 +108,12 @@ const LearningSettings: FC<SectionProps> = ({ settings, onChange }) => {
               min="10"
               max="120"
               value={settings.timerSeconds || 30}
-              onChange={(e) => onChange('timerSeconds', Math.max(10, Math.min(120, parseInt(e.target.value) || 30)))}
+              onChange={e =>
+                onChange(
+                  'timerSeconds',
+                  Math.max(10, Math.min(120, parseInt(e.target.value) || 30))
+                )
+              }
               className={styles.numberInput}
             />
           </label>
@@ -124,7 +131,7 @@ const LearningSettings: FC<SectionProps> = ({ settings, onChange }) => {
           <span className={styles.label}>Progressive mode</span>
           <select
             value={settings.progressiveLearning || 'spaced'}
-            onChange={(e) => onChange('progressiveLearning', e.target.value)}
+            onChange={e => onChange('progressiveLearning', e.target.value)}
             className={styles.select}
           >
             <option value="disabled">Disabled (No follow-ups)</option>
@@ -142,7 +149,12 @@ const LearningSettings: FC<SectionProps> = ({ settings, onChange }) => {
               min="1"
               max="10"
               value={settings.progressiveLearningSpacing || 3}
-              onChange={(e) => onChange('progressiveLearningSpacing', Math.max(1, Math.min(10, parseInt(e.target.value) || 3)))}
+              onChange={e =>
+                onChange(
+                  'progressiveLearningSpacing',
+                  Math.max(1, Math.min(10, parseInt(e.target.value) || 3))
+                )
+              }
               className={styles.numberInput}
             />
           </label>

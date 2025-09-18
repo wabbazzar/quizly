@@ -81,7 +81,7 @@ class PerformanceMonitor {
       return;
     }
 
-    this.observer = new PerformanceObserver((list) => {
+    this.observer = new PerformanceObserver(list => {
       for (const entry of list.getEntries()) {
         this.handlePerformanceEntry(entry);
       }
@@ -168,7 +168,9 @@ class PerformanceMonitor {
   private measureInitialMetrics(): void {
     // Measure initial bundle size
     if ('performance' in window && performance.getEntriesByType) {
-      const navigationEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+      const navigationEntry = performance.getEntriesByType(
+        'navigation'
+      )[0] as PerformanceNavigationTiming;
 
       if (navigationEntry) {
         // Time to First Byte
@@ -201,8 +203,12 @@ class PerformanceMonitor {
       const memoryUsage = {
         name: 'memory-usage',
         value: memory.usedJSHeapSize / 1024 / 1024, // Convert to MB
-        rating: memory.usedJSHeapSize > 200 * 1024 * 1024 ? 'poor' :
-               memory.usedJSHeapSize > 100 * 1024 * 1024 ? 'needs-improvement' : 'good',
+        rating:
+          memory.usedJSHeapSize > 200 * 1024 * 1024
+            ? 'poor'
+            : memory.usedJSHeapSize > 100 * 1024 * 1024
+              ? 'needs-improvement'
+              : 'good',
         timestamp: Date.now(),
       } as PerformanceMetric;
 
@@ -228,9 +234,12 @@ class PerformanceMonitor {
     if ('navigation' in performance) {
       const nav = performance.navigation;
       switch (nav.type) {
-        case nav.TYPE_RELOAD: return 'reload';
-        case nav.TYPE_BACK_FORWARD: return 'back-forward';
-        default: return 'navigate';
+        case nav.TYPE_RELOAD:
+          return 'reload';
+        case nav.TYPE_BACK_FORWARD:
+          return 'back-forward';
+        default:
+          return 'navigate';
       }
     }
     return 'unknown';
@@ -364,18 +373,23 @@ class PerformanceMonitor {
         switch (metric.rating) {
           case 'poor':
             score -= 20;
-            recommendations.push(`Improve ${key.toUpperCase()}: Current ${metric.value.toFixed(2)}ms`);
+            recommendations.push(
+              `Improve ${key.toUpperCase()}: Current ${metric.value.toFixed(2)}ms`
+            );
             break;
           case 'needs-improvement':
             score -= 10;
-            recommendations.push(`Monitor ${key.toUpperCase()}: Current ${metric.value.toFixed(2)}ms`);
+            recommendations.push(
+              `Monitor ${key.toUpperCase()}: Current ${metric.value.toFixed(2)}ms`
+            );
             break;
         }
       }
     });
 
     // Check bundle size
-    if (custom.bundleSize && custom.bundleSize > 200 * 1024) { // 200KB
+    if (custom.bundleSize && custom.bundleSize > 200 * 1024) {
+      // 200KB
       score -= 15;
       recommendations.push(`Large bundle size: ${(custom.bundleSize / 1024).toFixed(2)}KB`);
     }
@@ -386,9 +400,8 @@ class PerformanceMonitor {
       recommendations.push(`High memory usage: ${custom.memoryUsage.value.toFixed(2)}MB`);
     }
 
-    const summary = score >= 90 ? 'Excellent' :
-                   score >= 75 ? 'Good' :
-                   score >= 60 ? 'Needs Improvement' : 'Poor';
+    const summary =
+      score >= 90 ? 'Excellent' : score >= 75 ? 'Good' : score >= 60 ? 'Needs Improvement' : 'Poor';
 
     return {
       summary,

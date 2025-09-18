@@ -54,18 +54,18 @@ export const useFlashcardSessionStore = create<FlashcardSessionStore>()(
       },
 
       saveSession: (session: FlashcardSession) => {
-        set((state) => {
+        set(state => {
           const newSessions = new Map(state.sessions);
           newSessions.set(session.deckId, {
             ...session,
-            lastAccessed: Date.now()
+            lastAccessed: Date.now(),
           });
           return { sessions: newSessions };
         });
       },
 
       clearSession: (deckId: string) => {
-        set((state) => {
+        set(state => {
           const newSessions = new Map(state.sessions);
           newSessions.delete(deckId);
           return { sessions: newSessions };
@@ -73,7 +73,7 @@ export const useFlashcardSessionStore = create<FlashcardSessionStore>()(
       },
 
       clearOldSessions: () => {
-        set((state) => {
+        set(state => {
           const newSessions = new Map();
           const now = Date.now();
 
@@ -101,7 +101,8 @@ export const useFlashcardSessionStore = create<FlashcardSessionStore>()(
           startTime: Date.now(),
           isMissedCardsRound: false,
           progressionMode: existingSession?.progressionMode || 'shuffle',
-          includeMastered: existingSession?.includeMastered !== undefined ? existingSession.includeMastered : true
+          includeMastered:
+            existingSession?.includeMastered !== undefined ? existingSession.includeMastered : true,
         };
 
         get().saveSession(newSession);
@@ -126,7 +127,8 @@ export const useFlashcardSessionStore = create<FlashcardSessionStore>()(
           startTime: Date.now(),
           isMissedCardsRound: true,
           progressionMode: existingSession?.progressionMode || 'shuffle',
-          includeMastered: existingSession?.includeMastered !== undefined ? existingSession.includeMastered : true
+          includeMastered:
+            existingSession?.includeMastered !== undefined ? existingSession.includeMastered : true,
         };
 
         get().saveSession(newSession);
@@ -153,13 +155,13 @@ export const useFlashcardSessionStore = create<FlashcardSessionStore>()(
         }
 
         return missedIndices;
-      }
+      },
     }),
     {
       name: 'flashcard-session-store',
       // Custom storage to handle Map serialization
       storage: {
-        getItem: (name) => {
+        getItem: name => {
           const str = localStorage.getItem(name);
           if (!str) return null;
 
@@ -167,8 +169,8 @@ export const useFlashcardSessionStore = create<FlashcardSessionStore>()(
           return {
             state: {
               ...state,
-              sessions: new Map(state.sessions || [])
-            }
+              sessions: new Map(state.sessions || []),
+            },
           };
         },
         setItem: (name, value) => {
@@ -176,13 +178,13 @@ export const useFlashcardSessionStore = create<FlashcardSessionStore>()(
           const serialized = {
             state: {
               ...state,
-              sessions: Array.from(state.sessions.entries())
-            }
+              sessions: Array.from(state.sessions.entries()),
+            },
           };
           localStorage.setItem(name, JSON.stringify(serialized));
         },
-        removeItem: (name) => localStorage.removeItem(name)
-      }
+        removeItem: name => localStorage.removeItem(name),
+      },
     }
   )
 );

@@ -2,15 +2,8 @@ import { FC, memo } from 'react';
 import { SpinnerProps } from './types';
 import styles from './Spinner.module.css';
 
-export const Spinner: FC<SpinnerProps> = memo(({
-  size = 'medium',
-  variant = 'primary'
-}) => {
-  const spinnerClasses = [
-    styles.spinner,
-    styles[size],
-    styles[variant]
-  ].filter(Boolean).join(' ');
+export const Spinner: FC<SpinnerProps> = memo(({ size = 'medium', variant = 'primary' }) => {
+  const spinnerClasses = [styles.spinner, styles[size], styles[variant]].filter(Boolean).join(' ');
 
   return (
     <div className={spinnerClasses} role="status" aria-label="Loading">

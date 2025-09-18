@@ -105,7 +105,7 @@ export function preloadComponent(
       const tempComponent = lazy(() => preloadPromise);
       lazyComponentCache.set(cacheKey, {
         component: tempComponent,
-        preloadPromise
+        preloadPromise,
       });
     }
   }
@@ -138,7 +138,7 @@ export function preloadComponents(
 export const LazyHome = createLazyImport(
   () => import('@/pages/Home'),
   {
-    onError: (error) => console.error('Failed to load Home component:', error),
+    onError: error => console.error('Failed to load Home component:', error),
     retryAttempts: 3,
   },
   'home'
@@ -147,7 +147,7 @@ export const LazyHome = createLazyImport(
 export const LazyDeck = createLazyImport(
   () => import('@/pages/Deck'),
   {
-    onError: (error) => console.error('Failed to load Deck component:', error),
+    onError: error => console.error('Failed to load Deck component:', error),
     retryAttempts: 3,
   },
   'deck'
@@ -156,7 +156,7 @@ export const LazyDeck = createLazyImport(
 export const LazyLearn = createLazyImport(
   () => import('@/pages/Learn'),
   {
-    onError: (error) => console.error('Failed to load Learn component:', error),
+    onError: error => console.error('Failed to load Learn component:', error),
     retryAttempts: 3,
   },
   'learn'
@@ -165,7 +165,7 @@ export const LazyLearn = createLazyImport(
 export const LazyFlashcards = createLazyImport(
   () => import('@/pages/Flashcards'),
   {
-    onError: (error) => console.error('Failed to load Flashcards component:', error),
+    onError: error => console.error('Failed to load Flashcards component:', error),
     retryAttempts: 3,
   },
   'flashcards'
@@ -174,7 +174,7 @@ export const LazyFlashcards = createLazyImport(
 export const LazyLearnDemo = createLazyImport(
   () => import('@/pages/LearnDemo'),
   {
-    onError: (error) => console.error('Failed to load LearnDemo component:', error),
+    onError: error => console.error('Failed to load LearnDemo component:', error),
     retryAttempts: 3,
   },
   'learn-demo'
@@ -183,7 +183,7 @@ export const LazyLearnDemo = createLazyImport(
 export const LazyResults = createLazyImport(
   () => import('@/pages/Results'),
   {
-    onError: (error) => console.error('Failed to load Results component:', error),
+    onError: error => console.error('Failed to load Results component:', error),
     retryAttempts: 3,
   },
   'results'

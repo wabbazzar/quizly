@@ -13,13 +13,17 @@ const ProgressionSettings: FC<SectionProps> = ({ settings, onChange, mode = 'fla
       return [
         { value: 'shuffle', label: 'Shuffle', description: 'Random order for better retention' },
         { value: 'sequential', label: 'Sequential', description: 'Content in order as it appears' },
-        { value: 'level', label: 'By Level', description: 'Progressive difficulty based on performance' }
+        {
+          value: 'level',
+          label: 'By Level',
+          description: 'Progressive difficulty based on performance',
+        },
       ];
     } else {
       // Deck and other modes
       return [
         { value: 'sequential', label: 'Sequential', description: 'In order' },
-        { value: 'random', label: 'Random', description: 'Randomized order' }
+        { value: 'random', label: 'Random', description: 'Randomized order' },
       ];
     }
   };
@@ -32,12 +36,8 @@ const ProgressionSettings: FC<SectionProps> = ({ settings, onChange, mode = 'fla
 
   return (
     <div className={styles.container}>
-      <h3 className={styles.title}>
-        Progression Mode
-      </h3>
-      <p className={styles.description}>
-        Choose how content is presented during your session
-      </p>
+      <h3 className={styles.title}>Progression Mode</h3>
+      <p className={styles.description}>Choose how content is presented during your session</p>
 
       <div className={styles.progressionOptions}>
         {options.map(option => (
@@ -47,7 +47,7 @@ const ProgressionSettings: FC<SectionProps> = ({ settings, onChange, mode = 'fla
               name="progression"
               value={option.value}
               checked={currentMode === option.value}
-              onChange={(e) => handleChange(e.target.value)}
+              onChange={e => handleChange(e.target.value)}
               className={styles.radioInput}
             />
             <div className={styles.radioContent}>

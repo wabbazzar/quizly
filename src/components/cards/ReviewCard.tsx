@@ -37,9 +37,9 @@ const ReviewCard: FC<ReviewCardProps> = ({
     <div
       className={`${styles.reviewCard} ${showBothSides ? styles.expanded : ''}`}
       onClick={handleClick}
-      role={showBothSides ? undefined : "button"}
+      role={showBothSides ? undefined : 'button'}
       tabIndex={showBothSides ? undefined : 0}
-      aria-label={showBothSides ? undefined : "Click to flip card"}
+      aria-label={showBothSides ? undefined : 'Click to flip card'}
     >
       {showBothSides ? (
         <>
@@ -55,9 +55,7 @@ const ReviewCard: FC<ReviewCardProps> = ({
         </>
       ) : (
         <div className={styles.flipCard}>
-          <div className={styles.content}>
-            {isFlipped ? backContent : frontContent}
-          </div>
+          <div className={styles.content}>{isFlipped ? backContent : frontContent}</div>
           {!showBothSides && (
             <div className={styles.flipHint}>
               {isFlipped ? 'Click to see question' : 'Click to see answer'}
@@ -65,9 +63,7 @@ const ReviewCard: FC<ReviewCardProps> = ({
           )}
         </div>
       )}
-      {card.level && (
-        <div className={styles.level}>Level {card.level}</div>
-      )}
+      {card.level && <div className={styles.level}>Level {card.level}</div>}
     </div>
   );
 };

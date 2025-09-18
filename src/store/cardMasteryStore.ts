@@ -27,7 +27,13 @@ interface CardMasteryStore {
   getMasteredCards: (deckId: string) => number[];
   getDeckMasteryPercentage: (deckId: string) => number;
   resetDeckMastery: (deckId: string) => void;
-  updateCardAttempt: (deckId: string, cardIndex: number, isCorrect: boolean, totalCards: number, masteryThreshold?: number) => void;
+  updateCardAttempt: (
+    deckId: string,
+    cardIndex: number,
+    isCorrect: boolean,
+    totalCards: number,
+    masteryThreshold?: number
+  ) => void;
   isCardMastered: (deckId: string, cardIndex: number) => boolean;
 }
 
@@ -37,7 +43,7 @@ export const useCardMasteryStore = create<CardMasteryStore>()(
       mastery: {},
 
       markCardMastered: (deckId: string, cardIndex: number, totalCards: number) => {
-        set((state) => {
+        set(state => {
           const deckMastery = state.mastery[deckId] || {
             deckId,
             masteredCards: new Map(),
@@ -71,7 +77,7 @@ export const useCardMasteryStore = create<CardMasteryStore>()(
       },
 
       unmarkCardMastered: (deckId: string, cardIndex: number) => {
-        set((state) => {
+        set(state => {
           const deckMastery = state.mastery[deckId];
           if (!deckMastery) return state;
 
@@ -112,7 +118,7 @@ export const useCardMasteryStore = create<CardMasteryStore>()(
 
         // Count only cards with 3+ consecutive correct answers
         let masteredCount = 0;
-        deckMastery.masteredCards.forEach((record) => {
+        deckMastery.masteredCards.forEach(record => {
           if (record.consecutiveCorrect >= (deckMastery.masteryThreshold || 3)) {
             masteredCount++;
           }
@@ -122,15 +128,21 @@ export const useCardMasteryStore = create<CardMasteryStore>()(
       },
 
       resetDeckMastery: (deckId: string) => {
-        set((state) => {
+        set(state => {
           const newMastery = { ...state.mastery };
           delete newMastery[deckId];
           return { mastery: newMastery };
         });
       },
 
-      updateCardAttempt: (deckId: string, cardIndex: number, isCorrect: boolean, totalCards: number, masteryThreshold: number = 3) => {
-        set((state) => {
+      updateCardAttempt: (
+        deckId: string,
+        cardIndex: number,
+        isCorrect: boolean,
+        totalCards: number,
+        masteryThreshold: number = 3
+      ) => {
+        set(state => {
           const deckMastery = state.mastery[deckId] || {
             deckId,
             masteredCards: new Map(),
@@ -210,14 +222,14 @@ export const useCardMasteryStore = create<CardMasteryStore>()(
       name: 'card-mastery-store',
       // Custom serialization to handle Map objects
       storage: {
-        getItem: (name) => {
+        getItem: name => {
           const str = localStorage.getItem(name);
           if (!str) return null;
 
           const parsed = JSON.parse(str);
           if (parsed.state && parsed.state.mastery) {
             // Convert arrays back to Maps
-            Object.keys(parsed.state.mastery).forEach((deckId) => {
+            Object.keys(parsed.state.mastery).forEach(deckId => {
               const deckMastery = parsed.state.mastery[deckId];
               if (Array.isArray(deckMastery.masteredCards)) {
                 deckMastery.masteredCards = new Map(deckMastery.masteredCards);
@@ -241,19 +253,32 @@ export const useCardMasteryStore = create<CardMasteryStore>()(
             ...value,
             state: {
               ...value.state,
-              mastery: Object.keys(value.state.mastery).reduce((acc: Record<string, Omit<DeckMastery, 'masteredCards'> & { masteredCards: [number, CardMasteryRecord][] }>, deckId: string) => {
-                const deckMastery = value.state.mastery[deckId];
-                acc[deckId] = {
-                  ...deckMastery,
-                  masteredCards: deckMastery.masteredCards ? Array.from(deckMastery.masteredCards.entries()) : [],
-                };
-                return acc;
-              }, {}),
+              mastery: Object.keys(value.state.mastery).reduce(
+                (
+                  acc: Record<
+                    string,
+                    Omit<DeckMastery, 'masteredCards'> & {
+                      masteredCards: [number, CardMasteryRecord][];
+                    }
+                  >,
+                  deckId: string
+                ) => {
+                  const deckMastery = value.state.mastery[deckId];
+                  acc[deckId] = {
+                    ...deckMastery,
+                    masteredCards: deckMastery.masteredCards
+                      ? Array.from(deckMastery.masteredCards.entries())
+                      : [],
+                  };
+                  return acc;
+                },
+                {}
+              ),
             },
           };
           localStorage.setItem(name, JSON.stringify(toStore));
         },
-        removeItem: (name) => {
+        removeItem: name => {
           localStorage.removeItem(name);
         },
       },

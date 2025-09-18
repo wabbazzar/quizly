@@ -6,11 +6,7 @@ interface IconProps {
   color?: string;
 }
 
-export const ArrowLeftIcon: FC<IconProps> = ({
-  className,
-  size = 24,
-  color = 'currentColor'
-}) => (
+export const ArrowLeftIcon: FC<IconProps> = ({ className, size = 24, color = 'currentColor' }) => (
   <svg
     width={size}
     height={size}
@@ -29,11 +25,7 @@ export const ArrowLeftIcon: FC<IconProps> = ({
   </svg>
 );
 
-export const ArrowRightIcon: FC<IconProps> = ({
-  className,
-  size = 24,
-  color = 'currentColor'
-}) => (
+export const ArrowRightIcon: FC<IconProps> = ({ className, size = 24, color = 'currentColor' }) => (
   <svg
     width={size}
     height={size}
@@ -52,11 +44,7 @@ export const ArrowRightIcon: FC<IconProps> = ({
   </svg>
 );
 
-export const CloseIcon: FC<IconProps> = ({
-  className,
-  size = 24,
-  color = 'currentColor'
-}) => (
+export const CloseIcon: FC<IconProps> = ({ className, size = 24, color = 'currentColor' }) => (
   <svg
     width={size}
     height={size}

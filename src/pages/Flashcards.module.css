@@ -192,7 +192,6 @@
   background: var(--error-light);
 }
 
-
 @media (max-width: 768px) {
   .container {
     height: 100vh;

@@ -7,7 +7,7 @@ on:
     branches: [main, develop]
 
 env:
-  NODE_VERSION: '20'
+  NODE_VERSION: "20"
   CACHE_VERSION: v1
 
 jobs:
@@ -26,7 +26,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: Generate dependency hash
         id: hash
@@ -75,7 +75,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: Restore dependencies
         uses: actions/cache@v4
@@ -134,7 +134,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: Restore dependencies
         uses: actions/cache@v4
@@ -178,7 +178,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: Restore dependencies
         uses: actions/cache@v4
@@ -216,7 +216,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: Restore dependencies
         uses: actions/cache@v4
@@ -255,7 +255,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: Restore dependencies
         uses: actions/cache@v4
@@ -308,7 +308,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: Restore dependencies
         uses: actions/cache@v4
@@ -356,7 +356,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: Restore dependencies
         uses: actions/cache@v4
@@ -409,7 +409,8 @@ jobs:
   quality-gate:
     name: Quality Gate Summary
     runs-on: ubuntu-latest
-    needs: [code-quality, security, unit-tests, integration-tests, e2e-tests, performance-tests, build]
+    needs:
+      [code-quality, security, unit-tests, integration-tests, e2e-tests, performance-tests, build]
     if: always()
     steps:
       - name: Check Quality Gate Status

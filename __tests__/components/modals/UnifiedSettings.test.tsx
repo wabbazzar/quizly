@@ -65,7 +65,7 @@ vi.mock('@/components/modals/settings/ProgressionSettings', () => ({
     <div data-testid="progression-settings">
       <select
         value={settings.progressionMode}
-        onChange={(e) => onChange('progressionMode', e.target.value)}
+        onChange={e => onChange('progressionMode', e.target.value)}
       >
         <option value="sequential">Sequential</option>
         <option value="shuffle">Shuffle</option>
@@ -82,7 +82,7 @@ vi.mock('@/components/modals/settings/LearningSettings', () => ({
       <input
         type="number"
         value={settings.cardsPerRound}
-        onChange={(e) => onChange('cardsPerRound', parseInt(e.target.value))}
+        onChange={e => onChange('cardsPerRound', parseInt(e.target.value))}
         min="5"
         max="50"
       />
@@ -283,7 +283,9 @@ describe('UnifiedSettings Component', () => {
       fireEvent.click(screen.getByText('Save Settings'));
 
       await waitFor(() => {
-        expect(screen.getByRole('alert')).toHaveTextContent('Same side cannot be both question and answer');
+        expect(screen.getByRole('alert')).toHaveTextContent(
+          'Same side cannot be both question and answer'
+        );
       });
     });
 
@@ -319,7 +321,7 @@ describe('UnifiedSettings Component', () => {
 
     it('should show loading state while saving', async () => {
       let resolveSave: () => void;
-      const savePromise = new Promise<void>((resolve) => {
+      const savePromise = new Promise<void>(resolve => {
         resolveSave = resolve;
       });
 
@@ -348,7 +350,9 @@ describe('UnifiedSettings Component', () => {
       fireEvent.click(screen.getByText('Save Settings'));
 
       await waitFor(() => {
-        expect(screen.getByRole('alert')).toHaveTextContent('Failed to save settings. Please try again.');
+        expect(screen.getByRole('alert')).toHaveTextContent(
+          'Failed to save settings. Please try again.'
+        );
       });
     });
   });
@@ -356,13 +360,7 @@ describe('UnifiedSettings Component', () => {
   describe('Deck Mode Special Functionality', () => {
     it('should render Reset Mastery button in deck mode', () => {
       const onResetMastery = vi.fn();
-      render(
-        <UnifiedSettings
-          {...defaultProps}
-          mode="deck"
-          onResetMastery={onResetMastery}
-        />
-      );
+      render(<UnifiedSettings {...defaultProps} mode="deck" onResetMastery={onResetMastery} />);
 
       expect(screen.getByText('Reset Mastery')).toBeInTheDocument();
       expect(screen.queryByText('Save Settings')).not.toBeInTheDocument();
@@ -370,13 +368,7 @@ describe('UnifiedSettings Component', () => {
 
     it('should call onResetMastery when Reset Mastery button is clicked', () => {
       const onResetMastery = vi.fn();
-      render(
-        <UnifiedSettings
-          {...defaultProps}
-          mode="deck"
-          onResetMastery={onResetMastery}
-        />
-      );
+      render(<UnifiedSettings {...defaultProps} mode="deck" onResetMastery={onResetMastery} />);
 
       fireEvent.click(screen.getByText('Reset Mastery'));
       expect(onResetMastery).toHaveBeenCalledTimes(1);

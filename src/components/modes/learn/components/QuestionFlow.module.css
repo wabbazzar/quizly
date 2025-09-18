@@ -135,7 +135,9 @@
   border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
+  transition:
+    background 0.2s,
+    transform 0.2s;
 }
 
 .continueButton:hover {

@@ -12,24 +12,24 @@ export const UNIVERSAL_PRESETS: PresetDefinition[] = [
       if (mode === 'flashcards') {
         return {
           frontSides: [sides[0] || 'side_a'],
-          backSides: [sides[1] || 'side_b']
+          backSides: [sides[1] || 'side_b'],
         };
       }
       if (mode === 'learn') {
         return {
           questionSides: [sides[0] || 'side_a'],
           answerSides: [sides[1] || 'side_b'],
-          questionTypeMix: 'auto' as const
+          questionTypeMix: 'auto' as const,
         };
       }
       if (mode === 'match') {
         return {
           frontSides: [sides[0] || 'side_a'],
-          backSides: [sides[1] || 'side_b']
+          backSides: [sides[1] || 'side_b'],
         };
       }
       return {};
-    }
+    },
   },
   {
     id: 'reverse',
@@ -42,18 +42,18 @@ export const UNIVERSAL_PRESETS: PresetDefinition[] = [
       if (mode === 'flashcards') {
         return {
           frontSides: [sides[1] || 'side_b'],
-          backSides: [sides[0] || 'side_a']
+          backSides: [sides[0] || 'side_a'],
         };
       }
       if (mode === 'learn') {
         return {
           questionSides: [sides[1] || 'side_b'],
           answerSides: [sides[0] || 'side_a'],
-          questionTypeMix: 'auto' as const
+          questionTypeMix: 'auto' as const,
         };
       }
       return {};
-    }
+    },
   },
   {
     id: 'comprehensive',
@@ -66,7 +66,7 @@ export const UNIVERSAL_PRESETS: PresetDefinition[] = [
       if (mode === 'flashcards') {
         return {
           frontSides: [sides[0] || 'side_a'],
-          backSides: sides.slice(1).length > 0 ? sides.slice(1) : ['side_b']
+          backSides: sides.slice(1).length > 0 ? sides.slice(1) : ['side_b'],
         };
       }
       if (mode === 'learn') {
@@ -74,11 +74,11 @@ export const UNIVERSAL_PRESETS: PresetDefinition[] = [
           questionSides: [sides[0] || 'side_a'],
           answerSides: sides.slice(1).length > 0 ? sides.slice(1) : ['side_b'],
           questionTypeMix: 'multiple_choice' as const,
-          cardsPerRound: 20
+          cardsPerRound: 20,
         };
       }
       return {};
-    }
+    },
   },
   {
     id: 'multi',
@@ -91,8 +91,9 @@ export const UNIVERSAL_PRESETS: PresetDefinition[] = [
       if (mode === 'flashcards') {
         const frontCount = Math.min(2, Math.floor(sides.length / 2));
         return {
-          frontSides: sides.slice(0, frontCount).length > 0 ? sides.slice(0, frontCount) : ['side_a'],
-          backSides: sides.slice(frontCount).length > 0 ? sides.slice(frontCount) : ['side_b']
+          frontSides:
+            sides.slice(0, frontCount).length > 0 ? sides.slice(0, frontCount) : ['side_a'],
+          backSides: sides.slice(frontCount).length > 0 ? sides.slice(frontCount) : ['side_b'],
         };
       }
       if (mode === 'learn') {
@@ -102,11 +103,11 @@ export const UNIVERSAL_PRESETS: PresetDefinition[] = [
           questionSides: questions.length > 0 ? questions : ['side_a'],
           answerSides: answers.length > 0 ? answers : ['side_b'],
           questionTypeMix: 'mixed' as const,
-          randomize: true
+          randomize: true,
         };
       }
       return {};
-    }
+    },
   },
   {
     id: 'formal',
@@ -123,11 +124,11 @@ export const UNIVERSAL_PRESETS: PresetDefinition[] = [
           enableTimer: true,
           timerSeconds: 1800, // 30 minutes
           randomize: false,
-          progressionMode: 'sequential' as const
+          progressionMode: 'sequential' as const,
         };
       }
       return {};
-    }
+    },
   },
   {
     id: 'practice',
@@ -144,10 +145,10 @@ export const UNIVERSAL_PRESETS: PresetDefinition[] = [
           enableTimer: false,
           timerSeconds: null,
           randomize: true,
-          progressionMode: 'random' as const
+          progressionMode: 'random' as const,
         };
       }
       return {};
-    }
-  }
+    },
+  },
 ];

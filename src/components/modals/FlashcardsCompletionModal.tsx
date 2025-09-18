@@ -76,7 +76,12 @@ const FlashcardsCompletionModal: FC<FlashcardsCompletionModalProps> = ({
     const handleKeyDown = (e: KeyboardEvent) => {
       // Ignore if typing in an input/textarea/contentEditable
       const target = e.target as HTMLElement | null;
-      if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || (target as any).isContentEditable)) {
+      if (
+        target &&
+        (target.tagName === 'INPUT' ||
+          target.tagName === 'TEXTAREA' ||
+          (target as any).isContentEditable)
+      ) {
         return;
       }
 

@@ -117,7 +117,8 @@
 }
 
 @keyframes incorrectShake {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(0);
   }
   25% {

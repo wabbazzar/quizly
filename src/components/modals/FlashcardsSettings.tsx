@@ -12,7 +12,12 @@ interface FlashcardsSettingsProps {
   backSides: string[];
   progressionMode?: 'sequential' | 'shuffle' | 'level';
   includeMastered?: boolean;
-  onUpdateSettings: (frontSides: string[], backSides: string[], progressionMode: 'sequential' | 'shuffle' | 'level', includeMastered: boolean) => void;
+  onUpdateSettings: (
+    frontSides: string[],
+    backSides: string[],
+    progressionMode: 'sequential' | 'shuffle' | 'level',
+    includeMastered: boolean
+  ) => void;
 }
 
 const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
@@ -27,7 +32,9 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
 }) => {
   const [localFrontSides, setLocalFrontSides] = useState<string[]>(frontSides);
   const [localBackSides, setLocalBackSides] = useState<string[]>(backSides);
-  const [localProgressionMode, setLocalProgressionMode] = useState<'sequential' | 'shuffle' | 'level'>(progressionMode);
+  const [localProgressionMode, setLocalProgressionMode] = useState<
+    'sequential' | 'shuffle' | 'level'
+  >(progressionMode);
   const [localIncludeMastered, setLocalIncludeMastered] = useState<boolean>(includeMastered);
 
   const { getMasteredCardsForDeck } = useDeckStore();
@@ -135,11 +142,7 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
           >
             <header className={styles.header}>
               <h2 className={styles.title}>Flashcard Settings</h2>
-              <button
-                className={styles.closeButton}
-                onClick={onClose}
-                aria-label="Close settings"
-              >
+              <button className={styles.closeButton} onClick={onClose} aria-label="Close settings">
                 ✕
               </button>
             </header>
@@ -154,14 +157,16 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
                     onClick={() => applyPreset('simple')}
                     title={`Show ${getSideLabel(availableSides[0] || 'side_a')} on front, ${getSideLabel(availableSides[1] || 'side_b')} on back`}
                   >
-                    Simple ({getShortSideLabel(availableSides[0] || 'side_a')} → {getShortSideLabel(availableSides[1] || 'side_b')})
+                    Simple ({getShortSideLabel(availableSides[0] || 'side_a')} →{' '}
+                    {getShortSideLabel(availableSides[1] || 'side_b')})
                   </button>
                   <button
                     className={styles.presetButton}
                     onClick={() => applyPreset('reverse')}
                     title={`Show ${getSideLabel(availableSides[1] || 'side_b')} on front, ${getSideLabel(availableSides[0] || 'side_a')} on back`}
                   >
-                    Reverse ({getShortSideLabel(availableSides[1] || 'side_b')} → {getShortSideLabel(availableSides[0] || 'side_a')})
+                    Reverse ({getShortSideLabel(availableSides[1] || 'side_b')} →{' '}
+                    {getShortSideLabel(availableSides[0] || 'side_a')})
                   </button>
                   <button
                     className={styles.presetButton}
@@ -187,7 +192,7 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
                   Select which sides appear on the front of the card
                 </p>
                 <div className={styles.sideSelector}>
-                  {availableSides.map((side) => (
+                  {availableSides.map(side => (
                     <button
                       key={side}
                       className={`${styles.sideOption} ${
@@ -208,7 +213,7 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
                   Select which sides appear on the back of the card
                 </p>
                 <div className={styles.sideSelector}>
-                  {availableSides.map((side) => (
+                  {availableSides.map(side => (
                     <button
                       key={side}
                       className={`${styles.sideOption} ${
@@ -235,12 +240,18 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
                       name="progression"
                       value="shuffle"
                       checked={localProgressionMode === 'shuffle'}
-                      onChange={(e) => setLocalProgressionMode(e.target.value as 'sequential' | 'shuffle' | 'level')}
+                      onChange={e =>
+                        setLocalProgressionMode(
+                          e.target.value as 'sequential' | 'shuffle' | 'level'
+                        )
+                      }
                       className={styles.radioInput}
                     />
                     <div className={styles.radioContent}>
                       <span className={styles.radioLabel}>Shuffle</span>
-                      <span className={styles.radioDescription}>Random order for better retention</span>
+                      <span className={styles.radioDescription}>
+                        Random order for better retention
+                      </span>
                     </div>
                   </label>
                   <label className={styles.radioOption}>
@@ -249,12 +260,18 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
                       name="progression"
                       value="sequential"
                       checked={localProgressionMode === 'sequential'}
-                      onChange={(e) => setLocalProgressionMode(e.target.value as 'sequential' | 'shuffle' | 'level')}
+                      onChange={e =>
+                        setLocalProgressionMode(
+                          e.target.value as 'sequential' | 'shuffle' | 'level'
+                        )
+                      }
                       className={styles.radioInput}
                     />
                     <div className={styles.radioContent}>
                       <span className={styles.radioLabel}>Sequential</span>
-                      <span className={styles.radioDescription}>Cards in order as they appear in deck</span>
+                      <span className={styles.radioDescription}>
+                        Cards in order as they appear in deck
+                      </span>
                     </div>
                   </label>
                   <label className={styles.radioOption}>
@@ -263,12 +280,18 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
                       name="progression"
                       value="level"
                       checked={localProgressionMode === 'level'}
-                      onChange={(e) => setLocalProgressionMode(e.target.value as 'sequential' | 'shuffle' | 'level')}
+                      onChange={e =>
+                        setLocalProgressionMode(
+                          e.target.value as 'sequential' | 'shuffle' | 'level'
+                        )
+                      }
                       className={styles.radioInput}
                     />
                     <div className={styles.radioContent}>
                       <span className={styles.radioLabel}>By Level</span>
-                      <span className={styles.radioDescription}>Progress from easier to harder cards</span>
+                      <span className={styles.radioDescription}>
+                        Progress from easier to harder cards
+                      </span>
                     </div>
                   </label>
                 </div>
@@ -282,7 +305,7 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
                     <input
                       type="checkbox"
                       checked={localIncludeMastered}
-                      onChange={(e) => setLocalIncludeMastered(e.target.checked)}
+                      onChange={e => setLocalIncludeMastered(e.target.checked)}
                       className={styles.checkbox}
                     />
                     <div className={styles.checkboxContent}>
@@ -296,7 +319,8 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
                   </label>
                   {masteredCount > 0 && !localIncludeMastered && (
                     <div className={styles.infoMessage}>
-                      ⓘ {masteredCount} mastered card{masteredCount === 1 ? '' : 's'} will be excluded from this session
+                      ⓘ {masteredCount} mastered card{masteredCount === 1 ? '' : 's'} will be
+                      excluded from this session
                     </div>
                   )}
                 </div>
@@ -304,10 +328,7 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
             </div>
 
             <footer className={styles.footer}>
-              <button
-                className={styles.cancelButton}
-                onClick={onClose}
-              >
+              <button className={styles.cancelButton} onClick={onClose}>
                 Cancel
               </button>
               <button

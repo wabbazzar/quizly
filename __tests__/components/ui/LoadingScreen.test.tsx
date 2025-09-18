@@ -82,7 +82,8 @@ describe('LoadingScreen Component', () => {
     });
 
     it('should handle long messages', () => {
-      const longMessage = 'This is a very long loading message that might wrap to multiple lines and should still be properly displayed within the loading screen component without breaking the layout';
+      const longMessage =
+        'This is a very long loading message that might wrap to multiple lines and should still be properly displayed within the loading screen component without breaking the layout';
       render(<LoadingScreen message={longMessage} />);
 
       const message = screen.getByText(longMessage);

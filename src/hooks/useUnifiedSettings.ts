@@ -28,39 +28,45 @@ export const useUnifiedSettings = (
   const updateSetting = useCallback((key: string, value: any) => {
     setLocalSettings((prev: any) => ({
       ...prev,
-      [key]: value
+      [key]: value,
     }));
   }, []);
 
   // Apply a preset
-  const applyPreset = useCallback((presetId: string) => {
-    const preset = UNIVERSAL_PRESETS.find(p => p.id === presetId);
-    if (!preset || !preset.supportedModes.includes(config.mode)) {
-      return;
-    }
+  const applyPreset = useCallback(
+    (presetId: string) => {
+      const preset = UNIVERSAL_PRESETS.find(p => p.id === presetId);
+      if (!preset || !preset.supportedModes.includes(config.mode)) {
+        return;
+      }
 
-    // Get available sides for this deck
-    const availableSides = getAvailableSidesFromSettings(localSettings);
-    const presetSettings = preset.applyToMode(config.mode, availableSides);
+      // Get available sides for this deck
+      const availableSides = getAvailableSidesFromSettings(localSettings);
+      const presetSettings = preset.applyToMode(config.mode, availableSides);
 
-    setLocalSettings((prev: any) => ({
-      ...prev,
-      ...presetSettings
-    }));
-  }, [config.mode, localSettings]);
+      setLocalSettings((prev: any) => ({
+        ...prev,
+        ...presetSettings,
+      }));
+    },
+    [config.mode, localSettings]
+  );
 
   // Validate settings
-  const validate = useCallback((settings: any): Record<string, string> => {
-    const errors: Record<string, string> = {};
+  const validate = useCallback(
+    (settings: any): Record<string, string> => {
+      const errors: Record<string, string> = {};
 
-    config.validationRules.forEach(rule => {
-      if (!rule.validator(settings[rule.field], settings)) {
-        errors[rule.field] = rule.errorMessage;
-      }
-    });
+      config.validationRules.forEach(rule => {
+        if (!rule.validator(settings[rule.field], settings)) {
+          errors[rule.field] = rule.errorMessage;
+        }
+      });
 
-    return errors;
-  }, [config.validationRules]);
+      return errors;
+    },
+    [config.validationRules]
+  );
 
   // Save settings
   const handleSave = useCallback(async () => {
@@ -87,7 +93,7 @@ export const useUnifiedSettings = (
     applyPreset,
     handleSave,
     validate,
-    applicablePresets
+    applicablePresets,
   };
 };
 

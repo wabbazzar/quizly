@@ -8,7 +8,7 @@ export interface LearnSessionProgress {
   correctAnswers: number;
   currentStreak: number;
   maxStreak: number;
-  passedCards: Set<number>;  // Cards answered correctly in this session
+  passedCards: Set<number>; // Cards answered correctly in this session
   strugglingCards: Set<number>;
   averageResponseTime: number;
 }
@@ -18,17 +18,14 @@ interface LearnProgressProps {
   className?: string;
 }
 
-export const LearnProgress: FC<LearnProgressProps> = memo(({
-  progress,
-  className,
-}) => {
-  const progressPercentage = progress.totalQuestions > 0
-    ? (progress.questionsAnswered / progress.totalQuestions) * 100
-    : 0;
+export const LearnProgress: FC<LearnProgressProps> = memo(({ progress, className }) => {
+  const progressPercentage =
+    progress.totalQuestions > 0 ? (progress.questionsAnswered / progress.totalQuestions) * 100 : 0;
 
-  const accuracyPercentage = progress.questionsAnswered > 0
-    ? (progress.correctAnswers / progress.questionsAnswered) * 100
-    : 0;
+  const accuracyPercentage =
+    progress.questionsAnswered > 0
+      ? (progress.correctAnswers / progress.questionsAnswered) * 100
+      : 0;
 
   const formatTime = (ms: number) => {
     const seconds = Math.round(ms / 1000);
@@ -50,21 +47,14 @@ export const LearnProgress: FC<LearnProgressProps> = memo(({
           aria-valuemax={100}
           aria-label={`Progress: ${progress.questionsAnswered} of ${progress.totalQuestions} questions`}
         >
-          <div
-            className={styles.progressFill}
-            style={{ width: `${progressPercentage}%` }}
-          >
+          <div className={styles.progressFill} style={{ width: `${progressPercentage}%` }}>
             {progressPercentage > 20 && (
-              <span className={styles.progressText}>
-                {Math.round(progressPercentage)}%
-              </span>
+              <span className={styles.progressText}>{Math.round(progressPercentage)}%</span>
             )}
           </div>
         </div>
         {progressPercentage <= 20 && (
-          <span className={styles.progressTextOutside}>
-            {Math.round(progressPercentage)}%
-          </span>
+          <span className={styles.progressTextOutside}>{Math.round(progressPercentage)}%</span>
         )}
       </div>
 
@@ -104,9 +94,7 @@ export const LearnProgress: FC<LearnProgressProps> = memo(({
 
         <div className={styles.statItem}>
           <span className={styles.statLabel}>Avg Time</span>
-          <span className={styles.statValue}>
-            {formatTime(progress.averageResponseTime)}
-          </span>
+          <span className={styles.statValue}>{formatTime(progress.averageResponseTime)}</span>
         </div>
       </div>
 
@@ -114,28 +102,18 @@ export const LearnProgress: FC<LearnProgressProps> = memo(({
       <div className={styles.masterySection}>
         <div className={styles.masteryIndicators}>
           <div className={styles.masteryItem}>
-            <div
-              className={cn(styles.masteryDot, styles.masteredDot)}
-              aria-hidden="true"
-            />
+            <div className={cn(styles.masteryDot, styles.masteredDot)} aria-hidden="true" />
             <span className={styles.masteryLabel}>
               Mastered
-              <strong className={styles.masteryCount}>
-                {progress.passedCards.size}
-              </strong>
+              <strong className={styles.masteryCount}>{progress.passedCards.size}</strong>
             </span>
           </div>
 
           <div className={styles.masteryItem}>
-            <div
-              className={cn(styles.masteryDot, styles.strugglingDot)}
-              aria-hidden="true"
-            />
+            <div className={cn(styles.masteryDot, styles.strugglingDot)} aria-hidden="true" />
             <span className={styles.masteryLabel}>
               Needs Practice
-              <strong className={styles.masteryCount}>
-                {progress.strugglingCards.size}
-              </strong>
+              <strong className={styles.masteryCount}>{progress.strugglingCards.size}</strong>
             </span>
           </div>
 
@@ -143,9 +121,7 @@ export const LearnProgress: FC<LearnProgressProps> = memo(({
             <div className={styles.masteryItem}>
               <span className={styles.masteryLabel}>
                 Best Streak
-                <strong className={styles.masteryCount}>
-                  {progress.maxStreak}
-                </strong>
+                <strong className={styles.masteryCount}>{progress.maxStreak}</strong>
               </span>
             </div>
           )}

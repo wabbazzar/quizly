@@ -73,7 +73,9 @@
       "Bash(git checkout:*)",
       "Bash(npx playwright:*)",
       "Bash(npm run lint:*)",
-      "Bash(npx vitest:*)"
+      "Bash(npx vitest:*)",
+      "Bash(npm audit:*)",
+      "Bash(npx prettier:*)"
     ],
     "deny": [],
     "ask": []

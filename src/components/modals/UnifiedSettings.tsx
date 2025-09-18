@@ -66,7 +66,6 @@ export interface ValidationRule {
 
 // Get configuration for the current mode
 const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConfig => {
-
   const sections: Record<string, SettingsSection[]> = {
     flashcards: [
       {
@@ -74,7 +73,7 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
         title: 'Quick Presets',
         visible: true,
         component: QuickPresets,
-        order: 1
+        order: 1,
       },
       {
         id: 'front_sides',
@@ -83,7 +82,7 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
         visible: true,
         required: true,
         component: SideConfiguration,
-        order: 2
+        order: 2,
       },
       {
         id: 'back_sides',
@@ -92,7 +91,7 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
         visible: true,
         required: true,
         component: SideConfiguration,
-        order: 3
+        order: 3,
       },
       {
         id: 'progression',
@@ -100,15 +99,15 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
         description: 'Choose how cards are presented during your session',
         visible: true,
         component: ProgressionSettings,
-        order: 4
+        order: 4,
       },
       {
         id: 'mastered_cards',
         title: 'Mastered Cards',
         visible: true,
         component: MasterySettings,
-        order: 5
-      }
+        order: 5,
+      },
     ],
     learn: [
       {
@@ -116,7 +115,7 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
         title: 'Quick Presets',
         visible: true,
         component: QuickPresets,
-        order: 1
+        order: 1,
       },
       {
         id: 'question_sides',
@@ -125,7 +124,7 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
         visible: true,
         required: true,
         component: SideConfiguration,
-        order: 2
+        order: 2,
       },
       {
         id: 'answer_sides',
@@ -134,29 +133,29 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
         visible: true,
         required: true,
         component: SideConfiguration,
-        order: 3
+        order: 3,
       },
       {
         id: 'learning_settings',
         title: 'Learning Settings',
         visible: true,
         component: LearningSettings,
-        order: 4
+        order: 4,
       },
       {
         id: 'progression',
         title: 'Progression Mode',
         visible: true,
         component: ProgressionSettings,
-        order: 5
+        order: 5,
       },
       {
         id: 'mastery_settings',
         title: 'Mastery Settings',
         visible: true,
         component: MasterySettings,
-        order: 6
-      }
+        order: 6,
+      },
     ],
     deck: [
       {
@@ -164,15 +163,15 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
         title: 'Deck Information',
         visible: true,
         component: DeckInformation,
-        order: 1
+        order: 1,
       },
       {
         id: 'mastery_management',
         title: 'Mastery Management',
         visible: true,
         component: MasterySettings,
-        order: 2
-      }
+        order: 2,
+      },
     ],
     match: [
       {
@@ -180,15 +179,15 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
         title: 'Quick Presets',
         visible: true,
         component: QuickPresets,
-        order: 1
+        order: 1,
       },
       {
         id: 'game_settings',
         title: 'Game Settings',
         visible: false, // Future implementation
         component: QuickPresets, // Placeholder
-        order: 2
-      }
+        order: 2,
+      },
     ],
     test: [
       {
@@ -196,16 +195,16 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
         title: 'Quick Presets',
         visible: true,
         component: QuickPresets,
-        order: 1
+        order: 1,
       },
       {
         id: 'test_configuration',
         title: 'Test Configuration',
         visible: false, // Future implementation
         component: QuickPresets, // Placeholder
-        order: 2
-      }
-    ]
+        order: 2,
+      },
+    ],
   };
 
   const validation: Record<string, ValidationRule[]> = {
@@ -213,24 +212,24 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
       {
         field: 'frontSides',
         validator: (value: string[]) => value && value.length > 0,
-        errorMessage: 'At least one front side is required'
+        errorMessage: 'At least one front side is required',
       },
       {
         field: 'backSides',
         validator: (value: string[]) => value && value.length > 0,
-        errorMessage: 'At least one back side is required'
-      }
+        errorMessage: 'At least one back side is required',
+      },
     ],
     learn: [
       {
         field: 'questionSides',
         validator: (value: string[]) => value && value.length > 0,
-        errorMessage: 'At least one question side is required'
+        errorMessage: 'At least one question side is required',
       },
       {
         field: 'answerSides',
         validator: (value: string[]) => value && value.length > 0,
-        errorMessage: 'At least one answer side is required'
+        errorMessage: 'At least one answer side is required',
       },
       {
         field: 'duplicateSides',
@@ -238,17 +237,17 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
           const duplicates = settings.questionSides.filter(s => settings.answerSides.includes(s));
           return duplicates.length === 0;
         },
-        errorMessage: 'Same side cannot be both question and answer'
+        errorMessage: 'Same side cannot be both question and answer',
       },
       {
         field: 'cardsPerRound',
         validator: (value: number) => value >= 5 && value <= 50,
-        errorMessage: 'Cards per round must be between 5 and 50'
-      }
+        errorMessage: 'Cards per round must be between 5 and 50',
+      },
     ],
     deck: [],
     match: [],
-    test: []
+    test: [],
   };
 
   return {
@@ -256,201 +255,184 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
     availableSections: sections[mode] || [],
     presets: [], // Will be populated by the preset system
     persistenceKey: `unified-settings-${mode}`,
-    validationRules: validation[mode] || []
+    validationRules: validation[mode] || [],
   };
 };
 
-export const UnifiedSettings: FC<UnifiedSettingsProps> = memo(({
-  visible,
-  onClose,
-  deck,
-  mode,
-  settings,
-  onUpdateSettings,
-  onResetMastery
-}) => {
-  const [isLoading] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+export const UnifiedSettings: FC<UnifiedSettingsProps> = memo(
+  ({ visible, onClose, deck, mode, settings, onUpdateSettings, onResetMastery }) => {
+    const [isLoading] = useState(false);
+    const [isSaving, setIsSaving] = useState(false);
+    const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const config = useMemo(() => getConfigForMode(mode, deck), [mode, deck]);
+    const config = useMemo(() => getConfigForMode(mode, deck), [mode, deck]);
 
-  const {
-    localSettings,
-    updateSetting,
-    handleSave,
-    validate
-  } = useUnifiedSettings(
-    settings,
-    config,
-    onUpdateSettings
-  );
+    const { localSettings, updateSetting, handleSave, validate } = useUnifiedSettings(
+      settings,
+      config,
+      onUpdateSettings
+    );
 
-  // Clear errors when modal closes
-  useEffect(() => {
-    if (!visible) {
-      setErrors({});
-      setIsSaving(false);
-    }
-  }, [visible]);
+    // Clear errors when modal closes
+    useEffect(() => {
+      if (!visible) {
+        setErrors({});
+        setIsSaving(false);
+      }
+    }, [visible]);
 
-  // Handle save with loading state
-  const onSave = async () => {
-    const validationErrors = validate(localSettings);
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
+    // Handle save with loading state
+    const onSave = async () => {
+      const validationErrors = validate(localSettings);
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
+      }
 
-    setIsSaving(true);
-    try {
-      await handleSave();
-      onClose();
-    } catch (error) {
-      setErrors({ save: 'Failed to save settings. Please try again.' });
-    } finally {
-      setIsSaving(false);
-    }
-  };
-
-  // Get title based on mode
-  const getModalTitle = () => {
-    const titles = {
-      flashcards: 'Flashcard Settings',
-      learn: 'Learn Mode Settings',
-      deck: 'Deck Settings',
-      match: 'Match Settings',
-      test: 'Test Settings'
+      setIsSaving(true);
+      try {
+        await handleSave();
+        onClose();
+      } catch (error) {
+        setErrors({ save: 'Failed to save settings. Please try again.' });
+      } finally {
+        setIsSaving(false);
+      }
     };
-    return titles[mode] || 'Settings';
-  };
 
-  if (!deck && mode !== 'deck') return null;
+    // Get title based on mode
+    const getModalTitle = () => {
+      const titles = {
+        flashcards: 'Flashcard Settings',
+        learn: 'Learn Mode Settings',
+        deck: 'Deck Settings',
+        match: 'Match Settings',
+        test: 'Test Settings',
+      };
+      return titles[mode] || 'Settings';
+    };
 
-  return (
-    <AnimatePresence>
-      {visible && (
-        <>
-          <motion.div
-            className={styles.overlay}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-          />
-          <motion.div
-            className={styles.modal}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{
-              type: "spring",
-              stiffness: 300,
-              damping: 30
-            }}
-          >
-            <header className={styles.header}>
-              <h2 className={styles.title}>{getModalTitle()}</h2>
-              <button
-                className={styles.closeButton}
-                onClick={onClose}
-                aria-label="Close settings"
-              >
-                ✕
-              </button>
-            </header>
+    if (!deck && mode !== 'deck') return null;
 
-            <div className={styles.content}>
-              {isLoading ? (
-                <div className={styles.loadingContainer}>
-                  <div className={styles.spinner} data-testid="loading-spinner" />
-                  <span>Loading settings...</span>
-                </div>
-              ) : (
-                <>
-                  {/* Render sections based on mode */}
-                  {config.availableSections
-                    .filter(section => section.visible)
-                    .sort((a, b) => a.order - b.order)
-                    .map(section => {
-                      const SectionComponent = section.component;
-                      const sectionError = errors[section.id] || '';
-
-                      // Map section IDs to appropriate settings keys
-                      const sectionSettings = getSectionSettings(section.id, localSettings);
-
-                      return (
-                        <motion.section
-                          key={section.id}
-                          className={styles.section}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{
-                            delay: section.order * 0.05,
-                            type: "spring",
-                            stiffness: 100
-                          }}
-                        >
-                          <SectionComponent
-                            settings={sectionSettings}
-                            onChange={updateSetting}
-                            deck={deck}
-                            mode={mode}
-                            error={sectionError}
-                          />
-                        </motion.section>
-                      );
-                    })}
-
-                  {/* Error display */}
-                  {Object.keys(errors).length > 0 && (
-                    <motion.div
-                      className={styles.errorContainer}
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      role="alert"
-                    >
-                      {Object.values(errors).map((error, index) => (
-                        <div key={index} className={styles.errorMessage}>
-                          {error}
-                        </div>
-                      ))}
-                    </motion.div>
-                  )}
-                </>
-              )}
-            </div>
-
-            <footer className={styles.footer}>
-              <button
-                className={styles.cancelButton}
-                onClick={onClose}
-              >
-                Cancel
-              </button>
-              {mode === 'deck' && onResetMastery ? (
+    return (
+      <AnimatePresence>
+        {visible && (
+          <>
+            <motion.div
+              className={styles.overlay}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={onClose}
+            />
+            <motion.div
+              className={styles.modal}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{
+                type: 'spring',
+                stiffness: 300,
+                damping: 30,
+              }}
+            >
+              <header className={styles.header}>
+                <h2 className={styles.title}>{getModalTitle()}</h2>
                 <button
-                  className={styles.resetButton}
-                  onClick={onResetMastery}
+                  className={styles.closeButton}
+                  onClick={onClose}
+                  aria-label="Close settings"
                 >
-                  Reset Mastery
+                  ✕
                 </button>
-              ) : (
-                <button
-                  className={styles.saveButton}
-                  onClick={onSave}
-                  disabled={isSaving || Object.keys(errors).length > 0}
-                >
-                  {isSaving ? 'Saving...' : 'Save Settings'}
+              </header>
+
+              <div className={styles.content}>
+                {isLoading ? (
+                  <div className={styles.loadingContainer}>
+                    <div className={styles.spinner} data-testid="loading-spinner" />
+                    <span>Loading settings...</span>
+                  </div>
+                ) : (
+                  <>
+                    {/* Render sections based on mode */}
+                    {config.availableSections
+                      .filter(section => section.visible)
+                      .sort((a, b) => a.order - b.order)
+                      .map(section => {
+                        const SectionComponent = section.component;
+                        const sectionError = errors[section.id] || '';
+
+                        // Map section IDs to appropriate settings keys
+                        const sectionSettings = getSectionSettings(section.id, localSettings);
+
+                        return (
+                          <motion.section
+                            key={section.id}
+                            className={styles.section}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{
+                              delay: section.order * 0.05,
+                              type: 'spring',
+                              stiffness: 100,
+                            }}
+                          >
+                            <SectionComponent
+                              settings={sectionSettings}
+                              onChange={updateSetting}
+                              deck={deck}
+                              mode={mode}
+                              error={sectionError}
+                            />
+                          </motion.section>
+                        );
+                      })}
+
+                    {/* Error display */}
+                    {Object.keys(errors).length > 0 && (
+                      <motion.div
+                        className={styles.errorContainer}
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        role="alert"
+                      >
+                        {Object.values(errors).map((error, index) => (
+                          <div key={index} className={styles.errorMessage}>
+                            {error}
+                          </div>
+                        ))}
+                      </motion.div>
+                    )}
+                  </>
+                )}
+              </div>
+
+              <footer className={styles.footer}>
+                <button className={styles.cancelButton} onClick={onClose}>
+                  Cancel
                 </button>
-              )}
-            </footer>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
-  );
-});
+                {mode === 'deck' && onResetMastery ? (
+                  <button className={styles.resetButton} onClick={onResetMastery}>
+                    Reset Mastery
+                  </button>
+                ) : (
+                  <button
+                    className={styles.saveButton}
+                    onClick={onSave}
+                    disabled={isSaving || Object.keys(errors).length > 0}
+                  >
+                    {isSaving ? 'Saving...' : 'Save Settings'}
+                  </button>
+                )}
+              </footer>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    );
+  }
+);
 
 // Helper function to map section IDs to settings
 const getSectionSettings = (sectionId: string, settings: any): any => {
@@ -463,14 +445,14 @@ const getSectionSettings = (sectionId: string, settings: any): any => {
   if (sectionId === 'front_sides' || sectionId === 'back_sides') {
     return {
       ...settings,
-      sectionType: sectionId === 'front_sides' ? 'front' : 'back'
+      sectionType: sectionId === 'front_sides' ? 'front' : 'back',
     };
   }
 
   if (sectionId === 'question_sides' || sectionId === 'answer_sides') {
     return {
       ...settings,
-      sectionType: sectionId === 'question_sides' ? 'question' : 'answer'
+      sectionType: sectionId === 'question_sides' ? 'question' : 'answer',
     };
   }
 

@@ -9,20 +9,14 @@
 
 /* Variant Styles - Using Semi-Transparent Design Pattern */
 .default {
-  background: linear-gradient(135deg,
-    rgba(74, 144, 226, 0.03),
-    rgba(74, 144, 226, 0.01)
-  );
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.03), rgba(74, 144, 226, 0.01));
   border: 1px solid rgba(74, 144, 226, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
 .elevated {
-  background: linear-gradient(135deg,
-    rgba(74, 144, 226, 0.05),
-    rgba(74, 144, 226, 0.02)
-  );
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.05), rgba(74, 144, 226, 0.02));
   border: 1px solid rgba(74, 144, 226, 0.15);
   box-shadow:
     0 4px 6px -1px rgba(74, 144, 226, 0.1),
@@ -32,10 +26,7 @@
 }
 
 .outlined {
-  background: linear-gradient(135deg,
-    rgba(255, 255, 255, 0.5),
-    rgba(255, 255, 255, 0.3)
-  );
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3));
   border: 2px solid rgba(74, 144, 226, 0.2);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -81,10 +72,7 @@
 }
 
 .interactive.default:hover {
-  background: linear-gradient(135deg,
-    rgba(74, 144, 226, 0.06),
-    rgba(74, 144, 226, 0.03)
-  );
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.06), rgba(74, 144, 226, 0.03));
   border-color: rgba(74, 144, 226, 0.2);
 }
 
@@ -95,10 +83,7 @@
 }
 
 .interactive.outlined:hover {
-  background: linear-gradient(135deg,
-    rgba(74, 144, 226, 0.08),
-    rgba(74, 144, 226, 0.04)
-  );
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.08), rgba(74, 144, 226, 0.04));
   border-color: rgba(74, 144, 226, 0.3);
 }
 
@@ -143,18 +128,12 @@
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
   .default {
-    background: linear-gradient(135deg,
-      rgba(107, 165, 233, 0.05),
-      rgba(107, 165, 233, 0.02)
-    );
+    background: linear-gradient(135deg, rgba(107, 165, 233, 0.05), rgba(107, 165, 233, 0.02));
     border-color: rgba(107, 165, 233, 0.15);
   }
 
   .elevated {
-    background: linear-gradient(135deg,
-      rgba(107, 165, 233, 0.08),
-      rgba(107, 165, 233, 0.04)
-    );
+    background: linear-gradient(135deg, rgba(107, 165, 233, 0.08), rgba(107, 165, 233, 0.04));
     border-color: rgba(107, 165, 233, 0.2);
     box-shadow:
       0 4px 6px -1px rgba(0, 0, 0, 0.3),
@@ -162,18 +141,12 @@
   }
 
   .outlined {
-    background: linear-gradient(135deg,
-      rgba(31, 41, 55, 0.5),
-      rgba(31, 41, 55, 0.3)
-    );
+    background: linear-gradient(135deg, rgba(31, 41, 55, 0.5), rgba(31, 41, 55, 0.3));
     border-color: rgba(107, 165, 233, 0.3);
   }
 
   .interactive.default:hover {
-    background: linear-gradient(135deg,
-      rgba(107, 165, 233, 0.1),
-      rgba(107, 165, 233, 0.05)
-    );
+    background: linear-gradient(135deg, rgba(107, 165, 233, 0.1), rgba(107, 165, 233, 0.05));
     border-color: rgba(107, 165, 233, 0.25);
   }
 
@@ -184,10 +157,7 @@
   }
 
   .interactive.outlined:hover {
-    background: linear-gradient(135deg,
-      rgba(107, 165, 233, 0.15),
-      rgba(107, 165, 233, 0.08)
-    );
+    background: linear-gradient(135deg, rgba(107, 165, 233, 0.15), rgba(107, 165, 233, 0.08));
     border-color: rgba(107, 165, 233, 0.4);
   }
 }

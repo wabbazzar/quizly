@@ -154,8 +154,8 @@
   display: flex;
   align-items: flex-start;
   gap: var(--space-2);
-  background: var(--semantic-warning-bg, #FEF3C7);
-  border: 1px solid var(--semantic-warning-border, #FCD34D);
+  background: var(--semantic-warning-bg, #fef3c7);
+  border: 1px solid var(--semantic-warning-border, #fcd34d);
   border-radius: var(--radius-md);
   padding: var(--space-3);
   margin-bottom: var(--space-4);
@@ -194,7 +194,7 @@
 }
 
 .resetButton:hover {
-  background: #DC2626;
+  background: #dc2626;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
@@ -237,7 +237,7 @@
 }
 
 .confirmButton:hover {
-  background: #DC2626;
+  background: #dc2626;
 }
 
 .cancelButton {

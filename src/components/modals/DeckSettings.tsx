@@ -1,10 +1,7 @@
 import { FC, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Deck } from '@/types';
-import {
-  TrophyIcon,
-  InformationCircleIcon,
-} from '@/components/icons/StatusIcons';
+import { TrophyIcon, InformationCircleIcon } from '@/components/icons/StatusIcons';
 import styles from './DeckSettings.module.css';
 
 interface DeckSettingsProps {
@@ -51,11 +48,7 @@ const DeckSettings: FC<DeckSettingsProps> = ({ visible, onClose, deck, onResetMa
           >
             <header className={styles.header}>
               <h2 className={styles.title}>Deck Settings</h2>
-              <button
-                className={styles.closeButton}
-                onClick={onClose}
-                aria-label="Close settings"
-              >
+              <button className={styles.closeButton} onClick={onClose} aria-label="Close settings">
                 ✕
               </button>
             </header>
@@ -99,7 +92,8 @@ const DeckSettings: FC<DeckSettingsProps> = ({ visible, onClose, deck, onResetMa
                 </h3>
                 <div className={styles.resetBox}>
                   <p className={styles.resetDescription}>
-                    Reset the mastered card list for this deck. This will clear all mastery progress and allow you to restart learning from scratch.
+                    Reset the mastered card list for this deck. This will clear all mastery progress
+                    and allow you to restart learning from scratch.
                   </p>
                   <div className={styles.warningBox}>
                     <InformationCircleIcon size={16} className={styles.warningIcon} />
@@ -114,7 +108,9 @@ const DeckSettings: FC<DeckSettingsProps> = ({ visible, onClose, deck, onResetMa
                       </button>
                     ) : (
                       <div className={styles.confirmRow}>
-                        <span className={styles.confirmText}>Are you sure you want to reset all mastery progress?</span>
+                        <span className={styles.confirmText}>
+                          Are you sure you want to reset all mastery progress?
+                        </span>
                         <div className={styles.confirmButtons}>
                           <button className={styles.confirmButton} onClick={handleReset}>
                             Yes, Reset
@@ -143,5 +139,3 @@ const DeckSettings: FC<DeckSettingsProps> = ({ visible, onClose, deck, onResetMa
 };
 
 export default DeckSettings;
-
-

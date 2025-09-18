@@ -9,7 +9,7 @@ interface SettingsIconProps {
 const SettingsIcon: FC<SettingsIconProps> = ({
   size = 24,
   color = 'currentColor',
-  className = ''
+  className = '',
 }) => {
   return (
     <svg

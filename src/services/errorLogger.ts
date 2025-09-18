@@ -44,7 +44,7 @@ class ErrorLogger {
 
   private setupUnhandledErrorListeners() {
     // Global error handler for unhandled JavaScript errors
-    window.addEventListener('error', (event) => {
+    window.addEventListener('error', event => {
       const error = new Error(event.message);
       error.stack = `${event.filename}:${event.lineno}:${event.colno}`;
 
@@ -65,7 +65,7 @@ class ErrorLogger {
     });
 
     // Global handler for unhandled promise rejections
-    window.addEventListener('unhandledrejection', (event) => {
+    window.addEventListener('unhandledrejection', event => {
       const error = new Error(`Unhandled Promise Rejection: ${event.reason}`);
 
       this.logError(error, {
@@ -115,7 +115,10 @@ class ErrorLogger {
     return `error_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
 
-  private determineSeverity(error: Error, context: ErrorContext): 'low' | 'medium' | 'high' | 'critical' {
+  private determineSeverity(
+    error: Error,
+    context: ErrorContext
+  ): 'low' | 'medium' | 'high' | 'critical' {
     // Critical: App-level errors, security issues
     if (context.errorBoundaryLevel === 'app' || error.message.includes('security')) {
       return 'critical';
@@ -201,7 +204,7 @@ class ErrorLogger {
     // - Custom API endpoint
 
     // For now, simulate API call
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       setTimeout(resolve, 100);
     });
   }

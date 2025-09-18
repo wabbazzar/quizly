@@ -9,52 +9,54 @@
 
 :root {
   /* Primary Colors */
-  --primary-main: #4A90E2;
-  --primary-light: #6BA5E9;
-  --primary-dark: #3A7BC8;
+  --primary-main: #4a90e2;
+  --primary-light: #6ba5e9;
+  --primary-dark: #3a7bc8;
 
   /* Secondary Colors */
-  --secondary-main: #50E3C2;
-  --secondary-light: #6FEBD0;
-  --secondary-dark: #3DCBAA;
+  --secondary-main: #50e3c2;
+  --secondary-light: #6febd0;
+  --secondary-dark: #3dcbaa;
 
   /* Neutral Colors */
-  --neutral-white: #FFFFFF;
-  --neutral-gray-100: #F7F8FA;
-  --neutral-gray-200: #E5E7EB;
-  --neutral-gray-300: #D1D5DB;
-  --neutral-gray-400: #9CA3AF;
-  --neutral-gray-500: #6B7280;
-  --neutral-gray-600: #4B5563;
+  --neutral-white: #ffffff;
+  --neutral-gray-100: #f7f8fa;
+  --neutral-gray-200: #e5e7eb;
+  --neutral-gray-300: #d1d5db;
+  --neutral-gray-400: #9ca3af;
+  --neutral-gray-500: #6b7280;
+  --neutral-gray-600: #4b5563;
   --neutral-gray-700: #374151;
-  --neutral-gray-800: #1F2937;
+  --neutral-gray-800: #1f2937;
   --neutral-black: #000000;
 
   /* Semantic Colors */
-  --semantic-success: #10B981;
-  --semantic-warning: #F59E0B;
-  --semantic-error: #EF4444;
-  --semantic-info: #3B82F6;
+  --semantic-success: #10b981;
+  --semantic-warning: #f59e0b;
+  --semantic-error: #ef4444;
+  --semantic-info: #3b82f6;
 
   /* Mode Colors */
-  --mode-purple: #9333EA;
-  --mode-orange: #EA580C;
+  --mode-purple: #9333ea;
+  --mode-orange: #ea580c;
   --mode-purple-light: rgba(147, 51, 234, 0.1);
   --mode-orange-light: rgba(234, 88, 12, 0.1);
 
   /* Typography */
   --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-mono:
+    'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', 'Droid Sans Mono', 'Courier New',
+    monospace;
 
   /* Font Sizes */
-  --text-xs: 0.75rem;    /* 12px */
-  --text-sm: 0.875rem;   /* 14px */
-  --text-base: 1rem;     /* 16px */
-  --text-lg: 1.125rem;   /* 18px */
-  --text-xl: 1.25rem;    /* 20px */
-  --text-2xl: 1.5rem;    /* 24px */
-  --text-3xl: 1.875rem;  /* 30px */
-  --text-4xl: 2.25rem;   /* 36px */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-4xl: 2.25rem; /* 36px */
 
   /* Line Heights */
   --leading-tight: 1.25;
@@ -68,17 +70,17 @@
   --font-bold: 700;
 
   /* Spacing */
-  --space-1: 0.25rem;   /* 4px */
+  --space-1: 0.25rem; /* 4px */
   --space-1-5: 0.375rem; /* 6px */
-  --space-2: 0.5rem;    /* 8px */
-  --space-3: 0.75rem;   /* 12px */
-  --space-4: 1rem;      /* 16px */
-  --space-5: 1.25rem;   /* 20px */
-  --space-6: 1.5rem;    /* 24px */
-  --space-8: 2rem;      /* 32px */
-  --space-10: 2.5rem;   /* 40px */
-  --space-12: 3rem;     /* 48px */
-  --space-16: 4rem;     /* 64px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
+  --space-16: 4rem; /* 64px */
 
   /* Border Radius */
   --radius-sm: 0.25rem;

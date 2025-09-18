@@ -1,7 +1,10 @@
 # Ticket 002: Learn Mode Implementation
 
 ## Implementation Summary
-All phases of the Learn Mode feature have been successfully implemented. The feature includes:
+
+All phases of the Learn Mode feature have been successfully implemented. The
+feature includes:
+
 - Enhanced deck cards with integrated mode selection on the home page
 - Complete Learn mode with multiple choice and free text questions
 - Adaptive card scheduling with Smart Spaced and Leitner Box algorithms
@@ -10,13 +13,17 @@ All phases of the Learn Mode feature have been successfully implemented. The fea
 - Mobile-responsive design with dark mode support
 
 ### Key Components Created:
+
 - **Phase 0**: EnhancedDeckCard, ModeIcons
 - **Phase 1**: Learn page, LearnContainer
 - **Phase 2**: QuestionGenerator, CardScheduler, text matching utilities
-- **Phase 3**: QuestionCard, MultipleChoiceOptions, FreeTextInput, LearnProgress, FeedbackSection
-- **Phase 4**: useLearnSession hook, learnSessionStore, SessionComplete component
+- **Phase 3**: QuestionCard, MultipleChoiceOptions, FreeTextInput,
+  LearnProgress, FeedbackSection
+- **Phase 4**: useLearnSession hook, learnSessionStore, SessionComplete
+  component
 
 ### Testing:
+
 - TypeScript compilation: ✅ Passing
 - ESLint: ✅ Passing (except for pre-existing warnings)
 - Build: ✅ Successful
@@ -30,21 +37,28 @@ All phases of the Learn Mode feature have been successfully implemented. The fea
 ### 🔴 Critical Issues Identified
 
 #### **1. State Management Fragmentation** - **High Severity**
+
 - **Problem**: Three competing state management approaches coexist
 - **Evidence**:
   - Local state in `LearnContainer.tsx` (lines 22-37)
   - `useLearnSession` hook with independent state management
   - `useLearnSessionStore` Zustand store operating separately
-- **Impact**: Data synchronization bugs, unclear data flow, maintenance complexity
-- **Recommendation**: Consolidate to single Zustand store as primary state source
+- **Impact**: Data synchronization bugs, unclear data flow, maintenance
+  complexity
+- **Recommendation**: Consolidate to single Zustand store as primary state
+  source
 
 #### **2. Component Responsibility Overload** - **High Severity**
+
 - **Problem**: `LearnContainer` violates Single Responsibility Principle
-- **Evidence**: Handles UI rendering, state coordination, and event handling (323 lines)
+- **Evidence**: Handles UI rendering, state coordination, and event handling
+  (323 lines)
 - **Impact**: Difficult to test individual behaviors, complex debugging
-- **Recommendation**: Extract session orchestration logic into dedicated service/hook
+- **Recommendation**: Extract session orchestration logic into dedicated
+  service/hook
 
 #### **3. Error Boundary Absence** - **High Severity**
+
 - **Problem**: No error boundaries for Learn Mode components
 - **Evidence**: Missing error boundary implementation at feature level
 - **Impact**: Unhandled errors could crash entire application
@@ -53,36 +67,47 @@ All phases of the Learn Mode feature have been successfully implemented. The fea
 ### 🟡 Medium Priority Issues
 
 #### **4. Hook Dependency Entanglement** - **Medium Severity**
-- **Problem**: `useLearnSession` and `LearnContainer` hooks have overlapping responsibilities
+
+- **Problem**: `useLearnSession` and `LearnContainer` hooks have overlapping
+  responsibilities
 - **Evidence**: Both manage session state independently without coordination
 - **Impact**: Potential state synchronization issues, code duplication
 - **Recommendation**: Consolidate session management into single source of truth
 
 #### **5. Data Type Serialization Issues** - **Medium Severity**
+
 - **Problem**: `Set` objects in state don't serialize properly for persistence
 - **Evidence**: `correctCards: new Set()`, `incorrectCards: new Set()` in state
 - **Impact**: Data loss on page refresh, persistence layer complexity
-- **Recommendation**: Use arrays for serializable state, convert to Sets in computed properties
+- **Recommendation**: Use arrays for serializable state, convert to Sets in
+  computed properties
 
 #### **6. Open/Closed Principle Violations** - **Medium Severity**
+
 - **Problem**: Adding new question types requires modifying existing code
-- **Evidence**: Hard-coded question type checks in `QuestionCard.tsx` (lines 50-68)
+- **Evidence**: Hard-coded question type checks in `QuestionCard.tsx` (lines
+  50-68)
 - **Impact**: Fragile extension points, testing complexity for new features
 - **Recommendation**: Implement strategy pattern for question type handling
 
 ### 🟢 Quality Improvements (Technical Debt)
 
 #### **7. File Size and Complexity**
+
 - **Problem**: Large files exceed maintainability thresholds
-- **Evidence**: `LearnContainer.tsx` (323 lines), `QuestionGenerator.ts` (279 lines)
+- **Evidence**: `LearnContainer.tsx` (323 lines), `QuestionGenerator.ts` (279
+  lines)
 - **Recommendation**: Split into focused, single-responsibility modules
 
 #### **8. Import Path Inconsistency**
+
 - **Problem**: Mix of relative and aliased imports
 - **Evidence**: `'@/types'` vs `'./LearnContainer'` inconsistency
-- **Recommendation**: Standardize on aliased imports for cross-module dependencies
+- **Recommendation**: Standardize on aliased imports for cross-module
+  dependencies
 
 #### **9. Performance Optimization Gaps**
+
 - **Problem**: Missing React.memo usage in frequently re-rendering components
 - **Evidence**: `MultipleChoiceOptions` not memoized despite complex props
 - **Recommendation**: Add selective memoization for expensive components
@@ -90,40 +115,48 @@ All phases of the Learn Mode feature have been successfully implemented. The fea
 ## Follow-Up Technical Debt Tickets
 
 ### Ticket 002-A: Consolidate State Management (Priority: Critical)
-**Effort**: 5 points
-**Description**: Refactor Learn Mode to use single Zustand store as source of truth
+
+**Effort**: 5 points **Description**: Refactor Learn Mode to use single Zustand
+store as source of truth
+
 - Remove duplicate state management in `LearnContainer` and `useLearnSession`
 - Migrate all session state to `learnSessionStore`
 - Update components to consume from single store
 - Add state persistence for session recovery
 
 ### Ticket 002-B: Extract Session Orchestration Service (Priority: High)
-**Effort**: 3 points
-**Description**: Separate complex coordination logic from UI components
+
+**Effort**: 3 points **Description**: Separate complex coordination logic from
+UI components
+
 - Create `LearnSessionOrchestrator` service class
 - Move session lifecycle management out of `LearnContainer`
 - Implement clean component/service boundaries
 - Add comprehensive unit tests
 
 ### Ticket 002-C: Implement Error Boundaries (Priority: High)
-**Effort**: 2 points
-**Description**: Add robust error handling for Learn Mode
+
+**Effort**: 2 points **Description**: Add robust error handling for Learn Mode
+
 - Create `LearnModeErrorBoundary` component
 - Implement graceful fallback UI for errors
 - Add error tracking and reporting
 - Test error scenarios and recovery
 
 ### Ticket 002-D: Optimize Component Performance (Priority: Medium)
-**Effort**: 2 points
-**Description**: Add performance optimizations for better UX
+
+**Effort**: 2 points **Description**: Add performance optimizations for better
+UX
+
 - Implement React.memo for list components
 - Add selective re-render optimization
 - Profile and optimize expensive operations
 - Add performance monitoring
 
 ### Ticket 002-E: Implement Strategy Pattern for Question Types (Priority: Medium)
-**Effort**: 3 points
-**Description**: Make question type handling extensible
+
+**Effort**: 3 points **Description**: Make question type handling extensible
+
 - Create `QuestionTypeStrategy` interface
 - Implement separate strategies for multiple choice and free text
 - Add plugin architecture for new question types
@@ -131,17 +164,19 @@ All phases of the Learn Mode feature have been successfully implemented. The fea
 
 ## Architecture Quality Metrics
 
-| Category | Current Score | Target Score | Priority |
-|----------|---------------|--------------|----------|
-| Modularity | 75/100 | 85/100 | High |
-| Data Design | 70/100 | 85/100 | Critical |
-| Architecture Quality | 72/100 | 85/100 | High |
-| Code Organization | 78/100 | 85/100 | Medium |
-| **Overall** | **73/100** | **85/100** | **High** |
+| Category             | Current Score | Target Score | Priority |
+| -------------------- | ------------- | ------------ | -------- |
+| Modularity           | 75/100        | 85/100       | High     |
+| Data Design          | 70/100        | 85/100       | Critical |
+| Architecture Quality | 72/100        | 85/100       | High     |
+| Code Organization    | 78/100        | 85/100       | Medium   |
+| **Overall**          | **73/100**    | **85/100**   | **High** |
 
-**Target**: Achieve B+ grade (85/100) after addressing critical and high-priority issues.
+**Target**: Achieve B+ grade (85/100) after addressing critical and
+high-priority issues.
 
 ## Metadata
+
 - **Status**: Complete
 - **Priority**: High
 - **Effort**: 13 points
@@ -159,33 +194,57 @@ All phases of the Learn Mode feature have been successfully implemented. The fea
 ## User Stories
 
 ### Primary User Story
-As a student, I want to use a Learn mode that combines multiple choice and free text questions so that I can actively test my knowledge and receive immediate feedback while studying flashcards.
+
+As a student, I want to use a Learn mode that combines multiple choice and free
+text questions so that I can actively test my knowledge and receive immediate
+feedback while studying flashcards.
 
 ### Secondary User Stories
-- As a learner, I want to see my progress through a round so that I can track how much I've completed.
-- As a student, I want incorrect answers to be reshuffled back into the round so that I can master difficult concepts.
-- As a user, I want adaptive difficulty based on my performance so that the learning experience matches my skill level.
-- As a mobile user, I want the interface to work perfectly on touch devices with proper input handling.
-- As an accessibility user, I want full keyboard navigation and screen reader support.
+
+- As a learner, I want to see my progress through a round so that I can track
+  how much I've completed.
+- As a student, I want incorrect answers to be reshuffled back into the round so
+  that I can master difficult concepts.
+- As a user, I want adaptive difficulty based on my performance so that the
+  learning experience matches my skill level.
+- As a mobile user, I want the interface to work perfectly on touch devices with
+  proper input handling.
+- As an accessibility user, I want full keyboard navigation and screen reader
+  support.
 
 ## Technical Requirements
 
 ### Functional Requirements
-1. **Question Generation System**: Generate multiple choice questions with 1 correct answer + 3 distractors from deck content, plus free text input questions with fuzzy matching validation
-2. **Multi-Sided Card Support**: Handle cards with 2-6 sides, configurable front/back side selection, and side grouping for complex question-answer relationships
-3. **Progress Tracking**: Real-time progress bar, correct/incorrect counters, streak tracking, and session completion statistics
-4. **Adaptive Difficulty**: Level-based progression system that adjusts question difficulty based on user performance patterns
-5. **Responsive Design**: Mobile-first interface optimizing for touch interactions while maintaining desktop usability
+
+1. **Question Generation System**: Generate multiple choice questions with 1
+   correct answer + 3 distractors from deck content, plus free text input
+   questions with fuzzy matching validation
+2. **Multi-Sided Card Support**: Handle cards with 2-6 sides, configurable
+   front/back side selection, and side grouping for complex question-answer
+   relationships
+3. **Progress Tracking**: Real-time progress bar, correct/incorrect counters,
+   streak tracking, and session completion statistics
+4. **Adaptive Difficulty**: Level-based progression system that adjusts question
+   difficulty based on user performance patterns
+5. **Responsive Design**: Mobile-first interface optimizing for touch
+   interactions while maintaining desktop usability
 
 ### Non-Functional Requirements
-1. **Performance**: Question rendering <100ms, smooth animations at 60 FPS, bundle size impact <50KB
-2. **Accessibility**: WCAG AA compliance with full keyboard navigation, screen reader support, and proper focus management
-3. **Platform Parity**: Consistent behavior across modern browsers with progressive enhancement
+
+1. **Performance**: Question rendering <100ms, smooth animations at 60 FPS,
+   bundle size impact <50KB
+2. **Accessibility**: WCAG AA compliance with full keyboard navigation, screen
+   reader support, and proper focus management
+3. **Platform Parity**: Consistent behavior across modern browsers with
+   progressive enhancement
 
 ## UI/UX Design - Home Page Navigation Flow
 
 ### Design Concept: Mode Selection Hub
-The home page will feature an elegant two-tier navigation system that presents decks as the primary selection, with learning modes as secondary actions within each deck card.
+
+The home page will feature an elegant two-tier navigation system that presents
+decks as the primary selection, with learning modes as secondary actions within
+each deck card.
 
 ### Home Page Layout Architecture
 
@@ -303,12 +362,12 @@ interface QuickAction {
 }
 
 .modeButton.match {
-  --mode-color: #9333EA; /* Purple */
+  --mode-color: #9333ea; /* Purple */
   --mode-color-light: rgba(147, 51, 234, 0.1);
 }
 
 .modeButton.test {
-  --mode-color: #EA580C; /* Orange */
+  --mode-color: #ea580c; /* Orange */
   --mode-color-light: rgba(234, 88, 12, 0.1);
 }
 
@@ -620,7 +679,9 @@ export const FloatingModeSelector: FC<FloatingModeSelectorProps> = ({
 ## Implementation Plan
 
 ### Phase 0: Home Page UI Enhancement (2 points)
+
 **Files to create/modify:**
+
 - `src/components/EnhancedDeckCard.tsx` - New deck card with mode selection
 - `src/components/modes/ModeSelector.tsx` - Mode selection component
 - `src/components/icons/ModeIcons.tsx` - Icons for each learning mode
@@ -628,6 +689,7 @@ export const FloatingModeSelector: FC<FloatingModeSelectorProps> = ({
 - `src/styles/modes.css` - Mode-specific styling
 
 **Implementation steps:**
+
 1. Create enhanced deck card component with integrated mode selection
 2. Implement mode selector with hover effects and transitions
 3. Add progress tracking visualization
@@ -636,12 +698,16 @@ export const FloatingModeSelector: FC<FloatingModeSelectorProps> = ({
 6. Add keyboard navigation and accessibility features
 
 ### Phase 1: Core Learn Page Component (3 points)
+
 **Files to create/modify:**
+
 - `src/pages/Learn.tsx` - Main Learn mode page component
 - `src/router/AppRouter.tsx` - Add Learn route with lazy loading
-- `src/components/modes/learn/LearnContainer.tsx` - Container component managing learn session state
+- `src/components/modes/learn/LearnContainer.tsx` - Container component managing
+  learn session state
 
 **Component Structure:**
+
 ```typescript
 interface LearnPageProps {
   deckId: string;
@@ -675,6 +741,7 @@ export const Learn: FC<LearnPageProps> = memo(({ deckId }) => {
 ```
 
 **State Management:**
+
 ```typescript
 interface LearnModeSettings extends ModeSettings {
   questionTypes: ('multiple_choice' | 'free_text')[];
@@ -705,6 +772,7 @@ interface LearnSessionState {
 ```
 
 **Navigation Updates:**
+
 ```typescript
 // Add to AppRouter.tsx routes
 const Learn = lazy(() => import('@/pages/Learn'));
@@ -713,6 +781,7 @@ const Learn = lazy(() => import('@/pages/Learn'));
 ```
 
 **Implementation steps:**
+
 1. Create Learn page component with proper routing and error handling
 2. Implement LearnContainer with session state management using custom hook
 3. Add proper loading states and error boundaries for deck fetching
@@ -720,16 +789,21 @@ const Learn = lazy(() => import('@/pages/Learn'));
 5. Follow responsive design patterns from existing Flashcards component
 
 **Code Implementation:**
-1. Run: `claude --agent code-writer "Implement Learn page component for Phase 1 following ticket #002 specifications"`
-2. Run: `claude --agent code-quality-assessor "Review the Learn page implementation for React best practices"`
+
+1. Run:
+   `claude --agent code-writer "Implement Learn page component for Phase 1 following ticket #002 specifications"`
+2. Run:
+   `claude --agent code-quality-assessor "Review the Learn page implementation for React best practices"`
 3. Apply code quality improvements
 
 **Testing:**
+
 1. Run: `claude --agent test-writer "Write tests for src/pages/Learn.tsx"`
 2. Run: `claude --agent test-critic "Review tests for src/pages/Learn.tsx"`
 3. Run: `claude --agent test-writer "Implement critic's suggestions"`
 
 **Platform Testing:**
+
 ```bash
 # Desktop browsers
 npm run dev  # Test on Chrome, Firefox, Safari, Edge
@@ -741,15 +815,20 @@ npm run dev  # Test on Chrome, Firefox, Safari, Edge
 **Commit**: `feat(learn): implement core Learn mode page and routing`
 
 ### Phase 2: Question Generation Engine with Adaptive Scheduling (4 points)
+
 **Files to create/modify:**
+
 - `src/services/questionGenerator.ts` - Question generation logic and algorithms
-- `src/services/cardScheduler.ts` - Modular card scheduling algorithms for missed cards
+- `src/services/cardScheduler.ts` - Modular card scheduling algorithms for
+  missed cards
 - `src/types/index.ts` - Add question-related TypeScript interfaces
-- `src/utils/textMatching.ts` - Fuzzy matching utilities for free text validation
+- `src/utils/textMatching.ts` - Fuzzy matching utilities for free text
+  validation
 - `src/hooks/useQuestionGenerator.ts` - React hook for question generation
 - `src/hooks/useCardScheduler.ts` - React hook for adaptive card scheduling
 
 **Component Structure:**
+
 ```typescript
 interface Question {
   id: string;
@@ -797,6 +876,7 @@ export class QuestionGenerator {
 ```
 
 **Text Matching Utilities:**
+
 ```typescript
 interface TextMatchOptions {
   caseSensitive: boolean;
@@ -819,7 +899,8 @@ export class TextMatcher {
 ```
 
 **Card Scheduling System:**
-```typescript
+
+````typescript
 // Modular scheduling algorithm interface
 interface SchedulingAlgorithm {
   name: string;
@@ -1144,28 +1225,39 @@ export const useCardScheduler = (settings: LearnModeSettings) => {
     currentAlgorithm: config.algorithm,
   };
 };
-```
+````
 
 **Implementation steps:**
-1. Implement QuestionGenerator class with multiple choice and free text generation
+
+1. Implement QuestionGenerator class with multiple choice and free text
+   generation
 2. Create TextMatcher utility with fuzzy matching and normalization
-3. Build modular CardScheduler system with Smart Spaced and Leitner Box algorithms
-4. Implement useQuestionGenerator and useCardScheduler hooks for state management
+3. Build modular CardScheduler system with Smart Spaced and Leitner Box
+   algorithms
+4. Implement useQuestionGenerator and useCardScheduler hooks for state
+   management
 5. Add comprehensive TypeScript interfaces for question and scheduling systems
 6. Create factory pattern for extensible scheduling algorithms
 7. Implement distractor generation algorithm using semantic similarity
 
 **Code Implementation:**
-1. Run: `claude --agent code-writer "Implement question generation engine for Phase 2 following ticket #002 specifications"`
-2. Run: `claude --agent code-quality-assessor "Review the question generation implementation for performance and accuracy"`
+
+1. Run:
+   `claude --agent code-writer "Implement question generation engine for Phase 2 following ticket #002 specifications"`
+2. Run:
+   `claude --agent code-quality-assessor "Review the question generation implementation for performance and accuracy"`
 3. Apply code quality improvements
 
 **Testing:**
-1. Run: `claude --agent test-writer "Write tests for src/services/questionGenerator.ts"`
-2. Run: `claude --agent test-critic "Review tests for src/services/questionGenerator.ts"`
+
+1. Run:
+   `claude --agent test-writer "Write tests for src/services/questionGenerator.ts"`
+2. Run:
+   `claude --agent test-critic "Review tests for src/services/questionGenerator.ts"`
 3. Run: `claude --agent test-writer "Implement critic's suggestions"`
 
 **Platform Testing:**
+
 ```bash
 # Unit testing
 npm test src/services/questionGenerator.test.ts
@@ -1175,17 +1267,24 @@ npm test src/utils/textMatching.test.ts
 npm test src/hooks/useQuestionGenerator.test.ts
 ```
 
-**Commit**: `feat(learn): implement question generation engine with fuzzy text matching`
+**Commit**:
+`feat(learn): implement question generation engine with fuzzy text matching`
 
 ### Phase 3: Learn Mode UI Components (3 points)
+
 **Files to create/modify:**
-- `src/components/modes/learn/QuestionCard.tsx` - Main question display component
-- `src/components/modes/learn/MultipleChoiceOptions.tsx` - Multiple choice answer options
-- `src/components/modes/learn/FreeTextInput.tsx` - Free text input with validation
+
+- `src/components/modes/learn/QuestionCard.tsx` - Main question display
+  component
+- `src/components/modes/learn/MultipleChoiceOptions.tsx` - Multiple choice
+  answer options
+- `src/components/modes/learn/FreeTextInput.tsx` - Free text input with
+  validation
 - `src/components/modes/learn/LearnProgress.tsx` - Progress tracking component
 - `src/components/modes/learn/QuestionCard.module.css` - Component styling
 
 **Component Structure:**
+
 ```typescript
 interface QuestionCardProps {
   question: Question;
@@ -1249,6 +1348,7 @@ export const QuestionCard: FC<QuestionCardProps> = memo(({
 ```
 
 **Multiple Choice Component:**
+
 ```typescript
 interface MultipleChoiceOptionsProps {
   options: string[];
@@ -1304,6 +1404,7 @@ export const MultipleChoiceOptions: FC<MultipleChoiceOptionsProps> = memo(({
 ```
 
 **Free Text Component:**
+
 ```typescript
 interface FreeTextInputProps {
   correctAnswer: string;
@@ -1381,6 +1482,7 @@ export const FreeTextInput: FC<FreeTextInputProps> = memo(({
 ```
 
 **CSS Module Styling:**
+
 ```css
 .questionCard {
   background: var(--neutral-white);
@@ -1500,23 +1602,32 @@ export const FreeTextInput: FC<FreeTextInputProps> = memo(({
 ```
 
 **Implementation steps:**
+
 1. Create QuestionCard component with accessibility and mobile-first design
-2. Implement MultipleChoiceOptions with proper ARIA roles and keyboard navigation
+2. Implement MultipleChoiceOptions with proper ARIA roles and keyboard
+   navigation
 3. Build FreeTextInput with validation and override functionality
 4. Add responsive CSS modules following project design system
 5. Implement smooth animations and feedback states using Framer Motion patterns
 
 **Code Implementation:**
-1. Run: `claude --agent code-writer "Implement Learn mode UI components for Phase 3 following ticket #002 specifications"`
-2. Run: `claude --agent code-quality-assessor "Review the Learn UI components for accessibility and responsive design"`
+
+1. Run:
+   `claude --agent code-writer "Implement Learn mode UI components for Phase 3 following ticket #002 specifications"`
+2. Run:
+   `claude --agent code-quality-assessor "Review the Learn UI components for accessibility and responsive design"`
 3. Apply code quality improvements
 
 **Testing:**
-1. Run: `claude --agent test-writer "Write tests for src/components/modes/learn/"`
-2. Run: `claude --agent test-critic "Review tests for src/components/modes/learn/"`
+
+1. Run:
+   `claude --agent test-writer "Write tests for src/components/modes/learn/"`
+2. Run:
+   `claude --agent test-critic "Review tests for src/components/modes/learn/"`
 3. Run: `claude --agent test-writer "Implement critic's suggestions"`
 
 **Platform Testing:**
+
 ```bash
 # Component testing
 npm test src/components/modes/learn/
@@ -1531,14 +1642,18 @@ npm run dev # Test on multiple viewport sizes
 **Commit**: `feat(learn): implement Learn mode UI components with accessibility`
 
 ### Phase 4: Session Management and Progress Tracking (3 points)
+
 **Files to create/modify:**
+
 - `src/hooks/useLearnSession.ts` - Session state management hook
 - `src/store/learnSessionStore.ts` - Zustand store for learn sessions
-- `src/components/modes/learn/LearnProgress.tsx` - Progress visualization component
+- `src/components/modes/learn/LearnProgress.tsx` - Progress visualization
+  component
 - `src/components/modes/learn/SessionComplete.tsx` - Session completion screen
 - `src/utils/progressCalculation.ts` - Progress calculation utilities
 
 **Session Management Hook:**
+
 ```typescript
 interface LearnSessionOptions {
   cardsPerRound: number;
@@ -1558,10 +1673,7 @@ interface LearnSessionProgress {
   averageResponseTime: number;
 }
 
-export const useLearnSession = (
-  deck: Deck,
-  options: LearnSessionOptions
-) => {
+export const useLearnSession = (deck: Deck, options: LearnSessionOptions) => {
   const [sessionState, setSessionState] = useState<LearnSessionState>({
     currentQuestion: null,
     questionIndex: 0,
@@ -1585,74 +1697,82 @@ export const useLearnSession = (
     averageResponseTime: 0,
   });
 
-  const startRound = useCallback((cards: Card[]) => {
-    const roundCards = cards.slice(0, options.cardsPerRound);
-    const questions = generateQuestionsFromCards(roundCards, options);
+  const startRound = useCallback(
+    (cards: Card[]) => {
+      const roundCards = cards.slice(0, options.cardsPerRound);
+      const questions = generateQuestionsFromCards(roundCards, options);
 
-    setSessionState(prev => ({
-      ...prev,
-      roundCards,
-      currentQuestion: questions[0] || null,
-      questionIndex: 0,
-    }));
-
-    setProgress(prev => ({
-      ...prev,
-      totalQuestions: questions.length,
-      questionsAnswered: 0,
-    }));
-  }, [deck, options]);
-
-  const answerQuestion = useCallback((
-    answer: string,
-    isCorrect: boolean,
-    responseTime: number
-  ) => {
-    setProgress(prev => {
-      const newCorrectAnswers = isCorrect ? prev.correctAnswers + 1 : prev.correctAnswers;
-      const newStreak = isCorrect ? prev.currentStreak + 1 : 0;
-      const newMaxStreak = Math.max(prev.maxStreak, newStreak);
-      const newQuestionsAnswered = prev.questionsAnswered + 1;
-
-      // Update mastered/struggling cards
-      const cardIndex = sessionState.currentQuestion?.cardIndex;
-      const newMasteredCards = new Set(prev.masteredCards);
-      const newStrugglingCards = new Set(prev.strugglingCards);
-
-      if (cardIndex !== undefined) {
-        if (isCorrect && prev.currentStreak >= options.masteryThreshold - 1) {
-          newMasteredCards.add(cardIndex);
-          newStrugglingCards.delete(cardIndex);
-        } else if (!isCorrect) {
-          newStrugglingCards.add(cardIndex);
-        }
-      }
-
-      return {
-        ...prev,
-        questionsAnswered: newQuestionsAnswered,
-        correctAnswers: newCorrectAnswers,
-        currentStreak: newStreak,
-        maxStreak: newMaxStreak,
-        masteredCards: newMasteredCards,
-        strugglingCards: newStrugglingCards,
-        averageResponseTime: (prev.averageResponseTime * (newQuestionsAnswered - 1) + responseTime) / newQuestionsAnswered,
-      };
-    });
-
-    // Move to next question or complete session
-    const hasNext = sessionState.questionIndex < sessionState.roundCards.length - 1;
-    if (hasNext) {
       setSessionState(prev => ({
         ...prev,
-        questionIndex: prev.questionIndex + 1,
-        currentQuestion: questions[prev.questionIndex + 1],
-        responseStartTime: Date.now(),
+        roundCards,
+        currentQuestion: questions[0] || null,
+        questionIndex: 0,
       }));
-    } else {
-      completeSession();
-    }
-  }, [sessionState, options]);
+
+      setProgress(prev => ({
+        ...prev,
+        totalQuestions: questions.length,
+        questionsAnswered: 0,
+      }));
+    },
+    [deck, options]
+  );
+
+  const answerQuestion = useCallback(
+    (answer: string, isCorrect: boolean, responseTime: number) => {
+      setProgress(prev => {
+        const newCorrectAnswers = isCorrect
+          ? prev.correctAnswers + 1
+          : prev.correctAnswers;
+        const newStreak = isCorrect ? prev.currentStreak + 1 : 0;
+        const newMaxStreak = Math.max(prev.maxStreak, newStreak);
+        const newQuestionsAnswered = prev.questionsAnswered + 1;
+
+        // Update mastered/struggling cards
+        const cardIndex = sessionState.currentQuestion?.cardIndex;
+        const newMasteredCards = new Set(prev.masteredCards);
+        const newStrugglingCards = new Set(prev.strugglingCards);
+
+        if (cardIndex !== undefined) {
+          if (isCorrect && prev.currentStreak >= options.masteryThreshold - 1) {
+            newMasteredCards.add(cardIndex);
+            newStrugglingCards.delete(cardIndex);
+          } else if (!isCorrect) {
+            newStrugglingCards.add(cardIndex);
+          }
+        }
+
+        return {
+          ...prev,
+          questionsAnswered: newQuestionsAnswered,
+          correctAnswers: newCorrectAnswers,
+          currentStreak: newStreak,
+          maxStreak: newMaxStreak,
+          masteredCards: newMasteredCards,
+          strugglingCards: newStrugglingCards,
+          averageResponseTime:
+            (prev.averageResponseTime * (newQuestionsAnswered - 1) +
+              responseTime) /
+            newQuestionsAnswered,
+        };
+      });
+
+      // Move to next question or complete session
+      const hasNext =
+        sessionState.questionIndex < sessionState.roundCards.length - 1;
+      if (hasNext) {
+        setSessionState(prev => ({
+          ...prev,
+          questionIndex: prev.questionIndex + 1,
+          currentQuestion: questions[prev.questionIndex + 1],
+          responseStartTime: Date.now(),
+        }));
+      } else {
+        completeSession();
+      }
+    },
+    [sessionState, options]
+  );
 
   return {
     sessionState,
@@ -1665,6 +1785,7 @@ export const useLearnSession = (
 ```
 
 **Zustand Store:**
+
 ```typescript
 interface LearnSessionStore {
   activeSession: LearnSessionState | null;
@@ -1707,16 +1828,16 @@ export const useLearnSessionStore = create<LearnSessionStore>()(
         });
       },
 
-      updateProgress: (progress) => {
-        set((state) => ({
+      updateProgress: progress => {
+        set(state => ({
           activeSession: state.activeSession
             ? { ...state.activeSession, ...progress }
             : null,
         }));
       },
 
-      completeSession: (results) => {
-        set((state) => ({
+      completeSession: results => {
+        set(state => ({
           activeSession: null,
           sessionHistory: [...state.sessionHistory, results],
         }));
@@ -1726,7 +1847,7 @@ export const useLearnSessionStore = create<LearnSessionStore>()(
     }),
     {
       name: 'learn-session-store',
-      partialize: (state) => ({
+      partialize: state => ({
         sessionHistory: state.sessionHistory,
         preferences: state.preferences,
       }),
@@ -1736,6 +1857,7 @@ export const useLearnSessionStore = create<LearnSessionStore>()(
 ```
 
 **Progress Component:**
+
 ```typescript
 interface LearnProgressProps {
   progress: LearnSessionProgress;
@@ -1799,6 +1921,7 @@ export const LearnProgress: FC<LearnProgressProps> = memo(({
 ```
 
 **Implementation steps:**
+
 1. Create useLearnSession hook managing session state with progress tracking
 2. Implement Zustand store for session persistence and preferences
 3. Build LearnProgress component with visual progress indicators
@@ -1806,16 +1929,23 @@ export const LearnProgress: FC<LearnProgressProps> = memo(({
 5. Integrate with existing session management patterns from Flashcards mode
 
 **Code Implementation:**
-1. Run: `claude --agent code-writer "Implement session management and progress tracking for Phase 4 following ticket #002 specifications"`
-2. Run: `claude --agent code-quality-assessor "Review the session management implementation for state consistency and performance"`
+
+1. Run:
+   `claude --agent code-writer "Implement session management and progress tracking for Phase 4 following ticket #002 specifications"`
+2. Run:
+   `claude --agent code-quality-assessor "Review the session management implementation for state consistency and performance"`
 3. Apply code quality improvements
 
 **Testing:**
-1. Run: `claude --agent test-writer "Write tests for src/hooks/useLearnSession.ts"`
-2. Run: `claude --agent test-critic "Review tests for src/hooks/useLearnSession.ts"`
+
+1. Run:
+   `claude --agent test-writer "Write tests for src/hooks/useLearnSession.ts"`
+2. Run:
+   `claude --agent test-critic "Review tests for src/hooks/useLearnSession.ts"`
 3. Run: `claude --agent test-writer "Implement critic's suggestions"`
 
 **Platform Testing:**
+
 ```bash
 # Session state testing
 npm test src/hooks/useLearnSession.test.ts
@@ -1825,16 +1955,20 @@ npm test src/store/learnSessionStore.test.ts
 npm test src/components/modes/learn/LearnProgress.test.ts
 ```
 
-**Commit**: `feat(learn): implement session management and progress tracking system`
+**Commit**:
+`feat(learn): implement session management and progress tracking system`
 
 ## Testing Strategy
 
 ### Unit Tests
+
 - Test file: `__tests__/pages/Learn.test.tsx`
-- Key scenarios: Question generation, text matching accuracy, progress calculation, session state management
+- Key scenarios: Question generation, text matching accuracy, progress
+  calculation, session state management
 - Mock requirements: React Router, Zustand stores, localStorage
 
 ### Component Tests
+
 ```typescript
 describe('Learn Mode Components', () => {
   it('should render QuestionCard with multiple choice options', () => {
@@ -1896,11 +2030,13 @@ describe('Learn Mode Components', () => {
 ```
 
 ### Integration Tests
+
 - User flows: Complete learn session from start to finish
 - Navigation testing: Page transitions and back button handling
 - State persistence: Session resumption after page refresh
 
 ### E2E Tests (Playwright)
+
 ```typescript
 describe('Learn Mode E2E', () => {
   it('should complete a full learn session', async ({ page }) => {
@@ -1911,7 +2047,10 @@ describe('Learn Mode E2E', () => {
 
     // Answer multiple questions
     for (let i = 0; i < 5; i++) {
-      const questionType = await page.getAttribute('[data-testid="question-card"]', 'data-question-type');
+      const questionType = await page.getAttribute(
+        '[data-testid="question-card"]',
+        'data-question-type'
+      );
 
       if (questionType === 'multiple_choice') {
         await page.click('[data-testid="option-0"]');
@@ -1927,12 +2066,15 @@ describe('Learn Mode E2E', () => {
 
     // Check completion screen
     await page.waitForSelector('[data-testid="session-complete"]');
-    expect(await page.textContent('[data-testid="completion-message"]')).toContain('Great job!');
+    expect(
+      await page.textContent('[data-testid="completion-message"]')
+    ).toContain('Great job!');
   });
 });
 ```
 
 ### Performance Tests
+
 - Question generation: <50ms for 20-question set
 - Text matching: <10ms per input validation
 - Progress updates: <5ms for state changes
@@ -1941,6 +2083,7 @@ describe('Learn Mode E2E', () => {
 ## Platform-Specific Considerations
 
 ### Web PWA
+
 - Touch-optimized button sizes (minimum 44px)
 - Keyboard navigation with proper focus management
 - Screen reader announcements for dynamic content
@@ -1948,6 +2091,7 @@ describe('Learn Mode E2E', () => {
 - Service Worker caching for offline functionality
 
 ### Accessibility Features
+
 - ARIA labels and descriptions for all interactive elements
 - Live regions for progress updates and feedback
 - High contrast support for visual feedback states
@@ -1955,34 +2099,46 @@ describe('Learn Mode E2E', () => {
 - Keyboard shortcuts for common actions
 
 ## Documentation Updates Required
+
 1. `README.md` - Add Learn mode documentation and user guide
 2. `docs/spec.md` - Update with Learn mode implementation details
 3. In-code documentation: JSDoc comments for all major components and utilities
 
 ## Success Criteria
-1. **Functional**: Complete learn sessions with 95% accuracy in question generation
+
+1. **Functional**: Complete learn sessions with 95% accuracy in question
+   generation
 2. **Performance**: Question rendering <100ms, smooth 60 FPS animations
 3. **Accessibility**: WCAG AA compliance verified with automated testing
 4. **User Experience**: <5% user drop-off rate in learn sessions
 5. **Quality**: >85% test coverage with comprehensive E2E testing
 
 ## Dependencies
-- **NPM packages**: No new dependencies required (uses existing React, Zustand, Framer Motion)
-- **Internal dependencies**: Deck management system, session store, UI component library
-- **Data requirements**: Multi-sided card support, question generation algorithms
+
+- **NPM packages**: No new dependencies required (uses existing React, Zustand,
+  Framer Motion)
+- **Internal dependencies**: Deck management system, session store, UI component
+  library
+- **Data requirements**: Multi-sided card support, question generation
+  algorithms
 
 ## Risks & Mitigations
+
 1. **Risk**: Question generation producing poor-quality distractors
-   **Mitigation**: Implement semantic similarity algorithms and manual distractor pools
+   **Mitigation**: Implement semantic similarity algorithms and manual
+   distractor pools
 2. **Risk**: Fuzzy text matching producing false positives/negatives
-   **Mitigation**: Extensive testing with real user data and adjustable matching thresholds
-3. **Risk**: Performance issues with large decks (>1000 cards)
-   **Mitigation**: Implement question caching and lazy loading strategies
-4. **Risk**: Complex state management leading to bugs
-   **Mitigation**: Comprehensive unit testing and Redux DevTools integration
+   **Mitigation**: Extensive testing with real user data and adjustable matching
+   thresholds
+3. **Risk**: Performance issues with large decks (>1000 cards) **Mitigation**:
+   Implement question caching and lazy loading strategies
+4. **Risk**: Complex state management leading to bugs **Mitigation**:
+   Comprehensive unit testing and Redux DevTools integration
 
 ## Accessibility Requirements
-- Screen reader support with proper ARIA semantics and live regions for dynamic updates
+
+- Screen reader support with proper ARIA semantics and live regions for dynamic
+  updates
 - Keyboard navigation with focus trapping and logical tab order
 - Minimum touch target size (44x44px) for mobile interactions
 - Color contrast ratios meeting WCAG AA standard (4.5:1 for normal text)
@@ -1992,11 +2148,13 @@ describe('Learn Mode E2E', () => {
 ## Release & Deployment Guide
 
 ### Build Configuration
+
 - Update Vite build configuration for Learn mode code splitting
 - Add Learn mode routes to router configuration
 - Configure service worker caching for Learn mode assets
 
 ### Testing Checklist
+
 - [ ] Unit tests passing for all Learn mode components
 - [ ] Integration tests covering full learn session flow
 - [ ] E2E tests validating cross-browser compatibility
@@ -2006,6 +2164,7 @@ describe('Learn Mode E2E', () => {
 - [ ] Responsive design testing across breakpoints
 
 ### Release Process
+
 1. Create feature branch from develop
 2. Implement all phases sequentially with testing
 3. Run full test suite including E2E tests
@@ -2017,6 +2176,7 @@ describe('Learn Mode E2E', () => {
 9. Production deployment with feature flag
 
 ### Rollback Strategy
+
 - Feature flag to disable Learn mode if critical issues discovered
 - Graceful degradation to redirect users to Flashcards mode
 - Database rollback procedures for session data if needed
@@ -2025,6 +2185,7 @@ describe('Learn Mode E2E', () => {
 ## Mobile-Specific Implementation Details
 
 ### Touch Interactions
+
 ```typescript
 // Touch-optimized button handling
 const handleTouchStart = useCallback((e: TouchEvent) => {
@@ -2043,6 +2204,7 @@ const swipeGesture = useSwipeable({
 ```
 
 ### Responsive Typography
+
 ```css
 .questionText {
   font-size: clamp(1.125rem, 4vw, 1.5rem);
@@ -2058,20 +2220,26 @@ const swipeGesture = useSwipeable({
 ```
 
 ### Virtual Keyboard Handling
+
 ```typescript
 // Handle virtual keyboard appearance
 useEffect(() => {
   const handleResize = () => {
     const viewportHeight = window.visualViewport?.height || window.innerHeight;
-    document.documentElement.style.setProperty('--viewport-height', `${viewportHeight}px`);
+    document.documentElement.style.setProperty(
+      '--viewport-height',
+      `${viewportHeight}px`
+    );
   };
 
   window.visualViewport?.addEventListener('resize', handleResize);
-  return () => window.visualViewport?.removeEventListener('resize', handleResize);
+  return () =>
+    window.visualViewport?.removeEventListener('resize', handleResize);
 }, []);
 ```
 
 ### Performance Optimizations
+
 - Use `React.memo` for QuestionCard and answer option components
 - Implement question preloading for next 2-3 questions
 - Use `requestIdleCallback` for non-critical progress calculations
@@ -2079,6 +2247,7 @@ useEffect(() => {
 - Implement efficient list virtualization for large question sets
 
 ### Error Handling
+
 ```typescript
 // Comprehensive error boundary for Learn mode
 class LearnModeErrorBoundary extends React.Component<Props, State> {

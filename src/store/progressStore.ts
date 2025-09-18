@@ -16,7 +16,13 @@ interface ProgressStore {
   progress: Record<string, DeckProgress>;
 
   // Actions
-  updateDeckProgress: (deckId: string, mode: string, cardsStudied: number, correctCount: number, totalCards: number) => void;
+  updateDeckProgress: (
+    deckId: string,
+    mode: string,
+    cardsStudied: number,
+    correctCount: number,
+    totalCards: number
+  ) => void;
   getDeckProgress: (deckId: string) => DeckProgress;
   resetDeckProgress: (deckId: string) => void;
   clearAllProgress: () => void;
@@ -42,8 +48,14 @@ export const useProgressStore = create<ProgressStore>()(
     (set, get) => ({
       progress: {},
 
-      updateDeckProgress: (deckId: string, _mode: string, cardsStudied: number, _correctCount: number, totalCards: number) => {
-        set((state) => {
+      updateDeckProgress: (
+        deckId: string,
+        _mode: string,
+        cardsStudied: number,
+        _correctCount: number,
+        totalCards: number
+      ) => {
+        set(state => {
           const existingProgress = state.progress[deckId] || { ...defaultProgress };
 
           // Get mastery data from the card mastery store
@@ -63,12 +75,18 @@ export const useProgressStore = create<ProgressStore>()(
           };
 
           // Use mastery percentage as overall progress if available
-          const overall = masteryPercentage > 0 ? masteryPercentage : Math.round(
-            Object.values(updatedByMode).reduce((sum, progress) => sum + progress, 0) / Object.values(updatedByMode).length
-          );
+          const overall =
+            masteryPercentage > 0
+              ? masteryPercentage
+              : Math.round(
+                  Object.values(updatedByMode).reduce((sum, progress) => sum + progress, 0) /
+                    Object.values(updatedByMode).length
+                );
 
           // Check for streak continuation
-          const lastStudied = existingProgress.lastStudied ? new Date(existingProgress.lastStudied) : null;
+          const lastStudied = existingProgress.lastStudied
+            ? new Date(existingProgress.lastStudied)
+            : null;
           const today = new Date();
           today.setHours(0, 0, 0, 0);
 
@@ -77,7 +95,9 @@ export const useProgressStore = create<ProgressStore>()(
             const lastStudiedDate = new Date(lastStudied);
             lastStudiedDate.setHours(0, 0, 0, 0);
 
-            const daysDiff = Math.floor((today.getTime() - lastStudiedDate.getTime()) / (1000 * 60 * 60 * 24));
+            const daysDiff = Math.floor(
+              (today.getTime() - lastStudiedDate.getTime()) / (1000 * 60 * 60 * 24)
+            );
 
             if (daysDiff === 0) {
               // Same day, keep streak
@@ -157,7 +177,7 @@ export const useProgressStore = create<ProgressStore>()(
       },
 
       resetDeckProgress: (deckId: string) => {
-        set((state) => {
+        set(state => {
           const newProgress = { ...state.progress };
           delete newProgress[deckId];
           return { progress: newProgress };
@@ -171,19 +191,22 @@ export const useProgressStore = create<ProgressStore>()(
     {
       name: 'progress-store',
       // Ensure dates are properly serialized and deserialized
-      partialize: (state) => ({
-        progress: Object.entries(state.progress).reduce((acc, [deckId, progress]) => ({
-          ...acc,
-          [deckId]: {
-            ...progress,
-            lastStudied: progress.lastStudied ? progress.lastStudied.toISOString() : undefined,
-          },
-        }), {}),
+      partialize: state => ({
+        progress: Object.entries(state.progress).reduce(
+          (acc, [deckId, progress]) => ({
+            ...acc,
+            [deckId]: {
+              ...progress,
+              lastStudied: progress.lastStudied ? progress.lastStudied.toISOString() : undefined,
+            },
+          }),
+          {}
+        ),
       }),
-      onRehydrateStorage: () => (state) => {
+      onRehydrateStorage: () => state => {
         // Convert ISO strings back to Date objects after rehydration
         if (state && state.progress) {
-          Object.keys(state.progress).forEach((deckId) => {
+          Object.keys(state.progress).forEach(deckId => {
             const progress = state.progress[deckId];
             if (progress.lastStudied && typeof progress.lastStudied === 'string') {
               progress.lastStudied = new Date(progress.lastStudied);

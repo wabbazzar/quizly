@@ -36,7 +36,7 @@ test.describe('Smoke Tests @smoke', () => {
     // Look for deck navigation or deck listing
     const deckElements = page.locator('[data-testid*="deck"], a[href*="/deck/"]');
 
-    if (await deckElements.count() > 0) {
+    if ((await deckElements.count()) > 0) {
       // If deck elements exist, verify they're visible
       await expect(deckElements.first()).toBeVisible();
     } else {
@@ -54,7 +54,7 @@ test.describe('Smoke Tests @smoke', () => {
     // Check if it shows a 404 or redirects to home
     const currentUrl = page.url();
     const isHome = currentUrl.endsWith('/') || currentUrl.includes('/home');
-    const has404Content = await page.locator('text=/404|not found/i').count() > 0;
+    const has404Content = (await page.locator('text=/404|not found/i').count()) > 0;
 
     expect(isHome || has404Content).toBeTruthy();
   });
@@ -92,8 +92,8 @@ test.describe('Smoke Tests @smoke', () => {
     if (resourceErrors.length > 0) {
       console.warn('Resource loading errors:', resourceErrors);
       // Only fail if critical resources failed
-      const criticalErrors = resourceErrors.filter(error =>
-        error.includes('.js') || error.includes('.css') || error.includes('404')
+      const criticalErrors = resourceErrors.filter(
+        error => error.includes('.js') || error.includes('.css') || error.includes('404')
       );
       expect(criticalErrors.length).toBe(0);
     }

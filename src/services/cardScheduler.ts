@@ -8,15 +8,11 @@ export class SmartSpacedScheduler implements SchedulingAlgorithm {
   name = 'Smart Spaced Reinforcement';
   description = 'Adaptive spacing based on performance with anti-clustering';
 
-  schedule(
-    missedCards: MissedCard[],
-    upcomingCards: Card[],
-    config: SchedulerConfig
-  ): Card[] {
+  schedule(missedCards: MissedCard[], upcomingCards: Card[], config: SchedulerConfig): Card[] {
     // Calculate dynamic position for each missed card
     const positions = missedCards.map(card => ({
       card,
-      position: this.calculatePosition(card, upcomingCards.length, config)
+      position: this.calculatePosition(card, upcomingCards.length, config),
     }));
 
     // Sort by priority (higher difficulty first)
@@ -26,22 +22,17 @@ export class SmartSpacedScheduler implements SchedulingAlgorithm {
     return this.mergeWithAntiClustering(positions, upcomingCards, config);
   }
 
-  private calculatePosition(
-    card: MissedCard,
-    queueSize: number,
-    config: SchedulerConfig
-  ): number {
+  private calculatePosition(card: MissedCard, queueSize: number, config: SchedulerConfig): number {
     const base = config.minSpacing;
     const range = config.maxSpacing - base;
 
     // Factors affecting position
-    const difficultyFactor = 1 - (card.difficulty * config.difficultyWeight);
+    const difficultyFactor = 1 - card.difficulty * config.difficultyWeight;
     const attemptFactor = Math.min(1, card.missCount / 3);
     const timeFactor = Math.min(1, (Date.now() - card.lastSeen) / 60000); // cap at 1 minute
 
-    const spacing = base + Math.floor(
-      range * difficultyFactor * (1 - attemptFactor) * Math.max(0.5, timeFactor)
-    );
+    const spacing =
+      base + Math.floor(range * difficultyFactor * (1 - attemptFactor) * Math.max(0.5, timeFactor));
     const jitter = Math.floor(Math.random() * 3) - 1; // ±1 randomness
 
     return Math.max(base, Math.min(queueSize - 1, spacing + jitter));
@@ -158,11 +149,7 @@ export class LeitnerBoxScheduler implements SchedulingAlgorithm {
 
   private readonly boxes = [2, 4, 8, 16, 32]; // Review intervals per box
 
-  schedule(
-    missedCards: MissedCard[],
-    upcomingCards: Card[],
-    config: SchedulerConfig
-  ): Card[] {
+  schedule(missedCards: MissedCard[], upcomingCards: Card[], config: SchedulerConfig): Card[] {
     const result = [...upcomingCards];
 
     // Group cards by their box level (based on miss count)
@@ -173,10 +160,7 @@ export class LeitnerBoxScheduler implements SchedulingAlgorithm {
       const interval = this.getBoxInterval(boxLevel, config);
 
       cards.forEach((missedCard, index) => {
-        const position = Math.min(
-          interval + (index * config.minSpacing),
-          result.length
-        );
+        const position = Math.min(interval + index * config.minSpacing, result.length);
 
         const cardToInsert = this.convertMissedToCard(missedCard, upcomingCards);
         if (cardToInsert) {
@@ -211,7 +195,7 @@ export class LeitnerBoxScheduler implements SchedulingAlgorithm {
     const aggressivenessMultiplier = {
       gentle: 1.5,
       balanced: 1.0,
-      intensive: 0.5
+      intensive: 0.5,
     }[config.aggressiveness];
 
     return Math.round(baseInterval * aggressivenessMultiplier);

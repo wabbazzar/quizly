@@ -7,10 +7,7 @@
 
 .track {
   flex: 1;
-  background: linear-gradient(135deg,
-    rgba(0, 0, 0, 0.05),
-    rgba(0, 0, 0, 0.02)
-  );
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.02));
   border-radius: 9999px;
   overflow: hidden;
   position: relative;
@@ -117,10 +114,7 @@
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
   .track {
-    background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.08),
-      rgba(255, 255, 255, 0.04)
-    );
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
   }
 
   .default {

@@ -24,48 +24,50 @@ export function useErrorHandler<T extends any[], R>(
   const [lastArgs, setLastArgs] = useState<T | null>(null);
   const [attemptCount, setAttemptCount] = useState(0);
 
-  const executeWithErrorHandling = useCallback(async (...args: T): Promise<R> => {
-    try {
-      setLastArgs(args);
-      const result = await asyncFunction(...args);
+  const executeWithErrorHandling = useCallback(
+    async (...args: T): Promise<R> => {
+      try {
+        setLastArgs(args);
+        const result = await asyncFunction(...args);
 
-      // Reset error state on success
-      if (error) {
-        setError(null);
-        setAttemptCount(0);
+        // Reset error state on success
+        if (error) {
+          setError(null);
+          setAttemptCount(0);
+        }
+
+        return result;
+      } catch (caughtError) {
+        const errorInstance =
+          caughtError instanceof Error ? caughtError : new Error(String(caughtError));
+
+        // Log the error
+        errorLogger.logError(errorInstance, {
+          level: 'async',
+          timestamp: new Date().toISOString(),
+          userAgent: navigator.userAgent,
+          url: window.location.href,
+          userId: localStorage.getItem('userId'),
+          sessionId: sessionStorage.getItem('sessionId') || 'unknown',
+          errorBoundaryLevel: 'async',
+          additionalContext: {
+            functionName: asyncFunction.name,
+            arguments: args,
+            attemptCount: attemptCount + 1,
+          },
+        });
+
+        setError(errorInstance);
+        setAttemptCount(prev => prev + 1);
+
+        // Call custom error handler
+        onError?.(errorInstance);
+
+        throw errorInstance;
       }
-
-      return result;
-    } catch (caughtError) {
-      const errorInstance = caughtError instanceof Error
-        ? caughtError
-        : new Error(String(caughtError));
-
-      // Log the error
-      errorLogger.logError(errorInstance, {
-        level: 'async',
-        timestamp: new Date().toISOString(),
-        userAgent: navigator.userAgent,
-        url: window.location.href,
-        userId: localStorage.getItem('userId'),
-        sessionId: sessionStorage.getItem('sessionId') || 'unknown',
-        errorBoundaryLevel: 'async',
-        additionalContext: {
-          functionName: asyncFunction.name,
-          arguments: args,
-          attemptCount: attemptCount + 1,
-        },
-      });
-
-      setError(errorInstance);
-      setAttemptCount(prev => prev + 1);
-
-      // Call custom error handler
-      onError?.(errorInstance);
-
-      throw errorInstance;
-    }
-  }, [asyncFunction, error, attemptCount, onError]);
+    },
+    [asyncFunction, error, attemptCount, onError]
+  );
 
   const retry = useCallback(async () => {
     if (!lastArgs || attemptCount >= retryAttempts) {
@@ -134,28 +136,31 @@ export function useErrorBoundary() {
 
 // Hook for reporting user feedback on errors
 export function useErrorReporting() {
-  const reportError = useCallback(async (
-    error: Error,
-    userFeedback?: string,
-    severity: 'low' | 'medium' | 'high' | 'critical' = 'medium'
-  ) => {
-    const errorId = errorLogger.logError(error, {
-      level: 'user_reported',
-      timestamp: new Date().toISOString(),
-      userAgent: navigator.userAgent,
-      url: window.location.href,
-      userId: localStorage.getItem('userId'),
-      sessionId: sessionStorage.getItem('sessionId') || 'unknown',
-      errorBoundaryLevel: 'user_reported',
-      additionalContext: {
-        userFeedback,
-        severity,
-        reportedManually: true,
-      },
-    });
+  const reportError = useCallback(
+    async (
+      error: Error,
+      userFeedback?: string,
+      severity: 'low' | 'medium' | 'high' | 'critical' = 'medium'
+    ) => {
+      const errorId = errorLogger.logError(error, {
+        level: 'user_reported',
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        url: window.location.href,
+        userId: localStorage.getItem('userId'),
+        sessionId: sessionStorage.getItem('sessionId') || 'unknown',
+        errorBoundaryLevel: 'user_reported',
+        additionalContext: {
+          userFeedback,
+          severity,
+          reportedManually: true,
+        },
+      });
 
-    return errorId;
-  }, []);
+      return errorId;
+    },
+    []
+  );
 
   const getErrorHistory = useCallback(() => {
     return errorLogger.getErrorHistory();

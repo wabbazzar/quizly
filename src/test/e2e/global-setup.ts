@@ -18,12 +18,12 @@ async function globalSetup(config: FullConfig) {
     console.log(`⏳ Waiting for application at ${baseURL}...`);
     await page.goto(baseURL, {
       waitUntil: 'networkidle',
-      timeout: 60000
+      timeout: 60000,
     });
 
     // Verify core application is loaded
     await page.waitForSelector('[data-testid="app-root"], #root', {
-      timeout: 30000
+      timeout: 30000,
     });
 
     console.log('✅ Application is ready for E2E testing');
@@ -45,7 +45,6 @@ async function globalSetup(config: FullConfig) {
     } catch (error) {
       console.warn('⚠️  Could not verify test data endpoints');
     }
-
   } catch (error) {
     console.error('❌ Global setup failed:', error);
     throw error;

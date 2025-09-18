@@ -2,7 +2,11 @@
 
 ## Executive Summary
 
-Quizly is a high-performance, mobile-first Progressive Web Application (PWA) built with React and Vite that provides an advanced flashcard and learning system. Inspired by Quizlet's functionality, Quizly offers multiple learning modes with a focus on speed, accessibility, and beautiful responsive design that works seamlessly across all devices.
+Quizly is a high-performance, mobile-first Progressive Web Application (PWA)
+built with React and Vite that provides an advanced flashcard and learning
+system. Inspired by Quizlet's functionality, Quizly offers multiple learning
+modes with a focus on speed, accessibility, and beautiful responsive design that
+works seamlessly across all devices.
 
 ## Table of Contents
 
@@ -19,10 +23,15 @@ Quizly is a high-performance, mobile-first Progressive Web Application (PWA) bui
 ## Project Overview
 
 ### Vision
-Create a versatile flashcard web application that supports multi-sided cards with various learning modes, enabling users to study any subject through different perspectives and learning styles on any device with a modern browser.
+
+Create a versatile flashcard web application that supports multi-sided cards
+with various learning modes, enabling users to study any subject through
+different perspectives and learning styles on any device with a modern browser.
 
 ### Core Principles
-- **Mobile-First Design**: Responsive design optimized for touch and mobile screens
+
+- **Mobile-First Design**: Responsive design optimized for touch and mobile
+  screens
 - **Performance**: Lightning-fast load times with optimal bundle sizes
 - **Flexibility**: Multi-sided cards support various learning scenarios
 - **Beauty**: Clean, modern UI with smooth animations and transitions
@@ -30,6 +39,7 @@ Create a versatile flashcard web application that supports multi-sided cards wit
 - **Accessibility**: WCAG AA compliant with full keyboard navigation
 
 ### Target Platforms
+
 - Modern browsers (Chrome, Firefox, Safari, Edge)
 - Progressive Web App (installable on mobile and desktop)
 - Responsive design for phones, tablets, and desktops
@@ -39,6 +49,7 @@ Create a versatile flashcard web application that supports multi-sided cards wit
 ### Technology Stack
 
 #### Frontend
+
 - **Build Tool**: Vite 5.x for lightning-fast HMR and optimized builds
 - **Framework**: React 18.x with concurrent features
 - **Language**: TypeScript 5.x (strict mode)
@@ -50,6 +61,7 @@ Create a versatile flashcard web application that supports multi-sided cards wit
 - **Testing**: Vitest + React Testing Library
 
 #### Key Libraries
+
 ```json
 {
   "react": "^18.3.x",
@@ -69,6 +81,7 @@ Create a versatile flashcard web application that supports multi-sided cards wit
 ### Architecture Patterns
 
 #### Project Structure
+
 ```
 src/
 ├── components/
@@ -97,6 +110,7 @@ src/
 ```
 
 ### Progressive Web App Features
+
 - **Service Worker**: Offline caching with Workbox
 - **Web App Manifest**: Installable on mobile and desktop
 - **Push Notifications**: Study reminders (optional)
@@ -116,7 +130,11 @@ interface DeckMetadata {
   available_levels: number[];
   available_sides: number;
   card_count: number;
-  difficulty: 'beginner' | 'intermediate' | 'advanced' | 'beginner_to_intermediate';
+  difficulty:
+    | 'beginner'
+    | 'intermediate'
+    | 'advanced'
+    | 'beginner_to_intermediate';
   tags: string[];
   version: string;
   created_date: string;
@@ -157,15 +175,15 @@ interface SessionState {
 
 // Mode Settings
 interface ModeSettings {
-  frontSides: string[];  // e.g., ['side_a']
-  backSides: string[];   // e.g., ['side_b', 'side_c']
+  frontSides: string[]; // e.g., ['side_a']
+  backSides: string[]; // e.g., ['side_b', 'side_c']
   cardsPerRound: number;
   enableTimer: boolean;
   timerSeconds?: number;
   enableAudio: boolean;
   randomize: boolean;
   progressionMode: 'sequential' | 'level' | 'random';
-  masteryThreshold?: number;  // Number of consecutive correct answers for mastery
+  masteryThreshold?: number; // Number of consecutive correct answers for mastery
 }
 
 // Progress & Mastery Tracking
@@ -178,12 +196,12 @@ interface CardMasteryRecord {
 }
 
 interface DeckProgress {
-  overall: number;  // Percentage of cards mastered
-  byMode: Record<string, number>;  // Progress per mode
+  overall: number; // Percentage of cards mastered
+  byMode: Record<string, number>; // Progress per mode
   lastStudied?: Date;
   totalCardsStudied: number;
   streakDays: number;
-  masteredCards: number;  // Count of mastered cards
+  masteredCards: number; // Count of mastered cards
   totalCards: number;
 }
 
@@ -196,14 +214,15 @@ interface LearnSessionResults {
   accuracy: number;
   maxStreak: number;
   duration: number;
-  passedCards: number[];  // Cards answered correctly (session-level)
-  strugglingCards: number[];  // Cards answered incorrectly
+  passedCards: number[]; // Cards answered correctly (session-level)
+  strugglingCards: number[]; // Cards answered incorrectly
 }
 ```
 
 ### Data Validation Requirements
 
 Minimum required fields for card sanitization:
+
 - `idx`: Unique identifier within deck
 - `name`: Human-readable card identifier
 - `side_a`: Primary content (required)
@@ -215,6 +234,7 @@ Minimum required fields for card sanitization:
 ### 1. Deck Management
 
 #### Home Screen
+
 - Display grid/list of available decks
 - Show deck metadata (name, description, card count)
 - Search and filter by category/tags
@@ -222,6 +242,7 @@ Minimum required fields for card sanitization:
 - Deck statistics and progress tracking
 
 #### Deck Operations
+
 - **View Deck**: Display deck details and card list
 - **Add Deck**: Manual data entry form with validation
 - **Import Deck**: JSON/CSV import functionality
@@ -232,11 +253,13 @@ Minimum required fields for card sanitization:
 ### 2. Card Display System
 
 #### Multi-Side Support
+
 - Support 2-6 sides per card (defined by `available_sides`)
 - Dynamic side grouping for display
 - Configurable side combinations for each mode
 
 #### Card Rendering
+
 - Clean, readable typography with web fonts
 - Support for special characters (Unicode, emojis, math symbols)
 - Responsive sizing based on viewport and content
@@ -248,17 +271,21 @@ Minimum required fields for card sanitization:
 
 ### Two-Tier Mastery Architecture
 
-The application implements a two-tier mastery system to differentiate between short-term session performance and long-term learning retention:
+The application implements a two-tier mastery system to differentiate between
+short-term session performance and long-term learning retention:
 
 #### 1. Session-Level Performance (Passed Cards)
+
 - **Purpose**: Track immediate performance within a single learning session
 - **Scope**: Temporary, resets each session
-- **Tracking**: Cards passed/failed in current round (passedCards, strugglingCards)
+- **Tracking**: Cards passed/failed in current round (passedCards,
+  strugglingCards)
 - **Use Case**: Determine which cards to review in the next round
 - **Storage**: In-memory during session
 - **Naming**: Uses "passed" to distinguish from true "mastery"
 
 #### 2. Persistent Card Mastery
+
 - **Purpose**: Track true mastery across multiple sessions
 - **Scope**: Persistent across all sessions and modes
 - **Requirement**: 3 consecutive correct answers to achieve mastery
@@ -269,6 +296,7 @@ The application implements a two-tier mastery system to differentiate between sh
 ### Progress Calculation
 
 #### Overall Deck Progress
+
 ```typescript
 // Calculation hierarchy:
 1. Primary: Percentage of cards mastered (from cardMasteryStore)
@@ -277,6 +305,7 @@ The application implements a two-tier mastery system to differentiate between sh
 ```
 
 #### Mode-Specific Progress
+
 - Each mode tracks its own best performance percentage
 - Stored separately from mastery
 - Used for mode-specific statistics
@@ -306,11 +335,13 @@ The application implements a two-tier mastery system to differentiate between sh
 ### Implementation Details
 
 #### Mastery Threshold
+
 - **Default**: 3 consecutive correct answers
 - **Configurable**: Via `masteryThreshold` in mode settings
 - **Applied**: Consistently across all learning modes
 
 #### Progress Display
+
 - **Deck Card**: Shows overall mastery percentage (0-100%)
 - **Statistics**: "X/Y cards mastered" format
 - **Visual**: Circular progress indicator
@@ -321,6 +352,7 @@ The application implements a two-tier mastery system to differentiate between sh
 ### 1. Flashcards Mode
 
 #### Core Functionality
+
 - Display one card at a time
 - Click/tap to flip between front/back
 - Keyboard navigation:
@@ -334,6 +366,7 @@ The application implements a two-tier mastery system to differentiate between sh
 - Progress indicators with visual feedback
 
 #### Settings
+
 - **Side Configuration**: Choose which sides appear on front/back
 - **Side Grouping**: Combine multiple sides (e.g., side_b + side_c)
 - **Timer Option**: Auto-advance after timeout
@@ -341,6 +374,7 @@ The application implements a two-tier mastery system to differentiate between sh
 - **Animations**: Card flip style (3D transform, fade, slide)
 
 #### Flow
+
 1. Start with full deck
 2. Show cards sequentially
 3. Track correct/missed cards
@@ -351,6 +385,7 @@ The application implements a two-tier mastery system to differentiate between sh
 ### 2. Learn Mode
 
 #### Core Functionality
+
 - Question displayed at top (configurable sides)
 - Multiple choice answers below (4 options)
 - Mix multiple choice with free text input
@@ -358,12 +393,14 @@ The application implements a two-tier mastery system to differentiate between sh
 - Progress bar showing completion
 
 #### Question Types
+
 - **Multiple Choice**: 1 correct + 3 distractors from deck
 - **Free Text**: Type answer with fuzzy matching
 - **Combined Sides**: Questions/answers can show grouped sides
 - **True/False**: Binary choice questions
 
 #### Settings
+
 - **Cards per Round**: Default 10, adjustable
 - **Side Selection**: Configure Q&A sides
 - **Randomize**: Auto-swap and combine sides
@@ -371,6 +408,7 @@ The application implements a two-tier mastery system to differentiate between sh
 - **Difficulty Adaptation**: Adjust based on performance
 
 #### Flow
+
 1. Start round with N cards
 2. Present questions (80% multiple choice, 20% free text)
 3. Show success animation for correct answers
@@ -380,6 +418,7 @@ The application implements a two-tier mastery system to differentiate between sh
 7. Track mastery level per card
 
 #### Special Features
+
 - "Let's try again" message for re-attempted questions
 - "Override: I was correct" option for free text
 - Progressive difficulty based on levels
@@ -389,6 +428,7 @@ The application implements a two-tier mastery system to differentiate between sh
 ### 3. Match Mode
 
 #### Core Functionality
+
 - Responsive grid layout (adapts to screen size)
 - Timer counting up with pause option
 - Match related sides from same card
@@ -396,6 +436,7 @@ The application implements a two-tier mastery system to differentiate between sh
 - Drag and drop support on desktop
 
 #### Grid Configuration
+
 - **Responsive Sizes**:
   - Mobile: 3x4 or 4x3
   - Tablet: 4x4 or 4x5
@@ -406,6 +447,7 @@ The application implements a two-tier mastery system to differentiate between sh
   - Mixed: Different combinations per card
 
 #### Settings
+
 - **Side Selection**: Which sides appear
 - **Match Complexity**: 2-way, 3-way, or mixed
 - **Grid Size**: Auto or manual selection
@@ -413,6 +455,7 @@ The application implements a two-tier mastery system to differentiate between sh
 - **Hints**: Show brief hints on hover
 
 #### Flow
+
 1. Display responsive grid with shuffled cards
 2. User clicks/taps cards to match
 3. Correct matches animate and disappear
@@ -424,12 +467,14 @@ The application implements a two-tier mastery system to differentiate between sh
 ### 4. Test Mode
 
 #### Core Functionality
+
 - Formal assessment with multiple question types
 - Configurable question count and types
 - Optional instant feedback or end-of-test results
 - Progress indicator showing question N of Total
 
 #### Question Types
+
 - **True/False**: Statement verification
 - **Multiple Choice**: 4 options with single/multi select
 - **Free Response**: Text input with validation
@@ -437,6 +482,7 @@ The application implements a two-tier mastery system to differentiate between sh
 - **Ordering**: Arrange items in sequence
 
 #### Settings
+
 - **Question Types**: Select which types to include
 - **Side Configuration**: Choose Q&A sides
 - **Auto Mode**: Shuffle which sides are questions/answers
@@ -447,6 +493,7 @@ The application implements a two-tier mastery system to differentiate between sh
 - **Passing Score**: Set minimum percentage
 
 #### Flow
+
 1. Configure test parameters
 2. Present questions with navigation
 3. Allow review and flag questions
@@ -460,35 +507,36 @@ The application implements a two-tier mastery system to differentiate between sh
 ### Design System
 
 #### Color Palette
+
 ```css
 :root {
   /* Primary Colors */
-  --primary-main: #4A90E2;
-  --primary-light: #6BA5E9;
-  --primary-dark: #3A7BC8;
+  --primary-main: #4a90e2;
+  --primary-light: #6ba5e9;
+  --primary-dark: #3a7bc8;
 
   /* Secondary Colors */
-  --secondary-main: #50E3C2;
-  --secondary-light: #6FEBD0;
-  --secondary-dark: #3DCBAA;
+  --secondary-main: #50e3c2;
+  --secondary-light: #6febd0;
+  --secondary-dark: #3dcbaa;
 
   /* Neutral Colors */
-  --neutral-white: #FFFFFF;
-  --neutral-gray-100: #F7F8FA;
-  --neutral-gray-200: #E5E7EB;
-  --neutral-gray-300: #D1D5DB;
-  --neutral-gray-400: #9CA3AF;
-  --neutral-gray-500: #6B7280;
-  --neutral-gray-600: #4B5563;
+  --neutral-white: #ffffff;
+  --neutral-gray-100: #f7f8fa;
+  --neutral-gray-200: #e5e7eb;
+  --neutral-gray-300: #d1d5db;
+  --neutral-gray-400: #9ca3af;
+  --neutral-gray-500: #6b7280;
+  --neutral-gray-600: #4b5563;
   --neutral-gray-700: #374151;
-  --neutral-gray-800: #1F2937;
+  --neutral-gray-800: #1f2937;
   --neutral-black: #000000;
 
   /* Semantic Colors */
-  --semantic-success: #10B981;
-  --semantic-warning: #F59E0B;
-  --semantic-error: #EF4444;
-  --semantic-info: #3B82F6;
+  --semantic-success: #10b981;
+  --semantic-warning: #f59e0b;
+  --semantic-error: #ef4444;
+  --semantic-info: #3b82f6;
 
   /* Dark Mode */
   @media (prefers-color-scheme: dark) {
@@ -501,6 +549,7 @@ The application implements a two-tier mastery system to differentiate between sh
 ```
 
 #### Typography
+
 ```css
 :root {
   /* Font Family */
@@ -508,14 +557,14 @@ The application implements a two-tier mastery system to differentiate between sh
   --font-mono: 'SF Mono', Consolas, monospace;
 
   /* Font Sizes */
-  --text-xs: 0.75rem;    /* 12px */
-  --text-sm: 0.875rem;   /* 14px */
-  --text-base: 1rem;     /* 16px */
-  --text-lg: 1.125rem;   /* 18px */
-  --text-xl: 1.25rem;    /* 20px */
-  --text-2xl: 1.5rem;    /* 24px */
-  --text-3xl: 1.875rem;  /* 30px */
-  --text-4xl: 2.25rem;   /* 36px */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-4xl: 2.25rem; /* 36px */
 
   /* Line Heights */
   --leading-tight: 1.25;
@@ -531,24 +580,26 @@ The application implements a two-tier mastery system to differentiate between sh
 ```
 
 #### Spacing System
+
 ```css
 :root {
-  --space-1: 0.25rem;  /* 4px */
-  --space-2: 0.5rem;   /* 8px */
-  --space-3: 0.75rem;  /* 12px */
-  --space-4: 1rem;     /* 16px */
-  --space-5: 1.25rem;  /* 20px */
-  --space-6: 1.5rem;   /* 24px */
-  --space-8: 2rem;     /* 32px */
-  --space-10: 2.5rem;  /* 40px */
-  --space-12: 3rem;    /* 48px */
-  --space-16: 4rem;    /* 64px */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
+  --space-16: 4rem; /* 64px */
 }
 ```
 
 ### Component Design
 
 #### Cards
+
 - Border radius: 12px
 - Box shadow for depth
 - Smooth transitions (200-300ms)
@@ -556,6 +607,7 @@ The application implements a two-tier mastery system to differentiate between sh
 - Loading skeletons
 
 #### Buttons
+
 - Primary, secondary, ghost, and danger variants
 - Consistent padding and sizing
 - Ripple effect on click
@@ -563,6 +615,7 @@ The application implements a two-tier mastery system to differentiate between sh
 - Loading states with spinners
 
 #### Forms
+
 - Floating labels or top labels
 - Clear validation messages
 - Auto-save functionality
@@ -571,16 +624,18 @@ The application implements a two-tier mastery system to differentiate between sh
 ### Responsive Design
 
 #### Breakpoints
+
 ```css
 /* Mobile First Approach */
---breakpoint-sm: 640px;   /* Small tablets */
---breakpoint-md: 768px;   /* Tablets */
---breakpoint-lg: 1024px;  /* Small laptops */
---breakpoint-xl: 1280px;  /* Desktops */
+--breakpoint-sm: 640px; /* Small tablets */
+--breakpoint-md: 768px; /* Tablets */
+--breakpoint-lg: 1024px; /* Small laptops */
+--breakpoint-xl: 1280px; /* Desktops */
 --breakpoint-2xl: 1536px; /* Large screens */
 ```
 
 #### Layout Patterns
+
 - Mobile: Single column, stacked layout
 - Tablet: 2-column layouts where appropriate
 - Desktop: Multi-column with sidebars
@@ -590,6 +645,7 @@ The application implements a two-tier mastery system to differentiate between sh
 ### Accessibility
 
 #### Requirements
+
 - WCAG AA compliance minimum
 - Full keyboard navigation
 - Screen reader support with ARIA
@@ -599,6 +655,7 @@ The application implements a two-tier mastery system to differentiate between sh
 - Skip links for navigation
 
 #### Implementation
+
 - Semantic HTML structure
 - Proper heading hierarchy
 - ARIA labels and descriptions
@@ -609,6 +666,7 @@ The application implements a two-tier mastery system to differentiate between sh
 ## Performance Requirements
 
 ### Target Metrics
+
 - **First Contentful Paint**: <1.5s
 - **Time to Interactive**: <3.5s
 - **Largest Contentful Paint**: <2.5s
@@ -620,6 +678,7 @@ The application implements a two-tier mastery system to differentiate between sh
 ### Optimization Strategies
 
 #### Build Optimization
+
 - Code splitting with React.lazy()
 - Tree shaking with Vite
 - Compression (gzip/brotli)
@@ -628,6 +687,7 @@ The application implements a two-tier mastery system to differentiate between sh
 - Preloading key resources
 
 #### Runtime Optimization
+
 - Virtual scrolling for long lists
 - React.memo for expensive components
 - useMemo/useCallback where appropriate
@@ -636,6 +696,7 @@ The application implements a two-tier mastery system to differentiate between sh
 - Intersection Observer for lazy loading
 
 #### Caching Strategy
+
 - Service Worker with cache-first strategy
 - localStorage for user preferences
 - IndexedDB for deck data
@@ -647,6 +708,7 @@ The application implements a two-tier mastery system to differentiate between sh
 ### Code Quality
 
 #### TypeScript Configuration
+
 ```json
 {
   "compilerOptions": {
@@ -670,6 +732,7 @@ The application implements a two-tier mastery system to differentiate between sh
 ```
 
 #### Linting and Formatting
+
 - ESLint with React and TypeScript configs
 - Prettier for consistent formatting
 - Husky for pre-commit hooks
@@ -678,6 +741,7 @@ The application implements a two-tier mastery system to differentiate between sh
 ### Testing Requirements
 
 #### Unit Tests
+
 - Component testing with Vitest
 - Hook testing with @testing-library/react-hooks
 - Store testing for Zustand actions
@@ -685,12 +749,14 @@ The application implements a two-tier mastery system to differentiate between sh
 - Target: >80% coverage
 
 #### Integration Tests
+
 - Page-level testing
 - User flow testing
 - API integration testing
 - Router testing
 
 #### E2E Tests (Playwright)
+
 - Critical user journeys
 - Cross-browser testing
 - Mobile viewport testing
@@ -700,6 +766,7 @@ The application implements a two-tier mastery system to differentiate between sh
 ### Git Workflow
 
 #### Branch Strategy
+
 - `main`: Production-ready code
 - `develop`: Development branch
 - `feature/*`: Feature branches
@@ -707,6 +774,7 @@ The application implements a two-tier mastery system to differentiate between sh
 - `release/*`: Release preparation
 
 #### Commit Standards
+
 ```
 feat: Add new feature
 fix: Bug fix
@@ -723,6 +791,7 @@ chore: Build/tool updates
 ### MVP Features
 
 #### 1. Core Infrastructure
+
 - [x] Vite setup with React and TypeScript
 - [x] React Router configuration
 - [x] Theme system with CSS custom properties
@@ -733,6 +802,7 @@ chore: Build/tool updates
 - [ ] Service Worker for offline support
 
 #### 2. Deck Management
+
 - [x] Home page with deck grid/list
 - [ ] Deck detail view
 - [ ] Add deck functionality
@@ -741,12 +811,14 @@ chore: Build/tool updates
 - [x] Card list display
 
 #### 3. Learning Modes
+
 - [~] Flashcards mode (basic implementation, needs polish)
 - [ ] Learn mode (complete)
 - [ ] Match mode (complete)
 - [ ] Test mode (complete)
 
 #### 4. Settings System
+
 - [ ] Side configuration for each mode
 - [ ] Side grouping options
 - [ ] Theme selection (light/dark/auto)
@@ -755,6 +827,7 @@ chore: Build/tool updates
 - [ ] Persistence of preferences
 
 #### 5. UI Components
+
 - [x] Card component with flip animation
 - [ ] Multiple choice component
 - [ ] Free text input component
@@ -764,6 +837,7 @@ chore: Build/tool updates
 - [x] Loading states and skeletons
 
 #### 6. PWA Features
+
 - [ ] Web App Manifest
 - [ ] Service Worker with Workbox
 - [ ] Offline functionality
@@ -868,7 +942,8 @@ interface AppStore {
 
 ### Error Boundary Architecture
 
-The application implements a comprehensive error boundary system with multiple levels of error containment and recovery:
+The application implements a comprehensive error boundary system with multiple
+levels of error containment and recovery:
 
 #### Hierarchical Error Boundaries
 
@@ -886,21 +961,25 @@ interface ErrorBoundaryProps {
 ```
 
 **1. App-Level Boundaries**
+
 - Catch catastrophic application errors
 - Provide full page reload and navigation options
 - Display branded error page with support contact
 
 **2. Route-Level Boundaries**
+
 - Isolate page-specific errors
 - Reset automatically when navigation changes
 - Offer retry, refresh, and back navigation options
 
 **3. Feature-Level Boundaries**
+
 - Contain errors within major app features
 - Preserve rest of application functionality
 - Feature-specific recovery instructions
 
 **4. Component-Level Boundaries**
+
 - Isolate individual component failures
 - Minimal impact on surrounding UI
 - Automatic retry mechanisms
@@ -933,6 +1012,7 @@ interface ErrorContext {
 ```
 
 **Features:**
+
 - Automatic error context capture
 - Severity classification based on error level
 - Local storage with queue management
@@ -942,12 +1022,14 @@ interface ErrorContext {
 #### Error Recovery Mechanisms
 
 **Automatic Recovery:**
+
 - Component remounting on prop changes
 - Route reset on navigation
 - Session state preservation
 - Progressive retry with backoff
 
 **User-Initiated Recovery:**
+
 - "Try Again" buttons for component retries
 - "Refresh Page" for route-level issues
 - "Go Home" for navigation recovery
@@ -988,6 +1070,7 @@ interface ProgressSnapshot {
 ```
 
 **Features:**
+
 - Automatic progress snapshots every 30 seconds
 - Error-triggered emergency snapshots
 - Recovery dialog on session restoration
@@ -1002,7 +1085,7 @@ Custom hooks for handling asynchronous operations:
 const [loadDeck, { error, isError, retry, reset }] = useErrorHandler(
   deckService.loadDeck,
   {
-    onError: (error) => console.error('Failed to load deck:', error),
+    onError: error => console.error('Failed to load deck:', error),
     retryAttempts: 3,
     retryDelay: 1000,
   }
@@ -1018,24 +1101,28 @@ const { reportError, getErrorHistory, clearErrorHistory } = useErrorReporting();
 ### Error Classification
 
 **Critical Errors (App-Level)**
+
 - Application crashes
 - Security violations
 - Core system failures
 - Service worker errors
 
 **High Severity (Route-Level)**
+
 - Page load failures
 - Data corruption
 - Authentication errors
 - Navigation failures
 
 **Medium Severity (Feature-Level)**
+
 - Learning mode failures
 - Deck loading errors
 - Network connectivity issues
 - File import/export errors
 
 **Low Severity (Component-Level)**
+
 - Individual component failures
 - Validation errors
 - Minor UI glitches
@@ -1044,18 +1131,21 @@ const { reportError, getErrorHistory, clearErrorHistory } = useErrorReporting();
 ### Error Prevention
 
 **TypeScript Integration:**
+
 - Strict type checking with no `any` types
 - Exhaustive union type handling
 - Proper null/undefined checks
 - Error boundary type safety
 
 **Input Validation:**
+
 - Runtime data validation
 - Sanitization of external data
 - Graceful handling of malformed input
 - User input constraints
 
 **Defensive Programming:**
+
 - Null checks for all external dependencies
 - Fallback values for critical operations
 - Try-catch blocks for risky operations
@@ -1064,12 +1154,14 @@ const { reportError, getErrorHistory, clearErrorHistory } = useErrorReporting();
 ### Monitoring & Analytics
 
 **Error Metrics:**
+
 - Error rate by severity level
 - Recovery success rate
 - Time to recovery
 - User impact assessment
 
 **Development Tools:**
+
 - Error replay in development mode
 - Component stack traces
 - Redux/Zustand state dumps
@@ -1078,12 +1170,14 @@ const { reportError, getErrorHistory, clearErrorHistory } = useErrorReporting();
 ### Performance Requirements
 
 **Error Handling Overhead:**
+
 - <1ms per error boundary check
 - <5MB memory for error logging
 - <200KB bundle size impact
 - <100ms error reporting latency
 
 **Recovery Performance:**
+
 - <2 seconds from error to recovery UI
 - <1 second for component retry
 - <500ms for progress restoration
@@ -1092,12 +1186,14 @@ const { reportError, getErrorHistory, clearErrorHistory } = useErrorReporting();
 ### Accessibility
 
 **Screen Reader Support:**
+
 - ARIA live regions for error announcements
 - Descriptive error messages
 - Keyboard navigation in error dialogs
 - High contrast error indicators
 
 **Reduced Motion:**
+
 - Respect `prefers-reduced-motion`
 - Optional error animations
 - Static fallback for motion-sensitive users
@@ -1105,18 +1201,21 @@ const { reportError, getErrorHistory, clearErrorHistory } = useErrorReporting();
 ### Testing Strategy
 
 **Unit Tests:**
+
 - Error boundary catching behavior
 - Error logging accuracy
 - Recovery mechanism functionality
 - Hook behavior under error conditions
 
 **Integration Tests:**
+
 - Cross-component error propagation
 - Progress preservation workflows
 - User recovery interactions
 - Error reporting workflows
 
 **E2E Tests:**
+
 - Simulated network failures
 - Browser crash recovery
 - Page refresh during errors
@@ -1124,4 +1223,5 @@ const { reportError, getErrorHistory, clearErrorHistory } = useErrorReporting();
 
 ---
 
-*This specification is a living document and will be updated as development progresses and requirements evolve.*
+_This specification is a living document and will be updated as development
+progresses and requirements evolve._

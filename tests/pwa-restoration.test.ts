@@ -9,7 +9,8 @@ test.describe('PWA Restoration Tests', () => {
     const browser = await chromium.launch();
     context = await browser.newContext({
       viewport: { width: 390, height: 844 }, // iPhone 13 Pro
-      userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1',
+      userAgent:
+        'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1',
       deviceScaleFactor: 3,
     });
   });
@@ -40,7 +41,7 @@ test.describe('PWA Restoration Tests', () => {
     await page.evaluate(() => {
       Object.defineProperty(document, 'hidden', {
         writable: true,
-        value: true
+        value: true,
       });
       document.dispatchEvent(new Event('visibilitychange'));
     });
@@ -51,7 +52,7 @@ test.describe('PWA Restoration Tests', () => {
     await page.evaluate(() => {
       Object.defineProperty(document, 'hidden', {
         writable: true,
-        value: false
+        value: false,
       });
       document.dispatchEvent(new Event('visibilitychange'));
     });
@@ -59,9 +60,8 @@ test.describe('PWA Restoration Tests', () => {
     await page.waitForTimeout(500);
 
     // Check for infinite loop indicators
-    const restorationLogs = consoleLogs.filter(log =>
-      log.includes('Forcing component refresh') ||
-      log.includes('Page restored from cache')
+    const restorationLogs = consoleLogs.filter(
+      log => log.includes('Forcing component refresh') || log.includes('Page restored from cache')
     );
 
     // Should not have excessive restoration logs
@@ -70,7 +70,9 @@ test.describe('PWA Restoration Tests', () => {
 
   test('should show and hide restoration overlay correctly', async () => {
     // Initially, restoration overlay should not be visible
-    const overlayInitially = await page.locator('[style*="position: fixed"][style*="z-index: 9999"]').isVisible();
+    const overlayInitially = await page
+      .locator('[style*="position: fixed"][style*="z-index: 9999"]')
+      .isVisible();
     expect(overlayInitially).toBe(false);
 
     // Simulate app termination and restoration
@@ -83,12 +85,16 @@ test.describe('PWA Restoration Tests', () => {
     await page.reload();
 
     // Check if restoration overlay appears briefly
-    const overlayAfterReload = await page.locator('[style*="position: fixed"][style*="z-index: 9999"]').count();
+    const overlayAfterReload = await page
+      .locator('[style*="position: fixed"][style*="z-index: 9999"]')
+      .count();
 
     // Wait for overlay to disappear
     await page.waitForTimeout(1500);
 
-    const overlayAfterTimeout = await page.locator('[style*="position: fixed"][style*="z-index: 9999"]').isVisible();
+    const overlayAfterTimeout = await page
+      .locator('[style*="position: fixed"][style*="z-index: 9999"]')
+      .isVisible();
     expect(overlayAfterTimeout).toBe(false);
   });
 
@@ -109,18 +115,21 @@ test.describe('PWA Restoration Tests', () => {
 
     // Store some state
     await page.evaluate(() => {
-      localStorage.setItem('quizly-pwa-state', JSON.stringify({
-        timestamp: Date.now(),
-        url: window.location.href,
-        scrollPosition: 100
-      }));
+      localStorage.setItem(
+        'quizly-pwa-state',
+        JSON.stringify({
+          timestamp: Date.now(),
+          url: window.location.href,
+          scrollPosition: 100,
+        })
+      );
     });
 
     // Simulate visibility change (backgrounding)
     await page.evaluate(() => {
       Object.defineProperty(document, 'hidden', {
         writable: true,
-        value: true
+        value: true,
       });
       document.dispatchEvent(new Event('visibilitychange'));
     });
@@ -131,7 +140,7 @@ test.describe('PWA Restoration Tests', () => {
     await page.evaluate(() => {
       Object.defineProperty(document, 'hidden', {
         writable: true,
-        value: false
+        value: false,
       });
       document.dispatchEvent(new Event('visibilitychange'));
     });
@@ -158,7 +167,7 @@ test.describe('PWA Restoration Tests', () => {
       await page.evaluate(() => {
         Object.defineProperty(document, 'hidden', {
           writable: true,
-          value: true
+          value: true,
         });
         document.dispatchEvent(new Event('visibilitychange'));
       });
@@ -168,7 +177,7 @@ test.describe('PWA Restoration Tests', () => {
       await page.evaluate(() => {
         Object.defineProperty(document, 'hidden', {
           writable: true,
-          value: false
+          value: false,
         });
         document.dispatchEvent(new Event('visibilitychange'));
       });
@@ -185,7 +194,7 @@ test.describe('PWA Restoration Tests', () => {
     await page.evaluate(() => {
       Object.defineProperty(document, 'hidden', {
         writable: true,
-        value: true
+        value: true,
       });
       document.dispatchEvent(new Event('visibilitychange'));
     });
@@ -195,7 +204,7 @@ test.describe('PWA Restoration Tests', () => {
     await page.evaluate(() => {
       Object.defineProperty(document, 'hidden', {
         writable: true,
-        value: false
+        value: false,
       });
       document.dispatchEvent(new Event('visibilitychange'));
     });

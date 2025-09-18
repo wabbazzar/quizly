@@ -13,8 +13,15 @@ interface UnifiedSettingsStore {
   presetSelections: Record<string, { [mode: string]: string }>;
 
   // Actions
-  getSettingsForMode: (deckId: string, mode: string) => ModeSettings | FlashcardsSettings | LearnModeSettings;
-  updateSettings: (deckId: string, mode: string, settings: ModeSettings | FlashcardsSettings | LearnModeSettings) => void;
+  getSettingsForMode: (
+    deckId: string,
+    mode: string
+  ) => ModeSettings | FlashcardsSettings | LearnModeSettings;
+  updateSettings: (
+    deckId: string,
+    mode: string,
+    settings: ModeSettings | FlashcardsSettings | LearnModeSettings
+  ) => void;
   applyPreset: (deckId: string, mode: string, presetId: string) => void;
   getSettings: (key: string) => any;
   saveSettings: (key: string, settings: any) => void;
@@ -32,7 +39,7 @@ const getDefaultSettings = (mode: string): any => {
       enableTimer: false,
       timerSeconds: 30,
       enableAudio: false,
-      groupSides: {}
+      groupSides: {},
     },
     learn: {
       questionSides: ['side_a'],
@@ -51,7 +58,7 @@ const getDefaultSettings = (mode: string): any => {
       questionTypes: ['multiple_choice', 'free_text'],
       adaptiveDifficulty: false,
       frontSides: ['side_a'],
-      backSides: ['side_b']
+      backSides: ['side_b'],
     },
     match: {
       frontSides: ['side_a'],
@@ -61,7 +68,7 @@ const getDefaultSettings = (mode: string): any => {
       timerSeconds: 60,
       enableAudio: true,
       randomize: true,
-      progressionMode: 'random' as const
+      progressionMode: 'random' as const,
     },
     test: {
       frontSides: ['side_a'],
@@ -71,8 +78,8 @@ const getDefaultSettings = (mode: string): any => {
       timerSeconds: 1800,
       enableAudio: false,
       randomize: true,
-      progressionMode: 'sequential' as const
-    }
+      progressionMode: 'sequential' as const,
+    },
   };
 
   return defaults[mode] || defaults.flashcards;
@@ -105,39 +112,39 @@ export const useSettingsStore = create<UnifiedSettingsStore>()(
       },
 
       updateSettings: (deckId: string, mode: string, settings: any) => {
-        set((state) => {
+        set(state => {
           switch (mode) {
             case 'flashcards':
               return {
                 ...state,
                 flashcardsSettings: {
                   ...state.flashcardsSettings,
-                  [deckId]: settings
-                }
+                  [deckId]: settings,
+                },
               };
             case 'learn':
               return {
                 ...state,
                 learnSettings: {
                   ...state.learnSettings,
-                  [deckId]: settings as LearnModeSettings
-                }
+                  [deckId]: settings as LearnModeSettings,
+                },
               };
             case 'match':
               return {
                 ...state,
                 matchSettings: {
                   ...state.matchSettings,
-                  [deckId]: settings
-                }
+                  [deckId]: settings,
+                },
               };
             case 'test':
               return {
                 ...state,
                 testSettings: {
                   ...state.testSettings,
-                  [deckId]: settings
-                }
+                  [deckId]: settings,
+                },
               };
             default:
               return state;
@@ -146,15 +153,15 @@ export const useSettingsStore = create<UnifiedSettingsStore>()(
       },
 
       applyPreset: (deckId: string, mode: string, presetId: string) => {
-        set((state) => ({
+        set(state => ({
           ...state,
           presetSelections: {
             ...state.presetSelections,
             [deckId]: {
               ...state.presetSelections[deckId],
-              [mode]: presetId
-            }
-          }
+              [mode]: presetId,
+            },
+          },
         }));
       },
 
@@ -189,9 +196,9 @@ export const useSettingsStore = create<UnifiedSettingsStore>()(
           const oldFlashcardsSettings = localStorage.getItem('flashcards-settings');
           if (oldFlashcardsSettings) {
             const parsed = JSON.parse(oldFlashcardsSettings);
-            set((state) => ({
+            set(state => ({
               ...state,
-              flashcardsSettings: parsed
+              flashcardsSettings: parsed,
             }));
           }
 
@@ -199,9 +206,9 @@ export const useSettingsStore = create<UnifiedSettingsStore>()(
           const oldLearnSettings = localStorage.getItem('learn-settings');
           if (oldLearnSettings) {
             const parsed = JSON.parse(oldLearnSettings);
-            set((state) => ({
+            set(state => ({
               ...state,
-              learnSettings: parsed
+              learnSettings: parsed,
             }));
           }
 
@@ -211,26 +218,25 @@ export const useSettingsStore = create<UnifiedSettingsStore>()(
           // Clean up old keys after successful migration
           localStorage.removeItem('flashcards-settings');
           localStorage.removeItem('learn-settings');
-
         } catch (error) {
           console.error('Settings migration failed:', error);
           // Don't mark as migrated, will retry next time
         }
-      }
+      },
     }),
     {
       name: 'unified-settings-store',
-      partialize: (state) => ({
+      partialize: state => ({
         flashcardsSettings: state.flashcardsSettings,
         learnSettings: state.learnSettings,
         matchSettings: state.matchSettings,
         testSettings: state.testSettings,
-        presetSelections: state.presetSelections
+        presetSelections: state.presetSelections,
       }),
-      onRehydrateStorage: () => (state) => {
+      onRehydrateStorage: () => state => {
         // Run migration after rehydration
         state?.migrateOldSettings();
-      }
+      },
     }
   )
 );

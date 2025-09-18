@@ -1,6 +1,7 @@
 # Ticket 006: Advanced Performance Optimization and Monitoring
 
 ## Metadata
+
 - **Status**: Completed
 - **Priority**: High
 - **Effort**: 14 points
@@ -11,25 +12,41 @@
 ## User Stories
 
 ### Primary User Story
-As a user, I want the application to load instantly and respond immediately to all interactions so that my learning experience is smooth and engaging without any performance delays.
+
+As a user, I want the application to load instantly and respond immediately to
+all interactions so that my learning experience is smooth and engaging without
+any performance delays.
 
 ### Secondary User Stories
-- As a mobile user, I want the app to work smoothly on slower devices so that I can learn effectively regardless of my hardware
-- As a developer, I want performance monitoring so that regressions are caught before affecting users
-- As a user with limited data, I want minimal network usage so that I can use the app without worrying about data costs
-- As a user on slow networks, I want smart loading strategies so that the app remains usable even with poor connectivity
+
+- As a mobile user, I want the app to work smoothly on slower devices so that I
+  can learn effectively regardless of my hardware
+- As a developer, I want performance monitoring so that regressions are caught
+  before affecting users
+- As a user with limited data, I want minimal network usage so that I can use
+  the app without worrying about data costs
+- As a user on slow networks, I want smart loading strategies so that the app
+  remains usable even with poor connectivity
 
 ## Technical Requirements
 
 ### Functional Requirements
-1. **Bundle Optimization**: Implement code splitting, tree shaking, and lazy loading to reduce initial bundle size by 40%
-2. **Runtime Performance**: Optimize component rendering, memory usage, and eliminate performance bottlenecks
-3. **Network Optimization**: Implement intelligent caching, compression, and resource prioritization
-4. **Memory Management**: Prevent memory leaks and optimize memory usage for long-running sessions
-5. **Performance Monitoring**: Real-time performance tracking with automated alerts and regression detection
+
+1. **Bundle Optimization**: Implement code splitting, tree shaking, and lazy
+   loading to reduce initial bundle size by 40%
+2. **Runtime Performance**: Optimize component rendering, memory usage, and
+   eliminate performance bottlenecks
+3. **Network Optimization**: Implement intelligent caching, compression, and
+   resource prioritization
+4. **Memory Management**: Prevent memory leaks and optimize memory usage for
+   long-running sessions
+5. **Performance Monitoring**: Real-time performance tracking with automated
+   alerts and regression detection
 
 ### Non-Functional Requirements
-1. Performance: First Contentful Paint <1.2s, Time to Interactive <2.5s, 60 FPS interactions
+
+1. Performance: First Contentful Paint <1.2s, Time to Interactive <2.5s, 60 FPS
+   interactions
 2. Bundle Size: Initial JS <150KB gzipped, total assets <500KB for critical path
 3. Memory Usage: <100MB baseline, <200MB peak during intensive operations
 4. Network: <10 requests for initial load, intelligent caching with 90% hit rate
@@ -37,7 +54,9 @@ As a user, I want the application to load instantly and respond immediately to a
 ## Implementation Plan
 
 ### Phase 1: Bundle Size Optimization and Code Splitting (3 points)
+
 **Files to create/modify:**
+
 - `vite.config.ts` - Advanced build optimization configuration
 - `src/utils/lazyImports.ts` - Dynamic import utilities and error handling
 - `src/components/common/LazyLoadBoundary.tsx` - Lazy loading wrapper component
@@ -45,6 +64,7 @@ As a user, I want the application to load instantly and respond immediately to a
 - `scripts/bundle-analyzer.js` - Build-time bundle analysis script
 
 **Advanced Vite Configuration:**
+
 ```typescript
 // vite.config.ts (enhanced)
 import { defineConfig } from 'vite';
@@ -139,9 +159,13 @@ export default defineConfig({
             './src/components/ui/Card.tsx',
           ],
         },
-        chunkFileNames: (chunkInfo) => {
+        chunkFileNames: chunkInfo => {
           const facadeModuleId = chunkInfo.facadeModuleId
-            ? chunkInfo.facadeModuleId.split('/').pop()?.replace('.tsx', '').replace('.ts', '')
+            ? chunkInfo.facadeModuleId
+                .split('/')
+                .pop()
+                ?.replace('.tsx', '')
+                .replace('.ts', '')
             : 'chunk';
           return `assets/[name]-[hash].js`;
         },
@@ -185,6 +209,7 @@ export default defineConfig({
 ```
 
 **Lazy Loading System:**
+
 ```typescript
 // src/utils/lazyImports.ts
 import { ComponentType, lazy, LazyExoticComponent } from 'react';
@@ -222,29 +247,24 @@ export function createLazyImport<T extends ComponentType<any>>(
 }
 
 // Pre-configured lazy imports with error handling
-export const LazyLearn = createLazyImport(
-  () => import('@/pages/Learn'),
-  {
-    onError: (error) => console.error('Failed to load Learn component:', error),
-    retryAttempts: 3,
-  }
-);
+export const LazyLearn = createLazyImport(() => import('@/pages/Learn'), {
+  onError: error => console.error('Failed to load Learn component:', error),
+  retryAttempts: 3,
+});
 
 export const LazyFlashcards = createLazyImport(
   () => import('@/pages/Flashcards'),
   {
-    onError: (error) => console.error('Failed to load Flashcards component:', error),
+    onError: error =>
+      console.error('Failed to load Flashcards component:', error),
     retryAttempts: 3,
   }
 );
 
-export const LazyDeck = createLazyImport(
-  () => import('@/pages/Deck'),
-  {
-    onError: (error) => console.error('Failed to load Deck component:', error),
-    retryAttempts: 3,
-  }
-);
+export const LazyDeck = createLazyImport(() => import('@/pages/Deck'), {
+  onError: error => console.error('Failed to load Deck component:', error),
+  retryAttempts: 3,
+});
 
 // Utility for preloading components
 export const preloadComponent = (importFunction: () => Promise<any>) => {
@@ -277,6 +297,7 @@ export const preloadRouteComponents = () => {
 ```
 
 **Lazy Load Boundary Component:**
+
 ```typescript
 // src/components/common/LazyLoadBoundary.tsx
 import { FC, Suspense, ReactNode, useState, useEffect } from 'react';
@@ -385,6 +406,7 @@ export function withLazyLoading<P extends object>(
 ```
 
 **Bundle Analysis Service:**
+
 ```typescript
 // src/services/bundleAnalyzer.ts
 interface BundleMetrics {
@@ -412,7 +434,7 @@ class BundleAnalyzer {
 
   private setupPerformanceMonitoring() {
     if ('PerformanceObserver' in window) {
-      this.performanceObserver = new PerformanceObserver((list) => {
+      this.performanceObserver = new PerformanceObserver(list => {
         for (const entry of list.getEntries()) {
           if (entry.entryType === 'navigation') {
             this.recordLoadMetrics(entry as PerformanceNavigationTiming);
@@ -462,9 +484,11 @@ class BundleAnalyzer {
     };
 
     // Estimate cache hit rate based on resource timing
-    const resources = performance.getEntriesByType('resource') as PerformanceResourceTiming[];
-    const cachedResources = resources.filter(r =>
-      r.transferSize === 0 || r.transferSize < r.decodedBodySize
+    const resources = performance.getEntriesByType(
+      'resource'
+    ) as PerformanceResourceTiming[];
+    const cachedResources = resources.filter(
+      r => r.transferSize === 0 || r.transferSize < r.decodedBodySize
     );
 
     if (resources.length > 0) {
@@ -551,12 +575,17 @@ class BundleAnalyzer {
 
   public getAverageLoadTime(): number {
     if (this.metrics.length === 0) return 0;
-    return this.metrics.reduce((sum, m) => sum + m.loadTime, 0) / this.metrics.length;
+    return (
+      this.metrics.reduce((sum, m) => sum + m.loadTime, 0) / this.metrics.length
+    );
   }
 
   public getCacheHitRate(): number {
     if (this.metrics.length === 0) return 0;
-    return this.metrics.reduce((sum, m) => sum + m.cacheHitRate, 0) / this.metrics.length;
+    return (
+      this.metrics.reduce((sum, m) => sum + m.cacheHitRate, 0) /
+      this.metrics.length
+    );
   }
 
   public destroy() {
@@ -571,6 +600,7 @@ export const bundleAnalyzer = new BundleAnalyzer();
 ```
 
 **Implementation steps:**
+
 1. Configure advanced Vite build optimization with intelligent chunking
 2. Implement lazy loading system with error handling and retry logic
 3. Create bundle analysis and monitoring service
@@ -578,15 +608,19 @@ export const bundleAnalyzer = new BundleAnalyzer();
 5. Set up preloading strategies for critical resources
 
 **Testing:**
+
 1. Bundle size analysis before and after optimization
 2. Lazy loading functionality and error handling validation
 3. Performance metrics collection and accuracy verification
 4. Network request reduction and caching effectiveness
 
-**Commit**: `perf: implement advanced bundle optimization and lazy loading system`
+**Commit**:
+`perf: implement advanced bundle optimization and lazy loading system`
 
 ### Phase 2: Runtime Performance Optimization (4 points)
+
 **Files to create/modify:**
+
 - `src/hooks/usePerformanceOptimization.ts` - Performance optimization hooks
 - `src/components/common/VirtualizedList.tsx` - Virtual scrolling implementation
 - `src/utils/memoryManager.ts` - Memory management and leak prevention
@@ -594,6 +628,7 @@ export const bundleAnalyzer = new BundleAnalyzer();
 - `src/components/common/OptimizedImage.tsx` - Image optimization component
 
 **Performance Optimization Hooks:**
+
 ```typescript
 // src/hooks/usePerformanceOptimization.ts
 import {
@@ -602,7 +637,7 @@ import {
   useRef,
   useEffect,
   useState,
-  RefObject
+  RefObject,
 } from 'react';
 
 // Heavy computation optimization hook
@@ -615,7 +650,11 @@ export function useHeavyComputation<T, D extends ReadonlyArray<unknown>>(
     enableMemoization?: boolean;
   } = {}
 ): { result: T | null; isComputing: boolean; error: Error | null } {
-  const { debounceMs = 0, enableWebWorker = false, enableMemoization = true } = options;
+  const {
+    debounceMs = 0,
+    enableWebWorker = false,
+    enableMemoization = true,
+  } = options;
 
   const [result, setResult] = useState<T | null>(null);
   const [isComputing, setIsComputing] = useState(false);
@@ -626,10 +665,13 @@ export function useHeavyComputation<T, D extends ReadonlyArray<unknown>>(
     controller: AbortController | null;
   }>({ promise: null, controller: null });
 
-  const memoizedComputation = useMemo(() => {
-    if (!enableMemoization) return computeFn();
-    return computeFn();
-  }, enableMemoization ? deps : []);
+  const memoizedComputation = useMemo(
+    () => {
+      if (!enableMemoization) return computeFn();
+      return computeFn();
+    },
+    enableMemoization ? deps : []
+  );
 
   const debouncedComputation = useCallback(
     debounce(async () => {
@@ -654,7 +696,9 @@ export function useHeavyComputation<T, D extends ReadonlyArray<unknown>>(
           }
         } else {
           // Use requestIdleCallback for non-blocking computation
-          const result = await runInIdleCallback(enableMemoization ? () => memoizedComputation : computeFn);
+          const result = await runInIdleCallback(
+            enableMemoization ? () => memoizedComputation : computeFn
+          );
 
           if (!controller.signal.aborted) {
             setResult(result);
@@ -737,8 +781,11 @@ export function usePerformanceMeasure(name: string, measureOnRender = false) {
       const duration = endTime - startTimeRef.current;
 
       // Log slow operations
-      if (duration > 16) { // More than one frame at 60fps
-        console.warn(`Slow operation detected: ${name} took ${duration.toFixed(2)}ms`);
+      if (duration > 16) {
+        // More than one frame at 60fps
+        console.warn(
+          `Slow operation detected: ${name} took ${duration.toFixed(2)}ms`
+        );
       }
 
       return duration;
@@ -804,7 +851,9 @@ async function runInWebWorker<T>(fn: () => T): Promise<T> {
   return new Promise((resolve, reject) => {
     const worker = new Worker(
       URL.createObjectURL(
-        new Blob([`
+        new Blob(
+          [
+            `
           self.onmessage = function(e) {
             try {
               const result = (${fn.toString()})();
@@ -813,11 +862,14 @@ async function runInWebWorker<T>(fn: () => T): Promise<T> {
               self.postMessage({ error: error.message });
             }
           }
-        `], { type: 'application/javascript' })
+        `,
+          ],
+          { type: 'application/javascript' }
+        )
       )
     );
 
-    worker.onmessage = (e) => {
+    worker.onmessage = e => {
       worker.terminate();
       if (e.data.error) {
         reject(new Error(e.data.error));
@@ -826,7 +878,7 @@ async function runInWebWorker<T>(fn: () => T): Promise<T> {
       }
     };
 
-    worker.onerror = (error) => {
+    worker.onerror = error => {
       worker.terminate();
       reject(error);
     };
@@ -836,7 +888,7 @@ async function runInWebWorker<T>(fn: () => T): Promise<T> {
 }
 
 async function runInIdleCallback<T>(fn: () => T): Promise<T> {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     if ('requestIdleCallback' in window) {
       requestIdleCallback(() => {
         resolve(fn());
@@ -852,6 +904,7 @@ async function runInIdleCallback<T>(fn: () => T): Promise<T> {
 ```
 
 **Virtual Scrolling Component:**
+
 ```typescript
 // src/components/common/VirtualizedList.tsx
 import { FC, useState, useEffect, useRef, useMemo, useCallback } from 'react';
@@ -1066,6 +1119,7 @@ export function useVirtualizedDeckList(
 ```
 
 **Memory Management Service:**
+
 ```typescript
 // src/utils/memoryManager.ts
 interface MemoryMetrics {
@@ -1179,7 +1233,11 @@ class MemoryManager {
 
     // Find and remove from registry
     for (const entry of this.listenerRegistry) {
-      if (entry.element === element && entry.type === type && entry.listener === listener) {
+      if (
+        entry.element === element &&
+        entry.type === type &&
+        entry.listener === listener
+      ) {
         this.listenerRegistry.delete(entry);
         break;
       }
@@ -1198,7 +1256,10 @@ class MemoryManager {
   }
 
   private getTotalComponentCount(): number {
-    return Array.from(this.componentRegistry.values()).reduce((sum, count) => sum + count, 0);
+    return Array.from(this.componentRegistry.values()).reduce(
+      (sum, count) => sum + count,
+      0
+    );
   }
 
   private checkForMemoryLeaks(metrics: MemoryMetrics) {
@@ -1206,14 +1267,19 @@ class MemoryManager {
 
     // Check for consistent memory growth
     const recentMetrics = this.metrics.slice(-10);
-    const memoryGrowth = recentMetrics.map((m, i) =>
-      i > 0 ? m.usedJSHeapSize - recentMetrics[i - 1].usedJSHeapSize : 0
-    ).slice(1);
+    const memoryGrowth = recentMetrics
+      .map((m, i) =>
+        i > 0 ? m.usedJSHeapSize - recentMetrics[i - 1].usedJSHeapSize : 0
+      )
+      .slice(1);
 
-    const averageGrowth = memoryGrowth.reduce((sum, growth) => sum + growth, 0) / memoryGrowth.length;
+    const averageGrowth =
+      memoryGrowth.reduce((sum, growth) => sum + growth, 0) /
+      memoryGrowth.length;
 
     // Alert if memory is consistently growing
-    if (averageGrowth > 1024 * 1024) { // 1MB growth per measurement
+    if (averageGrowth > 1024 * 1024) {
+      // 1MB growth per measurement
       console.warn('Potential memory leak detected:', {
         averageGrowth: `${(averageGrowth / 1024 / 1024).toFixed(2)}MB`,
         currentUsage: `${(metrics.usedJSHeapSize / 1024 / 1024).toFixed(2)}MB`,
@@ -1291,7 +1357,8 @@ class MemoryManager {
       const keysToCheck = ['deck-store', 'errorReports', 'progress_snapshots'];
       keysToCheck.forEach(key => {
         const item = localStorage.getItem(key);
-        if (item && item.length > 100000) { // > 100KB
+        if (item && item.length > 100000) {
+          // > 100KB
           localStorage.removeItem(key);
           console.log(`Cleared large localStorage item: ${key}`);
         }
@@ -1304,7 +1371,10 @@ class MemoryManager {
   private cleanupOrphanedListeners() {
     // Remove listeners for elements that no longer exist in DOM
     for (const entry of this.listenerRegistry) {
-      if (entry.element instanceof Element && !document.contains(entry.element)) {
+      if (
+        entry.element instanceof Element &&
+        !document.contains(entry.element)
+      ) {
         this.listenerRegistry.delete(entry);
       }
     }
@@ -1325,7 +1395,9 @@ class MemoryManager {
   }
 
   public getCurrentMemoryUsage(): MemoryMetrics | null {
-    return this.metrics.length > 0 ? this.metrics[this.metrics.length - 1] : null;
+    return this.metrics.length > 0
+      ? this.metrics[this.metrics.length - 1]
+      : null;
   }
 }
 
@@ -1354,6 +1426,7 @@ export function useMemoryManagement(componentName: string) {
 ```
 
 **Implementation steps:**
+
 1. Create performance optimization hooks for heavy computations and measurements
 2. Implement virtual scrolling for large lists with dynamic heights
 3. Build comprehensive memory management and leak detection system
@@ -1361,15 +1434,19 @@ export function useMemoryManagement(componentName: string) {
 5. Create optimized image loading component with lazy loading
 
 **Testing:**
+
 1. Performance benchmarking before and after optimizations
 2. Memory leak detection and prevention validation
 3. Virtual scrolling functionality with large datasets
 4. Runtime performance monitoring accuracy verification
 
-**Commit**: `perf: implement runtime performance optimization and memory management`
+**Commit**:
+`perf: implement runtime performance optimization and memory management`
 
 ### Phase 3: Network and Caching Optimization (4 points)
+
 **Files to create/modify:**
+
 - `src/services/cacheManager.ts` - Intelligent caching system
 - `src/services/networkOptimizer.ts` - Network request optimization
 - `src/hooks/useSmartFetch.ts` - Smart data fetching with caching
@@ -1377,6 +1454,7 @@ export function useMemoryManagement(componentName: string) {
 - `public/sw.js` - Enhanced service worker for caching
 
 **Intelligent Caching System:**
+
 ```typescript
 // src/services/cacheManager.ts
 interface CacheEntry<T> {
@@ -1416,7 +1494,10 @@ class CacheManager {
         await this.initIndexedDB();
         this.persistentStorage = 'indexedDB';
       } catch (error) {
-        console.warn('IndexedDB initialization failed, falling back to localStorage:', error);
+        console.warn(
+          'IndexedDB initialization failed, falling back to localStorage:',
+          error
+        );
         this.persistentStorage = 'localStorage';
       }
     } else {
@@ -1431,7 +1512,7 @@ class CacheManager {
       request.onerror = () => reject(request.error);
       request.onsuccess = () => resolve();
 
-      request.onupgradeneeded = (event) => {
+      request.onupgradeneeded = event => {
         const db = (event.target as IDBOpenDBRequest).result;
 
         if (!db.objectStoreNames.contains('cache')) {
@@ -1464,7 +1545,8 @@ class CacheManager {
     let dataSize = new Blob([serializedData]).size;
 
     // Apply compression if enabled and beneficial
-    if (finalConfig.compression && dataSize > 1024) { // Only compress if > 1KB
+    if (finalConfig.compression && dataSize > 1024) {
+      // Only compress if > 1KB
       try {
         serializedData = await this.compressData(serializedData);
         dataSize = new Blob([serializedData]).size;
@@ -1556,7 +1638,10 @@ class CacheManager {
     await this.clearPersistent();
   }
 
-  private async evictIfNecessary(newEntrySize: number, config: CacheConfig): Promise<void> {
+  private async evictIfNecessary(
+    newEntrySize: number,
+    config: CacheConfig
+  ): Promise<void> {
     // Check memory limit
     while (this.totalSize + newEntrySize > this.maxMemorySize) {
       await this.evictEntry(config.strategy);
@@ -1632,7 +1717,10 @@ class CacheManager {
     return oldestKey;
   }
 
-  private async setPersistent(key: string, entry: CacheEntry<string>): Promise<void> {
+  private async setPersistent(
+    key: string,
+    entry: CacheEntry<string>
+  ): Promise<void> {
     try {
       if (this.persistentStorage === 'indexedDB') {
         await this.setIndexedDB(key, entry);
@@ -1675,7 +1763,9 @@ class CacheManager {
       if (this.persistentStorage === 'indexedDB') {
         await this.clearIndexedDB();
       } else if (this.persistentStorage === 'localStorage') {
-        const keys = Object.keys(localStorage).filter(key => key.startsWith('cache_'));
+        const keys = Object.keys(localStorage).filter(key =>
+          key.startsWith('cache_')
+        );
         keys.forEach(key => localStorage.removeItem(key));
       }
     } catch (error) {
@@ -1683,7 +1773,10 @@ class CacheManager {
     }
   }
 
-  private async setIndexedDB(key: string, entry: CacheEntry<string>): Promise<void> {
+  private async setIndexedDB(
+    key: string,
+    entry: CacheEntry<string>
+  ): Promise<void> {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open('QuizlyCache', 1);
 
@@ -1777,7 +1870,9 @@ class CacheManager {
         if (value) chunks.push(value);
       }
 
-      const compressed = new Uint8Array(chunks.reduce((acc, chunk) => acc + chunk.length, 0));
+      const compressed = new Uint8Array(
+        chunks.reduce((acc, chunk) => acc + chunk.length, 0)
+      );
       let offset = 0;
       for (const chunk of chunks) {
         compressed.set(chunk, offset);
@@ -1795,7 +1890,9 @@ class CacheManager {
     if (data.startsWith('gzip:')) {
       // Use DecompressionStream if available
       if ('DecompressionStream' in window) {
-        const compressed = Uint8Array.from(atob(data.slice(5)), c => c.charCodeAt(0));
+        const compressed = Uint8Array.from(atob(data.slice(5)), c =>
+          c.charCodeAt(0)
+        );
         const stream = new DecompressionStream('gzip');
         const writer = stream.writable.getWriter();
         const reader = stream.readable.getReader();
@@ -1812,7 +1909,9 @@ class CacheManager {
           if (value) chunks.push(value);
         }
 
-        const decompressed = new Uint8Array(chunks.reduce((acc, chunk) => acc + chunk.length, 0));
+        const decompressed = new Uint8Array(
+          chunks.reduce((acc, chunk) => acc + chunk.length, 0)
+        );
         let offset = 0;
         for (const chunk of chunks) {
           decompressed.set(chunk, offset);
@@ -1864,9 +1963,12 @@ class CacheManager {
 
   private startCleanupTimer(): void {
     // Clean up expired entries every 5 minutes
-    setInterval(() => {
-      this.cleanupExpiredEntries();
-    }, 5 * 60 * 1000);
+    setInterval(
+      () => {
+        this.cleanupExpiredEntries();
+      },
+      5 * 60 * 1000
+    );
   }
 
   private async cleanupExpiredEntries(): Promise<void> {
@@ -1898,6 +2000,7 @@ export const cacheManager = new CacheManager();
 ```
 
 **Smart Fetch Hook:**
+
 ```typescript
 // src/hooks/useSmartFetch.ts
 import { useState, useEffect, useCallback, useRef } from 'react';
@@ -1955,160 +2058,164 @@ export function useSmartFetch<T>(
   const abortControllerRef = useRef<AbortController | null>(null);
   const backgroundRefreshTimeoutRef = useRef<NodeJS.Timeout>();
 
-  const fetchData = useCallback(async (
-    isBackground = false,
-    skipCache = false
-  ): Promise<void> => {
-    if (!url) return;
+  const fetchData = useCallback(
+    async (isBackground = false, skipCache = false): Promise<void> => {
+      if (!url) return;
 
-    // Cancel previous request
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-    }
+      // Cancel previous request
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
 
-    abortControllerRef.current = new AbortController();
+      abortControllerRef.current = new AbortController();
 
-    // Try cache first (unless skipping cache or background refresh)
-    if (!skipCache && !isBackground) {
-      try {
-        const cachedData = await cacheManager.get<T>(cacheKey);
-        if (cachedData) {
+      // Try cache first (unless skipping cache or background refresh)
+      if (!skipCache && !isBackground) {
+        try {
+          const cachedData = await cacheManager.get<T>(cacheKey);
+          if (cachedData) {
+            setState(prev => ({
+              ...prev,
+              data: cachedData,
+              isLoading: false,
+              isStale: staleWhileRevalidate, // Mark as stale if using SWR
+              lastFetched: Date.now(),
+            }));
+
+            // If using stale-while-revalidate, fetch in background
+            if (staleWhileRevalidate && !isBackground) {
+              fetchData(true, true);
+            }
+            return;
+          }
+        } catch (error) {
+          console.warn('Cache retrieval failed:', error);
+        }
+      }
+
+      setState(prev => ({
+        ...prev,
+        isLoading: !isBackground,
+        isValidating: isBackground,
+        error: null,
+      }));
+
+      let lastError: Error | null = null;
+
+      for (let attempt = 1; attempt <= retryAttempts; attempt++) {
+        try {
+          const fetchPromise = fetch(url, {
+            signal: abortControllerRef.current.signal,
+            headers: {
+              Accept: 'application/json',
+              'Cache-Control': 'no-cache',
+            },
+          });
+
+          // Add timeout
+          const timeoutPromise = new Promise<never>((_, reject) => {
+            setTimeout(() => reject(new Error('Request timeout')), timeout);
+          });
+
+          const response = await Promise.race([fetchPromise, timeoutPromise]);
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          }
+
+          const data: T = await response.json();
+
+          // Cache the successful response
+          try {
+            await cacheManager.set(cacheKey, data, {
+              maxAge: cacheMaxAge,
+              compression,
+              persistent,
+            });
+          } catch (error) {
+            console.warn('Failed to cache response:', error);
+          }
+
           setState(prev => ({
             ...prev,
-            data: cachedData,
+            data,
             isLoading: false,
-            isStale: staleWhileRevalidate, // Mark as stale if using SWR
+            isValidating: false,
+            error: null,
+            isStale: false,
             lastFetched: Date.now(),
           }));
 
-          // If using stale-while-revalidate, fetch in background
-          if (staleWhileRevalidate && !isBackground) {
-            fetchData(true, true);
+          // Schedule background refresh
+          if (backgroundRefresh && !isBackground) {
+            const refreshDelay = Math.min(cacheMaxAge * 0.8, 30 * 60 * 1000); // 80% of cache age or 30 min
+            backgroundRefreshTimeoutRef.current = setTimeout(() => {
+              fetchData(true, true);
+            }, refreshDelay);
           }
+
           return;
-        }
-      } catch (error) {
-        console.warn('Cache retrieval failed:', error);
-      }
-    }
-
-    setState(prev => ({
-      ...prev,
-      isLoading: !isBackground,
-      isValidating: isBackground,
-      error: null,
-    }));
-
-    let lastError: Error | null = null;
-
-    for (let attempt = 1; attempt <= retryAttempts; attempt++) {
-      try {
-        const fetchPromise = fetch(url, {
-          signal: abortControllerRef.current.signal,
-          headers: {
-            'Accept': 'application/json',
-            'Cache-Control': 'no-cache',
-          },
-        });
-
-        // Add timeout
-        const timeoutPromise = new Promise<never>((_, reject) => {
-          setTimeout(() => reject(new Error('Request timeout')), timeout);
-        });
-
-        const response = await Promise.race([fetchPromise, timeoutPromise]);
-
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-
-        const data: T = await response.json();
-
-        // Cache the successful response
-        try {
-          await cacheManager.set(cacheKey, data, {
-            maxAge: cacheMaxAge,
-            compression,
-            persistent,
-          });
         } catch (error) {
-          console.warn('Failed to cache response:', error);
-        }
+          lastError = error as Error;
 
-        setState(prev => ({
-          ...prev,
-          data,
-          isLoading: false,
-          isValidating: false,
-          error: null,
-          isStale: false,
-          lastFetched: Date.now(),
-        }));
+          // Don't retry on abort
+          if (lastError.name === 'AbortError') {
+            return;
+          }
 
-        // Schedule background refresh
-        if (backgroundRefresh && !isBackground) {
-          const refreshDelay = Math.min(cacheMaxAge * 0.8, 30 * 60 * 1000); // 80% of cache age or 30 min
-          backgroundRefreshTimeoutRef.current = setTimeout(() => {
-            fetchData(true, true);
-          }, refreshDelay);
-        }
-
-        return;
-
-      } catch (error) {
-        lastError = error as Error;
-
-        // Don't retry on abort
-        if (lastError.name === 'AbortError') {
-          return;
-        }
-
-        // Wait before retry (exponential backoff)
-        if (attempt < retryAttempts) {
-          await new Promise(resolve => setTimeout(resolve, retryDelay * Math.pow(2, attempt - 1)));
+          // Wait before retry (exponential backoff)
+          if (attempt < retryAttempts) {
+            await new Promise(resolve =>
+              setTimeout(resolve, retryDelay * Math.pow(2, attempt - 1))
+            );
+          }
         }
       }
-    }
 
-    // All retries failed
-    setState(prev => ({
-      ...prev,
-      isLoading: false,
-      isValidating: false,
-      error: lastError,
-    }));
-  }, [
-    url,
-    cacheKey,
-    cacheMaxAge,
-    retryAttempts,
-    retryDelay,
-    timeout,
-    staleWhileRevalidate,
-    backgroundRefresh,
-    compression,
-    persistent,
-  ]);
+      // All retries failed
+      setState(prev => ({
+        ...prev,
+        isLoading: false,
+        isValidating: false,
+        error: lastError,
+      }));
+    },
+    [
+      url,
+      cacheKey,
+      cacheMaxAge,
+      retryAttempts,
+      retryDelay,
+      timeout,
+      staleWhileRevalidate,
+      backgroundRefresh,
+      compression,
+      persistent,
+    ]
+  );
 
   const refetch = useCallback(async (): Promise<void> => {
     await fetchData(false, true);
   }, [fetchData]);
 
-  const mutate = useCallback((data: T) => {
-    setState(prev => ({
-      ...prev,
-      data,
-      isStale: false,
-      lastFetched: Date.now(),
-    }));
+  const mutate = useCallback(
+    (data: T) => {
+      setState(prev => ({
+        ...prev,
+        data,
+        isStale: false,
+        lastFetched: Date.now(),
+      }));
 
-    // Update cache
-    cacheManager.set(cacheKey, data, {
-      maxAge: cacheMaxAge,
-      compression,
-      persistent,
-    });
-  }, [cacheKey, cacheMaxAge, compression, persistent]);
+      // Update cache
+      cacheManager.set(cacheKey, data, {
+        maxAge: cacheMaxAge,
+        compression,
+        persistent,
+      });
+    },
+    [cacheKey, cacheMaxAge, compression, persistent]
+  );
 
   // Initial fetch
   useEffect(() => {
@@ -2219,6 +2326,7 @@ export function useSmartBatchFetch<T>(
 ```
 
 **Implementation steps:**
+
 1. Create intelligent caching system with compression and persistence
 2. Implement smart fetch hook with stale-while-revalidate strategy
 3. Build network optimization service with request batching and deduplication
@@ -2226,6 +2334,7 @@ export function useSmartBatchFetch<T>(
 5. Enhance service worker with advanced caching strategies
 
 **Testing:**
+
 1. Cache performance and hit rate validation
 2. Network optimization effectiveness measurement
 3. Data compression ratio and performance testing
@@ -2234,14 +2343,18 @@ export function useSmartBatchFetch<T>(
 **Commit**: `perf: implement intelligent caching and network optimization`
 
 ### Phase 4: Performance Monitoring and Analytics (3 points)
+
 **Files to create/modify:**
+
 - `src/services/performanceMonitor.ts` - Real-time performance monitoring
-- `src/components/admin/PerformanceDashboard.tsx` - Performance analytics dashboard
+- `src/components/admin/PerformanceDashboard.tsx` - Performance analytics
+  dashboard
 - `src/hooks/usePerformanceMetrics.ts` - Performance metrics collection hook
 - `src/utils/performanceReporter.ts` - Performance data reporting service
 - `scripts/performance-budget.js` - Performance budget enforcement script
 
 **Real-time Performance Monitor:**
+
 ```typescript
 // src/services/performanceMonitor.ts
 interface PerformanceMetric {
@@ -2305,20 +2418,22 @@ class PerformanceMonitor {
 
     try {
       // Observe Core Web Vitals
-      this.vitalsObserver = new PerformanceObserver((list) => {
+      this.vitalsObserver = new PerformanceObserver(list => {
         for (const entry of list.getEntries()) {
           this.processVitalMetric(entry);
         }
       });
 
       // Observe different entry types
-      ['largest-contentful-paint', 'first-input', 'layout-shift'].forEach(type => {
-        try {
-          this.vitalsObserver?.observe({ type, buffered: true });
-        } catch (error) {
-          console.warn(`Failed to observe ${type}:`, error);
+      ['largest-contentful-paint', 'first-input', 'layout-shift'].forEach(
+        type => {
+          try {
+            this.vitalsObserver?.observe({ type, buffered: true });
+          } catch (error) {
+            console.warn(`Failed to observe ${type}:`, error);
+          }
         }
-      });
+      );
     } catch (error) {
       console.warn('Failed to setup vitals observer:', error);
     }
@@ -2328,7 +2443,7 @@ class PerformanceMonitor {
     if (!('PerformanceObserver' in window)) return;
 
     try {
-      this.resourceObserver = new PerformanceObserver((list) => {
+      this.resourceObserver = new PerformanceObserver(list => {
         for (const entry of list.getEntries()) {
           this.processResourceMetric(entry as PerformanceResourceTiming);
         }
@@ -2370,20 +2485,28 @@ class PerformanceMonitor {
       type: this.getResourceType(entry.name),
       size: entry.transferSize || 0,
       duration: entry.responseEnd - entry.requestStart,
-      cached: entry.transferSize === 0 || entry.transferSize < entry.decodedBodySize,
+      cached:
+        entry.transferSize === 0 || entry.transferSize < entry.decodedBodySize,
     };
 
     // Record large or slow resources
     if (resourceMetric.size > 100000 || resourceMetric.duration > 1000) {
-      this.recordMetric(`resource_${resourceMetric.type}_size`, resourceMetric.size);
-      this.recordMetric(`resource_${resourceMetric.type}_duration`, resourceMetric.duration);
+      this.recordMetric(
+        `resource_${resourceMetric.type}_size`,
+        resourceMetric.size
+      );
+      this.recordMetric(
+        `resource_${resourceMetric.type}_duration`,
+        resourceMetric.duration
+      );
     }
   }
 
   private getResourceType(name: string): string {
     if (name.includes('.js')) return 'script';
     if (name.includes('.css')) return 'stylesheet';
-    if (name.includes('.png') || name.includes('.jpg') || name.includes('.svg')) return 'image';
+    if (name.includes('.png') || name.includes('.jpg') || name.includes('.svg'))
+      return 'image';
     if (name.includes('.woff') || name.includes('.ttf')) return 'font';
     if (name.includes('/api/')) return 'api';
     return 'other';
@@ -2402,15 +2525,18 @@ class PerformanceMonitor {
   }
 
   private calculateNavigationMetrics() {
-    const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+    const navigation = performance.getEntriesByType(
+      'navigation'
+    )[0] as PerformanceNavigationTiming;
     if (!navigation) return;
 
     const metrics: NavigationMetrics = {
       dns: navigation.domainLookupEnd - navigation.domainLookupStart,
       tcp: navigation.connectEnd - navigation.connectStart,
-      ssl: navigation.secureConnectionStart > 0
-        ? navigation.connectEnd - navigation.secureConnectionStart
-        : 0,
+      ssl:
+        navigation.secureConnectionStart > 0
+          ? navigation.connectEnd - navigation.secureConnectionStart
+          : 0,
       ttfb: navigation.responseStart - navigation.requestStart,
       fcp: 0, // Will be set by observer
       lcp: 0, // Will be set by observer
@@ -2433,7 +2559,9 @@ class PerformanceMonitor {
     }
   }
 
-  private estimateTimeToInteractive(navigation: PerformanceNavigationTiming): number {
+  private estimateTimeToInteractive(
+    navigation: PerformanceNavigationTiming
+  ): number {
     // Simplified TTI calculation
     // In a real implementation, this would be more sophisticated
     return navigation.domContentLoadedEventEnd - navigation.navigationStart;
@@ -2443,7 +2571,7 @@ class PerformanceMonitor {
     if (!('PerformanceObserver' in window)) return;
 
     try {
-      const longTaskObserver = new PerformanceObserver((list) => {
+      const longTaskObserver = new PerformanceObserver(list => {
         for (const entry of list.getEntries()) {
           // Long task detected (>50ms)
           this.recordMetric('long_task_duration', entry.duration);
@@ -2506,22 +2634,27 @@ class PerformanceMonitor {
     const thresholds = {
       FCP: 1800, // 1.8s
       LCP: 2500, // 2.5s
-      FID: 100,  // 100ms
-      CLS: 0.1,  // 0.1
+      FID: 100, // 100ms
+      CLS: 0.1, // 0.1
       TTI: 3800, // 3.8s
       TTFB: 600, // 600ms
     };
 
     const threshold = thresholds[metric.name as keyof typeof thresholds];
     if (threshold && metric.value > threshold) {
-      console.warn(`Performance threshold exceeded: ${metric.name} = ${metric.value} (threshold: ${threshold})`);
+      console.warn(
+        `Performance threshold exceeded: ${metric.name} = ${metric.value} (threshold: ${threshold})`
+      );
 
       // Could trigger alerts or automated actions here
       this.handleThresholdExceeded(metric, threshold);
     }
   }
 
-  private handleThresholdExceeded(metric: PerformanceMetric, threshold: number) {
+  private handleThresholdExceeded(
+    metric: PerformanceMetric,
+    threshold: number
+  ) {
     // In a real application, this could:
     // - Send alerts to monitoring systems
     // - Adjust application behavior
@@ -2558,7 +2691,10 @@ class PerformanceMonitor {
     const relevantMetrics = this.metrics.filter(m => m.name === name);
     if (relevantMetrics.length === 0) return 0;
 
-    return relevantMetrics.reduce((sum, m) => sum + m.value, 0) / relevantMetrics.length;
+    return (
+      relevantMetrics.reduce((sum, m) => sum + m.value, 0) /
+      relevantMetrics.length
+    );
   }
 
   public getWebVitalsScore(): {
@@ -2567,7 +2703,11 @@ class PerformanceMonitor {
     fid: { value: number; rating: 'good' | 'needs-improvement' | 'poor' };
     cls: { value: number; rating: 'good' | 'needs-improvement' | 'poor' };
   } {
-    const getVitalRating = (value: number, goodThreshold: number, poorThreshold: number) => {
+    const getVitalRating = (
+      value: number,
+      goodThreshold: number,
+      poorThreshold: number
+    ) => {
       if (value <= goodThreshold) return 'good';
       if (value <= poorThreshold) return 'needs-improvement';
       return 'poor';
@@ -2612,6 +2752,7 @@ export const performanceMonitor = new PerformanceMonitor();
 ```
 
 **Performance Dashboard Component:**
+
 ```typescript
 // src/components/admin/PerformanceDashboard.tsx
 import { FC, useState, useEffect } from 'react';
@@ -2885,6 +3026,7 @@ export const PerformanceOverlay: FC = () => {
 ```
 
 **Implementation steps:**
+
 1. Create real-time performance monitoring with Core Web Vitals tracking
 2. Build performance analytics dashboard for development and debugging
 3. Implement performance metrics collection hooks for components
@@ -2892,6 +3034,7 @@ export const PerformanceOverlay: FC = () => {
 5. Create performance budget enforcement script for CI/CD
 
 **Testing:**
+
 1. Performance monitoring accuracy and overhead measurement
 2. Dashboard functionality and real-time updates validation
 3. Performance budget enforcement testing
@@ -2902,12 +3045,14 @@ export const PerformanceOverlay: FC = () => {
 ## Testing Strategy
 
 ### Unit Tests
+
 - Bundle optimization and lazy loading functionality
 - Performance optimization hook behavior
 - Caching system accuracy and eviction policies
 - Performance monitoring metric collection
 
 ### Component Tests
+
 ```typescript
 describe('Performance Optimizations', () => {
   it('should load components lazily without blocking', async () => {
@@ -2937,12 +3082,14 @@ describe('Performance Optimizations', () => {
 ```
 
 ### Performance Tests
+
 - Bundle size analysis and chunking effectiveness
 - Runtime performance benchmarking
 - Memory usage monitoring and leak detection
 - Network optimization and caching validation
 
 ### Integration Tests
+
 - Complete performance optimization workflow
 - Cross-component performance impact assessment
 - End-to-end performance measurement
@@ -2951,39 +3098,46 @@ describe('Performance Optimizations', () => {
 ## Platform-Specific Considerations
 
 ### Web Desktop
+
 - Multi-core CPU utilization for heavy computations
 - Large memory capacity optimization strategies
 - High-resolution display optimizations
 - Advanced caching strategies for faster subsequent loads
 
 ### Web Mobile
+
 - Battery-conscious performance optimizations
 - Network-aware loading strategies (WiFi vs cellular)
 - Memory-constrained environment optimizations
 - Touch performance and responsiveness optimization
 
 ### PWA Features
+
 - Intelligent service worker caching strategies
 - Offline performance optimization
 - Background processing and sync optimization
 - Install and update performance optimization
 
 ## Documentation Updates Required
+
 1. `README.md` - Add performance optimization guide
 2. `docs/performance.md` - Comprehensive performance documentation
 3. `docs/caching.md` - Caching strategy and configuration guide
 4. In-code documentation: JSDoc comments for all performance utilities
 
 ## Success Criteria
+
 1. **Bundle Size**: 40% reduction in initial bundle size, <150KB gzipped
 2. **Load Performance**: FCP <1.2s, LCP <2.5s, TTI <2.5s on 3G networks
 3. **Runtime Performance**: 60 FPS for all interactions, <16ms render times
 4. **Memory Usage**: <100MB baseline, <200MB peak, zero memory leaks
 5. **Network Efficiency**: 90% cache hit rate, <10 requests for initial load
-6. **Monitoring Coverage**: 100% performance metric collection, real-time alerting
+6. **Monitoring Coverage**: 100% performance metric collection, real-time
+   alerting
 7. **User Experience**: Perceived performance improvements in user testing
 
 ## Dependencies
+
 - **Build Tools**: Vite with advanced optimization plugins
 - **Compression**: CompressionStream API (modern browsers)
 - **Monitoring**: PerformanceObserver API
@@ -2991,16 +3145,18 @@ describe('Performance Optimizations', () => {
 - **Analysis**: Bundle analyzer and performance profiling tools
 
 ## Risks & Mitigations
-1. **Risk**: Over-optimization could increase complexity
-   **Mitigation**: Systematic approach, measure before and after, maintain code clarity
-2. **Risk**: Caching could cause stale data issues
-   **Mitigation**: Smart cache invalidation, version-aware caching, fallback strategies
-3. **Risk**: Performance monitoring could impact performance
-   **Mitigation**: Minimal overhead design, async processing, configurable monitoring
-4. **Risk**: Browser compatibility issues with advanced APIs
-   **Mitigation**: Progressive enhancement, feature detection, graceful fallbacks
+
+1. **Risk**: Over-optimization could increase complexity **Mitigation**:
+   Systematic approach, measure before and after, maintain code clarity
+2. **Risk**: Caching could cause stale data issues **Mitigation**: Smart cache
+   invalidation, version-aware caching, fallback strategies
+3. **Risk**: Performance monitoring could impact performance **Mitigation**:
+   Minimal overhead design, async processing, configurable monitoring
+4. **Risk**: Browser compatibility issues with advanced APIs **Mitigation**:
+   Progressive enhancement, feature detection, graceful fallbacks
 
 ## Accessibility Requirements
+
 - Performance optimizations must not impact accessibility features
 - Screen reader performance maintained during optimizations
 - Keyboard navigation responsiveness preserved
@@ -3009,6 +3165,7 @@ describe('Performance Optimizations', () => {
 ## Performance Metrics
 
 ### Target Performance Budgets
+
 - **JavaScript Bundle**: <150KB initial, <500KB total gzipped
 - **CSS Bundle**: <50KB initial, <100KB total gzipped
 - **Images**: <1MB total, WebP format preferred
@@ -3016,6 +3173,7 @@ describe('Performance Optimizations', () => {
 - **API Responses**: <50KB average, compression enabled
 
 ### Core Web Vitals Targets
+
 - **First Contentful Paint**: <1.2s (mobile), <0.8s (desktop)
 - **Largest Contentful Paint**: <2.5s (mobile), <1.8s (desktop)
 - **First Input Delay**: <100ms (all devices)
@@ -3024,6 +3182,7 @@ describe('Performance Optimizations', () => {
 ## Release & Deployment Guide
 
 ### Performance Testing Checklist
+
 - [ ] Bundle size analysis shows expected reductions
 - [ ] Lighthouse audit scores >90 for all metrics
 - [ ] Real device testing on slow networks (3G)
@@ -3033,12 +3192,14 @@ describe('Performance Optimizations', () => {
 - [ ] Cross-browser performance consistency confirmed
 
 ### Rollout Strategy
+
 1. **Phase 1**: Bundle optimization and lazy loading
 2. **Phase 2**: Runtime performance improvements
 3. **Phase 3**: Advanced caching and network optimization
 4. **Phase 4**: Monitoring and continuous optimization
 
 ### Rollback Strategy
+
 - Bundle optimizations can be reverted via build configuration
 - Runtime optimizations can be disabled via feature flags
 - Caching can fall back to browser defaults

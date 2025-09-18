@@ -1,11 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useMemo,
-  useCallback,
-  CSSProperties,
-} from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback, CSSProperties } from 'react';
 import styles from './VirtualScrollList.module.css';
 
 export interface VirtualScrollListProps<T> {
@@ -56,9 +49,7 @@ export function VirtualScrollList<T>({
     const metrics: Array<{ offset: number; size: number }> = [];
 
     for (let i = 0; i < items.length; i++) {
-      const size = typeof itemHeight === 'function'
-        ? itemHeight(i, items[i])
-        : itemHeight;
+      const size = typeof itemHeight === 'function' ? itemHeight(i, items[i]) : itemHeight;
 
       metrics.push({ offset, size });
       offset += size + gap;
@@ -153,25 +144,28 @@ export function VirtualScrollList<T>({
   }, [visibleRange, items, itemMetrics, horizontal, getItemId]);
 
   // Handle scroll with throttling
-  const handleScroll = useCallback((event: React.UIEvent<HTMLDivElement>) => {
-    const target = event.currentTarget;
-    const newScrollOffset = horizontal ? target.scrollLeft : target.scrollTop;
+  const handleScroll = useCallback(
+    (event: React.UIEvent<HTMLDivElement>) => {
+      const target = event.currentTarget;
+      const newScrollOffset = horizontal ? target.scrollLeft : target.scrollTop;
 
-    setScrollOffset(newScrollOffset);
-    setIsScrolling(true);
+      setScrollOffset(newScrollOffset);
+      setIsScrolling(true);
 
-    onScroll?.(target.scrollTop, target.scrollLeft);
+      onScroll?.(target.scrollTop, target.scrollLeft);
 
-    // Clear existing timeout
-    if (scrollTimeoutRef.current) {
-      clearTimeout(scrollTimeoutRef.current);
-    }
+      // Clear existing timeout
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
 
-    // Set scrolling to false after scrolling stops
-    scrollTimeoutRef.current = setTimeout(() => {
-      setIsScrolling(false);
-    }, 150);
-  }, [horizontal, onScroll]);
+      // Set scrolling to false after scrolling stops
+      scrollTimeoutRef.current = setTimeout(() => {
+        setIsScrolling(false);
+      }, 150);
+    },
+    [horizontal, onScroll]
+  );
 
   // Cleanup on unmount
   useEffect(() => {
@@ -240,17 +234,9 @@ export function VirtualScrollList<T>({
       onScroll={handleScroll}
       data-scrolling={isScrolling}
     >
-      <div
-        className={styles.scrollArea}
-        style={scrollAreaStyle}
-      >
+      <div className={styles.scrollArea} style={scrollAreaStyle}>
         {visibleItems.map(({ key, index, item, style }) => (
-          <div
-            key={key}
-            className={styles.virtualItem}
-            style={style}
-            data-index={index}
-          >
+          <div key={key} className={styles.virtualItem} style={style} data-index={index}>
             {renderItem(item, index, style)}
           </div>
         ))}
@@ -294,10 +280,7 @@ export const VirtualListItem = React.memo<{
   className?: string;
   style?: CSSProperties;
 }>(({ children, className, style }) => (
-  <div
-    className={`${styles.listItem} ${className || ''}`}
-    style={style}
-  >
+  <div className={`${styles.listItem} ${className || ''}`} style={style}>
     {children}
   </div>
 ));

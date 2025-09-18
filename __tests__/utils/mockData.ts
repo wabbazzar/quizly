@@ -106,7 +106,7 @@ export const createMockDeck = (overrides?: Partial<Deck>): Deck => ({
   metadata: createMockDeckMetadata(),
   content: [
     createMockCard(),
-    createMockCard({ idx: 2, name: 'Card 2', side_a: 'Question 2', side_b: 'Answer 2' })
+    createMockCard({ idx: 2, name: 'Card 2', side_a: 'Question 2', side_b: 'Answer 2' }),
   ],
   ...overrides,
 });
@@ -118,13 +118,15 @@ export const createLargeMockDeck = (cardCount: number = 100): Deck => ({
     card_count: cardCount,
     description: `A large deck with ${cardCount} cards for performance testing`,
   }),
-  content: Array.from({ length: cardCount }, (_, i) => createMockCard({
-    idx: i,
-    name: `Card ${i + 1}`,
-    side_a: `Question ${i + 1}`,
-    side_b: `Answer ${i + 1}`,
-    level: Math.floor(i / 20) + 1, // Distribute across levels
-  })),
+  content: Array.from({ length: cardCount }, (_, i) =>
+    createMockCard({
+      idx: i,
+      name: `Card ${i + 1}`,
+      side_a: `Question ${i + 1}`,
+      side_b: `Answer ${i + 1}`,
+      level: Math.floor(i / 20) + 1, // Distribute across levels
+    })
+  ),
 });
 
 // Settings Factory
@@ -247,7 +249,11 @@ export const createTestCardCollection = () => ({
   edgeCases: [
     createMockCard({ idx: 0, side_a: '', side_b: 'Empty front' }), // Empty front
     createMockCard({ idx: 1, side_a: 'Empty back', side_b: '' }), // Empty back
-    createMockCard({ idx: 2, side_a: 'Very long question that exceeds normal length and might cause UI issues', side_b: 'Long question' }),
+    createMockCard({
+      idx: 2,
+      side_a: 'Very long question that exceeds normal length and might cause UI issues',
+      side_b: 'Long question',
+    }),
     createMockCard({ idx: 3, side_a: 'Special chars', side_b: '!@#$%^&*()_+-={}[]|\\:";\'<>?,./' }),
     createMockCard({ idx: 4, side_a: 'Unicode', side_b: '🌟⭐✨💫🎯🚀' }),
   ],

@@ -17,7 +17,7 @@ export default defineConfig({
   reporter: [
     ['html', { outputFolder: 'playwright-report' }],
     ['json', { outputFile: 'test-results/results.json' }],
-    process.env.CI ? ['github'] : ['list']
+    process.env.CI ? ['github'] : ['list'],
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -81,12 +81,14 @@ export default defineConfig({
   globalTeardown: require.resolve('./src/test/e2e/global-teardown.ts'),
 
   /* Run your local dev server before starting the tests */
-  webServer: process.env.CI ? undefined : {
-    command: 'npm run preview',
-    url: 'http://localhost:5173',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120000,
-  },
+  webServer: process.env.CI
+    ? undefined
+    : {
+        command: 'npm run preview',
+        url: 'http://localhost:5173',
+        reuseExistingServer: !process.env.CI,
+        timeout: 120000,
+      },
 
   /* Test output directories */
   outputDir: 'test-results/',
@@ -98,11 +100,7 @@ export default defineConfig({
   },
 
   /* Test patterns */
-  testMatch: [
-    '**/*.e2e.test.ts',
-    '**/e2e/**/*.test.ts',
-    '**/tests/**/*.spec.ts'
-  ],
+  testMatch: ['**/*.e2e.test.ts', '**/e2e/**/*.test.ts', '**/tests/**/*.spec.ts'],
 
   /* Test categories for CI optimization */
   grep: process.env.CI ? undefined : /@(smoke|critical|regression)/,
@@ -112,5 +110,5 @@ export default defineConfig({
     project: 'Quizly',
     environment: process.env.NODE_ENV || 'development',
     version: process.env.VITE_APP_VERSION || 'dev',
-  }
+  },
 });

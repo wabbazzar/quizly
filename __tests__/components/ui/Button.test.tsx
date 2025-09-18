@@ -115,11 +115,19 @@ describe('Button Component', () => {
     });
 
     it('should render correct spinner variant based on button variant', () => {
-      const { unmount } = render(<Button loading variant="primary">Loading</Button>);
+      const { unmount } = render(
+        <Button loading variant="primary">
+          Loading
+        </Button>
+      );
       expect(screen.getByTestId('spinner')).toHaveAttribute('data-variant', 'white');
       unmount();
 
-      render(<Button loading variant="secondary">Loading</Button>);
+      render(
+        <Button loading variant="secondary">
+          Loading
+        </Button>
+      );
       expect(screen.getByTestId('spinner')).toHaveAttribute('data-variant', 'primary');
     });
 
@@ -210,12 +218,7 @@ describe('Button Component', () => {
   describe('HTML Button Attributes', () => {
     it('should pass through HTML button attributes', () => {
       render(
-        <Button
-          id="test-button"
-          title="Test title"
-          data-testid="custom-button"
-          tabIndex={0}
-        >
+        <Button id="test-button" title="Test title" data-testid="custom-button" tabIndex={0}>
           Test
         </Button>
       );
@@ -229,12 +232,7 @@ describe('Button Component', () => {
 
     it('should handle form-related attributes', () => {
       render(
-        <Button
-          type="submit"
-          form="test-form"
-          formAction="/submit"
-          formMethod="post"
-        >
+        <Button type="submit" form="test-form" formAction="/submit" formMethod="post">
           Submit
         </Button>
       );
@@ -327,7 +325,11 @@ describe('Button Component', () => {
     });
 
     it('should handle both disabled and loading states', () => {
-      render(<Button disabled loading>Both States</Button>);
+      render(
+        <Button disabled loading>
+          Both States
+        </Button>
+      );
 
       const button = screen.getByRole('button');
       expect(button).toBeDisabled();
@@ -340,9 +342,7 @@ describe('Button Component', () => {
   describe('Performance', () => {
     it('should be memoized to prevent unnecessary re-renders', () => {
       const handleClick = vi.fn();
-      const { rerender } = render(
-        <Button onClick={handleClick}>Test</Button>
-      );
+      const { rerender } = render(<Button onClick={handleClick}>Test</Button>);
 
       // Same props should not cause re-render (verified by memo)
       rerender(<Button onClick={handleClick}>Test</Button>);

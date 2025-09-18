@@ -1,6 +1,7 @@
 # Ticket 007: Unified Settings Component
 
 ## Metadata
+
 - **Status**: Not Started
 - **Priority**: High
 - **Effort**: 8 points
@@ -12,45 +13,71 @@
 ## User Stories
 
 ### Primary User Story
-As a quiz learner, I want a single, consistent settings interface that intelligently shows only relevant options for my current learning mode, so that I can configure my learning experience without confusion from irrelevant options.
+
+As a quiz learner, I want a single, consistent settings interface that
+intelligently shows only relevant options for my current learning mode, so that
+I can configure my learning experience without confusion from irrelevant
+options.
 
 ### Secondary User Stories
-- As a user switching between modes, I want my preset preferences to be remembered per mode so that I don't need to reconfigure settings repeatedly
-- As a mobile user, I want settings to be easy to access and configure on my device with proper touch targets and scrolling
-- As a power user, I want access to all advanced settings when relevant while maintaining a clean interface for basic usage
-- As a developer, I want a single reusable component that reduces code duplication and maintenance overhead
+
+- As a user switching between modes, I want my preset preferences to be
+  remembered per mode so that I don't need to reconfigure settings repeatedly
+- As a mobile user, I want settings to be easy to access and configure on my
+  device with proper touch targets and scrolling
+- As a power user, I want access to all advanced settings when relevant while
+  maintaining a clean interface for basic usage
+- As a developer, I want a single reusable component that reduces code
+  duplication and maintenance overhead
 
 ## Technical Requirements
 
 ### Functional Requirements
-1. **Single Unified Component**: Replace three separate settings modals (FlashcardsSettings, LearnSettings, DeckSettings) with one intelligent UnifiedSettings component
-2. **Mode-Aware Configuration**: Dynamically show/hide settings sections based on the active learning mode context
-3. **Preset System**: Universal presets that adapt to the current mode while persisting user's preset selection per mode
-4. **Settings Persistence**: All settings must persist across sessions without showing persistence notifications
-5. **Mobile-First Design**: Maintain FlashcardsSettings' responsive pattern and mobile-optimized UX
-6. **Visual Consistency**: Use FlashcardsSettings' semi-transparent gradient styling as the design foundation
-7. **Error Handling**: Graceful handling of persistence failures with user-friendly messages
-8. **Loading States**: Proper loading indicators during settings retrieval and save operations
+
+1. **Single Unified Component**: Replace three separate settings modals
+   (FlashcardsSettings, LearnSettings, DeckSettings) with one intelligent
+   UnifiedSettings component
+2. **Mode-Aware Configuration**: Dynamically show/hide settings sections based
+   on the active learning mode context
+3. **Preset System**: Universal presets that adapt to the current mode while
+   persisting user's preset selection per mode
+4. **Settings Persistence**: All settings must persist across sessions without
+   showing persistence notifications
+5. **Mobile-First Design**: Maintain FlashcardsSettings' responsive pattern and
+   mobile-optimized UX
+6. **Visual Consistency**: Use FlashcardsSettings' semi-transparent gradient
+   styling as the design foundation
+7. **Error Handling**: Graceful handling of persistence failures with
+   user-friendly messages
+8. **Loading States**: Proper loading indicators during settings retrieval and
+   save operations
 
 ### Non-Functional Requirements
+
 1. Performance: Component rendering <50ms, settings persistence <100ms
-2. Accessibility: Full keyboard navigation, screen reader support, WCAG AA compliance
-3. Mobile Responsiveness: Support 320px minimum width, touch-friendly 44px+ targets
-4. Code Quality: TypeScript strict mode, >90% test coverage, reusable component architecture
+2. Accessibility: Full keyboard navigation, screen reader support, WCAG AA
+   compliance
+3. Mobile Responsiveness: Support 320px minimum width, touch-friendly 44px+
+   targets
+4. Code Quality: TypeScript strict mode, >90% test coverage, reusable component
+   architecture
 
 ### Mode Support Matrix
-| Mode | Settings Sections | Presets | Notes |
-|------|------------------|---------|-------|
-| flashcards | front/back sides, progression, mastered cards | simple, reverse, comprehensive, multifront | Full settings support |
-| learn | question/answer sides, learning settings, mastery | simple, reverse, comprehensive, mixed | Most complex settings |
-| deck | deck info, mastery management | none | Minimal settings |
-| match | game settings, difficulty | simple | Future enhancement |
-| test | test configuration, time limits | formal, practice | Future enhancement |
+
+| Mode       | Settings Sections                                 | Presets                                    | Notes                 |
+| ---------- | ------------------------------------------------- | ------------------------------------------ | --------------------- |
+| flashcards | front/back sides, progression, mastered cards     | simple, reverse, comprehensive, multifront | Full settings support |
+| learn      | question/answer sides, learning settings, mastery | simple, reverse, comprehensive, mixed      | Most complex settings |
+| deck       | deck info, mastery management                     | none                                       | Minimal settings      |
+| match      | game settings, difficulty                         | simple                                     | Future enhancement    |
+| test       | test configuration, time limits                   | formal, practice                           | Future enhancement    |
 
 ## Implementation Plan
 
 ### Phase 1: Core Unified Component Architecture (3 points)
+
 **Files to create/modify:**
+
 - `src/components/modals/UnifiedSettings.tsx` - New unified settings component
 - `src/components/modals/UnifiedSettings.module.css` - CSS modules styling
 - `src/types/index.ts` - Update with unified settings interfaces
@@ -58,6 +85,7 @@ As a quiz learner, I want a single, consistent settings interface that intellige
 - `src/store/settingsStore.ts` - Unified settings persistence store
 
 **Component Structure:**
+
 ```typescript
 interface UnifiedSettingsProps {
   visible: boolean;
@@ -65,7 +93,9 @@ interface UnifiedSettingsProps {
   deck: Deck | null;
   mode: 'flashcards' | 'learn' | 'deck' | 'match' | 'test';
   settings: FlashcardsSettings | LearnModeSettings | ModeSettings;
-  onUpdateSettings: (settings: FlashcardsSettings | LearnModeSettings | ModeSettings) => void;
+  onUpdateSettings: (
+    settings: FlashcardsSettings | LearnModeSettings | ModeSettings
+  ) => void;
   onResetMastery?: () => void; // Only for deck mode
 }
 
@@ -94,60 +124,60 @@ interface ValidationRule {
   errorMessage: string;
 }
 
-export const UnifiedSettings: FC<UnifiedSettingsProps> = memo(({
-  visible,
-  onClose,
-  deck,
-  mode,
-  settings,
-  onUpdateSettings,
-  onResetMastery
-}) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const config = useMemo(() => getConfigForMode(mode, deck), [mode, deck]);
-  const {
-    localSettings,
-    updateSetting,
-    applyPreset,
-    handleSave,
-    validate
-  } = useUnifiedSettings(
+export const UnifiedSettings: FC<UnifiedSettingsProps> = memo(
+  ({
+    visible,
+    onClose,
+    deck,
+    mode,
     settings,
-    config,
-    onUpdateSettings
-  );
+    onUpdateSettings,
+    onResetMastery,
+  }) => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [isSaving, setIsSaving] = useState(false);
+    const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // Handle save with loading state
-  const onSave = async () => {
-    const validationErrors = validate(localSettings);
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
+    const config = useMemo(() => getConfigForMode(mode, deck), [mode, deck]);
+    const { localSettings, updateSetting, applyPreset, handleSave, validate } =
+      useUnifiedSettings(settings, config, onUpdateSettings);
 
-    setIsSaving(true);
-    try {
-      await handleSave();
-      onClose();
-    } catch (error) {
-      setErrors({ save: 'Failed to save settings. Please try again.' });
-    } finally {
-      setIsSaving(false);
-    }
-  };
+    // Handle save with loading state
+    const onSave = async () => {
+      const validationErrors = validate(localSettings);
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
+      }
 
-  // Implementation continues...
-});
+      setIsSaving(true);
+      try {
+        await handleSave();
+        onClose();
+      } catch (error) {
+        setErrors({ save: 'Failed to save settings. Please try again.' });
+      } finally {
+        setIsSaving(false);
+      }
+    };
+
+    // Implementation continues...
+  }
+);
 ```
 
 **Mode Configuration System:**
+
 ```typescript
 interface ModeConfig {
   flashcards: {
-    sections: ['quick_presets', 'front_sides', 'back_sides', 'progression', 'mastered_cards'];
+    sections: [
+      'quick_presets',
+      'front_sides',
+      'back_sides',
+      'progression',
+      'mastered_cards',
+    ];
     presets: ['simple', 'reverse', 'comprehensive', 'multifront'];
     validation: {
       requireAtLeastOneSide: true;
@@ -155,7 +185,14 @@ interface ModeConfig {
     };
   };
   learn: {
-    sections: ['quick_presets', 'question_sides', 'answer_sides', 'learning_settings', 'progressive_learning', 'mastery_settings'];
+    sections: [
+      'quick_presets',
+      'question_sides',
+      'answer_sides',
+      'learning_settings',
+      'progressive_learning',
+      'mastery_settings',
+    ];
     presets: ['simple', 'reverse', 'comprehensive', 'mixed'];
     validation: {
       requireAtLeastOneSide: true;
@@ -181,6 +218,7 @@ interface ModeConfig {
 ```
 
 **Implementation steps:**
+
 1. Create UnifiedSettings component with mode-aware section rendering
 2. Implement useUnifiedSettings hook for state management and persistence
 3. Create modular SettingsSection components for reusable UI blocks
@@ -190,6 +228,7 @@ interface ModeConfig {
 7. Implement validation system for settings
 
 **Testing:**
+
 1. Unit tests for component rendering with different mode configurations
 2. Hook testing for settings persistence and preset application
 3. Accessibility testing for keyboard navigation and screen readers
@@ -198,15 +237,23 @@ interface ModeConfig {
 **Commit**: `feat(settings): implement unified settings component architecture`
 
 ### Phase 2: Settings Sections and Preset System (3 points)
+
 **Files to create/modify:**
-- `src/components/modals/settings/SettingsSection.tsx` - Enhanced base section component
+
+- `src/components/modals/settings/SettingsSection.tsx` - Enhanced base section
+  component
 - `src/components/modals/settings/QuickPresets.tsx` - Universal preset selector
-- `src/components/modals/settings/SideConfiguration.tsx` - Reusable side selector
-- `src/components/modals/settings/ProgressionSettings.tsx` - Mode-specific progression options
-- `src/components/modals/settings/LearningSettings.tsx` - Learn mode specific settings
-- `src/components/modals/settings/MasterySettings.tsx` - Mastery management interface
+- `src/components/modals/settings/SideConfiguration.tsx` - Reusable side
+  selector
+- `src/components/modals/settings/ProgressionSettings.tsx` - Mode-specific
+  progression options
+- `src/components/modals/settings/LearningSettings.tsx` - Learn mode specific
+  settings
+- `src/components/modals/settings/MasterySettings.tsx` - Mastery management
+  interface
 
 **Component Structure:**
+
 ```typescript
 interface PresetDefinition {
   id: string;
@@ -214,7 +261,10 @@ interface PresetDefinition {
   shortLabel: string;
   description: string;
   tooltip: string;
-  applyToMode: (mode: string, availableSides: string[]) => Partial<ModeSettings>;
+  applyToMode: (
+    mode: string,
+    availableSides: string[]
+  ) => Partial<ModeSettings>;
   supportedModes: string[];
 }
 
@@ -238,7 +288,7 @@ export const QuickPresets: FC<QuickPresetsProps> = ({
   mode,
   presets,
   onApplyPreset,
-  currentPreset
+  currentPreset,
 }) => {
   // Universal preset system that adapts to current mode
   // Highlight currently active preset
@@ -253,7 +303,7 @@ export const SideConfiguration: FC<SideConfigurationProps> = ({
   onToggleSide,
   getSideLabel,
   validation,
-  error
+  error,
 }) => {
   // Reusable side selection component used by both flashcards and learn modes
   // Show validation errors inline
@@ -261,6 +311,7 @@ export const SideConfiguration: FC<SideConfigurationProps> = ({
 ```
 
 **Complete Preset System Implementation:**
+
 ```typescript
 const UNIVERSAL_PRESETS: Record<string, PresetDefinition> = {
   simple: {
@@ -275,23 +326,23 @@ const UNIVERSAL_PRESETS: Record<string, PresetDefinition> = {
         return {
           frontSides: [sides[0] || 'side_a'],
           backSides: [sides[1] || 'side_b'],
-          progressionMode: 'shuffle'
+          progressionMode: 'shuffle',
         };
       }
       if (mode === 'learn') {
         return {
           questionSides: [sides[0] || 'side_a'],
           answerSides: [sides[1] || 'side_b'],
-          questionTypeMix: 'auto'
+          questionTypeMix: 'auto',
         };
       }
       if (mode === 'match') {
         return {
-          matchPairs: [[sides[0] || 'side_a', sides[1] || 'side_b']]
+          matchPairs: [[sides[0] || 'side_a', sides[1] || 'side_b']],
         };
       }
       return {};
-    }
+    },
   },
   reverse: {
     id: 'reverse',
@@ -305,18 +356,18 @@ const UNIVERSAL_PRESETS: Record<string, PresetDefinition> = {
         return {
           frontSides: [sides[1] || 'side_b'],
           backSides: [sides[0] || 'side_a'],
-          progressionMode: 'shuffle'
+          progressionMode: 'shuffle',
         };
       }
       if (mode === 'learn') {
         return {
           questionSides: [sides[1] || 'side_b'],
           answerSides: [sides[0] || 'side_a'],
-          questionTypeMix: 'auto'
+          questionTypeMix: 'auto',
         };
       }
       return {};
-    }
+    },
   },
   comprehensive: {
     id: 'comprehensive',
@@ -330,7 +381,7 @@ const UNIVERSAL_PRESETS: Record<string, PresetDefinition> = {
         return {
           frontSides: [sides[0] || 'side_a'],
           backSides: sides.slice(1),
-          progressionMode: 'sequential'
+          progressionMode: 'sequential',
         };
       }
       if (mode === 'learn') {
@@ -338,11 +389,11 @@ const UNIVERSAL_PRESETS: Record<string, PresetDefinition> = {
           questionSides: [sides[0] || 'side_a'],
           answerSides: sides.slice(1),
           questionTypeMix: 'multiple_choice',
-          cardsPerRound: 20
+          cardsPerRound: 20,
         };
       }
       return {};
-    }
+    },
   },
   multifront: {
     id: 'multifront',
@@ -357,11 +408,11 @@ const UNIVERSAL_PRESETS: Record<string, PresetDefinition> = {
         return {
           frontSides: sides.slice(0, frontCount),
           backSides: sides.slice(frontCount),
-          progressionMode: 'level'
+          progressionMode: 'level',
         };
       }
       return {};
-    }
+    },
   },
   mixed: {
     id: 'mixed',
@@ -376,11 +427,11 @@ const UNIVERSAL_PRESETS: Record<string, PresetDefinition> = {
           questionSides: sides.filter((_, i) => i % 2 === 0),
           answerSides: sides.filter((_, i) => i % 2 === 1),
           questionTypeMix: 'mixed',
-          randomize: true
+          randomize: true,
         };
       }
       return {};
-    }
+    },
   },
   formal: {
     id: 'formal',
@@ -395,11 +446,11 @@ const UNIVERSAL_PRESETS: Record<string, PresetDefinition> = {
           timeLimit: 1800, // 30 minutes
           showResults: 'end',
           allowReview: false,
-          scoring: 'percentage'
+          scoring: 'percentage',
         };
       }
       return {};
-    }
+    },
   },
   practice: {
     id: 'practice',
@@ -414,12 +465,12 @@ const UNIVERSAL_PRESETS: Record<string, PresetDefinition> = {
           timeLimit: null,
           showResults: 'immediate',
           allowReview: true,
-          scoring: 'none'
+          scoring: 'none',
         };
       }
       return {};
-    }
-  }
+    },
+  },
 };
 ```
 
@@ -565,6 +616,7 @@ export const MasterySettings: FC<SectionProps> = ({
 ```
 
 **Implementation steps:**
+
 1. Create modular settings section components with consistent interfaces
 2. Implement universal preset system with mode-specific application logic
 3. Build reusable SideConfiguration component for flashcards and learn modes
@@ -573,15 +625,19 @@ export const MasterySettings: FC<SectionProps> = ({
 6. Add validation logic for each section
 
 **Testing:**
+
 1. Component tests for each settings section with mode variations
 2. Preset system testing with mode-specific application logic
 3. Integration tests for settings persistence and retrieval
 4. Validation testing for conflicting settings
 
-**Commit**: `feat(settings): implement modular settings sections and universal presets`
+**Commit**:
+`feat(settings): implement modular settings sections and universal presets`
 
 ### Phase 3: Integration and Migration (2 points)
+
 **Files to create/modify:**
+
 - `src/pages/Flashcards.tsx` - Replace FlashcardsSettings with UnifiedSettings
 - `src/pages/Learn.tsx` - Replace LearnSettings with UnifiedSettings
 - `src/pages/Deck.tsx` - Replace DeckSettings with UnifiedSettings
@@ -589,6 +645,7 @@ export const MasterySettings: FC<SectionProps> = ({
 - `src/components/modals/` - Remove old settings components after migration
 
 **Migration Strategy:**
+
 ```typescript
 // Settings store implementation
 interface UnifiedSettingsStore {
@@ -683,6 +740,7 @@ const FlashcardsPage: FC = () => {
 ```
 
 **Error Handling Strategy:**
+
 ```typescript
 // Error handling in UnifiedSettings
 const handleSettingsPersistence = async (settings: ModeSettings) => {
@@ -706,13 +764,12 @@ const handleSettingsPersistence = async (settings: ModeSettings) => {
     // Show success feedback (brief toast)
     showToast('Settings saved', 'success');
     return true;
-
   } catch (error) {
     console.error('Settings persistence error:', error);
 
     // Show user-friendly error
     setErrors({
-      save: 'Unable to save settings. Your changes will apply for this session only.'
+      save: 'Unable to save settings. Your changes will apply for this session only.',
     });
 
     // Still update in-memory settings
@@ -737,7 +794,7 @@ const loadSettings = async (deckId: string, mode: string) => {
   } catch (error) {
     console.error('Failed to load settings:', error);
     setErrors({
-      load: 'Unable to load saved settings. Using defaults.'
+      load: 'Unable to load saved settings. Using defaults.',
     });
     setLocalSettings(getDefaultSettings(mode, deck));
   } finally {
@@ -747,6 +804,7 @@ const loadSettings = async (deckId: string, mode: string) => {
 ```
 
 **Implementation steps:**
+
 1. Create unified settings store with migration logic from existing localStorage
 2. Update page components to use UnifiedSettings instead of mode-specific modals
 3. Implement backward compatibility for existing user settings
@@ -756,6 +814,7 @@ const loadSettings = async (deckId: string, mode: string) => {
 7. Update all imports and references throughout the codebase
 
 **Testing:**
+
 1. Migration testing for existing user settings data
 2. Integration tests for UnifiedSettings usage in page components
 3. E2E tests for complete settings workflows across all modes
@@ -767,11 +826,14 @@ const loadSettings = async (deckId: string, mode: string) => {
 ## Testing Strategy
 
 ### Unit Tests
+
 - Test file: `__tests__/components/UnifiedSettings.test.tsx`
-- Key scenarios: Mode-specific rendering, preset application, settings persistence, validation
+- Key scenarios: Mode-specific rendering, preset application, settings
+  persistence, validation
 - Mock requirements: localStorage, useDeckStore, mode configurations
 
 ### Component Tests
+
 ```typescript
 describe('UnifiedSettings', () => {
   it('should render flashcards mode sections only', () => {
@@ -876,12 +938,14 @@ describe('UnifiedSettings', () => {
 ```
 
 ### Integration Tests
+
 - User flows: Settings configuration across all modes
 - Mode switching: Verify settings persistence when switching between modes
 - Preset application: Test universal presets adapt correctly to each mode
 - Error recovery: Test persistence failure handling and recovery
 
 ### Accessibility Tests
+
 ```typescript
 describe('UnifiedSettings Accessibility', () => {
   it('should support keyboard navigation', async () => {
@@ -939,12 +1003,14 @@ describe('UnifiedSettings Accessibility', () => {
 ```
 
 ### Performance Tests
+
 - Settings modal open/close timing: <50ms
 - Preset application performance: <100ms
 - Settings persistence timing: <100ms
 - Validation execution: <10ms
 
 ### E2E Test Scenarios
+
 ```typescript
 describe('Settings E2E Workflows', () => {
   it('should complete full flashcards configuration workflow', () => {
@@ -980,6 +1046,7 @@ describe('Settings E2E Workflows', () => {
 ## Mobile-Specific Implementation Details
 
 ### Responsive Design Pattern
+
 ```css
 /* Following FlashcardsSettings responsive pattern */
 .modal {
@@ -1033,29 +1100,47 @@ describe('Settings E2E Workflows', () => {
 ```
 
 ### Semi-Transparent Styling
+
 ```css
 /* Maintain FlashcardsSettings design patterns */
 .radioOption:has(.radioInput:checked) {
-  background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(74, 144, 226, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.1),
+    rgba(74, 144, 226, 0.05)
+  );
   border-color: var(--primary-main);
 }
 
 .infoMessage {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.1),
+    rgba(59, 130, 246, 0.05)
+  );
   border: 1px solid var(--primary-light);
 }
 
 .errorMessage {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.1),
+    rgba(239, 68, 68, 0.05)
+  );
   border: 1px solid var(--semantic-error);
 }
 
 .loadingOverlay {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.95));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.95)
+  );
 }
 ```
 
 ### Touch Optimization
+
 - Minimum 44px touch targets for all interactive elements
 - Proper scroll behavior with -webkit-overflow-scrolling: touch
 - Safe area support for iOS devices
@@ -1063,32 +1148,33 @@ describe('Settings E2E Workflows', () => {
 - Swipe-to-close gesture support on mobile
 
 ### Animation Specifications
+
 ```typescript
 // Framer Motion animations
 const modalVariants = {
   hidden: {
     opacity: 0,
     scale: 0.95,
-    y: 20
+    y: 20,
   },
   visible: {
     opacity: 1,
     scale: 1,
     y: 0,
     transition: {
-      type: "spring",
+      type: 'spring',
       stiffness: 300,
-      damping: 30
-    }
+      damping: 30,
+    },
   },
   exit: {
     opacity: 0,
     scale: 0.95,
     y: 20,
     transition: {
-      duration: 0.2
-    }
-  }
+      duration: 0.2,
+    },
+  },
 };
 
 const sectionVariants = {
@@ -1098,55 +1184,67 @@ const sectionVariants = {
     x: 0,
     transition: {
       delay: i * 0.05,
-      type: "spring",
-      stiffness: 100
-    }
-  })
+      type: 'spring',
+      stiffness: 100,
+    },
+  }),
 };
 
 const errorVariants = {
   hidden: { opacity: 0, height: 0 },
   visible: {
     opacity: 1,
-    height: "auto",
+    height: 'auto',
     transition: {
-      height: { type: "spring", stiffness: 500, damping: 30 },
-      opacity: { duration: 0.2 }
-    }
-  }
+      height: { type: 'spring', stiffness: 500, damping: 30 },
+      opacity: { duration: 0.2 },
+    },
+  },
 };
 ```
 
 ## Success Criteria
-1. **Unified Interface**: Single settings component successfully replaces all three existing modals ✓
-2. **Mode Intelligence**: Settings sections show/hide appropriately based on current mode (100% accuracy) ✓
-3. **Preset Functionality**: Universal presets adapt correctly to each mode and persist user selections ✓
-4. **Mobile Performance**: Settings modal opens in <50ms on mobile devices, no horizontal overflow ✓
-5. **User Experience**: Users can configure settings without seeing irrelevant options ✓
-6. **Code Quality**: >90% test coverage, zero TypeScript errors, passes accessibility audit ✓
+
+1. **Unified Interface**: Single settings component successfully replaces all
+   three existing modals ✓
+2. **Mode Intelligence**: Settings sections show/hide appropriately based on
+   current mode (100% accuracy) ✓
+3. **Preset Functionality**: Universal presets adapt correctly to each mode and
+   persist user selections ✓
+4. **Mobile Performance**: Settings modal opens in <50ms on mobile devices, no
+   horizontal overflow ✓
+5. **User Experience**: Users can configure settings without seeing irrelevant
+   options ✓
+6. **Code Quality**: >90% test coverage, zero TypeScript errors, passes
+   accessibility audit ✓
 7. **Error Handling**: Graceful degradation when persistence fails ✓
 8. **Loading States**: Clear feedback during async operations ✓
 
 ## Dependencies
+
 - Framer Motion (existing) - for modal animations
 - @testing-library/react - for component testing
 - @testing-library/user-event - for interaction testing
 - No additional runtime dependencies needed
 
 ## Risks & Mitigations
-1. **Risk**: Complex state management across different modes
-   **Mitigation**: Use TypeScript discriminated unions and comprehensive testing, validation at boundaries
+
+1. **Risk**: Complex state management across different modes **Mitigation**: Use
+   TypeScript discriminated unions and comprehensive testing, validation at
+   boundaries
 
 2. **Risk**: Settings migration breaking existing user preferences
-   **Mitigation**: Implement robust migration logic with fallbacks, version tracking, and testing
+   **Mitigation**: Implement robust migration logic with fallbacks, version
+   tracking, and testing
 
-3. **Risk**: Mobile performance impact from larger component
-   **Mitigation**: Use React.memo, lazy loading, code splitting, and performance monitoring
+3. **Risk**: Mobile performance impact from larger component **Mitigation**: Use
+   React.memo, lazy loading, code splitting, and performance monitoring
 
-4. **Risk**: localStorage quota exceeded
-   **Mitigation**: Implement quota management, compression for large settings, cleanup of old data
+4. **Risk**: localStorage quota exceeded **Mitigation**: Implement quota
+   management, compression for large settings, cleanup of old data
 
 ## Accessibility Requirements
+
 - Full keyboard navigation with logical tab order
 - Screen reader support with proper ARIA labels and roles
 - High contrast mode compatibility
@@ -1159,6 +1257,7 @@ const errorVariants = {
 ## Migration and Backward Compatibility
 
 ### Data Migration Strategy
+
 ```typescript
 const migrateOldSettings = () => {
   const migrationVersion = '1.0.0';
@@ -1193,7 +1292,6 @@ const migrateOldSettings = () => {
     // Clean up old keys after successful migration
     localStorage.removeItem('flashcards-settings');
     localStorage.removeItem('learn-settings');
-
   } catch (error) {
     console.error('Settings migration failed:', error);
     // Don't mark as migrated, will retry next time
@@ -1202,12 +1300,14 @@ const migrateOldSettings = () => {
 ```
 
 ### Component Deprecation
+
 1. Mark old components as deprecated with console warnings
 2. Maintain old components for one release cycle (commented out)
 3. Remove old components after successful migration verification
 4. Update all imports to use UnifiedSettings
 
 ### API Compatibility
+
 - Maintain existing prop interfaces for smooth transition
 - Provide adapter functions for old settings formats
 - Ensure onUpdateSettings callback remains compatible
@@ -1216,6 +1316,7 @@ const migrateOldSettings = () => {
 ## Performance Optimization
 
 ### Code Splitting
+
 ```typescript
 const UnifiedSettings = lazy(() =>
   import(/* webpackChunkName: "unified-settings" */ './UnifiedSettings')
@@ -1228,6 +1329,7 @@ const UnifiedSettings = lazy(() =>
 ```
 
 ### State Management Optimizations
+
 ```typescript
 // Use React.memo for expensive section components
 export const ProgressionSettings = memo(ProgressionSettingsComponent);
@@ -1240,19 +1342,18 @@ const applicablePresets = useMemo(
 );
 
 // Debounce settings persistence
-const debouncedSave = useMemo(
-  () => debounce(persistSettings, 500),
-  []
-);
+const debouncedSave = useMemo(() => debounce(persistSettings, 500), []);
 ```
 
 ### Bundle Size Considerations
+
 - Target <5KB increase from unified component
 - Tree-shake unused preset definitions
 - Optimize CSS with critical path extraction
 - Lazy load heavy sections (future optimization)
 
 ## Documentation Updates Required
+
 1. `README.md` - Update settings configuration documentation
 2. `docs/components.md` - Add UnifiedSettings component documentation
 3. Component JSDoc - Comprehensive interface documentation
@@ -1262,18 +1363,21 @@ const debouncedSave = useMemo(
 ## Release Strategy
 
 ### Phased Rollout
+
 1. **Phase 1**: Deploy behind feature flag for internal testing
 2. **Phase 2**: Enable for 10% of users, monitor for issues
 3. **Phase 3**: Gradual rollout to 50%, then 100%
 4. **Phase 4**: Remove old components and feature flags
 
 ### Rollback Plan
+
 - Feature flag to instantly revert to old components
 - localStorage versioning for data rollback
 - Component hot-swapping capability
 - Monitoring alerts for error spikes
 
 ### Monitoring and Analytics
+
 - Track settings modal open/close events
 - Monitor performance metrics (open time, preset usage)
 - Collect error rates for persistence failures
@@ -1282,6 +1386,10 @@ const debouncedSave = useMemo(
 
 ---
 
-*This ticket represents a complete reimagining of the settings system in Quizly, prioritizing user experience, code maintainability, and mobile-first design. The implementation should be thoroughly tested and gradually rolled out to ensure a smooth transition from the existing system.*
+_This ticket represents a complete reimagining of the settings system in Quizly,
+prioritizing user experience, code maintainability, and mobile-first design. The
+implementation should be thoroughly tested and gradually rolled out to ensure a
+smooth transition from the existing system._
 
-*Last Updated: 2025-01-17 - Specification completed with all implementation details, error handling, validation, and test scenarios.*
+_Last Updated: 2025-01-17 - Specification completed with all implementation
+details, error handling, validation, and test scenarios._

@@ -1,10 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import {
-  LearnSessionState,
-  LearnSessionResults,
-  LearnModeSettings
-} from '@/types';
+import { LearnSessionState, LearnSessionResults, LearnModeSettings } from '@/types';
 import { LearnSessionProgress } from '@/components/modes/learn/LearnProgress';
 
 interface LearnSessionStore {
@@ -87,8 +83,8 @@ export const useLearnSessionStore = create<LearnSessionStore>()(
         });
       },
 
-      updateProgress: (progress) => {
-        set((state) => {
+      updateProgress: progress => {
+        set(state => {
           if (!state.activeSession) return state;
 
           return {
@@ -100,8 +96,8 @@ export const useLearnSessionStore = create<LearnSessionStore>()(
         });
       },
 
-      completeSession: (results) => {
-        set((state) => ({
+      completeSession: results => {
+        set(state => ({
           activeSession: null,
           sessionHistory: [...state.sessionHistory, results],
         }));
@@ -138,8 +134,8 @@ export const useLearnSessionStore = create<LearnSessionStore>()(
       },
 
       // Preferences
-      updatePreferences: (preferences) => {
-        set((state) => ({
+      updatePreferences: preferences => {
+        set(state => ({
           preferences: { ...state.preferences, ...preferences },
         }));
       },
@@ -162,7 +158,7 @@ export const useLearnSessionStore = create<LearnSessionStore>()(
       },
 
       // Statistics
-      getSessionStatistics: (deckId) => {
+      getSessionStatistics: deckId => {
         const state = get();
         const sessions = deckId
           ? state.sessionHistory.filter(s => s.deckId === deckId)
@@ -184,7 +180,8 @@ export const useLearnSessionStore = create<LearnSessionStore>()(
         const totalCorrectAnswers = sessions.reduce((sum, s) => sum + s.correctAnswers, 0);
         const averageAccuracy = (totalCorrectAnswers / totalQuestionsAnswered) * 100;
         const bestStreak = Math.max(...sessions.map(s => s.maxStreak));
-        const averageSessionDuration = sessions.reduce((sum, s) => sum + s.duration, 0) / totalSessions;
+        const averageSessionDuration =
+          sessions.reduce((sum, s) => sum + s.duration, 0) / totalSessions;
 
         return {
           totalSessions,
@@ -199,7 +196,7 @@ export const useLearnSessionStore = create<LearnSessionStore>()(
     {
       name: 'learn-session-store',
       storage: createJSONStorage(() => localStorage),
-      partialize: (state) => ({
+      partialize: state => ({
         sessionHistory: state.sessionHistory.slice(-50), // Keep last 50 sessions
         preferences: state.preferences,
       }),

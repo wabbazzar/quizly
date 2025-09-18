@@ -15,8 +15,8 @@ const CONFIG = {
   outputFile: 'bundle-analysis.json',
   thresholds: {
     maxBundleSize: 200 * 1024, // 200KB gzipped
-    maxChunkSize: 100 * 1024,  // 100KB per chunk
-    maxAssets: 50,             // Maximum number of assets
+    maxChunkSize: 100 * 1024, // 100KB per chunk
+    maxAssets: 50, // Maximum number of assets
   },
   reportFormat: process.env.REPORT_FORMAT || 'json', // json, html, console
 };
@@ -221,7 +221,9 @@ class BundleAnalyzer {
 
     // Check total bundle size
     if (this.results.gzipSize > CONFIG.thresholds.maxBundleSize) {
-      console.error(`❌ Bundle size threshold exceeded: ${this.formatSize(this.results.gzipSize)} > ${this.formatSize(CONFIG.thresholds.maxBundleSize)}`);
+      console.error(
+        `❌ Bundle size threshold exceeded: ${this.formatSize(this.results.gzipSize)} > ${this.formatSize(CONFIG.thresholds.maxBundleSize)}`
+      );
       passed = false;
     }
 
@@ -273,7 +275,9 @@ class BundleAnalyzer {
   generateConsoleReport() {
     console.log('\n📊 Bundle Analysis Report');
     console.log('='.repeat(50));
-    console.log(`Total Size: ${this.formatSize(this.results.totalSize)} (${this.formatSize(this.results.gzipSize)} gzipped)`);
+    console.log(
+      `Total Size: ${this.formatSize(this.results.totalSize)} (${this.formatSize(this.results.gzipSize)} gzipped)`
+    );
     console.log(`Assets: ${this.results.assetCount}`);
     console.log(`Chunks: ${this.results.chunks.length}`);
 
@@ -336,24 +340,37 @@ class BundleAnalyzer {
 
     <div class="assets">
         <h2>Largest Assets</h2>
-        ${this.results.assets.slice(0, 15).map(asset => `
+        ${this.results.assets
+          .slice(0, 15)
+          .map(
+            asset => `
             <div class="asset">
                 <strong>${asset.name}</strong> - ${this.formatSize(asset.gzipSize)} (${asset.type})
             </div>
-        `).join('')}
+        `
+          )
+          .join('')}
     </div>
 
-    ${this.results.recommendations.length > 0 ? `
+    ${
+      this.results.recommendations.length > 0
+        ? `
     <div class="recommendations">
         <h2>Recommendations</h2>
-        ${this.results.recommendations.map(rec => `
+        ${this.results.recommendations
+          .map(
+            rec => `
             <div class="recommendation severity-${rec.severity}">
                 <strong>${rec.message}</strong><br>
                 <em>${rec.suggestion}</em>
             </div>
-        `).join('')}
+        `
+          )
+          .join('')}
     </div>
-    ` : ''}
+    `
+        : ''
+    }
 </body>
 </html>`;
 

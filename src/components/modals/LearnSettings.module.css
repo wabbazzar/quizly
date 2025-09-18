@@ -267,7 +267,9 @@
   z-index: 1001;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.2s, visibility 0.2s;
+  transition:
+    opacity 0.2s,
+    visibility 0.2s;
   pointer-events: none;
   box-shadow: var(--shadow-lg);
 }
@@ -428,7 +430,6 @@
     border-radius: var(--radius-xl) !important;
   }
 }
-
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {

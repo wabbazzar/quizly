@@ -1,9 +1,5 @@
 import { FC, useState } from 'react';
-import {
-  QuestionCard,
-  LearnProgress,
-  LearnSessionProgress
-} from '@/components/modes/learn';
+import { QuestionCard, LearnProgress, LearnSessionProgress } from '@/components/modes/learn';
 import { Question } from '@/types';
 import styles from './Learn.module.css';
 

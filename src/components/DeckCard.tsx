@@ -16,7 +16,7 @@ const DeckCard: FC<DeckCardProps> = ({ deck, onSelect }) => {
       onClick={() => onSelect(deck.id)}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => {
+      onKeyDown={e => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           onSelect(deck.id);
@@ -33,13 +33,9 @@ const DeckCard: FC<DeckCardProps> = ({ deck, onSelect }) => {
         )}
       </div>
 
-      {metadata.deck_subtitle && (
-        <p className={styles.subtitle}>{metadata.deck_subtitle}</p>
-      )}
+      {metadata.deck_subtitle && <p className={styles.subtitle}>{metadata.deck_subtitle}</p>}
 
-      {metadata.description && (
-        <p className={styles.description}>{metadata.description}</p>
-      )}
+      {metadata.description && <p className={styles.description}>{metadata.description}</p>}
 
       <div className={styles.metadata}>
         <div className={styles.metaItem}>
@@ -64,7 +60,7 @@ const DeckCard: FC<DeckCardProps> = ({ deck, onSelect }) => {
 
       {metadata.tags && metadata.tags.length > 0 && (
         <div className={styles.tags}>
-          {metadata.tags.slice(0, 4).map((tag) => (
+          {metadata.tags.slice(0, 4).map(tag => (
             <span key={tag} className={styles.tag}>
               {tag}
             </span>
@@ -75,7 +71,7 @@ const DeckCard: FC<DeckCardProps> = ({ deck, onSelect }) => {
       <div className={styles.cardFooter}>
         <button
           className={styles.studyButton}
-          onClick={(e) => {
+          onClick={e => {
             e.stopPropagation();
             onSelect(deck.id);
           }}

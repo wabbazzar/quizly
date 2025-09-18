@@ -7,11 +7,11 @@
 }
 
 /* Optimize scrolling performance */
-.virtualScrollContainer[data-scrolling="true"] {
+.virtualScrollContainer[data-scrolling='true'] {
   pointer-events: none; /* Prevent mouse events during scroll */
 }
 
-.virtualScrollContainer[data-scrolling="false"] {
+.virtualScrollContainer[data-scrolling='false'] {
   pointer-events: auto;
 }
 

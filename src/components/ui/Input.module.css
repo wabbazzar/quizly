@@ -28,18 +28,12 @@
 
 /* Variant Styles */
 .default {
-  background: linear-gradient(135deg,
-    rgba(255, 255, 255, 0.8),
-    rgba(255, 255, 255, 0.6)
-  );
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
   border: 1px solid var(--border-color);
 }
 
 .filled {
-  background: linear-gradient(135deg,
-    rgba(74, 144, 226, 0.05),
-    rgba(74, 144, 226, 0.02)
-  );
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.05), rgba(74, 144, 226, 0.02));
   border: 1px solid transparent;
 }
 
@@ -95,26 +89,17 @@
 
 .default:focus-within {
   border-color: var(--primary-main);
-  background: linear-gradient(135deg,
-    rgba(255, 255, 255, 0.95),
-    rgba(255, 255, 255, 0.9)
-  );
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
 }
 
 .filled:focus-within {
-  background: linear-gradient(135deg,
-    rgba(74, 144, 226, 0.08),
-    rgba(74, 144, 226, 0.04)
-  );
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.08), rgba(74, 144, 226, 0.04));
   border-color: rgba(74, 144, 226, 0.2);
 }
 
 .outlined:focus-within {
   border-color: var(--primary-main);
-  background: linear-gradient(135deg,
-    rgba(74, 144, 226, 0.03),
-    rgba(74, 144, 226, 0.01)
-  );
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.03), rgba(74, 144, 226, 0.01));
 }
 
 /* Error State */
@@ -182,18 +167,12 @@
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
   .default {
-    background: linear-gradient(135deg,
-      rgba(31, 41, 55, 0.8),
-      rgba(31, 41, 55, 0.6)
-    );
+    background: linear-gradient(135deg, rgba(31, 41, 55, 0.8), rgba(31, 41, 55, 0.6));
     border-color: rgba(75, 85, 99, 0.5);
   }
 
   .filled {
-    background: linear-gradient(135deg,
-      rgba(107, 165, 233, 0.08),
-      rgba(107, 165, 233, 0.04)
-    );
+    background: linear-gradient(135deg, rgba(107, 165, 233, 0.08), rgba(107, 165, 233, 0.04));
   }
 
   .outlined {
@@ -201,10 +180,7 @@
   }
 
   .default:focus-within {
-    background: linear-gradient(135deg,
-      rgba(31, 41, 55, 0.95),
-      rgba(31, 41, 55, 0.9)
-    );
+    background: linear-gradient(135deg, rgba(31, 41, 55, 0.95), rgba(31, 41, 55, 0.9));
   }
 
   .input:-webkit-autofill,

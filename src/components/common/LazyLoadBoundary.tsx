@@ -34,15 +34,9 @@ const DefaultErrorFallback: FC<{
   <div className={styles.errorContainer}>
     <div className={styles.errorIcon}>⚠️</div>
     <h3 className={styles.errorTitle}>Something went wrong</h3>
-    <p className={styles.errorMessage}>
-      {error?.message || 'Failed to load this component'}
-    </p>
+    <p className={styles.errorMessage}>{error?.message || 'Failed to load this component'}</p>
     {retryable && onRetry && (
-      <button
-        className={styles.retryButton}
-        onClick={onRetry}
-        type="button"
-      >
+      <button className={styles.retryButton} onClick={onRetry} type="button">
         Try Again
       </button>
     )}
@@ -128,14 +122,8 @@ export const LazyLoadBoundary: FC<LazyLoadBoundaryProps> = ({
   const loadingFallback = fallback || <DefaultLoadingSpinner />;
 
   return (
-    <LazyErrorBoundary
-      fallback={errorFallback}
-      onError={onError}
-      retryable={retryable}
-    >
-      <Suspense fallback={loadingFallback}>
-        {children}
-      </Suspense>
+    <LazyErrorBoundary fallback={errorFallback} onError={onError} retryable={retryable}>
+      <Suspense fallback={loadingFallback}>{children}</Suspense>
     </LazyErrorBoundary>
   );
 };
@@ -144,9 +132,7 @@ export const LazyLoadBoundary: FC<LazyLoadBoundaryProps> = ({
  * Lightweight boundary for non-critical components
  */
 export const SimpleLazyBoundary: FC<{ children: ReactNode }> = ({ children }) => (
-  <Suspense fallback={<div className={styles.simpleFallback}>Loading...</div>}>
-    {children}
-  </Suspense>
+  <Suspense fallback={<div className={styles.simpleFallback}>Loading...</div>}>{children}</Suspense>
 );
 
 /**

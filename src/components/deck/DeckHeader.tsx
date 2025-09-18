@@ -2,11 +2,7 @@ import { FC, memo } from 'react';
 import { DeckHeaderProps } from './types';
 import { PageHeader } from '@/components/common/PageHeader';
 
-export const DeckHeader: FC<DeckHeaderProps> = memo(({
-  deck,
-  onBackClick,
-  onSettingsClick
-}) => {
+export const DeckHeader: FC<DeckHeaderProps> = memo(({ deck, onBackClick, onSettingsClick }) => {
   // Add safety check for deck
   if (!deck || !deck.content || !deck.metadata) {
     return null;

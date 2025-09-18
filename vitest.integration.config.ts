@@ -9,15 +9,12 @@ export default defineConfig({
     name: 'integration',
     environment: 'jsdom',
     setupFiles: ['./src/test/integration-setup.ts'],
-    include: [
-      'src/test/integration/**/*.test.{ts,tsx}',
-      'src/**/*.integration.test.{ts,tsx}'
-    ],
+    include: ['src/test/integration/**/*.test.{ts,tsx}', 'src/**/*.integration.test.{ts,tsx}'],
     exclude: [
       'node_modules/**',
       'dist/**',
       'src/**/*.unit.test.{ts,tsx}',
-      'src/**/*.e2e.test.{ts,tsx}'
+      'src/**/*.e2e.test.{ts,tsx}',
     ],
     globals: true,
     coverage: {
@@ -30,30 +27,30 @@ export default defineConfig({
         'src/**/*.stories.{ts,tsx}',
         'src/test/**',
         'src/types/**',
-        'src/**/*.d.ts'
+        'src/**/*.d.ts',
       ],
       thresholds: {
         global: {
           branches: 70,
           functions: 70,
           lines: 70,
-          statements: 70
-        }
-      }
+          statements: 70,
+        },
+      },
     },
     testTimeout: 10000,
     poolOptions: {
       threads: {
         singleThread: false,
         maxThreads: 4,
-        minThreads: 1
-      }
-    }
+        minThreads: 1,
+      },
+    },
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      '@test': path.resolve(__dirname, './src/test')
-    }
-  }
+      '@test': path.resolve(__dirname, './src/test'),
+    },
+  },
 });

@@ -3,10 +3,7 @@ import { motion } from 'framer-motion';
 import { ModeSelectorProps } from './types';
 import styles from './ModeSelector.module.css';
 
-export const ModeSelector: FC<ModeSelectorProps> = memo(({
-  modes,
-  onModeClick
-}) => {
+export const ModeSelector: FC<ModeSelectorProps> = memo(({ modes, onModeClick }) => {
   return (
     <section className={styles.modesSection}>
       <motion.div
@@ -15,7 +12,7 @@ export const ModeSelector: FC<ModeSelectorProps> = memo(({
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
       >
-        {modes.map((mode) => (
+        {modes.map(mode => (
           <motion.div
             key={mode.id}
             className={`${styles.modeCard} ${styles[mode.color]}`}

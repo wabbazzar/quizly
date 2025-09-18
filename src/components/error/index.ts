@@ -9,11 +9,7 @@ export {
 } from './ErrorFallback';
 
 // Re-export error handling hooks
-export {
-  useErrorHandler,
-  useErrorBoundary,
-  useErrorReporting,
-} from '@/hooks/useErrorHandler';
+export { useErrorHandler, useErrorBoundary, useErrorReporting } from '@/hooks/useErrorHandler';
 
 // Re-export error logger
 export { errorLogger } from '@/services/errorLogger';

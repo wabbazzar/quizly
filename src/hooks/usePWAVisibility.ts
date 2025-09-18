@@ -14,8 +14,10 @@ interface VisibilityState {
 const isIOSDevice = () => /iPhone|iPad|iPod/i.test(navigator.userAgent);
 const isPWAMode = () => {
   // Check if running as PWA (standalone mode)
-  return (window.navigator as any).standalone === true ||
-         window.matchMedia('(display-mode: standalone)').matches;
+  return (
+    (window.navigator as any).standalone === true ||
+    window.matchMedia('(display-mode: standalone)').matches
+  );
 };
 
 // State persistence for iOS PWA termination handling
@@ -30,7 +32,7 @@ export function usePWAVisibility() {
     // Check if this is a restoration from termination
     const lastHeartbeat = parseInt(localStorage.getItem(PWA_HEARTBEAT_KEY) || '0');
     const now = Date.now();
-    const wasTerminated = isIOS && isPWA && (now - lastHeartbeat > 5000); // 5 seconds gap indicates termination
+    const wasTerminated = isIOS && isPWA && now - lastHeartbeat > 5000; // 5 seconds gap indicates termination
 
     return {
       isVisible: !document.hidden,
@@ -96,7 +98,7 @@ export function usePWAVisibility() {
     const isNowVisible = !document.hidden;
     const now = Date.now();
 
-    setState((prev) => {
+    setState(prev => {
       if (isNowVisible && !prev.isVisible) {
         // App becoming visible
         const timeInBackground = now - prev.lastVisibleTime;
@@ -128,23 +130,26 @@ export function usePWAVisibility() {
   }, [persistAppState]);
 
   // iOS-specific page restoration handling
-  const handlePageShow = useCallback((event: PageTransitionEvent) => {
-    if (event.persisted && state.isIOS && state.isPWA) {
-      console.log('iOS PWA: Page restored from cache');
+  const handlePageShow = useCallback(
+    (event: PageTransitionEvent) => {
+      if (event.persisted && state.isIOS && state.isPWA) {
+        console.log('iOS PWA: Page restored from cache');
 
-      // Restore app state
-      restoreAppState();
+        // Restore app state
+        restoreAppState();
 
-      setState((prev) => ({
-        ...prev,
-        wasRestored: true,
-        isVisible: true,
-        lastVisibleTime: Date.now(),
-        resumeCount: prev.resumeCount + 1,
-        isRestoring: false,
-      }));
-    }
-  }, [state.isIOS, state.isPWA, restoreAppState]);
+        setState(prev => ({
+          ...prev,
+          wasRestored: true,
+          isVisible: true,
+          lastVisibleTime: Date.now(),
+          resumeCount: prev.resumeCount + 1,
+          isRestoring: false,
+        }));
+      }
+    },
+    [state.isIOS, state.isPWA, restoreAppState]
+  );
 
   // Enhanced focus handling for iOS PWA
   const handleFocus = useCallback(() => {
@@ -156,7 +161,7 @@ export function usePWAVisibility() {
         document.dispatchEvent(new Event('visibilitychange'));
       }
 
-      setState((prev) => ({
+      setState(prev => ({
         ...prev,
         isVisible: true,
         lastVisibleTime: Date.now(),
@@ -199,11 +204,18 @@ export function usePWAVisibility() {
       window.removeEventListener('pageshow', handlePageShow);
       window.removeEventListener('focus', handleFocus);
     };
-  }, [handleVisibilityChange, handlePageShow, handleFocus, state.isIOS, state.isPWA, persistAppState]);
+  }, [
+    handleVisibilityChange,
+    handlePageShow,
+    handleFocus,
+    state.isIOS,
+    state.isPWA,
+    persistAppState,
+  ]);
 
   // Force refresh function for manual app restoration
   const forceRefresh = useCallback(() => {
-    setState((prev) => ({
+    setState(prev => ({
       ...prev,
       resumeCount: prev.resumeCount + 1,
       wasRestored: true,
@@ -215,7 +227,7 @@ export function usePWAVisibility() {
   useEffect(() => {
     if (state.wasRestored && state.isRestoring) {
       const timer = setTimeout(() => {
-        setState((prev) => ({
+        setState(prev => ({
           ...prev,
           wasRestored: false,
           isRestoring: false,

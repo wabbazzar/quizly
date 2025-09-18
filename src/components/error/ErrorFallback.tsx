@@ -41,7 +41,7 @@ export const ErrorFallback: FC<ErrorFallbackProps> = ({
             <Button variant="primary" onClick={onReload}>
               Refresh Page
             </Button>
-            <Button variant="secondary" onClick={() => window.location.href = '/'}>
+            <Button variant="secondary" onClick={() => (window.location.href = '/')}>
               Go Home
             </Button>
           </div>
@@ -89,19 +89,15 @@ export const ErrorFallback: FC<ErrorFallbackProps> = ({
             strokeWidth={2}
             className={styles.iconSvg}
           >
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="15" y1="9" x2="9" y2="15"/>
-            <line x1="9" y1="9" x2="15" y2="15"/>
+            <circle cx="12" cy="12" r="10" />
+            <line x1="15" y1="9" x2="9" y2="15" />
+            <line x1="9" y1="9" x2="15" y2="15" />
           </svg>
         </div>
 
-        <h2 className={styles.errorTitle}>
-          Oops! Something went wrong
-        </h2>
+        <h2 className={styles.errorTitle}>Oops! Something went wrong</h2>
 
-        <p className={styles.errorMessage}>
-          {getErrorMessage()}
-        </p>
+        <p className={styles.errorMessage}>{getErrorMessage()}</p>
 
         {import.meta.env.DEV && (
           <details className={styles.errorDetails}>
@@ -127,9 +123,7 @@ export const ErrorFallback: FC<ErrorFallbackProps> = ({
 };
 
 // Feature-specific error fallbacks
-export const LearnModeErrorFallback: FC<ErrorFallbackProps> = ({
-  onRetry,
-}) => (
+export const LearnModeErrorFallback: FC<ErrorFallbackProps> = ({ onRetry }) => (
   <Card className={styles.errorCard}>
     <div className={styles.errorContent}>
       <div className={styles.errorIcon} role="img" aria-label="Learn Mode Error">
@@ -142,21 +136,19 @@ export const LearnModeErrorFallback: FC<ErrorFallbackProps> = ({
           strokeWidth={2}
           className={styles.iconSvg}
         >
-          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-          <line x1="15" y1="9" x2="9" y2="15"/>
-          <line x1="9" y1="9" x2="15" y2="15"/>
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+          <line x1="15" y1="9" x2="9" y2="15" />
+          <line x1="9" y1="9" x2="15" y2="15" />
         </svg>
       </div>
       <h2>Learn Mode Error</h2>
-      <p>
-        The learning session encountered an error. Your progress has been saved.
-      </p>
+      <p>The learning session encountered an error. Your progress has been saved.</p>
       <div className={styles.buttonGroup}>
         <Button variant="primary" onClick={onRetry}>
           Resume Session
         </Button>
-        <Button variant="secondary" onClick={() => window.location.href = '/'}>
+        <Button variant="secondary" onClick={() => (window.location.href = '/')}>
           Return to Home
         </Button>
       </div>
@@ -164,9 +156,7 @@ export const LearnModeErrorFallback: FC<ErrorFallbackProps> = ({
   </Card>
 );
 
-export const DeckErrorFallback: FC<ErrorFallbackProps> = ({
-  onRetry,
-}) => (
+export const DeckErrorFallback: FC<ErrorFallbackProps> = ({ onRetry }) => (
   <Card className={styles.errorCard}>
     <div className={styles.errorContent}>
       <div className={styles.errorIcon} role="img" aria-label="Deck Error">
@@ -179,23 +169,21 @@ export const DeckErrorFallback: FC<ErrorFallbackProps> = ({
           strokeWidth={2}
           className={styles.iconSvg}
         >
-          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-          <line x1="16" y1="2" x2="16" y2="6"/>
-          <line x1="8" y1="2" x2="8" y2="6"/>
-          <line x1="3" y1="10" x2="21" y2="10"/>
-          <line x1="15" y1="14" x2="9" y2="20"/>
-          <line x1="9" y1="14" x2="15" y2="20"/>
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+          <line x1="16" y1="2" x2="16" y2="6" />
+          <line x1="8" y1="2" x2="8" y2="6" />
+          <line x1="3" y1="10" x2="21" y2="10" />
+          <line x1="15" y1="14" x2="9" y2="20" />
+          <line x1="9" y1="14" x2="15" y2="20" />
         </svg>
       </div>
       <h2>Deck Loading Error</h2>
-      <p>
-        Failed to load this deck. Please check your connection and try again.
-      </p>
+      <p>Failed to load this deck. Please check your connection and try again.</p>
       <div className={styles.buttonGroup}>
         <Button variant="primary" onClick={onRetry}>
           Retry Loading
         </Button>
-        <Button variant="secondary" onClick={() => window.location.href = '/'}>
+        <Button variant="secondary" onClick={() => (window.location.href = '/')}>
           Browse Other Decks
         </Button>
       </div>

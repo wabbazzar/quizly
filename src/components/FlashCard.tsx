@@ -35,7 +35,7 @@ const FlashCard: FC<FlashCardProps> = ({
       <motion.div
         className={styles.card}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+        transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
         style={{ transformStyle: 'preserve-3d' }}
       >
         {/* Front of card */}
@@ -47,9 +47,7 @@ const FlashCard: FC<FlashCardProps> = ({
               </div>
             ))}
           </div>
-          {card.level && (
-            <div className={styles.level}>Level {card.level}</div>
-          )}
+          {card.level && <div className={styles.level}>Level {card.level}</div>}
         </div>
 
         {/* Back of card */}
@@ -61,9 +59,7 @@ const FlashCard: FC<FlashCardProps> = ({
               </div>
             ))}
           </div>
-          {card.level && (
-            <div className={styles.level}>Level {card.level}</div>
-          )}
+          {card.level && <div className={styles.level}>Level {card.level}</div>}
         </div>
       </motion.div>
     </div>

@@ -1,6 +1,7 @@
 # Ticket 005: Error Boundary and Error Handling System
 
 ## Metadata
+
 - **Status**: Completed
 - **Priority**: High
 - **Effort**: 12 points
@@ -11,40 +12,61 @@
 ## User Stories
 
 ### Primary User Story
-As a user, I want the application to gracefully handle errors and crashes so that I never lose my progress and can continue using the app even when something goes wrong.
+
+As a user, I want the application to gracefully handle errors and crashes so
+that I never lose my progress and can continue using the app even when something
+goes wrong.
 
 ### Secondary User Stories
-- As a developer, I want comprehensive error logging so that bugs can be identified and fixed quickly
-- As a user, I want clear error messages so that I understand what went wrong and how to recover
-- As a support team member, I want detailed error reports so that user issues can be resolved efficiently
-- As a product owner, I want error recovery mechanisms so that user retention remains high even during failures
+
+- As a developer, I want comprehensive error logging so that bugs can be
+  identified and fixed quickly
+- As a user, I want clear error messages so that I understand what went wrong
+  and how to recover
+- As a support team member, I want detailed error reports so that user issues
+  can be resolved efficiently
+- As a product owner, I want error recovery mechanisms so that user retention
+  remains high even during failures
 
 ## Technical Requirements
 
 ### Functional Requirements
-1. **Error Boundary Implementation**: Strategic error boundaries at route, feature, and component levels to prevent cascading failures
-2. **Error Logging**: Comprehensive error tracking with context, user actions, and environment details
-3. **Graceful Recovery**: Automatic retry mechanisms and fallback UI states for common failure scenarios
-4. **Progress Preservation**: Session state recovery and data persistence during errors
-5. **User Communication**: Clear, actionable error messages with recovery instructions
+
+1. **Error Boundary Implementation**: Strategic error boundaries at route,
+   feature, and component levels to prevent cascading failures
+2. **Error Logging**: Comprehensive error tracking with context, user actions,
+   and environment details
+3. **Graceful Recovery**: Automatic retry mechanisms and fallback UI states for
+   common failure scenarios
+4. **Progress Preservation**: Session state recovery and data persistence during
+   errors
+5. **User Communication**: Clear, actionable error messages with recovery
+   instructions
 
 ### Non-Functional Requirements
-1. Performance: Error handling overhead <1ms per component, error reporting async
-2. Reliability: Error boundaries must not themselves crash, 100% error capture rate
+
+1. Performance: Error handling overhead <1ms per component, error reporting
+   async
+2. Reliability: Error boundaries must not themselves crash, 100% error capture
+   rate
 3. Privacy: Error reporting respects user privacy, no sensitive data in logs
 4. Accessibility: Error messages fully accessible with screen reader support
 
 ## Implementation Plan
 
 ### Phase 1: Core Error Boundary Infrastructure (3 points)
+
 **Files to create/modify:**
+
 - `src/components/error/ErrorBoundary.tsx` - Root error boundary component
-- `src/components/error/FeatureErrorBoundary.tsx` - Feature-specific error boundaries
+- `src/components/error/FeatureErrorBoundary.tsx` - Feature-specific error
+  boundaries
 - `src/components/error/ErrorFallback.tsx` - Error UI fallback components
 - `src/services/errorLogger.ts` - Error logging and reporting service
 - `src/hooks/useErrorHandler.ts` - Custom hook for error handling
 
 **Core Error Boundary:**
+
 ```typescript
 // src/components/error/ErrorBoundary.tsx
 import React, { Component, ErrorInfo, ReactNode } from 'react';
@@ -193,6 +215,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 ```
 
 **Error Fallback Components:**
+
 ```typescript
 // src/components/error/ErrorFallback.tsx
 import { FC } from 'react';
@@ -359,6 +382,7 @@ export const DeckErrorFallback: FC<ErrorFallbackProps> = ({
 ```
 
 **Error Logging Service:**
+
 ```typescript
 // src/services/errorLogger.ts
 interface ErrorContext {
@@ -407,7 +431,7 @@ class ErrorLogger {
 
   private setupUnhandledErrorListeners() {
     // Global error handler for unhandled JavaScript errors
-    window.addEventListener('error', (event) => {
+    window.addEventListener('error', event => {
       const error = new Error(event.message);
       error.stack = `${event.filename}:${event.lineno}:${event.colno}`;
 
@@ -428,7 +452,7 @@ class ErrorLogger {
     });
 
     // Global handler for unhandled promise rejections
-    window.addEventListener('unhandledrejection', (event) => {
+    window.addEventListener('unhandledrejection', event => {
       const error = new Error(`Unhandled Promise Rejection: ${event.reason}`);
 
       this.logError(error, {
@@ -478,19 +502,31 @@ class ErrorLogger {
     return `error_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
 
-  private determineSeverity(error: Error, context: ErrorContext): 'low' | 'medium' | 'high' | 'critical' {
+  private determineSeverity(
+    error: Error,
+    context: ErrorContext
+  ): 'low' | 'medium' | 'high' | 'critical' {
     // Critical: App-level errors, security issues
-    if (context.errorBoundaryLevel === 'app' || error.message.includes('security')) {
+    if (
+      context.errorBoundaryLevel === 'app' ||
+      error.message.includes('security')
+    ) {
       return 'critical';
     }
 
     // High: Route-level errors, data corruption
-    if (context.errorBoundaryLevel === 'route' || error.message.includes('corruption')) {
+    if (
+      context.errorBoundaryLevel === 'route' ||
+      error.message.includes('corruption')
+    ) {
       return 'high';
     }
 
     // Medium: Feature-level errors, network issues
-    if (context.errorBoundaryLevel === 'feature' || error.message.includes('network')) {
+    if (
+      context.errorBoundaryLevel === 'feature' ||
+      error.message.includes('network')
+    ) {
       return 'medium';
     }
 
@@ -542,7 +578,10 @@ class ErrorLogger {
       if (process.env.NODE_ENV === 'development') {
         console.group('Error Reports');
         errorsToSend.forEach(report => {
-          console.error(`[${report.severity.toUpperCase()}] ${report.error.name}:`, report);
+          console.error(
+            `[${report.severity.toUpperCase()}] ${report.error.name}:`,
+            report
+          );
         });
         console.groupEnd();
       }
@@ -564,7 +603,7 @@ class ErrorLogger {
     // - Custom API endpoint
 
     // For now, simulate API call
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       setTimeout(resolve, 100);
     });
   }
@@ -595,6 +634,7 @@ export const errorLogger = new ErrorLogger();
 ```
 
 **Implementation steps:**
+
 1. Create hierarchical error boundary system with different levels
 2. Implement comprehensive error logging with context capture
 3. Build error fallback UI components with recovery actions
@@ -602,22 +642,28 @@ export const errorLogger = new ErrorLogger();
 5. Add error severity classification and prioritization
 
 **Testing:**
+
 1. Unit tests for error boundary behavior and recovery
 2. Integration tests for error propagation and handling
 3. Manual error injection tests for UI validation
 4. Performance tests for error handling overhead
 
-**Commit**: `feat(error): implement core error boundary system with logging and recovery`
+**Commit**:
+`feat(error): implement core error boundary system with logging and recovery`
 
 ### Phase 2: Route and Feature Error Boundaries (3 points)
+
 **Files to create/modify:**
+
 - `src/router/AppRouter.tsx` - Add route-level error boundaries
 - `src/pages/ErrorPage.tsx` - Dedicated error page component
-- `src/components/modes/learn/LearnErrorBoundary.tsx` - Learn mode error boundary
+- `src/components/modes/learn/LearnErrorBoundary.tsx` - Learn mode error
+  boundary
 - `src/components/deck/DeckErrorBoundary.tsx` - Deck management error boundary
 - `src/hooks/useAsyncErrorHandler.ts` - Hook for async error handling
 
 **Route-Level Error Boundaries:**
+
 ```typescript
 // src/router/AppRouter.tsx (enhanced)
 import { Routes, Route } from 'react-router-dom';
@@ -694,6 +740,7 @@ export function AppRouter() {
 ```
 
 **Learn Mode Error Boundary:**
+
 ```typescript
 // src/components/modes/learn/LearnErrorBoundary.tsx
 import { FC, ReactNode } from 'react';
@@ -775,6 +822,7 @@ export const LearnErrorBoundary: FC<LearnErrorBoundaryProps> = ({
 ```
 
 **Async Error Handler Hook:**
+
 ```typescript
 // src/hooks/useAsyncErrorHandler.ts
 import { useCallback, useState } from 'react';
@@ -803,48 +851,52 @@ export function useAsyncErrorHandler<T extends any[], R>(
   const [lastArgs, setLastArgs] = useState<T | null>(null);
   const [attemptCount, setAttemptCount] = useState(0);
 
-  const executeWithErrorHandling = useCallback(async (...args: T): Promise<R> => {
-    try {
-      setLastArgs(args);
-      const result = await asyncFunction(...args);
+  const executeWithErrorHandling = useCallback(
+    async (...args: T): Promise<R> => {
+      try {
+        setLastArgs(args);
+        const result = await asyncFunction(...args);
 
-      // Reset error state on success
-      if (error) {
-        setError(null);
-        setAttemptCount(0);
+        // Reset error state on success
+        if (error) {
+          setError(null);
+          setAttemptCount(0);
+        }
+
+        return result;
+      } catch (caughtError) {
+        const errorInstance =
+          caughtError instanceof Error
+            ? caughtError
+            : new Error(String(caughtError));
+
+        // Log the error
+        errorLogger.logError(errorInstance, {
+          level: 'async',
+          timestamp: new Date().toISOString(),
+          userAgent: navigator.userAgent,
+          url: window.location.href,
+          userId: localStorage.getItem('userId'),
+          sessionId: sessionStorage.getItem('sessionId') || 'unknown',
+          errorBoundaryLevel: 'async',
+          additionalContext: {
+            functionName: asyncFunction.name,
+            arguments: args,
+            attemptCount: attemptCount + 1,
+          },
+        });
+
+        setError(errorInstance);
+        setAttemptCount(prev => prev + 1);
+
+        // Call custom error handler
+        onError?.(errorInstance);
+
+        throw errorInstance;
       }
-
-      return result;
-    } catch (caughtError) {
-      const errorInstance = caughtError instanceof Error
-        ? caughtError
-        : new Error(String(caughtError));
-
-      // Log the error
-      errorLogger.logError(errorInstance, {
-        level: 'async',
-        timestamp: new Date().toISOString(),
-        userAgent: navigator.userAgent,
-        url: window.location.href,
-        userId: localStorage.getItem('userId'),
-        sessionId: sessionStorage.getItem('sessionId') || 'unknown',
-        errorBoundaryLevel: 'async',
-        additionalContext: {
-          functionName: asyncFunction.name,
-          arguments: args,
-          attemptCount: attemptCount + 1,
-        },
-      });
-
-      setError(errorInstance);
-      setAttemptCount(prev => prev + 1);
-
-      // Call custom error handler
-      onError?.(errorInstance);
-
-      throw errorInstance;
-    }
-  }, [asyncFunction, error, attemptCount, onError]);
+    },
+    [asyncFunction, error, attemptCount, onError]
+  );
 
   const retry = useCallback(async () => {
     if (!lastArgs || attemptCount >= retryAttempts) {
@@ -857,7 +909,13 @@ export function useAsyncErrorHandler<T extends any[], R>(
     }
 
     return executeWithErrorHandling(...lastArgs);
-  }, [lastArgs, attemptCount, retryAttempts, retryDelay, executeWithErrorHandling]);
+  }, [
+    lastArgs,
+    attemptCount,
+    retryAttempts,
+    retryDelay,
+    executeWithErrorHandling,
+  ]);
 
   const reset = useCallback(() => {
     setError(null);
@@ -887,6 +945,7 @@ export function useAsyncErrorHandler<T extends any[], R>(
 ```
 
 **Implementation steps:**
+
 1. Add route-level error boundaries with navigation-aware reset logic
 2. Create feature-specific error boundaries for major app sections
 3. Implement async error handling hook with retry logic
@@ -894,21 +953,28 @@ export function useAsyncErrorHandler<T extends any[], R>(
 5. Create error page for app-level failures
 
 **Testing:**
+
 1. Route navigation error simulation and recovery testing
 2. Feature-specific error boundary isolation testing
 3. Async error handling and retry mechanism validation
 4. Session state preservation during error recovery
 
-**Commit**: `feat(error): add route and feature-level error boundaries with recovery`
+**Commit**:
+`feat(error): add route and feature-level error boundaries with recovery`
 
 ### Phase 3: Progress Preservation and Recovery (3 points)
+
 **Files to create/modify:**
-- `src/services/progressRecovery.ts` - Progress preservation and recovery service
-- `src/hooks/useErrorRecovery.ts` - Hook for error recovery with progress restoration
+
+- `src/services/progressRecovery.ts` - Progress preservation and recovery
+  service
+- `src/hooks/useErrorRecovery.ts` - Hook for error recovery with progress
+  restoration
 - `src/store/errorStore.ts` - Zustand store for error state management
 - `src/components/error/RecoveryDialog.tsx` - Progress recovery UI component
 
 **Progress Recovery Service:**
+
 ```typescript
 // src/services/progressRecovery.ts
 import { SessionState, LearnSessionState } from '@/types';
@@ -1038,7 +1104,7 @@ class ProgressRecoveryService {
 
   public cleanupOldSnapshots() {
     const snapshots = this.getAllSnapshots();
-    const cutoffTime = Date.now() - (7 * 24 * 60 * 60 * 1000); // 7 days ago
+    const cutoffTime = Date.now() - 7 * 24 * 60 * 60 * 1000; // 7 days ago
 
     const recentSnapshots = snapshots
       .filter(s => s.timestamp > cutoffTime)
@@ -1119,6 +1185,7 @@ export const progressRecovery = new ProgressRecoveryService();
 ```
 
 **Recovery Dialog Component:**
+
 ```typescript
 // src/components/error/RecoveryDialog.tsx
 import { FC, useState, useEffect } from 'react';
@@ -1246,6 +1313,7 @@ export const RecoveryDialog: FC<RecoveryDialogProps> = ({
 ```
 
 **Implementation steps:**
+
 1. Create progress snapshot system with automatic periodic saves
 2. Implement user action tracking for replay capability
 3. Build recovery dialog UI for progress restoration options
@@ -1253,6 +1321,7 @@ export const RecoveryDialog: FC<RecoveryDialogProps> = ({
 5. Create cleanup mechanisms for old recovery data
 
 **Testing:**
+
 1. Progress preservation testing during various error scenarios
 2. Recovery dialog functionality and user experience testing
 3. Session restoration accuracy and completeness validation
@@ -1261,7 +1330,9 @@ export const RecoveryDialog: FC<RecoveryDialogProps> = ({
 **Commit**: `feat(error): implement progress preservation and recovery system`
 
 ### Phase 4: User Communication and Monitoring (3 points)
+
 **Files to create/modify:**
+
 - `src/components/error/ErrorNotification.tsx` - Toast notifications for errors
 - `src/components/error/ErrorReportDialog.tsx` - User error reporting interface
 - `src/services/userFeedback.ts` - User feedback collection service
@@ -1269,6 +1340,7 @@ export const RecoveryDialog: FC<RecoveryDialogProps> = ({
 - `src/components/admin/ErrorDashboard.tsx` - Error monitoring dashboard (dev)
 
 **Error Notification System:**
+
 ```typescript
 // src/components/error/ErrorNotification.tsx
 import { FC, useEffect, useState } from 'react';
@@ -1505,6 +1577,7 @@ export function useErrorNotifications() {
 ```
 
 **User Feedback Service:**
+
 ```typescript
 // src/services/userFeedback.ts
 interface UserFeedbackReport {
@@ -1540,7 +1613,9 @@ interface UserFeedbackReport {
 class UserFeedbackService {
   private readonly STORAGE_KEY = 'user_feedback_reports';
 
-  public async submitFeedback(feedback: Omit<UserFeedbackReport, 'id' | 'timestamp' | 'userContext'>): Promise<string> {
+  public async submitFeedback(
+    feedback: Omit<UserFeedbackReport, 'id' | 'timestamp' | 'userContext'>
+  ): Promise<string> {
     const report: UserFeedbackReport = {
       ...feedback,
       id: this.generateReportId(),
@@ -1556,7 +1631,10 @@ class UserFeedbackService {
       await this.submitToBackend(report);
       console.log('Feedback submitted successfully:', report.id);
     } catch (error) {
-      console.warn('Failed to submit feedback to backend, stored locally:', error);
+      console.warn(
+        'Failed to submit feedback to backend, stored locally:',
+        error
+      );
     }
 
     return report.id;
@@ -1632,9 +1710,11 @@ class UserFeedbackService {
       const errorReports = localStorage.getItem('errorReports');
       if (errorReports) {
         const reports = JSON.parse(errorReports);
-        return reports.slice(-5).map((report: any) =>
-          `${report.error.name}: ${report.error.message}`
-        );
+        return reports
+          .slice(-5)
+          .map(
+            (report: any) => `${report.error.name}: ${report.error.message}`
+          );
       }
     } catch (error) {
       console.warn('Failed to get recent error logs:', error);
@@ -1678,6 +1758,7 @@ export const userFeedbackService = new UserFeedbackService();
 ```
 
 **Implementation steps:**
+
 1. Create toast notification system for error communication
 2. Build user feedback collection interface with screenshots
 3. Implement error monitoring dashboard for development
@@ -1685,6 +1766,7 @@ export const userFeedbackService = new UserFeedbackService();
 5. Create feedback analytics and reporting system
 
 **Testing:**
+
 1. Notification system functionality and accessibility testing
 2. User feedback collection workflow validation
 3. Error message clarity and user comprehension testing
@@ -1695,6 +1777,7 @@ export const userFeedbackService = new UserFeedbackService();
 ## Testing Strategy
 
 ### Unit Tests
+
 - Test files: `__tests__/error/**/*.test.tsx`
 - Key scenarios:
   - Error boundary catching and recovery behavior
@@ -1703,6 +1786,7 @@ export const userFeedbackService = new UserFeedbackService();
   - User notification display and interaction
 
 ### Component Tests
+
 ```typescript
 describe('ErrorBoundary', () => {
   it('should catch errors and display fallback UI', () => {
@@ -1745,12 +1829,14 @@ describe('ErrorBoundary', () => {
 ```
 
 ### Integration Tests
+
 - Complete error recovery flows: Error → Recovery → Session restoration
 - Cross-component error propagation and isolation
 - Progress preservation across different error scenarios
 - User feedback submission and notification workflows
 
 ### E2E Tests (Playwright)
+
 - Simulated network failures and error recovery
 - Page refresh during errors with progress restoration
 - Cross-browser error handling consistency
@@ -1759,55 +1845,67 @@ describe('ErrorBoundary', () => {
 ## Platform-Specific Considerations
 
 ### Web Desktop
+
 - Keyboard navigation in error dialogs and recovery interfaces
 - Copy error details functionality for support requests
 - Window focus management during error states
 - Multiple tab error state synchronization
 
 ### Web Mobile
+
 - Touch-friendly error notification dismissal
 - Mobile-optimized error dialog layouts
 - Network connectivity error handling
 - Mobile browser crash recovery
 
 ### PWA Features
+
 - Offline error handling and queuing
 - Service worker error reporting
 - Cache corruption recovery mechanisms
 - Installation error handling
 
 ## Documentation Updates Required
+
 1. `README.md` - Add error handling and recovery documentation
 2. `docs/error-handling.md` - Comprehensive error handling guide
 3. `docs/user-feedback.md` - User feedback and support documentation
 4. In-code documentation: JSDoc comments for all error handling utilities
 
 ## Success Criteria
-1. **Error Prevention**: Zero app crashes, graceful degradation for all error types
+
+1. **Error Prevention**: Zero app crashes, graceful degradation for all error
+   types
 2. **Recovery Success Rate**: >95% successful recovery from recoverable errors
 3. **Progress Preservation**: 100% session state preservation during errors
-4. **User Communication**: Clear, actionable error messages with <5 second response time
+4. **User Communication**: Clear, actionable error messages with <5 second
+   response time
 5. **Feedback Collection**: >80% user feedback completion rate when prompted
 6. **Performance Impact**: <1ms overhead per component for error handling
-7. **Developer Experience**: Complete error logs with sufficient debugging context
+7. **Developer Experience**: Complete error logs with sufficient debugging
+   context
 
 ## Dependencies
+
 - **React Error Boundaries**: React 16.8+ (already available)
 - **Screenshot Capture**: html2canvas (new dependency - optional)
 - **Date Formatting**: date-fns (already used in project)
 - **Error Reporting**: Integration with Sentry/LogRocket (future enhancement)
 
 ## Risks & Mitigations
-1. **Risk**: Error boundaries themselves could crash
-   **Mitigation**: Comprehensive testing, fallback error handling, nested boundary strategy
+
+1. **Risk**: Error boundaries themselves could crash **Mitigation**:
+   Comprehensive testing, fallback error handling, nested boundary strategy
 2. **Risk**: Progress preservation could fail during storage errors
-   **Mitigation**: Multiple storage strategies, graceful degradation, user notification
-3. **Risk**: Error logging could impact app performance
-   **Mitigation**: Asynchronous logging, batching, size limits, cleanup mechanisms
-4. **Risk**: User feedback collection could become overwhelming
-   **Mitigation**: Smart feedback prompting, rate limiting, user preference controls
+   **Mitigation**: Multiple storage strategies, graceful degradation, user
+   notification
+3. **Risk**: Error logging could impact app performance **Mitigation**:
+   Asynchronous logging, batching, size limits, cleanup mechanisms
+4. **Risk**: User feedback collection could become overwhelming **Mitigation**:
+   Smart feedback prompting, rate limiting, user preference controls
 
 ## Accessibility Requirements
+
 - Error messages must be announced by screen readers
 - Error dialogs must trap focus and support keyboard navigation
 - High contrast support for error states and notifications
@@ -1816,6 +1914,7 @@ describe('ErrorBoundary', () => {
 ## Performance Metrics
 
 ### Target Performance Standards
+
 - **Error Detection Time**: <10ms from error occurrence to boundary catch
 - **Recovery Time**: <2 seconds from error to recovery UI display
 - **Progress Restoration**: <1 second to restore saved session state
@@ -1823,6 +1922,7 @@ describe('ErrorBoundary', () => {
 - **Memory Usage**: <5MB additional memory for error handling infrastructure
 
 ### Monitoring and Alerting
+
 - Error rate monitoring with alerts for spikes
 - Recovery success rate tracking
 - User feedback sentiment analysis
@@ -1831,6 +1931,7 @@ describe('ErrorBoundary', () => {
 ## Release & Deployment Guide
 
 ### Testing Checklist
+
 - [ ] Error boundaries catch all error types correctly
 - [ ] Progress preservation works across all session types
 - [ ] User notifications display properly on all devices
@@ -1840,12 +1941,14 @@ describe('ErrorBoundary', () => {
 - [ ] Accessibility requirements met for all error states
 
 ### Rollout Strategy
+
 1. **Phase 1**: Core error boundaries with basic recovery
 2. **Phase 2**: Progress preservation and restoration
 3. **Phase 3**: User notifications and feedback collection
 4. **Phase 4**: Advanced monitoring and analytics
 
 ### Rollback Strategy
+
 - Error boundaries can be disabled via feature flags
 - Progress preservation can revert to basic session storage
 - User notifications can be suppressed during issues

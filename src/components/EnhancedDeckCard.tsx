@@ -96,181 +96,175 @@ const DifficultyBadge: FC<{ level?: string }> = ({ level }) => {
   );
 };
 
-export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(({
-  deck,
-  progress = {
-    overall: 0,
-    byMode: {},
-    totalCardsStudied: 0,
-    streakDays: 0,
-    masteredCards: 0,
-    totalCards: deck.content.length
-  },
-  onModeSelect,
-}) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const navigate = useNavigate();
-  const { showNotification } = useNotificationStore();
-  const { metadata } = deck;
-
-  const modes: ModeConfig[] = [
-    {
-      id: 'flashcards',
-      label: 'Flashcards',
-      icon: FlashcardsIcon,
-      color: 'primary',
-      description: 'Classic flip cards',
-      route: `/flashcards/${deck.id}`,
+export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(
+  ({
+    deck,
+    progress = {
+      overall: 0,
+      byMode: {},
+      totalCardsStudied: 0,
+      streakDays: 0,
+      masteredCards: 0,
+      totalCards: deck.content.length,
     },
-    {
-      id: 'learn',
-      label: 'Learn',
-      icon: LearnIcon,
-      color: 'secondary',
-      description: 'Interactive questions',
-      route: `/learn/${deck.id}`,
-    },
-    {
-      id: 'match',
-      label: 'Match',
-      icon: MatchIcon,
-      color: 'purple',
-      description: 'Memory game',
-      route: `/match/${deck.id}`,
-    },
-    {
-      id: 'test',
-      label: 'Test',
-      icon: TestIcon,
-      color: 'orange',
-      description: 'Practice exam',
-      route: `/test/${deck.id}`,
-    },
-  ];
+    onModeSelect,
+  }) => {
+    const [isHovered, setIsHovered] = useState(false);
+    const navigate = useNavigate();
+    const { showNotification } = useNotificationStore();
+    const { metadata } = deck;
 
-  const handleModeClick = (e: React.MouseEvent, mode: ModeConfig) => {
-    e.stopPropagation();
+    const modes: ModeConfig[] = [
+      {
+        id: 'flashcards',
+        label: 'Flashcards',
+        icon: FlashcardsIcon,
+        color: 'primary',
+        description: 'Classic flip cards',
+        route: `/flashcards/${deck.id}`,
+      },
+      {
+        id: 'learn',
+        label: 'Learn',
+        icon: LearnIcon,
+        color: 'secondary',
+        description: 'Interactive questions',
+        route: `/learn/${deck.id}`,
+      },
+      {
+        id: 'match',
+        label: 'Match',
+        icon: MatchIcon,
+        color: 'purple',
+        description: 'Memory game',
+        route: `/match/${deck.id}`,
+      },
+      {
+        id: 'test',
+        label: 'Test',
+        icon: TestIcon,
+        color: 'orange',
+        description: 'Practice exam',
+        route: `/test/${deck.id}`,
+      },
+    ];
 
-    // Show "Coming Soon" notification for Match and Test modes
-    if (mode.id === 'match' || mode.id === 'test') {
-      showNotification({
-        message: `${mode.label} mode coming soon!`,
-        type: 'coming-soon',
-        icon: '🚀',
-        duration: 3000,
-      });
-      return;
-    }
+    const handleModeClick = (e: React.MouseEvent, mode: ModeConfig) => {
+      e.stopPropagation();
 
-    onModeSelect?.(deck.id, mode.id);
-    navigate(mode.route);
-  };
+      // Show "Coming Soon" notification for Match and Test modes
+      if (mode.id === 'match' || mode.id === 'test') {
+        showNotification({
+          message: `${mode.label} mode coming soon!`,
+          type: 'coming-soon',
+          icon: '🚀',
+          duration: 3000,
+        });
+        return;
+      }
 
-  const handleCardClick = () => {
-    navigate(`/deck/${deck.id}`);
-  };
+      onModeSelect?.(deck.id, mode.id);
+      navigate(mode.route);
+    };
 
-  return (
-    <motion.article
-      className={styles.enhancedDeckCard}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -4 }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-      onClick={handleCardClick}
-      layout
-    >
-      {/* Progress Ring - Shows mastery percentage of entire deck */}
-      {progress.overall > 0 && (
-        <div className={styles.progressRing}>
-          <CircularProgress value={progress.overall} />
-        </div>
-      )}
+    const handleCardClick = () => {
+      navigate(`/deck/${deck.id}`);
+    };
 
-      {/* Deck Info */}
-      <header className={styles.cardHeader}>
-        <h3 className={styles.deckName}>{metadata.deck_name}</h3>
-        <DifficultyBadge level={metadata.difficulty} />
-      </header>
-
-      {metadata.deck_subtitle && (
-        <p className={styles.subtitle}>
-          {metadata.deck_subtitle}
-        </p>
-      )}
-
-      {metadata.description && (
-        <p className={styles.description}>
-          {metadata.description}
-        </p>
-      )}
-
-      <div className={styles.stats}>
-        <div className={styles.statItem}>
-          <CardsIcon className={styles.statIcon} size={16} />
-          <span className={styles.statValue}>
-            {progress.masteredCards > 0
-              ? `${progress.masteredCards}/${metadata.card_count || deck.content.length}`
-              : metadata.card_count || deck.content.length}
-          </span>
-          <span className={styles.statLabel}>
-            {progress.masteredCards > 0 ? 'mastered' : 'cards'}
-          </span>
-        </div>
-
-        {metadata.available_levels && metadata.available_levels.length > 0 && (
-          <div className={styles.statItem}>
-            <LevelsIcon className={styles.statIcon} size={16} />
-            <span className={styles.statValue}>{metadata.available_levels.length}</span>
-            <span className={styles.statLabel}>levels</span>
+    return (
+      <motion.article
+        className={styles.enhancedDeckCard}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        whileHover={{ y: -4 }}
+        onHoverStart={() => setIsHovered(true)}
+        onHoverEnd={() => setIsHovered(false)}
+        onClick={handleCardClick}
+        layout
+      >
+        {/* Progress Ring - Shows mastery percentage of entire deck */}
+        {progress.overall > 0 && (
+          <div className={styles.progressRing}>
+            <CircularProgress value={progress.overall} />
           </div>
         )}
 
-        <div className={styles.statItem}>
-          <ClockIcon className={styles.statIcon} size={16} />
-          <span className={styles.statValue}>{formatLastStudied(progress.lastStudied)}</span>
-        </div>
-      </div>
+        {/* Deck Info */}
+        <header className={styles.cardHeader}>
+          <h3 className={styles.deckName}>{metadata.deck_name}</h3>
+          <DifficultyBadge level={metadata.difficulty} />
+        </header>
 
-      {/* Tags */}
-      {metadata.tags && metadata.tags.length > 0 && (
-        <div className={styles.tags}>
-          {metadata.tags.slice(0, 3).map((tag) => (
-            <span key={tag} className={styles.tag}>
-              {tag}
+        {metadata.deck_subtitle && <p className={styles.subtitle}>{metadata.deck_subtitle}</p>}
+
+        {metadata.description && <p className={styles.description}>{metadata.description}</p>}
+
+        <div className={styles.stats}>
+          <div className={styles.statItem}>
+            <CardsIcon className={styles.statIcon} size={16} />
+            <span className={styles.statValue}>
+              {progress.masteredCards > 0
+                ? `${progress.masteredCards}/${metadata.card_count || deck.content.length}`
+                : metadata.card_count || deck.content.length}
             </span>
-          ))}
-          {metadata.tags.length > 3 && (
-            <span className={styles.tag}>+{metadata.tags.length - 3}</span>
-          )}
-        </div>
-      )}
+            <span className={styles.statLabel}>
+              {progress.masteredCards > 0 ? 'mastered' : 'cards'}
+            </span>
+          </div>
 
-      {/* Mode Selection Strip */}
-      <motion.div
-        className={styles.modeStrip}
-        initial={false}
-        animate={{ opacity: isHovered ? 1 : 0.8 }}
-      >
-        {modes.map((mode) => (
-          <motion.button
-            key={mode.id}
-            className={`${styles.modeButton} ${styles[mode.id]}`}
-            onClick={(e) => handleModeClick(e, mode)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            aria-label={`Study ${metadata.deck_name} with ${mode.label} mode`}
-            title={mode.description}
-          >
-            <mode.icon className={styles.modeIcon} />
-            <span className={styles.modeLabel}>{mode.label}</span>
-          </motion.button>
-        ))}
-      </motion.div>
-    </motion.article>
-  );
-});
+          {metadata.available_levels && metadata.available_levels.length > 0 && (
+            <div className={styles.statItem}>
+              <LevelsIcon className={styles.statIcon} size={16} />
+              <span className={styles.statValue}>{metadata.available_levels.length}</span>
+              <span className={styles.statLabel}>levels</span>
+            </div>
+          )}
+
+          <div className={styles.statItem}>
+            <ClockIcon className={styles.statIcon} size={16} />
+            <span className={styles.statValue}>{formatLastStudied(progress.lastStudied)}</span>
+          </div>
+        </div>
+
+        {/* Tags */}
+        {metadata.tags && metadata.tags.length > 0 && (
+          <div className={styles.tags}>
+            {metadata.tags.slice(0, 3).map(tag => (
+              <span key={tag} className={styles.tag}>
+                {tag}
+              </span>
+            ))}
+            {metadata.tags.length > 3 && (
+              <span className={styles.tag}>+{metadata.tags.length - 3}</span>
+            )}
+          </div>
+        )}
+
+        {/* Mode Selection Strip */}
+        <motion.div
+          className={styles.modeStrip}
+          initial={false}
+          animate={{ opacity: isHovered ? 1 : 0.8 }}
+        >
+          {modes.map(mode => (
+            <motion.button
+              key={mode.id}
+              className={`${styles.modeButton} ${styles[mode.id]}`}
+              onClick={e => handleModeClick(e, mode)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label={`Study ${metadata.deck_name} with ${mode.label} mode`}
+              title={mode.description}
+            >
+              <mode.icon className={styles.modeIcon} />
+              <span className={styles.modeLabel}>{mode.label}</span>
+            </motion.button>
+          ))}
+        </motion.div>
+      </motion.article>
+    );
+  }
+);
 
 EnhancedDeckCard.displayName = 'EnhancedDeckCard';
 

@@ -27,26 +27,26 @@ export default defineConfig({
           {
             src: 'pwa-64x64.png',
             sizes: '64x64',
-            type: 'image/png'
+            type: 'image/png',
           },
           {
             src: 'pwa-192x192.png',
             sizes: '192x192',
-            type: 'image/png'
+            type: 'image/png',
           },
           {
             src: 'pwa-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'any'
+            purpose: 'any',
           },
           {
             src: 'maskable-icon-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'maskable'
-          }
-        ]
+            purpose: 'maskable',
+          },
+        ],
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
@@ -59,12 +59,12 @@ export default defineConfig({
               cacheName: 'google-fonts-cache',
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365 // 365 days
+                maxAgeSeconds: 60 * 60 * 24 * 365, // 365 days
               },
               cacheableResponse: {
-                statuses: [0, 200]
-              }
-            }
+                statuses: [0, 200],
+              },
+            },
           },
           {
             urlPattern: /\/data\/.*\.json$/,
@@ -76,9 +76,9 @@ export default defineConfig({
                 maxAgeSeconds: 24 * 60 * 60, // 24 hours
               },
             },
-          }
-        ]
-      }
+          },
+        ],
+      },
     }),
     visualizer({
       filename: 'dist/bundle-analysis.html',
@@ -90,8 +90,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
-    }
+      '@': path.resolve(__dirname, './src'),
+    },
   },
   build: {
     target: 'esnext',
@@ -120,22 +120,14 @@ export default defineConfig({
             './src/hooks/useLearnSession.ts',
             './src/services/questionGenerator.ts',
           ],
-          'flashcards-mode': [
-            './src/pages/Flashcards.tsx',
-          ],
-          'deck-management': [
-            './src/pages/Deck.tsx',
-            './src/utils/deckLoader.ts',
-          ],
+          'flashcards-mode': ['./src/pages/Flashcards.tsx'],
+          'deck-management': ['./src/pages/Deck.tsx', './src/utils/deckLoader.ts'],
 
           // Utility chunks
-          'shared-utils': [
-            './src/utils/textMatching.ts',
-            './src/services/cardScheduler.ts',
-          ],
+          'shared-utils': ['./src/utils/textMatching.ts', './src/services/cardScheduler.ts'],
 
           // Store chunks
-          'stores': [
+          stores: [
             './src/store/deckStore.ts',
             './src/store/progressStore.ts',
             './src/store/cardMasteryStore.ts',
@@ -144,7 +136,7 @@ export default defineConfig({
         chunkFileNames: () => {
           return `assets/[name]-[hash].js`;
         },
-        assetFileNames: (assetInfo) => {
+        assetFileNames: assetInfo => {
           const extType = assetInfo.name!.split('.').at(1);
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType!)) {
             return `assets/images/[name]-[hash][extname]`;
@@ -178,17 +170,12 @@ export default defineConfig({
     cors: true,
   },
   preview: {
-    port: 5178
+    port: 5178,
   },
 
   // Dependency optimization
   optimizeDeps: {
-    include: [
-      'react',
-      'react-dom',
-      'react-router-dom',
-      'zustand',
-    ],
+    include: ['react', 'react-dom', 'react-router-dom', 'zustand'],
     exclude: [
       // Large libraries that should be loaded on demand
       '@testing-library/react',

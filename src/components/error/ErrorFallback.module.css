@@ -21,7 +21,7 @@
 
 .errorIcon {
   margin: 0 auto var(--space-6, 1.5rem);
-  color: var(--semantic-error, #EF4444);
+  color: var(--semantic-error, #ef4444);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,20 +30,20 @@
 .iconSvg {
   width: 64px;
   height: 64px;
-  color: var(--semantic-error, #EF4444);
+  color: var(--semantic-error, #ef4444);
 }
 
 .errorTitle {
   font-size: var(--text-xl, 1.25rem);
   font-weight: 600;
-  color: var(--text-primary, #1F2937);
+  color: var(--text-primary, #1f2937);
   margin: 0 0 var(--space-4, 1rem);
   line-height: 1.4;
 }
 
 .errorMessage {
   font-size: var(--text-base, 1rem);
-  color: var(--text-secondary, #6B7280);
+  color: var(--text-secondary, #6b7280);
   margin: 0 0 var(--space-6, 1.5rem);
   line-height: 1.6;
 }
@@ -51,16 +51,16 @@
 .errorDetails {
   margin: var(--space-4, 1rem) 0;
   text-align: left;
-  background: var(--bg-tertiary, #E5E7EB);
+  background: var(--bg-tertiary, #e5e7eb);
   border-radius: var(--radius-md, 8px);
-  border: 1px solid var(--border-color, #D1D5DB);
+  border: 1px solid var(--border-color, #d1d5db);
 }
 
 .errorDetails summary {
   padding: var(--space-3, 0.75rem);
   cursor: pointer;
   font-weight: 500;
-  color: var(--text-secondary, #6B7280);
+  color: var(--text-secondary, #6b7280);
   user-select: none;
 }
 
@@ -73,9 +73,9 @@
   margin: 0;
   font-family: 'Courier New', monospace;
   font-size: var(--text-sm, 0.875rem);
-  color: var(--text-primary, #1F2937);
+  color: var(--text-primary, #1f2937);
   background: var(--bg-primary, white);
-  border-top: 1px solid var(--border-color, #D1D5DB);
+  border-top: 1px solid var(--border-color, #d1d5db);
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-x: auto;
@@ -85,12 +85,12 @@
 
 .errorId {
   font-size: var(--text-sm, 0.875rem);
-  color: var(--text-tertiary, #9CA3AF);
+  color: var(--text-tertiary, #9ca3af);
   margin: var(--space-4, 1rem) 0;
 }
 
 .errorId code {
-  background: var(--bg-tertiary, #E5E7EB);
+  background: var(--bg-tertiary, #e5e7eb);
   padding: var(--space-1, 0.25rem) var(--space-2, 0.5rem);
   border-radius: var(--radius-sm, 4px);
   font-family: 'Courier New', monospace;
@@ -181,11 +181,11 @@
 @media (prefers-contrast: high) {
   .errorCard {
     border-width: 3px;
-    border-color: var(--semantic-error, #EF4444);
+    border-color: var(--semantic-error, #ef4444);
   }
 
   .errorTitle {
-    color: var(--semantic-error, #EF4444);
+    color: var(--semantic-error, #ef4444);
     font-weight: 700;
   }
 

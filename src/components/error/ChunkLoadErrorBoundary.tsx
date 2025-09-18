@@ -28,19 +28,17 @@ const ChunkLoadErrorFallback = ({ onRetry }: { onRetry: () => void }) => (
           strokeWidth={2}
           className={styles.iconSvg}
         >
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M12 6v6l4 2"/>
-          <line x1="15" y1="9" x2="9" y2="15"/>
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 6v6l4 2" />
+          <line x1="15" y1="9" x2="9" y2="15" />
         </svg>
       </div>
 
-      <h2 className={styles.errorTitle}>
-        Failed to Load Application Resources
-      </h2>
+      <h2 className={styles.errorTitle}>Failed to Load Application Resources</h2>
 
       <p className={styles.errorMessage}>
-        Some application resources failed to load. This might be due to a network issue
-        or the application has been updated. Please refresh the page to try again.
+        Some application resources failed to load. This might be due to a network issue or the
+        application has been updated. Please refresh the page to try again.
       </p>
 
       <div className={styles.buttonGroup}>
@@ -52,9 +50,12 @@ const ChunkLoadErrorFallback = ({ onRetry }: { onRetry: () => void }) => (
           onClick={() => {
             // Clear any cached resources and reload
             if ('caches' in window) {
-              caches.keys().then(names => {
-                names.forEach(name => caches.delete(name));
-              }).finally(() => window.location.reload());
+              caches
+                .keys()
+                .then(names => {
+                  names.forEach(name => caches.delete(name));
+                })
+                .finally(() => window.location.reload());
             } else {
               (window as any).location.reload();
             }
@@ -137,8 +138,8 @@ export class ChunkLoadErrorBoundary extends Component<
     const errorMessage = error.message.toLowerCase();
     const errorStack = (error.stack || '').toLowerCase();
 
-    return chunkErrorPatterns.some(pattern =>
-      pattern.test(errorMessage) || pattern.test(errorStack)
+    return chunkErrorPatterns.some(
+      pattern => pattern.test(errorMessage) || pattern.test(errorStack)
     );
   }
 

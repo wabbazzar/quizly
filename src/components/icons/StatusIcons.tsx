@@ -44,7 +44,11 @@ export const BookOpenIcon: FC<IconProps> = ({ className, size = 24, color = 'cur
   </svg>
 );
 
-export const CheckCircleIcon: FC<IconProps> = ({ className, size = 24, color = 'currentColor' }) => (
+export const CheckCircleIcon: FC<IconProps> = ({
+  className,
+  size = 24,
+  color = 'currentColor',
+}) => (
   <svg
     width={size}
     height={size}
@@ -158,7 +162,11 @@ export const ClockIcon: FC<IconProps> = ({ className, size = 24, color = 'curren
   </svg>
 );
 
-export const InformationCircleIcon: FC<IconProps> = ({ className, size = 24, color = 'currentColor' }) => (
+export const InformationCircleIcon: FC<IconProps> = ({
+  className,
+  size = 24,
+  color = 'currentColor',
+}) => (
   <svg
     width={size}
     height={size}

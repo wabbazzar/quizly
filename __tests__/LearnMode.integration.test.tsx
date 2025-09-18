@@ -20,7 +20,7 @@ const mockDeck: Deck = {
     prerequisites: [],
     learning_objectives: [],
     total_cards: 2,
-    category: 'test'
+    category: 'test',
   },
   content: [
     {
@@ -30,7 +30,7 @@ const mockDeck: Deck = {
       side_b: 'Paris',
       notes: 'Test note',
       examples: [],
-      related_cards: []
+      related_cards: [],
     },
     {
       idx: 1,
@@ -39,9 +39,9 @@ const mockDeck: Deck = {
       side_b: '4',
       notes: '',
       examples: [],
-      related_cards: []
-    }
-  ]
+      related_cards: [],
+    },
+  ],
 };
 
 const defaultSettings: LearnModeSettings = {
@@ -56,7 +56,7 @@ const defaultSettings: LearnModeSettings = {
   sideGrouping: 'separate',
   showHints: false,
   progressionMode: 'sequential',
-  questionTypes: ['multiple_choice', 'free_text']
+  questionTypes: ['multiple_choice', 'free_text'],
 };
 
 describe('Learn Mode Integration - Free Text Feedback', () => {

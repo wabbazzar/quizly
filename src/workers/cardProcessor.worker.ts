@@ -56,8 +56,14 @@ function calculateRelevanceScore(card: Card, query: string): number {
   if (queryWords.length === 0) return 0;
 
   let score = 0;
-  const fields = [card.side_a, card.side_b, card.side_c, card.side_d, card.side_e, card.side_f]
-    .filter(Boolean) as string[];
+  const fields = [
+    card.side_a,
+    card.side_b,
+    card.side_c,
+    card.side_d,
+    card.side_e,
+    card.side_f,
+  ].filter(Boolean) as string[];
 
   fields.forEach((field, fieldIndex) => {
     const normalizedField = normalizeText(field);
@@ -147,8 +153,7 @@ function analyzeCards(cards: Card[]): CardStatistics {
 
     // Track difficulty (if available)
     const difficulty = (card as any).difficulty || 'unknown';
-    stats.difficultyDistribution[difficulty] =
-      (stats.difficultyDistribution[difficulty] || 0) + 1;
+    stats.difficultyDistribution[difficulty] = (stats.difficultyDistribution[difficulty] || 0) + 1;
   });
 
   stats.averageCardLength = totalLength / cards.length;
@@ -225,7 +230,8 @@ function processStudySession(cards: Card[], sessionData: any) {
     }
 
     // Generate recommendations based on performance
-    const accuracy = processed.correctAnswers / (processed.correctAnswers + processed.incorrectAnswers);
+    const accuracy =
+      processed.correctAnswers / (processed.correctAnswers + processed.incorrectAnswers);
 
     if (accuracy < 0.6) {
       processed.recommendations.push('Consider reviewing cards more thoroughly before testing');
@@ -298,7 +304,7 @@ function generateQuizQuestions(cards: Card[], count: number, options: any = {}) 
 }
 
 // Message handler
-self.onmessage = function(event: MessageEvent<WorkerMessage>) {
+self.onmessage = function (event: MessageEvent<WorkerMessage>) {
   const { id, type, payload } = event.data;
 
   try {
@@ -347,7 +353,6 @@ self.onmessage = function(event: MessageEvent<WorkerMessage>) {
     };
 
     self.postMessage(response);
-
   } catch (error) {
     // Send error response
     const response: WorkerResponse = {
@@ -361,14 +366,9 @@ self.onmessage = function(event: MessageEvent<WorkerMessage>) {
 };
 
 // Handle worker termination
-self.onclose = function() {
+self.onclose = function () {
   console.log('Card processor worker terminated');
 };
 
 // Export types for main thread
-export type {
-  WorkerMessage,
-  WorkerResponse,
-  CardStatistics,
-  SearchResult,
-};
+export type { WorkerMessage, WorkerResponse, CardStatistics, SearchResult };

@@ -85,7 +85,13 @@ export const TestIcon: FC<IconProps> = ({ className, size = 24 }) => (
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <path d="M14 2v6h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M14 2v6h6"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
     <path d="M9 15h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     <path d="M9 11h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     <path d="M9 7h3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />

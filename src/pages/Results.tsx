@@ -64,15 +64,13 @@ const Results: FC = () => {
     // For "Continue with New Cards": exclude only passed cards
     // This keeps struggling cards in the pool to be mixed with new cards
     // For "Try Again": don't exclude any cards (when no cards were passed)
-    const cardsToExclude = results.passedCards?.length > 0
-      ? results.passedCards
-      : [];
+    const cardsToExclude = results.passedCards?.length > 0 ? results.passedCards : [];
 
     navigate(`/learn/${deckId}`, {
       state: {
         excludeCards: cardsToExclude,
-        strugglingCards: results.strugglingCards || []
-      }
+        strugglingCards: results.strugglingCards || [],
+      },
     });
   };
 
@@ -99,12 +97,7 @@ const Results: FC = () => {
     const isEditableTarget = (el: EventTarget | null) => {
       if (!(el instanceof HTMLElement)) return false;
       const tag = el.tagName.toLowerCase();
-      return (
-        tag === 'input' ||
-        tag === 'textarea' ||
-        el.isContentEditable ||
-        tag === 'select'
-      );
+      return tag === 'input' || tag === 'textarea' || el.isContentEditable || tag === 'select';
     };
 
     const onKeyDown = (e: KeyboardEvent) => {
@@ -149,7 +142,8 @@ const Results: FC = () => {
           </h1>
           {currentDeck && results.passedCards?.length >= currentDeck.content.length && (
             <p className={styles.completionMessage}>
-              Congratulations! You&apos;ve passed all {currentDeck.content.length} cards in this session!
+              Congratulations! You&apos;ve passed all {currentDeck.content.length} cards in this
+              session!
             </p>
           )}
         </div>
@@ -220,9 +214,8 @@ const Results: FC = () => {
             {currentDeck && results.passedCards?.length >= currentDeck.content.length
               ? 'View Deck'
               : results.passedCards?.length > 0
-              ? 'Continue with New Cards'
-              : 'Try Again'
-            }
+                ? 'Continue with New Cards'
+                : 'Try Again'}
           </button>
           <button
             onClick={handleBackToDeck}
@@ -243,7 +236,7 @@ const Results: FC = () => {
           <div className={styles.missedCardsSection}>
             <h2 className={styles.missedCardsTitle}>Cards to Review</h2>
             <div className={styles.missedCardsGrid}>
-              {results.strugglingCards.map((cardIndex) => {
+              {results.strugglingCards.map(cardIndex => {
                 const card = currentDeck.content[cardIndex];
                 if (!card) return null;
                 return (
@@ -279,7 +272,7 @@ const Results: FC = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
             >
               <button className={styles.closeButton} onClick={closeCardModal}>
                 ×
@@ -287,52 +280,64 @@ const Results: FC = () => {
               <h3 className={styles.modalTitle}>Card Details</h3>
               <div className={styles.modalCard}>
                 <div className={styles.modalSide}>
-                  <h4>{currentDeck?.metadata?.side_labels?.side_a ?
-                    currentDeck.metadata.side_labels.side_a.charAt(0).toUpperCase() +
-                    currentDeck.metadata.side_labels.side_a.slice(1) :
-                    'Side A (Front)'}</h4>
+                  <h4>
+                    {currentDeck?.metadata?.side_labels?.side_a
+                      ? currentDeck.metadata.side_labels.side_a.charAt(0).toUpperCase() +
+                        currentDeck.metadata.side_labels.side_a.slice(1)
+                      : 'Side A (Front)'}
+                  </h4>
                   <p>{selectedCard.side_a}</p>
                 </div>
                 <div className={styles.modalSide}>
-                  <h4>{currentDeck?.metadata?.side_labels?.side_b ?
-                    currentDeck.metadata.side_labels.side_b.charAt(0).toUpperCase() +
-                    currentDeck.metadata.side_labels.side_b.slice(1) :
-                    'Side B (Back)'}</h4>
+                  <h4>
+                    {currentDeck?.metadata?.side_labels?.side_b
+                      ? currentDeck.metadata.side_labels.side_b.charAt(0).toUpperCase() +
+                        currentDeck.metadata.side_labels.side_b.slice(1)
+                      : 'Side B (Back)'}
+                  </h4>
                   <p>{selectedCard.side_b}</p>
                 </div>
                 {selectedCard.side_c && (
                   <div className={styles.modalSide}>
-                    <h4>{currentDeck?.metadata?.side_labels?.side_c ?
-                      currentDeck.metadata.side_labels.side_c.charAt(0).toUpperCase() +
-                      currentDeck.metadata.side_labels.side_c.slice(1) :
-                      'Side C (Extra)'}</h4>
+                    <h4>
+                      {currentDeck?.metadata?.side_labels?.side_c
+                        ? currentDeck.metadata.side_labels.side_c.charAt(0).toUpperCase() +
+                          currentDeck.metadata.side_labels.side_c.slice(1)
+                        : 'Side C (Extra)'}
+                    </h4>
                     <p>{selectedCard.side_c}</p>
                   </div>
                 )}
                 {selectedCard.side_d && (
                   <div className={styles.modalSide}>
-                    <h4>{currentDeck?.metadata?.side_labels?.side_d ?
-                      currentDeck.metadata.side_labels.side_d.charAt(0).toUpperCase() +
-                      currentDeck.metadata.side_labels.side_d.slice(1) :
-                      'Side D'}</h4>
+                    <h4>
+                      {currentDeck?.metadata?.side_labels?.side_d
+                        ? currentDeck.metadata.side_labels.side_d.charAt(0).toUpperCase() +
+                          currentDeck.metadata.side_labels.side_d.slice(1)
+                        : 'Side D'}
+                    </h4>
                     <p>{selectedCard.side_d}</p>
                   </div>
                 )}
                 {selectedCard.side_e && (
                   <div className={styles.modalSide}>
-                    <h4>{currentDeck?.metadata?.side_labels?.side_e ?
-                      currentDeck.metadata.side_labels.side_e.charAt(0).toUpperCase() +
-                      currentDeck.metadata.side_labels.side_e.slice(1) :
-                      'Side E'}</h4>
+                    <h4>
+                      {currentDeck?.metadata?.side_labels?.side_e
+                        ? currentDeck.metadata.side_labels.side_e.charAt(0).toUpperCase() +
+                          currentDeck.metadata.side_labels.side_e.slice(1)
+                        : 'Side E'}
+                    </h4>
                     <p>{selectedCard.side_e}</p>
                   </div>
                 )}
                 {selectedCard.side_f && (
                   <div className={styles.modalSide}>
-                    <h4>{currentDeck?.metadata?.side_labels?.side_f ?
-                      currentDeck.metadata.side_labels.side_f.charAt(0).toUpperCase() +
-                      currentDeck.metadata.side_labels.side_f.slice(1) :
-                      'Side F'}</h4>
+                    <h4>
+                      {currentDeck?.metadata?.side_labels?.side_f
+                        ? currentDeck.metadata.side_labels.side_f.charAt(0).toUpperCase() +
+                          currentDeck.metadata.side_labels.side_f.slice(1)
+                        : 'Side F'}
+                    </h4>
                     <p>{selectedCard.side_f}</p>
                   </div>
                 )}

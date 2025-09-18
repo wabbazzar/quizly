@@ -113,7 +113,11 @@ describe('Card Component', () => {
 
     it('should handle click events when interactive', () => {
       const handleClick = vi.fn();
-      render(<Card interactive={true} onClick={handleClick}>Interactive card</Card>);
+      render(
+        <Card interactive={true} onClick={handleClick}>
+          Interactive card
+        </Card>
+      );
 
       const card = screen.getByRole('button');
       fireEvent.click(card);
@@ -193,7 +197,11 @@ describe('Card Component', () => {
 
     it('should support keyboard navigation when interactive', () => {
       const handleClick = vi.fn();
-      render(<Card interactive={true} onClick={handleClick}>Keyboard accessible</Card>);
+      render(
+        <Card interactive={true} onClick={handleClick}>
+          Keyboard accessible
+        </Card>
+      );
 
       const card = screen.getByRole('button');
       card.focus();
@@ -326,15 +334,11 @@ describe('Card Component', () => {
     });
 
     it('should handle prop changes correctly', () => {
-      const { rerender } = render(
-        <Card variant="default">Original content</Card>
-      );
+      const { rerender } = render(<Card variant="default">Original content</Card>);
 
       expect(screen.getByText('Original content').className).toMatch(/_default_/);
 
-      rerender(
-        <Card variant="elevated">Original content</Card>
-      );
+      rerender(<Card variant="elevated">Original content</Card>);
 
       expect(screen.getByText('Original content').className).toMatch(/_elevated_/);
     });
