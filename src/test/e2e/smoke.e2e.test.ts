@@ -46,7 +46,7 @@ test.describe('Smoke Tests @smoke', () => {
   });
 
   test('should handle 404 pages gracefully', async ({ page }) => {
-    const response = await page.goto('/non-existent-page');
+    const _response = await page.goto('/non-existent-page');
 
     // Should not crash the application
     await expect(page.locator('#root')).toBeVisible();

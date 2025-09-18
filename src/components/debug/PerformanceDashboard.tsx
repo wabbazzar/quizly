@@ -182,7 +182,7 @@ export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({
 
       <div className={styles.chunksList}>
         <h3>Largest Chunks</h3>
-        {analysis?.initialChunks.concat(analysis.asyncChunks).slice(0, 10).map((chunk, index) => (
+        {analysis?.initialChunks.concat(analysis.asyncChunks).slice(0, 10).map((chunk, _index) => (
           <div key={chunk.name} className={styles.chunkItem}>
             <span className={styles.chunkName}>{chunk.name}</span>
             <span className={styles.chunkSize}>{(chunk.size / 1024).toFixed(0)}KB</span>

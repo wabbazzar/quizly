@@ -56,7 +56,7 @@ const ChunkLoadErrorFallback = ({ onRetry }: { onRetry: () => void }) => (
                 names.forEach(name => caches.delete(name));
               }).finally(() => window.location.reload());
             } else {
-              window.location.reload();
+              (window as any).location.reload();
             }
           }}
         >

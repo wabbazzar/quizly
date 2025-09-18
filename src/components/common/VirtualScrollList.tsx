@@ -183,7 +183,8 @@ export function VirtualScrollList<T>({
   }, []);
 
   // Scroll to specific item
-  const scrollToItem = useCallback((index: number, align: 'start' | 'center' | 'end' = 'start') => {
+  // scrollToItem method - currently unused but available for future use
+  // const scrollToItem = useCallback((index: number, align: 'start' | 'center' | 'end' = 'start') => {
     if (!containerRef.current || index < 0 || index >= items.length) return;
 
     const metrics = itemMetrics.items[index];
@@ -206,7 +207,7 @@ export function VirtualScrollList<T>({
     } else {
       containerRef.current.scrollTop = targetOffset;
     }
-  }, [items.length, itemMetrics, containerHeight, horizontal]);
+  // }, [items.length, itemMetrics, containerHeight, horizontal]);
 
   // Container style
   const containerStyle: CSSProperties = {

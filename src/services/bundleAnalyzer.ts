@@ -165,7 +165,7 @@ class BundleAnalyzer {
       React.lazy = function<T extends React.ComponentType<any>>(factory: () => Promise<{ default: T }>) {
         return originalLazy(() => {
           const startTime = performance.now();
-          return factory().then(module => {
+          return (factory as () => Promise<{ default: T }>)().then(module => {
             const loadTime = performance.now() - startTime;
             performanceMonitor.measureCustom('lazyLoadTime', loadTime);
             return module;

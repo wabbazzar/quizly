@@ -63,7 +63,14 @@
       "Bash(npx playwright test:*)",
       "Bash(npx vitest run:*)",
       "Bash(find:*)",
-      "Bash(sed:*)"
+      "Bash(sed:*)",
+      "Bash(NODE_ENV=production npm run build)",
+      "Bash(NODE_ENV=production)",
+      "Bash(export NODE_ENV=production)",
+      "Bash(awk:*)",
+      "Bash(gzip:*)",
+      "Bash(gh run view:*)",
+      "Bash(git checkout:*)"
     ],
     "deny": [],
     "ask": []

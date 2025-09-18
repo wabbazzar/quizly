@@ -295,10 +295,7 @@ class FallbackProcessor {
       const allText = [card.side_a, card.side_b].filter(Boolean).join(' ');
       totalLength += allText.length;
 
-      if (card.category) {
-        stats.categoryDistribution[card.category] =
-          (stats.categoryDistribution[card.category] || 0) + 1;
-      }
+      // Category tracking removed - not in Card type
     });
 
     stats.averageCardLength = totalLength / cards.length;

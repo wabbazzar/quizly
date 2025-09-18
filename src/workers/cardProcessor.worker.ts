@@ -3,7 +3,7 @@
  * Offloads expensive operations from the main thread
  */
 
-import type { Card, Deck } from '@/types';
+import type { Card } from '@/types';
 
 // Message types for communication with main thread
 interface WorkerMessage {
@@ -143,11 +143,7 @@ function analyzeCards(cards: Card[]): CardStatistics {
       stats.shortestCard = card.side_a;
     }
 
-    // Track categories
-    if (card.category) {
-      stats.categoryDistribution[card.category] =
-        (stats.categoryDistribution[card.category] || 0) + 1;
-    }
+    // Category tracking removed - not in Card type
 
     // Track difficulty (if available)
     const difficulty = (card as any).difficulty || 'unknown';
@@ -169,7 +165,7 @@ function searchCards(cards: Card[], query: string, limit = 50): SearchResult[] {
     const score = calculateRelevanceScore(card, query);
 
     if (score > 0) {
-      const matches = [];
+      const matches: { field: string; start: number; end: number }[] = [];
       const fields = [
         { name: 'side_a', text: card.side_a },
         { name: 'side_b', text: card.side_b },
@@ -215,7 +211,7 @@ function processStudySession(cards: Card[], sessionData: any) {
     incorrectAnswers: sessionData.incorrectAnswers || 0,
     averageResponseTime: 0,
     difficultyAdjustments: [],
-    recommendations: [],
+    recommendations: [] as string[],
   };
 
   if (sessionData.responses && Array.isArray(sessionData.responses)) {
@@ -263,7 +259,7 @@ function generateQuizQuestions(cards: Card[], count: number, options: any = {}) 
     if (questionType === 'multiple-choice') {
       // Generate multiple choice question
       const correctAnswer = card.side_b;
-      const distractors = [];
+      const distractors: string[] = [];
 
       // Get random incorrect answers from other cards
       while (distractors.length < 3) {

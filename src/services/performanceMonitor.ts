@@ -31,7 +31,7 @@ export interface CustomMetrics {
   deckLoadTime?: PerformanceMetric;
 }
 
-type MetricCallback = (metric: PerformanceMetric) => void;
+// type MetricCallback = (metric: PerformanceMetric) => void;
 type PerformanceEventCallback = (data: { metrics: WebVitalsData; custom: CustomMetrics }) => void;
 
 class PerformanceMonitor {
@@ -40,7 +40,7 @@ class PerformanceMonitor {
   private callbacks: Set<PerformanceEventCallback> = new Set();
   private observer?: PerformanceObserver;
   private layoutShiftScore = 0;
-  private largestContentfulPaint = 0;
+  private _largestContentfulPaint = 0;
   private firstInputDelay = 0;
   private isInitialized = false;
 
@@ -113,7 +113,7 @@ class PerformanceMonitor {
         break;
 
       case 'largest-contentful-paint':
-        this.largestContentfulPaint = entry.startTime;
+        this._largestContentfulPaint = entry.startTime;
         this.recordMetric('lcp', entry.startTime);
         break;
 
@@ -281,7 +281,7 @@ class PerformanceMonitor {
     };
   }
 
-  public measureCustom(name: keyof CustomMetrics, value: number, category?: string): void {
+  public measureCustom(name: keyof CustomMetrics, value: number, _category?: string): void {
     const metric: PerformanceMetric = {
       name,
       value,
