@@ -27,4 +27,30 @@ async function fixManifest() {
   }
 }
 
-fixManifest();
+async function fixIndexHtml() {
+  const indexPath = path.join(__dirname, '../dist/index.html');
+
+  try {
+    let htmlContent = await fs.readFile(indexPath, 'utf-8');
+
+    // Fix favicon and icon paths
+    htmlContent = htmlContent
+      .replace(/href="\.\/favicon\.ico"/g, 'href="/quizly/favicon.ico"')
+      .replace(/href="\.\/icons\//g, 'href="/quizly/icons/')
+      .replace(/content="\.\/icons\//g, 'content="/quizly/icons/');
+
+    // Write back the fixed HTML
+    await fs.writeFile(indexPath, htmlContent);
+    console.log('✅ Fixed index.html icon paths for GitHub Pages');
+  } catch (error) {
+    console.error('❌ Error fixing index.html:', error);
+    process.exit(1);
+  }
+}
+
+async function main() {
+  await fixManifest();
+  await fixIndexHtml();
+}
+
+main();

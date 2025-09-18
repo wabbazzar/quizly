@@ -69,7 +69,7 @@ const QuickPresets: FC<SectionProps> = ({ settings, onChange, mode = 'flashcards
 };
 
 // Helper function to get available sides from deck
-const getAvailableSides = (settings: any, deck: any): string[] => {
+const getAvailableSides = (_settings: any, deck: any): string[] => {
   // If deck exists and has content, determine available sides from the first card
   if (deck && deck.content && deck.content.length > 0) {
     const firstCard = deck.content[0];

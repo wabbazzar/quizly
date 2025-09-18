@@ -7,6 +7,7 @@
 - **Created**: 2025-09-17
 - **Type**: feature
 - **Platforms**: Web (Desktop/Tablet/Mobile)
+- **Updated**: 2025-09-18 - Updated to reflect UnifiedSettings component from completed Ticket #0035
 
 ## User Stories
 
@@ -18,6 +19,9 @@ As a developer, I want comprehensive test coverage across all components, stores
 - As a developer, I want confidence in refactoring so that changes don't break existing functionality
 - As a QA engineer, I want reliable test suite execution so that release quality is consistently high
 - As a product owner, I want reduced production bugs so that user experience remains stable
+
+## Dependencies
+- **Ticket #0035**: Unified Settings Component (COMPLETED) - The UnifiedSettings component has been implemented (at `src/components/modals/UnifiedSettings.tsx`) and needs comprehensive test coverage. This replaces the removed FlashcardsSettings, LearnSettings, and DeckSettings components.
 
 ## Technical Requirements
 
@@ -150,7 +154,7 @@ export const createMockDeckMetadata = (overrides?: Partial<DeckMetadata>): DeckM
   ...overrides,
 });
 
-export const createMockLearnSettings = (overrides?: Partial<LearnModeSettings>): LearnModeSettings => ({
+export const createMockUnifiedSettings = (mode: 'flashcards' | 'learn' | 'deck', overrides?: Partial<ModeSettings>): ModeSettings => ({
   frontSides: ['side_a'],
   backSides: ['side_b'],
   cardsPerRound: 10,
@@ -184,12 +188,156 @@ export const createMockLearnSettings = (overrides?: Partial<LearnModeSettings>):
 
 ### Phase 2: Component Library Test Suite (3 points)
 **Files to create/modify:**
+- `__tests__/components/modals/UnifiedSettings.test.tsx` - Complete UnifiedSettings component test suite (PRIORITY - new unified component from completed Ticket #0035)
 - `__tests__/components/ui/Button.test.tsx` - Complete Button component test suite
 - `__tests__/components/ui/Modal.test.tsx` - Modal component with portal and accessibility testing
 - `__tests__/components/ui/Card.test.tsx` - Card component with variant testing
 - `__tests__/components/ui/Input.test.tsx` - Input component with validation testing
 - `__tests__/components/ui/ProgressBar.test.tsx` - Progress component with animation testing
 - `__tests__/components/ui/Spinner.test.tsx` - Loading spinner component testing
+
+**UnifiedSettings Component Tests (PRIORITY):**
+```typescript
+// __tests__/components/modals/UnifiedSettings.test.tsx
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent, waitFor } from '@/test/utils/testUtils';
+import { UnifiedSettings } from '@/components/modals/UnifiedSettings';
+import { createMockDeck, createMockUnifiedSettings } from '@/test/utils/mockData';
+
+describe('UnifiedSettings', () => {
+  const defaultProps = {
+    visible: true,
+    onClose: vi.fn(),
+    deck: createMockDeck(),
+    mode: 'flashcards' as const,
+    settings: createMockUnifiedSettings('flashcards'),
+    onUpdateSettings: vi.fn(),
+  };
+
+  describe('Mode-Specific Rendering', () => {
+    it('should render flashcards-specific sections', () => {
+      render(<UnifiedSettings {...defaultProps} mode="flashcards" />);
+      expect(screen.getByText('Card Front')).toBeInTheDocument();
+      expect(screen.getByText('Card Back')).toBeInTheDocument();
+      expect(screen.queryByText('Question Sides')).not.toBeInTheDocument();
+    });
+
+    it('should render learn-specific sections', () => {
+      render(<UnifiedSettings {...defaultProps} mode="learn" />);
+      expect(screen.getByText('Question Sides')).toBeInTheDocument();
+      expect(screen.getByText('Answer Sides')).toBeInTheDocument();
+      expect(screen.queryByText('Card Front')).not.toBeInTheDocument();
+    });
+
+    it('should render deck-specific sections', () => {
+      render(<UnifiedSettings {...defaultProps} mode="deck" />);
+      expect(screen.getByText('Deck Information')).toBeInTheDocument();
+      expect(screen.getByText('Mastery Management')).toBeInTheDocument();
+    });
+  });
+
+  describe('Preset System', () => {
+    it('should apply presets correctly per mode', async () => {
+      const onUpdateSettings = vi.fn();
+      render(<UnifiedSettings {...defaultProps} onUpdateSettings={onUpdateSettings} />);
+
+      fireEvent.click(screen.getByText('Simple (A → B)'));
+      await waitFor(() => {
+        expect(onUpdateSettings).toHaveBeenCalledWith(
+          expect.objectContaining({
+            frontSides: ['side_a'],
+            backSides: ['side_b'],
+            progressionMode: 'shuffle'
+          })
+        );
+      });
+    });
+
+    it('should persist preset selection per deck and mode', async () => {
+      const { rerender } = render(<UnifiedSettings {...defaultProps} />);
+
+      // Select preset for deck1
+      fireEvent.click(screen.getByText('Comprehensive'));
+      fireEvent.click(screen.getByText('Save Settings'));
+
+      // Switch to different deck
+      const deck2 = createMockDeck({ id: 'deck2', name: 'Deck 2' });
+      rerender(<UnifiedSettings {...defaultProps} deck={deck2} />);
+
+      // Should not have deck1's preset
+      expect(screen.getByTestId('preset-comprehensive')).not.toHaveClass('selected');
+    });
+  });
+
+  describe('Validation', () => {
+    it('should validate settings before saving', async () => {
+      const onUpdateSettings = vi.fn();
+      render(<UnifiedSettings {...defaultProps} mode="learn" onUpdateSettings={onUpdateSettings} />);
+
+      // Clear all sides to trigger validation
+      fireEvent.click(screen.getByText('Clear All'));
+      fireEvent.click(screen.getByText('Save Settings'));
+
+      expect(screen.getByRole('alert')).toHaveTextContent('At least one question side is required');
+      expect(onUpdateSettings).not.toHaveBeenCalled();
+    });
+
+    it('should prevent duplicate sides in learn mode', () => {
+      render(<UnifiedSettings {...defaultProps} mode="learn" />);
+
+      // Try to select same side for both question and answer
+      fireEvent.click(screen.getAllByText('Side A')[0]); // Question
+      fireEvent.click(screen.getAllByText('Side A')[1]); // Answer
+
+      expect(screen.getByRole('alert')).toHaveTextContent('Same side cannot be both question and answer');
+    });
+  });
+
+  describe('Persistence', () => {
+    it('should handle persistence errors gracefully', async () => {
+      // Mock localStorage to throw error
+      const mockSetItem = vi.spyOn(Storage.prototype, 'setItem');
+      mockSetItem.mockImplementation(() => {
+        throw new Error('Storage quota exceeded');
+      });
+
+      render(<UnifiedSettings {...defaultProps} />);
+      fireEvent.click(screen.getByText('Save Settings'));
+
+      await waitFor(() => {
+        expect(screen.getByText(/Unable to save settings/)).toBeInTheDocument();
+      });
+
+      mockSetItem.mockRestore();
+    });
+  });
+
+  describe('Accessibility', () => {
+    it('should support keyboard navigation', async () => {
+      render(<UnifiedSettings {...defaultProps} />);
+      const closeButton = screen.getByRole('button', { name: /close/i });
+
+      closeButton.focus();
+      expect(closeButton).toHaveFocus();
+
+      // Tab to first preset
+      fireEvent.keyDown(document.activeElement!, { key: 'Tab' });
+      expect(screen.getByRole('button', { name: /simple/i })).toHaveFocus();
+    });
+
+    it('should trap focus within modal', () => {
+      render(<UnifiedSettings {...defaultProps} />);
+
+      const modalElement = screen.getByRole('dialog');
+      const focusableElements = modalElement.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+
+      expect(focusableElements.length).toBeGreaterThan(0);
+    });
+  });
+});
+```
 
 **Button Component Tests:**
 ```typescript
@@ -437,7 +585,7 @@ describe('Modal Component', () => {
 // __tests__/store/deckStore.test.ts
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { useDeckStore } from '@/store/deckStore';
-import { createMockDeck, createMockLearnSettings } from '@/test/utils/mockData';
+import { createMockDeck, createMockUnifiedSettings } from '@/test/utils/mockData';
 
 // Helper to get fresh store instance
 const getStoreInstance = () => {
@@ -511,7 +659,7 @@ describe('DeckStore', () => {
   describe('Session Management', () => {
     it('should start learn session correctly', () => {
       const mockDeck = createMockDeck();
-      const mockSettings = createMockLearnSettings();
+      const mockSettings = createMockUnifiedSettings('learn');
       store.currentDeck = mockDeck;
 
       store.startSession('learn', mockSettings);
@@ -529,7 +677,7 @@ describe('DeckStore', () => {
 
     it('should update progress correctly', () => {
       const mockDeck = createMockDeck();
-      const mockSettings = createMockLearnSettings();
+      const mockSettings = createMockUnifiedSettings('learn');
       store.currentDeck = mockDeck;
       store.startSession('learn', mockSettings);
 
@@ -541,7 +689,7 @@ describe('DeckStore', () => {
 
     it('should handle incorrect answers', () => {
       const mockDeck = createMockDeck();
-      const mockSettings = createMockLearnSettings();
+      const mockSettings = createMockUnifiedSettings('learn');
       store.currentDeck = mockDeck;
       store.startSession('learn', mockSettings);
 
@@ -553,7 +701,7 @@ describe('DeckStore', () => {
 
     it('should end session and clear state', () => {
       const mockDeck = createMockDeck();
-      const mockSettings = createMockLearnSettings();
+      const mockSettings = createMockUnifiedSettings('learn');
       store.currentDeck = mockDeck;
       store.startSession('learn', mockSettings);
 
@@ -589,7 +737,7 @@ describe('DeckStore', () => {
 // __tests__/services/questionGenerator.test.ts
 import { describe, it, expect } from 'vitest';
 import { QuestionGenerator } from '@/services/questionGenerator';
-import { createMockDeck, createMockLearnSettings } from '@/test/utils/mockData';
+import { createMockDeck, createMockUnifiedSettings } from '@/test/utils/mockData';
 
 describe('QuestionGenerator', () => {
   let generator: QuestionGenerator;
@@ -607,7 +755,7 @@ describe('QuestionGenerator', () => {
           { idx: 2, name: 'Card 3', side_a: 'Question 3', side_b: 'Answer 3', level: 1 },
         ],
       });
-      const settings = createMockLearnSettings({
+      const settings = createMockUnifiedSettings('learn', {
         questionTypes: ['multiple_choice'],
         frontSides: ['side_a'],
         backSides: ['side_b'],
@@ -637,7 +785,7 @@ describe('QuestionGenerator', () => {
 
       const result = generator.generateQuestion({
         cards: deck.content,
-        settings: createMockLearnSettings(),
+        settings: createMockUnifiedSettings('learn'),
         difficultyRange: [1, 1],
       });
 
@@ -659,7 +807,7 @@ describe('QuestionGenerator', () => {
   describe('Free Text Questions', () => {
     it('should generate free text question', () => {
       const deck = createMockDeck();
-      const settings = createMockLearnSettings({
+      const settings = createMockUnifiedSettings('learn', {
         questionTypes: ['free_text'],
       });
 
@@ -684,7 +832,7 @@ describe('QuestionGenerator', () => {
 
       const result = generator.generateQuestion({
         cards: deck.content,
-        settings: createMockLearnSettings({ questionTypes: ['free_text'] }),
+        settings: createMockUnifiedSettings('learn', { questionTypes: ['free_text'] }),
         difficultyRange: [1, 1],
       });
 
@@ -698,7 +846,7 @@ describe('QuestionGenerator', () => {
   describe('Error Handling', () => {
     it('should throw error for invalid settings', () => {
       const deck = createMockDeck();
-      const invalidSettings = createMockLearnSettings({
+      const invalidSettings = createMockUnifiedSettings('learn', {
         frontSides: [], // Invalid: empty front sides
       });
 
@@ -720,7 +868,7 @@ describe('QuestionGenerator', () => {
 
       const result = generator.generateQuestion({
         cards: deck.content,
-        settings: createMockLearnSettings({ questionTypes: ['multiple_choice'] }),
+        settings: createMockUnifiedSettings('learn', { questionTypes: ['multiple_choice'] }),
         difficultyRange: [1, 1],
       });
 
@@ -761,7 +909,7 @@ describe('QuestionGenerator', () => {
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@/test/utils/testUtils';
 import { Learn } from '@/pages/Learn';
-import { createMockDeck, createMockLearnSettings } from '@/test/utils/mockData';
+import { createMockDeck, createMockUnifiedSettings } from '@/test/utils/mockData';
 
 // Mock the router params
 vi.mock('react-router-dom', async () => {
@@ -1023,7 +1171,7 @@ test.describe('Learn Session E2E', () => {
 import { describe, it, expect, vi } from 'vitest';
 import { render, act } from '@testing-library/react';
 import { LearnContainer } from '@/components/modes/learn/LearnContainer';
-import { createMockDeck, createMockLearnSettings } from '@/test/utils/mockData';
+import { createMockDeck, createMockUnifiedSettings } from '@/test/utils/mockData';
 
 describe('Component Performance Tests', () => {
   it('should render LearnContainer within performance budget', async () => {
@@ -1043,7 +1191,7 @@ describe('Component Performance Tests', () => {
       render(
         <LearnContainer
           deck={mockDeck}
-          settings={createMockLearnSettings()}
+          settings={createMockUnifiedSettings('learn')}
           onComplete={vi.fn()}
           onExit={vi.fn()}
         />
@@ -1092,7 +1240,7 @@ describe('Component Performance Tests', () => {
       render(
         <LearnContainer
           deck={largeDeck}
-          settings={createMockLearnSettings({ cardsPerRound: 50 })}
+          settings={createMockUnifiedSettings('learn', { cardsPerRound: 50 })}
           onComplete={vi.fn()}
           onExit={vi.fn()}
         />
@@ -1117,7 +1265,7 @@ import { axe, toHaveNoViolations } from 'jest-axe';
 import { LearnContainer } from '@/components/modes/learn/LearnContainer';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
-import { createMockDeck, createMockLearnSettings } from '@/test/utils/mockData';
+import { createMockDeck, createMockUnifiedSettings } from '@/test/utils/mockData';
 
 expect.extend(toHaveNoViolations);
 
@@ -1126,7 +1274,7 @@ describe('Accessibility Tests', () => {
     const { container } = render(
       <LearnContainer
         deck={createMockDeck()}
-        settings={createMockLearnSettings()}
+        settings={createMockUnifiedSettings('learn')}
         onComplete={vi.fn()}
         onExit={vi.fn()}
       />
