@@ -61,7 +61,9 @@
       "Bash(npx vite build:*)",
       "Bash(cat:*)",
       "Bash(npx playwright test:*)",
-      "Bash(npx vitest run:*)"
+      "Bash(npx vitest run:*)",
+      "Bash(find:*)",
+      "Bash(sed:*)"
     ],
     "deny": [],
     "ask": []

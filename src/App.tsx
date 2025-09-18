@@ -2,6 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { useEffect } from 'react';
 import { AppRouter } from './router/AppRouter';
 import { usePWAVisibility } from './hooks/usePWAVisibility';
+import { useDeckStore } from './store/deckStore';
 import Notification from './components/common/Notification';
 
 // Simple loading indicator for iOS PWA restoration
@@ -29,6 +30,12 @@ function RestorationOverlay({ isVisible }: { isVisible: boolean }) {
 // Main App component with global notification support
 function App() {
   const { wasRestored, resumeCount, isIOS, isPWA, isRestoring } = usePWAVisibility();
+  const { loadDecks } = useDeckStore();
+
+  // Load all decks on app initialization
+  useEffect(() => {
+    loadDecks();
+  }, [loadDecks]);
 
   // iOS PWA specific: Force refresh on restoration
   useEffect(() => {

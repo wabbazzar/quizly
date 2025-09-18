@@ -59,19 +59,16 @@ export interface ModeSettings {
   backSides: string[];   // e.g., ['side_b', 'side_c']
   cardsPerRound: number;
   enableTimer: boolean;
-  timerSeconds?: number;
+  timerSeconds?: number | null;
   enableAudio: boolean;
   randomize: boolean;
-  progressionMode: 'sequential' | 'level' | 'random';
+  progressionMode: 'sequential' | 'level' | 'random' | 'shuffle';
 }
 
 // Flashcards specific settings
-export interface FlashcardsSettings {
-  frontSides: string[];
-  backSides: string[];
-  enableTimer: boolean;
-  timerSeconds: number;
-  enableAudio: boolean;
+export interface FlashcardsSettings extends ModeSettings {
+  progressionMode: 'sequential' | 'shuffle' | 'level';
+  includeMastered?: boolean;
   groupSides: Record<string, string[]>;
 }
 

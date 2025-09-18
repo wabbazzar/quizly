@@ -74,6 +74,43 @@ quizly2/
 ## Design System & Styling
 
 ### CSS Custom Properties (from spec.md)
+**CRITICAL: Always use theme-aware custom properties, never hardcoded colors**
+
+### Semi-Transparent Design Pattern
+**CRITICAL: Use semi-transparent boxes throughout the app for consistency**
+
+The app follows a semi-transparent design pattern where components use subtle gradient backgrounds instead of solid colors:
+
+#### ✅ Correct Semi-Transparent Patterns
+```css
+/* Mode cards and interactive components */
+.component {
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(74, 144, 226, 0.05));
+  border: 2px solid rgba(74, 144, 226, 0.2);
+}
+
+/* Card categories and sections */
+.section {
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.03), rgba(74, 144, 226, 0.01));
+}
+
+/* Settings notices and info boxes */
+.infoBox {
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(74, 144, 226, 0.05));
+  border: 1px solid var(--primary-light);
+}
+```
+
+#### ❌ Forbidden Patterns
+```css
+/* NEVER use solid backgrounds for main components */
+.component {
+  background: var(--neutral-white);     /* ❌ Bad - solid white */
+  background: white;                    /* ❌ Bad - hardcoded */
+  background: var(--bg-primary);        /* ❌ Bad - should be semi-transparent */
+}
+```
+
 ```css
 :root {
   /* Primary Colors */
@@ -86,7 +123,7 @@ quizly2/
   --secondary-light: #6FEBD0;
   --secondary-dark: #3DCBAA;
 
-  /* Neutral Colors */
+  /* Neutral Colors (Use sparingly - prefer theme variables) */
   --neutral-white: #FFFFFF;
   --neutral-gray-100: #F7F8FA;
   --neutral-gray-200: #E5E7EB;
@@ -103,15 +140,215 @@ quizly2/
   --semantic-warning: #F59E0B;
   --semantic-error: #EF4444;
   --semantic-info: #3B82F6;
+
+  /* Theme-Aware Colors (ALWAYS USE THESE) */
+  --bg-primary: var(--neutral-white);
+  --bg-secondary: var(--neutral-gray-100);
+  --bg-tertiary: var(--neutral-gray-200);
+  --text-primary: var(--neutral-gray-800);
+  --text-secondary: var(--neutral-gray-600);
+  --text-tertiary: var(--neutral-gray-500);
+  --text-primary-on-dark: var(--neutral-white);
+  --border-color: var(--neutral-gray-200);
+}
+```
+
+### Mobile-First Design Principles
+**CRITICAL: All CSS must be mobile-first and prevent horizontal overflow**
+
+#### ✅ Required Patterns
+```css
+/* Always prevent horizontal overflow */
+.component {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Always use theme-aware colors */
+.component {
+  background: var(--bg-primary); /* ✅ Good */
+  color: var(--text-primary);    /* ✅ Good */
+}
+
+/* Mobile-first responsive design */
+.component {
+  /* Mobile styles first */
+  padding: var(--space-4);
+  font-size: var(--text-sm);
+}
+
+@media (min-width: 768px) {
+  .component {
+    /* Tablet and up */
+    padding: var(--space-6);
+    font-size: var(--text-base);
+  }
+}
+
+/* Proper text wrapping for mobile */
+.textContent {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
+}
+```
+
+#### ❌ Forbidden Patterns
+```css
+/* NEVER use hardcoded colors */
+.component {
+  background: white;           /* ❌ Bad - breaks dark mode */
+  color: #1F2937;             /* ❌ Bad - hardcoded */
+  background: var(--neutral-white); /* ❌ Bad - not theme aware */
+}
+
+/* NEVER allow horizontal overflow */
+.component {
+  width: 500px;               /* ❌ Bad - fixed width on mobile */
+  min-width: 400px;           /* ❌ Bad - forces horizontal scroll */
+}
+
+/* NEVER use desktop-first responsive */
+.component {
+  /* Desktop styles first */
+  padding: var(--space-8);
+}
+
+@media (max-width: 768px) {   /* ❌ Bad - desktop-first */
+  .component {
+    padding: var(--space-4);
+  }
 }
 ```
 
 ### Component Styling Rules
 - **Always use CSS Modules** for component-specific styles
-- **Use CSS custom properties** for theming
+- **Use CSS custom properties** for theming (theme-aware variables only)
 - **Never use inline styles** except for dynamic values
 - **Maintain mobile-first approach** with responsive design
 - **Ensure WCAG AA compliance** for accessibility
+- **Prevent horizontal overflow** on all screen sizes
+- **Use proper text wrapping** for mobile content
+
+### Mobile Responsive Checklist
+Before committing any component, verify:
+
+- [ ] **No horizontal overflow** on mobile (< 480px)
+- [ ] **Theme-aware colors** (no hardcoded `--neutral-*` or color values)
+- [ ] **Semi-transparent backgrounds** (use gradient patterns, not solid colors)
+- [ ] **Mobile-first responsive design** (styles start with mobile, use min-width)
+- [ ] **Proper text wrapping** for long content
+- [ ] **Safe area support** for iOS devices
+- [ ] **Touch-friendly targets** (minimum 44px)
+- [ ] **Dark mode compatibility** (uses theme variables)
+
+### Responsive Design Patterns
+
+#### Grid Layouts
+```css
+/* ✅ Good - Mobile-first responsive grid */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: var(--content-width-xl);
+    margin: 0 auto;
+  }
+}
+```
+
+#### Modal Responsiveness
+```css
+/* ✅ Good - Mobile-friendly modals */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-primary);
+  max-width: 100vw;
+  overflow-y: auto;
+  padding: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .modal {
+    inset: var(--space-8);
+    border-radius: var(--radius-xl);
+    max-width: 600px;
+    max-height: 80vh;
+    margin: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+```
+
+#### Card Component Patterns
+```css
+/* ✅ Good - Responsive card layout */
+.card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.cardContent {
+  min-width: 0; /* Allows flex children to shrink */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 768px) {
+  .card {
+    padding: var(--space-6);
+  }
+}
+```
+
+### Theme Variable Usage Guide
+
+#### Always Use Theme Variables
+```css
+/* ✅ Correct */
+.component {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+/* ❌ Incorrect */
+.component {
+  background: var(--neutral-white);
+  color: var(--neutral-gray-800);
+  border: 1px solid var(--neutral-gray-200);
+}
+```
+
+#### Available Theme Variables
+- **Backgrounds**: `--bg-primary`, `--bg-secondary`, `--bg-tertiary`
+- **Text**: `--text-primary`, `--text-secondary`, `--text-tertiary`, `--text-primary-on-dark`
+- **Borders**: `--border-color`
+- **Semantic**: `--semantic-success`, `--semantic-warning`, `--semantic-error`, `--semantic-info`
+- **Brand**: `--primary-main`, `--primary-light`, `--primary-dark`, `--secondary-main`
 
 ### Icon System Guidelines
 
@@ -288,6 +525,8 @@ interface AppStore {
   // Deck management
   decks: Deck[];
   activeDeck: Deck | null;
+  currentDeck: Deck | null;
+  currentDeckId?: string;
 
   // Session management
   session: SessionState | null;
@@ -300,17 +539,100 @@ interface AppStore {
 
   // Actions
   loadDecks: () => Promise<void>;
+  loadDeck: (deckId: string) => Promise<void>;
   selectDeck: (id: string) => void;
   startSession: (mode: string, settings: ModeSettings) => void;
   updateProgress: (correct: boolean, cardIdx: number) => void;
 }
 ```
 
+### Persistence & Reload Handling
+
+#### Store Persistence Configuration
+```typescript
+// CRITICAL: Only persist minimal state to avoid stale data
+persist(
+  (set, get) => ({ /* store implementation */ }),
+  {
+    name: 'deck-store',
+    partialize: (state) => ({
+      // Only persist IDs and user data, not content
+      currentDeckId: state.currentDeck?.id,
+      masteredCards: state.masteredCards,
+      // Never persist deck content - always reload fresh
+    }),
+    onRehydrateStorage: () => (state) => {
+      // Auto-reload current deck after refresh
+      if (state?.currentDeckId) {
+        state.loadDeck(state.currentDeckId);
+      }
+    }
+  }
+)
+```
+
+#### Page Reload Pattern
+**CRITICAL: All pages must handle async deck loading gracefully**
+
+```typescript
+// ✅ CORRECT: Component pattern for reload-safe pages
+const PageComponent: FC = () => {
+  const { currentDeck, isLoading, error, loadDeck } = useDeckStore();
+
+  // 1. Load deck on mount
+  useEffect(() => {
+    if (deckId) {
+      loadDeck(deckId);
+    }
+  }, [deckId, loadDeck]);
+
+  // 2. Use useMemo for derived state with null checks
+  const derivedData = useMemo(() => {
+    if (!currentDeck?.content) return [];
+    return currentDeck.content.filter(/* ... */);
+  }, [currentDeck]);
+
+  // 3. Handle loading state FIRST
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+
+  // 4. Handle error/missing data SECOND
+  if (error || !currentDeck) {
+    return <ErrorState />;
+  }
+
+  // 5. Only render content when data is ready
+  return <Content deck={currentDeck} />;
+};
+```
+
+#### Component Safety Rules
+```typescript
+// ✅ CORRECT: Defensive component with null checks
+export const Component: FC<Props> = ({ deck }) => {
+  // Always check for required data
+  if (!deck?.content || !deck?.metadata) {
+    return null;
+  }
+
+  // Safe to use deck properties here
+  return <div>{deck.content.length} cards</div>;
+};
+
+// ❌ WRONG: Assumes data exists
+export const Component: FC<Props> = ({ deck }) => {
+  // This will crash on reload!
+  return <div>{deck.content.length} cards</div>;
+};
+```
+
 ### Persistence Rules
-- Use localStorage for user preferences
-- Use IndexedDB for deck data
-- Cache active session in memory
+- Use localStorage for user preferences and session IDs only
+- Never persist full deck content (reload from source)
+- Cache active session state in memory
 - Implement Service Worker for offline support
+- Always validate persisted data on rehydration
 
 ## Responsive Design
 
@@ -363,6 +685,29 @@ interface AppStore {
 3. **Never use index as key** in dynamic lists
 4. **Never ignore TypeScript errors**
 5. **Never ship without browser testing**
+6. **Never access deck properties without null checks** - causes reload crashes
+7. **Never persist full deck content** - leads to stale data issues
+8. **Never render before checking isLoading/error states** - causes undefined errors
+
+## Troubleshooting Page Reload Issues
+
+### Problem: "Cannot read properties of undefined" on page reload
+**Solution**: Follow the component pattern in "Page Reload Pattern" section above
+
+### Problem: Deck data missing after refresh
+**Solution**: Ensure `onRehydrateStorage` is configured in store
+
+### Problem: Components render without data
+**Solution**: Add defensive null checks as shown in "Component Safety Rules"
+
+### Testing Reload Resilience
+```bash
+# Test each route with direct browser refresh
+1. Navigate to /deck/1 → Press F5
+2. Navigate to /flashcards/1 → Press F5
+3. Navigate to /learn/1 → Press F5
+4. Check browser console for errors
+```
 
 ## Pre-Commit Checklist
 
