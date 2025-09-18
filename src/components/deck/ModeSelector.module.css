@@ -156,30 +156,39 @@
   color: var(--primary-dark);
 }
 
-/* Mobile responsive styles */
+/* Mobile responsive styles - Hide section title on small screens */
 @media (max-width: 640px) {
   .modesSection {
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-6); /* Maintain consistent spacing */
   }
 
   .sectionTitle {
-    font-size: var(--font-md);
-    margin-bottom: var(--space-3);
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    /* Maintain accessibility for screen readers */
+    clip: rect(0, 0, 0, 0);
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 
   .modesGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-2);
+    gap: var(--space-3); /* Increased from var(--space-2) */
+    padding: 0 var(--space-2); /* Add container padding */
   }
 
   .modeCard {
-    padding: var(--space-3);
+    padding: var(--space-4); /* Increased from var(--space-3) */
+    min-height: 120px; /* Ensure sufficient touch target */
+    border-radius: var(--radius-lg); /* Consistent with design system */
   }
 
   .modeIconWrapper {
     width: 48px;
     height: 48px;
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-3); /* Improved icon spacing */
   }
 
   .modeIcon {

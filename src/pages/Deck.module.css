@@ -405,10 +405,11 @@
   line-height: var(--leading-relaxed);
 }
 
-/* Mobile Responsive */
+/* Enhanced deck page mobile spacing */
 @media (max-width: 768px) {
   /* Prevent horizontal scrolling on mobile */
   .deckPage {
+    padding: 0; /* Remove any container padding that might cause issues */
     max-width: 100vw;
     overflow-x: hidden;
   }
@@ -450,9 +451,10 @@
 
   /* Ensure all sections respect viewport width */
   .cardsSection {
+    margin-top: var(--space-6); /* Consistent top spacing */
+    padding: var(--space-6) var(--space-4); /* Reduced from var(--space-8) */
     max-width: 100vw;
     overflow-x: hidden;
-    padding: var(--space-6) var(--space-4);
   }
 
   .cardsList {
@@ -489,5 +491,12 @@
   .modalSide {
     max-width: 100%;
     word-wrap: break-word;
+  }
+}
+
+/* Tablet responsiveness */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .modesSection {
+    padding: 0 var(--space-6);
   }
 }
