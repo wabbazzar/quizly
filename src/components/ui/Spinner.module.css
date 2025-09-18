@@ -1,0 +1,131 @@
+.spinner {
+  display: inline-block;
+  position: relative;
+  animation: spin 1.2s linear infinite;
+}
+
+/* Size Variants */
+.small {
+  width: 16px;
+  height: 16px;
+}
+
+.medium {
+  width: 24px;
+  height: 24px;
+}
+
+.large {
+  width: 48px;
+  height: 48px;
+}
+
+/* Color Variants */
+.primary .spinnerBlade {
+  background: var(--primary-main);
+}
+
+.secondary .spinnerBlade {
+  background: var(--secondary-main);
+}
+
+.white .spinnerBlade {
+  background: var(--neutral-white);
+}
+
+/* Spinner Blades */
+.spinnerBlade {
+  position: absolute;
+  width: 12%;
+  height: 26%;
+  top: 37%;
+  left: 44%;
+  border-radius: 50% / 20%;
+  opacity: 0.25;
+  animation: fade 1.2s linear infinite;
+}
+
+.spinnerBlade:nth-child(2) {
+  transform: rotate(45deg);
+  animation-delay: -1.05s;
+}
+
+.spinnerBlade:nth-child(3) {
+  transform: rotate(90deg);
+  animation-delay: -0.9s;
+}
+
+.spinnerBlade:nth-child(4) {
+  transform: rotate(135deg);
+  animation-delay: -0.75s;
+}
+
+.spinnerBlade:nth-child(5) {
+  transform: rotate(180deg);
+  animation-delay: -0.6s;
+}
+
+.spinnerBlade:nth-child(6) {
+  transform: rotate(225deg);
+  animation-delay: -0.45s;
+}
+
+.spinnerBlade:nth-child(7) {
+  transform: rotate(270deg);
+  animation-delay: -0.3s;
+}
+
+.spinnerBlade:nth-child(8) {
+  transform: rotate(315deg);
+  animation-delay: -0.15s;
+}
+
+/* Animations */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade {
+  0%, 39%, 100% {
+    opacity: 0.25;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+/* Accessibility */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .spinner,
+  .spinnerBlade {
+    animation: none;
+  }
+
+  .spinner {
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    border-top-color: transparent;
+  }
+
+  .spinnerBlade {
+    display: none;
+  }
+}

@@ -1,0 +1,258 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 var(--space-4);
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+  z-index: 10;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Three-column layout */
+.headerLeft,
+.headerRight {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 80px;
+}
+
+.headerCenter {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Title Section */
+.titleSection {
+  text-align: center;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.deckName {
+  margin: 0;
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
+}
+
+.progressInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1;
+}
+
+.cardCount {
+  font-weight: 500;
+  color: var(--primary-main);
+  white-space: nowrap;
+}
+
+.subtitle {
+  font-weight: 400;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+}
+
+/* Back Button - Minimalist Style */
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.backButton:hover {
+  background: var(--bg-secondary);
+  border-color: var(--primary-main);
+  color: var(--text-primary);
+  transform: translateX(-1px);
+}
+
+.backButton:active {
+  transform: translateX(0);
+  background: var(--bg-tertiary);
+}
+
+.backLabel {
+  display: inline-block;
+}
+
+/* Settings Button */
+.settingsButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.settingsButton:hover {
+  background: var(--bg-secondary);
+  border-color: var(--primary-main);
+  color: var(--text-primary);
+  transform: rotate(45deg);
+}
+
+.settingsButton:active {
+  transform: rotate(45deg) scale(0.95);
+  background: var(--bg-tertiary);
+}
+
+/* Mobile Responsive - Thinner header */
+@media (max-width: 768px) {
+  .header {
+    height: 48px;
+    padding: 0 var(--space-3);
+  }
+
+  .headerLeft,
+  .headerRight {
+    min-width: 60px;
+    gap: var(--space-1);
+  }
+
+  .backButton {
+    padding: var(--space-1-5) var(--space-2);
+    font-size: var(--text-xs);
+  }
+
+  .backLabel {
+    display: none; /* Show only icon on mobile */
+  }
+
+  .settingsButton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .deckName {
+    font-size: var(--text-sm);
+    max-width: 180px;
+  }
+
+  .progressInfo {
+    font-size: var(--text-xs);
+    gap: var(--space-1);
+    margin-top: 2px;
+  }
+
+  .subtitle {
+    max-width: 80px;
+    font-size: var(--text-xs);
+  }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .header {
+    height: 52px;
+  }
+
+  .deckName {
+    max-width: 240px;
+  }
+
+  .subtitle {
+    max-width: 100px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1025px) {
+  .deckName {
+    font-size: var(--text-lg);
+    max-width: 320px;
+  }
+
+  .progressInfo {
+    font-size: var(--text-base);
+  }
+
+  .subtitle {
+    max-width: 140px;
+  }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+  .header {
+    background: var(--bg-primary);
+    border-bottom-color: var(--border-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .backButton:hover,
+  .settingsButton:hover {
+    background: var(--bg-secondary);
+  }
+
+  .backButton:active,
+  .settingsButton:active {
+    background: var(--bg-tertiary);
+  }
+}
+
+/* Focus states for accessibility */
+.backButton:focus-visible,
+.settingsButton:focus-visible {
+  outline: 2px solid var(--primary-main);
+  outline-offset: 2px;
+}
+
+/* Prevent text selection on interactive elements */
+.backButton,
+.settingsButton {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Ensure proper text handling */
+.titleSection * {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Animation for smooth transitions */
+.header * {
+  transition: inherit;
+}

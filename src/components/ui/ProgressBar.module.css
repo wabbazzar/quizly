@@ -1,0 +1,152 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.track {
+  flex: 1;
+  background: linear-gradient(135deg,
+    rgba(0, 0, 0, 0.05),
+    rgba(0, 0, 0, 0.02)
+  );
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Size Variants */
+.small .track {
+  height: 4px;
+}
+
+.medium .track {
+  height: 8px;
+}
+
+.large .track {
+  height: 12px;
+}
+
+/* Progress Bar */
+.bar {
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated Stripe Pattern */
+.animated::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 1rem 1rem;
+  animation: progress-animation 1s linear infinite;
+}
+
+@keyframes progress-animation {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1rem 1rem;
+  }
+}
+
+/* Color Variants */
+.default {
+  background: linear-gradient(135deg, var(--primary-main), var(--primary-dark));
+}
+
+.success {
+  background: linear-gradient(135deg, var(--semantic-success), #059669);
+}
+
+.warning {
+  background: linear-gradient(135deg, var(--semantic-warning), #d97706);
+}
+
+.error {
+  background: linear-gradient(135deg, var(--semantic-error), #dc2626);
+}
+
+/* Label */
+.label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  min-width: 3ch;
+  text-align: right;
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .small .track {
+    height: 3px;
+  }
+
+  .medium .track {
+    height: 6px;
+  }
+
+  .large .track {
+    height: 10px;
+  }
+
+  .label {
+    font-size: var(--text-xs);
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .track {
+    background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.04)
+    );
+  }
+
+  .default {
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-main));
+  }
+
+  .success {
+    background: linear-gradient(135deg, #10b981, #059669);
+  }
+
+  .warning {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+  }
+
+  .error {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .bar {
+    transition: none;
+  }
+
+  .animated::before {
+    animation: none;
+  }
+}

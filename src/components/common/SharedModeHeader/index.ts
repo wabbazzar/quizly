@@ -1,0 +1,1 @@
+export { SharedModeHeader, type SharedModeHeaderProps } from './SharedModeHeader';

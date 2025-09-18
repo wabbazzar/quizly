@@ -1,0 +1,215 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  display: block;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+/* Variant Styles */
+.default {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.6)
+  );
+  border: 1px solid var(--border-color);
+}
+
+.filled {
+  background: linear-gradient(135deg,
+    rgba(74, 144, 226, 0.05),
+    rgba(74, 144, 226, 0.02)
+  );
+  border: 1px solid transparent;
+}
+
+.outlined {
+  background: transparent;
+  border: 2px solid rgba(74, 144, 226, 0.2);
+}
+
+/* Input Element */
+.input {
+  flex: 1;
+  padding: var(--space-3) var(--space-4);
+  font-family: inherit;
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  min-width: 0;
+}
+
+.withIcon .input {
+  padding-left: var(--space-3);
+  padding-right: var(--space-3);
+}
+
+/* Icon Styles */
+.startIcon,
+.endIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.startIcon {
+  margin-left: var(--space-3);
+}
+
+.endIcon {
+  margin-right: var(--space-3);
+}
+
+/* Focus States */
+.inputWrapper:focus-within {
+  outline: 3px solid var(--primary-main);
+  outline-offset: 2px;
+}
+
+.default:focus-within {
+  border-color: var(--primary-main);
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0.9)
+  );
+}
+
+.filled:focus-within {
+  background: linear-gradient(135deg,
+    rgba(74, 144, 226, 0.08),
+    rgba(74, 144, 226, 0.04)
+  );
+  border-color: rgba(74, 144, 226, 0.2);
+}
+
+.outlined:focus-within {
+  border-color: var(--primary-main);
+  background: linear-gradient(135deg,
+    rgba(74, 144, 226, 0.03),
+    rgba(74, 144, 226, 0.01)
+  );
+}
+
+/* Error State */
+.error {
+  border-color: var(--semantic-error) !important;
+}
+
+.error:focus-within {
+  outline-color: var(--semantic-error);
+}
+
+.errorText {
+  font-size: var(--text-sm);
+  color: var(--semantic-error);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.helperText {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* Placeholder Styles */
+.input::placeholder {
+  color: var(--text-tertiary);
+  opacity: 0.7;
+}
+
+/* Autofill Styles */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary);
+  -webkit-box-shadow: 0 0 0 30px var(--bg-primary) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Disabled State */
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.inputWrapper:has(.input:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .input {
+    padding: var(--space-3);
+    font-size: 16px; /* Prevent zoom on iOS */
+    min-height: 48px; /* Touch-friendly */
+  }
+
+  .withIcon .input {
+    padding-left: var(--space-2);
+    padding-right: var(--space-2);
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .default {
+    background: linear-gradient(135deg,
+      rgba(31, 41, 55, 0.8),
+      rgba(31, 41, 55, 0.6)
+    );
+    border-color: rgba(75, 85, 99, 0.5);
+  }
+
+  .filled {
+    background: linear-gradient(135deg,
+      rgba(107, 165, 233, 0.08),
+      rgba(107, 165, 233, 0.04)
+    );
+  }
+
+  .outlined {
+    border-color: rgba(107, 165, 233, 0.3);
+  }
+
+  .default:focus-within {
+    background: linear-gradient(135deg,
+      rgba(31, 41, 55, 0.95),
+      rgba(31, 41, 55, 0.9)
+    );
+  }
+
+  .input:-webkit-autofill,
+  .input:-webkit-autofill:hover,
+  .input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px var(--bg-primary) inset;
+  }
+}
