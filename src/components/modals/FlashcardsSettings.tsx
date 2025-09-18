@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Deck } from '@/types';
+import { useDeckStore } from '@/store/deckStore';
 import styles from './FlashcardsSettings.module.css';
 
 interface FlashcardsSettingsProps {
@@ -9,7 +10,9 @@ interface FlashcardsSettingsProps {
   deck: Deck | null;
   frontSides: string[];
   backSides: string[];
-  onUpdateSettings: (frontSides: string[], backSides: string[]) => void;
+  progressionMode?: 'sequential' | 'shuffle' | 'level';
+  includeMastered?: boolean;
+  onUpdateSettings: (frontSides: string[], backSides: string[], progressionMode: 'sequential' | 'shuffle' | 'level', includeMastered: boolean) => void;
 }
 
 const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
@@ -18,10 +21,17 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
   deck,
   frontSides,
   backSides,
+  progressionMode = 'shuffle',
+  includeMastered = true,
   onUpdateSettings,
 }) => {
   const [localFrontSides, setLocalFrontSides] = useState<string[]>(frontSides);
   const [localBackSides, setLocalBackSides] = useState<string[]>(backSides);
+  const [localProgressionMode, setLocalProgressionMode] = useState<'sequential' | 'shuffle' | 'level'>(progressionMode);
+  const [localIncludeMastered, setLocalIncludeMastered] = useState<boolean>(includeMastered);
+
+  const { getMasteredCardsForDeck } = useDeckStore();
+  const masteredCount = deck ? getMasteredCardsForDeck(deck.id).length : 0;
 
   if (!deck) return null;
 
@@ -102,7 +112,7 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
   };
 
   const handleSave = () => {
-    onUpdateSettings(localFrontSides, localBackSides);
+    onUpdateSettings(localFrontSides, localBackSides, localProgressionMode, localIncludeMastered);
     onClose();
   };
 
@@ -209,6 +219,86 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
                       {getSideLabel(side)}
                     </button>
                   ))}
+                </div>
+              </section>
+
+              {/* Progression Settings */}
+              <section className={styles.section}>
+                <h3 className={styles.sectionTitle}>Card Progression</h3>
+                <p className={styles.sectionDescription}>
+                  Choose how cards are presented during your session
+                </p>
+                <div className={styles.progressionOptions}>
+                  <label className={styles.radioOption}>
+                    <input
+                      type="radio"
+                      name="progression"
+                      value="shuffle"
+                      checked={localProgressionMode === 'shuffle'}
+                      onChange={(e) => setLocalProgressionMode(e.target.value as 'sequential' | 'shuffle' | 'level')}
+                      className={styles.radioInput}
+                    />
+                    <div className={styles.radioContent}>
+                      <span className={styles.radioLabel}>Shuffle</span>
+                      <span className={styles.radioDescription}>Random order for better retention</span>
+                    </div>
+                  </label>
+                  <label className={styles.radioOption}>
+                    <input
+                      type="radio"
+                      name="progression"
+                      value="sequential"
+                      checked={localProgressionMode === 'sequential'}
+                      onChange={(e) => setLocalProgressionMode(e.target.value as 'sequential' | 'shuffle' | 'level')}
+                      className={styles.radioInput}
+                    />
+                    <div className={styles.radioContent}>
+                      <span className={styles.radioLabel}>Sequential</span>
+                      <span className={styles.radioDescription}>Cards in order as they appear in deck</span>
+                    </div>
+                  </label>
+                  <label className={styles.radioOption}>
+                    <input
+                      type="radio"
+                      name="progression"
+                      value="level"
+                      checked={localProgressionMode === 'level'}
+                      onChange={(e) => setLocalProgressionMode(e.target.value as 'sequential' | 'shuffle' | 'level')}
+                      className={styles.radioInput}
+                    />
+                    <div className={styles.radioContent}>
+                      <span className={styles.radioLabel}>By Level</span>
+                      <span className={styles.radioDescription}>Progress from easier to harder cards</span>
+                    </div>
+                  </label>
+                </div>
+              </section>
+
+              {/* Mastered Cards Settings */}
+              <section className={styles.section}>
+                <h3 className={styles.sectionTitle}>Mastered Cards</h3>
+                <div className={styles.masteredSettings}>
+                  <label className={styles.checkboxOption}>
+                    <input
+                      type="checkbox"
+                      checked={localIncludeMastered}
+                      onChange={(e) => setLocalIncludeMastered(e.target.checked)}
+                      className={styles.checkbox}
+                    />
+                    <div className={styles.checkboxContent}>
+                      <span className={styles.checkboxLabel}>Include mastered cards</span>
+                      <span className={styles.checkboxDescription}>
+                        {masteredCount > 0
+                          ? `${masteredCount} card${masteredCount === 1 ? ' is' : 's are'} currently mastered`
+                          : 'No cards are currently mastered'}
+                      </span>
+                    </div>
+                  </label>
+                  {masteredCount > 0 && !localIncludeMastered && (
+                    <div className={styles.infoMessage}>
+                      ⓘ {masteredCount} mastered card{masteredCount === 1 ? '' : 's'} will be excluded from this session
+                    </div>
+                  )}
                 </div>
               </section>
             </div>

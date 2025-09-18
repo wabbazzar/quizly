@@ -9,64 +9,7 @@
   inset: 0;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--space-3);
-  background: var(--bg-secondary);
-  box-shadow: var(--shadow-md);
-  flex-shrink: 0;
-}
-
-.backButton,
-.settingsButton {
-  background: none;
-  border: none;
-  font-size: var(--text-lg);
-  color: var(--text-primary);
-  cursor: pointer;
-  padding: var(--space-2);
-  border-radius: var(--radius-md);
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0;
-}
-
-.backButton:hover {
-  background: var(--bg-hover);
-}
-
-.settingsButton:hover {
-  background: var(--bg-hover);
-  transform: rotate(45deg);
-}
-
-.deckInfo {
-  flex: 1;
-  text-align: center;
-  min-width: 0;
-}
-
-.deckTitle {
-  font-size: var(--text-lg);
-  font-weight: var(--font-semibold);
-  color: var(--text-primary);
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.cardCounter {
-  font-size: var(--text-sm);
-  color: var(--text-secondary);
-  margin-top: var(--space-1);
-}
+/* Special indicators for card counter in PageHeader subtitle */
 
 .missedCardsIndicator {
   color: var(--semantic-warning);
@@ -255,14 +198,6 @@
     height: 100vh;
     height: 100dvh;
     touch-action: pan-x; /* Allow horizontal swipe but prevent vertical scroll */
-  }
-
-  .header {
-    padding: var(--space-2);
-  }
-
-  .deckTitle {
-    font-size: var(--text-base);
   }
 
   .main {

@@ -177,15 +177,15 @@ const FlashcardsCompletionModal: FC<FlashcardsCompletionModalProps> = ({
                   <button
                     onClick={onContinueWithMissed}
                     className={`${styles.actionButton} ${styles.primaryButton}`}
+                    title="Press 1 to continue"
                   >
-                    <span className={styles.keyHint}>1</span>
                     Continue with Missed Cards ({results.incorrectCards})
                   </button>
                   <button
                     onClick={onStartNewRound}
                     className={`${styles.actionButton} ${styles.secondaryButton}`}
+                    title="Press 2 to start again"
                   >
-                    <span className={styles.keyHint}>2</span>
                     Start Full Deck Again
                   </button>
                 </>
@@ -194,8 +194,8 @@ const FlashcardsCompletionModal: FC<FlashcardsCompletionModalProps> = ({
                   <button
                     onClick={onStartNewRound}
                     className={`${styles.actionButton} ${styles.primaryButton}`}
+                    title="Press 1 to start new round"
                   >
-                    <span className={styles.keyHint}>1</span>
                     Start New Round
                   </button>
                 </>
@@ -203,8 +203,8 @@ const FlashcardsCompletionModal: FC<FlashcardsCompletionModalProps> = ({
               <button
                 onClick={onBackToDeck}
                 className={`${styles.actionButton} ${styles.tertiaryButton}`}
+                title="Press 3 to go back"
               >
-                <span className={styles.keyHint}>3</span>
                 Back to Deck
               </button>
             </div>

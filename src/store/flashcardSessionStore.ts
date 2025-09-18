@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-interface FlashcardSession {
+export interface FlashcardSession {
   deckId: string;
   currentCardIndex: number;
   progress: { [key: number]: 'correct' | 'incorrect' | null };
@@ -12,6 +12,8 @@ interface FlashcardSession {
   cardOrder: number[]; // Current order of cards (for shuffling missed cards)
   startTime: number;
   isMissedCardsRound: boolean; // True if current round is missed cards only
+  progressionMode?: 'sequential' | 'shuffle' | 'level'; // Card progression mode
+  includeMastered?: boolean; // Whether to include mastered cards in the session
 }
 
 interface FlashcardSessionStore {
@@ -26,8 +28,8 @@ interface FlashcardSessionStore {
   getMissedCardIndices: (session: FlashcardSession) => number[];
 }
 
-const DEFAULT_FRONT_SIDES = ['side_a'];
-const DEFAULT_BACK_SIDES = ['side_b'];
+export const DEFAULT_FRONT_SIDES = ['side_a'];
+export const DEFAULT_BACK_SIDES = ['side_b'];
 const SESSION_EXPIRY_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 
 export const useFlashcardSessionStore = create<FlashcardSessionStore>()(
@@ -97,7 +99,9 @@ export const useFlashcardSessionStore = create<FlashcardSessionStore>()(
           roundNumber: (existingSession?.roundNumber || 0) + 1,
           cardOrder: Array.from({ length: totalCards }, (_, i) => i),
           startTime: Date.now(),
-          isMissedCardsRound: false
+          isMissedCardsRound: false,
+          progressionMode: existingSession?.progressionMode || 'shuffle',
+          includeMastered: existingSession?.includeMastered !== undefined ? existingSession.includeMastered : true
         };
 
         get().saveSession(newSession);
@@ -120,7 +124,9 @@ export const useFlashcardSessionStore = create<FlashcardSessionStore>()(
           roundNumber: (existingSession?.roundNumber || 0) + 1,
           cardOrder: shuffled,
           startTime: Date.now(),
-          isMissedCardsRound: true
+          isMissedCardsRound: true,
+          progressionMode: existingSession?.progressionMode || 'shuffle',
+          includeMastered: existingSession?.includeMastered !== undefined ? existingSession.includeMastered : true
         };
 
         get().saveSession(newSession);
@@ -180,5 +186,3 @@ export const useFlashcardSessionStore = create<FlashcardSessionStore>()(
     }
   )
 );
-
-export { DEFAULT_FRONT_SIDES, DEFAULT_BACK_SIDES };
