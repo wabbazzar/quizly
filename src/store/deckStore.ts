@@ -153,15 +153,17 @@ export const useDeckStore = create<DeckStore>()(
     {
       name: 'deck-store',
       partialize: (state) => ({
-        // Persist deck metadata and currentDeck ID
-        decks: state.decks.map(d => ({
-          id: d.id,
-          metadata: d.metadata,
-        })),
+        // Persist the current deck ID so we can reload it on refresh
         currentDeckId: state.currentDeck?.id,
         masteredCards: state.masteredCards,
         shuffleMasteredCardsBack: state.shuffleMasteredCardsBack,
       }),
+      onRehydrateStorage: () => (state) => {
+        // After rehydration, if we have a currentDeckId, reload that deck
+        if (state?.currentDeckId) {
+          state.loadDeck(state.currentDeckId);
+        }
+      },
     }
   )
 );

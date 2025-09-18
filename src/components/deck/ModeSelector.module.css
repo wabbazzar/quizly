@@ -1,0 +1,212 @@
+.modesSection {
+  margin-bottom: var(--space-8);
+}
+
+.sectionTitle {
+  font-size: var(--font-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4);
+  text-align: center;
+}
+
+.modesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-4);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.modeCard {
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 180px;
+}
+
+.modeCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--primary-main);
+}
+
+.modeCard.primary {
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(74, 144, 226, 0.05));
+  border-color: rgba(74, 144, 226, 0.2);
+}
+
+.modeCard.primary::before {
+  background: var(--primary-main);
+}
+
+.modeCard.secondary {
+  background: linear-gradient(135deg, rgba(80, 227, 194, 0.1), rgba(80, 227, 194, 0.05));
+  border-color: rgba(80, 227, 194, 0.2);
+}
+
+.modeCard.secondary::before {
+  background: var(--secondary-main);
+}
+
+.modeCard.purple {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05));
+  border-color: rgba(139, 92, 246, 0.2);
+}
+
+.modeCard.purple::before {
+  background: #8B5CF6;
+}
+
+.modeCard.orange {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.modeCard.orange::before {
+  background: #F59E0B;
+}
+
+.modeIconWrapper {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--neutral-gray-100);
+}
+
+.modeCard.primary .modeIconWrapper {
+  background: rgba(74, 144, 226, 0.1);
+  color: var(--primary-main);
+}
+
+.modeCard.secondary .modeIconWrapper {
+  background: rgba(80, 227, 194, 0.1);
+  color: var(--secondary-main);
+}
+
+.modeCard.purple .modeIconWrapper {
+  background: rgba(139, 92, 246, 0.1);
+  color: #8B5CF6;
+}
+
+.modeCard.orange .modeIconWrapper {
+  background: rgba(245, 158, 11, 0.1);
+  color: #F59E0B;
+}
+
+.modeIcon {
+  flex-shrink: 0;
+}
+
+.modeName {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-2);
+}
+
+.modeDescription {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-4);
+  line-height: 1.5;
+}
+
+.modeAction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.startText {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--primary-main);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.modeCard {
+  will-change: transform;
+}
+
+.modeCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-main);
+}
+
+.modeCard:hover .startText {
+  color: var(--primary-dark);
+}
+
+/* Mobile responsive styles */
+@media (max-width: 640px) {
+  .modesSection {
+    margin-bottom: var(--space-4);
+  }
+
+  .sectionTitle {
+    font-size: var(--font-md);
+    margin-bottom: var(--space-3);
+  }
+
+  .modesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2);
+  }
+
+  .modeCard {
+    padding: var(--space-3);
+  }
+
+  .modeIconWrapper {
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--space-2);
+  }
+
+  .modeIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .modeName {
+    font-size: var(--font-md);
+    margin-bottom: var(--space-1);
+  }
+
+  .modeDescription {
+    display: none; /* Hide description on mobile to save space */
+  }
+
+  .modeAction {
+    margin-top: var(--space-2);
+  }
+
+  .startText {
+    font-size: var(--font-xs);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .modesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

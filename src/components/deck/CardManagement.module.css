@@ -1,0 +1,376 @@
+.cardsSection {
+  margin-top: var(--space-8);
+  padding: 0 var(--space-4);
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+/* Mobile padding for the entire section */
+@media (max-width: 768px) {
+  .cardsSection {
+    padding: 0 var(--space-3);
+    margin-top: var(--space-6);
+  }
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+.sectionTitle {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.cardActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.dragHint {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+.cardsManagement {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Fixed 2-column layout */
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Single column on smaller screens */
+@media (max-width: 840px) {
+  .cardsManagement {
+    grid-template-columns: 1fr !important; /* Force single column */
+  }
+}
+
+.cardCategory {
+  background: var(--bg-secondary); /* Use secondary background for consistency */
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  min-height: 300px;
+  width: 100%; /* Take full width of grid cell */
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.cardCategory.dragOver {
+  border-color: var(--primary-main);
+  background: rgba(74, 144, 226, 0.05);
+}
+
+.learningSection {
+  box-shadow: var(--shadow-sm);
+}
+
+.masteredSection {
+  box-shadow: var(--shadow-sm);
+  /* Match the learning section styling for consistency */
+}
+
+.categoryTitle {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.categoryIcon {
+  flex-shrink: 0;
+}
+
+.learningSection .categoryIcon {
+  color: var(--primary-main);
+}
+
+.masteredSection .categoryIcon {
+  color: var(--semantic-success);
+}
+
+.cardsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-height: 500px; /* Restore scrolling for the list */
+  min-height: 120px; /* Maintain minimum height even when empty */
+  overflow-y: auto; /* Enable vertical scrolling for card lists */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  padding-right: var(--space-2);
+  flex: 1;
+  position: relative;
+}
+
+/* Empty state message styling */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  padding: var(--space-4);
+  text-align: center;
+  color: var(--text-tertiary);
+}
+
+.emptyState p {
+  margin: 0 0 var(--space-2) 0;
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.emptyState span {
+  font-size: var(--text-sm);
+  font-style: italic;
+  color: var(--text-tertiary);
+}
+
+.cardsList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cardsList::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+}
+
+.cardsList::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: var(--radius-sm);
+}
+
+.cardsList::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+.cardItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--bg-primary); /* Use primary background for contrast */
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+  min-height: 80px; /* Ensure minimum height for readability */
+}
+
+/* Hover effect handled by Framer Motion whileHover prop */
+.cardItem:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.cardItem.dragging {
+  opacity: 0.5;
+}
+
+.masteredCard {
+  background: var(--bg-primary);
+  border-color: var(--semantic-success);
+  position: relative;
+}
+
+/* Add a subtle indicator for mastered cards */
+.masteredCard::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--semantic-success);
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+}
+
+.cardDragHandle {
+  cursor: grab;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  align-self: center; /* Vertically center the drag handle */
+}
+
+.cardDragHandle:active {
+  cursor: grabbing;
+}
+
+/* Hide drag handles on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .cardDragHandle {
+    display: none;
+  }
+}
+
+.cardNumber {
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 32px;
+  text-align: center;
+  font-size: var(--text-sm);
+  align-self: center; /* Vertically center the card number */
+}
+
+.cardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  /* Remove overflow: hidden to prevent internal scrolling */
+  padding: var(--space-1) 0; /* Add vertical padding for better readability */
+  min-width: 0; /* Allow content to shrink properly */
+}
+
+.cardSide {
+  display: flex;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  align-items: flex-start; /* Align label and text at the top */
+  min-width: 0; /* Allow flex items to shrink */
+}
+
+.sideLabel {
+  font-weight: 500;
+  color: var(--text-tertiary);
+  min-width: 45px;
+}
+
+.sideText {
+  color: var(--text-primary);
+  line-height: 1.4; /* Better readability */
+  word-wrap: break-word; /* Allow word breaking */
+  overflow-wrap: break-word; /* Modern property for word breaking */
+  /* Remove overflow settings that could cause internal scrolling */
+  flex: 1;
+  min-width: 0; /* Allow flex item to shrink */
+}
+
+.masterButton,
+.unmasterButton {
+  padding: var(--space-1-5);
+  background: transparent;
+  border: 1px solid;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  align-self: center; /* Vertically center the buttons */
+  /* Increase touch target size on mobile */
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Adjust button size for desktop */
+@media (hover: hover) and (pointer: fine) {
+  .masterButton,
+  .unmasterButton {
+    min-width: 32px;
+    min-height: 32px;
+  }
+}
+
+.masterButton {
+  border-color: var(--semantic-success);
+  color: var(--semantic-success);
+}
+
+.masterButton:hover {
+  background: var(--semantic-success);
+  color: var(--neutral-white);
+}
+
+.unmasterButton {
+  border-color: var(--text-tertiary);
+  color: var(--text-secondary);
+}
+
+.unmasterButton:hover {
+  background: var(--text-tertiary);
+  color: var(--text-primary-on-dark);
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .cardsManagement {
+    grid-template-columns: 1fr !important; /* Ensure single column */
+    gap: var(--space-3);
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .cardCategory {
+    padding: var(--space-3);
+    min-height: 250px;
+    width: 100% !important; /* Force full width */
+    max-width: 100% !important;
+    margin: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .cardsList {
+    max-height: 350px; /* Restore reasonable scroll height for mobile */
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: var(--space-1);
+  }
+
+  .cardItem {
+    padding: var(--space-3);
+    gap: var(--space-2);
+    max-width: 100%;
+    overflow-x: hidden;
+    min-height: 90px; /* Ensure adequate height on mobile */
+  }
+
+  .cardContent {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .cardSide {
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+
+  .sideText {
+    word-break: break-word;
+    white-space: normal;
+    max-width: 100%;
+  }
+
+  .dragHint {
+    display: none; /* Hide drag hint on mobile */
+  }
+}

@@ -1,0 +1,149 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  padding: var(--space-4);
+  background: var(--neutral-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.backButton {
+  padding: var(--space-2) var(--space-3);
+  background: var(--neutral-gray-100);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--font-sm);
+  color: var(--neutral-gray-600);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.backButton:hover {
+  background: var(--neutral-gray-200);
+  color: var(--neutral-gray-700);
+}
+
+.deckInfo {
+  flex: 1;
+  text-align: center;
+  padding: 0 var(--space-4);
+}
+
+.deckName {
+  font-size: var(--font-2xl);
+  font-weight: 700;
+  color: var(--neutral-gray-800);
+  margin: 0 0 var(--space-2);
+  line-height: 1.2;
+}
+
+.deckDescription {
+  font-size: var(--font-md);
+  color: var(--neutral-gray-500);
+  margin: 0 0 var(--space-3);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.deckStats {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: var(--font-sm);
+}
+
+.stat {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  background: var(--neutral-gray-100);
+  border-radius: var(--radius-sm);
+  color: var(--neutral-gray-600);
+}
+
+.statIcon {
+  color: var(--primary-main);
+}
+
+.difficulty {
+  text-transform: capitalize;
+  background: var(--primary-light);
+  color: var(--neutral-white);
+  font-weight: 500;
+}
+
+.headerActions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.settingsButton {
+  padding: var(--space-2);
+  background: var(--neutral-gray-100);
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--neutral-gray-600);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settingsButton:hover {
+  background: var(--neutral-gray-200);
+  color: var(--neutral-gray-700);
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .header {
+    padding: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+
+  .backButton {
+    font-size: var(--font-xs);
+    padding: var(--space-1) var(--space-2);
+  }
+
+  .deckInfo {
+    padding: 0 var(--space-2);
+  }
+
+  .deckName {
+    font-size: var(--font-lg);
+    margin-bottom: var(--space-1);
+  }
+
+  .deckDescription {
+    display: none; /* Hide description on mobile */
+  }
+
+  .deckStats {
+    gap: var(--space-2);
+  }
+
+  .stat {
+    font-size: var(--font-xs);
+    padding: 2px var(--space-1);
+  }
+
+  .headerActions {
+    display: flex;
+  }
+
+  .settingsButton {
+    padding: var(--space-1);
+  }
+}
