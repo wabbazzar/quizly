@@ -17,7 +17,7 @@ export const DeckHeader: FC<DeckHeaderProps> = memo(({
   return (
     <PageHeader
       title={deck.metadata.deck_name}
-      subtitle={deck.metadata.description || statsText}
+      subtitle={deck.metadata.deck_subtitle || deck.metadata.description || statsText}
       onBackClick={onBackClick}
       backLabel="Home"
       onSettingsClick={onSettingsClick}

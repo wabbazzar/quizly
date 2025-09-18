@@ -194,6 +194,12 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(({
         <DifficultyBadge level={metadata.difficulty} />
       </header>
 
+      {metadata.deck_subtitle && (
+        <p className={styles.subtitle}>
+          {metadata.deck_subtitle}
+        </p>
+      )}
+
       {metadata.description && (
         <p className={styles.description}>
           {metadata.description}

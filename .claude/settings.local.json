@@ -70,7 +70,8 @@
       "Bash(awk:*)",
       "Bash(gzip:*)",
       "Bash(gh run view:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(npx playwright:*)"
     ],
     "deny": [],
     "ask": []

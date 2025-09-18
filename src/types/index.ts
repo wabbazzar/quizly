@@ -1,6 +1,7 @@
 // Deck Metadata
 export interface DeckMetadata {
   deck_name: string;
+  deck_subtitle?: string;
   description: string;
   category: string;
   available_levels: number[];
