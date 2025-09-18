@@ -864,6 +864,264 @@ interface AppStore {
 }
 ```
 
+## Error Handling & Recovery System
+
+### Error Boundary Architecture
+
+The application implements a comprehensive error boundary system with multiple levels of error containment and recovery:
+
+#### Hierarchical Error Boundaries
+
+```typescript
+// Four-tier error boundary system
+type ErrorBoundaryLevel = 'app' | 'route' | 'feature' | 'component';
+
+interface ErrorBoundaryProps {
+  level: ErrorBoundaryLevel;
+  fallback?: React.ComponentType<ErrorFallbackProps>;
+  onError?: (error: Error, errorInfo: ErrorInfo) => void;
+  resetKeys?: Array<string | number>;
+  resetOnPropsChange?: boolean;
+}
+```
+
+**1. App-Level Boundaries**
+- Catch catastrophic application errors
+- Provide full page reload and navigation options
+- Display branded error page with support contact
+
+**2. Route-Level Boundaries**
+- Isolate page-specific errors
+- Reset automatically when navigation changes
+- Offer retry, refresh, and back navigation options
+
+**3. Feature-Level Boundaries**
+- Contain errors within major app features
+- Preserve rest of application functionality
+- Feature-specific recovery instructions
+
+**4. Component-Level Boundaries**
+- Isolate individual component failures
+- Minimal impact on surrounding UI
+- Automatic retry mechanisms
+
+#### Error Logging Service
+
+```typescript
+interface ErrorReport {
+  id: string;
+  error: {
+    name: string;
+    message: string;
+    stack?: string;
+  };
+  context: ErrorContext;
+  severity: 'low' | 'medium' | 'high' | 'critical';
+}
+
+interface ErrorContext {
+  level: string;
+  timestamp: string;
+  userAgent: string;
+  url: string;
+  userId: string | null;
+  sessionId: string;
+  componentStack?: string;
+  errorBoundaryLevel: string;
+  additionalContext?: Record<string, any>;
+}
+```
+
+**Features:**
+- Automatic error context capture
+- Severity classification based on error level
+- Local storage with queue management
+- Offline error queuing with online sync
+- Development vs production logging modes
+
+#### Error Recovery Mechanisms
+
+**Automatic Recovery:**
+- Component remounting on prop changes
+- Route reset on navigation
+- Session state preservation
+- Progressive retry with backoff
+
+**User-Initiated Recovery:**
+- "Try Again" buttons for component retries
+- "Refresh Page" for route-level issues
+- "Go Home" for navigation recovery
+- "Clear Cache & Reload" for chunk loading errors
+
+#### Chunk Loading Error Handling
+
+Special handling for code-splitting failures:
+
+```typescript
+class ChunkLoadErrorBoundary extends Component {
+  // Detects chunk loading failures
+  static isChunkLoadError(error: Error): boolean;
+
+  // Automatic recovery attempts
+  // Clear cache and reload on failure
+}
+```
+
+#### Progress Preservation
+
+Session state recovery system to prevent progress loss:
+
+```typescript
+interface ProgressSnapshot {
+  id: string;
+  timestamp: number;
+  sessionType: 'learn' | 'flashcards' | 'match' | 'test';
+  deckId: string;
+  sessionData: SessionState;
+  userActions: UserAction[];
+  recoveryContext: {
+    url: string;
+    errorType: string;
+    errorMessage: string;
+  };
+}
+```
+
+**Features:**
+- Automatic progress snapshots every 30 seconds
+- Error-triggered emergency snapshots
+- Recovery dialog on session restoration
+- User action replay capability
+
+#### Async Error Handling
+
+Custom hooks for handling asynchronous operations:
+
+```typescript
+// Hook for async error handling with retry
+const [loadDeck, { error, isError, retry, reset }] = useErrorHandler(
+  deckService.loadDeck,
+  {
+    onError: (error) => console.error('Failed to load deck:', error),
+    retryAttempts: 3,
+    retryDelay: 1000,
+  }
+);
+
+// Hook for component error boundaries
+const { captureError, resetError, hasError } = useErrorBoundary();
+
+// Hook for user error reporting
+const { reportError, getErrorHistory, clearErrorHistory } = useErrorReporting();
+```
+
+### Error Classification
+
+**Critical Errors (App-Level)**
+- Application crashes
+- Security violations
+- Core system failures
+- Service worker errors
+
+**High Severity (Route-Level)**
+- Page load failures
+- Data corruption
+- Authentication errors
+- Navigation failures
+
+**Medium Severity (Feature-Level)**
+- Learning mode failures
+- Deck loading errors
+- Network connectivity issues
+- File import/export errors
+
+**Low Severity (Component-Level)**
+- Individual component failures
+- Validation errors
+- Minor UI glitches
+- Non-critical async failures
+
+### Error Prevention
+
+**TypeScript Integration:**
+- Strict type checking with no `any` types
+- Exhaustive union type handling
+- Proper null/undefined checks
+- Error boundary type safety
+
+**Input Validation:**
+- Runtime data validation
+- Sanitization of external data
+- Graceful handling of malformed input
+- User input constraints
+
+**Defensive Programming:**
+- Null checks for all external dependencies
+- Fallback values for critical operations
+- Try-catch blocks for risky operations
+- Circuit breaker patterns for external services
+
+### Monitoring & Analytics
+
+**Error Metrics:**
+- Error rate by severity level
+- Recovery success rate
+- Time to recovery
+- User impact assessment
+
+**Development Tools:**
+- Error replay in development mode
+- Component stack traces
+- Redux/Zustand state dumps
+- Performance impact analysis
+
+### Performance Requirements
+
+**Error Handling Overhead:**
+- <1ms per error boundary check
+- <5MB memory for error logging
+- <200KB bundle size impact
+- <100ms error reporting latency
+
+**Recovery Performance:**
+- <2 seconds from error to recovery UI
+- <1 second for component retry
+- <500ms for progress restoration
+- <3 seconds for full page recovery
+
+### Accessibility
+
+**Screen Reader Support:**
+- ARIA live regions for error announcements
+- Descriptive error messages
+- Keyboard navigation in error dialogs
+- High contrast error indicators
+
+**Reduced Motion:**
+- Respect `prefers-reduced-motion`
+- Optional error animations
+- Static fallback for motion-sensitive users
+
+### Testing Strategy
+
+**Unit Tests:**
+- Error boundary catching behavior
+- Error logging accuracy
+- Recovery mechanism functionality
+- Hook behavior under error conditions
+
+**Integration Tests:**
+- Cross-component error propagation
+- Progress preservation workflows
+- User recovery interactions
+- Error reporting workflows
+
+**E2E Tests:**
+- Simulated network failures
+- Browser crash recovery
+- Page refresh during errors
+- Mobile error handling
+
 ---
 
 *This specification is a living document and will be updated as development progresses and requirements evolve.*

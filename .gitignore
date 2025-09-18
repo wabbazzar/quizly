@@ -63,9 +63,31 @@ web-build/
 
 # Testing
 coverage/
+test-results/
+playwright-report/
+test-results.xml
+junit.xml
 
 # TypeScript
 *.tsbuildinfo
+
+# Build and cache
+dist/
+.vite/
+.cache/
+
+# Lighthouse CI
+.lighthouseci/
+
+# ESLint cache
+.eslintcache
+
+# Playwright browsers
+.playwright/
+
+# Performance profiling
+*.cpuprofile
+*.heapprofile
 
 # Temporary files
 *.log
@@ -73,9 +95,22 @@ coverage/
 .env.development.local
 .env.test.local
 .env.production.local
+.tmp/
+tmp/
+
+# CI/CD artifacts
+eslint-results.json
+coverage-summary.json
+bundle-analysis.json
 
 # Editor directories and files
 .vscode/
+.idea/
 *.swp
 *.swo
 *~
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
