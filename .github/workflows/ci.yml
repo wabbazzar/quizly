@@ -168,7 +168,7 @@ jobs:
     needs: setup
     strategy:
       matrix:
-        test-group: [components, services, utils, stores]
+        test-group: [components, error]
       fail-fast: false
     steps:
       - name: Checkout code
