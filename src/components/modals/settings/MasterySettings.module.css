@@ -1,0 +1,307 @@
+.container {
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.titleIcon {
+  color: var(--primary-main);
+}
+
+/* Deck mode reset styles */
+.resetBox {
+  padding: var(--space-4);
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.03), rgba(74, 144, 226, 0.01));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+}
+
+.resetDescription {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin-bottom: var(--space-4);
+}
+
+.warningBox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+  border: 1px solid var(--semantic-warning);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+}
+
+.warningIcon {
+  font-size: var(--text-base);
+  color: var(--semantic-warning);
+  flex-shrink: 0;
+}
+
+.warningText {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.resetActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.resetButton {
+  padding: var(--space-2) var(--space-4);
+  background: var(--semantic-warning);
+  color: var(--text-primary-on-dark);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+}
+
+.resetButton:hover {
+  background: #DC8A04;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.confirmRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.confirmText {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+}
+
+.confirmButtons {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.confirmButton,
+.cancelButton {
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.confirmButton {
+  background: var(--semantic-error);
+  color: var(--text-primary-on-dark);
+}
+
+.confirmButton:hover {
+  background: #DC2626;
+  transform: translateY(-1px);
+}
+
+.cancelButton {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+
+.cancelButton:hover {
+  background: var(--neutral-gray-300);
+  color: var(--text-primary);
+}
+
+/* Learn mode styles */
+.settingsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.settingRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) 0;
+}
+
+.labelContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex: 1;
+}
+
+.label {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.infoIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  font-size: var(--text-xs);
+  cursor: help;
+}
+
+.numberInput {
+  width: 80px;
+  padding: var(--space-2) var(--space-3);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.numberInput:hover {
+  border-color: var(--primary-light);
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.03), rgba(74, 144, 226, 0.01));
+}
+
+.numberInput:focus {
+  outline: none;
+  border-color: var(--primary-main);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+/* Checkbox styles */
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  padding: var(--space-3) 0;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--primary-main);
+}
+
+.checkboxLabel {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+/* Info and status boxes */
+.infoBox {
+  padding: var(--space-3);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+  border: 1px solid var(--semantic-info);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin-top: var(--space-3);
+}
+
+.masteredInfo {
+  padding: var(--space-3);
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.08), rgba(74, 144, 226, 0.04));
+  border: 1px solid var(--primary-light);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: var(--space-3);
+}
+
+.masteredStatus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+  border: 1px solid var(--semantic-success);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  margin-top: var(--space-3);
+}
+
+.statusIcon {
+  color: var(--semantic-success);
+}
+
+.masteredSettings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .confirmRow {
+    gap: var(--space-2);
+  }
+
+  .confirmButtons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .confirmButton,
+  .cancelButton {
+    width: 100%;
+  }
+
+  .settingRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .labelContainer {
+    width: 100%;
+  }
+
+  .numberInput {
+    width: 100%;
+  }
+}
+
+/* Focus styles */
+.checkbox:focus-visible,
+.numberInput:focus-visible,
+.resetButton:focus-visible,
+.confirmButton:focus-visible,
+.cancelButton:focus-visible {
+  outline: 2px solid var(--primary-main);
+  outline-offset: 2px;
+}

@@ -1,0 +1,68 @@
+.sideSelector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.selectorTitle {
+  font-size: var(--font-md);
+  font-weight: 500;
+  color: var(--neutral-gray-700);
+  margin: 0 0 var(--space-2);
+}
+
+.sideOptions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--space-2);
+}
+
+.sideButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+  background: var(--neutral-white);
+  border: 2px solid var(--neutral-gray-300);
+  border-radius: var(--radius-md);
+  font-size: var(--font-sm);
+  color: var(--neutral-gray-700);
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 42px;
+}
+
+.sideButton:hover {
+  border-color: var(--primary-light);
+  background: var(--neutral-gray-50);
+}
+
+.sideButton.selected {
+  border-color: var(--primary-main);
+  background: var(--primary-light);
+  color: var(--neutral-white);
+}
+
+.sideButton.selected:hover {
+  border-color: var(--primary-dark);
+  background: var(--primary-main);
+}
+
+.sideLabel {
+  flex: 1;
+  text-align: left;
+  font-weight: 500;
+}
+
+.checkMark {
+  font-weight: 600;
+  margin-left: var(--space-2);
+  width: 16px;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .sideOptions {
+    grid-template-columns: 1fr;
+  }
+}

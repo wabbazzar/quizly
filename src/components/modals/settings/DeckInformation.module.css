@@ -1,0 +1,150 @@
+.container {
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.titleIcon {
+  color: var(--primary-main);
+}
+
+.infoBox {
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.03), rgba(74, 144, 226, 0.01));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.infoRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.infoLabel {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  min-width: 100px;
+}
+
+.infoValue {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  flex: 1;
+  text-align: right;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.tag {
+  padding: var(--space-1) var(--space-2);
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(74, 144, 226, 0.05));
+  border: 1px solid var(--primary-light);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  color: var(--primary-main);
+  font-weight: var(--font-medium);
+}
+
+.sideLabels {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+  align-items: flex-end;
+}
+
+.sideLabel {
+  display: flex;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+}
+
+.sideName {
+  color: var(--text-secondary);
+  font-weight: var(--font-medium);
+}
+
+.sideValue {
+  color: var(--text-primary);
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .infoRow {
+    flex-direction: column;
+    gap: var(--space-1);
+    align-items: flex-start;
+  }
+
+  .infoValue {
+    text-align: left;
+  }
+
+  .tags {
+    justify-content: flex-start;
+    margin-top: var(--space-1);
+  }
+
+  .sideLabels {
+    align-items: flex-start;
+    margin-top: var(--space-1);
+  }
+
+  .infoLabel {
+    min-width: auto;
+    font-weight: var(--font-semibold);
+  }
+}
+
+/* Hover effect for tags */
+.tag:hover {
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.15), rgba(74, 144, 226, 0.08));
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(74, 144, 226, 0.15);
+}
+
+/* Animation for info box */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.infoBox {
+  animation: slideIn 0.3s ease-out;
+}

@@ -1,0 +1,43 @@
+.settingsSection {
+  margin-bottom: var(--space-5);
+  padding: var(--space-4);
+  background: var(--neutral-gray-50);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--neutral-gray-200);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.sectionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-main);
+  flex-shrink: 0;
+}
+
+.sectionTitle {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  color: var(--neutral-gray-800);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.sectionDescription {
+  font-size: var(--font-sm);
+  color: var(--neutral-gray-600);
+  margin: 0 0 var(--space-3);
+  line-height: 1.5;
+}
+
+.sectionContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}

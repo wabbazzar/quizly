@@ -1,0 +1,76 @@
+.levelSelector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.levelControls {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.controlButton {
+  padding: var(--space-1-5) var(--space-3);
+  background: var(--neutral-white);
+  border: 1px solid var(--neutral-gray-300);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-sm);
+  color: var(--neutral-gray-700);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.controlButton:hover {
+  background: var(--primary-light);
+  border-color: var(--primary-main);
+  color: var(--neutral-white);
+}
+
+.levelGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: var(--space-2);
+}
+
+.levelButton {
+  padding: var(--space-2);
+  background: var(--neutral-white);
+  border: 2px solid var(--neutral-gray-300);
+  border-radius: var(--radius-md);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--neutral-gray-700);
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 40px;
+}
+
+.levelButton:hover {
+  border-color: var(--primary-light);
+  background: var(--neutral-gray-50);
+}
+
+.levelButton.selected {
+  background: var(--primary-main);
+  border-color: var(--primary-dark);
+  color: var(--neutral-white);
+}
+
+.levelButton.selected:hover {
+  background: var(--primary-dark);
+}
+
+.selectedSummary {
+  font-size: var(--font-sm);
+  color: var(--neutral-gray-600);
+  padding: var(--space-2);
+  background: var(--neutral-gray-100);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .levelGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
