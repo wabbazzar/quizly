@@ -1,4 +1,5 @@
 .modesSection {
+  margin-top: var(--space-8);
   margin-bottom: var(--space-8);
 }
 
@@ -159,6 +160,7 @@
 /* Mobile responsive styles - Hide section title on small screens */
 @media (max-width: 640px) {
   .modesSection {
+    margin-top: var(--space-6);
     margin-bottom: var(--space-6); /* Maintain consistent spacing */
   }
 
