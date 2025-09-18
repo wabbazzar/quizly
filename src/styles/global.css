@@ -173,6 +173,13 @@ table {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 var(--space-4);
+  overflow-x: hidden;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 var(--space-5);
+  }
 }
 
 @media (min-width: 768px) {
@@ -185,6 +192,47 @@ table {
   .container {
     padding: 0 var(--space-8);
   }
+}
+
+/* Mobile-first responsive utilities */
+.w-full {
+  width: 100%;
+}
+
+.max-w-full {
+  max-width: 100%;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.text-wrap {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.min-w-0 {
+  min-width: 0;
+}
+
+/* Responsive spacing utilities */
+.p-safe {
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+}
+
+.px-safe {
+  padding-left: env(safe-area-inset-left, 0);
+  padding-right: env(safe-area-inset-right, 0);
+}
+
+.py-safe {
+  padding-top: env(safe-area-inset-top, 0);
+  padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
 /* Accessibility */
