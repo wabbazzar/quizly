@@ -1,0 +1,219 @@
+.questionFlowContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically on all screen sizes */
+  min-height: 0;
+  padding: var(--space-4);
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Desktop centering */
+@media (min-width: 1024px) {
+  .questionFlowContainer {
+    padding: var(--space-8) var(--space-4);
+  }
+}
+
+.questionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  justify-content: center;
+  min-height: 0;
+  flex: 0 1 auto; /* Allow proper centering on all screen sizes */
+  max-height: 90vh; /* Prevent overflow while maintaining centering */
+}
+
+/* Adjust max height for desktop */
+@media (min-width: 1024px) {
+  .questionWrapper {
+    max-height: 80vh;
+  }
+}
+
+.questionSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.noQuestion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  color: var(--neutral-gray-500);
+  font-size: var(--text-lg);
+}
+
+.textInputForm {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.textInput {
+  flex: 1;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-base);
+  border: 2px solid var(--neutral-gray-300);
+  border-radius: var(--radius-md);
+  background: var(--neutral-white);
+  color: var(--neutral-gray-800);
+  transition: border-color 0.2s;
+}
+
+.textInput:focus {
+  outline: none;
+  border-color: var(--primary-main);
+}
+
+.textInput:disabled {
+  background: var(--neutral-gray-100);
+  cursor: not-allowed;
+}
+
+.submitButton {
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--neutral-white);
+  background: var(--primary-main);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: var(--primary-dark);
+}
+
+.submitButton:disabled {
+  background: var(--neutral-gray-400);
+  cursor: not-allowed;
+}
+
+.hint {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--semantic-info);
+  background-opacity: 0.1;
+  border-radius: var(--radius-md);
+  margin-top: var(--space-2);
+}
+
+.hintIcon {
+  font-size: var(--text-lg);
+  flex-shrink: 0;
+}
+
+.hintText {
+  font-size: var(--text-sm);
+  color: var(--neutral-gray-700);
+  line-height: 1.5;
+}
+
+.continueSection {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-4);
+}
+
+.continueButton {
+  padding: var(--space-3) var(--space-8);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--neutral-white);
+  background: var(--primary-main);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.continueButton:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.continueButton:active {
+  transform: translateY(0);
+}
+
+/* Mobile Design */
+@media (max-width: 640px) {
+  .questionFlowContainer {
+    padding: var(--space-2);
+  }
+
+  .questionWrapper {
+    max-height: 85vh; /* Slightly more space on mobile */
+  }
+
+  .textInputForm {
+    flex-direction: column;
+  }
+
+  .submitButton {
+    width: 100%;
+  }
+}
+
+/* Tablet Design */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .questionFlowContainer {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .questionWrapper {
+    max-height: 82vh;
+  }
+}
+
+.keyboardHint {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--neutral-gray-500);
+  font-style: italic;
+}
+
+.keyboardHint kbd {
+  padding: var(--space-1) var(--space-2);
+  background: var(--neutral-gray-100);
+  border: 1px solid var(--neutral-gray-300);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-style: normal;
+  color: var(--neutral-gray-700);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .textInput {
+    background: var(--neutral-gray-800);
+    color: var(--neutral-gray-100);
+    border-color: var(--neutral-gray-600);
+  }
+
+  .textInput:focus {
+    border-color: var(--primary-light);
+  }
+
+  .hint {
+    background: rgba(59, 130, 246, 0.1);
+  }
+
+  .hintText {
+    color: var(--neutral-gray-300);
+  }
+}

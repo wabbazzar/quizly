@@ -8,9 +8,9 @@
   display: flex;
   align-items: center;
   padding: var(--space-4);
-  border: 2px solid var(--neutral-gray-200);
+  border: 2px solid var(--border-color);
   border-radius: 12px;
-  background: var(--neutral-white);
+  background: var(--bg-secondary);
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: left;
@@ -59,7 +59,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--neutral-gray-100);
+  background: var(--bg-tertiary);
   font-weight: var(--font-semibold);
   margin-right: var(--space-3);
   flex-shrink: 0;
@@ -68,24 +68,24 @@
 
 .option.selected .optionLetter {
   background: var(--primary-main);
-  color: var(--neutral-white);
+  color: var(--text-primary-on-dark);
 }
 
 .option.correct .optionLetter {
   background: var(--semantic-success);
-  color: var(--neutral-white);
+  color: var(--text-primary-on-dark);
 }
 
 .option.incorrect .optionLetter {
   background: var(--semantic-error);
-  color: var(--neutral-white);
+  color: var(--text-primary-on-dark);
 }
 
 .optionText {
   flex: 1;
   font-size: var(--text-base);
   line-height: var(--leading-normal);
-  color: var(--neutral-gray-800);
+  color: var(--text-primary);
 }
 
 .statusIcon {
@@ -169,10 +169,10 @@
   gap: var(--space-2);
   margin-top: var(--space-3);
   padding: var(--space-2) var(--space-3);
-  background: var(--neutral-gray-50);
+  background: var(--bg-tertiary);
   border-radius: var(--radius-md);
   font-size: var(--text-sm);
-  color: var(--neutral-gray-600);
+  color: var(--text-secondary);
   opacity: 0.8;
   transition: opacity 0.2s ease;
 }
@@ -232,36 +232,4 @@
   }
 }
 
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  .option {
-    background: var(--neutral-gray-800);
-    border-color: var(--neutral-gray-600);
-  }
-
-  .option:hover:not(.disabled):not(.selected) {
-    border-color: var(--primary-light);
-    box-shadow: 0 2px 8px rgba(107, 165, 233, 0.25);
-  }
-
-  .optionText {
-    color: var(--neutral-gray-100);
-  }
-
-  .optionLetter {
-    background: var(--neutral-gray-700);
-    color: var(--neutral-gray-200);
-  }
-
-  .option.selected {
-    background: rgba(74, 144, 226, 0.1);
-  }
-
-  .option.correct {
-    background: rgba(16, 185, 129, 0.1);
-  }
-
-  .option.incorrect {
-    background: rgba(239, 68, 68, 0.1);
-  }
-}
+/* Theme variables handle dark mode automatically */

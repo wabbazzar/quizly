@@ -69,7 +69,7 @@ export const QuestionCard: FC<QuestionCardProps> = memo(({
             onSubmit={onAnswer}
             showFeedback={showFeedback}
             feedback={feedback}
-            disabled={disabled}
+            disabled={disabled || showFeedback}
             resetKey={question.id}
           />
         )}

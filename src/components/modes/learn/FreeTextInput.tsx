@@ -47,11 +47,38 @@ export const FreeTextInput: FC<FreeTextInputProps> = memo(({
     onSubmit(userInput, true);
   }, [userInput, onSubmit]);
 
+  // Add keyboard listener for "1" key to trigger override
+  useEffect(() => {
+    if (!showFeedback || feedback?.isCorrect !== false) return;
+
+    const handleKeyPress = (e: KeyboardEvent) => {
+      // Check if "1" key is pressed and no input/textarea is focused
+      if (e.key === '1' &&
+          document.activeElement?.tagName !== 'INPUT' &&
+          document.activeElement?.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        handleOverride();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [showFeedback, feedback?.isCorrect, handleOverride]);
+
   const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Always stop propagation so global handlers (e.g., Continue on Enter) don't
+    // trigger on the same key press as the submission.
+    e.stopPropagation();
+
+    // Only handle Enter key for submission if not already submitted
     if (e.key === 'Enter' && !e.shiftKey) {
-      handleSubmit(e as unknown as FormEvent);
+      if (!hasSubmitted && !disabled) {
+        handleSubmit(e as unknown as FormEvent);
+      }
+      // Do not let this Enter bubble; parent will handle next Enter after feedback
+      // when the input becomes disabled.
     }
-  }, [handleSubmit]);
+  }, [handleSubmit, hasSubmitted, disabled]);
 
   return (
     <form className={styles.freeTextForm} onSubmit={handleSubmit}>

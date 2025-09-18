@@ -1,0 +1,98 @@
+.metricsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.progressSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: var(--neutral-gray-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-main), var(--primary-light));
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  font-size: var(--text-sm);
+  color: var(--neutral-gray-600);
+  text-align: center;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-3);
+}
+
+.metricCard {
+  background: var(--neutral-white);
+  border: 1px solid var(--neutral-gray-200);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  text-align: center;
+}
+
+.metricLabel {
+  font-size: var(--text-xs);
+  color: var(--neutral-gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-1);
+}
+
+.metricValue {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--neutral-gray-800);
+  margin-bottom: var(--space-1);
+}
+
+.metricDetails {
+  font-size: var(--text-xs);
+  color: var(--neutral-gray-500);
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .metricsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .metricCard {
+    padding: var(--space-2);
+  }
+
+  .metricValue {
+    font-size: var(--text-xl);
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .metricCard {
+    background: var(--neutral-gray-800);
+    border-color: var(--neutral-gray-700);
+  }
+
+  .metricValue {
+    color: var(--neutral-gray-100);
+  }
+
+  .progressBar {
+    background: var(--neutral-gray-700);
+  }
+}

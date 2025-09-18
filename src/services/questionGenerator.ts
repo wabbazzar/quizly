@@ -132,20 +132,6 @@ export class QuestionGenerator {
       }
     });
 
-    // Debug logging
-    console.log('Distractor generation debug:', {
-      correctAnswer,
-      excludeIndex,
-      totalCardsProvided: allCards.length,
-      allCardIndices: allCards.map(c => c.idx),
-      masteredCardIndices: masteredCardIndices?.slice(0, 10),
-      nonMasteredCount: nonMasteredDistractors.length,
-      masteredCount: masteredDistractors.length,
-      nonMasteredDistractors: nonMasteredDistractors.slice(0, 5),
-      masteredDistractors: masteredDistractors.slice(0, 5),
-      // Check which cards are in both sets
-      cardsInBothSets: allCards.filter(c => masteredCardIndices?.includes(c.idx)).map(c => c.idx)
-    });
 
     // First, try to use only non-mastered distractors
     const primaryPool = nonMasteredDistractors.length > 0 ? nonMasteredDistractors : [];
@@ -236,8 +222,10 @@ export class QuestionGenerator {
     const parts: string[] = [];
 
     frontSides.forEach(side => {
-      const value = (card as any)[side];
-      if (value) {
+      // Type-safe card property access using keyof
+      const sideKey = side as keyof Card;
+      const value = card[sideKey];
+      if (typeof value === 'string' && value) {
         parts.push(value);
       }
     });
@@ -252,8 +240,10 @@ export class QuestionGenerator {
     const parts: string[] = [];
 
     backSides.forEach(side => {
-      const value = (card as any)[side];
-      if (value) {
+      // Type-safe card property access using keyof
+      const sideKey = side as keyof Card;
+      const value = card[sideKey];
+      if (typeof value === 'string' && value) {
         parts.push(value);
       }
     });

@@ -5,7 +5,8 @@ import { useProgressStore } from '@/store/progressStore';
 import { useCardMasteryStore } from '@/store/cardMasteryStore';
 import LoadingScreen from '@/components/common/LoadingScreen';
 import LearnContainer from '@/components/modes/learn/LearnContainer';
-import LearnSettings from '@/components/modals/LearnSettings';
+import UnifiedSettings from '@/components/modals/UnifiedSettings';
+import { useSettingsStore } from '@/store/settingsStore';
 import { LearnModeSettings, LearnSessionResults } from '@/types';
 import styles from './Learn.module.css';
 
@@ -42,6 +43,7 @@ const Learn: FC = () => {
   const { currentDeck, loadDeck, isLoading, error, shuffleMasteredCardsBack } = useDeckStore();
   const { updateDeckProgress } = useProgressStore();
   const { updateCardAttempt, getMasteredCards } = useCardMasteryStore();
+  const { updateSettings: updateStoredSettings } = useSettingsStore();
 
   // Get excluded cards and struggling cards from navigation state
   const excludeCards = location.state?.excludeCards as number[] | undefined;
@@ -175,12 +177,18 @@ const Learn: FC = () => {
         deckId={deckId}
         allDeckCards={currentDeck.content}
       />
-      <LearnSettings
+      <UnifiedSettings
         visible={showSettings}
         onClose={() => setShowSettings(false)}
         deck={currentDeck}
+        mode="learn"
         settings={settings}
-        onUpdateSettings={setSettings}
+        onUpdateSettings={(newSettings) => {
+          setSettings(newSettings as LearnModeSettings);
+          if (deckId) {
+            updateStoredSettings(deckId, 'learn', newSettings);
+          }
+        }}
       />
     </div>
   );

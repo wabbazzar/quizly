@@ -1,16 +1,17 @@
 .questionCard {
-  background: var(--neutral-white);
+  background: var(--bg-secondary);
   border-radius: 16px;
   padding: var(--space-6);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
   margin-bottom: var(--space-4);
   animation: slideInUp 0.3s ease-out;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid var(--border-color);
 }
 
 .questionCard:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-lg);
 }
 
 .questionHeader {
@@ -20,14 +21,14 @@
 .questionText {
   font-size: var(--text-xl);
   font-weight: var(--font-semibold);
-  color: var(--neutral-gray-800);
+  color: var(--text-primary);
   line-height: var(--leading-relaxed);
   margin: 0 0 var(--space-3) 0;
 }
 
 .difficultyIndicator {
   height: 4px;
-  background: var(--neutral-gray-200);
+  background: var(--bg-tertiary);
   border-radius: 2px;
   overflow: hidden;
   margin-top: var(--space-2);
@@ -110,18 +111,4 @@
   }
 }
 
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  .questionCard {
-    background: var(--neutral-gray-800);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-  }
-
-  .questionText {
-    color: var(--neutral-gray-100);
-  }
-
-  .difficultyIndicator {
-    background: var(--neutral-gray-700);
-  }
-}
+/* Theme variables handle dark mode automatically */
