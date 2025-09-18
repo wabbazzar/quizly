@@ -40,7 +40,6 @@ class PerformanceMonitor {
   private callbacks: Set<PerformanceEventCallback> = new Set();
   private observer?: PerformanceObserver;
   private layoutShiftScore = 0;
-  private _largestContentfulPaint = 0;
   private firstInputDelay = 0;
   private isInitialized = false;
 
@@ -113,7 +112,6 @@ class PerformanceMonitor {
         break;
 
       case 'largest-contentful-paint':
-        this._largestContentfulPaint = entry.startTime;
         this.recordMetric('lcp', entry.startTime);
         break;
 

@@ -71,7 +71,8 @@
       "Bash(gzip:*)",
       "Bash(gh run view:*)",
       "Bash(git checkout:*)",
-      "Bash(npx playwright:*)"
+      "Bash(npx playwright:*)",
+      "Bash(npm run lint:*)"
     ],
     "deny": [],
     "ask": []
