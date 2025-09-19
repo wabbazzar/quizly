@@ -117,12 +117,19 @@ const MasterySettings: FC<ExtendedSectionProps> = ({
               min="1"
               max="10"
               value={settings.masteryThreshold || 3}
-              onChange={e =>
-                onChange(
-                  'masteryThreshold',
-                  Math.max(1, Math.min(10, parseInt(e.target.value) || 3))
-                )
-              }
+              onChange={e => {
+                const value = e.target.value;
+                const numValue = value === '' ? 3 : parseInt(value);
+                if (!isNaN(numValue)) {
+                  onChange('masteryThreshold', numValue);
+                }
+              }}
+              onBlur={e => {
+                const value = parseInt(e.target.value) || 3;
+                onChange('masteryThreshold', Math.max(1, Math.min(10, value)));
+              }}
+              inputMode="numeric"
+              pattern="[0-9]*"
               className={styles.numberInput}
             />
           </label>

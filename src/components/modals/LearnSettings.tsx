@@ -281,12 +281,25 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                       min="5"
                       max="50"
                       value={localSettings.cardsPerRound}
-                      onChange={e =>
+                      onChange={e => {
+                        const value = e.target.value;
+                        const numValue = value === '' ? 10 : parseInt(value);
+                        if (!isNaN(numValue)) {
+                          setLocalSettings({
+                            ...localSettings,
+                            cardsPerRound: numValue,
+                          });
+                        }
+                      }}
+                      onBlur={e => {
+                        const value = parseInt(e.target.value) || 10;
                         setLocalSettings({
                           ...localSettings,
-                          cardsPerRound: Math.max(5, Math.min(50, parseInt(e.target.value) || 10)),
-                        })
-                      }
+                          cardsPerRound: Math.max(5, Math.min(50, value)),
+                        });
+                      }}
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       className={styles.numberInput}
                     />
                   </label>
@@ -329,15 +342,23 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                         min="10"
                         max="120"
                         value={localSettings.timerSeconds}
-                        onChange={e =>
+                        onChange={e => {
+                          const value = e.target.value;
+                          const numValue = value === '' ? 30 : parseInt(value);
+                          if (!isNaN(numValue)) {
+                            setLocalSettings({
+                              ...localSettings,
+                              timerSeconds: numValue,
+                            });
+                          }
+                        }}
+                        onBlur={e => {
+                          const value = parseInt(e.target.value) || 30;
                           setLocalSettings({
                             ...localSettings,
-                            timerSeconds: Math.max(
-                              10,
-                              Math.min(120, parseInt(e.target.value) || 30)
-                            ),
-                          })
-                        }
+                            timerSeconds: Math.max(10, Math.min(120, value)),
+                          });
+                        }}
                         className={styles.numberInput}
                       />
                     </label>
@@ -418,15 +439,28 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                       min="1"
                       max="10"
                       value={localSettings.masteryThreshold || 3}
-                      onChange={e =>
+                      onChange={e => {
+                        const value = e.target.value;
+                        // Allow empty string during typing
+                        const numValue = value === '' ? 3 : parseInt(value);
+                        // Only clamp if we have a valid number
+                        if (!isNaN(numValue)) {
+                          setLocalSettings({
+                            ...localSettings,
+                            masteryThreshold: numValue,
+                          });
+                        }
+                      }}
+                      onBlur={e => {
+                        // Sanitize on blur to ensure valid range
+                        const value = parseInt(e.target.value) || 3;
                         setLocalSettings({
                           ...localSettings,
-                          masteryThreshold: Math.max(
-                            1,
-                            Math.min(10, parseInt(e.target.value) || 3)
-                          ),
-                        })
-                      }
+                          masteryThreshold: Math.max(1, Math.min(10, value)),
+                        });
+                      }}
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       className={styles.numberInput}
                     />
                   </label>
@@ -471,15 +505,23 @@ const LearnSettings: FC<LearnSettingsProps> = ({
                         min="1"
                         max="10"
                         value={localSettings.progressiveLearningSpacing || 3}
-                        onChange={e =>
+                        onChange={e => {
+                          const value = e.target.value;
+                          const numValue = value === '' ? 3 : parseInt(value);
+                          if (!isNaN(numValue)) {
+                            setLocalSettings({
+                              ...localSettings,
+                              progressiveLearningSpacing: numValue,
+                            });
+                          }
+                        }}
+                        onBlur={e => {
+                          const value = parseInt(e.target.value) || 3;
                           setLocalSettings({
                             ...localSettings,
-                            progressiveLearningSpacing: Math.max(
-                              1,
-                              Math.min(10, parseInt(e.target.value) || 3)
-                            ),
-                          })
-                        }
+                            progressiveLearningSpacing: Math.max(1, Math.min(10, value)),
+                          });
+                        }}
                         className={styles.numberInput}
                       />
                     </label>

@@ -75,7 +75,8 @@
       "Bash(npm run lint:*)",
       "Bash(npx vitest:*)",
       "Bash(npm audit:*)",
-      "Bash(npx prettier:*)"
+      "Bash(npx prettier:*)",
+      "Bash(npx depcheck:*)"
     ],
     "deny": [],
     "ask": []

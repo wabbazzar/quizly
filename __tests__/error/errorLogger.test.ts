@@ -261,13 +261,13 @@ describe('ErrorLogger', () => {
   });
 
   describe('Global error handlers', () => {
-    it('should set up global error handlers during initialization', () => {
+    it('should set up global error handlers during initialization', async () => {
       // Test that the error logger registers global handlers
       const addEventListenerSpy = vi.spyOn(window, 'addEventListener');
 
       // Re-import to trigger constructor
       vi.resetModules();
-      import('@/services/errorLogger');
+      await import('@/services/errorLogger');
 
       expect(addEventListenerSpy).toHaveBeenCalledWith('error', expect.any(Function));
       expect(addEventListenerSpy).toHaveBeenCalledWith('unhandledrejection', expect.any(Function));

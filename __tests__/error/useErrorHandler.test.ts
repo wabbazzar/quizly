@@ -57,7 +57,7 @@ describe('useErrorHandler', () => {
 
       const { result } = renderHook(() => useErrorHandler(mockAsyncFunction));
 
-      const [wrappedFunction, errorState] = result.current;
+      const [wrappedFunction] = result.current;
 
       await act(async () => {
         try {
@@ -66,6 +66,9 @@ describe('useErrorHandler', () => {
           // Expected to throw
         }
       });
+
+      // Get updated error state after the action
+      const [, errorState] = result.current;
 
       expect(errorState.isError).toBe(true);
       expect(errorState.error).toBe(testError);
@@ -114,7 +117,7 @@ describe('useErrorHandler', () => {
 
       const { result } = renderHook(() => useErrorHandler(mockAsyncFunction, { retryDelay: 0 }));
 
-      const [wrappedFunction, errorState] = result.current;
+      const [wrappedFunction] = result.current;
 
       // Initial call fails
       await act(async () => {
@@ -125,6 +128,8 @@ describe('useErrorHandler', () => {
         }
       });
 
+      // Get updated error state after the action
+      const [, errorState] = result.current;
       expect(errorState.isError).toBe(true);
 
       // Retry succeeds
@@ -142,7 +147,7 @@ describe('useErrorHandler', () => {
 
       const { result } = renderHook(() => useErrorHandler(mockAsyncFunction));
 
-      const [wrappedFunction, errorState] = result.current;
+      const [wrappedFunction] = result.current;
 
       // Generate error
       await act(async () => {
@@ -153,6 +158,8 @@ describe('useErrorHandler', () => {
         }
       });
 
+      // Get updated error state after the action
+      const [, errorState] = result.current;
       expect(errorState.isError).toBe(true);
 
       // Reset error
@@ -172,7 +179,7 @@ describe('useErrorHandler', () => {
         useErrorHandler(mockAsyncFunction, { retryAttempts: 2, retryDelay: 0 })
       );
 
-      const [wrappedFunction, errorState] = result.current;
+      const [wrappedFunction] = result.current;
 
       // Initial call fails
       await act(async () => {
@@ -183,27 +190,36 @@ describe('useErrorHandler', () => {
         }
       });
 
+      // Get error state after initial failure
+      const [, errorStateAfterInitial] = result.current;
+
       // First retry
       await act(async () => {
         try {
-          await errorState.retry();
+          await errorStateAfterInitial.retry();
         } catch (error) {
           // Expected to throw
         }
       });
+
+      // Get error state after first retry
+      const [, errorStateAfterFirstRetry] = result.current;
 
       // Second retry
       await act(async () => {
         try {
-          await errorState.retry();
+          await errorStateAfterFirstRetry.retry();
         } catch (error) {
           // Expected to throw
         }
       });
 
+      // Get error state after second retry
+      const [, errorStateAfterSecondRetry] = result.current;
+
       // Third retry should not execute (exceeded limit)
       await act(async () => {
-        const retryResult = await errorState.retry();
+        const retryResult = await errorStateAfterSecondRetry.retry();
         expect(retryResult).toBeUndefined();
       });
 
@@ -217,7 +233,7 @@ describe('useErrorHandler', () => {
 
       const { result } = renderHook(() => useErrorHandler(mockAsyncFunction));
 
-      const [wrappedFunction, errorState] = result.current;
+      const [wrappedFunction] = result.current;
 
       await act(async () => {
         try {
@@ -226,6 +242,9 @@ describe('useErrorHandler', () => {
           // Expected to throw
         }
       });
+
+      // Get updated error state after the action
+      const [, errorState] = result.current;
 
       expect(errorState.error).toBeInstanceOf(Error);
       expect(errorState.error?.message).toBe('String error');

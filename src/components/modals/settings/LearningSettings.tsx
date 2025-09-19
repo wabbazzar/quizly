@@ -33,9 +33,19 @@ const LearningSettings: FC<SectionProps> = ({ settings, onChange }) => {
             min="5"
             max="50"
             value={settings.cardsPerRound || 10}
-            onChange={e =>
-              onChange('cardsPerRound', Math.max(5, Math.min(50, parseInt(e.target.value) || 10)))
-            }
+            onChange={e => {
+              const value = e.target.value;
+              const numValue = value === '' ? 10 : parseInt(value);
+              if (!isNaN(numValue)) {
+                onChange('cardsPerRound', numValue);
+              }
+            }}
+            onBlur={e => {
+              const value = parseInt(e.target.value) || 10;
+              onChange('cardsPerRound', Math.max(5, Math.min(50, value)));
+            }}
+            inputMode="numeric"
+            pattern="[0-9]*"
             className={styles.numberInput}
           />
         </label>
@@ -108,12 +118,19 @@ const LearningSettings: FC<SectionProps> = ({ settings, onChange }) => {
               min="10"
               max="120"
               value={settings.timerSeconds || 30}
-              onChange={e =>
-                onChange(
-                  'timerSeconds',
-                  Math.max(10, Math.min(120, parseInt(e.target.value) || 30))
-                )
-              }
+              onChange={e => {
+                const value = e.target.value;
+                const numValue = value === '' ? 30 : parseInt(value);
+                if (!isNaN(numValue)) {
+                  onChange('timerSeconds', numValue);
+                }
+              }}
+              onBlur={e => {
+                const value = parseInt(e.target.value) || 30;
+                onChange('timerSeconds', Math.max(10, Math.min(120, value)));
+              }}
+              inputMode="numeric"
+              pattern="[0-9]*"
               className={styles.numberInput}
             />
           </label>
@@ -149,12 +166,19 @@ const LearningSettings: FC<SectionProps> = ({ settings, onChange }) => {
               min="1"
               max="10"
               value={settings.progressiveLearningSpacing || 3}
-              onChange={e =>
-                onChange(
-                  'progressiveLearningSpacing',
-                  Math.max(1, Math.min(10, parseInt(e.target.value) || 3))
-                )
-              }
+              onChange={e => {
+                const value = e.target.value;
+                const numValue = value === '' ? 3 : parseInt(value);
+                if (!isNaN(numValue)) {
+                  onChange('progressiveLearningSpacing', numValue);
+                }
+              }}
+              onBlur={e => {
+                const value = parseInt(e.target.value) || 3;
+                onChange('progressiveLearningSpacing', Math.max(1, Math.min(10, value)));
+              }}
+              inputMode="numeric"
+              pattern="[0-9]*"
               className={styles.numberInput}
             />
           </label>

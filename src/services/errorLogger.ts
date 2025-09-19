@@ -119,18 +119,20 @@ class ErrorLogger {
     error: Error,
     context: ErrorContext
   ): 'low' | 'medium' | 'high' | 'critical' {
+    const lowerMessage = error.message.toLowerCase();
+
     // Critical: App-level errors, security issues
-    if (context.errorBoundaryLevel === 'app' || error.message.includes('security')) {
+    if (context.errorBoundaryLevel === 'app' || lowerMessage.includes('security')) {
       return 'critical';
     }
 
     // High: Route-level errors, data corruption
-    if (context.errorBoundaryLevel === 'route' || error.message.includes('corruption')) {
+    if (context.errorBoundaryLevel === 'route' || lowerMessage.includes('corruption')) {
       return 'high';
     }
 
     // Medium: Feature-level errors, network issues
-    if (context.errorBoundaryLevel === 'feature' || error.message.includes('network')) {
+    if (context.errorBoundaryLevel === 'feature' || lowerMessage.includes('network')) {
       return 'medium';
     }
 
