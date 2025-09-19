@@ -4,20 +4,55 @@
 }
 
 .header {
-  background: linear-gradient(135deg, var(--primary-main), var(--primary-dark));
+  background: #5b82b0;
+  background-color: #5b82b0;
   color: var(--text-primary-on-dark);
   padding: var(--space-5) var(--space-4);
   text-align: center;
   box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
 }
 
+/* removed headerInner; aligning mascot via calc */
+
 .title {
-  font-size: 3.25rem;
+  font-size: 3.75rem;
   font-weight: 700;
   margin-bottom: var(--space-2);
   letter-spacing: 0.01em;
   color: var(--neutral-white);
   font-family: 'Baloo 2', 'Quicksand', var(--font-sans);
+}
+
+.taglineSvg {
+  display: block;
+  margin: 4px auto 8px;
+}
+
+.mascot {
+  position: absolute;
+  left: calc((100vw - 1200px) / 2 + var(--space-4));
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  border-radius: 0;
+  filter: none;
+  box-shadow: none;
+  background: transparent;
+  background-color: transparent;
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .mascot {
+    left: var(--space-1);
+  }
+  .taglineSvg {
+    margin-right: var(--space-1);
+  }
 }
 
 .subtitle {
@@ -111,7 +146,7 @@
   }
 
   .title {
-    font-size: var(--text-3xl);
+    font-size: 1.5rem;
   }
 
   .subtitle {

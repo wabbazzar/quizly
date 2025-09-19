@@ -41,8 +41,55 @@ const Home: FC = () => {
   return (
     <div className={styles.container}>
       {/* Hero Section */}
-      <header className={styles.header}>
-        <motion.div
+      <header
+        className={styles.header}
+        ref={node => {
+          if (!node) return;
+          const img = node.querySelector('img.' + styles.mascot) as HTMLImageElement | null;
+          if (!img) return;
+          if (img.complete) {
+            try {
+              const canvas = document.createElement('canvas');
+              canvas.width = 1;
+              canvas.height = 1;
+              const ctx = canvas.getContext('2d');
+              if (!ctx) return;
+              ctx.drawImage(img, 0, 0, 1, 1);
+              const data = ctx.getImageData(0, 0, 1, 1).data;
+              const toHex = (v: number) => v.toString(16).padStart(2, '0');
+              const hex = `#${toHex(data[0])}${toHex(data[1])}${toHex(data[2])}`;
+              node.style.setProperty('--header-start', hex);
+            } catch {}
+          } else {
+            img.addEventListener(
+              'load',
+              () => {
+                try {
+                  const canvas = document.createElement('canvas');
+                  canvas.width = 1;
+                  canvas.height = 1;
+                  const ctx = canvas.getContext('2d');
+                  if (!ctx) return;
+                  ctx.drawImage(img, 0, 0, 1, 1);
+                  const data = ctx.getImageData(0, 0, 1, 1).data;
+                  const toHex = (v: number) => v.toString(16).padStart(2, '0');
+                  const hex = `#${toHex(data[0])}${toHex(data[1])}${toHex(data[2])}`;
+                  node.style.setProperty('--header-start', hex);
+                } catch {}
+              },
+              { once: true }
+            );
+          }
+        }}
+      >
+            <img
+              src={`${import.meta.env.BASE_URL}icons/mrquizly.png`}
+              alt="Mr. Quizly"
+              className={styles.mascot}
+              decoding="async"
+              loading="eager"
+            />
+            <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
@@ -61,6 +108,7 @@ const Home: FC = () => {
                   transformOrigin: 'center center',
                   marginTop: 8
                 }}
+                className={styles.taglineSvg}
               >
                 <title id="quizlyCursiveHeaderTitle">it's not a test! — cursive header</title>
                 <style>{`
@@ -81,14 +129,16 @@ const Home: FC = () => {
                     dominant-baseline: middle;
                     text-anchor: middle;
                   }
+                  .tg-center { display: block; }
+                  .tg-right { display: none; text-anchor: end; }
                   @media (max-width: 768px) {
-                    text {
-                      font-size: 172px;
-                      stroke-width: 1.6px;
-                    }
+                    .tg-center { display: none; }
+                    .tg-right { display: block; }
+                    text { font-size: 172px; stroke-width: 1.6px; }
                   }
                 `}</style>
-                <text x="50%" y="120">it's not a test!</text>
+                <text class="tg-center" x="50%" y="120">it's not a test!</text>
+                <text class="tg-right" x="100%" y="120">it's not a test!</text>
               </svg>
         </motion.div>
       </header>
