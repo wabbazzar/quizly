@@ -25,7 +25,7 @@ interface CardMasteryStore {
   markCardMastered: (deckId: string, cardIndex: number, totalCards: number) => void;
   unmarkCardMastered: (deckId: string, cardIndex: number) => void;
   getMasteredCards: (deckId: string) => number[];
-  getDeckMasteryPercentage: (deckId: string) => number;
+  getDeckMasteryPercentage: (deckId: string, actualTotalCards?: number) => number;
   resetDeckMastery: (deckId: string) => void;
   updateCardAttempt: (
     deckId: string,
@@ -112,9 +112,12 @@ export const useCardMasteryStore = create<CardMasteryStore>()(
         return masteredIndices;
       },
 
-      getDeckMasteryPercentage: (deckId: string) => {
+      getDeckMasteryPercentage: (deckId: string, actualTotalCards?: number) => {
         const deckMastery = get().mastery[deckId];
-        if (!deckMastery || deckMastery.totalCards === 0) return 0;
+        // Use actualTotalCards if provided, otherwise fall back to stored totalCards
+        const totalCards = actualTotalCards ?? deckMastery?.totalCards ?? 0;
+
+        if (!deckMastery || totalCards === 0) return 0;
 
         // Count only cards with 3+ consecutive correct answers
         let masteredCount = 0;
@@ -124,7 +127,7 @@ export const useCardMasteryStore = create<CardMasteryStore>()(
           }
         });
 
-        return Math.round((masteredCount / deckMastery.totalCards) * 100);
+        return Math.round((masteredCount / totalCards) * 100);
       },
 
       resetDeckMastery: (deckId: string) => {

@@ -113,7 +113,7 @@ const Deck: FC = () => {
 
   const handleToggleMastered = useCallback(
     (cardIdx: number) => {
-      if (!deckId) return;
+      if (!deckId || !currentDeck) return;
 
       const { markCardMastered, unmarkCardMastered } = useCardMasteryStore.getState();
       const isMastered = masteredCardIndices.includes(cardIdx);
@@ -121,7 +121,7 @@ const Deck: FC = () => {
       if (isMastered) {
         unmarkCardMastered(deckId, cardIdx);
       } else {
-        if (!currentDeck) return;
+        // Always use the actual current deck's card count
         markCardMastered(deckId, cardIdx, currentDeck.content.length);
       }
 

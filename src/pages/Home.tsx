@@ -1,4 +1,4 @@
-import { FC, useEffect, useCallback } from 'react';
+import { FC, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDeckStore } from '@/store/deckStore';
 import { useProgressStore } from '@/store/progressStore';
@@ -9,6 +9,58 @@ import styles from './Home.module.css';
 const Home: FC = () => {
   const { decks, isLoading, error, loadDecks, selectDeck } = useDeckStore();
   const { getDeckProgress } = useProgressStore();
+  const headerRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const node = headerRef.current;
+    if (!node) return;
+    const img = node.querySelector('img.' + styles.mascot) as HTMLImageElement | null;
+    if (!img) return;
+
+    const updateGradientStart = () => {
+      try {
+        const rect = img.getBoundingClientRect();
+        const headerRect = node.getBoundingClientRect();
+        const start = Math.max(0, rect.right - headerRect.left + 8);
+        node.style.setProperty('--grad-start', `${Math.round(start)}px`);
+        node.style.setProperty('--left-color', '#5b82b0');
+        node.style.setProperty(
+          '--right-color',
+          getComputedStyle(document.documentElement).getPropertyValue('--primary-main') || '#5b82b0'
+        );
+      } catch {}
+    };
+
+    updateGradientStart();
+    const onResize = () => updateGradientStart();
+    window.addEventListener('resize', onResize);
+
+    const setHeaderStartFromImage = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = 1;
+        canvas.height = 1;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        ctx.drawImage(img, 0, 0, 1, 1);
+        const data = ctx.getImageData(0, 0, 1, 1).data;
+        const toHex = (v: number) => v.toString(16).padStart(2, '0');
+        const hex = `#${toHex(data[0])}${toHex(data[1])}${toHex(data[2])}`;
+        node.style.setProperty('--header-start', hex);
+        updateGradientStart();
+      } catch {}
+    };
+
+    if (img.complete) {
+      setHeaderStartFromImage();
+    } else {
+      img.addEventListener('load', setHeaderStartFromImage, { once: true });
+    }
+
+    return () => {
+      window.removeEventListener('resize', onResize);
+    };
+  }, []);
 
   useEffect(() => {
     loadDecks();
@@ -43,62 +95,7 @@ const Home: FC = () => {
       {/* Hero Section */}
       <header
         className={styles.header}
-        ref={node => {
-          if (!node) return;
-          const img = node.querySelector('img.' + styles.mascot) as HTMLImageElement | null;
-          if (!img) return;
-          const updateGradientStart = () => {
-            try {
-              const rect = img.getBoundingClientRect();
-              const headerRect = node.getBoundingClientRect();
-              const start = Math.max(0, rect.right - headerRect.left + 8); // start just past mascot (+8px padding)
-              node.style.setProperty('--grad-start', `${Math.round(start)}px`);
-              // set colors (left current header color, right quizly primary)
-              node.style.setProperty('--left-color', '#5b82b0');
-              node.style.setProperty('--right-color', getComputedStyle(document.documentElement).getPropertyValue('--primary-main') || '#4a90e2');
-            } catch {}
-          };
-          updateGradientStart();
-          window.addEventListener('resize', updateGradientStart);
-          if (img.complete) {
-            try {
-              const canvas = document.createElement('canvas');
-              canvas.width = 1;
-              canvas.height = 1;
-              const ctx = canvas.getContext('2d');
-              if (!ctx) return;
-              ctx.drawImage(img, 0, 0, 1, 1);
-              const data = ctx.getImageData(0, 0, 1, 1).data;
-              const toHex = (v: number) => v.toString(16).padStart(2, '0');
-              const hex = `#${toHex(data[0])}${toHex(data[1])}${toHex(data[2])}`;
-              node.style.setProperty('--header-start', hex);
-              updateGradientStart();
-            } catch {}
-          } else {
-            img.addEventListener(
-              'load',
-              () => {
-                try {
-                  const canvas = document.createElement('canvas');
-                  canvas.width = 1;
-                  canvas.height = 1;
-                  const ctx = canvas.getContext('2d');
-                  if (!ctx) return;
-                  ctx.drawImage(img, 0, 0, 1, 1);
-                  const data = ctx.getImageData(0, 0, 1, 1).data;
-                  const toHex = (v: number) => v.toString(16).padStart(2, '0');
-                  const hex = `#${toHex(data[0])}${toHex(data[1])}${toHex(data[2])}`;
-                  node.style.setProperty('--header-start', hex);
-                  updateGradientStart();
-                } catch {}
-              },
-              { once: true }
-            );
-          }
-          return () => {
-            window.removeEventListener('resize', updateGradientStart);
-          };
-        }}
+        ref={headerRef}
       >
             <div className={styles.iosSafeTop} aria-hidden="true" />
             <img

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { useCardMasteryStore } from './cardMasteryStore';
+import { useDeckStore } from './deckStore';
 
 export interface DeckProgress {
   overall: number;
@@ -58,10 +59,15 @@ export const useProgressStore = create<ProgressStore>()(
         set(state => {
           const existingProgress = state.progress[deckId] || { ...defaultProgress };
 
+          // Get the actual deck to get the correct card count
+          const deckStore = useDeckStore.getState();
+          const deck = deckStore.decks.find(d => d.id === deckId);
+          const actualTotalCards = deck?.content?.length || totalCards;
+
           // Get mastery data from the card mastery store (ESM import is already at top of file)
           const cardMasteryStore = useCardMasteryStore.getState();
           const masteredCards = cardMasteryStore.getMasteredCards(deckId);
-          const masteryPercentage = cardMasteryStore.getDeckMasteryPercentage(deckId);
+          const masteryPercentage = cardMasteryStore.getDeckMasteryPercentage(deckId, actualTotalCards);
 
           // For all modes, show mastery percentage instead of session performance
           // This provides a unified view of progress across all indicators
@@ -74,14 +80,9 @@ export const useProgressStore = create<ProgressStore>()(
             test: masteryPercentage,
           };
 
-          // Use mastery percentage as overall progress if available
-          const overall =
-            masteryPercentage > 0
-              ? masteryPercentage
-              : Math.round(
-                  Object.values(updatedByMode).reduce((sum, progress) => sum + progress, 0) /
-                    Object.values(updatedByMode).length
-                );
+          // Always use mastery percentage as overall progress
+          // This ensures consistency even when no cards are mastered (0%)
+          const overall = masteryPercentage;
 
           // Check for streak continuation
           const lastStudied = existingProgress.lastStudied
@@ -134,10 +135,15 @@ export const useProgressStore = create<ProgressStore>()(
       getDeckProgress: (deckId: string) => {
         const progress = get().progress[deckId];
 
+        // Get the actual deck to get the correct card count
+        const deckStore = useDeckStore.getState();
+        const deck = deckStore.decks.find(d => d.id === deckId);
+        const actualTotalCards = deck?.content?.length || 0;
+
         // Get mastery data from the card mastery store
         const cardMasteryStore = useCardMasteryStore.getState();
         const masteredCards = cardMasteryStore.getMasteredCards(deckId);
-        const masteryPercentage = cardMasteryStore.getDeckMasteryPercentage(deckId);
+        const masteryPercentage = cardMasteryStore.getDeckMasteryPercentage(deckId, actualTotalCards);
 
         if (!progress) {
           return {
@@ -154,9 +160,9 @@ export const useProgressStore = create<ProgressStore>()(
           };
         }
 
-        // Use mastery percentage as the overall progress instead of mode averages
-        // This gives a more accurate representation of deck completion
-        const overall = masteryPercentage > 0 ? masteryPercentage : progress.overall;
+        // Always use the actual mastery percentage, even if it's 0
+        // This ensures consistency with the deck view
+        const overall = masteryPercentage;
 
         // Update all modes to show mastery percentage for consistency
         const unifiedByMode = {

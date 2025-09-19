@@ -4,13 +4,8 @@
 }
 
 .header {
-  background: linear-gradient(
-    to right,
-    var(--left-color, #5b82b0) 0,
-    var(--left-color, #5b82b0) var(--grad-start, 160px),
-    var(--right-color, var(--primary-main)) 100%
-  );
-  background-color: #5b82b0;
+  background: var(--primary-main);
+  background-color: var(--primary-main);
   color: var(--text-primary-on-dark);
   padding: var(--space-5) var(--space-4);
   text-align: center;
@@ -26,12 +21,7 @@
   left: 0;
   right: 0;
   height: env(safe-area-inset-top, 0px);
-  background: linear-gradient(
-    to right,
-    var(--left-color, #5b82b0) 0,
-    var(--left-color, #5b82b0) var(--grad-start, 160px),
-    var(--right-color, var(--primary-main)) 100%
-  );
+  background: var(--primary-main);
   z-index: 9999; /* above content */
   pointer-events: none; /* non-interactive overlay */
 }
