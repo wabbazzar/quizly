@@ -18,18 +18,7 @@
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
-    "test:integration": "vitest run --config vitest.integration.config.ts",
-    "test:e2e": "playwright test",
-    "test:e2e:headed": "playwright test --headed",
-    "test:performance": "lhci autorun",
-    "lighthouse": "lighthouse http://localhost:5173 --view",
-    "security:audit": "npm audit --audit-level=moderate",
-    "security:fix": "npm audit fix",
-    "generate-manifest": "node scripts/generate-deck-manifest.js",
-    "ci:install": "npm ci --prefer-offline --no-audit",
-    "ci:build": "npm run generate-manifest && npm run type-check && npm run build",
-    "ci:test": "npm run test:coverage && npm run test:integration",
-    "ci:quality": "npm run lint && npm run format:check && npm run type-check"
+    "generate-manifest": "node scripts/generate-deck-manifest.js"
   },
   "dependencies": {
     "@types/classnames": "^2.3.0",
@@ -42,8 +31,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
-    "@lhci/cli": "^0.14.0",
-    "@playwright/test": "^1.48.0",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^14.3.1",
     "@testing-library/user-event": "^14.5.2",
@@ -53,8 +40,6 @@
     "@vitejs/plugin-react": "^4.3.4",
     "@vitest/coverage-v8": "^2.1.9",
     "@vitest/ui": "^2.1.8",
-    "audit-ci": "^7.1.0",
-    "depcheck": "^1.4.7",
     "eslint": "^9.17.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
