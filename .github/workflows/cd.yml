@@ -41,7 +41,7 @@ jobs:
       deployment-url: ${{ steps.deploy.outputs.url }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -150,7 +150,7 @@ jobs:
           echo "Previous production SHA: ${PREVIOUS_SHA:-none}"
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -260,7 +260,7 @@ jobs:
       name: production-rollback
     steps:
       - name: Checkout previous version
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ needs.deploy-production.outputs.previous-sha }}
 
@@ -369,7 +369,7 @@ jobs:
           echo "sha=${ROLLBACK_SHA}" >> $GITHUB_OUTPUT
 
       - name: Checkout rollback target
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ steps.rollback-target.outputs.sha }}
 
