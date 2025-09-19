@@ -137,8 +137,8 @@ const Home: FC = () => {
                     text { font-size: 172px; stroke-width: 1.6px; }
                   }
                 `}</style>
-                <text class="tg-center" x="50%" y="120">it's not a test!</text>
-                <text class="tg-right" x="100%" y="120">it's not a test!</text>
+                <text className="tg-center" x="50%" y="120">it's not a test!</text>
+                <text className="tg-right" x="100%" y="120">it's not a test!</text>
               </svg>
         </motion.div>
       </header>
