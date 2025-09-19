@@ -108,22 +108,8 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
-          // Vendor chunks
-          if (id.includes('node_modules')) {
-            if (id.includes('react-dom')) {
-              return 'react-vendor';
-            }
-            if (id.includes('react-router')) {
-              return 'router-vendor';
-            }
-            if (id.includes('zustand')) {
-              return 'state-vendor';
-            }
-          }
-          // Don't split app code into manual chunks to avoid initialization issues
-          // Let Vite handle the chunking automatically
-        },
+        // Remove all manual chunks to avoid initialization order issues
+        // Let Vite handle all chunking automatically
         chunkFileNames: () => {
           return `assets/[name]-[hash].js`;
         },

@@ -78,7 +78,9 @@
       "Bash(npx prettier:*)",
       "Bash(npx depcheck:*)",
       "Bash(npm run format:*)",
-      "Bash(do echo \"=== $file ===\")"
+      "Bash(do echo \"=== $file ===\")",
+      "WebFetch(domain:wabbazzar.github.io)",
+      "Bash(gh workflow run:*)"
     ],
     "deny": [],
     "ask": []
