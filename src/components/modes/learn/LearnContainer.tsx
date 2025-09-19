@@ -48,7 +48,6 @@ const LearnContainer: FC<LearnContainerProps> = memo(
     // Use existing hooks
     const {
       generateRound,
-      questions,
       currentQuestion: generatedQuestion,
       nextQuestion: nextGeneratedQuestion,
     } = useQuestionGenerator(deck, settings);
