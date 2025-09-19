@@ -47,8 +47,49 @@ const Home: FC = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <h1 className={styles.title}>Welcome to Quizly</h1>
-          <p className={styles.subtitle}>Choose a deck and select your preferred learning mode</p>
+              <h1 className={styles.title}>Quizly</h1>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1600 220"
+                role="img"
+                aria-labelledby="quizlyCursiveHeaderTitle"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  maxHeight: 120,
+                  transform: 'rotate(-6deg) skewX(-6deg)',
+                  transformOrigin: 'center center',
+                  marginTop: 8
+                }}
+              >
+                <title id="quizlyCursiveHeaderTitle">it's not a test! — cursive header</title>
+                <style>{`
+                  :root{
+                    --quizly-blue:#4A90E2;
+                    --quizly-white:#FFFFFF;
+                  }
+                  text {
+                    font-family: "Pacifico", "Lobster", "Brush Script MT", "Segoe Script",
+                                 "Snell Roundhand", "Dancing Script", cursive;
+                    font-size: 94px;
+                    font-weight: 700;
+                    fill: var(--quizly-white);
+                    letter-spacing: 3px;
+                    paint-order: stroke fill;
+                    stroke: var(--quizly-white);
+                    stroke-width: 1px;
+                    dominant-baseline: middle;
+                    text-anchor: middle;
+                  }
+                  @media (max-width: 768px) {
+                    text {
+                      font-size: 172px;
+                      stroke-width: 1.6px;
+                    }
+                  }
+                `}</style>
+                <text x="50%" y="120">it's not a test!</text>
+              </svg>
         </motion.div>
       </header>
 
