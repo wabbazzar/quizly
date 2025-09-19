@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-// Import moved inside function to avoid circular dependency issues
+import { useCardMasteryStore } from './cardMasteryStore';
 
 export interface DeckProgress {
   overall: number;
@@ -137,8 +137,6 @@ export const useProgressStore = create<ProgressStore>()(
         const progress = get().progress[deckId];
 
         // Get mastery data from the card mastery store
-        // Dynamic import to avoid circular dependency
-        const { useCardMasteryStore } = require('./cardMasteryStore');
         const cardMasteryStore = useCardMasteryStore.getState();
         const masteredCards = cardMasteryStore.getMasteredCards(deckId);
         const masteryPercentage = cardMasteryStore.getDeckMasteryPercentage(deckId);
