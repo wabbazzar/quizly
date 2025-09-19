@@ -47,6 +47,19 @@ const Home: FC = () => {
           if (!node) return;
           const img = node.querySelector('img.' + styles.mascot) as HTMLImageElement | null;
           if (!img) return;
+          const updateGradientStart = () => {
+            try {
+              const rect = img.getBoundingClientRect();
+              const headerRect = node.getBoundingClientRect();
+              const start = Math.max(0, rect.right - headerRect.left + 8); // start just past mascot (+8px padding)
+              node.style.setProperty('--grad-start', `${Math.round(start)}px`);
+              // set colors (left current header color, right quizly primary)
+              node.style.setProperty('--left-color', '#5b82b0');
+              node.style.setProperty('--right-color', getComputedStyle(document.documentElement).getPropertyValue('--primary-main') || '#4a90e2');
+            } catch {}
+          };
+          updateGradientStart();
+          window.addEventListener('resize', updateGradientStart);
           if (img.complete) {
             try {
               const canvas = document.createElement('canvas');
@@ -59,6 +72,7 @@ const Home: FC = () => {
               const toHex = (v: number) => v.toString(16).padStart(2, '0');
               const hex = `#${toHex(data[0])}${toHex(data[1])}${toHex(data[2])}`;
               node.style.setProperty('--header-start', hex);
+              updateGradientStart();
             } catch {}
           } else {
             img.addEventListener(
@@ -75,11 +89,15 @@ const Home: FC = () => {
                   const toHex = (v: number) => v.toString(16).padStart(2, '0');
                   const hex = `#${toHex(data[0])}${toHex(data[1])}${toHex(data[2])}`;
                   node.style.setProperty('--header-start', hex);
+                  updateGradientStart();
                 } catch {}
               },
               { once: true }
             );
           }
+          return () => {
+            window.removeEventListener('resize', updateGradientStart);
+          };
         }}
       >
             <img

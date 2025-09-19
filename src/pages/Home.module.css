@@ -4,7 +4,12 @@
 }
 
 .header {
-  background: #5b82b0;
+  background: linear-gradient(
+    to right,
+    var(--left-color, #5b82b0) 0,
+    var(--left-color, #5b82b0) var(--grad-start, 160px),
+    var(--right-color, var(--primary-main)) 100%
+  );
   background-color: #5b82b0;
   color: var(--text-primary-on-dark);
   padding: var(--space-5) var(--space-4);
