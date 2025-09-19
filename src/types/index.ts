@@ -112,6 +112,7 @@ export interface LearnSessionState {
   maxStreak: number;
   startTime: number;
   responseStartTime: number;
+  responseTimes: number[]; // Track response times for each question
 }
 
 export interface Question {
@@ -126,6 +127,7 @@ export interface Question {
   difficulty: number;
   isFollowUp?: boolean; // True if this is a free text follow-up to a correct MC answer
   parentQuestionId?: string; // ID of the multiple choice question this follows
+  explanation?: string; // Optional explanation for the correct answer
 }
 
 export interface LearnSessionResults {

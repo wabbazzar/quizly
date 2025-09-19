@@ -15,10 +15,10 @@ const updateSW = registerSW({
     }
   },
   onOfflineReady() {
-    console.log('App is ready to work offline');
+    // App is ready to work offline
   },
-  onRegisteredSW(swScriptUrl, registration) {
-    console.log('Service Worker registered:', swScriptUrl);
+  onRegisteredSW(_swScriptUrl, registration) {
+    // Service Worker registered
 
     // Check for updates periodically
     if (registration) {
@@ -30,8 +30,8 @@ const updateSW = registerSW({
       ); // Check every hour
     }
   },
-  onRegisterError(error) {
-    console.error('Service Worker registration error:', error);
+  onRegisterError(_error) {
+    // Service Worker registration error
   },
 });
 
@@ -64,7 +64,7 @@ if (isIOSPWA) {
     const timeSinceUnload = Date.now() - parseInt(unloadTime);
     if (timeSinceUnload < 10000) {
       // Within 10 seconds, likely a refresh
-      console.log('iOS PWA: Quick restart detected, clearing unload marker');
+      // iOS PWA: Quick restart detected
     }
     sessionStorage.removeItem('quizly-ios-unload');
   }

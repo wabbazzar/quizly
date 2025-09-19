@@ -78,6 +78,7 @@ export const useLearnSessionStore = create<LearnSessionStore>()(
             maxStreak: 0,
             startTime: Date.now(),
             responseStartTime: Date.now(),
+            responseTimes: [],
           },
           preferences: settings,
         });

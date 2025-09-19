@@ -15,7 +15,7 @@ import UnifiedSettings from '@/components/modals/UnifiedSettings';
 import { FlashcardsSettings, LearnModeSettings, ModeSettings } from '@/types';
 import { useSettingsStore } from '@/store/settingsStore';
 import FlashcardsCompletionModal from '@/components/modals/FlashcardsCompletionModal';
-import LoadingScreen from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/ui';
 import { SharedModeHeader } from '@/components/common/SharedModeHeader';
 import styles from './Flashcards.module.css';
 

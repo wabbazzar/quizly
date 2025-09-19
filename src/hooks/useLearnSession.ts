@@ -32,6 +32,7 @@ export const useLearnSession = (deck: Deck, options: LearnSessionOptions) => {
     maxStreak: 0,
     startTime: Date.now(),
     responseStartTime: Date.now(),
+    responseTimes: [],
   });
 
   const [progress, setProgress] = useState<LearnSessionProgress>({
@@ -302,6 +303,7 @@ export const useLearnSession = (deck: Deck, options: LearnSessionOptions) => {
       maxStreak: 0,
       startTime: Date.now(),
       responseStartTime: Date.now(),
+      responseTimes: [],
     });
 
     setProgress({

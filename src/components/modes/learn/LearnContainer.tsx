@@ -141,7 +141,7 @@ const LearnContainer: FC<LearnContainerProps> = memo(
         setFeedback({
           isCorrect,
           correctAnswer: sessionState.currentQuestion?.correctAnswer || '',
-          explanation: undefined, // TODO: Add explanation to Question type
+          explanation: sessionState.currentQuestion?.explanation,
           isMastered,
         });
         setShowFeedback(true);
@@ -168,7 +168,9 @@ const LearnContainer: FC<LearnContainerProps> = memo(
           correctAnswers: sessionState.correctCards.size,
           incorrectAnswers: sessionState.incorrectCards.size,
           accuracy: accuracyPercent, // Now in percentage (0-100)
-          averageResponseTime: 0, // TODO: Track response times
+          averageResponseTime: sessionState.responseTimes.length > 0
+            ? sessionState.responseTimes.reduce((a, b) => a + b, 0) / sessionState.responseTimes.length
+            : 0,
           maxStreak: sessionState.maxStreak,
           duration: Date.now() - sessionState.startTime,
           passedCards: Array.from(sessionState.correctCards),

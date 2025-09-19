@@ -40,7 +40,7 @@ function App() {
   // iOS PWA specific: Force refresh on restoration
   useEffect(() => {
     if (isIOS && isPWA && wasRestored && !isRestoring) {
-      console.log('iOS PWA: Forcing component refresh after restoration');
+      // iOS PWA: Forcing component refresh after restoration
       // Force React to re-render the entire app tree
       const root = document.getElementById('root');
       if (root) {

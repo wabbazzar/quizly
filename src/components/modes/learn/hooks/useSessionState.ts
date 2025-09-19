@@ -12,6 +12,7 @@ const initialSessionState: LearnSessionState = {
   maxStreak: 0,
   startTime: Date.now(),
   responseStartTime: Date.now(),
+  responseTimes: [],
 };
 
 export const useSessionState = (
@@ -39,6 +40,7 @@ export const useSessionState = (
       ...initialSessionState,
       startTime: Date.now(),
       responseStartTime: Date.now(),
+      responseTimes: [],
     });
     setMasteredCardIndices(new Set());
     setStrugglingCardIndices(new Set());
@@ -48,6 +50,10 @@ export const useSessionState = (
   // Handle answer submission
   const handleAnswer = useCallback((_answer: string, isCorrect: boolean, cardIdx: number) => {
     setSessionState(prev => {
+      // Track response time
+      const responseTime = Date.now() - prev.responseStartTime;
+      const newResponseTimes = [...prev.responseTimes, responseTime];
+
       const newCorrectCards = new Set(prev.correctCards);
       const newIncorrectCards = new Set(prev.incorrectCards);
 
@@ -89,6 +95,7 @@ export const useSessionState = (
         incorrectCards: newIncorrectCards,
         currentStreak: newStreak,
         maxStreak: newMaxStreak,
+        responseTimes: newResponseTimes,
       };
     });
   }, []);

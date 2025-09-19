@@ -26,14 +26,14 @@ const validateMetadata = (metadata: unknown): DeckMetadata | null => {
 
   // Required fields
   if (!metadata.deck_name || !metadata.description || !metadata.category) {
-    console.warn('Deck metadata missing required fields');
+    // Deck metadata missing required fields
     return null;
   }
 
   // Validate difficulty enum
   const validDifficulties = ['beginner', 'intermediate', 'advanced', 'beginner_to_intermediate'];
   if (typeof metadata.difficulty !== 'string' || !validDifficulties.includes(metadata.difficulty)) {
-    console.warn(`Invalid difficulty: ${metadata.difficulty}`);
+    // Invalid difficulty value
     return null;
   }
 
@@ -91,7 +91,7 @@ const validateCard = (card: unknown, index: number): Card | null => {
 
   // Require at least side_a and side_b
   if (!card.side_a || !card.side_b) {
-    console.warn(`Card at index ${index} missing required sides`);
+    // Card missing required sides
     return null;
   }
 
@@ -113,7 +113,7 @@ export const loadDeckFromJSON = async (jsonPath: string): Promise<Deck | null> =
     // Don't modify the path - it should already be correct from the caller
     const response = await fetch(jsonPath);
     if (!response.ok) {
-      console.error(`Failed to load deck from ${jsonPath}: ${response.status}`);
+      // Failed to load deck
       return null;
     }
 
@@ -121,20 +121,20 @@ export const loadDeckFromJSON = async (jsonPath: string): Promise<Deck | null> =
 
     // Validate deck structure
     if (!rawDeck || typeof rawDeck !== 'object') {
-      console.error('Invalid deck structure');
+      // Invalid deck structure
       return null;
     }
 
     // Validate and sanitize metadata
     const metadata = validateMetadata(rawDeck.metadata);
     if (!metadata) {
-      console.error('Invalid deck metadata');
+      // Invalid deck metadata
       return null;
     }
 
     // Validate and sanitize cards
     if (!Array.isArray(rawDeck.content) || rawDeck.content.length === 0) {
-      console.error('Deck has no valid cards');
+      // Deck has no valid cards
       return null;
     }
 
@@ -143,7 +143,7 @@ export const loadDeckFromJSON = async (jsonPath: string): Promise<Deck | null> =
       .filter(Boolean) as Card[];
 
     if (cards.length === 0) {
-      console.error('No valid cards after sanitization');
+      // No valid cards after sanitization
       return null;
     }
 
@@ -156,10 +156,10 @@ export const loadDeckFromJSON = async (jsonPath: string): Promise<Deck | null> =
       content: cards,
     };
 
-    console.log(`Successfully loaded deck: ${deck.metadata.deck_name} with ${cards.length} cards`);
+    // Deck loaded successfully
     return deck;
   } catch (error) {
-    console.error(`Error loading deck from ${jsonPath}:`, error);
+    // Error loading deck
     return null;
   }
 };
@@ -175,11 +175,11 @@ export const loadAllDecks = async (): Promise<Deck[]> => {
     const deckFiles = await discoverDeckFiles(decksBasePath);
 
     if (deckFiles.length === 0) {
-      console.warn('No deck files found');
+      // No deck files found
       return [];
     }
 
-    console.log(`Found ${deckFiles.length} deck files to load`);
+    // Found deck files to load
 
     // Load all decks in parallel with sanitization
     const deckPromises = deckFiles.map(file => loadDeckFromJSON(`${decksBasePath}${file}`));
@@ -189,11 +189,11 @@ export const loadAllDecks = async (): Promise<Deck[]> => {
     // Filter out any decks that failed validation
     const validDecks = loadedDecks.filter(Boolean) as Deck[];
 
-    console.log(`Successfully loaded ${validDecks.length} of ${deckFiles.length} decks`);
+    // Decks loaded successfully
 
     return validDecks;
   } catch (error) {
-    console.error('Error loading decks:', error);
+    // Error loading decks
     return [];
   }
 };
@@ -204,23 +204,23 @@ async function discoverDeckFiles(basePath: string): Promise<string[]> {
     // The manifest is auto-generated when dev/build runs
     const manifestResponse = await fetch(`${basePath}manifest.json`);
     if (!manifestResponse.ok) {
-      console.error('Failed to fetch deck manifest');
+      // Failed to fetch deck manifest
       return [];
     }
 
     const manifest = await manifestResponse.json();
     if (!Array.isArray(manifest)) {
-      console.error('Invalid manifest format');
+      // Invalid manifest format
       return [];
     }
 
     // Filter for JSON files (extra safety check)
     const deckFiles = manifest.filter(f => typeof f === 'string' && f.endsWith('.json'));
 
-    console.log(`Manifest loaded: ${deckFiles.length} deck files found`);
+    // Manifest loaded successfully
     return deckFiles;
   } catch (error) {
-    console.error('Error loading deck manifest:', error);
+    // Error loading deck manifest
     return [];
   }
 }

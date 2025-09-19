@@ -5,7 +5,7 @@ import { useDeckStore } from '@/store/deckStore';
 import { useCardMasteryStore } from '@/store/cardMasteryStore';
 import { useNotificationStore } from '@/store/notificationStore';
 import { Card } from '@/types';
-import LoadingScreen from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/ui';
 import { DeckHeader } from '@/components/deck/DeckHeader';
 import { ModeSelector } from '@/components/deck/ModeSelector';
 import { CardManagement } from '@/components/deck/CardManagement';

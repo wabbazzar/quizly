@@ -3,7 +3,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useDeckStore } from '@/store/deckStore';
 import { useProgressStore } from '@/store/progressStore';
 import { useCardMasteryStore } from '@/store/cardMasteryStore';
-import LoadingScreen from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/ui';
 import LearnContainer from '@/components/modes/learn/LearnContainer';
 import UnifiedSettings from '@/components/modals/UnifiedSettings';
 import { useSettingsStore } from '@/store/settingsStore';
