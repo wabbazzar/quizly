@@ -32,16 +32,22 @@ const LearningSettings: FC<SectionProps> = ({ settings, onChange }) => {
             type="number"
             min="5"
             max="50"
-            value={settings.cardsPerRound || 10}
+            value={settings.cardsPerRound === '' ? '' : (settings.cardsPerRound || 10)}
             onChange={e => {
               const value = e.target.value;
-              const numValue = value === '' ? 10 : parseInt(value);
-              if (!isNaN(numValue)) {
-                onChange('cardsPerRound', numValue);
+              // Allow empty values so users can delete and retype
+              if (value === '') {
+                onChange('cardsPerRound', '');
+              } else {
+                const numValue = parseInt(value);
+                if (!isNaN(numValue)) {
+                  onChange('cardsPerRound', numValue);
+                }
               }
             }}
             onBlur={e => {
-              const value = parseInt(e.target.value) || 10;
+              // Apply defaults and validation only on blur
+              const value = e.target.value === '' ? 10 : parseInt(e.target.value) || 10;
               onChange('cardsPerRound', Math.max(5, Math.min(50, value)));
             }}
             inputMode="numeric"
@@ -117,16 +123,22 @@ const LearningSettings: FC<SectionProps> = ({ settings, onChange }) => {
               type="number"
               min="10"
               max="120"
-              value={settings.timerSeconds || 30}
+              value={settings.timerSeconds === '' ? '' : (settings.timerSeconds || 30)}
               onChange={e => {
                 const value = e.target.value;
-                const numValue = value === '' ? 30 : parseInt(value);
-                if (!isNaN(numValue)) {
-                  onChange('timerSeconds', numValue);
+                // Allow empty values so users can delete and retype
+                if (value === '') {
+                  onChange('timerSeconds', '');
+                } else {
+                  const numValue = parseInt(value);
+                  if (!isNaN(numValue)) {
+                    onChange('timerSeconds', numValue);
+                  }
                 }
               }}
               onBlur={e => {
-                const value = parseInt(e.target.value) || 30;
+                // Apply defaults and validation only on blur
+                const value = e.target.value === '' ? 30 : parseInt(e.target.value) || 30;
                 onChange('timerSeconds', Math.max(10, Math.min(120, value)));
               }}
               inputMode="numeric"
@@ -165,16 +177,22 @@ const LearningSettings: FC<SectionProps> = ({ settings, onChange }) => {
               type="number"
               min="1"
               max="10"
-              value={settings.progressiveLearningSpacing || 3}
+              value={settings.progressiveLearningSpacing === '' ? '' : (settings.progressiveLearningSpacing || 3)}
               onChange={e => {
                 const value = e.target.value;
-                const numValue = value === '' ? 3 : parseInt(value);
-                if (!isNaN(numValue)) {
-                  onChange('progressiveLearningSpacing', numValue);
+                // Allow empty values so users can delete and retype
+                if (value === '') {
+                  onChange('progressiveLearningSpacing', '');
+                } else {
+                  const numValue = parseInt(value);
+                  if (!isNaN(numValue)) {
+                    onChange('progressiveLearningSpacing', numValue);
+                  }
                 }
               }}
               onBlur={e => {
-                const value = parseInt(e.target.value) || 3;
+                // Apply defaults and validation only on blur
+                const value = e.target.value === '' ? 3 : parseInt(e.target.value) || 3;
                 onChange('progressiveLearningSpacing', Math.max(1, Math.min(10, value)));
               }}
               inputMode="numeric"

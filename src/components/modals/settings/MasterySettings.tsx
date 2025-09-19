@@ -116,16 +116,22 @@ const MasterySettings: FC<ExtendedSectionProps> = ({
               type="number"
               min="1"
               max="10"
-              value={settings.masteryThreshold || 3}
+              value={settings.masteryThreshold === '' ? '' : (settings.masteryThreshold || 3)}
               onChange={e => {
                 const value = e.target.value;
-                const numValue = value === '' ? 3 : parseInt(value);
-                if (!isNaN(numValue)) {
-                  onChange('masteryThreshold', numValue);
+                // Allow empty values so users can delete and retype
+                if (value === '') {
+                  onChange('masteryThreshold', '');
+                } else {
+                  const numValue = parseInt(value);
+                  if (!isNaN(numValue)) {
+                    onChange('masteryThreshold', numValue);
+                  }
                 }
               }}
               onBlur={e => {
-                const value = parseInt(e.target.value) || 3;
+                // Apply defaults and validation only on blur
+                const value = e.target.value === '' ? 3 : parseInt(e.target.value) || 3;
                 onChange('masteryThreshold', Math.max(1, Math.min(10, value)));
               }}
               inputMode="numeric"
