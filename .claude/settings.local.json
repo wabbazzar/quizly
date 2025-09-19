@@ -80,7 +80,12 @@
       "Bash(npm run format:*)",
       "Bash(do echo \"=== $file ===\")",
       "WebFetch(domain:wabbazzar.github.io)",
-      "Bash(gh workflow run:*)"
+      "Bash(gh workflow run:*)",
+      "Bash(git remote get-url:*)",
+      "Bash(gh api:*)",
+      "Bash(git fetch:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(git branch:*)"
     ],
     "deny": [],
     "ask": []
