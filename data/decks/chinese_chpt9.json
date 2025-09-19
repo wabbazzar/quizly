@@ -1,0 +1,555 @@
+{
+  "id": "chinese_chpt9",
+  "metadata": {
+    "deck_name": "Chinese Chapter 9",
+    "deck_subtitle": "Shopping",
+    "description": "Essential Chinese vocabulary for shopping, including store items, colors, sizes, and money",
+    "category": "Language Learning",
+    "available_levels": [1, 2, 3],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 54,
+    "difficulty": "intermediate",
+    "tags": ["chinese", "mandarin", "shopping", "vocabulary", "chapter9"],
+    "version": "1.0.0",
+    "created_date": "2025-01-22T10:00:00Z",
+    "last_updated": "2025-01-22T16:00:00Z"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "store",
+      "side_a": "Store; shop",
+      "side_b": "shāngdiàn",
+      "side_c": "商店",
+      "side_d": "A place where goods are sold",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "buy",
+      "side_a": "To buy",
+      "side_b": "mǎi",
+      "side_c": "买",
+      "side_d": "To purchase something",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "things",
+      "side_a": "Things; objects",
+      "side_b": "dōngxi",
+      "side_c": "东西",
+      "side_d": "General term for items or objects",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "shop_assistant",
+      "side_a": "Shop assistant; salesclerk",
+      "side_b": "shòuhuòyuán",
+      "side_c": "售货员",
+      "side_d": "Person who helps customers in a store",
+      "level": 2
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "clothes",
+      "side_a": "Clothes",
+      "side_b": "yīfu",
+      "side_c": "衣服",
+      "side_d": "Garments and clothing items",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "measure_word_shirt",
+      "side_a": "Measure word for shirts, dresses, jackets, coats, etc.",
+      "side_b": "jiàn",
+      "side_c": "件",
+      "side_d": "Classifier for clothing items",
+      "level": 2
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "shirt",
+      "side_a": "Shirt",
+      "side_b": "chènshān",
+      "side_c": "衬衫",
+      "side_d": "A type of clothing worn on the upper body",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "color",
+      "side_a": "Color",
+      "side_b": "yánsè",
+      "side_c": "颜色",
+      "side_d": "The visual property of objects",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "yellow",
+      "side_a": "Yellow",
+      "side_b": "huáng",
+      "side_c": "黄",
+      "side_d": "The color of the sun",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "red",
+      "side_a": "Red",
+      "side_b": "hóng",
+      "side_c": "红",
+      "side_d": "The color of blood or fire",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "wear",
+      "side_a": "To wear; to put on",
+      "side_b": "chuān",
+      "side_c": "穿",
+      "side_d": "To put on clothing",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "measure_word_pants",
+      "side_a": "Measure word for pants and long, thin objects",
+      "side_b": "tiáo",
+      "side_c": "条",
+      "side_d": "Classifier for pants and elongated items",
+      "level": 2
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "pants",
+      "side_a": "Pants",
+      "side_b": "kùzi",
+      "side_c": "裤子",
+      "side_d": "Clothing worn on the lower body",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "size",
+      "side_a": "Size",
+      "side_b": "hào",
+      "side_c": "号",
+      "side_d": "Measurement of clothing or objects",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "medium",
+      "side_a": "Medium; middle",
+      "side_b": "zhōng",
+      "side_c": "中",
+      "side_d": "Between small and large",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "cheap",
+      "side_a": "Cheap; inexpensive",
+      "side_b": "piányi",
+      "side_c": "便宜",
+      "side_d": "Low in price",
+      "level": 1
+    },
+    {
+      "card_id": "card-017",
+      "idx": 16,
+      "name": "if",
+      "side_a": "If",
+      "side_b": "rúguǒ...de huà",
+      "side_c": "如果...的话",
+      "side_d": "Conditional conjunction",
+      "level": 2
+    },
+    {
+      "card_id": "card-018",
+      "idx": 17,
+      "name": "length",
+      "side_a": "Length",
+      "side_b": "chángduǎn",
+      "side_c": "长短",
+      "side_d": "Measurement of how long something is",
+      "level": 2
+    },
+    {
+      "card_id": "card-019",
+      "idx": 18,
+      "name": "long",
+      "side_a": "Long",
+      "side_b": "cháng",
+      "side_c": "长",
+      "side_d": "Having great length",
+      "level": 1
+    },
+    {
+      "card_id": "card-020",
+      "idx": 19,
+      "name": "short",
+      "side_a": "Short",
+      "side_b": "duǎn",
+      "side_c": "短",
+      "side_d": "Having little length",
+      "level": 1
+    },
+    {
+      "card_id": "card-021",
+      "idx": 20,
+      "name": "suitable",
+      "side_a": "Suitable",
+      "side_b": "héshì",
+      "side_c": "合适",
+      "side_d": "Appropriate or fitting",
+      "level": 2
+    },
+    {
+      "card_id": "card-022",
+      "idx": 21,
+      "name": "try",
+      "side_a": "To try",
+      "side_b": "shì",
+      "side_c": "试",
+      "side_d": "To test or attempt something",
+      "level": 1
+    },
+    {
+      "card_id": "card-023",
+      "idx": 22,
+      "name": "need_not",
+      "side_a": "Need not",
+      "side_b": "búyòng",
+      "side_c": "不用",
+      "side_d": "Not necessary",
+      "level": 2
+    },
+    {
+      "card_id": "card-024",
+      "idx": 23,
+      "name": "altogether",
+      "side_a": "Altogether",
+      "side_b": "yígòng",
+      "side_c": "一共",
+      "side_d": "In total; all together",
+      "level": 2
+    },
+    {
+      "card_id": "card-025",
+      "idx": 24,
+      "name": "how_much",
+      "side_a": "How much or many",
+      "side_b": "duōshao",
+      "side_c": "多少",
+      "side_d": "Question word for quantity",
+      "level": 1
+    },
+    {
+      "card_id": "card-026",
+      "idx": 25,
+      "name": "money",
+      "side_a": "Money",
+      "side_b": "qián",
+      "side_c": "钱",
+      "side_d": "Currency used for transactions",
+      "level": 1
+    },
+    {
+      "card_id": "card-027",
+      "idx": 26,
+      "name": "kuai",
+      "side_a": "measure word for Chinese monetary unit)",
+      "side_b": "kuài",
+      "side_c": "块",
+      "side_d": "Basic unit of Chinese currency",
+      "level": 2
+    },
+    {
+      "card_id": "card-028",
+      "idx": 27,
+      "name": "mao",
+      "side_a": "measure word for 1/10 of a kuai, dime",
+      "side_b": "máo",
+      "side_c": "毛",
+      "side_d": "1/10 of a kuai, equivalent to a dime",
+      "level": 2
+    },
+    {
+      "card_id": "card-029",
+      "idx": 28,
+      "name": "fen",
+      "side_a": "measure word for 1/100 of a kuai, cent)",
+      "side_b": "fēn",
+      "side_c": "分",
+      "side_d": "1/100 of a kuai, equivalent to a cent",
+      "level": 2
+    },
+    {
+      "card_id": "card-030",
+      "idx": 29,
+      "name": "hundred",
+      "side_a": "Hundred",
+      "side_b": "bǎi",
+      "side_c": "百",
+      "side_d": "The number 100",
+      "level": 1
+    },
+    {
+      "card_id": "card-031",
+      "idx": 30,
+      "name": "give_change",
+      "side_a": "To give change",
+      "side_b": "zhǎo (qián)",
+      "side_c": "找(钱)",
+      "side_d": "To return money to a customer",
+      "level": 2
+    },
+    {
+      "card_id": "card-032",
+      "idx": 31,
+      "name": "measure_word_pair",
+      "side_a": "Measure word for a pair",
+      "side_b": "shuāng",
+      "side_c": "双",
+      "side_d": "Classifier for pairs of items",
+      "level": 2
+    },
+    {
+      "card_id": "card-033",
+      "idx": 32,
+      "name": "shoes",
+      "side_a": "Shoes",
+      "side_b": "xié",
+      "side_c": "鞋",
+      "side_d": "Footwear worn to protect feet",
+      "level": 1
+    },
+    {
+      "card_id": "card-034",
+      "idx": 33,
+      "name": "exchange",
+      "side_a": "To exchange; to change",
+      "side_b": "huàn",
+      "side_c": "换",
+      "side_d": "To trade or replace something",
+      "level": 2
+    },
+    {
+      "card_id": "card-035",
+      "idx": 34,
+      "name": "same",
+      "side_a": "Same; alike",
+      "side_b": "yíyàng",
+      "side_c": "一样",
+      "side_d": "Identical or similar",
+      "level": 2
+    },
+    {
+      "card_id": "card-036",
+      "idx": 35,
+      "name": "although",
+      "side_a": "Although",
+      "side_b": "suīrán",
+      "side_c": "虽然",
+      "side_d": "Despite the fact that; even though",
+      "level": 3
+    },
+    {
+      "card_id": "card-037",
+      "idx": 36,
+      "name": "big_small_size",
+      "side_a": "Size",
+      "side_b": "dàxiǎo",
+      "side_c": "大小",
+      "side_d": "The dimensions or magnitude of something",
+      "level": 2
+    },
+    {
+      "card_id": "card-038",
+      "idx": 37,
+      "name": "brown_coffee_color",
+      "side_a": "Brown; coffee color",
+      "side_b": "kāfēisè",
+      "side_c": "咖啡色",
+      "side_d": "The color brown, like coffee",
+      "level": 2
+    },
+    {
+      "card_id": "card-039",
+      "idx": 38,
+      "name": "measure_word_kinds",
+      "side_a": "Measure word for kinds, sorts, types",
+      "side_b": "zhǒng",
+      "side_c": "种",
+      "side_d": "Classifier for varieties or types",
+      "level": 2
+    },
+    {
+      "card_id": "card-040",
+      "idx": 39,
+      "name": "black",
+      "side_a": "Black",
+      "side_b": "hēi",
+      "side_c": "黑",
+      "side_d": "The darkest color",
+      "level": 1
+    },
+    {
+      "card_id": "card-041",
+      "idx": 40,
+      "name": "style",
+      "side_a": "Style",
+      "side_b": "yàngzi",
+      "side_c": "样子",
+      "side_d": "Appearance or fashion",
+      "level": 2
+    },
+    {
+      "card_id": "card-042",
+      "idx": 41,
+      "name": "quite_rather",
+      "side_a": "Very; rather",
+      "side_b": "tǐng",
+      "side_c": "挺",
+      "side_d": "Quite or fairly (used before adjectives)",
+      "level": 2
+    },
+    {
+      "card_id": "card-043",
+      "idx": 42,
+      "name": "it_pronoun",
+      "side_a": "It",
+      "side_b": "tā",
+      "side_c": "它",
+      "side_d": "Third person pronoun for things",
+      "level": 1
+    },
+    {
+      "card_id": "card-044",
+      "idx": 43,
+      "name": "here_location",
+      "side_a": "Here",
+      "side_b": "zhèr",
+      "side_c": "这儿",
+      "side_d": "This place; at this location",
+      "level": 1
+    },
+    {
+      "card_id": "card-045",
+      "idx": 44,
+      "name": "swipe_card",
+      "side_a": "To pay with a credit card",
+      "side_b": "shuā kǎ",
+      "side_c": "刷卡",
+      "side_d": "To swipe or use a card for payment",
+      "level": 2
+    },
+    {
+      "card_id": "card-046",
+      "idx": 45,
+      "name": "brush_swipe",
+      "side_a": "To brush; to swipe",
+      "side_b": "shuā",
+      "side_c": "刷",
+      "side_d": "To clean with a brush or to swipe",
+      "level": 2
+    },
+    {
+      "card_id": "card-047",
+      "idx": 46,
+      "name": "card",
+      "side_a": "Card",
+      "side_b": "kǎ",
+      "side_c": "卡",
+      "side_d": "A plastic or paper card",
+      "level": 1
+    },
+    {
+      "card_id": "card-048",
+      "idx": 47,
+      "name": "receive_accept",
+      "side_a": "To receive; to accept",
+      "side_b": "shōu",
+      "side_c": "收",
+      "side_d": "To get or take something given",
+      "level": 2
+    },
+    {
+      "card_id": "card-049",
+      "idx": 48,
+      "name": "credit_card",
+      "side_a": "Credit card",
+      "side_b": "xìnyòngkǎ",
+      "side_c": "信用卡",
+      "side_d": "A payment card for credit transactions",
+      "level": 2
+    },
+    {
+      "card_id": "card-050",
+      "idx": 49,
+      "name": "however_but",
+      "side_a": "However; but",
+      "side_b": "búguò",
+      "side_c": "不过",
+      "side_d": "Nevertheless; however",
+      "level": 2
+    },
+    {
+      "card_id": "card-051",
+      "idx": 50,
+      "name": "again",
+      "side_a": "Again",
+      "side_b": "zài",
+      "side_c": "再",
+      "side_d": "Once more; another time",
+      "level": 1
+    },
+    {
+      "card_id": "card-052",
+      "idx": 51,
+      "name": "pay_money",
+      "side_a": "To pay money",
+      "side_b": "fù qián",
+      "side_c": "付钱",
+      "side_d": "To give money as payment",
+      "level": 2
+    },
+    {
+      "card_id": "card-053",
+      "idx": 52,
+      "name": "pay",
+      "side_a": "To pay",
+      "side_b": "fù",
+      "side_c": "付",
+      "side_d": "To give money for something",
+      "level": 1
+    }
+  ]
+}
