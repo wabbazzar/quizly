@@ -100,6 +100,7 @@ const Home: FC = () => {
           };
         }}
       >
+            <div className={styles.iosSafeTop} aria-hidden="true" />
             <img
               src={`${import.meta.env.BASE_URL}icons/mrquizly.png`}
               alt="Mr. Quizly"

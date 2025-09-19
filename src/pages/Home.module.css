@@ -19,6 +19,23 @@
   overflow: hidden;
 }
 
+/* iOS PWA safe-area top overlay to match header gradient */
+.iosSafeTop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top, 0px);
+  background: linear-gradient(
+    to right,
+    var(--left-color, #5b82b0) 0,
+    var(--left-color, #5b82b0) var(--grad-start, 160px),
+    var(--right-color, var(--primary-main)) 100%
+  );
+  z-index: 9999; /* above content */
+  pointer-events: none; /* non-interactive overlay */
+}
+
 /* removed headerInner; aligning mascot via calc */
 
 .title {

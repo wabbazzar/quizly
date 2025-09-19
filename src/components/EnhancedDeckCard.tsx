@@ -54,32 +54,32 @@ const formatLastStudied = (date?: Date): string => {
 };
 
 const CircularProgress: FC<{ value: number }> = ({ value }) => {
-  const radius = 20;
+  const radius = 16;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (value / 100) * circumference;
 
   return (
-    <svg width="48" height="48" className={styles.progressSvg}>
+    <svg viewBox="0 0 40 40" className={styles.progressSvg}>
       <circle
-        cx="24"
-        cy="24"
+        cx="20"
+        cy="20"
         r={radius}
         className={styles.progressBackground}
-        strokeWidth="3"
+        strokeWidth="2.5"
         fill="none"
       />
       <circle
-        cx="24"
-        cy="24"
+        cx="20"
+        cy="20"
         r={radius}
         className={styles.progressFill}
-        strokeWidth="3"
+        strokeWidth="2.5"
         fill="none"
         strokeDasharray={circumference}
         strokeDashoffset={offset}
         strokeLinecap="round"
       />
-      <text x="24" y="24" className={styles.progressText} textAnchor="middle" dy="0.3em">
+      <text x="20" y="20" className={styles.progressText} textAnchor="middle" dy="0.3em">
         {Math.round(value)}%
       </text>
     </svg>
