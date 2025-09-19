@@ -18,6 +18,8 @@ export default tseslint.config(
       'src/sw.ts',
       'scripts/**',
       'vite.config.ts',
+      'lighthouserc.cjs',
+      '*.cjs',
     ],
   },
   js.configs.recommended,
