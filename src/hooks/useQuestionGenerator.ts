@@ -186,6 +186,8 @@ export const useQuestionGenerator = (
       !currentQ.isFollowUp &&
       correctMCCards.has(currentQ.cardIndex) &&
       !questions[currentQuestionIndex + 1]?.isFollowUp &&
+      // Do not insert a follow-up if we're on the last question
+      currentQuestionIndex < questions.length - 1 &&
       shouldAddFollowUp(currentQ.cardIndex)
     ) {
       // Add a follow-up free text question

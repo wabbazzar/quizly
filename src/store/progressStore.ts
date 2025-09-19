@@ -58,9 +58,7 @@ export const useProgressStore = create<ProgressStore>()(
         set(state => {
           const existingProgress = state.progress[deckId] || { ...defaultProgress };
 
-          // Get mastery data from the card mastery store
-          // Dynamic import to avoid circular dependency
-          const { useCardMasteryStore } = require('./cardMasteryStore');
+          // Get mastery data from the card mastery store (ESM import is already at top of file)
           const cardMasteryStore = useCardMasteryStore.getState();
           const masteredCards = cardMasteryStore.getMasteredCards(deckId);
           const masteryPercentage = cardMasteryStore.getDeckMasteryPercentage(deckId);

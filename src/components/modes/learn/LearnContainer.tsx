@@ -43,6 +43,7 @@ const LearnContainer: FC<LearnContainerProps> = memo(
     const [showCardDetailsModal, setShowCardDetailsModal] = useState(false);
     const [currentCard, setCurrentCard] = useState<Card | null>(null);
     const [currentQuestion, setCurrentQuestion] = useState(sessionState.currentQuestion);
+  const [servedCount, setServedCount] = useState(0);
 
     // Use existing hooks
     const {
@@ -122,6 +123,9 @@ const LearnContainer: FC<LearnContainerProps> = memo(
           responseStartTime: Date.now(),
         });
 
+        // Reset served counter for new round
+        setServedCount(0);
+
         setIsLoading(false);
       };
 
@@ -151,26 +155,23 @@ const LearnContainer: FC<LearnContainerProps> = memo(
 
     // Handle moving to next question
     const handleQuestionComplete = useCallback(() => {
-      // Move to next generated question
-      nextGeneratedQuestion();
-
-      // Check if we've completed all questions
-      const currentIndex = questions.findIndex(q => q.id === generatedQuestion?.id);
-      if (currentIndex >= questions.length - 1) {
-        // Session complete
+      // Hard cap session to the number of round cards, regardless of generated follow-ups
+      const targetCount = sessionState.roundCards.length || 0;
+      if (servedCount + 1 >= targetCount) {
         const totalAnswered = sessionState.correctCards.size + sessionState.incorrectCards.size;
         const accuracyPercent =
           totalAnswered > 0 ? (sessionState.correctCards.size / totalAnswered) * 100 : 0;
 
         const results: LearnSessionResults = {
           deckId: deckId || '',
-          totalQuestions: totalAnswered, // Use actual questions answered, not deck size
+          totalQuestions: totalAnswered,
           correctAnswers: sessionState.correctCards.size,
           incorrectAnswers: sessionState.incorrectCards.size,
-          accuracy: accuracyPercent, // Now in percentage (0-100)
-          averageResponseTime: sessionState.responseTimes.length > 0
-            ? sessionState.responseTimes.reduce((a, b) => a + b, 0) / sessionState.responseTimes.length
-            : 0,
+          accuracy: accuracyPercent,
+          averageResponseTime:
+            sessionState.responseTimes.length > 0
+              ? sessionState.responseTimes.reduce((a, b) => a + b, 0) / sessionState.responseTimes.length
+              : 0,
           maxStreak: sessionState.maxStreak,
           duration: Date.now() - sessionState.startTime,
           passedCards: Array.from(sessionState.correctCards),
@@ -181,19 +182,22 @@ const LearnContainer: FC<LearnContainerProps> = memo(
         return;
       }
 
-      // Reset feedback for next question
+      // Reset feedback BEFORE advancing so next question doesn't inherit feedback state
       setShowFeedback(false);
       setFeedback(undefined);
+
+      // Advance question generators/state
+      nextGeneratedQuestion();
       nextQuestion();
+      setServedCount(prev => prev + 1);
     }, [
-      questions,
-      generatedQuestion,
       sessionState,
       cardTracking,
       deckId,
       nextGeneratedQuestion,
       nextQuestion,
       onComplete,
+      servedCount,
     ]);
 
     // Handle showing card details
@@ -233,7 +237,7 @@ const LearnContainer: FC<LearnContainerProps> = memo(
       <div className={styles.container}>
         <SharedModeHeader
           deckName={deck.metadata.deck_name}
-          currentCard={sessionState.correctCards.size + sessionState.incorrectCards.size + 1}
+          currentCard={servedCount + 1}
           totalCards={sessionState.roundCards.length}
           onBackClick={onExit}
           onSettingsClick={handleSettingsClick}
