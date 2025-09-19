@@ -122,6 +122,10 @@ jobs:
     name: Security Scan
     runs-on: ubuntu-latest
     needs: setup
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
     strategy:
       matrix:
         scan: [dependencies, code-analysis]

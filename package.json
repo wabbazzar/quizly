@@ -21,7 +21,7 @@
     "test:integration": "vitest run --config vitest.integration.config.ts",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
-    "test:performance": "lighthouse-ci autorun",
+    "test:performance": "lhci autorun",
     "lighthouse": "lighthouse http://localhost:5173 --view",
     "security:audit": "npm audit --audit-level=moderate",
     "security:fix": "npm audit fix",

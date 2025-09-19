@@ -70,7 +70,7 @@ export function useErrorHandler<T extends any[], R>(
   );
 
   const retry = useCallback(async () => {
-    if (!lastArgs || attemptCount >= retryAttempts) {
+    if (!lastArgs || attemptCount > retryAttempts) {
       return;
     }
 
