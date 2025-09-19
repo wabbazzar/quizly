@@ -77,7 +77,8 @@
       "Bash(npm audit:*)",
       "Bash(npx prettier:*)",
       "Bash(npx depcheck:*)",
-      "Bash(npm run format:*)"
+      "Bash(npm run format:*)",
+      "Bash(do echo \"=== $file ===\")"
     ],
     "deny": [],
     "ask": []

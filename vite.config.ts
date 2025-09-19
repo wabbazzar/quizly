@@ -108,30 +108,21 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        manualChunks: {
-          // Vendor chunks - separate large libraries
-          'react-vendor': ['react', 'react-dom'],
-          'router-vendor': ['react-router-dom'],
-          'state-vendor': ['zustand'],
-
-          // Feature chunks - group by functionality
-          'learn-mode': [
-            './src/pages/Learn.tsx',
-            './src/hooks/useLearnSession.ts',
-            './src/services/questionGenerator.ts',
-          ],
-          'flashcards-mode': ['./src/pages/Flashcards.tsx'],
-          'deck-management': ['./src/pages/Deck.tsx', './src/utils/deckLoader.ts'],
-
-          // Utility chunks
-          'shared-utils': ['./src/utils/textMatching.ts', './src/services/cardScheduler.ts'],
-
-          // Store chunks
-          stores: [
-            './src/store/deckStore.ts',
-            './src/store/progressStore.ts',
-            './src/store/cardMasteryStore.ts',
-          ],
+        manualChunks: (id) => {
+          // Vendor chunks
+          if (id.includes('node_modules')) {
+            if (id.includes('react-dom')) {
+              return 'react-vendor';
+            }
+            if (id.includes('react-router')) {
+              return 'router-vendor';
+            }
+            if (id.includes('zustand')) {
+              return 'state-vendor';
+            }
+          }
+          // Don't split app code into manual chunks to avoid initialization issues
+          // Let Vite handle the chunking automatically
         },
         chunkFileNames: () => {
           return `assets/[name]-[hash].js`;
