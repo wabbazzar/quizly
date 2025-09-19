@@ -83,7 +83,7 @@ const LearnContainer: FC<LearnContainerProps> = memo(
         }
 
         // Get scheduled cards
-        let cardsToLearn: Card[] = [];
+        const cardsToLearn: Card[] = [];
 
         // First, add struggling cards if provided
         if (initialStrugglingCards && initialStrugglingCards.length > 0) {

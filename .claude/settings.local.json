@@ -76,7 +76,8 @@
       "Bash(npx vitest:*)",
       "Bash(npm audit:*)",
       "Bash(npx prettier:*)",
-      "Bash(npx depcheck:*)"
+      "Bash(npx depcheck:*)",
+      "Bash(npm run format:*)"
     ],
     "deny": [],
     "ask": []
