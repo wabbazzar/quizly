@@ -171,6 +171,15 @@ export const LazyFlashcards = createLazyImport(
   'flashcards'
 );
 
+export const LazyMatch = createLazyImport(
+  () => import('@/pages/Match'),
+  {
+    onError: error => console.error('Failed to load Match component:', error),
+    retryAttempts: 3,
+  },
+  'match'
+);
+
 export const LazyLearnDemo = createLazyImport(
   () => import('@/pages/LearnDemo'),
   {
@@ -207,6 +216,7 @@ export function preloadOnIntent(componentKey: string): void {
   const importMap: Record<string, () => Promise<{ default: any }>> = {
     learn: () => import('@/pages/Learn'),
     flashcards: () => import('@/pages/Flashcards'),
+    match: () => import('@/pages/Match'),
     'learn-demo': () => import('@/pages/LearnDemo'),
     results: () => import('@/pages/Results'),
   };

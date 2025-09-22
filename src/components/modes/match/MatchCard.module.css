@@ -1,0 +1,245 @@
+/* Match Card Styles */
+.card {
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.1),
+    rgba(74, 144, 226, 0.05)
+  );
+  border: 2px solid rgba(74, 144, 226, 0.2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  user-select: none;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+/* Ensure minimum touch target size for accessibility */
+.card {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Touch target overlay for better mobile interaction */
+.touchTarget {
+  position: absolute;
+  inset: 0;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Hover states for desktop */
+.card:hover:not(.matched) {
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.15),
+    rgba(74, 144, 226, 0.08)
+  );
+  border-color: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
+}
+
+/* Focus states for keyboard navigation */
+.card:focus {
+  outline: 2px solid var(--primary-main);
+  outline-offset: 2px;
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--primary-main);
+  outline-offset: 2px;
+}
+
+/* Selected state */
+.card.selected {
+  border-color: var(--primary-main);
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.2),
+    rgba(74, 144, 226, 0.1)
+  );
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.3);
+}
+
+/* Matched state */
+.card.matched {
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.1),
+    rgba(16, 185, 129, 0.05)
+  );
+  border-color: var(--semantic-success);
+  cursor: default;
+  opacity: 0.7;
+}
+
+/* Card content */
+.content {
+  text-align: center;
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  hyphens: auto;
+  z-index: 1;
+  position: relative;
+}
+
+/* Selection indicator */
+.selectionIndicator {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 20px;
+  height: 20px;
+  background: var(--primary-main);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  z-index: 2;
+}
+
+.selectionIndicator::after {
+  content: "●";
+}
+
+/* Match indicator */
+.matchIndicator {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 24px;
+  height: 24px;
+  background: var(--semantic-success);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 2;
+}
+
+/* Mobile-first responsive design */
+@media (min-width: 640px) {
+  .card {
+    padding: var(--space-4);
+    min-height: 100px;
+  }
+
+  .content {
+    font-size: var(--text-base);
+  }
+}
+
+@media (min-width: 768px) {
+  .card {
+    min-height: 120px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    padding: var(--space-6);
+    min-height: 140px;
+  }
+
+  .content {
+    font-size: var(--text-lg);
+  }
+}
+
+/* Touch optimizations for mobile devices */
+@media (hover: none) and (pointer: coarse) {
+  .card {
+    min-height: 60px;
+    padding: var(--space-2);
+  }
+
+  /* Remove hover effects on touch devices */
+  .card:hover {
+    transform: none;
+    box-shadow: none;
+    background: linear-gradient(
+      135deg,
+      rgba(74, 144, 226, 0.1),
+      rgba(74, 144, 226, 0.05)
+    );
+    border-color: rgba(74, 144, 226, 0.2);
+  }
+
+  .content {
+    font-size: var(--text-xs);
+  }
+
+  /* Larger touch targets for mobile */
+  .touchTarget {
+    min-width: 48px;
+    min-height: 48px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .card {
+    border-width: 3px;
+  }
+
+  .card.selected {
+    box-shadow: 0 0 0 3px var(--primary-main);
+  }
+
+  .selectionIndicator,
+  .matchIndicator {
+    border: 2px solid var(--neutral-white);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+
+  .card:hover:not(.matched) {
+    transform: none;
+  }
+
+  .selectionIndicator,
+  .matchIndicator {
+    animation: none;
+  }
+}
+
+/* Dark mode adjustments (if supported in future) */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: linear-gradient(
+      135deg,
+      rgba(74, 144, 226, 0.15),
+      rgba(74, 144, 226, 0.08)
+    );
+    border-color: rgba(74, 144, 226, 0.3);
+  }
+
+  .card:hover:not(.matched) {
+    background: linear-gradient(
+      135deg,
+      rgba(74, 144, 226, 0.2),
+      rgba(74, 144, 226, 0.12)
+    );
+  }
+}

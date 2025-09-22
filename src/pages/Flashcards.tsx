@@ -12,7 +12,7 @@ import { useProgressStore } from '@/store/progressStore';
 import { FlashcardSessionResults } from '@/types';
 import FlashCard from '@/components/FlashCard';
 import UnifiedSettings from '@/components/modals/UnifiedSettings';
-import { FlashcardsSettings, LearnModeSettings, ModeSettings } from '@/types';
+import { FlashcardsSettings } from '@/types';
 import { useSettingsStore } from '@/store/settingsStore';
 import FlashcardsCompletionModal from '@/components/modals/FlashcardsCompletionModal';
 import { LoadingScreen } from '@/components/ui';
@@ -616,11 +616,9 @@ const Flashcards: FC = () => {
             groupSides: {},
           } as FlashcardsSettings
         }
-        onUpdateSettings={
-          updateSettings as (
-            settings: FlashcardsSettings | LearnModeSettings | ModeSettings
-          ) => void
-        }
+        onUpdateSettings={(newSettings) => {
+          updateSettings(newSettings as FlashcardsSettings);
+        }}
       />
 
       <FlashcardsCompletionModal

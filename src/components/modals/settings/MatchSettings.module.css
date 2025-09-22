@@ -1,0 +1,481 @@
+/* Match Settings Component Styles */
+
+.container {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-6) 0;
+}
+
+.titleIcon {
+  color: var(--primary-main);
+  flex-shrink: 0;
+}
+
+.settingsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* Setting Sections */
+.settingSection {
+  background: linear-gradient(135deg,
+    rgba(74, 144, 226, 0.03),
+    rgba(74, 144, 226, 0.01)
+  );
+  border: 1px solid rgba(74, 144, 226, 0.1);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+}
+
+.sectionLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.sectionIcon {
+  color: var(--primary-main);
+  flex-shrink: 0;
+}
+
+/* Info Tooltip */
+.infoTooltipWrapper {
+  position: relative;
+  display: inline-block;
+  margin-left: var(--space-1);
+}
+
+.infoIcon {
+  font-size: var(--text-sm);
+  opacity: 0.7;
+  cursor: help;
+}
+
+.infoTooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--neutral-gray-800);
+  color: var(--text-primary-on-dark);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+  margin-bottom: var(--space-1);
+}
+
+.infoTooltipWrapper:hover .infoTooltip {
+  opacity: 1;
+}
+
+/* Grid Size Presets */
+.gridPresets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.gridPresetButton {
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-1);
+}
+
+.gridPresetButton:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--primary-light);
+}
+
+.gridPresetButton.active {
+  background: linear-gradient(135deg,
+    rgba(74, 144, 226, 0.1),
+    rgba(74, 144, 226, 0.05)
+  );
+  border-color: var(--primary-main);
+  color: var(--primary-main);
+}
+
+.presetLabel {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: inherit;
+}
+
+.presetInfo {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+/* Custom Grid Size */
+.customGridSize {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  flex-wrap: wrap;
+}
+
+.customLabel {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  font-weight: var(--font-medium);
+}
+
+.gridInputs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.gridInput {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.gridInput span {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  font-weight: var(--font-medium);
+}
+
+.gridMultiplier {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  font-weight: var(--font-bold);
+  margin: 0 var(--space-1);
+}
+
+/* Number Inputs */
+.numberInput {
+  background: var(--bg-primary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  width: 60px;
+  text-align: center;
+  transition: border-color 0.2s ease;
+}
+
+.numberInput:focus {
+  outline: none;
+  border-color: var(--primary-main);
+}
+
+/* Match Type Options */
+.matchTypeOptions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.radioOption {
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.radioOption:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--primary-light);
+}
+
+.radioOption:has(.radioInput:checked) {
+  background: linear-gradient(135deg,
+    rgba(74, 144, 226, 0.1),
+    rgba(74, 144, 226, 0.05)
+  );
+  border-color: var(--primary-main);
+}
+
+.radioOption:has(.radioInput:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.radioInput {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--primary-main);
+  flex-shrink: 0;
+}
+
+.radioContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+}
+
+.radioLabel {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+}
+
+.radioDescription {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+/* Card Sides Configuration */
+.cardSidesConfig {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.cardSideRow {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  display: flex;
+  gap: var(--space-4);
+  align-items: end;
+  flex-wrap: wrap;
+}
+
+.sideSelection,
+.sideCount {
+  flex: 1;
+  min-width: 120px;
+}
+
+.sideLabel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  font-weight: var(--font-medium);
+}
+
+.select {
+  background: var(--bg-primary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  transition: border-color 0.2s ease;
+  width: 100%;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--primary-main);
+}
+
+/* Timer Options */
+.timerOptions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+/* Checkbox Rows */
+.checkboxRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  cursor: pointer;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  transition: background-color 0.2s ease;
+}
+
+.checkboxRow:hover {
+  background: var(--bg-secondary);
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--primary-main);
+  flex-shrink: 0;
+}
+
+.checkboxLabel {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  font-weight: var(--font-medium);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+/* Regular Setting Rows */
+.settingRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-2);
+  margin: var(--space-2) 0;
+}
+
+.label {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  font-weight: var(--font-medium);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.settingRow .numberInput {
+  width: 80px;
+}
+
+/* Settings Summary */
+.settingsSummary {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.summaryTitle {
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-3) 0;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-3);
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2);
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+}
+
+.summaryLabel {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  font-weight: var(--font-medium);
+}
+
+.summaryValue {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  font-weight: var(--font-medium);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .gridPresets {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .customGridSize {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .cardSideRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .settingRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-2);
+  }
+
+  .summaryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .summaryItem {
+    justify-content: flex-start;
+    gap: var(--space-3);
+  }
+}
+
+/* Focus visible support */
+.gridPresetButton:focus-visible,
+.radioOption:focus-visible,
+.checkbox:focus-visible,
+.numberInput:focus-visible,
+.select:focus-visible {
+  outline: 2px solid var(--primary-main);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .settingSection {
+    border-width: 2px;
+  }
+
+  .gridPresetButton,
+  .radioOption,
+  .cardSideRow {
+    border-width: 3px;
+  }
+
+  .gridPresetButton.active,
+  .radioOption:has(.radioInput:checked) {
+    border-width: 3px;
+  }
+}

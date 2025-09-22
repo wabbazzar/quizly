@@ -85,7 +85,8 @@
       "Bash(gh api:*)",
       "Bash(git fetch:*)",
       "Bash(git ls-tree:*)",
-      "Bash(git branch:*)"
+      "Bash(git branch:*)",
+      "Bash(timeout 10s npm run dev)"
     ],
     "deny": [],
     "ask": []

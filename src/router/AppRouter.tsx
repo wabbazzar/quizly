@@ -9,6 +9,7 @@ import {
   LazyDeck,
   LazyFlashcards,
   LazyLearn,
+  LazyMatch,
   LazyLearnDemo,
   LazyResults,
   preloadCriticalComponents,
@@ -79,6 +80,16 @@ export function AppRouter() {
             <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
               <PageLazyBoundary pageName="Learn">
                 <LazyLearn />
+              </PageLazyBoundary>
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/match/:deckId"
+          element={
+            <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
+              <PageLazyBoundary pageName="Match">
+                <LazyMatch />
               </PageLazyBoundary>
             </ErrorBoundary>
           }

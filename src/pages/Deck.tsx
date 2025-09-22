@@ -87,8 +87,8 @@ const Deck: FC = () => {
 
   const handleModeClick = useCallback(
     (mode: ModeCard) => {
-      // Show "Coming Soon" notification for Match and Test modes
-      if (mode.id === 'match' || mode.id === 'test') {
+      // Show "Coming Soon" notification for Test mode only
+      if (mode.id === 'test') {
         showNotification({
           message: `${mode.label} mode coming soon!`,
           type: 'coming-soon',

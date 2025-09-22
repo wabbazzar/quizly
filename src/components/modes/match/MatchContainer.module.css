@@ -1,0 +1,554 @@
+/* Match Container Styles */
+.container {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Game Statistics Section */
+.gameStats {
+  padding: var(--space-4);
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.03),
+    rgba(74, 144, 226, 0.01)
+  );
+  border-bottom: 1px solid var(--border-color);
+}
+
+.progressSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.progressBar {
+  height: 8px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-main), var(--primary-light));
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+.statsText {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* Match Timer Integration */
+.matchTimer {
+  margin-left: var(--space-2);
+}
+
+@media (max-width: 640px) {
+  .gameStats {
+    padding: var(--space-3);
+  }
+
+  .statsText {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .matchTimer {
+    margin-left: 0;
+    align-self: flex-end;
+  }
+}
+
+.timer {
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-weight: 600;
+  color: var(--primary-main);
+}
+
+.gameControls {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.pauseButton,
+.clearButton,
+.resumeButton {
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.1),
+    rgba(74, 144, 226, 0.05)
+  );
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pauseButton:hover,
+.clearButton:hover,
+.resumeButton:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.15),
+    rgba(74, 144, 226, 0.08)
+  );
+  border-color: var(--primary-light);
+  transform: translateY(-1px);
+}
+
+.pauseButton:active,
+.clearButton:active,
+.resumeButton:active {
+  transform: translateY(0);
+}
+
+/* Grid Container */
+.gridContainer {
+  flex: 1;
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.matchGrid {
+  display: grid;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 4/3;
+  margin: 0 auto;
+}
+
+/* Match Cards */
+.matchCard {
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.1),
+    rgba(74, 144, 226, 0.05)
+  );
+  border: 2px solid rgba(74, 144, 226, 0.2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  user-select: none;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+.matchCard:hover:not(.matched) {
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.15),
+    rgba(74, 144, 226, 0.08)
+  );
+  border-color: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
+}
+
+.matchCard:focus {
+  outline: 2px solid var(--primary-main);
+  outline-offset: 2px;
+}
+
+.matchCard.selected {
+  border-color: var(--primary-main);
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.2),
+    rgba(74, 144, 226, 0.1)
+  );
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.3);
+}
+
+.matchCard.matched {
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.1),
+    rgba(16, 185, 129, 0.05)
+  );
+  border-color: var(--semantic-success);
+  cursor: default;
+  opacity: 0.7;
+}
+
+.cardContent {
+  text-align: center;
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Card Indicators */
+.selectionIndicator {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 20px;
+  height: 20px;
+  background: var(--primary-main);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+}
+
+.selectionIndicator::after {
+  content: "●";
+}
+
+.matchIndicator {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 24px;
+  height: 24px;
+  background: var(--semantic-success);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Paused Overlay */
+.pausedOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.pausedContent {
+  background: var(--bg-primary);
+  padding: var(--space-8);
+  border-radius: var(--radius-xl);
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.pausedContent h2 {
+  margin: 0 0 var(--space-6) 0;
+  color: var(--text-primary);
+  font-size: var(--text-xl);
+}
+
+/* Selection Feedback */
+.selectionFeedback {
+  position: fixed;
+  bottom: var(--space-6);
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.9),
+    rgba(74, 144, 226, 0.8)
+  );
+  color: white;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  z-index: 5;
+  backdrop-filter: blur(8px);
+}
+
+/* Responsive Design */
+@media (min-width: 640px) {
+  .gameStats {
+    padding: var(--space-6);
+  }
+
+  .gridContainer {
+    padding: var(--space-6);
+  }
+
+  .matchGrid {
+    gap: var(--space-4);
+    max-width: 800px;
+  }
+
+  .matchCard {
+    padding: var(--space-4);
+    min-height: 100px;
+  }
+
+  .cardContent {
+    font-size: var(--text-base);
+  }
+}
+
+@media (min-width: 768px) {
+  .progressSection {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .progressBar {
+    flex: 1;
+    height: 10px;
+  }
+
+  .statsText {
+    flex-shrink: 0;
+    min-width: 200px;
+  }
+
+  .gameControls {
+    justify-content: flex-end;
+  }
+
+  .matchGrid {
+    max-width: 900px;
+  }
+
+  .matchCard {
+    min-height: 120px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .matchGrid {
+    max-width: 1000px;
+  }
+
+  .matchCard {
+    padding: var(--space-6);
+    min-height: 140px;
+  }
+
+  .cardContent {
+    font-size: var(--text-lg);
+  }
+}
+
+/* Touch optimizations for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .matchCard {
+    min-height: 60px;
+    padding: var(--space-2);
+  }
+
+  .matchCard:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .cardContent {
+    font-size: var(--text-xs);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .matchCard {
+    border-width: 3px;
+  }
+
+  .matchCard.selected {
+    box-shadow: 0 0 0 3px var(--primary-main);
+  }
+}
+
+/* Game Completion Overlay */
+.gameCompleteOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  backdrop-filter: blur(12px);
+}
+
+.gameCompleteContent {
+  background: linear-gradient(
+    135deg,
+    var(--bg-primary),
+    rgba(74, 144, 226, 0.05)
+  );
+  padding: var(--space-8);
+  border-radius: var(--radius-2xl);
+  text-align: center;
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  max-width: 400px;
+  width: 90%;
+  border: 2px solid rgba(74, 144, 226, 0.2);
+}
+
+.celebrationIcon {
+  font-size: 4rem;
+  margin-bottom: var(--space-4);
+  display: block;
+}
+
+.gameCompleteContent h2 {
+  margin: 0 0 var(--space-3) 0;
+  color: var(--text-primary);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+}
+
+.gameCompleteContent p {
+  margin: 0 0 var(--space-4) 0;
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+}
+
+.finalTime {
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.1),
+    rgba(74, 144, 226, 0.05)
+  );
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-mono, 'SF Mono', 'Monaco', 'Consolas', monospace);
+  font-weight: 600;
+  font-size: var(--text-lg);
+  color: var(--primary-main);
+  margin-bottom: var(--space-6);
+  border: 1px solid rgba(74, 144, 226, 0.15);
+}
+
+.gameCompleteActions {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.playAgainButton,
+.backButton {
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-lg);
+  border: 2px solid transparent;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+}
+
+.playAgainButton {
+  background: linear-gradient(135deg, var(--primary-main), var(--primary-light));
+  color: white;
+  border-color: var(--primary-main);
+}
+
+.playAgainButton:hover {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-main));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
+}
+
+.backButton {
+  background: linear-gradient(
+    135deg,
+    rgba(107, 114, 128, 0.1),
+    rgba(107, 114, 128, 0.05)
+  );
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+
+.backButton:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(107, 114, 128, 0.15),
+    rgba(107, 114, 128, 0.08)
+  );
+  transform: translateY(-1px);
+  border-color: var(--text-tertiary);
+}
+
+/* Mobile responsive adjustments for game completion */
+@media (max-width: 640px) {
+  .gameCompleteContent {
+    padding: var(--space-6);
+    max-width: 350px;
+  }
+
+  .celebrationIcon {
+    font-size: 3rem;
+  }
+
+  .gameCompleteContent h2 {
+    font-size: var(--text-xl);
+  }
+
+  .finalTime {
+    font-size: var(--text-base);
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .gameCompleteActions {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .playAgainButton,
+  .backButton {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .matchCard,
+  .progressFill,
+  .selectionFeedback {
+    transition: none;
+  }
+
+  .matchCard:hover:not(.matched) {
+    transform: none;
+  }
+
+  .celebrationIcon {
+    animation: none !important;
+  }
+
+  .playAgainButton:hover,
+  .backButton:hover {
+    transform: none;
+  }
+}

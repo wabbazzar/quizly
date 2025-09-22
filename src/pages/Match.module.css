@@ -1,0 +1,138 @@
+/* Match Page Styles */
+.container {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Error Container */
+.errorContainer {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.errorContent {
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.1),
+    rgba(74, 144, 226, 0.05)
+  );
+  border: 2px solid rgba(74, 144, 226, 0.2);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.errorContent h1 {
+  margin: 0 0 var(--space-4) 0;
+  color: var(--text-primary);
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+.errorContent p {
+  margin: 0 0 var(--space-6) 0;
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  line-height: 1.6;
+}
+
+.errorContent p + p {
+  margin-top: var(--space-3);
+}
+
+.errorButton {
+  background: linear-gradient(
+    135deg,
+    var(--primary-main),
+    var(--primary-light)
+  );
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 160px;
+}
+
+.errorButton:hover {
+  background: linear-gradient(
+    135deg,
+    var(--primary-dark),
+    var(--primary-main)
+  );
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.errorButton:active {
+  transform: translateY(0);
+}
+
+.errorButton:focus {
+  outline: 2px solid var(--primary-main);
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (min-width: 640px) {
+  .errorContainer {
+    padding: var(--space-6);
+  }
+
+  .errorContent {
+    padding: var(--space-12);
+    max-width: 500px;
+  }
+
+  .errorContent h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .errorContent p {
+    font-size: var(--text-lg);
+  }
+
+  .errorButton {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--text-lg);
+  }
+}
+
+@media (min-width: 768px) {
+  .errorContent {
+    max-width: 600px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .errorContent {
+    border-width: 3px;
+  }
+
+  .errorButton {
+    border: 2px solid var(--primary-dark);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .errorButton {
+    transition: none;
+  }
+
+  .errorButton:hover {
+    transform: none;
+  }
+}

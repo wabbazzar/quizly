@@ -183,9 +183,10 @@ const Learn: FC = () => {
         mode="learn"
         settings={settings}
         onUpdateSettings={newSettings => {
-          setSettings(newSettings as LearnModeSettings);
+          const learnSettings = newSettings as LearnModeSettings;
+          setSettings(learnSettings);
           if (deckId) {
-            updateStoredSettings(deckId, 'learn', newSettings);
+            updateStoredSettings(deckId, 'learn', learnSettings);
           }
         }}
       />

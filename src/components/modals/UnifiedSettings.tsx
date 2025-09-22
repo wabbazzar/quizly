@@ -1,6 +1,7 @@
 import { FC, memo, useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Deck, FlashcardsSettings, LearnModeSettings, ModeSettings } from '@/types';
+import { MatchSettings as MatchSettingsType } from '@/components/modes/match/types';
 import { useUnifiedSettings } from '@/hooks/useUnifiedSettings';
 import styles from './UnifiedSettings.module.css';
 
@@ -11,14 +12,15 @@ import ProgressionSettings from './settings/ProgressionSettings';
 import LearningSettings from './settings/LearningSettings';
 import MasterySettings from './settings/MasterySettings';
 import DeckInformation from './settings/DeckInformation';
+import MatchSettingsComponent from './settings/MatchSettings';
 
 export interface UnifiedSettingsProps {
   visible: boolean;
   onClose: () => void;
   deck: Deck | null;
   mode: 'flashcards' | 'learn' | 'deck' | 'match' | 'test';
-  settings: FlashcardsSettings | LearnModeSettings | ModeSettings;
-  onUpdateSettings: (settings: FlashcardsSettings | LearnModeSettings | ModeSettings) => void;
+  settings: FlashcardsSettings | LearnModeSettings | ModeSettings | MatchSettingsType;
+  onUpdateSettings: (settings: FlashcardsSettings | LearnModeSettings | ModeSettings | MatchSettingsType) => void;
   onResetMastery?: () => void; // Only for deck mode
 }
 
@@ -182,11 +184,21 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
         order: 1,
       },
       {
-        id: 'game_settings',
-        title: 'Game Settings',
-        visible: false, // Future implementation
-        component: QuickPresets, // Placeholder
+        id: 'match_settings',
+        title: 'Match Game Settings',
+        description: 'Configure grid size, match type, and game options',
+        visible: true,
+        required: true,
+        component: MatchSettingsComponent,
         order: 2,
+      },
+      {
+        id: 'mastery_settings',
+        title: 'Mastery Settings',
+        description: 'Control which cards appear in the game',
+        visible: true,
+        component: MasterySettings,
+        order: 3,
       },
     ],
     test: [
@@ -246,7 +258,23 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
       },
     ],
     deck: [],
-    match: [],
+    match: [
+      {
+        field: 'gridSize',
+        validator: (value: any) => value && value.rows >= 2 && value.cols >= 2 && (value.rows * value.cols) >= 6,
+        errorMessage: 'Grid must be at least 2x2 with minimum 6 cards',
+      },
+      {
+        field: 'cardSides',
+        validator: (value: any[]) => value && value.length >= 2 && value.every(side => side.count > 0),
+        errorMessage: 'At least 2 card side configurations required with positive counts',
+      },
+      {
+        field: 'timerSeconds',
+        validator: (value: number, settings: any) => !settings.enableTimer || value >= 0,
+        errorMessage: 'Timer seconds must be 0 or positive when timer is enabled',
+      },
+    ],
     test: [],
   };
 
@@ -454,6 +482,16 @@ const getSectionSettings = (sectionId: string, settings: any): any => {
       ...settings,
       sectionType: sectionId === 'question_sides' ? 'question' : 'answer',
     };
+  }
+
+  // For match settings section, return the full match settings
+  if (sectionId === 'match_settings') {
+    return settings;
+  }
+
+  // For mastery settings, return the full settings
+  if (sectionId === 'mastery_settings') {
+    return settings;
   }
 
   // For other sections, return the full settings
