@@ -37,7 +37,12 @@
   flex-direction: column;
   gap: var(--space-2);
   padding: var(--space-3);
-  background: var(--bg-secondary);
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.1),
+    rgba(74, 144, 226, 0.05)
+  );
+  border: 2px solid rgba(74, 144, 226, 0.1);
   border-radius: var(--radius-md);
 }
 
@@ -52,7 +57,7 @@
 }
 
 .radioOption:hover {
-  background: var(--bg-tertiary);
+  background: rgba(74, 144, 226, 0.15);
 }
 
 .radioOption input[type="radio"] {
@@ -70,7 +75,12 @@
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-3);
-  background: var(--bg-secondary);
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.1),
+    rgba(74, 144, 226, 0.05)
+  );
+  border: 2px solid rgba(74, 144, 226, 0.1);
   border-radius: var(--radius-md);
 }
 
@@ -142,13 +152,22 @@
   gap: var(--space-2);
   cursor: pointer;
   padding: var(--space-3);
-  background: var(--bg-secondary);
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.1),
+    rgba(74, 144, 226, 0.05)
+  );
+  border: 2px solid rgba(74, 144, 226, 0.1);
   border-radius: var(--radius-md);
   transition: background-color 0.2s ease;
 }
 
 .checkboxLabel:hover {
-  background: var(--bg-tertiary);
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.15),
+    rgba(74, 144, 226, 0.1)
+  );
 }
 
 .checkboxLabel input[type="checkbox"] {

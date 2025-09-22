@@ -215,7 +215,6 @@ const Read: FC = () => {
             className={styles.settingsButton}
           >
             <SettingsIcon size={20} />
-            Settings
           </Button>
         }
       />
