@@ -140,16 +140,18 @@ export const SentenceTranslation: FC<Props> = ({
         <div className={styles.sourceText}>
           {hasAlignments && settings.showWordHints ? (
             <div className={styles.interactiveSource}>
-              {alignedTokens.map((token, index) => (
-                <span
-                  key={index}
-                  className={`${styles.wordToken} ${token.english ? styles.clickable : styles.static}`}
-                  onClick={() => handleWordClick(token.chinese)}
-                  title={token.english ? `${token.pinyin} - ${token.english}` : undefined}
-                >
-                  {token.chinese}
-                </span>
-              ))}
+              <div className={styles.wordTokensContainer}>
+                {alignedTokens.map((token, index) => (
+                  <span
+                    key={index}
+                    className={`${styles.wordToken} ${token.english ? styles.clickable : styles.static}`}
+                    onClick={() => handleWordClick(token.chinese)}
+                    title={token.english ? `${token.pinyin} - ${token.english}` : undefined}
+                  >
+                    {token.chinese}
+                  </span>
+                ))}
+              </div>
               <div className={styles.hintText}>
                 Tap words for hints
               </div>

@@ -20,7 +20,6 @@ interface ErrorBoundaryState {
 const DefaultLoadingSpinner: FC = () => (
   <div className={styles.loadingContainer}>
     <Spinner size="large" variant="primary" />
-    <p className={styles.loadingText}>Loading...</p>
   </div>
 );
 
