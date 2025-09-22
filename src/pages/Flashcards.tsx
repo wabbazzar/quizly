@@ -15,7 +15,6 @@ import UnifiedSettings from '@/components/modals/UnifiedSettings';
 import { FlashcardsSettings } from '@/types';
 import { useSettingsStore } from '@/store/settingsStore';
 import FlashcardsCompletionModal from '@/components/modals/FlashcardsCompletionModal';
-import { LoadingScreen } from '@/components/ui';
 import { SharedModeHeader } from '@/components/common/SharedModeHeader';
 import styles from './Flashcards.module.css';
 
@@ -462,7 +461,7 @@ const Flashcards: FC = () => {
   }, [handleKeyDown]);
 
   if (!activeDeck) {
-    return <LoadingScreen />;
+    return null; // Let PageLazyBoundary handle loading state
   }
 
   // Get the actual card based on the card order (always use cardOrder for proper shuffling)

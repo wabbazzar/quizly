@@ -4,7 +4,6 @@ import { useDeckStore } from '@/store/deckStore';
 import { useCardMasteryStore } from '@/store/cardMasteryStore';
 // import { useMatchSessionStore } from '@/store/matchSessionStore'; // Will be used in later phases
 // import { useProgressStore } from '@/store/progressStore'; // Will be used in Phase 4
-import { LoadingScreen } from '@/components/ui';
 import MatchContainer from '@/components/modes/match/MatchContainer';
 // import { MatchResults } from '@/components/modes/match/types'; // Will be used in Phase 4
 import styles from './Match.module.css';
@@ -85,9 +84,9 @@ const Match: FC = () => {
     );
   }
 
-  // Loading state
+  // Loading state - removed LoadingScreen to avoid duplicate with PageLazyBoundary
   if (deckLoading || !isInitialized || !activeDeck) {
-    return <LoadingScreen />;
+    return null; // Let PageLazyBoundary handle loading state
   }
 
   // Check if deck has enough cards for match mode

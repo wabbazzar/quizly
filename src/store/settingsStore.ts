@@ -89,6 +89,9 @@ const getDefaultSettings = (mode: string): any => {
       showPinyinDefault: false,
       multipleChoiceDifficulty: 'medium' as const,
       unit: 'character' as const,
+      translationMode: 'sentence' as const,
+      accuracyThreshold: 70,
+      showWordHints: true,
     },
   };
 
