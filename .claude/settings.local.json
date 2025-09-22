@@ -86,7 +86,15 @@
       "Bash(git fetch:*)",
       "Bash(git ls-tree:*)",
       "Bash(git branch:*)",
-      "Bash(timeout 10s npm run dev)"
+      "Bash(timeout 10s npm run dev)",
+      "Bash(timeout 30 npm test:*)",
+      "Bash(sudo kill:*)",
+      "Read(//etc/**)",
+      "Bash(dpkg:*)",
+      "Bash(sudo apt-get:*)",
+      "Bash(sudo apt-get install:*)",
+      "Bash(apt list:*)",
+      "Bash(./fix-browser-wsl2.sh:*)"
     ],
     "deny": [],
     "ask": []

@@ -31,12 +31,20 @@ const MatchSettings: FC<SectionProps> = ({ settings, onChange, deck }) => {
     availableSides.push(sideKeys[i]);
   }
 
-  // Helper to get side display name
+  // Helper to get side display name from deck metadata
   const getSideDisplayName = (side: string): string => {
+    // Use actual side label from deck metadata if available
+    const label = deck?.metadata?.side_labels?.[side as keyof typeof deck.metadata.side_labels];
+    if (label) {
+      // Capitalize first letter
+      return label.charAt(0).toUpperCase() + label.slice(1);
+    }
+
+    // Fallback to generic names if no labels defined
     const sideMap: Record<string, string> = {
-      side_a: 'Side A',
-      side_b: 'Side B',
-      side_c: 'Side C',
+      side_a: 'Front',
+      side_b: 'Back',
+      side_c: 'Notes',
       side_d: 'Side D',
       side_e: 'Side E',
       side_f: 'Side F',
@@ -174,7 +182,9 @@ const MatchSettings: FC<SectionProps> = ({ settings, onChange, deck }) => {
               />
               <div className={styles.radioContent}>
                 <span className={styles.radioLabel}>Two-Way Matching</span>
-                <span className={styles.radioDescription}>Match Side A ↔ Side B</span>
+                <span className={styles.radioDescription}>
+                  Match {getSideDisplayName('side_a')} ↔ {getSideDisplayName('side_b')}
+                </span>
               </div>
             </label>
 
@@ -191,7 +201,10 @@ const MatchSettings: FC<SectionProps> = ({ settings, onChange, deck }) => {
               <div className={styles.radioContent}>
                 <span className={styles.radioLabel}>Three-Way Matching</span>
                 <span className={styles.radioDescription}>
-                  {availableSides.length < 3 ? 'Requires 3+ sides' : 'Match A ↔ B ↔ C'}
+                  {availableSides.length < 3
+                    ? 'Requires 3+ sides'
+                    : `Match ${getSideDisplayName('side_a')} ↔ ${getSideDisplayName('side_b')} ↔ ${getSideDisplayName('side_c')}`
+                  }
                 </span>
               </div>
             </label>

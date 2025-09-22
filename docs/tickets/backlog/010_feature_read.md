@@ -31,6 +31,7 @@
   - Translation direction: generic side-to-side (e.g., a→b, a→c), labeled via the deck's `reading.sides` mapping
   - Multiple-choice difficulty: easy, medium, hard (affects distractor pool)
   - Direction options are constrained to sides present for the current deck (from `reading.sides`).
+ - **Replace Test with Read**: On the deck overview and deck cards, the previous "Test" placeholder is removed and replaced by a functional "Read" mode entry. The "coming soon" notification is not shown for Read.
  - **Tokenization config**: If the deck provides `reading.tokenization`, it is respected. If absent, app falls back to defaults (characters=character, pinyin=space, english=space, preservePunctuation=true).
 
 ## Technical Requirements
@@ -129,6 +130,7 @@ export interface Deck {
 - Expose a Read mode entry wherever modes are listed (deck overview and mode cards):
   - `src/pages/Deck.tsx` — add a new mode card for Read linking to `/read/:deckId`
   - `src/components/EnhancedDeckCard.tsx` — add Read to the `modes` list
+ - Replace the existing Test placeholder card with Read in both places; remove the "coming soon" logic for that slot.
 
 ### Page & Components
 
@@ -228,7 +230,7 @@ Defaults:
 - `src/components/modals/UnifiedSettings.tsx` — Add mode config for Read.
 - `src/components/modals/settings/ReadSettings.tsx` — New settings section.
 - `src/store/settingsStore.ts` — Support read mode persistence and defaults.
-- `src/pages/Deck.tsx` & `src/components/EnhancedDeckCard.tsx` — Add Read mode card.
+- `src/pages/Deck.tsx` & `src/components/EnhancedDeckCard.tsx` — Replace Test placeholder with a Read mode card (route `/read/:deckId`), remove "coming soon" hook for that card.
 
 ## Non-Goals / Out of Scope (for this ticket)
 

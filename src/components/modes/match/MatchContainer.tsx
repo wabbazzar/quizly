@@ -23,15 +23,14 @@ import {
 import {
   pauseOverlayVariants,
 } from './animations/matchAnimations';
-// Sound effects disabled for now
-// import {
-//   playMatchSuccess,
-//   playMatchFailure,
-//   playGameComplete,
-//   playSound,
-//   vibrate,
-//   getAudioSettings,
-// } from '@/utils/soundUtils';
+import {
+  playMatchSuccess,
+  playMatchFailure,
+  playGameComplete,
+  playSound,
+  vibrate,
+  updateAudioSettings,
+} from '@/utils/soundUtils';
 import styles from './MatchContainer.module.css';
 
 const MatchContainer: FC<MatchContainerProps> = memo(({ deck }) => {
@@ -63,7 +62,8 @@ const MatchContainer: FC<MatchContainerProps> = memo(({ deck }) => {
   const [animatingCards, setAnimatingCards] = useState<string[]>([]);
   const [gameCompleted, setGameCompleted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  // const [audioSettings, setAudioSettings] = useState(getAudioSettings());
+  // Audio settings (sync with session settings)
+  const isAudioEnabled = session?.settings.enableAudio ?? false;
 
   // Initialize or restore session
   useEffect(() => {
@@ -127,21 +127,25 @@ const MatchContainer: FC<MatchContainerProps> = memo(({ deck }) => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Sound effects disabled for now
-  // useEffect(() => {
-  //   const settings = getAudioSettings();
-  //   setAudioSettings(settings);
-  // }, []);
+  // Sync audio settings with match settings
+  useEffect(() => {
+    if (session?.settings.enableAudio !== undefined) {
+      updateAudioSettings({
+        enabled: session.settings.enableAudio,
+        soundEffects: session.settings.enableAudio,
+      });
+    }
+  }, [session?.settings.enableAudio]);
 
   // Handle card selection
   const handleCardSelect = useCallback(async (cardId: string) => {
     if (!session || animatingCards.length > 0 || gameCompleted) return;
 
-    // Sound effects disabled for now
-    // if (audioSettings.enabled && audioSettings.soundEffects) {
-    //   playSound('card_select', 0.8);
-    //   vibrate(30);
-    // }
+    // Play card selection sound if audio is enabled
+    if (isAudioEnabled) {
+      playSound('card_select', 0.8);
+      vibrate(30);
+    }
 
     selectCard(cardId);
 
@@ -154,11 +158,11 @@ const MatchContainer: FC<MatchContainerProps> = memo(({ deck }) => {
         const result = processMatch();
 
         if (result.isMatch && result.matchedCards) {
-          // Sound effects disabled for now
-          // if (audioSettings.enabled && audioSettings.soundEffects) {
-          //   await playMatchSuccess(1.2);
-          //   vibrate([50, 50, 50]);
-          // }
+          // Play match success sound if audio is enabled
+          if (isAudioEnabled) {
+            await playMatchSuccess(1.2);
+            vibrate([50, 50, 50]);
+          }
 
           // Show success notification
           showNotification({
@@ -183,11 +187,11 @@ const MatchContainer: FC<MatchContainerProps> = memo(({ deck }) => {
             }
           }, 600);
         } else {
-          // Sound effects disabled for now
-          // if (audioSettings.enabled && audioSettings.soundEffects) {
-          //   await playMatchFailure();
-          //   vibrate(100);
-          // }
+          // Play match failure sound if audio is enabled
+          if (isAudioEnabled) {
+            await playMatchFailure();
+            vibrate(100);
+          }
 
           // Show mismatch notification
           showNotification({
@@ -211,11 +215,11 @@ const MatchContainer: FC<MatchContainerProps> = memo(({ deck }) => {
 
     setGameCompleted(true);
 
-    // Sound effects disabled for now
-    // if (audioSettings.enabled && audioSettings.soundEffects) {
-    //   await playGameComplete();
-    //   vibrate([100, 50, 100, 50, 200]);
-    // }
+    // Play game completion sound if audio is enabled
+    if (isAudioEnabled) {
+      await playGameComplete();
+      vibrate([100, 50, 100, 50, 200]);
+    }
 
     const completionTime = Date.now() - session.roundStartTime;
     const endTime = Date.now();

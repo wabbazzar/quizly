@@ -118,6 +118,10 @@ describe('MatchContainer', () => {
       endSession: mockEndSession,
       pauseSession: vi.fn(),
       resumeSession: vi.fn(),
+      loadSession: vi.fn(() => null),
+      clearSelection: vi.fn(),
+      generateGrid: vi.fn(),
+      startNewRound: vi.fn(),
     });
 
     (useCardMasteryStore as any).mockReturnValue({

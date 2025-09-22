@@ -122,13 +122,12 @@ const generateMatchCards = (
         position: { row: 0, col: 0 },
       });
 
-      // Card 3: Shows side_c (if available, otherwise combine side_a and side_b)
-      const sideC = card.side_c || `${card.side_a} - ${card.side_b}`;
+      // Card 3: Shows side_c
       matchCards.push({
         id: generateCardId(card.idx, 'side_c', 2),
         cardIndex: card.idx,
         displaySides: ['side_c'],
-        content: sideC.trim(),
+        content: (card.side_c || '').trim(),
         groupId,
         isMatched: false,
         isSelected: false,
@@ -136,28 +135,46 @@ const generateMatchCards = (
       });
     } else {
       // Custom mode: use the cardSides configuration from settings
-      // Fallback to two-way if not properly configured
-      matchCards.push({
-        id: generateCardId(card.idx, 'side_a', 0),
-        cardIndex: card.idx,
-        displaySides: ['side_a'],
-        content: (card.side_a || '').trim(),
-        groupId,
-        isMatched: false,
-        isSelected: false,
-        position: { row: 0, col: 0 },
-      });
+      if (settings.cardSides && settings.cardSides.length > 0) {
+        settings.cardSides.forEach((cardSide, index) => {
+          const sideKey = cardSide.sides[0]; // e.g., 'side_a', 'side_b', 'side_c'
+          const sideContent = (card as any)[sideKey] || '';
 
-      matchCards.push({
-        id: generateCardId(card.idx, 'side_b', 1),
-        cardIndex: card.idx,
-        displaySides: ['side_b'],
-        content: (card.side_b || '').trim(),
-        groupId,
-        isMatched: false,
-        isSelected: false,
-        position: { row: 0, col: 0 },
-      });
+          matchCards.push({
+            id: generateCardId(card.idx, sideKey, index),
+            cardIndex: card.idx,
+            displaySides: [sideKey],
+            content: sideContent.trim(),
+            groupId,
+            isMatched: false,
+            isSelected: false,
+            position: { row: 0, col: 0 },
+          });
+        });
+      } else {
+        // Fallback to two-way if not properly configured
+        matchCards.push({
+          id: generateCardId(card.idx, 'side_a', 0),
+          cardIndex: card.idx,
+          displaySides: ['side_a'],
+          content: (card.side_a || '').trim(),
+          groupId,
+          isMatched: false,
+          isSelected: false,
+          position: { row: 0, col: 0 },
+        });
+
+        matchCards.push({
+          id: generateCardId(card.idx, 'side_b', 1),
+          cardIndex: card.idx,
+          displaySides: ['side_b'],
+          content: (card.side_b || '').trim(),
+          groupId,
+          isMatched: false,
+          isSelected: false,
+          position: { row: 0, col: 0 },
+        });
+      }
     }
   });
 

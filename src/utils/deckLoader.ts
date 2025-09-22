@@ -1,4 +1,14 @@
-import { Deck, DeckMetadata, Card } from '@/types';
+import {
+  Deck,
+  DeckMetadata,
+  Card,
+  DeckReading,
+  ReadingSidesMap,
+  ReadingTokenizationConfig,
+  DeckReadingDialogue,
+  ReadingLine,
+  SideId
+} from '@/types';
 
 // Sanitization helper to prevent XSS
 const sanitizeString = (str: unknown): string => {
@@ -108,6 +118,115 @@ const validateCard = (card: unknown, index: number): Card | null => {
   };
 };
 
+// Validate reading line structure
+const validateReadingLine = (line: unknown): ReadingLine | null => {
+  if (!isRecord(line)) return null;
+
+  // At least one side should be present
+  const hasContent = line.a || line.b || line.c || line.d || line.e || line.f;
+  if (!hasContent) return null;
+
+  return {
+    a: line.a ? sanitizeString(line.a) : undefined,
+    b: line.b ? sanitizeString(line.b) : undefined,
+    c: line.c ? sanitizeString(line.c) : undefined,
+    d: line.d ? sanitizeString(line.d) : undefined,
+    e: line.e ? sanitizeString(line.e) : undefined,
+    f: line.f ? sanitizeString(line.f) : undefined,
+    alignments: Array.isArray(line.alignments) ? line.alignments : undefined,
+    wordAlignments: Array.isArray(line.wordAlignments) ? line.wordAlignments : undefined
+  };
+};
+
+// Validate dialogue structure
+const validateDialogue = (dialogue: unknown): DeckReadingDialogue | null => {
+  if (!isRecord(dialogue) || !Array.isArray(dialogue.lines)) return null;
+
+  const validLines = dialogue.lines
+    .map(validateReadingLine)
+    .filter(Boolean) as ReadingLine[];
+
+  if (validLines.length === 0) return null;
+
+  return { lines: validLines };
+};
+
+// Validate reading sides map
+const validateReadingSides = (sides: unknown): ReadingSidesMap | null => {
+  if (!isRecord(sides)) return null;
+
+  const validSides: ReadingSidesMap = {};
+  const sideIds: SideId[] = ['a', 'b', 'c', 'd', 'e', 'f'];
+
+  for (const side of sideIds) {
+    if (sides[side] && typeof sides[side] === 'string') {
+      validSides[side] = sanitizeString(sides[side]);
+    }
+  }
+
+  return Object.keys(validSides).length > 0 ? validSides : null;
+};
+
+// Validate tokenization config
+const validateTokenization = (tokenization: unknown): ReadingTokenizationConfig | null => {
+  if (!isRecord(tokenization)) return null;
+
+  const defaultConfig: ReadingTokenizationConfig = {
+    unit: {
+      a: 'character',
+      b: 'space',
+      c: 'space',
+      d: undefined,
+      e: undefined,
+      f: undefined
+    },
+    preservePunctuation: true,
+    alignment: undefined
+  };
+
+  if (isRecord(tokenization.unit)) {
+    const sideIds: SideId[] = ['a', 'b', 'c', 'd', 'e', 'f'];
+    for (const side of sideIds) {
+      const unit = tokenization.unit[side];
+      if (unit === 'character' || unit === 'word' || unit === 'space') {
+        defaultConfig.unit[side] = unit;
+      }
+    }
+  }
+
+  if (typeof tokenization.preservePunctuation === 'boolean') {
+    defaultConfig.preservePunctuation = tokenization.preservePunctuation;
+  }
+
+  if (tokenization.alignment === 'index') {
+    defaultConfig.alignment = 'index';
+  }
+
+  return defaultConfig;
+};
+
+// Validate reading content
+const validateReading = (reading: unknown): DeckReading | null => {
+  if (!isRecord(reading) || !isRecord(reading.dialogues)) return null;
+
+  const validDialogues: Record<string, DeckReadingDialogue> = {};
+
+  for (const [key, dialogue] of Object.entries(reading.dialogues)) {
+    const validDialogue = validateDialogue(dialogue);
+    if (validDialogue) {
+      validDialogues[key] = validDialogue;
+    }
+  }
+
+  if (Object.keys(validDialogues).length === 0) return null;
+
+  return {
+    sides: reading.sides ? validateReadingSides(reading.sides) || undefined : undefined,
+    tokenization: reading.tokenization ? validateTokenization(reading.tokenization) || undefined : undefined,
+    dialogues: validDialogues
+  };
+};
+
 export const loadDeckFromJSON = async (jsonPath: string): Promise<Deck | null> => {
   try {
     // Don't modify the path - it should already be correct from the caller
@@ -150,10 +269,14 @@ export const loadDeckFromJSON = async (jsonPath: string): Promise<Deck | null> =
     // Update card count to match actual validated cards
     metadata.card_count = cards.length;
 
+    // Validate reading content if present
+    const reading = rawDeck.reading ? validateReading(rawDeck.reading) || undefined : undefined;
+
     const deck: Deck = {
       id: sanitizeString(rawDeck.id || rawDeck.deck_id || `deck_${Date.now()}`),
       metadata,
       content: cards,
+      reading
     };
 
     // Deck loaded successfully

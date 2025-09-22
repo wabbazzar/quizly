@@ -198,6 +198,15 @@ export const LazyResults = createLazyImport(
   'results'
 );
 
+export const LazyRead = createLazyImport(
+  () => import('@/pages/Read'),
+  {
+    onError: error => console.error('Failed to load Read component:', error),
+    retryAttempts: 3,
+  },
+  'read'
+);
+
 /**
  * Preload critical components on app initialization
  */
@@ -219,6 +228,7 @@ export function preloadOnIntent(componentKey: string): void {
     match: () => import('@/pages/Match'),
     'learn-demo': () => import('@/pages/LearnDemo'),
     results: () => import('@/pages/Results'),
+    read: () => import('@/pages/Read'),
   };
 
   const importFunction = importMap[componentKey];

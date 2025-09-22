@@ -1,4 +1,5 @@
 import { FC, Suspense, Component, ReactNode, ErrorInfo } from 'react';
+import { Spinner } from '@/components/ui/Spinner';
 import styles from './LazyLoadBoundary.module.css';
 
 interface LazyLoadBoundaryProps {
@@ -15,12 +16,10 @@ interface ErrorBoundaryState {
   retryCount: number;
 }
 
-// Performance-optimized loading spinner
+// Performance-optimized loading spinner using the standard Spinner component
 const DefaultLoadingSpinner: FC = () => (
   <div className={styles.loadingContainer}>
-    <div className={styles.spinner} role="status" aria-label="Loading">
-      <div className={styles.spinnerInner}></div>
-    </div>
+    <Spinner size="large" variant="primary" />
     <p className={styles.loadingText}>Loading...</p>
   </div>
 );

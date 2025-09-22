@@ -8,7 +8,7 @@ export interface DeckHeaderProps {
 }
 
 export interface ModeCard {
-  id: 'flashcards' | 'learn' | 'match' | 'test';
+  id: 'flashcards' | 'learn' | 'match' | 'test' | 'read';
   label: string;
   icon: FC<{ className?: string; size?: number }>;
   color: string;

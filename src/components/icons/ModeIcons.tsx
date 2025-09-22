@@ -68,7 +68,7 @@ export const MatchIcon: FC<IconProps> = ({ className, size = 24 }) => (
   </svg>
 );
 
-export const TestIcon: FC<IconProps> = ({ className, size = 24 }) => (
+export const ReadIcon: FC<IconProps> = ({ className, size = 24 }) => (
   <svg
     width={size}
     height={size}
@@ -97,6 +97,9 @@ export const TestIcon: FC<IconProps> = ({ className, size = 24 }) => (
     <path d="M9 7h3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
+
+// Alias TestIcon to ReadIcon for backwards compatibility
+export const TestIcon = ReadIcon;
 
 export const CardsIcon: FC<IconProps> = ({ className, size = 24 }) => (
   <svg

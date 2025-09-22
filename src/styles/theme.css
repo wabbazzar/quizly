@@ -64,10 +64,13 @@
   --border-black-alpha-10: rgba(0, 0, 0, 0.1);
 
   /* Typography */
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans CJK SC', 'Source Han Sans SC', 'SimSun', 'Microsoft YaHei', sans-serif;
   --font-mono:
     'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', 'Droid Sans Mono', 'Courier New',
     monospace;
+
+  /* Chinese/CJK optimized font stack */
+  --font-cjk: 'Noto Sans CJK SC', 'Source Han Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'SimSun', 'STHeiti', sans-serif;
 
   /* Font Sizes */
   --text-xs: 0.75rem; /* 12px */

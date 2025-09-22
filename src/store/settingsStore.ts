@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { FlashcardsSettings, LearnModeSettings, ModeSettings } from '@/types';
+import { FlashcardsSettings, LearnModeSettings, ModeSettings, ReadModeSettings } from '@/types';
 
 interface UnifiedSettingsStore {
   // Settings by deck and mode
@@ -8,6 +8,7 @@ interface UnifiedSettingsStore {
   learnSettings: Record<string, LearnModeSettings>;
   matchSettings: Record<string, ModeSettings>;
   testSettings: Record<string, ModeSettings>;
+  readSettings: Record<string, ReadModeSettings>;
 
   // Preset selections per deck and mode
   presetSelections: Record<string, { [mode: string]: string }>;
@@ -16,11 +17,11 @@ interface UnifiedSettingsStore {
   getSettingsForMode: (
     deckId: string,
     mode: string
-  ) => ModeSettings | FlashcardsSettings | LearnModeSettings;
+  ) => ModeSettings | FlashcardsSettings | LearnModeSettings | ReadModeSettings;
   updateSettings: (
     deckId: string,
     mode: string,
-    settings: ModeSettings | FlashcardsSettings | LearnModeSettings
+    settings: ModeSettings | FlashcardsSettings | LearnModeSettings | ReadModeSettings
   ) => void;
   applyPreset: (deckId: string, mode: string, presetId: string) => void;
   getSettings: (key: string) => any;
@@ -80,6 +81,15 @@ const getDefaultSettings = (mode: string): any => {
       randomize: true,
       progressionMode: 'sequential' as const,
     },
+    read: {
+      answerType: 'free_text' as const,
+      checkMode: 'wait' as const,
+      translationDirection: { from: 'a' as const, to: 'c' as const },
+      optionsCount: 4,
+      showPinyinDefault: false,
+      multipleChoiceDifficulty: 'medium' as const,
+      unit: 'character' as const,
+    },
   };
 
   return defaults[mode] || defaults.flashcards;
@@ -92,6 +102,7 @@ export const useSettingsStore = create<UnifiedSettingsStore>()(
       learnSettings: {},
       matchSettings: {},
       testSettings: {},
+      readSettings: {},
       presetSelections: {},
 
       getSettingsForMode: (deckId: string, mode: string) => {
@@ -106,6 +117,8 @@ export const useSettingsStore = create<UnifiedSettingsStore>()(
             return state.matchSettings[deckId] || getDefaultSettings('match');
           case 'test':
             return state.testSettings[deckId] || getDefaultSettings('test');
+          case 'read':
+            return state.readSettings[deckId] || getDefaultSettings('read');
           default:
             return getDefaultSettings(mode);
         }
@@ -144,6 +157,14 @@ export const useSettingsStore = create<UnifiedSettingsStore>()(
                 testSettings: {
                   ...state.testSettings,
                   [deckId]: settings,
+                },
+              };
+            case 'read':
+              return {
+                ...state,
+                readSettings: {
+                  ...state.readSettings,
+                  [deckId]: settings as ReadModeSettings,
                 },
               };
             default:

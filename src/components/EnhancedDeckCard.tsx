@@ -7,7 +7,7 @@ import {
   FlashcardsIcon,
   LearnIcon,
   MatchIcon,
-  TestIcon,
+  ReadIcon,
   CardsIcon,
   LevelsIcon,
   ClockIcon,
@@ -15,7 +15,7 @@ import {
 import styles from './EnhancedDeckCard.module.css';
 
 interface ModeConfig {
-  id: 'flashcards' | 'learn' | 'match' | 'test';
+  id: 'flashcards' | 'learn' | 'match' | 'read';
   label: string;
   icon: FC<{ className?: string }>;
   color: string;
@@ -140,24 +140,24 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(
         route: `/match/${deck.id}`,
       },
       {
-        id: 'test',
-        label: 'Test',
-        icon: TestIcon,
+        id: 'read',
+        label: 'Read',
+        icon: ReadIcon,
         color: 'orange',
-        description: 'Practice exam',
-        route: `/test/${deck.id}`,
+        description: 'Structured reading practice',
+        route: `/read/${deck.id}`,
       },
     ];
 
     const handleModeClick = (e: React.MouseEvent, mode: ModeConfig) => {
       e.stopPropagation();
 
-      // Show "Coming Soon" notification for Test mode only
-      if (mode.id === 'test') {
+      // Check if Read mode is available for this deck
+      if (mode.id === 'read' && (!deck.reading || Object.keys(deck.reading.dialogues).length === 0)) {
         showNotification({
-          message: `${mode.label} mode coming soon!`,
-          type: 'coming-soon',
-          icon: '🚀',
+          message: 'No reading content available for this deck',
+          type: 'info',
+          icon: '📖',
           duration: 3000,
         });
         return;

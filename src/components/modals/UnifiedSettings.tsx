@@ -1,6 +1,6 @@
 import { FC, memo, useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Deck, FlashcardsSettings, LearnModeSettings, ModeSettings } from '@/types';
+import { Deck, FlashcardsSettings, LearnModeSettings, ModeSettings, ReadModeSettings } from '@/types';
 import { MatchSettings as MatchSettingsType } from '@/components/modes/match/types';
 import { useUnifiedSettings } from '@/hooks/useUnifiedSettings';
 import styles from './UnifiedSettings.module.css';
@@ -13,19 +13,20 @@ import LearningSettings from './settings/LearningSettings';
 import MasterySettings from './settings/MasterySettings';
 import DeckInformation from './settings/DeckInformation';
 import MatchSettingsComponent from './settings/MatchSettings';
+import ReadSettings from './settings/ReadSettings';
 
 export interface UnifiedSettingsProps {
   visible: boolean;
   onClose: () => void;
   deck: Deck | null;
-  mode: 'flashcards' | 'learn' | 'deck' | 'match' | 'test';
-  settings: FlashcardsSettings | LearnModeSettings | ModeSettings | MatchSettingsType;
-  onUpdateSettings: (settings: FlashcardsSettings | LearnModeSettings | ModeSettings | MatchSettingsType) => void;
+  mode: 'flashcards' | 'learn' | 'deck' | 'match' | 'test' | 'read';
+  settings: FlashcardsSettings | LearnModeSettings | ModeSettings | MatchSettingsType | ReadModeSettings;
+  onUpdateSettings: (settings: FlashcardsSettings | LearnModeSettings | ModeSettings | MatchSettingsType | ReadModeSettings) => void;
   onResetMastery?: () => void; // Only for deck mode
 }
 
 export interface UnifiedSettingsConfig {
-  mode: 'flashcards' | 'learn' | 'deck' | 'match' | 'test';
+  mode: 'flashcards' | 'learn' | 'deck' | 'match' | 'test' | 'read';
   availableSections: SettingsSection[];
   presets: PresetDefinition[];
   persistenceKey: string;
@@ -217,6 +218,17 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
         order: 2,
       },
     ],
+    read: [
+      {
+        id: 'read_settings',
+        title: 'Read Mode Settings',
+        description: 'Configure translation direction and answer options',
+        visible: true,
+        required: true,
+        component: ReadSettings,
+        order: 1,
+      },
+    ],
   };
 
   const validation: Record<string, ValidationRule[]> = {
@@ -276,6 +288,18 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
       },
     ],
     test: [],
+    read: [
+      {
+        field: 'translationDirection',
+        validator: (value: any) => value && value.from && value.to && value.from !== value.to,
+        errorMessage: 'Translation direction must have different from and to sides',
+      },
+      {
+        field: 'optionsCount',
+        validator: (value: any) => !value || value >= 2,
+        errorMessage: 'Options count must be at least 2',
+      },
+    ],
   };
 
   return {
@@ -336,6 +360,7 @@ export const UnifiedSettings: FC<UnifiedSettingsProps> = memo(
         deck: 'Deck Settings',
         match: 'Match Settings',
         test: 'Test Settings',
+        read: 'Read Settings',
       };
       return titles[mode] || 'Settings';
     };

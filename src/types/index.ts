@@ -35,11 +35,94 @@ export interface Card {
   level: number;
 }
 
+// Reading Types
+export type SideId = 'a' | 'b' | 'c' | 'd' | 'e' | 'f';
+export type TokenUnit = 'character' | 'word' | 'space';
+
+export type ReadingSidesMap = Partial<Record<SideId, string>>;
+
+export interface ReadingTokenizationConfig {
+  // Per-side tokenization unit
+  unit: Record<SideId, TokenUnit | undefined>;
+  preservePunctuation: boolean;
+  alignment?: 'index'; // hint; explicit per-line alignments are optional
+}
+
+export interface WordAlignment {
+  chinese: string;
+  pinyin: string;
+  english: string;
+}
+
+export interface ReadingLine {
+  // Generic sides
+  a?: string;
+  b?: string;
+  c?: string;
+  d?: string;
+  e?: string;
+  f?: string;
+  // Optional explicit token alignment entries, deferred by default
+  // Example unified mapping entries: { a?: number; b?: number; c?: number }
+  alignments?: Array<Partial<Record<SideId, number>>>;
+  // New word-based alignment system
+  wordAlignments?: WordAlignment[];
+}
+
+export interface DeckReadingDialogue {
+  lines: ReadingLine[];
+}
+
+export interface DeckReading {
+  sides?: ReadingSidesMap; // e.g., { a: 'characters', b: 'pinyin', c: 'english' }
+  tokenization?: ReadingTokenizationConfig;
+  dialogues: Record<string, DeckReadingDialogue>;
+}
+
+export type ReadAnswerType = 'free_text' | 'multiple_choice';
+export type ReadCheckMode = 'live' | 'wait';
+
+export interface ReadTranslationDirection {
+  from: SideId; // e.g., 'a'
+  to: SideId;   // e.g., 'c'
+}
+
+export type ReadUnit = 'character' | 'word' | 'sentence';
+export type ReadTranslationMode = 'token' | 'sentence';
+
+export interface ReadModeSettings {
+  answerType: ReadAnswerType;
+  checkMode: ReadCheckMode;
+  translationDirection: ReadTranslationDirection; // side-to-side
+  optionsCount?: number; // for multiple choice (default 4)
+  showPinyinDefault: boolean;
+  multipleChoiceDifficulty?: 'easy' | 'medium' | 'hard';
+  unit: ReadUnit; // UI preference: characters vs words when tokenizing side 'a' by default
+  translationMode: ReadTranslationMode; // token-by-token vs full sentence translation
+  accuracyThreshold?: number; // minimum similarity percentage for partial credit (default 70)
+  showWordHints?: boolean; // whether to show word-level hints on hover/tap (default true)
+}
+
+// Sentence translation result with accuracy scoring
+export interface SentenceTranslationResult {
+  userAnswer: string;
+  correctAnswer: string;
+  accuracy: number; // 0-100 percentage
+  isCorrect: boolean; // true if accuracy >= threshold
+  wordMatches?: Array<{
+    word: string;
+    matched: boolean;
+    similarity?: number;
+  }>;
+  suggestions?: string[]; // alternative correct answers
+}
+
 // Complete Deck
 export interface Deck {
   id: string;
   metadata: DeckMetadata;
   content: Card[];
+  reading?: DeckReading; // NEW optional field
 }
 
 // Learning Session State

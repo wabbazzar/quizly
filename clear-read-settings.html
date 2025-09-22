@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear Read Mode Settings</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        button {
+            background: #4a90e2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #3a7bc8;
+        }
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .success {
+            background: #d4f4dd;
+            color: #1e7e34;
+            border: 1px solid #c3e6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Read Mode Settings Manager</h1>
+
+    <div class="message info">
+        <strong>Current Issue:</strong> The Read mode might be showing character-by-character translation instead of sentence mode.
+    </div>
+
+    <h2>Actions:</h2>
+
+    <button onclick="clearReadSettings()">
+        Clear Read Settings
+    </button>
+
+    <button onclick="setToSentenceMode()">
+        Force Sentence Mode
+    </button>
+
+    <button onclick="showCurrentSettings()">
+        Show Current Settings
+    </button>
+
+    <button onclick="clearAllStorage()">
+        Clear All Local Storage (Reset Everything)
+    </button>
+
+    <div id="result"></div>
+
+    <script>
+        function clearReadSettings() {
+            try {
+                localStorage.removeItem('read-store');
+                showMessage('✅ Read settings cleared! Refresh the Quizly app to use default sentence mode.', 'success');
+            } catch (e) {
+                showMessage('❌ Error: ' + e.message, 'error');
+            }
+        }
+
+        function setToSentenceMode() {
+            try {
+                const stored = localStorage.getItem('read-store');
+                let data = stored ? JSON.parse(stored) : {};
+
+                data.state = data.state || {};
+                data.state.settings = data.state.settings || {};
+                data.state.settings.translationMode = 'sentence';
+                data.state.settings.accuracyThreshold = 70;
+                data.state.settings.showWordHints = true;
+                data.version = 2;
+
+                localStorage.setItem('read-store', JSON.stringify(data));
+                showMessage('✅ Settings updated to sentence mode! Refresh the Quizly app.', 'success');
+
+                setTimeout(() => showCurrentSettings(), 500);
+            } catch (e) {
+                showMessage('❌ Error: ' + e.message, 'error');
+            }
+        }
+
+        function showCurrentSettings() {
+            try {
+                const stored = localStorage.getItem('read-store');
+                if (stored) {
+                    const data = JSON.parse(stored);
+                    const settings = data.state?.settings || {};
+
+                    const html = `
+                        <h3>Current Read Settings:</h3>
+                        <pre>${JSON.stringify(settings, null, 2)}</pre>
+                        <p><strong>Translation Mode:</strong> ${settings.translationMode || 'Not set (will default to sentence)'}</p>
+                        <p><strong>Accuracy Threshold:</strong> ${settings.accuracyThreshold || 70}%</p>
+                        <p><strong>Show Word Hints:</strong> ${settings.showWordHints !== false}</p>
+                    `;
+                    showMessage(html, 'info');
+                } else {
+                    showMessage('No settings found in local storage. Using defaults (sentence mode).', 'info');
+                }
+            } catch (e) {
+                showMessage('❌ Error reading settings: ' + e.message, 'error');
+            }
+        }
+
+        function clearAllStorage() {
+            if (confirm('⚠️ This will clear ALL local storage data including decks, progress, and settings. Are you sure?')) {
+                localStorage.clear();
+                showMessage('✅ All local storage cleared! Refresh the Quizly app to start fresh.', 'success');
+            }
+        }
+
+        function showMessage(message, type) {
+            document.getElementById('result').innerHTML = `
+                <div class="message ${type}">${message}</div>
+            `;
+        }
+
+        // Show current settings on load
+        window.onload = () => {
+            showCurrentSettings();
+        };
+    </script>
+</body>
+</html>

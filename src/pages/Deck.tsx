@@ -12,7 +12,7 @@ import { CardManagement } from '@/components/deck/CardManagement';
 import { ModeCard } from '@/components/deck/types';
 import UnifiedSettings from '@/components/modals/UnifiedSettings';
 import { useSettingsStore } from '@/store/settingsStore';
-import { FlashcardsIcon, LearnIcon, MatchIcon, TestIcon } from '@/components/icons/ModeIcons';
+import { FlashcardsIcon, LearnIcon, MatchIcon, ReadIcon } from '@/components/icons/ModeIcons';
 import styles from './Deck.module.css';
 
 const Deck: FC = () => {
@@ -74,12 +74,12 @@ const Deck: FC = () => {
         route: `/match/${deckId}`,
       },
       {
-        id: 'test',
-        label: 'Test',
-        icon: TestIcon,
+        id: 'read',
+        label: 'Read',
+        icon: ReadIcon,
         color: 'orange',
-        description: 'Practice exam with various question types',
-        route: `/test/${deckId}`,
+        description: 'Structured reading with line-by-line translation',
+        route: `/read/${deckId}`,
       },
     ],
     [deckId]
@@ -87,18 +87,20 @@ const Deck: FC = () => {
 
   const handleModeClick = useCallback(
     (mode: ModeCard) => {
-      // Show "Coming Soon" notification for Test mode only
-      if (mode.id === 'test') {
-        showNotification({
-          message: `${mode.label} mode coming soon!`,
-          type: 'coming-soon',
-          duration: 3000,
-        });
-        return;
+      // Check if Read mode is available for this deck
+      if (mode.id === 'read') {
+        if (!currentDeck?.reading || Object.keys(currentDeck.reading.dialogues).length === 0) {
+          showNotification({
+            message: 'No reading content available for this deck',
+            type: 'info',
+            duration: 3000,
+          });
+          return;
+        }
       }
       navigate(mode.route);
     },
-    [navigate, showNotification]
+    [navigate, showNotification, currentDeck]
   );
 
   const handleCardClick = useCallback((card: Card) => {

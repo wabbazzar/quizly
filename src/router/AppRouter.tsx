@@ -12,6 +12,7 @@ import {
   LazyMatch,
   LazyLearnDemo,
   LazyResults,
+  LazyRead,
   preloadCriticalComponents,
 } from '@/utils/lazyImports';
 
@@ -90,6 +91,16 @@ export function AppRouter() {
             <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
               <PageLazyBoundary pageName="Match">
                 <LazyMatch />
+              </PageLazyBoundary>
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/read/:deckId"
+          element={
+            <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
+              <PageLazyBoundary pageName="Read">
+                <LazyRead />
               </PageLazyBoundary>
             </ErrorBoundary>
           }
