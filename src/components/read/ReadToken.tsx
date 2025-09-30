@@ -16,6 +16,7 @@ interface Props {
   isActive: boolean;
   isCompleted: boolean;
   onClick: () => void;
+  onClose?: () => void; // New prop to deactivate token
   onComplete?: () => void;
   settings: ReadModeSettings;
   sourceText: string;
@@ -28,6 +29,7 @@ export const ReadToken: FC<Props> = ({
   isActive,
   isCompleted,
   onClick,
+  onClose,
   onComplete,
   settings,
   sourceText,
@@ -246,17 +248,12 @@ export const ReadToken: FC<Props> = ({
       setIsCorrect(correct);
       setShowAnswer(true);
 
-      // Auto-advance to next token after a short delay
-      if (correct && onComplete) {
-        setTimeout(() => {
-          onComplete(); // Move to next token
-        }, 1000);
-      }
+      // Don't auto-advance - let user manually advance
     } else {
       // Wait mode - just store answer
       setUserAnswer(answer);
     }
-  }, [settings, targetText, onComplete, sourceText]);
+  }, [settings, targetText, sourceText]);
 
   // Handle reveal
   const handleReveal = useCallback(() => {
@@ -320,6 +317,21 @@ export const ReadToken: FC<Props> = ({
             transform: 'translateX(-50%)'
           }}
         >
+          {/* Close button to dismiss popup */}
+          <button
+            className={styles.closeButton}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (onClose) {
+                onClose(); // Deactivate this token
+              }
+            }}
+            aria-label="Close input"
+            title="Close (to see translations below)"
+          >
+            ✕
+          </button>
+
           {settings.answerType === 'free_text' ? (
             <div className={styles.freeTextInput}>
               <input

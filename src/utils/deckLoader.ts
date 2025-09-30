@@ -13,14 +13,13 @@ import {
 // Sanitization helper to prevent XSS
 const sanitizeString = (str: unknown): string => {
   if (typeof str !== 'string') return '';
-  // Basic HTML entity encoding for safety
-  // Note: Forward slashes are safe and commonly used in pinyin (e.g., wéi/wèi)
-  // Note: Ampersands are safe for text content and commonly used in titles
+  // React automatically escapes text content, so we only need minimal sanitization
+  // We'll keep angle brackets escaped to prevent HTML injection
+  // Note: Forward slashes, ampersands, quotes, and apostrophes are safe in React text content
   return str
     .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#x27;');
+    .replace(/>/g, '&gt;');
+  // Removed quote and apostrophe escaping - React handles these safely
   // Removed forward slash escaping as it's safe and breaks pinyin display
   // Removed ampersand escaping as it's safe for text content and commonly used in titles
 };

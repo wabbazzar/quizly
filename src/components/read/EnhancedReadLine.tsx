@@ -40,7 +40,7 @@ export const EnhancedReadLine: FC<Props> = ({
   onAnswer,
   onTokenClick,
   onTokenComplete,
-  onNext
+  onNext: _onNext // Reserved for potential future auto-advance feature
   // showControls = true // Reserved for future use
 }) => {
   // Get side labels
@@ -65,15 +65,8 @@ export const EnhancedReadLine: FC<Props> = ({
       onAnswer(result);
     }
 
-    // Don't auto-advance - let user review feedback and click Next
-    // Auto-advance only for correct answers after longer delay
-    if (result.isCorrect && onNext) {
-      // Give user 5 seconds to review before auto-advancing
-      setTimeout(() => {
-        onNext();
-      }, 5000);
-    }
-  }, [onAnswer, onNext]);
+    // Don't auto-advance - let user manually navigate with keyboard or buttons
+  }, [onAnswer]);
 
   // Render based on translation mode
   const renderContent = useMemo(() => {
