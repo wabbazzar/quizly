@@ -71,10 +71,11 @@ export const ReadToken: FC<Props> = ({
       // Generate distractors based on the target text
       const options = [targetText];
 
-      // Different distractor sets based on target type
+      // Generate appropriate distractors based on target language/side
       let distractorPool: string[] = [];
+      const targetSide = settings.translationDirection.to;
 
-      // Check if target is a number
+      // Check if target is a number (language agnostic)
       if (/^\d+$/.test(targetText)) {
         // For numbers, use other numbers as distractors
         const num = parseInt(targetText);
@@ -86,40 +87,85 @@ export const ReadToken: FC<Props> = ({
           Math.floor(num / 2).toString()
         ].filter(n => n !== targetText && parseInt(n) >= 0);
       }
-      // Check if target is very short (1-2 chars)
-      else if (targetText.length <= 2) {
-        // For short words, use other short common words
+      // Generate distractors based on target language/side
+      else if (targetSide === 'b') {
+        // Pinyin distractors - common pinyin syllables
+        const pinyinSyllables = [
+          'ma', 'wo', 'ni', 'ta', 'de', 'shi', 'zai', 'you', 'ge', 'le',
+          'dao', 'shang', 'xia', 'lai', 'qu', 'hao', 'hen', 'dou', 'bu', 'mei',
+          'kan', 'shuo', 'zuo', 'chi', 'he', 'zou', 'pao', 'fei', 'kai', 'guan',
+          'da', 'xiao', 'gao', 'ai', 'pang', 'shou', 'kuai', 'man', 'xin', 'jiu',
+          'duo', 'shao', 'chang', 'duan', 'yuan', 'jin', 'li', 'wai', 'zhong', 'bian',
+          'qian', 'hou', 'zuo', 'you', 'dong', 'xi', 'nan', 'bei', 'bai', 'hei',
+          'hong', 'lu', 'huang', 'lan', 'zi', 'fen', 'hui', 'zong', 'cheng', 'qing'
+        ];
+        // Add tone mark variations for more realistic distractors
+        const extendedPinyin = [...pinyinSyllables];
+        pinyinSyllables.forEach(syllable => {
+          if (syllable.includes('a')) {
+            extendedPinyin.push(syllable.replace('a', 'ā'), syllable.replace('a', 'á'), syllable.replace('a', 'ǎ'), syllable.replace('a', 'à'));
+          }
+          if (syllable.includes('e')) {
+            extendedPinyin.push(syllable.replace('e', 'ē'), syllable.replace('e', 'é'), syllable.replace('e', 'ě'), syllable.replace('e', 'è'));
+          }
+          if (syllable.includes('i')) {
+            extendedPinyin.push(syllable.replace('i', 'ī'), syllable.replace('i', 'í'), syllable.replace('i', 'ǐ'), syllable.replace('i', 'ì'));
+          }
+          if (syllable.includes('o')) {
+            extendedPinyin.push(syllable.replace('o', 'ō'), syllable.replace('o', 'ó'), syllable.replace('o', 'ǒ'), syllable.replace('o', 'ò'));
+          }
+          if (syllable.includes('u')) {
+            extendedPinyin.push(syllable.replace('u', 'ū'), syllable.replace('u', 'ú'), syllable.replace('u', 'ǔ'), syllable.replace('u', 'ù'));
+          }
+        });
+        distractorPool = extendedPinyin;
+      }
+      else if (targetSide === 'a') {
+        // Chinese character distractors - common characters
         distractorPool = [
-          'a', 'I', 'it', 'is', 'to', 'be', 'of', 'in', 'on', 'at',
-          'or', 'an', 'as', 'by', 'we', 'he', 'me', 'my', 'up', 'so'
+          '我', '你', '他', '她', '的', '是', '在', '有', '个', '了',
+          '到', '上', '下', '来', '去', '好', '很', '都', '不', '没',
+          '看', '说', '做', '吃', '喝', '走', '跑', '飞', '开', '关',
+          '大', '小', '高', '矮', '胖', '瘦', '快', '慢', '新', '旧',
+          '多', '少', '长', '短', '远', '近', '里', '外', '中', '边',
+          '前', '后', '左', '右', '东', '西', '南', '北', '白', '黑',
+          '红', '绿', '黄', '蓝', '紫', '粉', '灰', '棕', '橙', '青'
         ];
       }
-      // For regular words
       else {
-        // Group words by part of speech/meaning for better distractors
-        const pronouns = ['I', 'you', 'he', 'she', 'it', 'we', 'they', 'me', 'him', 'her', 'us', 'them'];
-        const verbs = ['is', 'are', 'was', 'were', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'can', 'could', 'would', 'should', 'make', 'take', 'give', 'get', 'go', 'come', 'see', 'know', 'think', 'want'];
-        const adjectives = ['good', 'bad', 'big', 'small', 'new', 'old', 'happy', 'sad', 'fast', 'slow', 'hot', 'cold', 'easy', 'hard', 'beautiful', 'ugly'];
-        const articles = ['the', 'a', 'an', 'this', 'that', 'these', 'those'];
-        const prepositions = ['in', 'on', 'at', 'to', 'for', 'with', 'from', 'by', 'about', 'into', 'through', 'during', 'before', 'after'];
-        const adverbs = ['very', 'really', 'quite', 'too', 'so', 'just', 'still', 'already', 'yet', 'even', 'only', 'also', 'never', 'always', 'sometimes'];
-
-        // Try to match the target word type and select from appropriate pool
-        if (pronouns.includes(targetText.toLowerCase())) {
-          distractorPool = pronouns;
-        } else if (verbs.includes(targetText.toLowerCase())) {
-          distractorPool = verbs;
-        } else if (adjectives.includes(targetText.toLowerCase())) {
-          distractorPool = adjectives;
-        } else if (articles.includes(targetText.toLowerCase())) {
-          distractorPool = articles;
-        } else if (prepositions.includes(targetText.toLowerCase())) {
-          distractorPool = prepositions;
-        } else if (adverbs.includes(targetText.toLowerCase())) {
-          distractorPool = adverbs;
+        // English distractors (side c or other)
+        // Check if target is very short (1-2 chars)
+        if (targetText.length <= 2) {
+          distractorPool = [
+            'a', 'I', 'it', 'is', 'to', 'be', 'of', 'in', 'on', 'at',
+            'or', 'an', 'as', 'by', 'we', 'he', 'me', 'my', 'up', 'so'
+          ];
         } else {
-          // Default mixed pool for unknown words
-          distractorPool = [...verbs.slice(0, 5), ...adjectives.slice(0, 5), ...pronouns.slice(0, 5)];
+          // Group words by part of speech/meaning for better distractors
+          const pronouns = ['I', 'you', 'he', 'she', 'it', 'we', 'they', 'me', 'him', 'her', 'us', 'them'];
+          const verbs = ['is', 'are', 'was', 'were', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'can', 'could', 'would', 'should', 'make', 'take', 'give', 'get', 'go', 'come', 'see', 'know', 'think', 'want'];
+          const adjectives = ['good', 'bad', 'big', 'small', 'new', 'old', 'happy', 'sad', 'fast', 'slow', 'hot', 'cold', 'easy', 'hard', 'beautiful', 'ugly'];
+          const articles = ['the', 'a', 'an', 'this', 'that', 'these', 'those'];
+          const prepositions = ['in', 'on', 'at', 'to', 'for', 'with', 'from', 'by', 'about', 'into', 'through', 'during', 'before', 'after'];
+          const adverbs = ['very', 'really', 'quite', 'too', 'so', 'just', 'still', 'already', 'yet', 'even', 'only', 'also', 'never', 'always', 'sometimes'];
+
+          // Try to match the target word type and select from appropriate pool
+          if (pronouns.includes(targetText.toLowerCase())) {
+            distractorPool = pronouns;
+          } else if (verbs.includes(targetText.toLowerCase())) {
+            distractorPool = verbs;
+          } else if (adjectives.includes(targetText.toLowerCase())) {
+            distractorPool = adjectives;
+          } else if (articles.includes(targetText.toLowerCase())) {
+            distractorPool = articles;
+          } else if (prepositions.includes(targetText.toLowerCase())) {
+            distractorPool = prepositions;
+          } else if (adverbs.includes(targetText.toLowerCase())) {
+            distractorPool = adverbs;
+          } else {
+            // Default mixed pool for unknown words
+            distractorPool = [...verbs.slice(0, 5), ...adjectives.slice(0, 5), ...pronouns.slice(0, 5)];
+          }
         }
       }
 
@@ -137,10 +183,20 @@ export const ReadToken: FC<Props> = ({
         }
       }
 
-      // If we still need more options, add contextually similar words
+      // If we still need more options, add language-appropriate fallbacks
       while (options.length < (settings.optionsCount || 4)) {
-        const fallbackOptions = ['something', 'nothing', 'anything', 'everything'];
-        const fallback = fallbackOptions[options.length - 1] || `word${options.length}`;
+        let fallbackOptions: string[];
+        if (targetSide === 'b') {
+          // Pinyin fallbacks
+          fallbackOptions = ['shénme', 'nǎlǐ', 'zěnme', 'shéi'];
+        } else if (targetSide === 'a') {
+          // Chinese character fallbacks
+          fallbackOptions = ['什么', '哪里', '怎么', '谁'];
+        } else {
+          // English fallbacks
+          fallbackOptions = ['something', 'nothing', 'anything', 'everything'];
+        }
+        const fallback = fallbackOptions[options.length - 1] || `option${options.length}`;
         if (!options.includes(fallback)) {
           options.push(fallback);
         }

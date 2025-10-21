@@ -60,7 +60,12 @@
   width: 100%;
 }
 
-.interactiveSource > div:first-child {
+.wordTokensContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
   font-family: var(--font-cjk);
   font-size: var(--text-xl);
   font-weight: 500;
@@ -76,6 +81,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 
 .wordToken {
   margin: 0 2px;

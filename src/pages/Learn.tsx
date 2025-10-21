@@ -3,7 +3,6 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useDeckStore } from '@/store/deckStore';
 import { useProgressStore } from '@/store/progressStore';
 import { useCardMasteryStore } from '@/store/cardMasteryStore';
-import { LoadingScreen } from '@/components/ui';
 import LearnContainer from '@/components/modes/learn/LearnContainer';
 import UnifiedSettings from '@/components/modals/UnifiedSettings';
 import { useSettingsStore } from '@/store/settingsStore';
@@ -128,7 +127,7 @@ const Learn: FC = () => {
   };
 
   if (isLoading) {
-    return <LoadingScreen />;
+    return null; // Let PageLazyBoundary handle loading state
   }
 
   if (error || !currentDeck) {
@@ -145,7 +144,7 @@ const Learn: FC = () => {
 
   // Check if deck content is loaded
   if (!currentDeck.content || currentDeck.content.length === 0) {
-    return <LoadingScreen />;
+    return null; // Let PageLazyBoundary handle loading state
   }
 
   // Filter deck content based on excludeCards and mastered cards

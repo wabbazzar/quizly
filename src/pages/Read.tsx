@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useDeckStore } from '@/store/deckStore';
 import { useReadStore } from '@/store/readStore';
 import { SentenceTranslationResult } from '@/types';
-import { LoadingScreen } from '@/components/ui';
 import { PageHeader } from '@/components/common/PageHeader';
 import { ReadDialoguePicker } from '@/components/read/ReadDialoguePicker';
 import { EnhancedReadLine } from '@/components/read/EnhancedReadLine';
@@ -170,9 +169,9 @@ const Read: FC = () => {
     };
   }, [session, deckId]);
 
-  // Loading state
+  // Loading state - removed LoadingScreen to avoid duplicate with PageLazyBoundary
   if (isLoading) {
-    return <LoadingScreen />;
+    return null; // Let PageLazyBoundary handle loading state
   }
 
   // Error state
@@ -216,7 +215,6 @@ const Read: FC = () => {
             className={styles.settingsButton}
           >
             <SettingsIcon size={20} />
-            Settings
           </Button>
         }
       />

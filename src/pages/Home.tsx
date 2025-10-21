@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useDeckStore } from '@/store/deckStore';
 import { useProgressStore } from '@/store/progressStore';
 import EnhancedDeckCard from '@/components/EnhancedDeckCard';
-import { LoadingScreen } from '@/components/ui';
 import styles from './Home.module.css';
 
 const Home: FC = () => {
@@ -75,7 +74,7 @@ const Home: FC = () => {
   );
 
   if (isLoading) {
-    return <LoadingScreen message="Loading decks..." />;
+    return null; // Let PageLazyBoundary handle loading state
   }
 
   if (error) {
