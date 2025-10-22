@@ -131,6 +131,17 @@ const Read: FC = () => {
   // Handle keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore if typing in an input/textarea
+      const target = e.target as HTMLElement | null;
+      if (
+        target &&
+        (target.tagName === 'INPUT' ||
+          target.tagName === 'TEXTAREA' ||
+          (target as any).isContentEditable)
+      ) {
+        return;
+      }
+
       switch (e.key) {
         case 'ArrowUp':
         case 'k':

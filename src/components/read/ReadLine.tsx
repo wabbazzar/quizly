@@ -137,6 +137,7 @@ export const ReadLine: FC<Props> = ({
                 isActive={session.currentTokenIndex === index}
                 isCompleted={false} // Will be implemented with progress tracking
                 onClick={() => handleTokenClick(index)}
+                onClose={() => handleTokenClick(-1)} // Deactivate by setting to -1
                 onComplete={handleTokenComplete}
                 settings={settings}
                 sourceText={token.text}

@@ -40,7 +40,13 @@ export const MultipleChoiceOptions: FC<MultipleChoiceOptionsProps> = memo(
 
         // Check if the target is an input element (to avoid conflicts with text input)
         const target = e.target as HTMLElement;
-        if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') return;
+        if (
+          target.tagName === 'INPUT' ||
+          target.tagName === 'TEXTAREA' ||
+          (target as any).isContentEditable
+        ) {
+          return;
+        }
 
         // Map keys 1-4 to option indices 0-3
         const keyMap: { [key: string]: number } = {

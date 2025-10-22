@@ -190,6 +190,7 @@ export const AlignedReadLine: FC<Props> = ({
                 isActive={session.currentTokenIndex === index}
                 isCompleted={false}
                 onClick={() => handleTokenClick(index)}
+                onClose={() => handleTokenClick(-1)} // Deactivate by setting to -1
                 onComplete={handleTokenComplete}
                 settings={settings}
                 sourceText={token.text}
