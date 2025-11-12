@@ -71,21 +71,24 @@ export const useReadStore = create<ReadStore>()(
       settings: defaultSettings,
 
       initSession: (deckId: string, dialogueId: string) => {
-        set(state => ({
-          session: {
-            deckId,
-            currentDialogueId: dialogueId,
-            currentLineIndex: 0,
-            currentTokenIndex: 0,
-            showPinyin: state.settings.showPinyinDefault,
-            showTranslation: false,
-            correctCount: 0,
-            incorrectCount: 0,
-            startTime: Date.now(),
-            responseStartTime: Date.now(),
-            responseTimes: []
-          }
-        }));
+        set(state => {
+          console.log('Initializing session with showPinyinDefault:', state.settings.showPinyinDefault);
+          return {
+            session: {
+              deckId,
+              currentDialogueId: dialogueId,
+              currentLineIndex: 0,
+              currentTokenIndex: 0,
+              showPinyin: state.settings.showPinyinDefault,
+              showTranslation: false,
+              correctCount: 0,
+              incorrectCount: 0,
+              startTime: Date.now(),
+              responseStartTime: Date.now(),
+              responseTimes: []
+            }
+          };
+        });
       },
 
       setCurrentDialogue: (dialogueId: string) => {
@@ -272,6 +275,7 @@ export const useReadStore = create<ReadStore>()(
       },
 
       updateSettings: (settings: Partial<ReadModeSettings>) => {
+        console.log('Updating settings:', settings);
         set(state => ({
           settings: {
             ...state.settings,
