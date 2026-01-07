@@ -881,6 +881,61 @@ export default defineConfig({
 });
 ```
 
+## Chinese Dialogue Generation Guidelines
+
+When generating Chinese dialogue transcripts for the `public/data/transcripts/` directory, follow these specifications:
+
+### Target Metrics for 10-Minute Dialogues
+
+| Metric | Target Range |
+|--------|--------------|
+| **Total lines** | 500-630 lines |
+| **Chinese characters (in dialogue)** | 1300-1500 characters |
+| **Speaking pace** | 130-150 characters/minute (learner-friendly) |
+| **Vocabulary blocks** | 55-60 blocks (4 words each) |
+| **Dialogue exchanges** | 55-80 exchanges |
+
+### File Structure Pattern
+
+Each dialogue file must follow this exact structure:
+
+```
+Chinese Dialogue Practice - Chapter [N]
+[Topic Title]
+Estimated listening time: [X] minutes
+
+[vocab1], [definition].
+[vocab2], [definition].
+[vocab3], [definition].
+[vocab4], [definition].
+
+小明: [Chinese dialogue line]
+小美: [Chinese dialogue line]
+
+Xiaoming: [English translation]
+Xiaomei: [English translation]
+
+[Repeat vocabulary block + dialogue pattern...]
+
+END OF DIALOGUE
+
+Vocabulary Review - Key words from Chapter [N] used:
+[comma-separated list of vocabulary]
+```
+
+### Key Requirements
+
+1. **Vocabulary blocks**: 4 words per block, introduced before each dialogue exchange
+2. **Character names**: Use 小明 (Xiaoming) and 小美 (Xiaomei) consistently
+3. **Translations**: Always provide English translations immediately after Chinese dialogues
+4. **Blank lines**: Separate each section with blank lines for readability
+5. **Words per minute**: Target ~140 Chinese characters per minute for clear learner pace
+
+### Reference Files
+
+- `chinese_chpt10_2_dialogue.txt`: 629 lines, 11 minutes, 1475 characters (~134 chars/min)
+- `chinese_chpt4_2_dialogue.txt`: 878 lines, 10 minutes, 1750 characters (~175 chars/min)
+
 ## Learning Resources
 
 - React docs: Use Context7 MCP for latest patterns
