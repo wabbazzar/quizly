@@ -1,14 +1,19 @@
 import { FC, useEffect, useCallback, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDeckStore } from '@/store/deckStore';
 import { useProgressStore } from '@/store/progressStore';
 import EnhancedDeckCard from '@/components/EnhancedDeckCard';
+import { CompactDeckGrid } from '@/components/deck/CompactDeckGrid';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import styles from './Home.module.css';
 
 const Home: FC = () => {
+  const navigate = useNavigate();
   const { decks, isLoading, error, loadDecks, selectDeck } = useDeckStore();
   const { getDeckProgress } = useProgressStore();
   const headerRef = useRef<HTMLElement | null>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const node = headerRef.current;
@@ -71,6 +76,15 @@ const Home: FC = () => {
       // Mode navigation is handled by EnhancedDeckCard
     },
     [selectDeck]
+  );
+
+  // Mobile: Handle compact card tap - navigate directly to deck page
+  const handleCompactDeckSelect = useCallback(
+    (deckId: string) => {
+      selectDeck(deckId);
+      navigate(`/deck/${deckId}`);
+    },
+    [selectDeck, navigate]
   );
 
   if (isLoading) {
@@ -172,7 +186,14 @@ const Home: FC = () => {
               <p>No decks available</p>
               <p className={styles.emptyHint}>Import a deck to get started</p>
             </motion.div>
+          ) : isMobile ? (
+            // Mobile: Compact 3-column grid
+            <CompactDeckGrid
+              decks={decks}
+              onSelectDeck={handleCompactDeckSelect}
+            />
           ) : (
+            // Desktop: Full-size cards
             <motion.div
               className={styles.deckGrid}
               initial={{ opacity: 0 }}

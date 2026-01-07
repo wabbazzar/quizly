@@ -48,6 +48,12 @@ const validateMetadata = (metadata: unknown): DeckMetadata | null => {
 
   return {
     deck_name: sanitizeString(metadata.deck_name),
+    abbreviated_title: metadata.abbreviated_title
+      ? sanitizeString(metadata.abbreviated_title)
+      : undefined,
+    deck_subtitle: metadata.deck_subtitle
+      ? sanitizeString(metadata.deck_subtitle)
+      : undefined,
     description: sanitizeString(metadata.description),
     category: sanitizeString(metadata.category),
     available_levels: Array.isArray(metadata.available_levels)

@@ -1,6 +1,7 @@
 // Deck Metadata
 export interface DeckMetadata {
   deck_name: string;
+  abbreviated_title?: string;
   deck_subtitle?: string;
   description: string;
   category: string;
