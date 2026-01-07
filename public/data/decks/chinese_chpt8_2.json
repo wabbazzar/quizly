@@ -1,0 +1,185 @@
+{
+  "id": "chinese_chpt8_2",
+  "metadata": {
+    "deck_name": "Chinese Chapter 8 Part 2",
+    "deck_subtitle": "Letters and Abilities",
+    "description": "Chinese vocabulary for correspondence, abilities, and expressing hopes",
+    "category": "Language Learning",
+    "available_levels": [1, 2, 3],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 14,
+    "difficulty": "beginner",
+    "tags": ["chinese", "mandarin", "chapter8", "vocabulary"],
+    "version": "1.0.0",
+    "created_date": "2026-01-06T00:00:00Z",
+    "last_updated": "2026-01-06T00:00:00Z"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "measure_word_for_letters",
+      "side_a": "(measure word for letters)",
+      "side_b": "fēng",
+      "side_c": "封",
+      "side_d": "m",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "letter_correspondence",
+      "side_a": "letter (correspondence)",
+      "side_b": "xìn",
+      "side_c": "信",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "recently",
+      "side_a": "recently",
+      "side_b": "zuìjìn",
+      "side_c": "最近",
+      "side_d": "t",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "most_superlative",
+      "side_a": "(of superlative degree; most, -est)",
+      "side_b": "zuì",
+      "side_c": "最",
+      "side_d": "adv",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "close_near",
+      "side_a": "close; near",
+      "side_b": "jìn",
+      "side_c": "近",
+      "side_d": "adj",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "school_term_semester",
+      "side_a": "school term; semester/quarter",
+      "side_b": "xuéqī",
+      "side_c": "学期",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "in_addition_to_besides",
+      "side_a": "in addition to; besides",
+      "side_b": "chúle...yǐwài",
+      "side_c": "除了...以外",
+      "side_d": "conj",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "major_specialty",
+      "side_a": "major (in college); specialty",
+      "side_b": "zhuānyè",
+      "side_c": "专业",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "can_know_how_to",
+      "side_a": "can; know how to",
+      "side_b": "huì",
+      "side_c": "会",
+      "side_d": "av",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "later",
+      "side_a": "later",
+      "side_b": "hòulái",
+      "side_c": "后来",
+      "side_d": "t",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "concert",
+      "side_a": "concert",
+      "side_b": "yīnyuèhuì",
+      "side_c": "音乐会",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "to_hope_hope",
+      "side_a": "to hope; hope",
+      "side_b": "xīwàng",
+      "side_c": "希望",
+      "side_d": "v/n",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "can_able_to",
+      "side_a": "can; to be able to",
+      "side_b": "néng",
+      "side_c": "能",
+      "side_d": "av",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "to_use",
+      "side_a": "to use",
+      "side_b": "yòng",
+      "side_c": "用",
+      "side_d": "v",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "to_laugh_smile",
+      "side_a": "to laugh at; to laugh; to smile",
+      "side_b": "xiào",
+      "side_c": "笑",
+      "side_d": "v",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "to_wish_well",
+      "side_a": "to wish (well)",
+      "side_b": "zhù",
+      "side_c": "祝",
+      "side_d": "v",
+      "level": 1
+    }
+  ]
+}

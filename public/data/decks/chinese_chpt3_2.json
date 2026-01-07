@@ -1,0 +1,175 @@
+{
+  "id": "chinese_chpt3_2",
+  "metadata": {
+    "deck_name": "Chinese Chapter 3 Part 2",
+    "deck_subtitle": "Time and Social",
+    "description": "Chinese vocabulary for time expressions, social relationships, and reasons",
+    "category": "Language Learning",
+    "available_levels": [1, 2, 3],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 16,
+    "difficulty": "beginner",
+    "tags": ["chinese", "mandarin", "chapter3", "vocabulary"],
+    "version": "1.0.0",
+    "created_date": "2026-01-06T00:00:00Z",
+    "last_updated": "2026-01-06T00:00:00Z"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "now",
+      "side_a": "now",
+      "side_b": "xiànzài",
+      "side_c": "现在",
+      "side_d": "t",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "quarter_hour",
+      "side_a": "quarter (of an hour)",
+      "side_b": "kè",
+      "side_c": "刻",
+      "side_d": "m",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "matter_affair",
+      "side_a": "matter; affair; event",
+      "side_b": "shì(r)",
+      "side_c": "事(儿)",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "today",
+      "side_a": "today",
+      "side_b": "jīntiān",
+      "side_c": "今天",
+      "side_d": "t",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "very",
+      "side_a": "very",
+      "side_b": "hěn",
+      "side_c": "很",
+      "side_d": "adv",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "busy",
+      "side_a": "busy",
+      "side_b": "máng",
+      "side_c": "忙",
+      "side_d": "adj",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "tomorrow",
+      "side_a": "tomorrow",
+      "side_b": "míngtiān",
+      "side_c": "明天",
+      "side_d": "t",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "dinner_supper",
+      "side_a": "dinner; supper",
+      "side_b": "wǎnfàn",
+      "side_c": "晚饭",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "why",
+      "side_a": "why",
+      "side_b": "wèishénme",
+      "side_c": "为什么",
+      "side_d": "qpr",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "for",
+      "side_a": "for",
+      "side_b": "wèi",
+      "side_c": "为",
+      "side_d": "prep",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "because",
+      "side_a": "because",
+      "side_b": "yīnwèi",
+      "side_c": "因为",
+      "side_d": "conj",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "also_too",
+      "side_a": "also; too; as well",
+      "side_b": "hái",
+      "side_c": "还",
+      "side_d": "adv",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "classmate",
+      "side_a": "classmate",
+      "side_b": "tóngxué",
+      "side_c": "同学",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "recognize_acquainted",
+      "side_a": "to be acquainted with; to recognize",
+      "side_b": "rènshi",
+      "side_c": "认识",
+      "side_d": "v",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "friend",
+      "side_a": "friend",
+      "side_b": "péngyou",
+      "side_c": "朋友",
+      "side_d": "n",
+      "level": 1
+    }
+  ]
+}
