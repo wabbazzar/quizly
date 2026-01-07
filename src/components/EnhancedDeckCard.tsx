@@ -1,8 +1,9 @@
-import { FC, memo, useState } from 'react';
+import { FC, memo, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Deck } from '@/types';
 import { useNotificationStore } from '@/store/notificationStore';
+import { hasTranscriptsForDeck } from '@/services/transcriptService';
 import {
   FlashcardsIcon,
   LearnIcon,
@@ -110,9 +111,15 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(
     onModeSelect,
   }) => {
     const [isHovered, setIsHovered] = useState(false);
+    const [hasTranscripts, setHasTranscripts] = useState(false);
     const navigate = useNavigate();
     const { showNotification } = useNotificationStore();
     const { metadata } = deck;
+
+    // Check for transcripts availability
+    useEffect(() => {
+      hasTranscriptsForDeck(deck.id).then(setHasTranscripts);
+    }, [deck.id]);
 
     const modes: ModeConfig[] = [
       {
@@ -153,14 +160,16 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(
       e.stopPropagation();
 
       // Check if Read mode is available for this deck
-      if (mode.id === 'read' && (!deck.reading || Object.keys(deck.reading.dialogues).length === 0)) {
-        showNotification({
-          message: 'No reading content available for this deck',
-          type: 'info',
-          icon: '📖',
-          duration: 3000,
-        });
-        return;
+      if (mode.id === 'read') {
+        const hasReadingContent = deck.reading && Object.keys(deck.reading.dialogues).length > 0;
+        if (!hasReadingContent && !hasTranscripts) {
+          showNotification({
+            message: 'No reading content available for this deck',
+            type: 'info',
+            duration: 3000,
+          });
+          return;
+        }
       }
 
       onModeSelect?.(deck.id, mode.id);

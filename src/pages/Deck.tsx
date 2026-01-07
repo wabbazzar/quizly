@@ -12,6 +12,7 @@ import { ModeCard } from '@/components/deck/types';
 import UnifiedSettings from '@/components/modals/UnifiedSettings';
 import { useSettingsStore } from '@/store/settingsStore';
 import { FlashcardsIcon, LearnIcon, MatchIcon, ReadIcon } from '@/components/icons/ModeIcons';
+import { hasTranscriptsForDeck } from '@/services/transcriptService';
 import styles from './Deck.module.css';
 
 const Deck: FC = () => {
@@ -24,10 +25,13 @@ const Deck: FC = () => {
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const [showCardModal, setShowCardModal] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [hasTranscripts, setHasTranscripts] = useState(false);
 
   useEffect(() => {
     if (deckId) {
       loadDeck(deckId);
+      // Check for transcripts availability
+      hasTranscriptsForDeck(deckId).then(setHasTranscripts);
     }
   }, [deckId, loadDeck]);
 
@@ -88,7 +92,8 @@ const Deck: FC = () => {
     (mode: ModeCard) => {
       // Check if Read mode is available for this deck
       if (mode.id === 'read') {
-        if (!currentDeck?.reading || Object.keys(currentDeck.reading.dialogues).length === 0) {
+        const hasReadingContent = currentDeck?.reading && Object.keys(currentDeck.reading.dialogues).length > 0;
+        if (!hasReadingContent && !hasTranscripts) {
           showNotification({
             message: 'No reading content available for this deck',
             type: 'info',
@@ -99,7 +104,7 @@ const Deck: FC = () => {
       }
       navigate(mode.route);
     },
-    [navigate, showNotification, currentDeck]
+    [navigate, showNotification, currentDeck, hasTranscripts]
   );
 
   const handleCardClick = useCallback((card: Card) => {
