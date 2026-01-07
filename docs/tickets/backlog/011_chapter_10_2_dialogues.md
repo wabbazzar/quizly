@@ -25,7 +25,7 @@ As a Chinese language learner, I want to practice reading dialogues in Chapter 1
 
 ### Functional Requirements
 
-1. Add two new dialogues to the `chinese_chpt10_pt2.json` deck's reading section
+1. Add two new dialogues to the `chinese_chpt10_2.json` deck's reading section
 2. Dialogues must include character-by-character tokenization for side_a (Chinese characters)
 3. Dialogues must include word-level alignments between Chinese, pinyin, and English
 4. Dialogues must be accessible through the Read mode interface
@@ -44,7 +44,7 @@ As a Chinese language learner, I want to practice reading dialogues in Chapter 1
 
 **Files to create/modify:**
 
-- `public/data/decks/chinese_chpt10_pt2.json` - Add reading section with dialogues
+- `public/data/decks/chinese_chpt10_2.json` - Add reading section with dialogues
 
 **Component Structure:**
 
@@ -85,7 +85,7 @@ No navigation changes required - dialogues will be accessible through existing R
 
 **Implementation steps:**
 
-1. Add reading section to `chinese_chpt10_pt2.json` with proper tokenization config
+1. Add reading section to `chinese_chpt10_2.json` with proper tokenization config
 2. Create dialogue_001 with the Chinese class preparation conversation
 3. Create dialogue_002 with the audio listening conversation
 4. Include word-level alignments for each line
@@ -94,14 +94,14 @@ No navigation changes required - dialogues will be accessible through existing R
 **Code Implementation:**
 
 1. Run:
-   `claude --agent code-writer "Add reading dialogues to chinese_chpt10_pt2.json following ticket #011 specifications"`
+   `claude --agent code-writer "Add reading dialogues to chinese_chpt10_2.json following ticket #011 specifications"`
 2. Run:
    `claude --agent code-quality-assessor "Review the deck JSON changes for consistency"`
 3. Apply code quality improvements
 
 **Testing:**
 
-1. Run: `claude --agent test-writer "Write tests for chinese_chpt10_pt2.json reading dialogues"`
+1. Run: `claude --agent test-writer "Write tests for chinese_chpt10_2.json reading dialogues"`
 2. Run: `claude --agent test-critic "Review tests for dialogue loading and parsing"`
 3. Run: `claude --agent test-writer "Implement critic's suggestions"`
 
@@ -142,7 +142,7 @@ npm run dev
 
 ### Unit Tests
 
-- Test file: `__tests__/decks/chinese_chpt10_pt2.test.ts`
+- Test file: `__tests__/decks/chinese_chpt10_2.test.ts`
 - Key scenarios: Dialogue loading, tokenization parsing, word alignments
 - Mock requirements: None (static JSON testing)
 

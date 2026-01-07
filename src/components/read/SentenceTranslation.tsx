@@ -27,7 +27,6 @@ export const SentenceTranslation: FC<Props> = ({
   const [userAnswer, setUserAnswer] = useState('');
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [result, setResult] = useState<SentenceTranslationResult | null>(null);
-  // const [showHints, setShowHints] = useState(false); // Will be used for hint toggling
 
   // Get source and target text
   const sourceText = line[settings.translationDirection.from] || '';
@@ -109,16 +108,11 @@ export const SentenceTranslation: FC<Props> = ({
 
   // Word hint functionality
   const handleWordClick = useCallback((chineseWord: string) => {
-    console.log('Word hint settings:', {
-      showWordHints: settings.showWordHints,
-      hasAlignments,
-      chineseWord
-    });
     if (!settings.showWordHints || !hasAlignments) return;
 
     const hint = getWordHint(line, chineseWord, settings.translationDirection.to);
     if (hint) {
-      // You could show this in a tooltip or temporary display
+      // Hint is shown via title attribute on hover
       console.log('Word hint:', chineseWord, hint);
     }
   }, [line, settings, hasAlignments]);
@@ -128,7 +122,6 @@ export const SentenceTranslation: FC<Props> = ({
     setUserAnswer('');
     setSelectedOption(null);
     setResult(null);
-    // setShowHints(false); // Will reset hint state when implemented
   }, [line]);
 
   const canSubmit = settings.answerType === 'multiple_choice'
@@ -143,34 +136,27 @@ export const SentenceTranslation: FC<Props> = ({
           Translate this sentence:
         </div>
         <div className={styles.sourceText}>
-           {(() => {
-             console.log('Rendering source text:', {
-               hasAlignments,
-               showWordHints: settings.showWordHints,
-               sourceText
-             });
-             return hasAlignments && settings.showWordHints ? (
-               <div className={styles.interactiveSource}>
-                 <div className={styles.wordTokensContainer}>
-                   {alignedTokens.map((token, index) => (
-                     <span
-                       key={index}
-                       className={`${styles.wordToken} ${token.english ? styles.clickable : styles.static}`}
-                       onClick={() => handleWordClick(token.chinese)}
-                       title={token.english ? `${token.pinyin} - ${token.english}` : undefined}
-                     >
-                       {token.chinese}
-                     </span>
-                   ))}
-                 </div>
-                 <div className={styles.hintText}>
-                   Tap words for hints
-                 </div>
+           {hasAlignments && settings.showWordHints ? (
+             <div className={styles.interactiveSource}>
+               <div className={styles.wordTokensContainer}>
+                 {alignedTokens.map((token, index) => (
+                   <span
+                     key={index}
+                     className={`${styles.wordToken} ${token.english ? styles.clickable : styles.static}`}
+                     onClick={() => handleWordClick(token.chinese)}
+                     title={token.english ? `${token.pinyin} - ${token.english}` : undefined}
+                   >
+                     {token.chinese}
+                   </span>
+                 ))}
                </div>
-             ) : (
-               <div className={styles.staticSource}>{sourceText}</div>
-             );
-           })()}
+               <div className={styles.hintText}>
+                 Hover over words for hints
+               </div>
+             </div>
+           ) : (
+             <div className={styles.staticSource}>{sourceText}</div>
+           )}
          </div>
       </div>
 

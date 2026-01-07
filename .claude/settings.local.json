@@ -94,7 +94,10 @@
       "Bash(sudo apt-get:*)",
       "Bash(sudo apt-get install:*)",
       "Bash(apt list:*)",
-      "Bash(./fix-browser-wsl2.sh:*)"
+      "Bash(./fix-browser-wsl2.sh:*)",
+      "Bash(npm run build:gh-pages:*)",
+      "Bash(npm --version:*)",
+      "Bash(timeout 8s npm run dev:*)"
     ],
     "deny": [],
     "ask": []
