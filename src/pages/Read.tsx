@@ -12,6 +12,7 @@ import { ReadProgress } from '@/components/read/ReadProgress';
 import UnifiedSettings from '@/components/modals/UnifiedSettings';
 import SettingsIcon from '@/components/icons/SettingsIcon';
 import { Button } from '@/components/ui/Button';
+import { hasTranscriptsForDeck } from '@/services/transcriptService';
 import styles from './Read.module.css';
 
 const Read: FC = () => {
@@ -37,6 +38,7 @@ const Read: FC = () => {
   // Local state
   const [showSettings, setShowSettings] = useState(false);
   const [selectedDialogueId, setSelectedDialogueId] = useState<string | null>(null);
+  const [hasTranscripts, setHasTranscripts] = useState<boolean | null>(null);
 
   // Load deck on mount
   useEffect(() => {
@@ -44,6 +46,13 @@ const Read: FC = () => {
       loadDeck(deckId);
     }
   }, [deckId, loadDeck]);
+
+  // Check for transcripts availability
+  useEffect(() => {
+    if (deckId) {
+      hasTranscriptsForDeck(deckId).then(setHasTranscripts);
+    }
+  }, [deckId]);
 
   // Initialize session when deck loads
   useEffect(() => {
@@ -199,12 +208,20 @@ const Read: FC = () => {
     );
   }
 
-  // Check if deck has reading content
-  if (!currentDeck.reading || Object.keys(currentDeck.reading.dialogues).length === 0) {
+  // Determine if we have reading content
+  const hasReadingContent = currentDeck.reading && Object.keys(currentDeck.reading.dialogues).length > 0;
+
+  // Wait for transcript check to complete
+  if (hasTranscripts === null) {
+    return null; // Still checking for transcripts
+  }
+
+  // Check if deck has any reading content (structured dialogues OR transcripts)
+  if (!hasReadingContent && !hasTranscripts) {
     return (
       <div className={styles.errorContainer}>
         <h2>No reading content available</h2>
-        <p>This deck doesn't have any reading dialogues. Please choose a different deck.</p>
+        <p>This deck doesn't have any reading dialogues or transcripts. Please choose a different deck.</p>
         <button onClick={() => navigate(`/deck/${deckId}`)} className={styles.backButton}>
           Back to Deck
         </button>
@@ -242,7 +259,7 @@ const Read: FC = () => {
         </div>
 
         <div className={styles.mainPanel}>
-          {session && currentDialogue && currentLine && (
+          {session && currentDialogue && currentLine ? (
             <>
               <ReadProgress
                 currentLineIndex={session.currentLineIndex}
@@ -320,7 +337,13 @@ const Read: FC = () => {
                 </div>
               )}
             </>
-          )}
+          ) : hasTranscripts && !hasReadingContent ? (
+            <div className={styles.transcriptOnlyMessage}>
+              <h3>Transcript Reader</h3>
+              <p>This deck has transcripts available for external TTS readers.</p>
+              <p>Select a transcript from the sidebar to view and copy.</p>
+            </div>
+          ) : null}
         </div>
       </div>
 
