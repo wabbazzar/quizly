@@ -5,7 +5,8 @@
 
 import { TranscriptFile, TranscriptManifest } from '@/types';
 
-const TRANSCRIPTS_BASE_PATH = '/data/transcripts';
+// Use BASE_URL to handle GitHub Pages base path (/quizly/)
+const getTranscriptsBasePath = () => `${import.meta.env.BASE_URL}data/transcripts`;
 
 let manifestCache: TranscriptManifest | null = null;
 
@@ -17,7 +18,7 @@ export async function loadTranscriptManifest(): Promise<TranscriptManifest> {
     return manifestCache;
   }
 
-  const response = await fetch(`${TRANSCRIPTS_BASE_PATH}/manifest.json`);
+  const response = await fetch(`${getTranscriptsBasePath()}/manifest.json`);
   if (!response.ok) {
     throw new Error('Failed to load transcript manifest');
   }
@@ -38,7 +39,7 @@ export async function getTranscriptsForDeck(deckId: string): Promise<TranscriptF
  * Load the text content of a transcript file
  */
 export async function loadTranscriptContent(filename: string): Promise<string> {
-  const response = await fetch(`${TRANSCRIPTS_BASE_PATH}/${filename}`);
+  const response = await fetch(`${getTranscriptsBasePath()}/${filename}`);
   if (!response.ok) {
     throw new Error(`Failed to load transcript: ${filename}`);
   }
