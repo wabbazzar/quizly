@@ -13,7 +13,6 @@ export const CompactDeckCard: FC<CompactDeckCardProps> = memo(({
   onSelect,
 }) => {
   const cardCount = deck.metadata.card_count;
-  const levelCount = deck.metadata.available_levels.length;
 
   const displayTitle = deck.metadata.abbreviated_title || deck.metadata.deck_name;
   const subtitle = deck.metadata.deck_subtitle;
@@ -36,7 +35,7 @@ export const CompactDeckCard: FC<CompactDeckCardProps> = memo(({
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="button"
-      aria-label={`${deck.metadata.deck_name}. ${cardCount} cards, ${levelCount} levels.`}
+      aria-label={`${deck.metadata.deck_name}. ${cardCount} cards.`}
       whileTap={{ scale: 0.98 }}
     >
       <div className={styles.title}>{displayTitle}</div>
@@ -45,7 +44,6 @@ export const CompactDeckCard: FC<CompactDeckCardProps> = memo(({
 
       <div className={styles.stats}>
         <span>{cardCount} cards</span>
-        <span>{levelCount} {levelCount === 1 ? 'level' : 'levels'}</span>
       </div>
     </motion.div>
   );
