@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "node scripts/generate-deck-manifest.js && vite",
-    "build": "node scripts/generate-deck-manifest.js && tsc -b && vite build",
-    "build:gh-pages": "node scripts/generate-deck-manifest.js && tsc -b && vite build --base /quizly/ && node scripts/fix-gh-pages-manifest.js",
+    "dev": "node scripts/generate-deck-manifest.js && node scripts/generate-transcript-manifest.js && vite",
+    "build": "node scripts/generate-deck-manifest.js && node scripts/generate-transcript-manifest.js && tsc -b && vite build",
+    "build:gh-pages": "node scripts/generate-deck-manifest.js && node scripts/generate-transcript-manifest.js && tsc -b && vite build --base /quizly/ && node scripts/fix-gh-pages-manifest.js",
     "build:analyze": "npm run build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -18,7 +18,8 @@
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
-    "generate-manifest": "node scripts/generate-deck-manifest.js"
+    "generate-manifest": "node scripts/generate-deck-manifest.js",
+    "generate-transcripts": "node scripts/generate-transcript-manifest.js"
   },
   "dependencies": {
     "@types/classnames": "^2.3.0",

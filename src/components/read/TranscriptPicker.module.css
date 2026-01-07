@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.subtitle {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+  margin-top: 0;
+}
+
+.loading {
+  padding: var(--space-4);
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.transcriptList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.transcriptButton {
+  width: 100%;
+  padding: var(--space-3);
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.transcriptButton:hover {
+  transform: translateX(2px);
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.1),
+    rgba(74, 144, 226, 0.05)
+  );
+}
+
+.transcriptContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.transcriptName {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.icon {
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.transcriptButton:hover .icon {
+  color: var(--primary-main);
+}

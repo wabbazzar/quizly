@@ -293,3 +293,19 @@ export interface UserPreferences {
   defaultMode: 'flashcards' | 'learn' | 'match' | 'test';
   soundEnabled: boolean;
 }
+
+// Transcript Types
+export type TranscriptType = 'dialogue' | 'phrases';
+
+export interface TranscriptFile {
+  id: string;           // e.g., "chinese_chpt9_2_dialogue"
+  deckId: string;       // e.g., "chinese_chpt9_2"
+  type: TranscriptType; // "dialogue" or "phrases"
+  filename: string;     // e.g., "chinese_chpt9_2_dialogue.txt"
+  displayName: string;  // e.g., "Dialogue" or "Phrases"
+}
+
+export interface TranscriptManifest {
+  transcripts: TranscriptFile[];
+  generatedAt: string;
+}

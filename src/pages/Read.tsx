@@ -4,7 +4,8 @@ import { useDeckStore } from '@/store/deckStore';
 import { useReadStore } from '@/store/readStore';
 import { SentenceTranslationResult } from '@/types';
 import { PageHeader } from '@/components/common/PageHeader';
-import { ReadDialoguePicker } from '@/components/read/ReadDialoguePicker';
+import { ReadSidebar } from '@/components/read/ReadSidebar';
+import { TranscriptModal } from '@/components/read/TranscriptModal';
 import { EnhancedReadLine } from '@/components/read/EnhancedReadLine';
 import { ReadControls } from '@/components/read/ReadControls';
 import { ReadProgress } from '@/components/read/ReadProgress';
@@ -232,7 +233,7 @@ const Read: FC = () => {
 
       <div className={styles.container}>
         <div className={styles.leftPanel}>
-          <ReadDialoguePicker
+          <ReadSidebar
             deck={currentDeck}
             selectedDialogueId={selectedDialogueId}
             onSelectDialogue={handleSelectDialogue}
@@ -335,6 +336,8 @@ const Read: FC = () => {
           }}
         />
       )}
+
+      <TranscriptModal />
     </div>
   );
 };

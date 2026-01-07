@@ -62,7 +62,7 @@ export const ReadDialoguePicker: FC<Props> = ({
 
   return (
     <div className={styles.container}>
-      <h3 className={styles.title}>Dialogues</h3>
+      <h3 className={styles.title}>Practice</h3>
       <div className={styles.dialogueList}>
         {dialogueEntries.map(([dialogueId, dialogue]) => {
           const isSelected = selectedDialogueId === dialogueId;
