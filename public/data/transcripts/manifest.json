@@ -57,6 +57,62 @@
       "displayName": "Phrases"
     },
     {
+      "id": "chinese_chpt5_2_dialogue",
+      "deckId": "chinese_chpt5_2",
+      "type": "dialogue",
+      "filename": "chinese_chpt5_2_dialogue.txt",
+      "displayName": "Dialogue"
+    },
+    {
+      "id": "chinese_chpt5_2_phrases",
+      "deckId": "chinese_chpt5_2",
+      "type": "phrases",
+      "filename": "chinese_chpt5_2_phrases.txt",
+      "displayName": "Phrases"
+    },
+    {
+      "id": "chinese_chpt6_2_dialogue",
+      "deckId": "chinese_chpt6_2",
+      "type": "dialogue",
+      "filename": "chinese_chpt6_2_dialogue.txt",
+      "displayName": "Dialogue"
+    },
+    {
+      "id": "chinese_chpt6_2_phrases",
+      "deckId": "chinese_chpt6_2",
+      "type": "phrases",
+      "filename": "chinese_chpt6_2_phrases.txt",
+      "displayName": "Phrases"
+    },
+    {
+      "id": "chinese_chpt7_2_dialogue",
+      "deckId": "chinese_chpt7_2",
+      "type": "dialogue",
+      "filename": "chinese_chpt7_2_dialogue.txt",
+      "displayName": "Dialogue"
+    },
+    {
+      "id": "chinese_chpt7_2_phrases",
+      "deckId": "chinese_chpt7_2",
+      "type": "phrases",
+      "filename": "chinese_chpt7_2_phrases.txt",
+      "displayName": "Phrases"
+    },
+    {
+      "id": "chinese_chpt8_2_dialogue",
+      "deckId": "chinese_chpt8_2",
+      "type": "dialogue",
+      "filename": "chinese_chpt8_2_dialogue.txt",
+      "displayName": "Dialogue"
+    },
+    {
+      "id": "chinese_chpt8_2_phrases",
+      "deckId": "chinese_chpt8_2",
+      "type": "phrases",
+      "filename": "chinese_chpt8_2_phrases.txt",
+      "displayName": "Phrases"
+    },
+    {
       "id": "chinese_chpt9_2_dialogue",
       "deckId": "chinese_chpt9_2",
       "type": "dialogue",
@@ -85,5 +141,5 @@
       "displayName": "Phrases"
     }
   ],
-  "generatedAt": "2026-01-08T14:54:20.066Z"
+  "generatedAt": "2026-01-08T15:30:00.000Z"
 }
