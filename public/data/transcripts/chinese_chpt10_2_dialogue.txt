@@ -1,6 +1,6 @@
 Chinese Dialogue Practice - Chapter 10
 Transportation
-Estimated listening time: 33 minutes
+Estimated listening time: 46 minutes
 
 寒假, winter vacation.
 下个星期, next week.
@@ -15,6 +15,9 @@ Estimated listening time: 33 minutes
 Xiaomei: Xiaoming, winter vacation starts next week. Did you buy your plane ticket?
 Xiaoming: Not yet. I'm going to buy tickets online today.
 
+小美: 小明，寒假下个星期就开始了。你买飞机票了吗？
+小明: 还没有。我今天要在网上买票。
+
 坐, to take transportation.
 同一, same.
 班, scheduled trip.
@@ -25,6 +28,9 @@ Xiaoming: Not yet. I'm going to buy tickets online today.
 
 Xiaomei: I've already bought mine. Let's take the same flight!
 Xiaoming: Good idea! What date is your flight?
+
+小美: 我已经买好了。我们坐同一班飞机吧！
+小明: 好主意！你的飞机是几号的？
 
 飞机, airplane.
 十二月, December.
@@ -37,6 +43,9 @@ Xiaoming: Good idea! What date is your flight?
 Xiaomei: My flight is December 20th, at 9 in the morning.
 Xiaoming: Okay, I'll also buy a ticket for that flight.
 
+小美: 我的飞机是十二月二十号的，早上九点。
+小明: 好，我也买那班飞机的票。
+
 问题, question, problem.
 
 小明: 我买好了！可是我有一个问题。
@@ -44,6 +53,9 @@ Xiaoming: Okay, I'll also buy a ticket for that flight.
 
 Xiaoming: I bought it! But I have a question.
 Xiaomei: What question?
+
+小明: 我买好了！可是我有一个问题。
+小美: 什么问题？
 
 飞机场, airport.
 方法, method, way.
@@ -53,6 +65,9 @@ Xiaomei: What question?
 
 Xiaoming: I don't know how to get to the airport. Do you know?
 Xiaomei: Yes. There are many ways to get to the airport.
+
+小明: 我不知道怎么去飞机场。你知道吗？
+小美: 知道。去飞机场有很多方法。
 
 坐, to take transportation.
 公共汽车, bus.
@@ -65,6 +80,9 @@ Xiaomei: Yes. There are many ways to get to the airport.
 
 Xiaoming: What ways are there?
 Xiaomei: You can take the bus, or take the subway, or take a taxi.
+
+小明: 有什么方法？
+小美: 你可以坐公共汽车，或者坐地铁，或者打车。
 
 坐, to take transportation.
 公共汽车, bus.
@@ -79,6 +97,9 @@ Xiaomei: You can take the bus, or take the subway, or take a taxi.
 
 Xiaoming: How do I get there by bus?
 Xiaomei: First take bus number 23, ride for five stops, then get off.
+
+小明: 坐公共汽车怎么去？
+小美: 先坐二十三路公共汽车，坐五站，然后下车。
 
 下车, to get off.
 以后, after.
@@ -95,6 +116,9 @@ Xiaomei: First take bus number 23, ride for five stops, then get off.
 Xiaomei: After getting off, transfer to bus number 31, and ride to the last stop.
 Xiaoming: Is that the airport?
 
+小美: 下车以后，再换三十一路，坐到最后一站。
+小明: 那是飞机场吗？
+
 最后, last.
 站, stop.
 飞机场, airport.
@@ -108,6 +132,9 @@ Xiaoming: Is that the airport?
 
 Xiaomei: Yes, the last stop is the airport.
 Xiaoming: That sounds a bit troublesome. What about the subway?
+
+小美: 对，最后一站就是飞机场。
+小明: 听起来有点儿麻烦。坐地铁呢？
 
 坐, to take transportation.
 地铁, subway.
@@ -125,6 +152,9 @@ Xiaoming: That sounds a bit troublesome. What about the subway?
 Xiaomei: The subway also works. First take the green line, ride three stops, then transfer to the blue line.
 Xiaoming: Then what?
 
+小美: 坐地铁也可以。先坐绿线，坐三站，然后换蓝线。
+小明: 然后呢？
+
 然后, then.
 坐, to take transportation.
 蓝, blue.
@@ -140,6 +170,9 @@ Xiaoming: Then what?
 Xiaomei: Then take the blue line to the airport station. Altogether it takes about 40 minutes.
 Xiaoming: 40 minutes? That's faster than the bus, right?
 
+小美: 然后坐蓝线到飞机场站。一共大概四十分钟。
+小明: 四十分钟？比坐公共汽车快吧？
+
 坐, to take transportation.
 公共汽车, bus.
 小时, hour.
@@ -153,6 +186,9 @@ Xiaoming: 40 minutes? That's faster than the bus, right?
 Xiaomei: Yes, the bus takes an hour. The subway is faster.
 Xiaoming: But our flight is at 9 in the morning. What time do we need to leave?
 
+小美: 对，坐公共汽车要一个小时。地铁比较快。
+小明: 可是我们的飞机是早上九点。我们要几点出发？
+
 出发, to depart.
 六点半, 6:30.
 飞机场, airport.
@@ -164,6 +200,9 @@ Xiaoming: But our flight is at 9 in the morning. What time do we need to leave?
 Xiaomei: We should leave at 6:30 in the morning. That way we'll arrive at the airport after 7.
 Xiaoming: 6:30? That's too early!
 
+小美: 我们应该早上六点半出发。这样七点多到飞机场。
+小明: 六点半？那太早了！
+
 起床, to get up.
 早, early.
 打车, to take a taxi.
@@ -174,6 +213,9 @@ Xiaoming: 6:30? That's too early!
 
 Xiaoming: I don't want to get up that early. Is there another way?
 Xiaomei: You can take a taxi to the airport. Taking a taxi is faster.
+
+小明: 我不想那么早起床。有没有别的方法？
+小美: 你可以打车去飞机场。打车比较快。
 
 打车, to take a taxi.
 多长时间, how long.
@@ -187,6 +229,9 @@ Xiaomei: You can take a taxi to the airport. Taking a taxi is faster.
 Xiaoming: How long does it take by taxi?
 Xiaomei: If there's no traffic, about 30 minutes.
 
+小明: 打车要多长时间？
+小美: 如果路上不堵车的话，大概三十分钟。
+
 地铁, subway.
 还, even more.
 打车, to take a taxi.
@@ -198,6 +243,9 @@ Xiaomei: If there's no traffic, about 30 minutes.
 Xiaoming: 30 minutes! That's even faster than the subway.
 Xiaomei: Yes. But taking a taxi is more expensive. It costs about 100 yuan.
 
+小明: 三十分钟！那比地铁还快。
+小美: 对。可是打车比较贵。大概要一百块。
+
 地铁, subway.
 便宜, cheap.
 
@@ -206,6 +254,9 @@ Xiaomei: Yes. But taking a taxi is more expensive. It costs about 100 yuan.
 
 Xiaoming: 100 yuan? That's a bit expensive. How much is the subway?
 Xiaomei: The subway only costs 20 yuan. Much cheaper.
+
+小明: 一百块？有点儿贵。地铁多少钱？
+小美: 地铁只要二十块。便宜很多。
 
 虽然, although.
 打车, to take a taxi.
@@ -218,6 +269,9 @@ Xiaomei: The subway only costs 20 yuan. Much cheaper.
 Xiaoming: Although taking a taxi is a bit more expensive, I can sleep a bit longer.
 Xiaomei: You don't want to get up early, so taking a taxi is more suitable for you.
 
+小明: 虽然打车贵一点儿，可是我可以多睡一会儿。
+小美: 你不想早起，所以打车对你比较合适。
+
 飞机场, airport.
 开车, to drive.
 送, to take someone.
@@ -227,6 +281,9 @@ Xiaomei: You don't want to get up early, so taking a taxi is more suitable for y
 
 Xiaoming: Right. What about you? How are you getting to the airport?
 Xiaomei: My dad said he can drive me to the airport.
+
+小明: 对。那你呢？你怎么去飞机场？
+小美: 我爸爸说他可以开车送我去飞机场。
 
 自己, oneself.
 坐, to take transportation.
@@ -240,6 +297,9 @@ Xiaomei: My dad said he can drive me to the airport.
 Xiaoming: Really? That's great! You don't have to take transportation yourself.
 Xiaomei: Yes. Every time I travel, my dad sees me off.
 
+小明: 真的吗？那太好了！你不用自己坐车了。
+小美: 对啊。我爸爸每次我出去旅行，他都送我。
+
 开车, to drive.
 会, can, to know how to.
 
@@ -248,6 +308,9 @@ Xiaomei: Yes. Every time I travel, my dad sees me off.
 
 Xiaoming: Your dad is so nice. My dad can't drive.
 Xiaomei: It's okay. Xiaoming, I have an idea.
+
+小明: 你爸爸真好。我爸爸不会开车。
+小美: 没关系。小明，我有一个主意。
 
 主意, idea.
 先, first.
@@ -262,6 +325,9 @@ Xiaomei: It's okay. Xiaoming, I have an idea.
 Xiaoming: What idea?
 Xiaomei: My dad can come to your house first to pick you up, then we can go to the airport together.
 
+小明: 什么主意？
+小美: 我爸爸可以先来你家接你，然后我们一起去飞机场。
+
 麻烦, troublesome.
 离, from distance.
 远, far.
@@ -273,6 +339,9 @@ Xiaomei: My dad can come to your house first to pick you up, then we can go to t
 Xiaoming: Really? That's great! But won't that be too much trouble for your dad?
 Xiaomei: No. Your house isn't far from mine. He's happy to help.
 
+小明: 真的吗？那太好了！可是会不会太麻烦你爸爸？
+小美: 不会。你家离我家不远。他很高兴帮忙。
+
 不好意思, embarrassed.
 好朋友, good friends.
 
@@ -281,6 +350,9 @@ Xiaomei: No. Your house isn't far from mine. He's happy to help.
 
 Xiaoming: Then I'm embarrassed. Please thank your dad for me.
 Xiaomei: It's okay. We're good friends!
+
+小明: 那我不好意思了。请帮我谢谢你爸爸。
+小美: 没关系。我们是好朋友嘛！
 
 七点半, 7:30.
 左右, around, approximately.
@@ -291,6 +363,9 @@ Xiaomei: It's okay. We're good friends!
 
 Xiaoming: Thank you, Xiaomei. What time do we leave then?
 Xiaomei: My dad says we'll leave at 7:30. We'll arrive at the airport around 8.
+
+小明: 谢谢你，小美。那我们几点出发？
+小美: 我爸爸说七点半出发。八点左右到飞机场。
 
 开车, to drive.
 飞机场, airport.
@@ -305,6 +380,9 @@ Xiaomei: My dad says we'll leave at 7:30. We'll arrive at the airport around 8.
 Xiaoming: 7:30 is much better than 6:30! I'm very happy.
 Xiaomei: Driving to the airport means taking the highway. The scenery along the way is nice.
 
+小明: 七点半比六点半好多了！我很高兴。
+小美: 开车去飞机场要走高速公路。路上风景很好。
+
 开车, to drive.
 二十多年, more than 20 years.
 
@@ -313,6 +391,9 @@ Xiaomei: Driving to the airport means taking the highway. The scenery along the 
 
 Xiaoming: How well does your dad drive?
 Xiaomei: He drives very well. He's been driving for more than 20 years.
+
+小明: 你爸爸开车开得怎么样？
+小美: 他开得很好。他开车开了二十多年了。
 
 经验, experience.
 不过, however.
@@ -326,6 +407,9 @@ Xiaomei: He drives very well. He's been driving for more than 20 years.
 Xiaoming: More than 20 years? Then he must be very experienced.
 Xiaomei: Yes. But he says some people on the highway drive too fast.
 
+小明: 二十多年？那他一定很有经验。
+小美: 对。不过他说高速公路上有的人开车开得太快。
+
 高速公路, highway.
 开车, to drive.
 正常, normal.
@@ -337,6 +421,9 @@ Xiaomei: Yes. But he says some people on the highway drive too fast.
 Xiaoming: Isn't it normal to drive fast on the highway?
 Xiaomei: Fast is fast, but too fast is not safe.
 
+小明: 高速公路上开车快是正常的吧？
+小美: 快是快，可是太快就不安全了。
+
 重要, important.
 开车, to drive.
 紧张, nervous.
@@ -346,6 +433,9 @@ Xiaomei: Fast is fast, but too fast is not safe.
 
 Xiaoming: That makes sense. Safety is most important.
 Xiaomei: Right. My dad is never nervous when driving, very safe.
+
+小明: 有道理。安全最重要。
+小美: 对。我爸爸开车从来不紧张，很安全。
 
 紧张, nervous.
 手机, cell phone.
@@ -357,6 +447,9 @@ Xiaomei: Right. My dad is never nervous when driving, very safe.
 Xiaoming: Great. Then I'm not nervous either.
 Xiaomei: By the way, what's your phone number?
 
+小明: 太好了。那我也不紧张了。
+小美: 对了，你的手机号码是多少？
+
 手机, cell phone.
 发短信, to send a text message.
 
@@ -366,6 +459,9 @@ Xiaomei: By the way, what's your phone number?
 Xiaoming: My phone number is 138-6554-3210. Why do you ask?
 Xiaomei: I want to send you a text message before we leave.
 
+小明: 我的手机号码是一三八六五五四三二一零。为什么问？
+小美: 我想在出发前给你发短信。
+
 电子邮件, email.
 
 小美: 这样你就知道我们什么时候到你家了。
@@ -373,6 +469,9 @@ Xiaomei: I want to send you a text message before we leave.
 
 Xiaomei: That way you'll know when we're arriving at your house.
 Xiaoming: Good idea! You can also send me an email.
+
+小美: 这样你就知道我们什么时候到你家了。
+小明: 好主意！你也可以给我发电子邮件。
 
 发短信, to send a text message.
 先, first.
@@ -384,6 +483,9 @@ Xiaoming: Good idea! You can also send me an email.
 Xiaomei: Okay. Texting is faster, I'll text first.
 Xiaoming: No problem. I'll check my phone.
 
+小美: 好的。发短信比较快，我先发短信。
+小明: 没问题。我会看手机的。
+
 长城, Great Wall.
 故宫, Forbidden City.
 好玩, fun.
@@ -393,6 +495,9 @@ Xiaoming: No problem. I'll check my phone.
 
 Xiaoming: Xiaomei, what places do we want to visit in Beijing?
 Xiaomei: I want to go to the Great Wall, the Forbidden City, and many other fun places.
+
+小明: 小美，我们在北京要去哪些地方？
+小美: 我想去长城、故宫，还有很多好玩的地方。
 
 出行, to travel, to get around.
 坐, to take transportation.
@@ -406,6 +511,9 @@ Xiaomei: I want to go to the Great Wall, the Forbidden City, and many other fun 
 
 Xiaoming: How will we get around in Beijing? Also by subway?
 Xiaomei: Yes, Beijing's subway is very convenient. Every city has a subway.
+
+小明: 在北京我们怎么出行？也是坐地铁吗？
+小美: 对，北京的地铁很方便。每个城市都有地铁。
 
 地铁, subway.
 线, line.
@@ -421,6 +529,9 @@ Xiaomei: Yes, Beijing's subway is very convenient. Every city has a subway.
 Xiaoming: Are there many subway lines in Beijing?
 Xiaomei: A lot! There's a red line, blue line, green line, yellow line, especially many.
 
+小明: 北京的地铁线多不多？
+小美: 很多！有红线、蓝线、绿线、黄线，特别多。
+
 麻烦, troublesome.
 手机, cell phone.
 地图, map.
@@ -432,6 +543,9 @@ Xiaomei: A lot! There's a red line, blue line, green line, yellow line, especial
 
 Xiaoming: Won't that be troublesome?
 Xiaomei: Not troublesome. There's a map on the phone, we can use the phone to see how to take the subway.
+
+小明: 那会不会很麻烦？
+小美: 不麻烦。手机上有地图，我们可以用手机看怎么坐地铁。
 
 手机, cell phone.
 方便, convenient.
@@ -445,6 +559,9 @@ Xiaomei: Not troublesome. There's a map on the phone, we can use the phone to se
 Xiaoming: Right, phones are really convenient now. You can do everything with a phone.
 Xiaomei: Yes. Buying tickets, looking at maps, sending texts, all can be done with a phone.
 
+小明: 对，现在手机真方便。什么都可以用手机做。
+小美: 是啊。买票、看地图、发短信，都可以用手机。
+
 待, to stay.
 星期, week.
 寒假, winter vacation.
@@ -455,6 +572,9 @@ Xiaomei: Yes. Buying tickets, looking at maps, sending texts, all can be done wi
 Xiaoming: How many days will we stay in Beijing?
 Xiaomei: We'll stay for one week. Winter vacation is two weeks, we'll stay one week then come back.
 
+小明: 我们在北京要待几天？
+小美: 我们要待一个星期。寒假有两个星期，我们待一个星期就回来。
+
 够, enough.
 
 小明: 一个星期够不够？
@@ -462,6 +582,9 @@ Xiaomei: We'll stay for one week. Winter vacation is two weeks, we'll stay one w
 
 Xiaoming: Is one week enough?
 Xiaomei: It should be enough. Beijing is very big, but in one week we can see many places.
+
+小明: 一个星期够不够？
+小美: 应该够。北京很大，可是一个星期可以看很多地方。
 
 回来, to come back.
 坐, to take transportation.
@@ -474,6 +597,9 @@ Xiaomei: It should be enough. Beijing is very big, but in one week we can see ma
 Xiaoming: When we come back, will we also fly?
 Xiaomei: Yes, we'll fly back. I've already bought the return tickets.
 
+小明: 我们回来的时候也是坐飞机吗？
+小美: 对，我们坐飞机回来。我已经买好了回来的票。
+
 厉害, amazing.
 准备, to prepare.
 特别, especially.
@@ -485,6 +611,9 @@ Xiaomei: Yes, we'll fly back. I've already bought the return tickets.
 Xiaoming: You're amazing! Everything is prepared.
 Xiaomei: Because I'm especially looking forward to this trip!
 
+小明: 你真厉害！什么都准备好了。
+小美: 因为我特别期待这次旅行！
+
 第一次, first time.
 城市, city.
 有意思, interesting.
@@ -495,6 +624,9 @@ Xiaomei: Because I'm especially looking forward to this trip!
 Xiaoming: Me too! This is my first time going to Beijing.
 Xiaomei: You'll definitely like Beijing. That city is especially interesting.
 
+小明: 我也是！这是我第一次去北京。
+小美: 你一定会喜欢北京的。那个城市特别有意思。
+
 事, matter, thing.
 
 小明: 小美，还有一件事我想问你。
@@ -502,6 +634,9 @@ Xiaomei: You'll definitely like Beijing. That city is especially interesting.
 
 Xiaoming: Xiaomei, there's one more thing I want to ask you.
 Xiaomei: What is it?
+
+小明: 小美，还有一件事我想问你。
+小美: 什么事？
 
 回家, to go home.
 飞机场, airport.
@@ -512,6 +647,9 @@ Xiaomei: What is it?
 Xiaoming: When we come back, how do we get home from the airport?
 Xiaomei: Good question! I haven't thought about that yet.
 
+小明: 我们回来的时候，从飞机场怎么回家？
+小美: 好问题！我还没想过这个问题。
+
 接, to pick up.
 晚上, evening, night.
 方便, convenient.
@@ -521,6 +659,9 @@ Xiaomei: Good question! I haven't thought about that yet.
 
 Xiaoming: Can your dad come pick us up?
 Xiaomei: I'll ask him. But we're coming back at night, it might not be convenient for him.
+
+小明: 你爸爸可以来接我们吗？
+小美: 我问问他。可是我们回来是晚上，可能他不方便。
 
 打车, to take a taxi.
 回家, to go home.
@@ -534,6 +675,9 @@ Xiaomei: I'll ask him. But we're coming back at night, it might not be convenien
 Xiaoming: Then we can take a taxi home.
 Xiaomei: Right, taking a taxi is most convenient. Or we can take the subway.
 
+小明: 那我们可以打车回家。
+小美: 对，打车最方便。或者我们可以坐地铁。
+
 晚上, evening, night.
 地铁, subway.
 停, to stop.
@@ -544,6 +688,9 @@ Xiaomei: Right, taking a taxi is most convenient. Or we can take the subway.
 
 Xiaoming: Is the subway still running at night?
 Xiaomei: Yes. The subway doesn't stop until 10:30 at night. Our flight arrives at 8.
+
+小明: 晚上地铁还有吗？
+小美: 有的。地铁晚上十点半才停。我们的飞机八点到。
 
 坐, to take transportation.
 地铁, subway.
@@ -557,6 +704,9 @@ Xiaomei: Yes. The subway doesn't stop until 10:30 at night. Our flight arrives a
 Xiaoming: Then we can take the subway home, save money.
 Xiaomei: Good idea! Although taking a taxi is fast, the subway is much cheaper.
 
+小明: 那我们可以坐地铁回家，省钱。
+小美: 好主意！虽然打车快，可是地铁便宜很多。
+
 准备, to prepare.
 应该, should.
 
@@ -565,6 +715,9 @@ Xiaomei: Good idea! Although taking a taxi is fast, the subway is much cheaper.
 
 Xiaoming: Xiaomei, thank you for helping me prepare for this trip.
 Xiaomei: You're welcome! We're good friends, helping is what I should do.
+
+小明: 小美，谢谢你帮我准备这次旅行。
+小美: 不用谢！我们是好朋友，帮忙是应该的。
 
 一起, together.
 寒假, winter vacation.
@@ -575,6 +728,9 @@ Xiaomei: You're welcome! We're good friends, helping is what I should do.
 
 Xiaoming: I'm really happy we can go to Beijing together.
 Xiaomei: Me too! This winter vacation will definitely be a lot of fun.
+
+小明: 我真的很高兴我们可以一起去北京。
+小美: 我也是！这次寒假一定很好玩。
 
 见, to see, to meet.
 别忘了, don't forget.
@@ -587,6 +743,9 @@ Xiaomei: Me too! This winter vacation will definitely be a lot of fun.
 
 Xiaoming: Then see you next week! I'll be ready.
 Xiaomei: Okay! Don't forget to bring your new clothes and new shoes!
+
+小明: 那我们下个星期见！我会准备好的。
+小美: 好的！别忘了带你的新衣服和新鞋！
 
 当然, of course.
 蓝, blue.
@@ -602,6 +761,9 @@ Xiaomei: Okay! Don't forget to bring your new clothes and new shoes!
 Xiaoming: Of course! My new blue shirt and black pants are all ready.
 Xiaomei: My new brown shoes are also ready. We'll look great!
 
+小明: 当然！我的新蓝色衬衫和黑色裤子都准备好了。
+小美: 我的新咖啡色鞋也准备好了。我们会很好看的！
+
 星期六, Saturday.
 新年, New Year.
 快乐, happy.
@@ -612,6 +774,9 @@ Xiaomei: My new brown shoes are also ready. We'll look great!
 Xiaoming: Haha, right! See you Saturday then!
 Xiaomei: See you Saturday! Happy New Year!
 
+小明: 哈哈，对！那星期六见！
+小美: 星期六见！新年快乐！
+
 新年, New Year.
 快乐, happy.
 寒假, winter vacation.
@@ -621,6 +786,9 @@ Xiaomei: See you Saturday! Happy New Year!
 
 Xiaoming: Happy New Year!
 Xiaomei: Happy winter vacation!
+
+小明: 新年快乐！
+小美: 寒假快乐！
 
 END OF DIALOGUE
 

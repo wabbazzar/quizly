@@ -1,6 +1,6 @@
 Chinese Dialogue Practice - Chapter 8
 Letters and Abilities
-Estimated listening time: 10 minutes
+Estimated listening time: 14 minutes
 
 封, measure word for letters.
 信, letter.
@@ -13,6 +13,9 @@ Estimated listening time: 10 minutes
 Xiaoming: How many letters have you received recently?
 Xiaomei: I received three letters this semester.
 
+小明: 你最近收到几封信？
+小美: 我这个学期收到了三封信。
+
 最, most.
 近, close.
 专业, major.
@@ -23,6 +26,9 @@ Xiaomei: I received three letters this semester.
 
 Xiaoming: What's your major?
 Xiaomei: I study Chinese. I can speak a little Chinese.
+
+小明: 你的专业是什么？
+小美: 我学中文。我会说一点中文。
 
 后来, later.
 音乐会, concert.
@@ -35,6 +41,9 @@ Xiaomei: I study Chinese. I can speak a little Chinese.
 Xiaoming: Did you go to the concert later?
 Xiaomei: No, but I hope I can go.
 
+小明: 后来你去了音乐会吗？
+小美: 没有，但是我希望能去。
+
 用, to use.
 笑, to laugh.
 祝, to wish.
@@ -45,6 +54,9 @@ Xiaomei: No, but I hope I can go.
 
 Xiaoming: Besides studying Chinese, what else do you study?
 Xiaomei: I also study music. I wish you success in your studies!
+
+小明: 除了学中文以外，你还学什么？
+小美: 我还学音乐。祝你学习顺利！
 
 信, letter.
 最近, recently.
@@ -57,6 +69,9 @@ Xiaomei: I also study music. I wish you success in your studies!
 Xiaomei: How many letters have you written recently?
 Xiaoming: I wrote two letters to my family this semester.
 
+小美: 你最近写了几封信？
+小明: 这个学期我写了两封信给家人。
+
 专业, major.
 会, can.
 最, most.
@@ -67,6 +82,9 @@ Xiaoming: I wrote two letters to my family this semester.
 
 Xiaoming: Is your major difficult?
 Xiaomei: A bit difficult, but I will study hard.
+
+小明: 你的专业难吗？
+小美: 有点难，但是我会努力学习。
 
 音乐会, concert.
 希望, hope.
@@ -79,6 +97,9 @@ Xiaomei: A bit difficult, but I will study hard.
 Xiaomei: What do you hope to do later?
 Xiaoming: I hope to go to many concerts.
 
+小美: 你希望后来能做什么？
+小明: 我希望能去很多音乐会。
+
 笑, to smile.
 祝, to wish.
 用, to use.
@@ -89,6 +110,9 @@ Xiaoming: I hope to go to many concerts.
 
 Xiaoming: Can you write letters in Chinese?
 Xiaomei: Yes! Besides writing letters, I can also speak. Don't laugh at me!
+
+小明: 你会用中文写信吗？
+小美: 会！除了写信以外，我还会说。别笑我！
 
 最近, recently.
 信, letter.
@@ -101,6 +125,9 @@ Xiaomei: Yes! Besides writing letters, I can also speak. Don't laugh at me!
 Xiaomei: Have you been busy recently?
 Xiaoming: Very busy. This semester I received many letters.
 
+小美: 最近你忙吗？
+小明: 很忙。这个学期我收到了很多封信。
+
 会, can.
 专业, specialty.
 能, able.
@@ -111,6 +138,9 @@ Xiaoming: Very busy. This semester I received many letters.
 
 Xiaoming: Can you play piano?
 Xiaomei: No, but I hope to learn. That's my professional hope.
+
+小明: 你会弹钢琴吗？
+小美: 不会，但是我希望能学。这是我的专业希望。
 
 后来, later.
 音乐会, concert.
@@ -123,6 +153,9 @@ Xiaomei: No, but I hope to learn. That's my professional hope.
 Xiaomei: How was the concert later?
 Xiaoming: Great! Everybody was smiling and chatting in Chinese.
 
+小美: 后来音乐会怎么样？
+小明: 很好！大家都笑着用中文聊天。
+
 祝, to wish.
 除了...以外, in addition to.
 最近, recently.
@@ -133,6 +166,9 @@ Xiaoming: Great! Everybody was smiling and chatting in Chinese.
 
 Xiaoming: Besides studying, what else have you been doing recently?
 Xiaomei: I write letters to friends. I wish you a smooth semester!
+
+小明: 除了学习以外，你最近还做什么？
+小美: 我写信给朋友。祝你这个学期顺利！
 
 END OF DIALOGUE
 

@@ -1,6 +1,6 @@
 Chinese Dialogue Practice - Chapter 2
 Family and Occupations
-Estimated listening time: 10 minutes
+Estimated listening time: 14 minutes
 
 家, family; home.
 几, how many.
@@ -13,6 +13,9 @@ Estimated listening time: 10 minutes
 Xiaoming: Xiaomei, how many people are in your family?
 Xiaomei: There are five people in my family. What about you?
 
+小明: 小美，你家有几口人？
+小美: 我家有五口人。你呢？
+
 哥哥, older brother.
 妹妹, younger sister.
 两, two.
@@ -23,6 +26,9 @@ Xiaomei: There are five people in my family. What about you?
 
 Xiaoming: There are four people in my family. I have an older brother. Do you have an older brother?
 Xiaomei: I don't have an older brother, but I have two younger sisters.
+
+小明: 我家有四口人。我有一个哥哥。你有哥哥吗？
+小美: 我没有哥哥，可是我有两个妹妹。
 
 大姐, eldest sister.
 二姐, second oldest sister.
@@ -35,6 +41,9 @@ Xiaomei: I don't have an older brother, but I have two younger sisters.
 Xiaoming: Do you have older sisters?
 Xiaomei: Yes, I have an eldest sister and a second sister. They are both grown up now.
 
+小明: 你有姐姐吗？
+小美: 有，我有大姐和二姐。她们都很大了。
+
 工作, job; to work.
 做, to do.
 什么, what.
@@ -45,6 +54,9 @@ Xiaomei: Yes, I have an eldest sister and a second sister. They are both grown u
 
 Xiaoming: What does your eldest sister do for work?
 Xiaomei: My eldest sister is a lawyer. Her job is very busy.
+
+小明: 你大姐做什么工作？
+小美: 我大姐是律师。她的工作很忙。
 
 医生, doctor.
 二姐, second sister.
@@ -57,6 +69,9 @@ Xiaomei: My eldest sister is a lawyer. Her job is very busy.
 Xiaoming: What about your second sister? Is she also a lawyer?
 Xiaomei: No, my second sister is a doctor. She's also very busy.
 
+小明: 你二姐呢？她也是律师吗？
+小美: 不是，我二姐是医生。她也很忙。
+
 大学生, college student.
 大学, university.
 学生, student.
@@ -67,6 +82,9 @@ Xiaomei: No, my second sister is a doctor. She's also very busy.
 
 Xiaoming: Are your two younger sisters students?
 Xiaomei: Yes, they are both college students. They go to university in Beijing.
+
+小明: 你的两个妹妹是学生吗？
+小美: 是的，她们都是大学生。她们在北京上大学。
 
 英文, English language.
 学, to study.
@@ -79,6 +97,9 @@ Xiaomei: Yes, they are both college students. They go to university in Beijing.
 Xiaoming: What do your sisters study?
 Xiaomei: My older younger sister studies English, my youngest sister wants to be a teacher.
 
+小明: 你妹妹学什么？
+小美: 大妹妹学英文，小妹妹想当老师。
+
 哥哥, older brother.
 做, to do.
 工作, to work.
@@ -89,6 +110,9 @@ Xiaomei: My older younger sister studies English, my youngest sister wants to be
 
 Xiaomei: What does your older brother do for work?
 Xiaoming: My older brother is also a lawyer. He works in New York.
+
+小美: 你哥哥做什么工作？
+小明: 我哥哥也是律师。他在纽约工作。
 
 家, family.
 都, all.
@@ -101,6 +125,9 @@ Xiaoming: My older brother is also a lawyer. He works in New York.
 Xiaomei: Your family members are all very busy, right?
 Xiaoming: Yes, our family is all very busy. But on weekends we're all at home.
 
+小美: 你们家人都很忙吧？
+小明: 是的，我们家人都很忙。可是周末我们都在家。
+
 大学, university.
 学生, student.
 美国, America.
@@ -112,6 +139,9 @@ Xiaoming: Yes, our family is all very busy. But on weekends we're all at home.
 Xiaoming: I go to university in America. Do you go to university in China?
 Xiaomei: Yes, I go to university in Beijing. I'm a college student.
 
+小明: 我在美国上大学。你在中国上大学吗？
+小美: 是的，我在北京上大学。我是大学生。
+
 医生, doctor.
 律师, lawyer.
 工作, job.
@@ -122,6 +152,9 @@ Xiaomei: Yes, I go to university in Beijing. I'm a college student.
 
 Xiaoming: Do you want to be a doctor or a lawyer?
 Xiaomei: I want to be a teacher. I think being a teacher is a good job.
+
+小明: 你想做医生还是律师？
+小美: 我想做老师。我觉得老师的工作很好。
 
 END OF DIALOGUE
 

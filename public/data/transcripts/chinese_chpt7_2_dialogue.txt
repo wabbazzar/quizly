@@ -1,6 +1,6 @@
 Chinese Dialogue Practice - Chapter 7
 Daily Routines and Classes
-Estimated listening time: 10 minutes
+Estimated listening time: 14 minutes
 
 平常, usually.
 早, early.
@@ -13,6 +13,9 @@ Estimated listening time: 10 minutes
 Xiaoming: What time do you usually wake up?
 Xiaomei: I usually wake up at six. I woke up so late today!
 
+小明: 你平常几点起床？
+小美: 我平常六点起床。今天起得这么晚！
+
 早上, morning.
 功课, homework.
 大家, everybody.
@@ -23,6 +26,9 @@ Xiaomei: I usually wake up at six. I woke up so late today!
 
 Xiaoming: What do you do in the morning?
 Xiaomei: In the morning I do homework, then go to class. Everybody is busy.
+
+小明: 早上你做什么？
+小美: 早上我做功课，然后上课。大家都很忙。
 
 开始, to begin.
 念, to read aloud.
@@ -35,6 +41,9 @@ Xiaomei: In the morning I do homework, then go to class. Everybody is busy.
 Xiaoming: When does class start?
 Xiaomei: It starts at eight. We first read the text aloud, then listen to recordings.
 
+小明: 上课什么时候开始？
+小美: 八点开始。我们先念课文，然后听录音。
+
 学习, to study.
 帅, handsome.
 酷, cool.
@@ -45,6 +54,9 @@ Xiaomei: It starts at eight. We first read the text aloud, then listen to record
 
 Xiaoming: Do you like studying Chinese?
 Xiaomei: Yes! Our teacher is very handsome and cool.
+
+小明: 你喜欢学习中文吗？
+小美: 喜欢！我们的老师很帅，也很酷。
 
 平常, usually.
 晚, late.
@@ -57,6 +69,9 @@ Xiaomei: Yes! Our teacher is very handsome and cool.
 Xiaomei: When do you usually do homework?
 Xiaoming: I usually do homework at night. There's so much homework today!
 
+小美: 你平常什么时候做功课？
+小明: 我平常晚上做功课。今天功课这么多！
+
 大家, everybody.
 上课, to go to class.
 开始, to start.
@@ -67,6 +82,9 @@ Xiaoming: I usually do homework at night. There's so much homework today!
 
 Xiaoming: What time does everybody go to class in the morning?
 Xiaomei: Everybody starts class at eight.
+
+小明: 大家早上几点上课？
+小美: 大家八点开始上课。
 
 念, to read aloud.
 课文, text.
@@ -79,6 +97,9 @@ Xiaomei: Everybody starts class at eight.
 Xiaomei: How do you study Chinese?
 Xiaoming: I read texts aloud, listen to recordings, and study every day.
 
+小美: 你怎么学习中文？
+小明: 我念课文，听录音，每天学习。
+
 帅, handsome.
 酷, cool.
 早, early.
@@ -89,6 +110,9 @@ Xiaoming: I read texts aloud, listen to recordings, and study every day.
 
 Xiaoming: Do you think I'm handsome?
 Xiaomei: You're very handsome and cool. But you wake up too late!
+
+小明: 你觉得我帅吗？
+小美: 你很帅，也很酷。但是你起床太晚了！
 
 平常, usually.
 这么, so.
@@ -101,6 +125,9 @@ Xiaomei: You're very handsome and cool. But you wake up too late!
 Xiaomei: Does everybody usually have a lot of homework?
 Xiaoming: Usually not this much, today there's especially a lot.
 
+小美: 平常大家的功课多吗？
+小明: 平常不这么多，今天特别多。
+
 上课, to go to class.
 开始, to begin.
 早上, morning.
@@ -111,6 +138,9 @@ Xiaoming: Usually not this much, today there's especially a lot.
 
 Xiaoming: When you go to class in the morning, what do you do first?
 Xiaomei: When class starts, we first read the text aloud.
+
+小明: 早上上课，你先做什么？
+小美: 上课开始，我们先念课文。
 
 课文, text.
 录音, recording.
@@ -123,6 +153,9 @@ Xiaomei: When class starts, we first read the text aloud.
 Xiaomei: This text is very difficult.
 Xiaoming: Listen to recordings to study, this method is cool.
 
+小美: 这个课文很难。
+小明: 听录音学习吧，这个方法很酷。
+
 帅, handsome.
 早, early.
 晚, late.
@@ -133,6 +166,9 @@ Xiaoming: Listen to recordings to study, this method is cool.
 
 Xiaoming: I should wake up earlier, that's more handsome.
 Xiaomei: People who usually wake up early are all handsome. You're too late!
+
+小明: 我要早点起床，这样更帅。
+小美: 平常早起的人都很帅。你太晚了！
 
 END OF DIALOGUE
 

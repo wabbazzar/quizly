@@ -1,6 +1,6 @@
 Chinese Dialogue Practice - Chapter 1
 Basic Introductions and Places
-Estimated listening time: 8 minutes
+Estimated listening time: 11 minutes
 
 是, to be.
 老师, teacher.
@@ -13,6 +13,9 @@ Estimated listening time: 8 minutes
 Xiaoming: Hello! Are you a teacher?
 Xiaomei: No, I'm not a teacher. I'm a student.
 
+小明: 你好！你是老师吗？
+小美: 不，我不是老师。我是学生。
+
 也, too; also.
 人, person.
 中国, China.
@@ -23,6 +26,9 @@ Xiaomei: No, I'm not a teacher. I'm a student.
 
 Xiaoming: I'm also a student. Are you Chinese?
 Xiaomei: Yes, I'm Chinese. What about you? Are you American?
+
+小明: 我也是学生。你是中国人吗？
+小美: 是，我是中国人。你呢？你是美国人吗？
 
 不, not; no.
 是, to be.
@@ -35,6 +41,9 @@ Xiaomei: Yes, I'm Chinese. What about you? Are you American?
 Xiaoming: Yes, I'm American. I'm from New York.
 Xiaomei: New York? New York is great! I'm from Beijing.
 
+小明: 是的，我是美国人。我是纽约人。
+小美: 纽约？纽约很好！我是北京人。
+
 老师, teacher.
 中国人, Chinese person.
 美国人, American person.
@@ -45,6 +54,9 @@ Xiaomei: New York? New York is great! I'm from Beijing.
 
 Xiaoming: Is your teacher Chinese?
 Xiaomei: Yes, my teacher is Chinese. What about your teacher?
+
+小明: 你的老师是中国人吗？
+小美: 是的，我的老师是中国人。你的老师呢？
 
 也, also.
 美国, America.
@@ -57,6 +69,9 @@ Xiaomei: Yes, my teacher is Chinese. What about your teacher?
 Xiaoming: My teacher is not American, and not Chinese either.
 Xiaomei: Really? Then where is he from?
 
+小明: 我的老师不是美国人，也不是中国人。
+小美: 真的吗？那他是哪国人？
+
 人, person.
 是, to be.
 老师, teacher.
@@ -67,6 +82,9 @@ Xiaomei: Really? Then where is he from?
 
 Xiaoming: He's British. He's a very good teacher.
 Xiaomei: My teacher is also very good. We are all good students.
+
+小明: 他是英国人。他是很好的老师。
+小美: 我的老师也很好。我们都是好学生。
 
 北京, Beijing.
 纽约, New York.
@@ -79,6 +97,9 @@ Xiaomei: My teacher is also very good. We are all good students.
 Xiaoming: Is Beijing big?
 Xiaomei: Yes, Beijing is very big. Is New York also big?
 
+小明: 北京大吗？
+小美: 是的，北京很大。纽约也很大吗？
+
 大, big.
 小, small.
 也, also.
@@ -89,6 +110,9 @@ Xiaomei: Yes, Beijing is very big. Is New York also big?
 
 Xiaoming: Yes, New York is also very big. There are many people in New York.
 Xiaomei: There are also many people in Beijing. Beijing is the capital of China.
+
+小明: 是的，纽约也很大。纽约人很多。
+小美: 北京人也很多。北京是中国的首都。
 
 学生, student.
 老师, teacher.
@@ -101,6 +125,9 @@ Xiaomei: There are also many people in Beijing. Beijing is the capital of China.
 Xiaomei: Are you a student in America?
 Xiaoming: Yes, I'm a college student in America.
 
+小美: 你在美国是学生吗？
+小明: 是的，我在美国是大学生。
+
 中国人, Chinese person.
 美国人, American person.
 人, person.
@@ -112,6 +139,9 @@ Xiaoming: Yes, I'm a college student in America.
 Xiaomei: Are all your classmates American?
 Xiaoming: No, there are Chinese people and American people too.
 
+小美: 你的同学都是美国人吗？
+小明: 不，有中国人，也有美国人。
+
 朋友, friend.
 认识, to know.
 好, good.
@@ -122,6 +152,9 @@ Xiaoming: No, there are Chinese people and American people too.
 
 Xiaoming: I know many Chinese people. They are all my good friends.
 Xiaomei: That's great! I also want to meet more American friends.
+
+小明: 我认识很多中国人。他们都是我的好朋友。
+小美: 真好！我也想认识更多美国朋友。
 
 END OF DIALOGUE
 
