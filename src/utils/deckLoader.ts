@@ -317,7 +317,28 @@ export const loadAllDecks = async (): Promise<Deck[]> => {
     // Filter out any decks that failed validation
     const validDecks = loadedDecks.filter(Boolean) as Deck[];
 
-    // Decks loaded successfully
+    // Sort decks: chapter descending, then part descending (10_2, 10_1, 9_2, 9_1, ..., 1_2, 1_1)
+    validDecks.sort((a, b) => {
+      // Extract chapter and part numbers from deck ID (e.g., "chinese_chpt10_2")
+      const parseId = (id: string): { chapter: number; part: number } => {
+        const match = id.match(/chpt(\d+)_(\d+)/);
+        if (match) {
+          return { chapter: parseInt(match[1], 10), part: parseInt(match[2], 10) };
+        }
+        // Fallback for non-matching IDs
+        return { chapter: 0, part: 0 };
+      };
+
+      const aInfo = parseId(a.id);
+      const bInfo = parseId(b.id);
+
+      // Sort by chapter descending first
+      if (bInfo.chapter !== aInfo.chapter) {
+        return bInfo.chapter - aInfo.chapter;
+      }
+      // Then by part descending
+      return bInfo.part - aInfo.part;
+    });
 
     return validDecks;
   } catch (error) {
