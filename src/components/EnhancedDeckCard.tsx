@@ -229,6 +229,13 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(
             </div>
           )}
 
+          {(hasTranscripts || (deck.reading && Object.keys(deck.reading.dialogues).length > 0)) && (
+            <div className={styles.statItem}>
+              <ReadIcon className={styles.statIcon} size={16} />
+              <span className={styles.statLabel}>reading</span>
+            </div>
+          )}
+
           <div className={styles.statItem}>
             <ClockIcon className={styles.statIcon} size={16} />
             <span className={styles.statValue}>{formatLastStudied(progress.lastStudied)}</span>

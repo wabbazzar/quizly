@@ -120,7 +120,8 @@
       "Bash(src/components/read/ReadDialoguePicker.tsx )",
       "Bash(src/pages/Read.tsx )",
       "Bash(src/types/index.ts)",
-      "Bash(npx -y playwright@latest test:*)"
+      "Bash(npx -y playwright@latest test:*)",
+      "Bash(wc:*)"
     ],
     "deny": [],
     "ask": []
