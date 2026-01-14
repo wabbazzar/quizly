@@ -60,7 +60,7 @@ async function generateIcons() {
   await sharp(svgBuffer)
     .resize(512, 512, {
       fit: 'contain',
-      background: { r: 74, g: 144, b: 226, alpha: 1 }, // Primary color
+      background: { r: 91, g: 130, b: 176, alpha: 1 }, // Primary color #5b82b0
     })
     .png()
     .toFile(path.join(iconsPath, 'icon-512x512-maskable.png'));
