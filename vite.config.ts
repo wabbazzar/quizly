@@ -49,7 +49,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,json,mp3}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
         navigateFallback: null, // Disable the default navigation fallback
         runtimeCaching: [
           {
