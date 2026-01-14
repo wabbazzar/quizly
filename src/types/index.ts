@@ -304,6 +304,7 @@ export interface TranscriptFile {
   type: TranscriptType; // "dialogue" or "phrases"
   filename: string;     // e.g., "chinese_chpt9_2_dialogue.txt"
   displayName: string;  // e.g., "Dialogue" or "Phrases"
+  audioFile?: string;   // Optional audio file, e.g., "chinese_chpt8_2_dialogue.mp3"
 }
 
 export interface TranscriptManifest {

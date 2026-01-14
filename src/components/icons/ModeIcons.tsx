@@ -149,3 +149,41 @@ export const ClockIcon: FC<IconProps> = ({ className, size = 24 }) => (
     <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
+
+export const PlayIcon: FC<IconProps> = ({ className, size = 24 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+    <path
+      d="M10 8l6 4-6 4V8z"
+      fill="currentColor"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const PauseIcon: FC<IconProps> = ({ className, size = 24 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+    <path d="M10 8v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <path d="M14 8v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+  </svg>
+);
