@@ -1,8 +1,7 @@
 import { FC, useCallback, useState, useRef, useEffect } from 'react';
 import { Modal } from '@/components/ui/Modal';
-import { Button } from '@/components/ui/Button';
 import CopyIcon from '@/components/icons/CopyIcon';
-import { PlayIcon, PauseIcon } from '@/components/icons/ModeIcons';
+import { PlayIcon, PauseIcon, SkipBackIcon, SkipForwardIcon, RestartIcon } from '@/components/icons/ModeIcons';
 import { useTranscriptStore } from '@/store/transcriptStore';
 import styles from './TranscriptModal.module.css';
 
@@ -19,6 +18,8 @@ export const TranscriptModal: FC = () => {
   const [copySuccess, setCopySuccess] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(100);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const audioFile = selectedTranscript?.audioFile;
@@ -30,17 +31,28 @@ export const TranscriptModal: FC = () => {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
       setIsPlaying(false);
+      setCurrentTime(0);
     }
   }, [isModalOpen]);
 
-  // Handle audio ended
+  // Handle audio events
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
     const handleEnded = () => setIsPlaying(false);
+    const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
+    const handleLoadedMetadata = () => setDuration(audio.duration);
+
     audio.addEventListener('ended', handleEnded);
-    return () => audio.removeEventListener('ended', handleEnded);
+    audio.addEventListener('timeupdate', handleTimeUpdate);
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+
+    return () => {
+      audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('timeupdate', handleTimeUpdate);
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+    };
   }, [audioUrl]);
 
   // Update playback rate when slider changes
@@ -61,6 +73,46 @@ export const TranscriptModal: FC = () => {
       setIsPlaying(true);
     }
   }, [isPlaying]);
+
+  const handleSkipBack = useCallback(() => {
+    if (!audioRef.current) return;
+    audioRef.current.currentTime = Math.max(0, audioRef.current.currentTime - 10);
+  }, []);
+
+  const handleSkipForward = useCallback(() => {
+    if (!audioRef.current) return;
+    audioRef.current.currentTime = Math.min(duration, audioRef.current.currentTime + 10);
+  }, [duration]);
+
+  const handleRestart = useCallback(() => {
+    if (!audioRef.current) return;
+    audioRef.current.currentTime = 0;
+    if (!isPlaying) {
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  }, [isPlaying]);
+
+  const handleSeek = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!audioRef.current) return;
+    const newTime = Number(e.target.value);
+    audioRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
+  }, []);
+
+  const formatTime = (time: number) => {
+    const mins = Math.floor(time / 60);
+    const secs = Math.floor(time % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const handleSpeedDecrease = useCallback(() => {
+    setPlaybackRate(prev => Math.max(75, prev - 5));
+  }, []);
+
+  const handleSpeedIncrease = useCallback(() => {
+    setPlaybackRate(prev => Math.min(100, prev + 5));
+  }, []);
 
   const handleCopy = useCallback(async () => {
     if (!transcriptContent) return;
@@ -102,30 +154,81 @@ export const TranscriptModal: FC = () => {
     >
       <div className={styles.modalContent}>
         {audioUrl && (
-          <audio ref={audioRef} src={audioUrl} preload="metadata" />
-        )}
-        <div className={styles.headerActions}>
-          {audioUrl && (
-            <div className={styles.audioControls}>
-              <Button
-                variant="secondary"
-                size="small"
-                onClick={handlePlayPause}
-                className={styles.playButton}
-                aria-label={isPlaying ? 'Pause audio' : 'Play audio'}
-                disabled={isLoadingContent}
-              >
-                {isPlaying ? <PauseIcon size={18} /> : <PlayIcon size={18} />}
-                <span>{isPlaying ? 'Pause' : 'Listen'}</span>
-              </Button>
-              <div className={styles.speedControl}>
-                <label htmlFor="speed-slider" className={styles.speedLabel}>
-                  Speed: {playbackRate}%
-                </label>
+          <>
+            <audio ref={audioRef} src={audioUrl} preload="metadata" />
+            <div className={styles.audioPlayer}>
+              <div className={styles.progressContainer}>
+                <span className={styles.time}>{formatTime(currentTime)}</span>
                 <input
-                  id="speed-slider"
                   type="range"
-                  min="80"
+                  min="0"
+                  max={duration || 100}
+                  value={currentTime}
+                  onChange={handleSeek}
+                  className={styles.progressBar}
+                  aria-label="Seek"
+                />
+                <span className={styles.time}>{formatTime(duration)}</span>
+              </div>
+              <div className={styles.controls}>
+                <button
+                  onClick={handleRestart}
+                  className={styles.controlBtn}
+                  aria-label="Restart"
+                  disabled={isLoadingContent}
+                >
+                  <RestartIcon size={26} />
+                </button>
+                <button
+                  onClick={handleSkipBack}
+                  className={styles.skipBtn}
+                  aria-label="Skip back 10 seconds"
+                  disabled={isLoadingContent}
+                >
+                  <SkipBackIcon size={36} />
+                </button>
+                <button
+                  onClick={handlePlayPause}
+                  className={styles.playBtn}
+                  aria-label={isPlaying ? 'Pause' : 'Play'}
+                  disabled={isLoadingContent}
+                >
+                  {isPlaying ? <PauseIcon size={32} /> : <PlayIcon size={32} />}
+                </button>
+                <button
+                  onClick={handleSkipForward}
+                  className={styles.skipBtn}
+                  aria-label="Skip forward 10 seconds"
+                  disabled={isLoadingContent}
+                >
+                  <SkipForwardIcon size={36} />
+                </button>
+                <div className={styles.copyContainer}>
+                  {copySuccess && <span className={styles.copiedText}>Copied!</span>}
+                  <button
+                    onClick={handleCopy}
+                    className={styles.copyBtn}
+                    aria-label={copySuccess ? 'Copied!' : 'Copy transcript'}
+                    title={copySuccess ? 'Copied!' : 'Copy'}
+                    disabled={!transcriptContent || isLoadingContent}
+                  >
+                    <CopyIcon size={22} />
+                  </button>
+                </div>
+              </div>
+              <div className={styles.speedControl}>
+                <button
+                  onClick={handleSpeedDecrease}
+                  className={styles.speedBtn}
+                  aria-label="Decrease speed"
+                  disabled={playbackRate <= 75}
+                >
+                  -
+                </button>
+                <span className={styles.speedLabel}>{playbackRate}%</span>
+                <input
+                  type="range"
+                  min="75"
                   max="100"
                   step="5"
                   value={playbackRate}
@@ -133,21 +236,18 @@ export const TranscriptModal: FC = () => {
                   className={styles.speedSlider}
                   aria-label="Playback speed"
                 />
+                <button
+                  onClick={handleSpeedIncrease}
+                  className={styles.speedBtn}
+                  aria-label="Increase speed"
+                  disabled={playbackRate >= 100}
+                >
+                  +
+                </button>
               </div>
             </div>
-          )}
-          <Button
-            variant="secondary"
-            size="small"
-            onClick={handleCopy}
-            className={styles.copyButton}
-            aria-label="Copy transcript to clipboard"
-            disabled={!transcriptContent || isLoadingContent}
-          >
-            <CopyIcon size={18} />
-            <span>{copySuccess ? 'Copied!' : 'Copy All'}</span>
-          </Button>
-        </div>
+          </>
+        )}
 
         <div className={styles.contentContainer}>
           {isLoadingContent ? (

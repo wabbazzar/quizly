@@ -1,6 +1,6 @@
 import { FC, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useDeckStore } from '@/store/deckStore';
 import { useProgressStore } from '@/store/progressStore';
 import EnhancedDeckCard from '@/components/EnhancedDeckCard';
@@ -39,20 +39,30 @@ const Home: FC = () => {
     const onResize = () => updateGradientStart();
     window.addEventListener('resize', onResize);
 
+    // Defer canvas operations to avoid blocking initial render
     const setHeaderStartFromImage = () => {
-      try {
-        const canvas = document.createElement('canvas');
-        canvas.width = 1;
-        canvas.height = 1;
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-        ctx.drawImage(img, 0, 0, 1, 1);
-        const data = ctx.getImageData(0, 0, 1, 1).data;
-        const toHex = (v: number) => v.toString(16).padStart(2, '0');
-        const hex = `#${toHex(data[0])}${toHex(data[1])}${toHex(data[2])}`;
-        node.style.setProperty('--header-start', hex);
-        updateGradientStart();
-      } catch {}
+      // Use requestIdleCallback if available, otherwise setTimeout
+      const deferredTask = () => {
+        try {
+          const canvas = document.createElement('canvas');
+          canvas.width = 1;
+          canvas.height = 1;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) return;
+          ctx.drawImage(img, 0, 0, 1, 1);
+          const data = ctx.getImageData(0, 0, 1, 1).data;
+          const toHex = (v: number) => v.toString(16).padStart(2, '0');
+          const hex = `#${toHex(data[0])}${toHex(data[1])}${toHex(data[2])}`;
+          node.style.setProperty('--header-start', hex);
+          updateGradientStart();
+        } catch {}
+      };
+
+      if ('requestIdleCallback' in window) {
+        (window as Window & { requestIdleCallback: (cb: () => void) => number }).requestIdleCallback(deferredTask);
+      } else {
+        setTimeout(deferredTask, 0);
+      }
     };
 
     if (img.complete) {
@@ -193,32 +203,17 @@ const Home: FC = () => {
               onSelectDeck={handleCompactDeckSelect}
             />
           ) : (
-            // Desktop: Full-size cards
-            <motion.div
-              className={styles.deckGrid}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              <AnimatePresence mode="popLayout">
-                {decks.map(deck => (
-                  <motion.div
-                    key={deck.id}
-                    layout
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <EnhancedDeckCard
-                      deck={deck}
-                      progress={getDeckProgress(deck.id)}
-                      onModeSelect={handleModeSelect}
-                    />
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </motion.div>
+            // Desktop: Full-size cards - simplified animations for performance
+            <div className={styles.deckGrid}>
+              {decks.map(deck => (
+                <EnhancedDeckCard
+                  key={deck.id}
+                  deck={deck}
+                  progress={getDeckProgress(deck.id)}
+                  onModeSelect={handleModeSelect}
+                />
+              ))}
+            </div>
           )}
         </section>
       </main>

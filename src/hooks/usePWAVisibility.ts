@@ -45,21 +45,13 @@ export function usePWAVisibility() {
     };
   });
 
-  // Heartbeat system to detect termination vs backgrounding
+  // Update heartbeat only on mount and when visibility changes (not continuously)
   useEffect(() => {
     if (!state.isIOS || !state.isPWA) return;
 
-    const updateHeartbeat = () => {
-      localStorage.setItem(PWA_HEARTBEAT_KEY, Date.now().toString());
-    };
-
-    // Update heartbeat every 2 seconds when visible
-    const interval = state.isVisible ? setInterval(updateHeartbeat, 2000) : null;
-
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [state.isVisible, state.isIOS, state.isPWA]);
+    // Write heartbeat once on mount
+    localStorage.setItem(PWA_HEARTBEAT_KEY, Date.now().toString());
+  }, [state.isIOS, state.isPWA]);
 
   // Persist critical app state before backgrounding
   const persistAppState = useCallback(() => {
@@ -72,6 +64,8 @@ export function usePWAVisibility() {
     };
 
     localStorage.setItem(PWA_STATE_KEY, JSON.stringify(appState));
+    // Update heartbeat when going to background so we can detect termination
+    localStorage.setItem(PWA_HEARTBEAT_KEY, Date.now().toString());
   }, [state.isIOS, state.isPWA]);
 
   // Restore app state after restoration

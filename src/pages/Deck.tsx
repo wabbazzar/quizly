@@ -18,8 +18,20 @@ import styles from './Deck.module.css';
 const Deck: FC = () => {
   const { deckId } = useParams<{ deckId: string }>();
   const navigate = useNavigate();
-  const { currentDeck, loadDeck, isLoading, error } = useDeckStore();
-  const { getMasteredCards, resetDeckMastery, mastery } = useCardMasteryStore();
+
+  // Use selectors to prevent re-renders from unrelated store changes
+  const currentDeck = useDeckStore(state => state.currentDeck);
+  const loadDeck = useDeckStore(state => state.loadDeck);
+  const isLoading = useDeckStore(state => state.isLoading);
+  const error = useDeckStore(state => state.error);
+
+  // Only subscribe to this specific deck's mastery changes via lastUpdated timestamp
+  const deckMasteryVersion = useCardMasteryStore(
+    state => state.mastery[deckId ?? '']?.lastUpdated?.getTime() ?? 0
+  );
+  const getMasteredCards = useCardMasteryStore(state => state.getMasteredCards);
+  const resetDeckMastery = useCardMasteryStore(state => state.resetDeckMastery);
+
   const { showNotification } = useNotificationStore();
   const { getSettingsForMode } = useSettingsStore();
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
@@ -35,10 +47,10 @@ const Deck: FC = () => {
     }
   }, [deckId, loadDeck]);
 
-  // Calculate mastered cards - safe to do at component level with proper guards
+  // Calculate mastered cards - only recalculates when this deck's mastery changes
   const masteredCardIndices = useMemo(() => {
     return deckId ? getMasteredCards(deckId) : [];
-  }, [deckId, getMasteredCards, mastery]); // Added mastery to dependencies to trigger recalculation
+  }, [deckId, getMasteredCards, deckMasteryVersion]);
 
   const learningCards = useMemo(() => {
     if (!currentDeck?.content) return [];

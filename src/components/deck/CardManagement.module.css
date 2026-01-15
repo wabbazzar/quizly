@@ -59,12 +59,12 @@
 }
 
 .cardCategory {
-  background: var(--bg-secondary); /* Use secondary background for consistency */
+  background: var(--bg-secondary);
   border-radius: var(--radius-lg);
   padding: var(--space-4);
   min-height: 300px;
-  width: 100%; /* Take full width of grid cell */
-  transition: all 0.3s ease;
+  width: 100%;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
   border: 1px solid var(--border-color);
   overflow: hidden;
   display: flex;
@@ -169,17 +169,21 @@
   align-items: flex-start;
   gap: var(--space-3);
   padding: var(--space-3);
-  background: var(--bg-primary); /* Use primary background for contrast */
+  background: var(--bg-primary);
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
   border: 1px solid var(--border-color);
-  min-height: 80px; /* Ensure minimum height for readability */
+  min-height: 80px;
 }
 
-/* Hover effect handled by Framer Motion whileHover prop */
 .cardItem:hover {
+  background-color: var(--bg-secondary);
   box-shadow: var(--shadow-sm);
+}
+
+.masteredCard:hover {
+  background-color: rgba(16, 185, 129, 0.1);
 }
 
 .cardItem.dragging {

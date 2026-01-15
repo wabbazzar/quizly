@@ -29,7 +29,7 @@ function RestorationOverlay({ isVisible }: { isVisible: boolean }) {
 
 // Main App component with global notification support
 function App() {
-  const { wasRestored, resumeCount, isIOS, isPWA, isRestoring } = usePWAVisibility();
+  const { resumeCount, isRestoring } = usePWAVisibility();
   const { loadDecks } = useDeckStore();
 
   // Load all decks on app initialization
@@ -37,21 +37,8 @@ function App() {
     loadDecks();
   }, [loadDecks]);
 
-  // iOS PWA specific: Force refresh on restoration
-  useEffect(() => {
-    if (isIOS && isPWA && wasRestored && !isRestoring) {
-      // iOS PWA: Forcing component refresh after restoration
-      // Force React to re-render the entire app tree
-      const root = document.getElementById('root');
-      if (root) {
-        root.style.display = 'none';
-        // Use requestAnimationFrame to ensure browser has painted
-        requestAnimationFrame(() => {
-          root.style.display = '';
-        });
-      }
-    }
-  }, [wasRestored, isIOS, isPWA, isRestoring]);
+  // iOS PWA specific: React re-render is handled via resumeCount key on AppRouter
+  // No forced DOM manipulation needed - the key prop change triggers re-render
 
   // Get the base URL from Vite's configuration
   const basename = import.meta.env.BASE_URL || '/';

@@ -187,3 +187,56 @@ export const PauseIcon: FC<IconProps> = ({ className, size = 24 }) => (
     <path d="M14 8v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
+
+export const SkipBackIcon: FC<IconProps> = ({ className, size = 24 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-hidden="true"
+  >
+    <path
+      d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"
+      fill="currentColor"
+    />
+    <text x="12" y="15.5" fontSize="7" fontWeight="600" textAnchor="middle" fill="currentColor">10</text>
+  </svg>
+);
+
+export const SkipForwardIcon: FC<IconProps> = ({ className, size = 24 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-hidden="true"
+  >
+    <path
+      d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"
+      fill="currentColor"
+    />
+    <text x="12" y="15.5" fontSize="7" fontWeight="600" textAnchor="middle" fill="currentColor">10</text>
+  </svg>
+);
+
+export const RestartIcon: FC<IconProps> = ({ className, size = 24 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-hidden="true"
+  >
+    <path
+      d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"
+      fill="currentColor"
+    />
+  </svg>
+);

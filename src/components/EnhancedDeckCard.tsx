@@ -1,6 +1,5 @@
 import { FC, memo, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { Deck } from '@/types';
 import { useNotificationStore } from '@/store/notificationStore';
 import { hasTranscriptsForDeck } from '@/services/transcriptService';
@@ -54,7 +53,8 @@ const formatLastStudied = (date?: Date): string => {
   return `${Math.floor(days / 30)} months ago`;
 };
 
-const CircularProgress: FC<{ value: number }> = ({ value }) => {
+// Memoized SVG progress ring to avoid recalculations
+const CircularProgress: FC<{ value: number }> = memo(({ value }) => {
   const radius = 16;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (value / 100) * circumference;
@@ -85,7 +85,8 @@ const CircularProgress: FC<{ value: number }> = ({ value }) => {
       </text>
     </svg>
   );
-};
+});
+CircularProgress.displayName = 'CircularProgress';
 
 const DifficultyBadge: FC<{ level?: string }> = ({ level }) => {
   if (!level) return null;
@@ -110,7 +111,6 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(
     },
     onModeSelect,
   }) => {
-    const [isHovered, setIsHovered] = useState(false);
     const [hasTranscripts, setHasTranscripts] = useState(false);
     const navigate = useNavigate();
     const { showNotification } = useNotificationStore();
@@ -181,15 +181,9 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(
     };
 
     return (
-      <motion.article
+      <article
         className={styles.enhancedDeckCard}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        whileHover={{ y: -4 }}
-        onHoverStart={() => setIsHovered(true)}
-        onHoverEnd={() => setIsHovered(false)}
         onClick={handleCardClick}
-        layout
       >
         {/* Progress Ring - Shows mastery percentage of entire deck */}
         {progress.overall > 0 && (
@@ -257,27 +251,21 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(
         )}
 
         {/* Mode Selection Strip */}
-        <motion.div
-          className={styles.modeStrip}
-          initial={false}
-          animate={{ opacity: isHovered ? 1 : 0.8 }}
-        >
+        <div className={styles.modeStrip}>
           {modes.map(mode => (
-            <motion.button
+            <button
               key={mode.id}
               className={`${styles.modeButton} ${styles[mode.id]}`}
               onClick={e => handleModeClick(e, mode)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               aria-label={`Study ${metadata.deck_name} with ${mode.label} mode`}
               title={mode.description}
             >
               <mode.icon className={styles.modeIcon} />
               <span className={styles.modeLabel}>{mode.label}</span>
-            </motion.button>
+            </button>
           ))}
-        </motion.div>
-      </motion.article>
+        </div>
+      </article>
     );
   }
 );

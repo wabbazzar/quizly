@@ -1,5 +1,4 @@
 import { FC, memo, useState, useRef } from 'react';
-import { motion } from 'framer-motion';
 import { Card } from '@/types';
 import { CardManagementProps } from './types';
 import {
@@ -83,18 +82,13 @@ export const CardManagement: FC<CardManagementProps> = memo(
     const sideBLabel = deck.metadata.side_labels?.side_b || 'Side B';
 
     const renderCard = (card: Card, isMastered: boolean) => (
-      <motion.div
+      <div
         key={card.idx}
         className={`${styles.cardItem} ${isMastered ? styles.masteredCard : ''} ${draggedCard === card.idx ? styles.dragging : ''}`}
-        draggable={!isTouchDevice} // Only enable dragging on non-touch devices
+        draggable={!isTouchDevice}
         onDragStart={!isTouchDevice ? () => handleDragStart(card.idx) : undefined}
         onDragEnd={!isTouchDevice ? handleDragEnd : undefined}
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: draggedCard === card.idx ? 0.5 : 1, x: 0 }}
-        transition={{ duration: 0.3 }}
         onClick={() => onCardClick(card)}
-        whileHover={{ backgroundColor: isMastered ? 'rgba(16, 185, 129, 0.15)' : '#F7F8FA' }}
-        layout
       >
         {!isTouchDevice && <DragHandleIcon className={styles.cardDragHandle} size={20} />}
         <div className={styles.cardNumber}>{card.idx + 1}</div>
@@ -118,7 +112,7 @@ export const CardManagement: FC<CardManagementProps> = memo(
         >
           {isMastered ? <RefreshIcon size={16} /> : <CheckCircleIcon size={16} />}
         </button>
-      </motion.div>
+      </div>
     );
 
     return (

@@ -4,7 +4,7 @@
   border-radius: 16px;
   padding: var(--space-5);
   box-shadow: var(--shadow-md);
-  transition: all var(--transition-base) ease;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -14,12 +14,9 @@
   min-height: 200px;
 }
 
-.enhancedDeckCard {
-  will-change: box-shadow;
-}
-
 .enhancedDeckCard:hover {
   box-shadow: var(--shadow-xl);
+  transform: translateY(-4px);
 }
 
 /* Progress Ring */
@@ -188,10 +185,9 @@
   border-radius: var(--radius-lg);
   border: 2px solid transparent;
   cursor: pointer;
-  transition: all var(--transition-fast) ease;
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
   position: relative;
   font-family: inherit;
-  will-change: transform;
 }
 
 .modeButton:hover {
