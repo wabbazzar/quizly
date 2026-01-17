@@ -255,6 +255,7 @@ export const useSettingsStore = create<UnifiedSettingsStore>()(
         learnSettings: state.learnSettings,
         matchSettings: state.matchSettings,
         testSettings: state.testSettings,
+        readSettings: state.readSettings,
         presetSelections: state.presetSelections,
       }),
       onRehydrateStorage: () => state => {

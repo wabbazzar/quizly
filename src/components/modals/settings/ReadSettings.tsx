@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { SectionProps } from '../UnifiedSettings';
 import { ReadModeSettings, SideId } from '@/types';
 import styles from './ReadSettings.module.css';
@@ -6,19 +6,73 @@ import styles from './ReadSettings.module.css';
 const ReadSettings: FC<SectionProps> = ({ settings, onChange, deck }) => {
   const readSettings = settings as ReadModeSettings;
 
-  // Get available sides from deck
-  const availableSides = deck?.reading?.sides || {
-    a: 'Characters',
-    b: 'Pinyin',
-    c: 'English'
-  };
+  // Get available sides from deck, with data-driven fallback from deck metadata
+  const availableSides = useMemo(() => {
+    // First priority: deck.reading.sides (explicit reading mode sides)
+    if (deck?.reading?.sides) {
+      return deck.reading.sides;
+    }
 
-  const sideOptions = Object.entries(availableSides)
-    .filter(([_, label]) => label)
-    .map(([side, label]) => ({
-      value: side as SideId,
-      label: label as string
-    }));
+    // Second priority: derive from deck.metadata.side_labels
+    if (deck?.metadata?.side_labels) {
+      const labels = deck.metadata.side_labels;
+      const sides: Partial<Record<SideId, string>> = {};
+
+      // Map side_a/side_b/etc to a/b/etc with proper labels
+      if (labels.side_a) sides.a = labels.side_a;
+      if (labels.side_b) sides.b = labels.side_b;
+      if (labels.side_c) sides.c = labels.side_c;
+      if (labels.side_d) sides.d = labels.side_d;
+      if (labels.side_e) sides.e = labels.side_e;
+      if (labels.side_f) sides.f = labels.side_f;
+
+      if (Object.keys(sides).length > 0) {
+        return sides;
+      }
+    }
+
+    // Last resort: generic fallback
+    return {
+      a: 'Side A',
+      b: 'Side B',
+      c: 'Side C'
+    };
+  }, [deck]);
+
+  const sideOptions = useMemo(() =>
+    Object.entries(availableSides)
+      .filter(([_, label]) => label)
+      .map(([side, label]) => ({
+        value: side as SideId,
+        label: label as string
+      })),
+    [availableSides]
+  );
+
+  // Validate and auto-correct translation direction if sides don't exist in current deck
+  useEffect(() => {
+    if (sideOptions.length < 2) return;
+
+    const validSideIds = sideOptions.map(opt => opt.value);
+    const currentFrom = readSettings.translationDirection?.from;
+    const currentTo = readSettings.translationDirection?.to;
+
+    const fromIsValid = currentFrom && validSideIds.includes(currentFrom);
+    const toIsValid = currentTo && validSideIds.includes(currentTo);
+
+    // If either side is invalid, reset to valid defaults
+    if (!fromIsValid || !toIsValid) {
+      const newFrom = fromIsValid ? currentFrom : validSideIds[0];
+      // Pick the first different side for 'to'
+      const newTo = toIsValid && currentTo !== newFrom
+        ? currentTo
+        : validSideIds.find(id => id !== newFrom) || validSideIds[1] || validSideIds[0];
+
+      if (newFrom !== currentFrom || newTo !== currentTo) {
+        onChange('translationDirection', { from: newFrom, to: newTo });
+      }
+    }
+  }, [sideOptions, readSettings.translationDirection, onChange]);
 
   // Handle translation direction change
   const handleDirectionChange = (fromOrTo: 'from' | 'to', value: string) => {

@@ -121,7 +121,10 @@
       "Bash(src/pages/Read.tsx )",
       "Bash(src/types/index.ts)",
       "Bash(npx -y playwright@latest test:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(ls:*)",
+      "Bash(gh run watch:*)",
+      "Bash(xargs ls:*)"
     ],
     "deny": [],
     "ask": []

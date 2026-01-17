@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { UnifiedSettingsConfig } from '@/components/modals/UnifiedSettings';
 import { useSettingsStore } from '@/store/settingsStore';
 import { UNIVERSAL_PRESETS } from '@/constants/presets';
@@ -11,18 +11,32 @@ export const useUnifiedSettings = (
   const [localSettings, setLocalSettings] = useState(initialSettings);
   const { saveSettings, getSettings } = useSettingsStore();
 
-  // Load settings on mount
+  // Track if we've already loaded settings to prevent re-running on initialSettings reference changes
+  const hasLoadedRef = useRef(false);
+  const persistenceKeyRef = useRef(config.persistenceKey);
+
+  // Load settings only on mount or when persistence key actually changes
   useEffect(() => {
-    const loadSettings = async () => {
-      const stored = getSettings(config.persistenceKey);
-      if (stored) {
-        setLocalSettings(stored);
-      } else {
-        setLocalSettings(initialSettings);
-      }
-    };
-    loadSettings();
-  }, [config.persistenceKey, initialSettings]);
+    // Reset loaded flag if persistence key changed (different mode)
+    if (persistenceKeyRef.current !== config.persistenceKey) {
+      hasLoadedRef.current = false;
+      persistenceKeyRef.current = config.persistenceKey;
+    }
+
+    // Only load once per persistence key
+    if (hasLoadedRef.current) {
+      return;
+    }
+
+    const stored = getSettings(config.persistenceKey);
+    if (stored) {
+      // Merge stored settings with initial settings to handle new fields
+      setLocalSettings({ ...initialSettings, ...stored });
+    } else {
+      setLocalSettings(initialSettings);
+    }
+    hasLoadedRef.current = true;
+  }, [config.persistenceKey, getSettings, initialSettings]);
 
   // Update a single setting
   const updateSetting = useCallback((key: string, value: any) => {
