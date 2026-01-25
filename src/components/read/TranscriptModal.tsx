@@ -153,7 +153,7 @@ export const TranscriptModal: FC = () => {
       className={styles.transcriptModal}
     >
       <div className={styles.modalContent}>
-        {audioUrl && (
+        {audioUrl ? (
           <>
             <audio ref={audioRef} src={audioUrl} preload="metadata" />
             <div className={styles.audioPlayer}>
@@ -247,6 +247,21 @@ export const TranscriptModal: FC = () => {
               </div>
             </div>
           </>
+        ) : (
+          <div className={styles.textToolbar}>
+            <div className={styles.copyContainer}>
+              {copySuccess && <span className={styles.copiedText}>Copied!</span>}
+              <button
+                onClick={handleCopy}
+                className={styles.copyBtn}
+                aria-label={copySuccess ? 'Copied!' : 'Copy transcript'}
+                title={copySuccess ? 'Copied!' : 'Copy'}
+                disabled={!transcriptContent || isLoadingContent}
+              >
+                <CopyIcon size={22} />
+              </button>
+            </div>
+          </div>
         )}
 
         <div className={styles.contentContainer}>
