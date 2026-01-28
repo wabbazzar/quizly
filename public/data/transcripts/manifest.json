@@ -1,6 +1,20 @@
 {
   "transcripts": [
     {
+      "id": "chinese_chpt12_1_dialogue",
+      "deckId": "chinese_chpt12_1",
+      "type": "dialogue",
+      "filename": "chinese_chpt12_1_dialogue.txt",
+      "displayName": "Dialogue"
+    },
+    {
+      "id": "chinese_chpt12_1_phrases",
+      "deckId": "chinese_chpt12_1",
+      "type": "phrases",
+      "filename": "chinese_chpt12_1_phrases.txt",
+      "displayName": "Phrases"
+    },
+    {
       "id": "chinese_chpt1_2_dialogue",
       "deckId": "chinese_chpt1_2",
       "type": "dialogue",
