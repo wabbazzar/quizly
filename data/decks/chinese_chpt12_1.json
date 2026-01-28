@@ -1,0 +1,296 @@
+{
+  "id": "chinese_chpt12_1",
+  "metadata": {
+    "deck_name": "Chinese Chapter 12 Part 1",
+    "abbreviated_title": "Chp 12 pt 1",
+    "deck_subtitle": "Dining",
+    "description": "Essential Chinese vocabulary for dining out, ordering food, and restaurant interactions",
+    "category": "Language Learning",
+    "available_levels": [1, 2, 3],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 27,
+    "difficulty": "intermediate",
+    "tags": ["chinese", "mandarin", "dining", "restaurant", "food", "vocabulary", "chapter12"],
+    "version": "1.0.0",
+    "created_date": "2026-01-28T00:00:00Z",
+    "last_updated": "2026-01-28T00:00:00Z"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "restaurant",
+      "side_a": "Restaurant",
+      "side_b": "fànguǎnr",
+      "side_c": "饭馆儿",
+      "side_d": "Noun for a place where meals are served",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "seem",
+      "side_a": "To seem; to be like",
+      "side_b": "hǎoxiàng",
+      "side_c": "好像",
+      "side_d": "Verb indicating appearance or similarity",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "seat",
+      "side_a": "Seat",
+      "side_b": "wèizi",
+      "side_c": "位子",
+      "side_d": "Noun for a place to sit",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "waiter",
+      "side_a": "Waiter; attendant",
+      "side_b": "fúwùyuán",
+      "side_c": "服务员",
+      "side_d": "Noun for restaurant service staff",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "table",
+      "side_a": "Table",
+      "side_b": "zhuōzi",
+      "side_c": "桌子",
+      "side_d": "Noun for furniture used for dining",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "order_food",
+      "side_a": "To order food",
+      "side_b": "diǎn cài",
+      "side_c": "点菜",
+      "side_d": "Verb-object phrase for selecting dishes at a restaurant",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "plate",
+      "side_a": "Plate; dish",
+      "side_b": "pán",
+      "side_c": "盘",
+      "side_d": "Noun and measure word for dishes of food",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "dumplings",
+      "side_a": "Dumplings",
+      "side_b": "jiǎozi",
+      "side_c": "饺子",
+      "side_d": "Noun for Chinese dumplings with vegetable and/or meat filling",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "vegetarian",
+      "side_a": "Vegetarian; made from vegetables",
+      "side_b": "sù",
+      "side_c": "素",
+      "side_d": "Adjective describing meatless food",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "home_style",
+      "side_a": "Home-style",
+      "side_b": "jiācháng",
+      "side_c": "家常",
+      "side_d": "Noun describing traditional home cooking style",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "tofu",
+      "side_a": "Tofu; bean curd",
+      "side_b": "dòufu",
+      "side_c": "豆腐",
+      "side_d": "Noun for a food made from soybeans",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "put",
+      "side_a": "To put; to place",
+      "side_b": "fàng",
+      "side_c": "放",
+      "side_d": "Verb for placing or adding ingredients",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "meat",
+      "side_a": "Meat",
+      "side_b": "ròu",
+      "side_c": "肉",
+      "side_d": "Noun for animal flesh used as food",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "bowl",
+      "side_a": "Bowl",
+      "side_b": "wǎn",
+      "side_c": "碗",
+      "side_d": "Noun and measure word for bowls of food",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "hot_sour_soup",
+      "side_a": "Hot and sour soup",
+      "side_b": "suānlàtāng",
+      "side_c": "酸辣汤",
+      "side_d": "Noun for a traditional Chinese soup",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "msg",
+      "side_a": "Monosodium glutamate (MSG)",
+      "side_b": "wèijīng",
+      "side_c": "味精",
+      "side_d": "Noun for a flavor enhancer",
+      "level": 2
+    },
+    {
+      "card_id": "card-017",
+      "idx": 16,
+      "name": "salt",
+      "side_a": "Salt",
+      "side_b": "yán",
+      "side_c": "盐",
+      "side_d": "Noun for a common seasoning",
+      "level": 1
+    },
+    {
+      "card_id": "card-018",
+      "idx": 17,
+      "name": "bok_choy",
+      "side_a": "Bok choy",
+      "side_b": "báicài",
+      "side_c": "白菜",
+      "side_d": "Noun for a Chinese leafy vegetable",
+      "level": 1
+    },
+    {
+      "card_id": "card-019",
+      "idx": 18,
+      "name": "just",
+      "side_a": "Just (indicating recent past)",
+      "side_b": "gāng",
+      "side_c": "刚",
+      "side_d": "Adverb meaning something just happened",
+      "level": 1
+    },
+    {
+      "card_id": "card-020",
+      "idx": 19,
+      "name": "sold_out",
+      "side_a": "To be sold out",
+      "side_b": "mài wán",
+      "side_c": "卖完",
+      "side_d": "Verb-complement phrase indicating no more available",
+      "level": 1
+    },
+    {
+      "card_id": "card-021",
+      "idx": 20,
+      "name": "green_vegetable",
+      "side_a": "Green/leafy vegetable",
+      "side_b": "qīngcài",
+      "side_c": "青菜",
+      "side_d": "Noun for green leafy vegetables",
+      "level": 1
+    },
+    {
+      "card_id": "card-022",
+      "idx": 21,
+      "name": "iced_tea",
+      "side_a": "Iced tea",
+      "side_b": "bīngchá",
+      "side_c": "冰茶",
+      "side_d": "Noun for cold tea beverage",
+      "level": 1
+    },
+    {
+      "card_id": "card-023",
+      "idx": 22,
+      "name": "thirsty",
+      "side_a": "Thirsty",
+      "side_b": "kě",
+      "side_c": "渴",
+      "side_d": "Adjective describing the need for water",
+      "level": 1
+    },
+    {
+      "card_id": "card-024",
+      "idx": 23,
+      "name": "some",
+      "side_a": "Some (measure word for indefinite amount)",
+      "side_b": "xiē",
+      "side_c": "些",
+      "side_d": "Measure word for an unspecified quantity",
+      "level": 1
+    },
+    {
+      "card_id": "card-025",
+      "idx": 24,
+      "name": "enough",
+      "side_a": "Enough",
+      "side_b": "gòu",
+      "side_c": "够",
+      "side_d": "Adjective meaning sufficient quantity",
+      "level": 1
+    },
+    {
+      "card_id": "card-026",
+      "idx": 25,
+      "name": "hungry",
+      "side_a": "Hungry",
+      "side_b": "è",
+      "side_c": "饿",
+      "side_d": "Adjective describing the need for food",
+      "level": 1
+    },
+    {
+      "card_id": "card-027",
+      "idx": 26,
+      "name": "serve_food",
+      "side_a": "To serve food",
+      "side_b": "shàng cài",
+      "side_c": "上菜",
+      "side_d": "Verb-object phrase for bringing dishes to the table",
+      "level": 1
+    }
+  ]
+}
