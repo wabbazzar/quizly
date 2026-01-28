@@ -5,14 +5,16 @@
       "deckId": "chinese_chpt1_2",
       "type": "dialogue",
       "filename": "chinese_chpt1_2_dialogue.txt",
-      "displayName": "Dialogue"
+      "displayName": "Dialogue",
+      "audioFile": "chinese_chpt1_2_dialogue.mp3"
     },
     {
       "id": "chinese_chpt1_2_phrases",
       "deckId": "chinese_chpt1_2",
       "type": "phrases",
       "filename": "chinese_chpt1_2_phrases.txt",
-      "displayName": "Phrases"
+      "displayName": "Phrases",
+      "audioFile": "chinese_chpt1_2_phrases.mp3"
     },
     {
       "id": "chinese_chpt10_2_dialogue",
@@ -51,84 +53,96 @@
       "deckId": "chinese_chpt2_2",
       "type": "dialogue",
       "filename": "chinese_chpt2_2_dialogue.txt",
-      "displayName": "Dialogue"
+      "displayName": "Dialogue",
+      "audioFile": "chinese_chpt2_2_dialogue.mp3"
     },
     {
       "id": "chinese_chpt2_2_phrases",
       "deckId": "chinese_chpt2_2",
       "type": "phrases",
       "filename": "chinese_chpt2_2_phrases.txt",
-      "displayName": "Phrases"
+      "displayName": "Phrases",
+      "audioFile": "chinese_chpt2_2_phrases.mp3"
     },
     {
       "id": "chinese_chpt3_2_dialogue",
       "deckId": "chinese_chpt3_2",
       "type": "dialogue",
       "filename": "chinese_chpt3_2_dialogue.txt",
-      "displayName": "Dialogue"
+      "displayName": "Dialogue",
+      "audioFile": "chinese_chpt3_2_dialogue.mp3"
     },
     {
       "id": "chinese_chpt3_2_phrases",
       "deckId": "chinese_chpt3_2",
       "type": "phrases",
       "filename": "chinese_chpt3_2_phrases.txt",
-      "displayName": "Phrases"
+      "displayName": "Phrases",
+      "audioFile": "chinese_chpt3_2_phrases.mp3"
     },
     {
       "id": "chinese_chpt4_2_dialogue",
       "deckId": "chinese_chpt4_2",
       "type": "dialogue",
       "filename": "chinese_chpt4_2_dialogue.txt",
-      "displayName": "Dialogue"
+      "displayName": "Dialogue",
+      "audioFile": "chinese_chpt4_2_dialogue.mp3"
     },
     {
       "id": "chinese_chpt4_2_phrases",
       "deckId": "chinese_chpt4_2",
       "type": "phrases",
       "filename": "chinese_chpt4_2_phrases.txt",
-      "displayName": "Phrases"
+      "displayName": "Phrases",
+      "audioFile": "chinese_chpt4_2_phrases.mp3"
     },
     {
       "id": "chinese_chpt5_2_dialogue",
       "deckId": "chinese_chpt5_2",
       "type": "dialogue",
       "filename": "chinese_chpt5_2_dialogue.txt",
-      "displayName": "Dialogue"
+      "displayName": "Dialogue",
+      "audioFile": "chinese_chpt5_2_dialogue.mp3"
     },
     {
       "id": "chinese_chpt5_2_phrases",
       "deckId": "chinese_chpt5_2",
       "type": "phrases",
       "filename": "chinese_chpt5_2_phrases.txt",
-      "displayName": "Phrases"
+      "displayName": "Phrases",
+      "audioFile": "chinese_chpt5_2_phrases.mp3"
     },
     {
       "id": "chinese_chpt6_2_dialogue",
       "deckId": "chinese_chpt6_2",
       "type": "dialogue",
       "filename": "chinese_chpt6_2_dialogue.txt",
-      "displayName": "Dialogue"
+      "displayName": "Dialogue",
+      "audioFile": "chinese_chpt6_2_dialogue.mp3"
     },
     {
       "id": "chinese_chpt6_2_phrases",
       "deckId": "chinese_chpt6_2",
       "type": "phrases",
       "filename": "chinese_chpt6_2_phrases.txt",
-      "displayName": "Phrases"
+      "displayName": "Phrases",
+      "audioFile": "chinese_chpt6_2_phrases.mp3"
     },
     {
       "id": "chinese_chpt7_2_dialogue",
       "deckId": "chinese_chpt7_2",
       "type": "dialogue",
       "filename": "chinese_chpt7_2_dialogue.txt",
-      "displayName": "Dialogue"
+      "displayName": "Dialogue",
+      "audioFile": "chinese_chpt7_2_dialogue.mp3"
     },
     {
       "id": "chinese_chpt7_2_phrases",
       "deckId": "chinese_chpt7_2",
       "type": "phrases",
       "filename": "chinese_chpt7_2_phrases.txt",
-      "displayName": "Phrases"
+      "displayName": "Phrases",
+      "audioFile": "chinese_chpt7_2_phrases.mp3"
     },
     {
       "id": "chinese_chpt8_2_dialogue",
@@ -163,5 +177,5 @@
       "audioFile": "chinese_chpt9_2_phrases.mp3"
     }
   ],
-  "generatedAt": "2026-01-16T05:20:36.929Z"
+  "generatedAt": "2026-01-25T18:28:45.172Z"
 }

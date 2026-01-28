@@ -936,6 +936,52 @@ Vocabulary Review - Key words from Chapter [N] used:
 - `chinese_chpt10_2_dialogue.txt`: 629 lines, 11 minutes, 1475 characters (~134 chars/min)
 - `chinese_chpt4_2_dialogue.txt`: 878 lines, 10 minutes, 1750 characters (~175 chars/min)
 
+## ElevenLabs Audio Generation
+
+When generating audio for Chinese transcripts, use these optimized voices:
+
+### Voice Configuration
+
+| Voice | Voice ID | Use For | Description |
+|-------|----------|---------|-------------|
+| **Amy** | `bhJUNIXWQQ94l8eI2VUf` | Female speaker (小美) | Friendly, Young and Natural |
+| **Adam Li** | `hZTuv9Zqrq4yHYrEmF1r` | Male speaker (小明) | Deep, Steady and Calm |
+
+### TTS Settings
+
+```javascript
+// Recommended settings for Chinese dialogue
+{
+  model_id: "eleven_multilingual_v2",
+  speed: 0.9,           // Slightly slower for learners
+  stability: 0.6,       // Natural variation
+  output_directory: "/home/wabbazzar/code/quizly/public/data/audio",
+  language: "zh"        // Chinese language code
+}
+```
+
+### Audio File Naming Convention
+
+Audio files must be saved to `public/data/audio/` (NOT `public/data/transcripts/`):
+
+- Dialogue: `chinese_chpt{N}_2_dialogue.mp3`
+- Phrases: `chinese_chpt{N}_2_phrases.mp3`
+
+### Manifest Updates
+
+After generating audio, update `public/data/transcripts/manifest.json` to add the `audioFile` property:
+
+```json
+{
+  "id": "chinese_chpt1_2_dialogue",
+  "deckId": "chinese_chpt1_2",
+  "type": "dialogue",
+  "filename": "chinese_chpt1_2_dialogue.txt",
+  "displayName": "Dialogue",
+  "audioFile": "chinese_chpt1_2_dialogue.mp3"
+}
+```
+
 ## Learning Resources
 
 - React docs: Use Context7 MCP for latest patterns
