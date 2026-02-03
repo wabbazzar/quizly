@@ -4,6 +4,7 @@ import { AppRouter } from './router/AppRouter';
 import { usePWAVisibility } from './hooks/usePWAVisibility';
 import { useDeckStore } from './store/deckStore';
 import Notification from './components/common/Notification';
+import { BottomNavBar } from './components/navigation/BottomNavBar';
 
 // Simple loading indicator for iOS PWA restoration
 function RestorationOverlay({ isVisible }: { isVisible: boolean }) {
@@ -48,6 +49,7 @@ function App() {
       <RestorationOverlay isVisible={isRestoring} />
       <Notification />
       <AppRouter key={resumeCount} />
+      <BottomNavBar />
     </BrowserRouter>
   );
 }

@@ -1,20 +1,6 @@
 {
   "transcripts": [
     {
-      "id": "chinese_chpt12_1_dialogue",
-      "deckId": "chinese_chpt12_1",
-      "type": "dialogue",
-      "filename": "chinese_chpt12_1_dialogue.txt",
-      "displayName": "Dialogue"
-    },
-    {
-      "id": "chinese_chpt12_1_phrases",
-      "deckId": "chinese_chpt12_1",
-      "type": "phrases",
-      "filename": "chinese_chpt12_1_phrases.txt",
-      "displayName": "Phrases"
-    },
-    {
       "id": "chinese_chpt1_2_dialogue",
       "deckId": "chinese_chpt1_2",
       "type": "dialogue",
@@ -75,6 +61,22 @@
       "type": "phrases",
       "filename": "chinese_chpt11_2_phrases.txt",
       "displayName": "Phrases"
+    },
+    {
+      "id": "chinese_chpt12_1_dialogue",
+      "deckId": "chinese_chpt12_1",
+      "type": "dialogue",
+      "filename": "chinese_chpt12_1_dialogue.txt",
+      "displayName": "Dialogue",
+      "audioFile": "chinese_chpt12_1_dialogue.mp3"
+    },
+    {
+      "id": "chinese_chpt12_1_phrases",
+      "deckId": "chinese_chpt12_1",
+      "type": "phrases",
+      "filename": "chinese_chpt12_1_phrases.txt",
+      "displayName": "Phrases",
+      "audioFile": "chinese_chpt12_1_phrases.mp3"
     },
     {
       "id": "chinese_chpt2_2_dialogue",
@@ -205,5 +207,5 @@
       "audioFile": "chinese_chpt9_2_phrases.mp3"
     }
   ],
-  "generatedAt": "2026-01-25T18:28:45.172Z"
+  "generatedAt": "2026-02-03T21:11:28.578Z"
 }

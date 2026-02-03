@@ -13,6 +13,7 @@ import {
   LazyLearnDemo,
   LazyResults,
   LazyRead,
+  LazyAudioPlayer,
   preloadCriticalComponents,
 } from '@/utils/lazyImports';
 
@@ -111,6 +112,16 @@ export function AppRouter() {
             <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
               <PageLazyBoundary pageName="Learn Demo">
                 <LazyLearnDemo />
+              </PageLazyBoundary>
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/audio"
+          element={
+            <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
+              <PageLazyBoundary pageName="Audio Player">
+                <LazyAudioPlayer />
               </PageLazyBoundary>
             </ErrorBoundary>
           }

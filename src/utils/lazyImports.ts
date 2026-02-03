@@ -207,6 +207,15 @@ export const LazyRead = createLazyImport(
   'read'
 );
 
+export const LazyAudioPlayer = createLazyImport(
+  () => import('@/pages/AudioPlayer'),
+  {
+    onError: error => console.error('Failed to load AudioPlayer component:', error),
+    retryAttempts: 3,
+  },
+  'audio-player'
+);
+
 /**
  * Preload critical components on app initialization
  */
@@ -229,6 +238,7 @@ export function preloadOnIntent(componentKey: string): void {
     'learn-demo': () => import('@/pages/LearnDemo'),
     results: () => import('@/pages/Results'),
     read: () => import('@/pages/Read'),
+    'audio-player': () => import('@/pages/AudioPlayer'),
   };
 
   const importFunction = importMap[componentKey];

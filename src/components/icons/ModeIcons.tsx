@@ -240,3 +240,84 @@ export const RestartIcon: FC<IconProps> = ({ className, size = 24 }) => (
     />
   </svg>
 );
+
+export const MusicIcon: FC<IconProps> = ({ className, size = 24 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-hidden="true"
+  >
+    <path
+      d="M9 18V5l12-2v13"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <circle cx="6" cy="18" r="3" stroke="currentColor" strokeWidth="2" />
+    <circle cx="18" cy="16" r="3" stroke="currentColor" strokeWidth="2" />
+  </svg>
+);
+
+export const PreviousTrackIcon: FC<IconProps> = ({ className, size = 24 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M6 6v12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <path d="M18 6l-9 6 9 6V6z" fill="currentColor" />
+  </svg>
+);
+
+export const NextTrackIcon: FC<IconProps> = ({ className, size = 24 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M18 6v12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <path d="M6 6l9 6-9 6V6z" fill="currentColor" />
+  </svg>
+);
+
+export const PlayFilledIcon: FC<IconProps> = ({ className, size = 24 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M8 5v14l11-7L8 5z" fill="currentColor" />
+  </svg>
+);
+
+export const PauseFilledIcon: FC<IconProps> = ({ className, size = 24 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-hidden="true"
+  >
+    <rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor" />
+    <rect x="14" y="4" width="4" height="16" rx="1" fill="currentColor" />
+  </svg>
+);
