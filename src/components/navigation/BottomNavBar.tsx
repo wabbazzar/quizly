@@ -5,20 +5,12 @@ import { FlashcardsIcon, MatchIcon, MusicIcon } from '../icons/ModeIcons';
 import { useAudioPlayerStore } from '../../store/audioPlayerStore';
 import styles from './BottomNavBar.module.css';
 
-// Pages where bottom nav should be hidden
-const HIDDEN_PATHS = ['/audio', '/all-flashcards', '/all-match'];
-
 export const BottomNavBar: FC = memo(() => {
   const navigate = useNavigate();
   const location = useLocation();
   const { isPlaying } = useAudioPlayerStore();
 
-  // Hide on specific pages
-  if (HIDDEN_PATHS.some((path) => location.pathname.startsWith(path))) {
-    return null;
-  }
-
-  // Also hide on deck-specific mode pages
+  // Hide on deck-specific mode pages (not the "all" pages)
   if (
     location.pathname.includes('/flashcards/') ||
     location.pathname.includes('/match/') ||
@@ -66,7 +58,7 @@ export const BottomNavBar: FC = memo(() => {
       </button>
 
       <button
-        className={`${styles.navButton} ${isPlaying ? styles.active : ''}`}
+        className={`${styles.navButton} ${isActive('/audio') || isPlaying ? styles.active : ''}`}
         onClick={() => navigate('/audio')}
         aria-label="Audio player"
       >
