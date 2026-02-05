@@ -4,19 +4,21 @@
   align-items: center;
   justify-content: center;
   padding: var(--space-4);
-  background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-light) 100%);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
   position: fixed;
   inset: 0;
   z-index: 1000;
 }
 
 .container {
-  background: var(--neutral-white);
+  background: var(--bg-primary);
   border-radius: 24px;
   padding: var(--space-8);
   max-width: 600px;
   width: 100%;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-color);
 }
 
 /* Header */
@@ -35,7 +37,7 @@
   font-size: var(--text-3xl);
   font-weight: var(--font-bold);
   margin: 0 0 var(--space-2) 0;
-  color: var(--neutral-gray-800);
+  color: var(--text-primary);
 }
 
 .title.excellent {
@@ -56,7 +58,7 @@
 
 .subtitle {
   font-size: var(--text-lg);
-  color: var(--neutral-gray-600);
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -69,18 +71,19 @@
 }
 
 .resultCard {
-  background: var(--neutral-gray-50);
+  background: var(--bg-secondary);
   padding: var(--space-5);
   border-radius: 16px;
   text-align: center;
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
+  border: 1px solid var(--border-color);
 }
 
 .resultCard:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .resultValue {
@@ -92,7 +95,7 @@
 
 .resultLabel {
   font-size: var(--text-sm);
-  color: var(--neutral-gray-600);
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -144,7 +147,7 @@
 .achievementText,
 .missedText {
   flex: 1;
-  color: var(--neutral-gray-700);
+  color: var(--text-primary);
 }
 
 /* Action Buttons */
@@ -172,7 +175,7 @@
 
 .actionButton.primary {
   background: linear-gradient(135deg, var(--primary-main), var(--primary-light));
-  color: var(--neutral-white);
+  color: var(--text-primary-on-dark);
 }
 
 .actionButton.primary:hover {
@@ -181,25 +184,25 @@
 }
 
 .actionButton.secondary {
-  background: var(--neutral-gray-100);
-  color: var(--neutral-gray-700);
-  border: 1px solid var(--neutral-gray-200);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
 }
 
 .actionButton.secondary:hover {
-  background: var(--neutral-gray-200);
+  background: var(--bg-tertiary);
   transform: translateY(-1px);
 }
 
 .actionButton.tertiary {
   background: transparent;
-  color: var(--neutral-gray-600);
-  border: 1px solid var(--neutral-gray-300);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
 }
 
 .actionButton.tertiary:hover {
-  background: var(--neutral-gray-50);
-  border-color: var(--neutral-gray-400);
+  background: var(--bg-secondary);
+  border-color: var(--text-tertiary);
 }
 
 .keyHint {
@@ -224,11 +227,11 @@
 .motivationalMessage {
   text-align: center;
   font-size: var(--text-sm);
-  color: var(--neutral-gray-600);
+  color: var(--text-secondary);
   font-style: italic;
   margin-top: var(--space-4);
   padding-top: var(--space-4);
-  border-top: 1px solid var(--neutral-gray-200);
+  border-top: 1px solid var(--border-color);
 }
 
 /* Animations */
@@ -309,5 +312,37 @@
 
   .actionButton.tertiary {
     flex: 1 1 100%;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .sessionComplete {
+    background: rgba(0, 0, 0, 0.75);
+  }
+
+  .container {
+    background: var(--bg-primary);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .resultCard {
+    background: var(--bg-secondary);
+  }
+
+  .resultCard:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .achievementSection {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08));
+  }
+
+  .missedSection {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.08));
+  }
+
+  .actionButton.primary:hover {
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
   }
 }

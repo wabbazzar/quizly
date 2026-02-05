@@ -16,7 +16,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: var(--neutral-white);
+  background: var(--bg-primary);
   border-radius: var(--radius-2xl);
   padding: var(--space-8);
   width: 90%;
@@ -25,6 +25,7 @@
   overflow-y: auto;
   box-shadow: var(--shadow-2xl);
   z-index: 1001;
+  border: 1px solid var(--border-color);
 }
 
 /* Performance Header */
@@ -52,13 +53,13 @@
 .performanceMessage {
   font-size: var(--text-2xl);
   font-weight: var(--font-bold);
-  color: var(--neutral-gray-800);
+  color: var(--text-primary);
   margin: 0 0 var(--space-2) 0;
 }
 
 .roundMessage {
   font-size: var(--text-base);
-  color: var(--neutral-gray-600);
+  color: var(--text-secondary);
   margin: 0;
   line-height: 1.5;
 }
@@ -92,7 +93,7 @@
 
 .accuracyLabel {
   font-size: var(--text-lg);
-  color: var(--neutral-gray-600);
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -105,22 +106,23 @@
 }
 
 .statCard {
-  background: var(--neutral-gray-100);
+  background: var(--bg-secondary);
   border-radius: var(--radius-lg);
   padding: var(--space-4);
   text-align: center;
+  border: 1px solid var(--border-color);
 }
 
 .statValue {
   font-size: var(--text-xl);
   font-weight: var(--font-semibold);
-  color: var(--neutral-gray-800);
+  color: var(--text-primary);
   margin-bottom: var(--space-1);
 }
 
 .statLabel {
   font-size: var(--text-sm);
-  color: var(--neutral-gray-600);
+  color: var(--text-secondary);
 }
 
 /* Round Info */
@@ -135,7 +137,7 @@
 
 .roundBadge {
   background: var(--secondary-light);
-  color: var(--neutral-gray-800);
+  color: var(--text-primary);
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-full);
   font-size: var(--text-sm);
@@ -177,7 +179,7 @@
 
 .primaryButton {
   background: var(--primary-main);
-  color: var(--neutral-white);
+  color: var(--text-primary-on-dark);
 }
 
 .primaryButton:hover {
@@ -192,33 +194,34 @@
 }
 
 .secondaryButton {
-  background: var(--neutral-gray-200);
-  color: var(--neutral-gray-800);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
 }
 
 .secondaryButton:hover {
-  background: var(--neutral-gray-300);
+  background: var(--bg-tertiary);
   transform: translateY(-2px);
 }
 
 .secondaryButton:focus-visible {
-  outline: 2px solid var(--neutral-gray-400);
+  outline: 2px solid var(--text-tertiary);
   outline-offset: 2px;
 }
 
 .tertiaryButton {
   background: transparent;
-  color: var(--neutral-gray-600);
-  border: 2px solid var(--neutral-gray-300);
+  color: var(--text-secondary);
+  border: 2px solid var(--border-color);
 }
 
 .tertiaryButton:hover {
-  background: var(--neutral-gray-100);
-  border-color: var(--neutral-gray-400);
+  background: var(--bg-secondary);
+  border-color: var(--text-tertiary);
 }
 
 .tertiaryButton:focus-visible {
-  outline: 2px solid var(--neutral-gray-400);
+  outline: 2px solid var(--text-tertiary);
   outline-offset: 2px;
 }
 
@@ -297,55 +300,11 @@
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .modal {
-    background: var(--neutral-gray-800);
-    color: var(--neutral-gray-100);
-  }
-
-  .performanceMessage {
-    color: var(--neutral-gray-100);
-  }
-
-  .roundMessage {
-    color: var(--neutral-gray-300);
-  }
-
-  .accuracyLabel {
-    color: var(--neutral-gray-400);
-  }
-
-  .statCard {
-    background: var(--neutral-gray-700);
-  }
-
-  .statValue {
-    color: var(--neutral-gray-100);
-  }
-
-  .statLabel {
-    color: var(--neutral-gray-400);
+    background: var(--bg-primary);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   }
 
   .roundBadge {
     background: var(--secondary-dark);
-    color: var(--neutral-gray-100);
-  }
-
-  .secondaryButton {
-    background: var(--neutral-gray-700);
-    color: var(--neutral-gray-100);
-  }
-
-  .secondaryButton:hover {
-    background: var(--neutral-gray-600);
-  }
-
-  .tertiaryButton {
-    color: var(--neutral-gray-300);
-    border-color: var(--neutral-gray-600);
-  }
-
-  .tertiaryButton:hover {
-    background: var(--neutral-gray-700);
-    border-color: var(--neutral-gray-500);
   }
 }

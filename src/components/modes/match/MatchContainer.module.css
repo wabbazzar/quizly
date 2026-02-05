@@ -125,6 +125,8 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  min-height: 0; /* Prevent flex item from growing beyond container */
+  overflow: hidden; /* Prevent any overflow from causing shifts */
 }
 
 .matchGrid {
@@ -284,6 +286,7 @@
   font-weight: 600;
   z-index: 5;
   backdrop-filter: blur(8px);
+  pointer-events: none; /* Don't interfere with clicks */
 }
 
 /* Responsive Design */

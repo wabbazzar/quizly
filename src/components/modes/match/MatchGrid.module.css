@@ -3,12 +3,13 @@
   display: grid;
   gap: var(--space-3);
   width: 100%;
-  max-width: 600px;
+  max-width: min(600px, 100vw);
   aspect-ratio: 4/3;
   margin: 0 auto;
   padding: var(--space-2);
-  max-width: 100vw;
   overflow: hidden;
+  /* Prevent layout shifts */
+  contain: layout style;
 }
 
 /* Mobile-first responsive design */
