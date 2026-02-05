@@ -14,6 +14,8 @@ import {
   LazyResults,
   LazyRead,
   LazyAudioPlayer,
+  LazyAllFlashcards,
+  LazyAllMatch,
   preloadCriticalComponents,
 } from '@/utils/lazyImports';
 
@@ -122,6 +124,26 @@ export function AppRouter() {
             <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
               <PageLazyBoundary pageName="Audio Player">
                 <LazyAudioPlayer />
+              </PageLazyBoundary>
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/all-flashcards"
+          element={
+            <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
+              <PageLazyBoundary pageName="All Flashcards">
+                <LazyAllFlashcards />
+              </PageLazyBoundary>
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/all-match"
+          element={
+            <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
+              <PageLazyBoundary pageName="All Match">
+                <LazyAllMatch />
               </PageLazyBoundary>
             </ErrorBoundary>
           }

@@ -53,7 +53,7 @@ interface ReadStore {
 const defaultSettings: ReadModeSettings = {
   answerType: 'free_text',
   checkMode: 'wait',
-  translationDirection: { from: 'a', to: 'c' },
+  translationDirection: { from: 'b', to: 'c' },  // pinyin → english
   optionsCount: 4,
   showPinyinDefault: false,
   multipleChoiceDifficulty: 'medium',
@@ -324,7 +324,7 @@ export const useReadStore = create<ReadStore>()(
     }),
     {
       name: 'read-store',
-      version: 2,
+      version: 3,
       partialize: state => ({
         progress: state.progress,
         settings: state.settings
@@ -332,7 +332,7 @@ export const useReadStore = create<ReadStore>()(
       migrate: (persistedState: any, version: number) => {
         if (version < 2) {
           // Add new sentence mode settings to existing persisted state
-          return {
+          persistedState = {
             ...persistedState,
             settings: {
               ...defaultSettings,
@@ -342,6 +342,21 @@ export const useReadStore = create<ReadStore>()(
               showWordHints: persistedState.settings?.showWordHints !== false
             }
           };
+        }
+        if (version < 3) {
+          // Update default translation direction from characters→english to pinyin→english
+          // Only migrate if user was on the old default (a→c)
+          const currentFrom = persistedState.settings?.translationDirection?.from;
+          const currentTo = persistedState.settings?.translationDirection?.to;
+          if (currentFrom === 'a' && currentTo === 'c') {
+            persistedState = {
+              ...persistedState,
+              settings: {
+                ...persistedState.settings,
+                translationDirection: { from: 'b', to: 'c' }
+              }
+            };
+          }
         }
         return persistedState;
       }

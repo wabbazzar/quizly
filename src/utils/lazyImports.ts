@@ -216,6 +216,24 @@ export const LazyAudioPlayer = createLazyImport(
   'audio-player'
 );
 
+export const LazyAllFlashcards = createLazyImport(
+  () => import('@/pages/AllFlashcards'),
+  {
+    onError: error => console.error('Failed to load AllFlashcards component:', error),
+    retryAttempts: 3,
+  },
+  'all-flashcards'
+);
+
+export const LazyAllMatch = createLazyImport(
+  () => import('@/pages/AllMatch'),
+  {
+    onError: error => console.error('Failed to load AllMatch component:', error),
+    retryAttempts: 3,
+  },
+  'all-match'
+);
+
 /**
  * Preload critical components on app initialization
  */
@@ -239,6 +257,8 @@ export function preloadOnIntent(componentKey: string): void {
     results: () => import('@/pages/Results'),
     read: () => import('@/pages/Read'),
     'audio-player': () => import('@/pages/AudioPlayer'),
+    'all-flashcards': () => import('@/pages/AllFlashcards'),
+    'all-match': () => import('@/pages/AllMatch'),
   };
 
   const importFunction = importMap[componentKey];

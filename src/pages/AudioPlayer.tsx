@@ -40,6 +40,7 @@ const AudioPlayer: FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const trackListRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const isTransitioningRef = useRef(false);
 
   // Load tracks from manifest on mount
   useEffect(() => {
@@ -71,15 +72,33 @@ const AudioPlayer: FC = () => {
 
     const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
     const handleDurationChange = () => setDuration(audio.duration || 0);
-    const handleEnded = () => nextTrack();
+    const handleEnded = () => {
+      // Set flag to prevent pause event from overriding isPlaying
+      isTransitioningRef.current = true;
+      nextTrack();
+      // Clear flag after a short delay to allow state updates
+      setTimeout(() => {
+        isTransitioningRef.current = false;
+      }, 100);
+    };
     const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
+    const handlePause = () => {
+      // Ignore pause events during track transitions (when track ends naturally)
+      if (!isTransitioningRef.current) {
+        setIsPlaying(false);
+      }
+    };
+    // Ensure playback rate is applied after audio loads
+    const handleLoadedMetadata = () => {
+      audio.playbackRate = playbackRate / 100;
+    };
 
     audio.addEventListener('timeupdate', handleTimeUpdate);
     audio.addEventListener('durationchange', handleDurationChange);
     audio.addEventListener('ended', handleEnded);
     audio.addEventListener('play', handlePlay);
     audio.addEventListener('pause', handlePause);
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
 
     return () => {
       audio.removeEventListener('timeupdate', handleTimeUpdate);
@@ -87,8 +106,9 @@ const AudioPlayer: FC = () => {
       audio.removeEventListener('ended', handleEnded);
       audio.removeEventListener('play', handlePlay);
       audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
     };
-  }, [setCurrentTime, setDuration, setIsPlaying, nextTrack]);
+  }, [setCurrentTime, setDuration, setIsPlaying, nextTrack, playbackRate]);
 
   // Control playback
   useEffect(() => {
@@ -115,12 +135,14 @@ const AudioPlayer: FC = () => {
       if (audio.src !== newSrc) {
         audio.src = newSrc;
         audio.load();
+        // Apply playback rate after loading (load() resets it to 1.0)
+        audio.playbackRate = playbackRate / 100;
         if (isPlaying) {
           audio.play().catch(() => setIsPlaying(false));
         }
       }
     }
-  }, [currentTrackIndex, tracks, isPlaying, setIsPlaying]);
+  }, [currentTrackIndex, tracks, isPlaying, setIsPlaying, playbackRate]);
 
   // Scroll current track into view
   useEffect(() => {

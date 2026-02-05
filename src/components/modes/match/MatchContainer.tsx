@@ -33,7 +33,7 @@ import {
 } from '@/utils/soundUtils';
 import styles from './MatchContainer.module.css';
 
-const MatchContainer: FC<MatchContainerProps> = memo(({ deck }) => {
+const MatchContainer: FC<MatchContainerProps> = memo(({ deck, onBackClick }) => {
   const navigate = useNavigate();
   const { getMasteredCards } = useCardMasteryStore();
   const { updateBestTime } = useMatchBestTimesStore();
@@ -266,8 +266,12 @@ const MatchContainer: FC<MatchContainerProps> = memo(({ deck }) => {
 
   // Handle back navigation
   const handleBack = useCallback(() => {
-    navigate(`/deck/${deck.id}`);
-  }, [navigate, deck.id]);
+    if (onBackClick) {
+      onBackClick();
+    } else {
+      navigate(`/deck/${deck.id}`);
+    }
+  }, [navigate, deck.id, onBackClick]);
 
   // Results modal handlers
   const handleContinueWithMissed = useCallback(() => {

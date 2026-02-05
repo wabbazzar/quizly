@@ -73,6 +73,7 @@ export interface MatchSessionStore {
 // Match container component props
 export interface MatchContainerProps {
   deck: Deck;
+  onBackClick?: () => void; // Optional override for back navigation
 }
 
 // Match grid component props
