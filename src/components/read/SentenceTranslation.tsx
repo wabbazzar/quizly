@@ -1,7 +1,7 @@
-import { FC, useState, useCallback, useMemo, useEffect } from 'react';
+import { FC, useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { ReadingLine, ReadModeSettings, SentenceTranslationResult } from '@/types';
-import { checkSentenceTranslation, generateSentenceMultipleChoice, getWordHint } from '@/utils/sentenceTranslation';
-import { hasWordAlignments, extractAlignedTokens } from '@/utils/wordAlignments';
+import { checkSentenceTranslation, generateSentenceMultipleChoice } from '@/utils/sentenceTranslation';
+import { hasWordAlignments, extractAlignedTokens, AlignedToken } from '@/utils/wordAlignments';
 import { Button } from '@/components/ui/Button';
 import styles from './SentenceTranslation.module.css';
 
@@ -106,22 +106,60 @@ export const SentenceTranslation: FC<Props> = ({
     }
   }, [handleSubmit]);
 
-  // Word hint functionality
-  const handleWordClick = useCallback((chineseWord: string) => {
-    if (!settings.showWordHints || !hasAlignments) return;
+  // Track which token is tapped (for mobile hint display)
+  const [tappedTokenIndex, setTappedTokenIndex] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-    const hint = getWordHint(line, chineseWord, settings.translationDirection.to);
-    if (hint) {
-      // Hint is shown via title attribute on hover
-      console.log('Word hint:', chineseWord, hint);
-    }
-  }, [line, settings, hasAlignments]);
+  // Close tapped hint when clicking outside
+  useEffect(() => {
+    if (tappedTokenIndex === null) return;
+    const handleOutsideClick = (e: MouseEvent | TouchEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setTappedTokenIndex(null);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('touchstart', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('touchstart', handleOutsideClick);
+    };
+  }, [tappedTokenIndex]);
+
+  // Get the display text and hint text for a token based on translation direction
+  const getTokenDisplay = useCallback((token: AlignedToken): string => {
+    const from = settings.translationDirection.from;
+    if (from === 'b') return token.pinyin;
+    if (from === 'c') return token.english;
+    return token.chinese; // default: side 'a'
+  }, [settings.translationDirection.from]);
+
+  const getTokenHint = useCallback((token: AlignedToken): string => {
+    const from = settings.translationDirection.from;
+    const parts: string[] = [];
+    if (from !== 'a' && token.chinese) parts.push(token.chinese);
+    if (from !== 'b' && token.pinyin) parts.push(token.pinyin);
+    if (from !== 'c' && token.english) parts.push(token.english);
+    return parts.join(' - ');
+  }, [settings.translationDirection.from]);
+
+  // Determine if a token has a meaningful hint
+  const tokenHasHint = useCallback((token: AlignedToken): boolean => {
+    return getTokenHint(token).length > 0;
+  }, [getTokenHint]);
+
+  // Handle token tap/click for hints
+  const handleTokenTap = useCallback((index: number) => {
+    if (!settings.showWordHints || !hasAlignments) return;
+    setTappedTokenIndex(prev => prev === index ? null : index);
+  }, [settings.showWordHints, hasAlignments]);
 
   // Reset when line changes
   useEffect(() => {
     setUserAnswer('');
     setSelectedOption(null);
     setResult(null);
+    setTappedTokenIndex(null);
   }, [line]);
 
   const canSubmit = settings.answerType === 'multiple_choice'
@@ -135,23 +173,30 @@ export const SentenceTranslation: FC<Props> = ({
         <div className={styles.sectionLabel}>
           Translate this sentence:
         </div>
-        <div className={styles.sourceText}>
+        <div className={styles.sourceText} ref={containerRef}>
            {hasAlignments && settings.showWordHints ? (
              <div className={styles.interactiveSource}>
                <div className={styles.wordTokensContainer}>
-                 {alignedTokens.map((token, index) => (
-                   <span
-                     key={index}
-                     className={`${styles.wordToken} ${token.english ? styles.clickable : styles.static}`}
-                     onClick={() => handleWordClick(token.chinese)}
-                     title={token.english ? `${token.pinyin} - ${token.english}` : undefined}
-                   >
-                     {token.chinese}
-                   </span>
-                 ))}
+                 {alignedTokens.map((token, index) => {
+                   const hint = getTokenHint(token);
+                   const hasHint = tokenHasHint(token);
+                   const isRevealed = tappedTokenIndex === index;
+                   return (
+                     <span
+                       key={index}
+                       className={`${styles.wordToken} ${hasHint ? styles.clickable : styles.static} ${isRevealed ? styles.revealed : ''}`}
+                       onClick={() => hasHint && handleTokenTap(index)}
+                     >
+                       {getTokenDisplay(token)}
+                       {isRevealed && hint && (
+                         <span className={styles.tokenHintPopup}>{hint}</span>
+                       )}
+                     </span>
+                   );
+                 })}
                </div>
                <div className={styles.hintText}>
-                 Hover over words for hints
+                 Tap words for hints
                </div>
              </div>
            ) : (

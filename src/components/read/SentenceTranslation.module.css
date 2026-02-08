@@ -94,6 +94,7 @@
   cursor: pointer;
   background: rgba(74, 144, 226, 0.1);
   border: 1px solid rgba(74, 144, 226, 0.2);
+  position: relative;
 }
 
 .wordToken.clickable:hover {
@@ -101,8 +102,42 @@
   transform: translateY(-1px);
 }
 
+.wordToken.clickable.revealed {
+  background: rgba(74, 144, 226, 0.25);
+  border-color: var(--primary-main);
+}
+
 .wordToken.static {
   color: var(--text-secondary);
+}
+
+.tokenHintPopup {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 4px;
+  padding: var(--space-1-5) var(--space-3);
+  background: var(--bg-primary);
+  border: 1px solid var(--primary-main);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.tokenHintPopup::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-bottom-color: var(--primary-main);
 }
 
 .hintText {
