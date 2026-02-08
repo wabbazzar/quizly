@@ -6,7 +6,11 @@
     "deck_subtitle": "Time and Social",
     "description": "Chinese vocabulary for time expressions, social relationships, and reasons",
     "category": "Language Learning",
-    "available_levels": [1, 2, 3],
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
     "available_sides": 4,
     "side_labels": {
       "side_a": "english",
@@ -16,10 +20,16 @@
     },
     "card_count": 16,
     "difficulty": "beginner",
-    "tags": ["chinese", "mandarin", "chapter3", "vocabulary"],
+    "tags": [
+      "chinese",
+      "mandarin",
+      "chapter3",
+      "vocabulary"
+    ],
     "version": "1.0.0",
     "created_date": "2026-01-06T00:00:00Z",
-    "last_updated": "2026-01-06T00:00:00Z"
+    "last_updated": "2026-01-06T00:00:00Z",
+    "family_id": "chinese"
   },
   "content": [
     {

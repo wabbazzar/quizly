@@ -1,19 +1,43 @@
-import { FC, useEffect, useCallback, useRef } from 'react';
+import { FC, useEffect, useCallback, useRef, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useDeckStore } from '@/store/deckStore';
 import { useProgressStore } from '@/store/progressStore';
+import { useDeckVisibilityStore } from '@/store/deckVisibilityStore';
 import EnhancedDeckCard from '@/components/EnhancedDeckCard';
 import { CompactDeckGrid } from '@/components/deck/CompactDeckGrid';
+import { FamilySection } from '@/components/deck/FamilySection';
+import { DeckVisibilityModal } from '@/components/modals/DeckVisibilityModal';
+import { SlidersIcon } from '@/components/icons/DeckManagementIcons';
 import { useIsMobile } from '@/hooks/useIsMobile';
+import { Deck, DeckFamily } from '@/types';
 import styles from './Home.module.css';
+
+const OTHER_FAMILY: DeckFamily = {
+  id: '__other__',
+  name: 'Other',
+  description: 'Uncategorized decks',
+  color: '#6b7280',
+  sortOrder: 9999,
+};
+
+interface FamilyGroup {
+  family: DeckFamily;
+  decks: Deck[];
+}
 
 const Home: FC = () => {
   const navigate = useNavigate();
   const { decks, isLoading, error, loadDecks, selectDeck } = useDeckStore();
   const { getDeckProgress } = useProgressStore();
+  const {
+    hiddenDeckIds,
+    families,
+    loadFamilies,
+  } = useDeckVisibilityStore();
   const headerRef = useRef<HTMLElement | null>(null);
   const isMobile = useIsMobile();
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const node = headerRef.current;
@@ -78,7 +102,8 @@ const Home: FC = () => {
 
   useEffect(() => {
     loadDecks();
-  }, [loadDecks]);
+    loadFamilies();
+  }, [loadDecks, loadFamilies]);
 
   const handleModeSelect = useCallback(
     (deckId: string, _mode: string) => {
@@ -96,6 +121,45 @@ const Home: FC = () => {
     },
     [selectDeck, navigate]
   );
+
+  // Filter hidden decks and group by family
+  const visibleDecks = useMemo(
+    () => decks.filter(d => !hiddenDeckIds.includes(d.id)),
+    [decks, hiddenDeckIds]
+  );
+
+  const familyGroups = useMemo((): FamilyGroup[] => {
+    const groupMap = new Map<string, Deck[]>();
+
+    visibleDecks.forEach(deck => {
+      const familyId = deck.metadata.family_id || '__other__';
+      const existing = groupMap.get(familyId) || [];
+      existing.push(deck);
+      groupMap.set(familyId, existing);
+    });
+
+    const groups: FamilyGroup[] = [];
+
+    // Add families in sort order
+    families.forEach(family => {
+      const familyDecks = groupMap.get(family.id);
+      if (familyDecks && familyDecks.length > 0) {
+        groups.push({ family, decks: familyDecks });
+        groupMap.delete(family.id);
+      }
+    });
+
+    // Add "Other" group for remaining decks
+    const otherDecks = groupMap.get('__other__');
+    if (otherDecks && otherDecks.length > 0) {
+      groups.push({ family: OTHER_FAMILY, decks: otherDecks });
+    }
+
+    return groups;
+  }, [visibleDecks, families]);
+
+  // When there's only one family, skip the section header
+  const hasMutipleFamilies = familyGroups.length > 1;
 
   if (isLoading) {
     return null; // Let PageLazyBoundary handle loading state
@@ -149,7 +213,7 @@ const Home: FC = () => {
                 }}
                 className={styles.taglineSvg}
               >
-                <title id="quizlyCursiveHeaderTitle">it's not a test! — cursive header</title>
+                <title id="quizlyCursiveHeaderTitle">it's not a test! -- cursive header</title>
                 <style>{`
                   :root{
                     --quizly-blue:#4A90E2;
@@ -184,9 +248,18 @@ const Home: FC = () => {
 
       <main className={styles.main}>
         <section className={styles.deckSection}>
-          <h2 className={styles.sectionTitle}>Available Decks</h2>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Available Decks</h2>
+            <button
+              className={styles.manageButton}
+              onClick={() => setModalOpen(true)}
+              aria-label="Manage deck visibility"
+            >
+              <SlidersIcon size={20} />
+            </button>
+          </div>
 
-          {decks.length === 0 ? (
+          {visibleDecks.length === 0 ? (
             <motion.div
               className={styles.emptyState}
               initial={{ opacity: 0 }}
@@ -194,29 +267,55 @@ const Home: FC = () => {
               transition={{ duration: 0.5 }}
             >
               <p>No decks available</p>
-              <p className={styles.emptyHint}>Import a deck to get started</p>
+              <p className={styles.emptyHint}>
+                {decks.length > 0
+                  ? 'All decks are hidden. Use the manage button to show them.'
+                  : 'Import a deck to get started'}
+              </p>
             </motion.div>
-          ) : isMobile ? (
-            // Mobile: Compact 3-column grid
-            <CompactDeckGrid
-              decks={decks}
-              onSelectDeck={handleCompactDeckSelect}
-            />
           ) : (
-            // Desktop: Full-size cards - simplified animations for performance
-            <div className={styles.deckGrid}>
-              {decks.map(deck => (
-                <EnhancedDeckCard
-                  key={deck.id}
-                  deck={deck}
-                  progress={getDeckProgress(deck.id)}
-                  onModeSelect={handleModeSelect}
+            familyGroups.map(group => {
+              const content = isMobile ? (
+                <CompactDeckGrid
+                  decks={group.decks}
+                  onSelectDeck={handleCompactDeckSelect}
                 />
-              ))}
-            </div>
+              ) : (
+                <div className={styles.deckGrid}>
+                  {group.decks.map(deck => (
+                    <EnhancedDeckCard
+                      key={deck.id}
+                      deck={deck}
+                      progress={getDeckProgress(deck.id)}
+                      onModeSelect={handleModeSelect}
+                    />
+                  ))}
+                </div>
+              );
+
+              if (!hasMutipleFamilies) {
+                return <div key={group.family.id}>{content}</div>;
+              }
+
+              return (
+                <FamilySection
+                  key={group.family.id}
+                  family={group.family}
+                  deckCount={group.decks.length}
+                >
+                  {content}
+                </FamilySection>
+              );
+            })
           )}
         </section>
       </main>
+
+      <DeckVisibilityModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        decks={decks}
+      />
     </div>
   );
 };

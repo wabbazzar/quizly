@@ -87,6 +87,7 @@ const validateMetadata = (metadata: unknown): DeckMetadata | null => {
       : undefined,
     card_count: typeof metadata.card_count === 'number' ? metadata.card_count : 0,
     difficulty: metadata.difficulty as DeckMetadata['difficulty'],
+    family_id: typeof metadata.family_id === 'string' ? sanitizeString(metadata.family_id) : undefined,
     tags: Array.isArray(metadata.tags) ? metadata.tags.map(sanitizeString).filter(Boolean) : [],
     version: sanitizeString(metadata.version || '1.0.0'),
     created_date:

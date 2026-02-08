@@ -1,3 +1,16 @@
+// Deck Family
+export interface DeckFamily {
+  id: string;
+  name: string;
+  description: string;
+  color: string;
+  sortOrder: number;
+}
+
+export interface FamiliesManifest {
+  families: DeckFamily[];
+}
+
 // Deck Metadata
 export interface DeckMetadata {
   deck_name: string;
@@ -5,6 +18,7 @@ export interface DeckMetadata {
   deck_subtitle?: string;
   description: string;
   category: string;
+  family_id?: string;
   available_levels: number[];
   available_sides: number;
   side_labels?: {

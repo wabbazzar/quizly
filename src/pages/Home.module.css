@@ -82,11 +82,38 @@
   margin-bottom: var(--space-8);
 }
 
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+}
+
 .sectionTitle {
   font-size: var(--text-2xl);
   font-weight: var(--font-semibold);
   color: var(--text-primary);
-  margin-bottom: var(--space-6);
+  margin: 0;
+}
+
+.manageButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(74, 144, 226, 0.05));
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.manageButton:hover {
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.18), rgba(74, 144, 226, 0.1));
+  color: var(--primary-main);
 }
 
 .deckGrid {

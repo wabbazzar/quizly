@@ -1,6 +1,7 @@
 import { FC, useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDeckStore } from '@/store/deckStore';
+import { useDeckVisibilityStore } from '@/store/deckVisibilityStore';
 import { Card, Deck } from '@/types';
 import MatchContainer from '@/components/modes/match/MatchContainer';
 import styles from './Match.module.css';
@@ -8,6 +9,7 @@ import styles from './Match.module.css';
 const AllMatch: FC = () => {
   const navigate = useNavigate();
   const { decks, isLoading: deckLoading } = useDeckStore();
+  const { hiddenDeckIds } = useDeckVisibilityStore();
 
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -15,9 +17,10 @@ const AllMatch: FC = () => {
   const combinedDeck: Deck | null = useMemo(() => {
     if (decks.length === 0) return null;
 
-    // Combine all cards from all decks
+    // Combine all cards from visible decks
     const allCards: Card[] = [];
-    decks.forEach((deck) => {
+    const visibleDecks = decks.filter(d => !hiddenDeckIds.includes(d.id));
+    visibleDecks.forEach((deck) => {
       deck.content.forEach((card) => {
         // Adjust the index to be unique across all decks
         allCards.push({
@@ -45,7 +48,7 @@ const AllMatch: FC = () => {
       },
       content: allCards,
     };
-  }, [decks]);
+  }, [decks, hiddenDeckIds]);
 
   // Initialize once decks are loaded
   useEffect(() => {

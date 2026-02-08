@@ -2,6 +2,7 @@ import { FC, useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, PanInfo, AnimatePresence } from 'framer-motion';
 import { useDeckStore } from '@/store/deckStore';
+import { useDeckVisibilityStore } from '@/store/deckVisibilityStore';
 import { Card } from '@/types';
 import FlashCard from '@/components/FlashCard';
 import { SharedModeHeader } from '@/components/common/SharedModeHeader';
@@ -14,6 +15,7 @@ const DEFAULT_BACK_SIDES = ['side_b', 'side_c'];
 const AllFlashcards: FC = () => {
   const navigate = useNavigate();
   const { decks, isLoading } = useDeckStore();
+  const { hiddenDeckIds } = useDeckVisibilityStore();
 
   // State
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -25,10 +27,11 @@ const AllFlashcards: FC = () => {
   const [cardOrder, setCardOrder] = useState<number[]>([]);
   const isInitialMount = useRef(true);
 
-  // Create aggregated cards from all decks
+  // Create aggregated cards from visible decks
   const allCards = useMemo(() => {
     const cards: Array<Card & { deckName: string; deckId: string }> = [];
-    decks.forEach((deck) => {
+    const visibleDecks = decks.filter(d => !hiddenDeckIds.includes(d.id));
+    visibleDecks.forEach((deck) => {
       deck.content.forEach((card) => {
         cards.push({
           ...card,
@@ -38,7 +41,7 @@ const AllFlashcards: FC = () => {
       });
     });
     return cards;
-  }, [decks]);
+  }, [decks, hiddenDeckIds]);
 
   // Initialize shuffled card order
   useEffect(() => {

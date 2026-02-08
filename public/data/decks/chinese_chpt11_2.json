@@ -6,7 +6,11 @@
     "deck_subtitle": "The Weather Here Is Awful",
     "description": "Chinese vocabulary for discussing weather conditions, online chatting, and comparing climates across seasons",
     "category": "Language Learning",
-    "available_levels": [1, 2, 3],
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
     "available_sides": 4,
     "side_labels": {
       "side_a": "english",
@@ -16,10 +20,19 @@
     },
     "card_count": 16,
     "difficulty": "intermediate",
-    "tags": ["chinese", "mandarin", "weather", "seasons", "online", "vocabulary", "chapter11"],
+    "tags": [
+      "chinese",
+      "mandarin",
+      "weather",
+      "seasons",
+      "online",
+      "vocabulary",
+      "chapter11"
+    ],
     "version": "1.0.0",
     "created_date": "2026-01-28T00:00:00Z",
-    "last_updated": "2026-01-28T00:00:00Z"
+    "last_updated": "2026-01-28T00:00:00Z",
+    "family_id": "chinese"
   },
   "content": [
     {

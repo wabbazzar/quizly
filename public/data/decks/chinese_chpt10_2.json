@@ -6,7 +6,11 @@
     "deck_subtitle": "Communication & Daily Life",
     "description": "Additional Chinese vocabulary for communication, technology, and everyday expressions",
     "category": "Language Learning",
-    "available_levels": [1, 2, 3],
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
     "available_sides": 4,
     "side_labels": {
       "side_a": "english",
@@ -16,10 +20,17 @@
     },
     "card_count": 18,
     "difficulty": "intermediate",
-    "tags": ["chinese", "mandarin", "communication", "vocabulary", "chapter10"],
+    "tags": [
+      "chinese",
+      "mandarin",
+      "communication",
+      "vocabulary",
+      "chapter10"
+    ],
     "version": "1.0.0",
     "created_date": "2025-10-21T00:00:00Z",
-    "last_updated": "2025-11-12T00:46:00Z"
+    "last_updated": "2025-11-12T00:46:00Z",
+    "family_id": "chinese"
   },
   "content": [
     {
@@ -204,9 +215,17 @@
     }
   ],
   "reading": {
-    "sides": { "a": "characters", "b": "pinyin", "c": "english" },
+    "sides": {
+      "a": "characters",
+      "b": "pinyin",
+      "c": "english"
+    },
     "tokenization": {
-      "unit": { "a": "character", "b": "space", "c": "space" },
+      "unit": {
+        "a": "character",
+        "b": "space",
+        "c": "space"
+      },
       "preservePunctuation": true,
       "alignment": "index"
     },
@@ -218,21 +237,81 @@
             "b": "Nǐ shuō zhōngwén shuō dé zhēn hǎo. Píngcháng zěnme zhǔnbèi shàng nǐ de zhōngwén kè?",
             "c": "You speak Chinese so well. Normally, how do you prepare for your Chinese class?",
             "wordAlignments": [
-              {"chinese": "你", "pinyin": "Nǐ", "english": "You"},
-              {"chinese": "说", "pinyin": "shuō", "english": "speak"},
-              {"chinese": "中文", "pinyin": "zhōngwén", "english": "Chinese"},
-              {"chinese": "说得", "pinyin": "shuō dé", "english": "so"},
-              {"chinese": "真", "pinyin": "zhēn", "english": ""},
-              {"chinese": "好", "pinyin": "hǎo", "english": "well"},
-              {"chinese": "。", "pinyin": ".", "english": "."},
-              {"chinese": "平常", "pinyin": "Píngcháng", "english": "Normally"},
-              {"chinese": "怎么", "pinyin": "zěnme", "english": "how"},
-              {"chinese": "准备", "pinyin": "zhǔnbèi", "english": "do you prepare"},
-              {"chinese": "上", "pinyin": "shàng", "english": "for"},
-              {"chinese": "你的", "pinyin": "nǐ de", "english": "your"},
-              {"chinese": "中文", "pinyin": "zhōngwén", "english": "Chinese"},
-              {"chinese": "课", "pinyin": "kè", "english": "class"},
-              {"chinese": "?", "pinyin": "?", "english": "?"}
+              {
+                "chinese": "你",
+                "pinyin": "Nǐ",
+                "english": "You"
+              },
+              {
+                "chinese": "说",
+                "pinyin": "shuō",
+                "english": "speak"
+              },
+              {
+                "chinese": "中文",
+                "pinyin": "zhōngwén",
+                "english": "Chinese"
+              },
+              {
+                "chinese": "说得",
+                "pinyin": "shuō dé",
+                "english": "so"
+              },
+              {
+                "chinese": "真",
+                "pinyin": "zhēn",
+                "english": ""
+              },
+              {
+                "chinese": "好",
+                "pinyin": "hǎo",
+                "english": "well"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              },
+              {
+                "chinese": "平常",
+                "pinyin": "Píngcháng",
+                "english": "Normally"
+              },
+              {
+                "chinese": "怎么",
+                "pinyin": "zěnme",
+                "english": "how"
+              },
+              {
+                "chinese": "准备",
+                "pinyin": "zhǔnbèi",
+                "english": "do you prepare"
+              },
+              {
+                "chinese": "上",
+                "pinyin": "shàng",
+                "english": "for"
+              },
+              {
+                "chinese": "你的",
+                "pinyin": "nǐ de",
+                "english": "your"
+              },
+              {
+                "chinese": "中文",
+                "pinyin": "zhōngwén",
+                "english": "Chinese"
+              },
+              {
+                "chinese": "课",
+                "pinyin": "kè",
+                "english": "class"
+              },
+              {
+                "chinese": "?",
+                "pinyin": "?",
+                "english": "?"
+              }
             ]
           },
           {
@@ -240,13 +319,41 @@
             "b": "Wǒ měitiān zǎoshang dōu tīng lùyīn.",
             "c": "I listen to the audio every morning.",
             "wordAlignments": [
-              {"chinese": "我", "pinyin": "Wǒ", "english": "I"},
-              {"chinese": "每天", "pinyin": "měitiān", "english": "every"},
-              {"chinese": "早上", "pinyin": "zǎoshang", "english": "morning"},
-              {"chinese": "都", "pinyin": "dōu", "english": ""},
-              {"chinese": "听", "pinyin": "tīng", "english": "listen to"},
-              {"chinese": "录音", "pinyin": "lùyīn", "english": "the audio"},
-              {"chinese": "。", "pinyin": ".", "english": "."}
+              {
+                "chinese": "我",
+                "pinyin": "Wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "每天",
+                "pinyin": "měitiān",
+                "english": "every"
+              },
+              {
+                "chinese": "早上",
+                "pinyin": "zǎoshang",
+                "english": "morning"
+              },
+              {
+                "chinese": "都",
+                "pinyin": "dōu",
+                "english": ""
+              },
+              {
+                "chinese": "听",
+                "pinyin": "tīng",
+                "english": "listen to"
+              },
+              {
+                "chinese": "录音",
+                "pinyin": "lùyīn",
+                "english": "the audio"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
             ]
           }
         ]
@@ -258,14 +365,46 @@
             "b": "Wǒ xiǎng gěi wǒ de péngyǒu fā duǎnxìn.",
             "c": "I want to send a text message to my friend.",
             "wordAlignments": [
-              {"chinese": "我", "pinyin": "Wǒ", "english": "I"},
-              {"chinese": "想", "pinyin": "xiǎng", "english": "want"},
-              {"chinese": "给", "pinyin": "gěi", "english": "to"},
-              {"chinese": "我的", "pinyin": "wǒ de", "english": "my"},
-              {"chinese": "朋友", "pinyin": "péngyǒu", "english": "friend"},
-              {"chinese": "发", "pinyin": "fā", "english": "send"},
-              {"chinese": "短信", "pinyin": "duǎnxìn", "english": "a text message"},
-              {"chinese": "。", "pinyin": ".", "english": "."}
+              {
+                "chinese": "我",
+                "pinyin": "Wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "想",
+                "pinyin": "xiǎng",
+                "english": "want"
+              },
+              {
+                "chinese": "给",
+                "pinyin": "gěi",
+                "english": "to"
+              },
+              {
+                "chinese": "我的",
+                "pinyin": "wǒ de",
+                "english": "my"
+              },
+              {
+                "chinese": "朋友",
+                "pinyin": "péngyǒu",
+                "english": "friend"
+              },
+              {
+                "chinese": "发",
+                "pinyin": "fā",
+                "english": "send"
+              },
+              {
+                "chinese": "短信",
+                "pinyin": "duǎnxìn",
+                "english": "a text message"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
             ]
           },
           {
@@ -273,13 +412,41 @@
             "b": "Nǐ kěyǐ yòng shǒujī fā duǎnxìn.",
             "c": "You can use your cell phone to send a text.",
             "wordAlignments": [
-              {"chinese": "你", "pinyin": "Nǐ", "english": "You"},
-              {"chinese": "可以", "pinyin": "kěyǐ", "english": "can"},
-              {"chinese": "用", "pinyin": "yòng", "english": "use"},
-              {"chinese": "手机", "pinyin": "shǒujī", "english": "your cell phone"},
-              {"chinese": "发", "pinyin": "fā", "english": "to send"},
-              {"chinese": "短信", "pinyin": "duǎnxìn", "english": "a text"},
-              {"chinese": "。", "pinyin": ".", "english": "."}
+              {
+                "chinese": "你",
+                "pinyin": "Nǐ",
+                "english": "You"
+              },
+              {
+                "chinese": "可以",
+                "pinyin": "kěyǐ",
+                "english": "can"
+              },
+              {
+                "chinese": "用",
+                "pinyin": "yòng",
+                "english": "use"
+              },
+              {
+                "chinese": "手机",
+                "pinyin": "shǒujī",
+                "english": "your cell phone"
+              },
+              {
+                "chinese": "发",
+                "pinyin": "fā",
+                "english": "to send"
+              },
+              {
+                "chinese": "短信",
+                "pinyin": "duǎnxìn",
+                "english": "a text"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
             ]
           }
         ]
@@ -287,4 +454,3 @@
     }
   }
 }
-
