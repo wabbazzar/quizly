@@ -1,0 +1,186 @@
+{
+  "id": "chinese_chpt7_2",
+  "metadata": {
+    "deck_name": "Chinese Chapter 7 Part 2",
+    "abbreviated_title": "Chp 7 pt 2",
+    "deck_subtitle": "Daily Routines and Classes",
+    "description": "Chinese vocabulary for daily schedules, classroom activities, and descriptions",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 15,
+    "difficulty": "beginner",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "chapter7",
+      "vocabulary"
+    ],
+    "version": "1.0.0",
+    "created_date": "2026-01-06T00:00:00Z",
+    "last_updated": "2026-01-06T00:00:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "usually",
+      "side_a": "usually",
+      "side_b": "píngcháng",
+      "side_c": "平常",
+      "side_d": "adv",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "early",
+      "side_a": "early",
+      "side_b": "zǎo",
+      "side_c": "早",
+      "side_d": "adj",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "so_this",
+      "side_a": "so; this (late, etc.)",
+      "side_b": "zhème",
+      "side_c": "这么",
+      "side_d": "pr",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "late",
+      "side_a": "late",
+      "side_b": "wǎn",
+      "side_c": "晚",
+      "side_d": "adj",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "morning",
+      "side_a": "morning",
+      "side_b": "zǎoshang",
+      "side_c": "早上",
+      "side_d": "t",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "homework_schoolwork",
+      "side_a": "homework; schoolwork",
+      "side_b": "gōngkè",
+      "side_c": "功课",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "everybody",
+      "side_a": "everybody",
+      "side_b": "dàjiā",
+      "side_c": "大家",
+      "side_d": "pr",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "to_go_to_class",
+      "side_a": "to go to a class; to start a class; to be in class",
+      "side_b": "shàng kè",
+      "side_c": "上课",
+      "side_d": "vo",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "to_begin_start",
+      "side_a": "to begin, to start; beginning",
+      "side_b": "kāishǐ",
+      "side_c": "开始",
+      "side_d": "v/n",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "to_read_aloud",
+      "side_a": "to read aloud",
+      "side_b": "niàn",
+      "side_c": "念",
+      "side_d": "v",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "text_of_lesson",
+      "side_a": "text of a lesson",
+      "side_b": "kèwén",
+      "side_c": "课文",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "sound_recording",
+      "side_a": "sound recording; to record",
+      "side_b": "lùyīn",
+      "side_c": "录音",
+      "side_d": "n/vo",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "to_study_learn",
+      "side_a": "to study; to learn",
+      "side_b": "xuéxí",
+      "side_c": "学习",
+      "side_d": "v",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "handsome",
+      "side_a": "handsome",
+      "side_b": "shuài",
+      "side_c": "帅",
+      "side_d": "adj",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "cool",
+      "side_a": "cool",
+      "side_b": "kù",
+      "side_c": "酷",
+      "side_d": "adj",
+      "level": 1
+    }
+  ]
+}

@@ -1,0 +1,266 @@
+{
+  "id": "chinese_chpt7_1",
+  "metadata": {
+    "deck_name": "Chinese Chapter 7 Part 1",
+    "abbreviated_title": "Chp 7 pt 1",
+    "deck_subtitle": "School & Study",
+    "description": "Essential Chinese vocabulary for school life, academic subjects, and study-related activities",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 23,
+    "difficulty": "beginner",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "chapter7",
+      "vocabulary"
+    ],
+    "version": "1.0.0",
+    "created_date": "2025-09-14T00:00:00Z",
+    "last_updated": "2025-09-14T00:00:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "talk",
+      "side_a": "to talk",
+      "side_b": "shuō huà",
+      "side_c": "说话",
+      "side_d": "verb object",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "previous_one",
+      "side_a": "the previous one",
+      "side_b": "shàng ge",
+      "side_c": "上个",
+      "side_d": "phrase",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "structural_particle",
+      "side_a": "(a structural particle)",
+      "side_b": "de",
+      "side_c": "地",
+      "side_d": "particle",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "review",
+      "side_a": "to review",
+      "side_b": "fùxí",
+      "side_c": "复习",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "write",
+      "side_a": "to write",
+      "side_b": "xiě",
+      "side_c": "写",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "character",
+      "side_a": "character",
+      "side_b": "zì",
+      "side_c": "字",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "slow",
+      "side_a": "slow",
+      "side_b": "màn",
+      "side_c": "慢",
+      "side_d": "adjective",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "measure_pen",
+      "side_a": "(measure word for long, thin, inflexible objects such as pens, rifles, etc.)",
+      "side_b": "zhī",
+      "side_c": "支",
+      "side_d": "measure word",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "pen",
+      "side_a": "pen",
+      "side_b": "bǐ",
+      "side_c": "笔",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "measure_flat",
+      "side_a": "(measure word for flat objects, paper, pictures, etc.)",
+      "side_b": "zhāng",
+      "side_c": "张",
+      "side_d": "measure word",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "paper",
+      "side_a": "paper",
+      "side_b": "zhǐ",
+      "side_c": "纸",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "teach",
+      "side_a": "to teach",
+      "side_b": "jiāo",
+      "side_c": "教",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "how_how_come",
+      "side_a": "how; how come",
+      "side_b": "zěnme",
+      "side_c": "怎么",
+      "side_d": "question pronoun",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "understand",
+      "side_a": "to understand",
+      "side_b": "dǒng",
+      "side_c": "懂",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "really",
+      "side_a": "really",
+      "side_b": "zhēn",
+      "side_c": "真",
+      "side_d": "adverb",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "where",
+      "side_a": "where",
+      "side_b": "nǎli",
+      "side_c": "哪里",
+      "side_d": "question pronoun",
+      "level": 1
+    },
+    {
+      "card_id": "card-017",
+      "idx": 16,
+      "name": "preview",
+      "side_a": "to preview",
+      "side_b": "yùxí",
+      "side_c": "预习",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-018",
+      "idx": 17,
+      "name": "study_learn",
+      "side_a": "to study; to learn",
+      "side_b": "xué",
+      "side_c": "学",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-019",
+      "idx": 18,
+      "name": "ordinal_prefix",
+      "side_a": "(prefix for ordinal numbers)",
+      "side_b": "dì",
+      "side_c": "第",
+      "side_d": "prefix",
+      "level": 1
+    },
+    {
+      "card_id": "card-020",
+      "idx": 19,
+      "name": "grammar",
+      "side_a": "grammar",
+      "side_b": "yǔfǎ",
+      "side_c": "语法",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-021",
+      "idx": 20,
+      "name": "easy",
+      "side_a": "easy",
+      "side_b": "róngyì",
+      "side_c": "容易",
+      "side_d": "adjective",
+      "level": 1
+    },
+    {
+      "card_id": "card-022",
+      "idx": 21,
+      "name": "new_words",
+      "side_a": "new words; vocabulary",
+      "side_b": "shēngcí",
+      "side_c": "生词",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-023",
+      "idx": 22,
+      "name": "many_much",
+      "side_a": "many; much",
+      "side_b": "duō",
+      "side_c": "多",
+      "side_d": "adjective",
+      "level": 1
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+{
+  "id": "chinese_chpt9_2",
+  "metadata": {
+    "deck_name": "Chinese Chapter 9 Part 2",
+    "abbreviated_title": "Chp 9 pt 2",
+    "deck_subtitle": "Shopping - Shoes and Payment",
+    "description": "Chinese vocabulary for shoes, sizes, styles, and payment methods",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 22,
+    "difficulty": "intermediate",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "shopping",
+      "vocabulary",
+      "chapter9"
+    ],
+    "version": "1.0.0",
+    "created_date": "2026-01-06T00:00:00Z",
+    "last_updated": "2026-01-06T00:00:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "measure_word_pair",
+      "side_a": "(measure word for a pair)",
+      "side_b": "shuāng",
+      "side_c": "双",
+      "side_d": "m",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "shoes",
+      "side_a": "shoes",
+      "side_b": "xié",
+      "side_c": "鞋",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "exchange",
+      "side_a": "to exchange; to change",
+      "side_b": "huàn",
+      "side_c": "换",
+      "side_d": "v",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "same_alike",
+      "side_a": "same; alike",
+      "side_b": "yíyàng",
+      "side_c": "一样",
+      "side_d": "adj",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "although",
+      "side_a": "although",
+      "side_b": "suīrán",
+      "side_c": "虽然",
+      "side_d": "conj",
+      "level": 2
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "size",
+      "side_a": "size",
+      "side_b": "dàxiǎo",
+      "side_c": "大小",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "brown_coffee_color",
+      "side_a": "brown; coffee color",
+      "side_b": "kāfēisè",
+      "side_c": "咖啡色",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "measure_word_kinds",
+      "side_a": "(measure word for kinds, sorts, types)",
+      "side_b": "zhǒng",
+      "side_c": "种",
+      "side_d": "m",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "black",
+      "side_a": "black",
+      "side_b": "hēi",
+      "side_c": "黑",
+      "side_d": "adj",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "style",
+      "side_a": "style",
+      "side_b": "yàngzi",
+      "side_c": "样子",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "quite_rather",
+      "side_a": "very; rather",
+      "side_b": "tǐng",
+      "side_c": "挺",
+      "side_d": "adv",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "it",
+      "side_a": "it",
+      "side_b": "tā",
+      "side_c": "它",
+      "side_d": "pr",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "here",
+      "side_a": "here",
+      "side_b": "zhèr",
+      "side_c": "这儿",
+      "side_d": "pr",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "pay_with_card",
+      "side_a": "to pay with a credit card",
+      "side_b": "shuā kǎ",
+      "side_c": "刷卡",
+      "side_d": "vo",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "brush_swipe",
+      "side_a": "to brush; to swipe",
+      "side_b": "shuā",
+      "side_c": "刷",
+      "side_d": "v",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "card",
+      "side_a": "card",
+      "side_b": "kǎ",
+      "side_c": "卡",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-017",
+      "idx": 16,
+      "name": "receive_accept",
+      "side_a": "to receive; to accept",
+      "side_b": "shōu",
+      "side_c": "收",
+      "side_d": "v",
+      "level": 1
+    },
+    {
+      "card_id": "card-018",
+      "idx": 17,
+      "name": "credit_card",
+      "side_a": "credit card",
+      "side_b": "xìnyòngkǎ",
+      "side_c": "信用卡",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-019",
+      "idx": 18,
+      "name": "however_but",
+      "side_a": "however; but",
+      "side_b": "búguò",
+      "side_c": "不过",
+      "side_d": "conj",
+      "level": 1
+    },
+    {
+      "card_id": "card-020",
+      "idx": 19,
+      "name": "again",
+      "side_a": "again",
+      "side_b": "zài",
+      "side_c": "再",
+      "side_d": "adv",
+      "level": 1
+    },
+    {
+      "card_id": "card-021",
+      "idx": 20,
+      "name": "pay_money",
+      "side_a": "to pay money",
+      "side_b": "fù qián",
+      "side_c": "付钱",
+      "side_d": "vo",
+      "level": 1
+    },
+    {
+      "card_id": "card-022",
+      "idx": 21,
+      "name": "pay",
+      "side_a": "to pay",
+      "side_b": "fù",
+      "side_c": "付",
+      "side_d": "v",
+      "level": 1
+    }
+  ]
+}

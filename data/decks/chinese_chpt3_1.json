@@ -1,0 +1,326 @@
+{
+  "id": "chinese_chpt3_1",
+  "metadata": {
+    "deck_name": "Chinese Chapter 3",
+    "abbreviated_title": "Chp 3 pt 1",
+    "deck_subtitle": "Time & Dates",
+    "description": "Essential Chinese vocabulary for time expressions, dates, months, and temporal concepts",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 29,
+    "difficulty": "beginner",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "chapter3",
+      "vocabulary"
+    ],
+    "version": "1.0.0",
+    "created_date": "2025-09-14T00:00:00Z",
+    "last_updated": "2025-09-14T00:00:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "september",
+      "side_a": "September",
+      "side_b": "jiǔyuè",
+      "side_c": "九月",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "month",
+      "side_a": "month",
+      "side_b": "yuè",
+      "side_c": "月",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "twelve",
+      "side_a": "twelve",
+      "side_b": "shí'èr",
+      "side_c": "十二",
+      "side_d": "number",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "number_day",
+      "side_a": "(measure word for number in a series; day of the month)",
+      "side_b": "hào",
+      "side_c": "号",
+      "side_d": "measure word",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "week",
+      "side_a": "week",
+      "side_b": "xīngqī",
+      "side_c": "星期",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "thursday",
+      "side_a": "Thursday",
+      "side_b": "xīngqīsì",
+      "side_c": "星期四",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "day",
+      "side_a": "day",
+      "side_b": "tiān",
+      "side_c": "天",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "birthday",
+      "side_a": "birthday",
+      "side_b": "shēngrì",
+      "side_c": "生日",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "this_year",
+      "side_a": "this year",
+      "side_b": "jīnnián",
+      "side_c": "今年",
+      "side_d": "time word",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "how_many",
+      "side_a": "how many or much; to what extent; many",
+      "side_b": "duō",
+      "side_c": "多",
+      "side_d": "adverb",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "big_old",
+      "side_a": "big; old",
+      "side_b": "dà",
+      "side_c": "大",
+      "side_d": "adjective",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "eighteen",
+      "side_a": "eighteen",
+      "side_b": "shíbā",
+      "side_c": "十八",
+      "side_d": "number",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "years_old",
+      "side_a": "year (of age)",
+      "side_b": "suì",
+      "side_c": "岁",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "eat",
+      "side_a": "to eat",
+      "side_b": "chī",
+      "side_c": "吃",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "meal_rice",
+      "side_a": "meal; (cooked) rice",
+      "side_b": "fàn",
+      "side_c": "饭",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "how_about",
+      "side_a": "Is it O.K.? How is that? How does that sound?",
+      "side_b": "zěnmeyàng",
+      "side_c": "怎么样",
+      "side_d": "question phrase",
+      "level": 1
+    },
+    {
+      "card_id": "card-017",
+      "idx": 16,
+      "name": "too_extremely",
+      "side_a": "too; extremely",
+      "side_b": "tài...le",
+      "side_c": "太...了",
+      "side_d": "adverb",
+      "level": 1
+    },
+    {
+      "card_id": "card-018",
+      "idx": 17,
+      "name": "thank",
+      "side_a": "to thank",
+      "side_b": "xièxie",
+      "side_c": "谢谢",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-019",
+      "idx": 18,
+      "name": "like",
+      "side_a": "to like",
+      "side_b": "xǐhuan",
+      "side_c": "喜欢",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-020",
+      "idx": 19,
+      "name": "dishes",
+      "side_a": "dishes, cuisine",
+      "side_b": "cài",
+      "side_c": "菜",
+      "side_d": "noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-021",
+      "idx": 20,
+      "name": "or",
+      "side_a": "or",
+      "side_b": "háishi",
+      "side_c": "还是",
+      "side_d": "conjunction",
+      "level": 1
+    },
+    {
+      "card_id": "card-022",
+      "idx": 21,
+      "name": "but",
+      "side_a": "but",
+      "side_b": "kěshì",
+      "side_c": "可是",
+      "side_d": "conjunction",
+      "level": 1
+    },
+    {
+      "card_id": "card-023",
+      "idx": 22,
+      "name": "we",
+      "side_a": "we",
+      "side_b": "wǒmen",
+      "side_c": "我们",
+      "side_d": "pronoun",
+      "level": 1
+    },
+    {
+      "card_id": "card-024",
+      "idx": 23,
+      "name": "oclock",
+      "side_a": "o'clock (lit. dot, point, thus \"points on the clock\")",
+      "side_b": "diǎn",
+      "side_c": "点",
+      "side_d": "measure word",
+      "level": 1
+    },
+    {
+      "card_id": "card-025",
+      "idx": 24,
+      "name": "half",
+      "side_a": "half; half an hour",
+      "side_b": "bàn",
+      "side_c": "半",
+      "side_d": "number",
+      "level": 1
+    },
+    {
+      "card_id": "card-026",
+      "idx": 25,
+      "name": "evening",
+      "side_a": "evening; night",
+      "side_b": "wǎnshang",
+      "side_c": "晚上",
+      "side_d": "time word or noun",
+      "level": 1
+    },
+    {
+      "card_id": "card-027",
+      "idx": 26,
+      "name": "see",
+      "side_a": "to see",
+      "side_b": "jiàn",
+      "side_c": "见",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-028",
+      "idx": 27,
+      "name": "goodbye",
+      "side_a": "goodbye; see you again",
+      "side_b": "zàijiàn",
+      "side_c": "再见",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-029",
+      "idx": 28,
+      "name": "england",
+      "side_a": "Britain; England",
+      "side_b": "Yīngguó",
+      "side_c": "英国",
+      "side_d": "proper noun",
+      "level": 1
+    }
+  ]
+}
