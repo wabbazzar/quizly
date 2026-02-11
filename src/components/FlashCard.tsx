@@ -9,6 +9,7 @@ interface FlashCardProps {
   onFlip: () => void;
   frontSides?: string[];
   backSides?: string[];
+  badgeText?: string;
 }
 
 const FlashCard: FC<FlashCardProps> = ({
@@ -17,6 +18,7 @@ const FlashCard: FC<FlashCardProps> = ({
   onFlip,
   frontSides = ['side_a'],
   backSides = ['side_b'],
+  badgeText,
 }) => {
   const frontContent = frontSides
     .filter(side => card[side as keyof Card])
@@ -47,7 +49,9 @@ const FlashCard: FC<FlashCardProps> = ({
               </div>
             ))}
           </div>
-          {card.level && <div className={styles.level}>Level {card.level}</div>}
+          {(badgeText || card.level) && (
+            <div className={styles.level}>{badgeText || `Level ${card.level}`}</div>
+          )}
         </div>
 
         {/* Back of card */}
@@ -59,7 +63,9 @@ const FlashCard: FC<FlashCardProps> = ({
               </div>
             ))}
           </div>
-          {card.level && <div className={styles.level}>Level {card.level}</div>}
+          {(badgeText || card.level) && (
+            <div className={styles.level}>{badgeText || `Level ${card.level}`}</div>
+          )}
         </div>
       </motion.div>
     </div>

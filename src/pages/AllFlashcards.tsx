@@ -29,7 +29,7 @@ const AllFlashcards: FC = () => {
 
   // Create aggregated cards from visible decks
   const allCards = useMemo(() => {
-    const cards: Array<Card & { deckName: string; deckId: string }> = [];
+    const cards: Array<Card & { deckName: string; deckId: string; abbreviatedTitle?: string }> = [];
     const visibleDecks = decks.filter(d => !hiddenDeckIds.includes(d.id));
     visibleDecks.forEach((deck) => {
       deck.content.forEach((card) => {
@@ -37,6 +37,7 @@ const AllFlashcards: FC = () => {
           ...card,
           deckName: deck.metadata.deck_name,
           deckId: deck.id,
+          abbreviatedTitle: deck.metadata.abbreviated_title,
         });
       });
     });
@@ -221,6 +222,7 @@ const AllFlashcards: FC = () => {
               onFlip={handleFlip}
               frontSides={frontSides}
               backSides={backSides}
+              badgeText={currentCard?.abbreviatedTitle}
             />
 
             <div
