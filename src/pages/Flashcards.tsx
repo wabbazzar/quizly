@@ -522,6 +522,7 @@ const Flashcards: FC = () => {
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={1}
             onDragEnd={handleDragEnd}
+            style={{ touchAction: 'none' }}
             initial={{ y: window.innerHeight, opacity: 0 }}
             animate={{
               y: 0,

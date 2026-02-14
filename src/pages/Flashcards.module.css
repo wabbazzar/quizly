@@ -196,7 +196,7 @@
   .container {
     height: 100vh;
     height: 100dvh;
-    touch-action: pan-x; /* Allow horizontal swipe but prevent vertical scroll */
+    touch-action: none; /* Prevent browser from handling touch — let framer-motion handle drag */
   }
 
   .main {
