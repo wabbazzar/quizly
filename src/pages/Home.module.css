@@ -116,6 +116,26 @@
   color: var(--primary-main);
 }
 
+.searchBar {
+  margin-bottom: var(--space-5);
+}
+
+.clearButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--text-tertiary);
+  transition: color 0.15s;
+}
+
+.clearButton:hover {
+  color: var(--text-primary);
+}
+
 .deckGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

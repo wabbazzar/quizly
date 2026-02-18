@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.resultCount {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.emptyState {
+  text-align: center;
+  padding: var(--space-10) var(--space-4);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--border-color);
+}
+
+.emptyText {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.emptyQuery {
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+}

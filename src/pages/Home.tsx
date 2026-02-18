@@ -8,9 +8,12 @@ import EnhancedDeckCard from '@/components/EnhancedDeckCard';
 import { CompactDeckGrid } from '@/components/deck/CompactDeckGrid';
 import { FamilySection } from '@/components/deck/FamilySection';
 import { DeckVisibilityModal } from '@/components/modals/DeckVisibilityModal';
+import { SearchResults, CardSearchResult } from '@/components/search/SearchResults';
+import { SearchIcon, CloseIcon } from '@/components/icons/NavigationIcons';
 import { SlidersIcon } from '@/components/icons/DeckManagementIcons';
+import { Input } from '@/components/ui/Input';
 import { useIsMobile } from '@/hooks/useIsMobile';
-import { Deck, DeckFamily } from '@/types';
+import { Deck, DeckFamily, Card } from '@/types';
 import styles from './Home.module.css';
 
 const OTHER_FAMILY: DeckFamily = {
@@ -38,6 +41,7 @@ const Home: FC = () => {
   const headerRef = useRef<HTMLElement | null>(null);
   const isMobile = useIsMobile();
   const [modalOpen, setModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const node = headerRef.current;
@@ -158,6 +162,32 @@ const Home: FC = () => {
     return groups;
   }, [visibleDecks, families]);
 
+  const SIDE_KEYS: (keyof Card)[] = ['side_a', 'side_b', 'side_c', 'side_d', 'side_e', 'side_f'];
+
+  const isSearching = searchQuery.trim().length > 0;
+
+  const searchResults = useMemo((): CardSearchResult[] => {
+    const strip = (s: string) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const q = strip(searchQuery.trim());
+    if (!q) return [];
+
+    const results: CardSearchResult[] = [];
+    for (const deck of visibleDecks) {
+      if (!deck.content) continue;
+      for (const card of deck.content) {
+        const nameMatch = card.name ? strip(card.name).includes(q) : false;
+        const sideMatch = SIDE_KEYS.some(key => {
+          const val = card[key];
+          return typeof val === 'string' && strip(val).includes(q);
+        });
+        if (nameMatch || sideMatch) {
+          results.push({ card, deck });
+        }
+      }
+    }
+    return results;
+  }, [searchQuery, visibleDecks]);
+
   // When there's only one family, skip the section header
   const hasMutipleFamilies = familyGroups.length > 1;
 
@@ -259,7 +289,37 @@ const Home: FC = () => {
             </button>
           </div>
 
-          {visibleDecks.length === 0 ? (
+          <div className={styles.searchBar}>
+            <Input
+              variant="outlined"
+              fullWidth
+              placeholder="Search cards..."
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              startIcon={<SearchIcon size={18} />}
+              endIcon={
+                searchQuery ? (
+                  <button
+                    className={styles.clearButton}
+                    onClick={() => setSearchQuery('')}
+                    aria-label="Clear search"
+                    type="button"
+                  >
+                    <CloseIcon size={16} />
+                  </button>
+                ) : undefined
+              }
+              aria-label="Search cards across all decks"
+            />
+          </div>
+
+          {isSearching ? (
+            <SearchResults
+              results={searchResults}
+              query={searchQuery.trim()}
+              onNavigateToDeck={handleCompactDeckSelect}
+            />
+          ) : visibleDecks.length === 0 ? (
             <motion.div
               className={styles.emptyState}
               initial={{ opacity: 0 }}
