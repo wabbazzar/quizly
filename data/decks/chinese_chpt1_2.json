@@ -1,0 +1,146 @@
+{
+  "id": "chinese_chpt1_2",
+  "metadata": {
+    "deck_name": "Chinese Chapter 1 Part 2",
+    "abbreviated_title": "Chp 1 pt 2",
+    "deck_subtitle": "Basic Words and Places",
+    "description": "Chinese vocabulary for basic words, people, and place names",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 11,
+    "difficulty": "beginner",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "chapter1",
+      "vocabulary"
+    ],
+    "version": "1.0.0",
+    "created_date": "2026-01-06T00:00:00Z",
+    "last_updated": "2026-01-06T00:00:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "to_be",
+      "side_a": "to be",
+      "side_b": "shì",
+      "side_c": "是",
+      "side_d": "v",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "teacher",
+      "side_a": "teacher",
+      "side_b": "lǎoshī",
+      "side_c": "老师",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "question_particle",
+      "side_a": "(question particle)",
+      "side_b": "ma",
+      "side_c": "吗",
+      "side_d": "qp",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "not_no",
+      "side_a": "not; no",
+      "side_b": "bù",
+      "side_c": "不",
+      "side_d": "adv",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "student",
+      "side_a": "student",
+      "side_b": "xuésheng",
+      "side_c": "学生",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "too_also",
+      "side_a": "too; also",
+      "side_b": "yě",
+      "side_c": "也",
+      "side_d": "adv",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "people_person",
+      "side_a": "people; person",
+      "side_b": "rén",
+      "side_c": "人",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "china",
+      "side_a": "China",
+      "side_b": "Zhōngguó",
+      "side_c": "中国",
+      "side_d": "pn",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "beijing",
+      "side_a": "Beijing",
+      "side_b": "Běijīng",
+      "side_c": "北京",
+      "side_d": "pn",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "america",
+      "side_a": "America",
+      "side_b": "Měiguó",
+      "side_c": "美国",
+      "side_d": "pn",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "new_york",
+      "side_a": "New York",
+      "side_b": "Niǔyuē",
+      "side_c": "纽约",
+      "side_d": "pn",
+      "level": 1
+    }
+  ]
+}

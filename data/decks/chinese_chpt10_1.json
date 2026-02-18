@@ -1,0 +1,257 @@
+{
+  "id": "chinese_chpt10_1",
+  "metadata": {
+    "deck_name": "Chinese Chapter 10 Part 1",
+    "abbreviated_title": "Chp 10 pt 1",
+    "deck_subtitle": "Transportation",
+    "description": "Essential Chinese vocabulary for transportation, directions, and travel",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 22,
+    "difficulty": "intermediate",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "transportation",
+      "vocabulary",
+      "chapter10"
+    ],
+    "version": "1.0.0",
+    "created_date": "2025-09-14T00:00:00Z",
+    "last_updated": "2025-09-14T00:00:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "winter_vacation",
+      "side_a": "Winter vacation",
+      "side_b": "hánjià",
+      "side_c": "寒假",
+      "side_d": "School break during the winter season",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "airplane",
+      "side_a": "Airplane",
+      "side_b": "fēijī",
+      "side_c": "飞机",
+      "side_d": "Powered flying vehicle",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "ticket",
+      "side_a": "Ticket",
+      "side_b": "piào",
+      "side_c": "票",
+      "side_d": "Proof of purchase for travel or entry",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "airport",
+      "side_a": "Airport",
+      "side_b": "fēijīchǎng",
+      "side_c": "飞机场",
+      "side_d": "Place where airplanes take off and land",
+      "level": 2
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "to_travel_by",
+      "side_a": "To travel by; to sit",
+      "side_b": "zuò",
+      "side_c": "坐",
+      "side_d": "To go by a means of transport",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "bus",
+      "side_a": "Bus",
+      "side_b": "gōnggòng qìchē",
+      "side_c": "公共汽车",
+      "side_d": "Public transportation bus",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "or",
+      "side_a": "Or",
+      "side_b": "huòzhě",
+      "side_c": "或者",
+      "side_d": "Conjunction offering a choice",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "subway",
+      "side_a": "Subway",
+      "side_b": "dìtiě",
+      "side_c": "地铁",
+      "side_d": "Underground rapid transit system",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "walk",
+      "side_a": "To go by way of; to walk",
+      "side_b": "zǒu",
+      "side_c": "走",
+      "side_d": "To walk; to take a route",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "first",
+      "side_a": "First",
+      "side_b": "xiān",
+      "side_c": "先",
+      "side_d": "Before anything else; initially",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "stop_measure_word",
+      "side_a": "(Measure word for stops of bus, train, etc.)",
+      "side_b": "zhàn",
+      "side_c": "站",
+      "side_d": "Classifier for stops or stations",
+      "level": 2
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "get_off",
+      "side_a": "To get off (a bus, train, etc.)",
+      "side_b": "xià chē",
+      "side_c": "下车",
+      "side_d": "To disembark from a vehicle",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "then",
+      "side_a": "Then; afterwards",
+      "side_b": "ránhòu",
+      "side_c": "然后",
+      "side_d": "Happening after something else",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "green",
+      "side_a": "Green",
+      "side_b": "lǜ",
+      "side_c": "绿",
+      "side_d": "Color between blue and yellow",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "line",
+      "side_a": "Line",
+      "side_b": "xiàn",
+      "side_c": "线",
+      "side_d": "Route or line (e.g., subway line)",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "final",
+      "side_a": "Final; last",
+      "side_b": "zuìhòu",
+      "side_c": "最后",
+      "side_d": "Happening at the end",
+      "level": 1
+    },
+    {
+      "card_id": "card-017",
+      "idx": 16,
+      "name": "blue",
+      "side_a": "Blue",
+      "side_b": "lán",
+      "side_c": "蓝",
+      "side_d": "Color between green and violet",
+      "level": 1
+    },
+    {
+      "card_id": "card-018",
+      "idx": 17,
+      "name": "troublesome",
+      "side_a": "Troublesome; inconvenient",
+      "side_b": "máfan",
+      "side_c": "麻烦",
+      "side_d": "Annoying or causing trouble",
+      "level": 1
+    },
+    {
+      "card_id": "card-019",
+      "idx": 18,
+      "name": "take_taxi",
+      "side_a": "To take a taxi",
+      "side_b": "dǎ chē",
+      "side_c": "打车",
+      "side_d": "To hail or ride in a taxi",
+      "level": 2
+    },
+    {
+      "card_id": "card-020",
+      "idx": 19,
+      "name": "taxi",
+      "side_a": "Taxi",
+      "side_b": "chūzū qìchē",
+      "side_c": "出租汽车",
+      "side_d": "Car for hire; cab",
+      "level": 1
+    },
+    {
+      "card_id": "card-021",
+      "idx": 20,
+      "name": "drive",
+      "side_a": "To drive a car",
+      "side_b": "kāi chē",
+      "side_c": "开车",
+      "side_d": "To operate a motor vehicle",
+      "level": 1
+    },
+    {
+      "card_id": "card-022",
+      "idx": 21,
+      "name": "see_off",
+      "side_a": "To see off or out; to take (someone somewhere)",
+      "side_b": "sòng",
+      "side_c": "送",
+      "side_d": "To escort or send someone off",
+      "level": 1
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "id": "chinese_chpt5_1",
+  "metadata": {
+    "deck_name": "Chinese Chapter 5 Part 1",
+    "abbreviated_title": "Chp 5 pt 1",
+    "deck_subtitle": "Meeting People",
+    "description": "Essential Chinese vocabulary for meeting people, social interactions, and polite conversation",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 9,
+    "difficulty": "beginner",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "chapter5",
+      "vocabulary"
+    ],
+    "version": "1.0.0",
+    "created_date": "2025-09-14T00:00:00Z",
+    "last_updated": "2025-09-14T00:00:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "interjection",
+      "side_a": "(interjectory particle used to soften a question)",
+      "side_b": "ya",
+      "side_c": "呀",
+      "side_d": "particle",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "enter",
+      "side_a": "to enter",
+      "side_b": "jìn",
+      "side_c": "进",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "fast_quick",
+      "side_a": "fast, quick; quickly",
+      "side_b": "kuài",
+      "side_c": "快",
+      "side_d": "adverb or adjective",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "come_in",
+      "side_a": "to come in",
+      "side_b": "jìn lai",
+      "side_c": "进来",
+      "side_d": "verb complement",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "come",
+      "side_a": "to come",
+      "side_b": "lái",
+      "side_c": "来",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "introduce",
+      "side_a": "to introduce",
+      "side_b": "jièshào",
+      "side_c": "介绍",
+      "side_d": "verb",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "once_bit",
+      "side_a": "once; a bit",
+      "side_b": "yí xià",
+      "side_c": "一下",
+      "side_d": "number + measure",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "happy_pleased",
+      "side_a": "happy, pleased",
+      "side_b": "gāoxìng",
+      "side_c": "高兴",
+      "side_d": "adjective",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "pretty",
+      "side_a": "pretty",
+      "side_b": "piàoliang",
+      "side_c": "漂亮",
+      "side_d": "adjective",
+      "level": 1
+    }
+  ]
+}

@@ -1,0 +1,206 @@
+{
+  "id": "chinese_chpt2_2",
+  "metadata": {
+    "deck_name": "Chinese Chapter 2 Part 2",
+    "abbreviated_title": "Chp 2 pt 2",
+    "deck_subtitle": "Family and Occupations",
+    "description": "Chinese vocabulary for family members and occupations",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 18,
+    "difficulty": "beginner",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "chapter2",
+      "vocabulary"
+    ],
+    "version": "1.0.0",
+    "created_date": "2026-01-06T00:00:00Z",
+    "last_updated": "2026-01-06T00:00:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "family_home",
+      "side_a": "family; home",
+      "side_b": "jiā",
+      "side_c": "家",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "how_many",
+      "side_a": "how many; some; a few",
+      "side_b": "jǐ",
+      "side_c": "几",
+      "side_d": "nu",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "measure_word_family",
+      "side_a": "(measure word for number of family members)",
+      "side_b": "kǒu",
+      "side_c": "口",
+      "side_d": "m",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "older_brother",
+      "side_a": "older brother",
+      "side_b": "gēge",
+      "side_c": "哥哥",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "two_couple",
+      "side_a": "two; a couple of",
+      "side_b": "liǎng",
+      "side_c": "两",
+      "side_d": "nu",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "younger_sister",
+      "side_a": "younger sister",
+      "side_b": "mèimei",
+      "side_c": "妹妹",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "and",
+      "side_a": "and",
+      "side_b": "hé",
+      "side_c": "和",
+      "side_d": "conj",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "eldest_sister",
+      "side_a": "eldest sister",
+      "side_b": "dàjiě",
+      "side_c": "大姐",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "second_oldest_sister",
+      "side_a": "second oldest sister",
+      "side_b": "èrjiě",
+      "side_c": "二姐",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "to_do",
+      "side_a": "to do",
+      "side_b": "zuò",
+      "side_c": "做",
+      "side_d": "v",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "job_work",
+      "side_a": "job; to work",
+      "side_b": "gōngzuò",
+      "side_c": "工作",
+      "side_d": "n/v",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "lawyer",
+      "side_a": "lawyer",
+      "side_b": "lǜshī",
+      "side_c": "律师",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "english_language",
+      "side_a": "English (language)",
+      "side_b": "Yīngwén",
+      "side_c": "英文",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "both_all",
+      "side_a": "both; all",
+      "side_b": "dōu",
+      "side_c": "都",
+      "side_d": "adv",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "college_student",
+      "side_a": "college student",
+      "side_b": "dàxuéshēng",
+      "side_c": "大学生",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "university_college",
+      "side_a": "university; college",
+      "side_b": "dàxué",
+      "side_c": "大学",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-017",
+      "idx": 16,
+      "name": "doctor_physician",
+      "side_a": "doctor; physician",
+      "side_b": "yīshēng",
+      "side_c": "医生",
+      "side_d": "n",
+      "level": 1
+    }
+  ]
+}

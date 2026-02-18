@@ -1,0 +1,136 @@
+{
+  "id": "chinese_chpt5_2",
+  "metadata": {
+    "deck_name": "Chinese Chapter 5 Part 2",
+    "abbreviated_title": "Chp 5 pt 2",
+    "deck_subtitle": "Activities and Going Home",
+    "description": "Chinese vocabulary for activities, chatting, and returning home",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 9,
+    "difficulty": "beginner",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "chapter5",
+      "vocabulary"
+    ],
+    "version": "1.0.0",
+    "created_date": "2026-01-06T00:00:00Z",
+    "last_updated": "2026-01-06T00:00:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "to_have_fun_play",
+      "side_a": "to have fun; to play",
+      "side_b": "wán(r)",
+      "side_c": "玩(儿)",
+      "side_d": "v",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "dynamic_particle",
+      "side_a": "(a dynamic particle)",
+      "side_b": "le",
+      "side_c": "了",
+      "side_d": "p",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "library",
+      "side_a": "library",
+      "side_b": "túshūguǎn",
+      "side_c": "图书馆",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "together",
+      "side_a": "together",
+      "side_b": "yìqǐ",
+      "side_c": "一起",
+      "side_d": "adv",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "to_chat",
+      "side_a": "to chat",
+      "side_b": "liáo tiān(r)",
+      "side_c": "聊天(儿)",
+      "side_d": "vo",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "chat",
+      "side_a": "to chat",
+      "side_b": "liáo",
+      "side_c": "聊",
+      "side_d": "v",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "sky",
+      "side_a": "sky",
+      "side_b": "tiān",
+      "side_c": "天",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "not_until_only_then",
+      "side_a": "not until; only then",
+      "side_b": "cái",
+      "side_c": "才",
+      "side_d": "adv",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "to_go_home",
+      "side_a": "to go home",
+      "side_b": "huí jiā",
+      "side_c": "回家",
+      "side_d": "vo",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "to_return",
+      "side_a": "to return",
+      "side_b": "huí",
+      "side_c": "回",
+      "side_d": "v",
+      "level": 1
+    }
+  ]
+}

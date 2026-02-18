@@ -1,0 +1,11 @@
+{
+  "families": [
+    {
+      "id": "chinese",
+      "name": "Chinese",
+      "description": "Mandarin Chinese vocabulary and dialogues",
+      "color": "#e74c3c",
+      "sortOrder": 1
+    }
+  ]
+}

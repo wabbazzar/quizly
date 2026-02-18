@@ -1,0 +1,456 @@
+{
+  "id": "chinese_chpt10_2",
+  "metadata": {
+    "deck_name": "Chinese Chapter 10 Part 2",
+    "abbreviated_title": "Chp 10 pt 2",
+    "deck_subtitle": "Communication & Daily Life",
+    "description": "Additional Chinese vocabulary for communication, technology, and everyday expressions",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 18,
+    "difficulty": "intermediate",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "communication",
+      "vocabulary",
+      "chapter10"
+    ],
+    "version": "1.0.0",
+    "created_date": "2025-10-21T00:00:00Z",
+    "last_updated": "2025-11-12T00:46:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "email",
+      "side_a": "Email",
+      "side_b": "diànzǐ yóujiàn",
+      "side_c": "电子邮件",
+      "side_d": "Electronic mail",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "electron",
+      "side_a": "Electron; electronic",
+      "side_b": "diànzǐ",
+      "side_c": "电子",
+      "side_d": "Electronic or electron",
+      "level": 2
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "to_allow",
+      "side_a": "To allow or cause (somebody to do something)",
+      "side_b": "ràng",
+      "side_c": "让",
+      "side_d": "To let; to allow; to cause",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "to_spend",
+      "side_a": "To spend",
+      "side_b": "huā",
+      "side_c": "花",
+      "side_d": "To spend (money or time)",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "embarrassed",
+      "side_a": "To feel embarrassed",
+      "side_b": "bù hǎoyìsi",
+      "side_c": "不好意思",
+      "side_d": "To feel embarrassed or sorry",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "every",
+      "side_a": "Every; each",
+      "side_b": "měi",
+      "side_c": "每",
+      "side_d": "Every single one; each",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "city",
+      "side_a": "City",
+      "side_b": "chéngshì",
+      "side_c": "城市",
+      "side_d": "Urban area; city",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "especially",
+      "side_a": "Especially",
+      "side_b": "tèbié",
+      "side_c": "特别",
+      "side_d": "Particularly; especially",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "highway",
+      "side_a": "Highway",
+      "side_b": "gāosù gōnglù",
+      "side_c": "高速公路",
+      "side_d": "High-speed highway; expressway",
+      "level": 2
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "high_speed",
+      "side_a": "High speed",
+      "side_b": "gāosù",
+      "side_c": "高速",
+      "side_d": "High speed; fast",
+      "level": 2
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "public_road",
+      "side_a": "Highway; public road",
+      "side_b": "gōnglù",
+      "side_c": "公路",
+      "side_d": "Public road; highway",
+      "level": 2
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "road",
+      "side_a": "Road; path",
+      "side_b": "lù",
+      "side_c": "路",
+      "side_d": "Road; route; way",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "nervous",
+      "side_a": "Nervous; anxious",
+      "side_b": "jǐnzhāng",
+      "side_c": "紧张",
+      "side_d": "Tense; nervous; anxious",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "oneself",
+      "side_a": "Oneself",
+      "side_b": "zìjǐ",
+      "side_c": "自己",
+      "side_d": "Self; oneself",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "cell_phone",
+      "side_a": "Cell phone",
+      "side_b": "shǒujī",
+      "side_c": "手机",
+      "side_d": "Mobile phone; cellphone",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "send_text",
+      "side_a": "To send a text message",
+      "side_b": "fā duǎnxìn",
+      "side_c": "发短信",
+      "side_d": "To send a short message; to text",
+      "level": 2
+    },
+    {
+      "card_id": "card-017",
+      "idx": 16,
+      "name": "new_year",
+      "side_a": "New year",
+      "side_b": "xīnnián",
+      "side_c": "新年",
+      "side_d": "New Year",
+      "level": 1
+    },
+    {
+      "card_id": "card-018",
+      "idx": 17,
+      "name": "happy",
+      "side_a": "Happy",
+      "side_b": "kuàilè",
+      "side_c": "快乐",
+      "side_d": "Happy; joyful",
+      "level": 1
+    }
+  ],
+  "reading": {
+    "sides": {
+      "a": "characters",
+      "b": "pinyin",
+      "c": "english"
+    },
+    "tokenization": {
+      "unit": {
+        "a": "character",
+        "b": "space",
+        "c": "space"
+      },
+      "preservePunctuation": true,
+      "alignment": "index"
+    },
+    "dialogues": {
+      "dialogue_001": {
+        "lines": [
+          {
+            "a": "你说中文说得真好。平常怎么准备上你的中文课?",
+            "b": "Nǐ shuō zhōngwén shuō dé zhēn hǎo. Píngcháng zěnme zhǔnbèi shàng nǐ de zhōngwén kè?",
+            "c": "You speak Chinese so well. Normally, how do you prepare for your Chinese class?",
+            "wordAlignments": [
+              {
+                "chinese": "你",
+                "pinyin": "Nǐ",
+                "english": "You"
+              },
+              {
+                "chinese": "说",
+                "pinyin": "shuō",
+                "english": "speak"
+              },
+              {
+                "chinese": "中文",
+                "pinyin": "zhōngwén",
+                "english": "Chinese"
+              },
+              {
+                "chinese": "说得",
+                "pinyin": "shuō dé",
+                "english": "so"
+              },
+              {
+                "chinese": "真",
+                "pinyin": "zhēn",
+                "english": ""
+              },
+              {
+                "chinese": "好",
+                "pinyin": "hǎo",
+                "english": "well"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              },
+              {
+                "chinese": "平常",
+                "pinyin": "Píngcháng",
+                "english": "Normally"
+              },
+              {
+                "chinese": "怎么",
+                "pinyin": "zěnme",
+                "english": "how"
+              },
+              {
+                "chinese": "准备",
+                "pinyin": "zhǔnbèi",
+                "english": "do you prepare"
+              },
+              {
+                "chinese": "上",
+                "pinyin": "shàng",
+                "english": "for"
+              },
+              {
+                "chinese": "你的",
+                "pinyin": "nǐ de",
+                "english": "your"
+              },
+              {
+                "chinese": "中文",
+                "pinyin": "zhōngwén",
+                "english": "Chinese"
+              },
+              {
+                "chinese": "课",
+                "pinyin": "kè",
+                "english": "class"
+              },
+              {
+                "chinese": "?",
+                "pinyin": "?",
+                "english": "?"
+              }
+            ]
+          },
+          {
+            "a": "我每天早上都听录音。",
+            "b": "Wǒ měitiān zǎoshang dōu tīng lùyīn.",
+            "c": "I listen to the audio every morning.",
+            "wordAlignments": [
+              {
+                "chinese": "我",
+                "pinyin": "Wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "每天",
+                "pinyin": "měitiān",
+                "english": "every"
+              },
+              {
+                "chinese": "早上",
+                "pinyin": "zǎoshang",
+                "english": "morning"
+              },
+              {
+                "chinese": "都",
+                "pinyin": "dōu",
+                "english": ""
+              },
+              {
+                "chinese": "听",
+                "pinyin": "tīng",
+                "english": "listen to"
+              },
+              {
+                "chinese": "录音",
+                "pinyin": "lùyīn",
+                "english": "the audio"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          }
+        ]
+      },
+      "dialogue_002": {
+        "lines": [
+          {
+            "a": "我想给我的朋友发短信。",
+            "b": "Wǒ xiǎng gěi wǒ de péngyǒu fā duǎnxìn.",
+            "c": "I want to send a text message to my friend.",
+            "wordAlignments": [
+              {
+                "chinese": "我",
+                "pinyin": "Wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "想",
+                "pinyin": "xiǎng",
+                "english": "want"
+              },
+              {
+                "chinese": "给",
+                "pinyin": "gěi",
+                "english": "to"
+              },
+              {
+                "chinese": "我的",
+                "pinyin": "wǒ de",
+                "english": "my"
+              },
+              {
+                "chinese": "朋友",
+                "pinyin": "péngyǒu",
+                "english": "friend"
+              },
+              {
+                "chinese": "发",
+                "pinyin": "fā",
+                "english": "send"
+              },
+              {
+                "chinese": "短信",
+                "pinyin": "duǎnxìn",
+                "english": "a text message"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "你可以用手机发短信。",
+            "b": "Nǐ kěyǐ yòng shǒujī fā duǎnxìn.",
+            "c": "You can use your cell phone to send a text.",
+            "wordAlignments": [
+              {
+                "chinese": "你",
+                "pinyin": "Nǐ",
+                "english": "You"
+              },
+              {
+                "chinese": "可以",
+                "pinyin": "kěyǐ",
+                "english": "can"
+              },
+              {
+                "chinese": "用",
+                "pinyin": "yòng",
+                "english": "use"
+              },
+              {
+                "chinese": "手机",
+                "pinyin": "shǒujī",
+                "english": "your cell phone"
+              },
+              {
+                "chinese": "发",
+                "pinyin": "fā",
+                "english": "to send"
+              },
+              {
+                "chinese": "短信",
+                "pinyin": "duǎnxìn",
+                "english": "a text"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

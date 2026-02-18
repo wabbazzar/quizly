@@ -1,0 +1,199 @@
+{
+  "id": "chinese_chpt11_2",
+  "metadata": {
+    "deck_name": "Chinese Chapter 11 Part 2",
+    "abbreviated_title": "Chp 11 pt 2",
+    "deck_subtitle": "The Weather Here Is Awful",
+    "description": "Chinese vocabulary for discussing weather conditions, online chatting, and comparing climates across seasons",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 16,
+    "difficulty": "intermediate",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "weather",
+      "seasons",
+      "online",
+      "vocabulary",
+      "chapter11"
+    ],
+    "version": "1.0.0",
+    "created_date": "2026-01-28T00:00:00Z",
+    "last_updated": "2026-01-28T00:00:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "so_such",
+      "side_a": "So; such (indicating degree)",
+      "side_b": "nàme",
+      "side_c": "那么",
+      "side_d": "Pronoun indicating degree or extent",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "fun",
+      "side_a": "Fun; amusing; interesting",
+      "side_b": "hǎowánr",
+      "side_c": "好玩儿",
+      "side_d": "Adjective describing something enjoyable",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "go_out",
+      "side_a": "To go out",
+      "side_b": "chū qu",
+      "side_c": "出去",
+      "side_d": "Verb complement meaning to exit or leave",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "very",
+      "side_a": "Very; extremely; exceedingly",
+      "side_b": "fēicháng",
+      "side_c": "非常",
+      "side_d": "Adverb emphasizing high degree",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "terrible",
+      "side_a": "In a terrible mess; how terrible",
+      "side_b": "zāogāo",
+      "side_c": "糟糕",
+      "side_d": "Adjective describing a bad situation",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "rain",
+      "side_a": "To rain",
+      "side_b": "xià yǔ",
+      "side_c": "下雨",
+      "side_d": "Verb-object phrase for precipitation",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "again_past",
+      "side_a": "Again (for past actions)",
+      "side_b": "yòu",
+      "side_c": "又",
+      "side_d": "Adverb indicating repetition of a past action",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "interview",
+      "side_a": "To interview; interview",
+      "side_b": "miànshì",
+      "side_c": "面试",
+      "side_d": "Verb or noun for a formal meeting to assess qualifications",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "go_back",
+      "side_a": "To go back; to return",
+      "side_b": "huí qu",
+      "side_c": "回去",
+      "side_d": "Verb complement meaning to return to a place",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "winter",
+      "side_a": "Winter",
+      "side_b": "dōngtiān",
+      "side_c": "冬天",
+      "side_d": "The coldest season of the year",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "summer",
+      "side_a": "Summer",
+      "side_b": "xiàtiān",
+      "side_c": "夏天",
+      "side_d": "The warmest season of the year",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "hot",
+      "side_a": "Hot",
+      "side_b": "rè",
+      "side_c": "热",
+      "side_d": "Adjective describing high temperature",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "spring",
+      "side_a": "Spring",
+      "side_b": "chūntiān",
+      "side_c": "春天",
+      "side_d": "Season between winter and summer",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "autumn",
+      "side_a": "Autumn; fall",
+      "side_b": "qiūtiān",
+      "side_c": "秋天",
+      "side_d": "Season between summer and winter",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "comfortable",
+      "side_a": "Comfortable",
+      "side_b": "shūfu",
+      "side_c": "舒服",
+      "side_d": "Adjective describing a pleasant physical state",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "california",
+      "side_a": "California",
+      "side_b": "Jiāzhōu",
+      "side_c": "加州",
+      "side_d": "US state on the west coast",
+      "level": 2
+    }
+  ]
+}

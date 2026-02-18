@@ -1,0 +1,216 @@
+{
+  "id": "chinese_chpt4_2",
+  "metadata": {
+    "deck_name": "Chinese Chapter 4 Part 2",
+    "abbreviated_title": "Chp 4 pt 2",
+    "deck_subtitle": "Descriptions and Feelings",
+    "description": "Chinese vocabulary for descriptions, feelings, and expressing thoughts",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 15,
+    "difficulty": "beginner",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "chapter4",
+      "vocabulary"
+    ],
+    "version": "1.0.0",
+    "created_date": "2026-01-06T00:00:00Z",
+    "last_updated": "2026-01-06T00:00:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "small_little",
+      "side_a": "small; little",
+      "side_b": "xiǎo",
+      "side_c": "小",
+      "side_d": "adj",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "long_time",
+      "side_a": "a long time",
+      "side_b": "hǎo jiǔ",
+      "side_c": "好久",
+      "side_d": "phrase",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "very",
+      "side_a": "very",
+      "side_b": "hǎo",
+      "side_c": "好",
+      "side_d": "adv",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "long_of_time",
+      "side_a": "long (of time)",
+      "side_b": "jiǔ",
+      "side_c": "久",
+      "side_d": "adj",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "pretty_good",
+      "side_a": "pretty good",
+      "side_b": "búcuò",
+      "side_c": "不错",
+      "side_d": "adj",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "wrong",
+      "side_a": "wrong",
+      "side_b": "cuò",
+      "side_c": "错",
+      "side_d": "adj",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "want_to_think",
+      "side_a": "to want to; would like to; to think",
+      "side_b": "xiǎng",
+      "side_c": "想",
+      "side_d": "mv",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "feel_think",
+      "side_a": "to feel; to think",
+      "side_b": "juéde",
+      "side_c": "觉得",
+      "side_d": "v",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "interesting",
+      "side_a": "interesting",
+      "side_b": "yǒu yìsi",
+      "side_c": "有意思",
+      "side_d": "adj",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "meaning",
+      "side_a": "meaning",
+      "side_b": "yìsi",
+      "side_c": "意思",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "only",
+      "side_a": "only",
+      "side_b": "zhǐ",
+      "side_c": "只",
+      "side_d": "adv",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "to_sleep",
+      "side_a": "to sleep",
+      "side_b": "shuì jiào",
+      "side_c": "睡觉",
+      "side_d": "vo",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "sleep_verb",
+      "side_a": "to sleep",
+      "side_b": "shuì",
+      "side_c": "睡",
+      "side_d": "v",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "sleep_noun",
+      "side_a": "sleep",
+      "side_b": "jiào",
+      "side_c": "觉",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "forget_it",
+      "side_a": "forget it; never mind",
+      "side_b": "suàn le",
+      "side_c": "算了",
+      "side_d": "phrase",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "look_for",
+      "side_a": "to look for",
+      "side_b": "zhǎo",
+      "side_c": "找",
+      "side_d": "v",
+      "level": 1
+    },
+    {
+      "card_id": "card-017",
+      "idx": 16,
+      "name": "other_people",
+      "side_a": "other people; another person",
+      "side_b": "biérén",
+      "side_c": "别人",
+      "side_d": "n",
+      "level": 1
+    },
+    {
+      "card_id": "card-018",
+      "idx": 17,
+      "name": "other",
+      "side_a": "other",
+      "side_b": "bié (de)",
+      "side_c": "别(的)",
+      "side_d": "adj",
+      "level": 1
+    }
+  ]
+}
