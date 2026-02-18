@@ -62,21 +62,21 @@ export const SessionComplete: FC<SessionCompleteProps> = memo(
 
     const getPerformanceMessage = () => {
       if (isDeckMastered) {
-        return { message: 'Deck Mastered!', emoji: '🏆', color: 'excellent' };
+        return { message: 'Deck Mastered!', color: 'excellent' };
       }
 
       const accuracy = results.accuracy;
 
       if (accuracy >= 90) {
-        return { message: 'Outstanding!', emoji: '🌟', color: 'excellent' };
+        return { message: 'Outstanding!', color: 'excellent' };
       } else if (accuracy >= 80) {
-        return { message: 'Great job!', emoji: '🎉', color: 'great' };
+        return { message: 'Great job!', color: 'great' };
       } else if (accuracy >= 70) {
-        return { message: 'Good work!', emoji: '👍', color: 'good' };
+        return { message: 'Good work!', color: 'good' };
       } else if (accuracy >= 60) {
-        return { message: 'Keep practicing!', emoji: '💪', color: 'fair' };
+        return { message: 'Keep practicing!', color: 'fair' };
       } else {
-        return { message: "Don't give up!", emoji: '🚀', color: 'needsWork' };
+        return { message: "Don't give up!", color: 'needsWork' };
       }
     };
 
@@ -93,21 +93,13 @@ export const SessionComplete: FC<SessionCompleteProps> = memo(
         <div className={styles.container}>
           {/* Header */}
           <header className={styles.header}>
-            <motion.div
-              className={styles.emoji}
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-            >
-              {performance.emoji}
-            </motion.div>
             <h1 className={`${styles.title} ${styles[performance.color]}`}>
               {performance.message}
             </h1>
             <p className={styles.subtitle}>
               {isDeckMastered
-                ? `Congratulations! You've mastered all cards in ${deckName}!`
-                : `You completed the Learn session for ${deckName}`}
+                ? `You've mastered all cards in ${deckName}`
+                : `Learn session complete - ${deckName}`}
             </p>
           </header>
 
@@ -166,16 +158,16 @@ export const SessionComplete: FC<SessionCompleteProps> = memo(
             >
               {isDeckMastered ? (
                 <div className={styles.masteryItem}>
-                  <span className={`${styles.masteryIcon} ${styles.mastered}`}>🏆</span>
+                  <span className={`${styles.masteryDot} ${styles.mastered}`} />
                   <span className={styles.masteryText}>
-                    Perfect! All <strong>{results.totalQuestions}</strong> cards mastered!
+                    All <strong>{results.totalQuestions}</strong> cards mastered
                   </span>
                 </div>
               ) : (
                 <>
                   {results.passedCards.length > 0 && (
                     <div className={styles.masteryItem}>
-                      <span className={`${styles.masteryIcon} ${styles.mastered}`}>✨</span>
+                      <span className={`${styles.masteryDot} ${styles.mastered}`} />
                       <span className={styles.masteryText}>
                         Passed <strong>{results.passedCards.length}</strong> cards
                       </span>
@@ -183,9 +175,9 @@ export const SessionComplete: FC<SessionCompleteProps> = memo(
                   )}
                   {results.strugglingCards.length > 0 && (
                     <div className={styles.masteryItem}>
-                      <span className={`${styles.masteryIcon} ${styles.struggling}`}>📚</span>
+                      <span className={`${styles.masteryDot} ${styles.struggling}`} />
                       <span className={styles.masteryText}>
-                        <strong>{results.strugglingCards.length}</strong> cards need more practice
+                        <strong>{results.strugglingCards.length}</strong> cards to review
                       </span>
                     </div>
                   )}

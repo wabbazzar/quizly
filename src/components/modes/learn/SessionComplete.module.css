@@ -9,8 +9,8 @@
 
 .container {
   background: var(--neutral-white);
-  border-radius: 24px;
-  padding: var(--space-8);
+  border-radius: 20px;
+  padding: var(--space-5);
   max-width: 600px;
   width: 100%;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
@@ -19,19 +19,13 @@
 /* Header */
 .header {
   text-align: center;
-  margin-bottom: var(--space-8);
-}
-
-.emoji {
-  font-size: 72px;
   margin-bottom: var(--space-4);
-  display: inline-block;
 }
 
 .title {
-  font-size: var(--text-3xl);
+  font-size: var(--text-2xl);
   font-weight: var(--font-bold);
-  margin: 0 0 var(--space-2) 0;
+  margin: 0 0 var(--space-1) 0;
   color: var(--neutral-gray-800);
 }
 
@@ -56,7 +50,7 @@
 }
 
 .subtitle {
-  font-size: var(--text-lg);
+  font-size: var(--text-sm);
   color: var(--neutral-gray-600);
   margin: 0;
 }
@@ -64,35 +58,27 @@
 /* Results Grid */
 .resultsGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-4);
-  margin-bottom: var(--space-6);
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
 }
 
 .resultCard {
   background: var(--neutral-gray-50);
-  padding: var(--space-5);
-  border-radius: 16px;
+  padding: var(--space-2) var(--space-1);
+  border-radius: 10px;
   text-align: center;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.resultCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .resultValue {
-  font-size: var(--text-2xl);
+  font-size: var(--text-lg);
   font-weight: var(--font-bold);
   color: var(--primary-main);
-  margin-bottom: var(--space-1);
+  line-height: 1.2;
 }
 
 .resultLabel {
-  font-size: var(--text-sm);
+  font-size: 10px;
   color: var(--neutral-gray-600);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -101,37 +87,40 @@
 /* Mastery Section */
 .masterySection {
   background: var(--neutral-gray-50);
-  border-radius: 12px;
-  padding: var(--space-4);
-  margin-bottom: var(--space-4);
+  border-radius: 10px;
+  padding: var(--space-2) var(--space-3);
+  margin-bottom: var(--space-3);
 }
 
 .masteryItem {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  padding: var(--space-2);
+  padding: var(--space-1) 0;
 }
 
 .masteryItem + .masteryItem {
-  margin-top: var(--space-2);
+  margin-top: 0;
 }
 
-.masteryIcon {
-  font-size: var(--text-xl);
+.masteryDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
-.masteryIcon.mastered {
-  color: var(--semantic-success);
+.masteryDot.mastered {
+  background: var(--semantic-success);
 }
 
-.masteryIcon.struggling {
-  color: var(--semantic-warning);
+.masteryDot.struggling {
+  background: var(--semantic-warning);
 }
 
 .masteryText {
   color: var(--neutral-gray-700);
-  font-size: var(--text-base);
+  font-size: var(--text-sm);
 }
 
 .masteryText strong {
@@ -143,21 +132,21 @@
 .duration {
   text-align: center;
   color: var(--neutral-gray-600);
-  font-size: var(--text-sm);
-  margin-bottom: var(--space-6);
+  font-size: var(--text-xs);
+  margin-bottom: var(--space-3);
 }
 
 /* Action Buttons */
 .actions {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-2);
 }
 
 .actionButton {
-  padding: var(--space-4) var(--space-6);
-  border-radius: 12px;
-  font-size: var(--text-base);
+  padding: var(--space-3) var(--space-4);
+  border-radius: 10px;
+  font-size: var(--text-sm);
   font-weight: var(--font-medium);
   cursor: pointer;
   transition: all 0.2s ease;
@@ -167,7 +156,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  min-height: 48px;
+  min-height: 44px;
 }
 
 /* Keyboard hint indicator */
@@ -252,37 +241,8 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .container {
-    padding: var(--space-6);
-    border-radius: 20px;
-  }
-
-  .emoji {
-    font-size: 56px;
-  }
-
-  .title {
-    font-size: var(--text-2xl);
-  }
-
-  .subtitle {
-    font-size: var(--text-base);
-  }
-
-  .resultsGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-3);
-  }
-
-  .resultCard {
     padding: var(--space-4);
-  }
-
-  .resultValue {
-    font-size: var(--text-xl);
-  }
-
-  .resultLabel {
-    font-size: 11px;
+    border-radius: 16px;
   }
 
   .actions {
@@ -291,13 +251,6 @@
 
   .actionButton {
     padding: var(--space-3) var(--space-4);
-  }
-}
-
-/* Small Mobile */
-@media (max-width: 480px) {
-  .resultsGrid {
-    grid-template-columns: 1fr;
   }
 }
 

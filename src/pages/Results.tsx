@@ -35,14 +35,9 @@ const Results: FC = () => {
   const minutes = Math.floor(timeInSeconds / 60);
   const seconds = timeInSeconds % 60;
 
-  const getPerformanceEmoji = () => {
-    if (accuracyPercentage >= 90) return '🌟';
-    if (accuracyPercentage >= 75) return '✨';
-    if (accuracyPercentage >= 60) return '👍';
-    return '💪';
-  };
-
   const getPerformanceMessage = () => {
+    if (currentDeck && results.passedCards?.length >= currentDeck.content.length)
+      return 'All Cards Passed!';
     if (accuracyPercentage >= 90) return 'Outstanding!';
     if (accuracyPercentage >= 75) return 'Great job!';
     if (accuracyPercentage >= 60) return 'Good effort!';
@@ -56,7 +51,7 @@ const Results: FC = () => {
 
     // If all cards in the deck are passed, show a message
     if (totalDeckCards > 0 && passedCount >= totalDeckCards) {
-      alert('🎉 Congratulations! You have passed all cards in this deck!');
+      alert('You have passed all cards in this deck.');
       navigate(`/deck/${deckId}`);
       return;
     }
@@ -126,84 +121,29 @@ const Results: FC = () => {
   }, [handleTryAgain, handleBackToDeck, handleBackToHome, showCardModal]);
 
   return (
-    <div className={styles.resultsPage}>
+    <div className={`${styles.resultsPage} ${results.strugglingCards.length <= 1 ? styles.noScroll : ''}`}>
       <div className={styles.resultsContainer}>
-        {/* Performance Header */}
-        <div className={styles.performanceHeader}>
-          <div className={styles.performanceEmoji}>
-            {currentDeck && results.passedCards?.length >= currentDeck.content.length
-              ? '🏆'
-              : getPerformanceEmoji()}
-          </div>
-          <h1 className={styles.performanceMessage}>
-            {currentDeck && results.passedCards?.length >= currentDeck.content.length
-              ? 'All Cards Passed!'
-              : getPerformanceMessage()}
-          </h1>
-          {currentDeck && results.passedCards?.length >= currentDeck.content.length && (
-            <p className={styles.completionMessage}>
-              Congratulations! You&apos;ve passed all {currentDeck.content.length} cards in this
-              session!
-            </p>
-          )}
+        {/* Header: message + accuracy */}
+        <div className={styles.header}>
+          <h1 className={styles.title}>{getPerformanceMessage()}</h1>
+          <span className={styles.accuracy}>{accuracyPercentage}%</span>
         </div>
 
-        {/* Main Score */}
-        <div className={styles.mainScore}>
-          <div className={styles.accuracyDisplay}>
-            <span className={styles.accuracyNumber}>{accuracyPercentage}</span>
-            <span className={styles.accuracyPercent}>%</span>
-          </div>
-          <p className={styles.accuracyLabel}>Accuracy</p>
+        {/* Compact stats line */}
+        <div className={styles.statsLine}>
+          <span>{results.correctAnswers}/{results.totalQuestions} correct</span>
+          <span className={styles.statsDot} />
+          <span>{results.maxStreak} streak</span>
+          <span className={styles.statsDot} />
+          <span>{minutes}:{seconds.toString().padStart(2, '0')}</span>
         </div>
 
-        {/* Stats Grid */}
-        <div className={styles.statsGrid}>
-          <div className={styles.statCard}>
-            <div className={styles.statValue}>{results.correctAnswers}</div>
-            <div className={styles.statLabel}>Correct</div>
-          </div>
-          <div className={styles.statCard}>
-            <div className={styles.statValue}>{results.incorrectAnswers}</div>
-            <div className={styles.statLabel}>Incorrect</div>
-          </div>
-          <div className={styles.statCard}>
-            <div className={styles.statValue}>{results.maxStreak} 🔥</div>
-            <div className={styles.statLabel}>Best Streak</div>
-          </div>
-          <div className={styles.statCard}>
-            <div className={styles.statValue}>
-              {minutes}:{seconds.toString().padStart(2, '0')}
-            </div>
-            <div className={styles.statLabel}>Time</div>
-          </div>
-        </div>
-
-        {/* Additional Stats */}
-        <div className={styles.additionalStats}>
-          <div className={styles.statRow}>
-            <span className={styles.statRowLabel}>Total Questions:</span>
-            <span className={styles.statRowValue}>{results.totalQuestions}</span>
-          </div>
-          {results.passedCards.length > 0 && (
-            <div className={styles.statRow}>
-              <span className={styles.statRowLabel}>Cards Passed:</span>
-              <span className={styles.statRowValue}>{results.passedCards.length}</span>
-            </div>
-          )}
-          {results.strugglingCards.length > 0 && (
-            <div className={styles.statRow}>
-              <span className={styles.statRowLabel}>Need Review:</span>
-              <span className={styles.statRowValue}>{results.strugglingCards.length}</span>
-            </div>
-          )}
-          {results.masteredCards && results.masteredCards.length > 0 && (
-            <div className={styles.statRow}>
-              <span className={styles.statRowLabel}>Cards Mastered:</span>
-              <span className={styles.statRowValue}>{results.masteredCards.length}</span>
-            </div>
-          )}
-        </div>
+        {/* Review count if any */}
+        {results.strugglingCards.length > 0 && (
+          <p className={styles.reviewNote}>
+            {results.strugglingCards.length} card{results.strugglingCards.length !== 1 ? 's' : ''} to review
+          </p>
+        )}
 
         {/* Action Buttons */}
         <div className={styles.actionButtons}>

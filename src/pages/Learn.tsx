@@ -159,7 +159,7 @@ const Learn: FC = () => {
     cardsToExclude.length > 0
       ? {
           ...currentDeck,
-          content: currentDeck.content.filter((_card, index) => !cardsToExclude.includes(index)),
+          content: currentDeck.content.filter(card => !cardsToExclude.includes(card.idx)),
         }
       : currentDeck;
 
