@@ -1,0 +1,179 @@
+{
+  "id": "chinese_chpt13_1",
+  "metadata": {
+    "deck_name": "Chinese Chapter 13 Part 1",
+    "abbreviated_title": "Chp 13 pt 1",
+    "deck_subtitle": "Directions & Locations",
+    "description": "Chinese vocabulary for giving directions, describing locations, and spatial relationships",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 4,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description"
+    },
+    "card_count": 14,
+    "difficulty": "intermediate",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "directions",
+      "locations",
+      "spatial",
+      "vocabulary",
+      "chapter13"
+    ],
+    "version": "1.0.0",
+    "created_date": "2026-03-03T00:00:00Z",
+    "last_updated": "2026-03-03T00:00:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "to_go",
+      "side_a": "To go (colloquial)",
+      "side_b": "shàng",
+      "side_c": "上",
+      "side_d": "Verb meaning to go, used colloquially",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "center",
+      "side_a": "Center",
+      "side_b": "zhōngxīn",
+      "side_c": "中心",
+      "side_d": "Noun for center or middle point",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "to_hear_of",
+      "side_a": "To be told; to hear of",
+      "side_b": "tīngshuō",
+      "side_c": "听说",
+      "side_d": "Verb meaning to be told or to hear of something",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "sports",
+      "side_a": "Sports",
+      "side_b": "yùndòng",
+      "side_c": "运动",
+      "side_d": "Noun for sports or physical exercise",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "field",
+      "side_a": "Field",
+      "side_b": "chǎng",
+      "side_c": "场",
+      "side_d": "Noun for a field or open area",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "side",
+      "side_a": "Side",
+      "side_b": "pángbiān",
+      "side_c": "旁边",
+      "side_d": "Noun for side or beside (see Grammar 1)",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "far",
+      "side_a": "Far",
+      "side_b": "yuǎn",
+      "side_c": "远",
+      "side_d": "Adjective meaning far or distant",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "away_from",
+      "side_a": "Away from",
+      "side_b": "lí",
+      "side_c": "离",
+      "side_d": "Preposition indicating distance from something",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "near",
+      "side_a": "Near",
+      "side_b": "jìn",
+      "side_c": "近",
+      "side_d": "Adjective meaning near or close",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "activity",
+      "side_a": "Activity",
+      "side_b": "huódòng",
+      "side_c": "活动",
+      "side_d": "Noun for an activity or event",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "middle",
+      "side_a": "Middle",
+      "side_b": "zhōngjiān",
+      "side_c": "中间",
+      "side_d": "Noun for the middle or in between",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "bookstore",
+      "side_a": "Bookstore",
+      "side_b": "shūdiàn",
+      "side_c": "书店",
+      "side_d": "Noun for a bookstore or book shop",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "place",
+      "side_a": "Place",
+      "side_b": "dìfang",
+      "side_c": "地方",
+      "side_d": "Noun for a place or location",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "inside",
+      "side_a": "Inside",
+      "side_b": "lǐbian",
+      "side_c": "里边",
+      "side_d": "Noun for inside or within (see Grammar 1)",
+      "level": 1
+    }
+  ]
+}

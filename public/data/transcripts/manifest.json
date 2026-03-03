@@ -79,6 +79,29 @@
       "audioFile": "chinese_chpt12_1_phrases.mp3"
     },
     {
+      "id": "chinese_chpt13_1_dialogue",
+      "deckId": "chinese_chpt13_1",
+      "type": "dialogue",
+      "filename": "chinese_chpt13_1_dialogue.txt",
+      "displayName": "Dialogue",
+      "audioFile": "chinese_chpt13_1_dialogue.mp3"
+    },
+    {
+      "id": "chinese_chpt13_1_phrases",
+      "deckId": "chinese_chpt13_1",
+      "type": "phrases",
+      "filename": "chinese_chpt13_1_phrases.txt",
+      "displayName": "Phrases",
+      "audioFile": "chinese_chpt13_1_phrases.mp3"
+    },
+    {
+      "id": "chinese_chpt13_1_bonus_grammar",
+      "deckId": "chinese_chpt13_1",
+      "type": "dialogue",
+      "filename": "chinese_chpt13_1_bonus_grammar.txt",
+      "displayName": "Grammar Practice"
+    },
+    {
       "id": "chinese_chpt2_2_dialogue",
       "deckId": "chinese_chpt2_2",
       "type": "dialogue",
@@ -207,5 +230,5 @@
       "audioFile": "chinese_chpt9_2_phrases.mp3"
     }
   ],
-  "generatedAt": "2026-02-04T00:58:11.224Z"
+  "generatedAt": "2026-02-18T01:28:36.759Z"
 }
