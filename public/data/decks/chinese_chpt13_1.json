@@ -175,5 +175,492 @@
       "side_d": "Noun for inside or within (see Grammar 1)",
       "level": 1
     }
-  ]
+  ],
+  "reading": {
+    "sides": {
+      "a": "characters",
+      "b": "pinyin",
+      "c": "english"
+    },
+    "tokenization": {
+      "unit": {
+        "a": "character",
+        "b": "space",
+        "c": "space"
+      },
+      "preservePunctuation": true,
+      "alignment": "index"
+    },
+    "dialogues": {
+      "dialogue_001": {
+        "title": "Asking for Directions on Campus",
+        "description": "Textbook dialogue: asking how to get to the computer center",
+        "lines": [
+          {
+            "a": "小白，下课了？上哪儿去？",
+            "b": "Xiǎo Bái, xià kè le? Shàng nǎr qù?",
+            "c": "Xiao Bai, class is over? Where are you going?",
+            "wordAlignments": [
+              { "chinese": "小白", "pinyin": "Xiǎo Bái", "english": "Xiao Bai" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "下课", "pinyin": "xià kè", "english": "class is over" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "？", "pinyin": "?", "english": "?" },
+              { "chinese": "上", "pinyin": "Shàng", "english": "go" },
+              { "chinese": "哪儿", "pinyin": "nǎr", "english": "where" },
+              { "chinese": "去", "pinyin": "qù", "english": "to" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "您好，常老师。我想去学校的电脑中心，不知道怎么走，听说就在运动场旁边。",
+            "b": "Nín hǎo, Cháng lǎoshī. Wǒ xiǎng qù xuéxiào de diànnǎo zhōngxīn, bù zhīdào zěnme zǒu, tīngshuō jiù zài yùndòngchǎng pángbiān.",
+            "c": "Hello, Teacher Chang. I want to go to the school's computer center, but I don't know how to get there. I heard it's right next to the sports field.",
+            "wordAlignments": [
+              { "chinese": "您好", "pinyin": "Nín hǎo", "english": "Hello" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "常", "pinyin": "Cháng", "english": "Chang" },
+              { "chinese": "老师", "pinyin": "lǎoshī", "english": "Teacher" },
+              { "chinese": "。", "pinyin": ".", "english": "." },
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "想", "pinyin": "xiǎng", "english": "want to" },
+              { "chinese": "去", "pinyin": "qù", "english": "go to" },
+              { "chinese": "学校", "pinyin": "xuéxiào", "english": "school's" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "电脑", "pinyin": "diànnǎo", "english": "computer" },
+              { "chinese": "中心", "pinyin": "zhōngxīn", "english": "center" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "不", "pinyin": "bù", "english": "don't" },
+              { "chinese": "知道", "pinyin": "zhīdào", "english": "know" },
+              { "chinese": "怎么", "pinyin": "zěnme", "english": "how to" },
+              { "chinese": "走", "pinyin": "zǒu", "english": "get there" },
+              { "chinese": "，", "pinyin": ",", "english": "." },
+              { "chinese": "听说", "pinyin": "tīngshuō", "english": "I heard" },
+              { "chinese": "就", "pinyin": "jiù", "english": "right" },
+              { "chinese": "在", "pinyin": "zài", "english": "" },
+              { "chinese": "运动场", "pinyin": "yùndòngchǎng", "english": "sports field" },
+              { "chinese": "旁边", "pinyin": "pángbiān", "english": "next to" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "电脑中心没有运动场那么远。你知道学校图书馆在哪里吗？",
+            "b": "Diànnǎo zhōngxīn méiyǒu yùndòngchǎng nàme yuǎn. Nǐ zhīdào xuéxiào túshūguǎn zài nǎli ma?",
+            "c": "The computer center isn't as far as the sports field. Do you know where the school library is?",
+            "wordAlignments": [
+              { "chinese": "电脑", "pinyin": "Diànnǎo", "english": "computer" },
+              { "chinese": "中心", "pinyin": "zhōngxīn", "english": "center" },
+              { "chinese": "没有", "pinyin": "méiyǒu", "english": "not as" },
+              { "chinese": "运动场", "pinyin": "yùndòngchǎng", "english": "sports field" },
+              { "chinese": "那么", "pinyin": "nàme", "english": "that" },
+              { "chinese": "远", "pinyin": "yuǎn", "english": "far" },
+              { "chinese": "。", "pinyin": ".", "english": "." },
+              { "chinese": "你", "pinyin": "Nǐ", "english": "you" },
+              { "chinese": "知道", "pinyin": "zhīdào", "english": "know" },
+              { "chinese": "学校", "pinyin": "xuéxiào", "english": "school" },
+              { "chinese": "图书馆", "pinyin": "túshūguǎn", "english": "library" },
+              { "chinese": "在", "pinyin": "zài", "english": "is" },
+              { "chinese": "哪里", "pinyin": "nǎli", "english": "where" },
+              { "chinese": "吗", "pinyin": "ma", "english": "" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "知道，离王朋的宿舍不远。",
+            "b": "Zhīdào, lí Wáng Péng de sùshè bù yuǎn.",
+            "c": "Yes, it's not far from Wang Peng's dormitory.",
+            "wordAlignments": [
+              { "chinese": "知道", "pinyin": "Zhīdào", "english": "Yes" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "离", "pinyin": "lí", "english": "from" },
+              { "chinese": "王朋", "pinyin": "Wáng Péng", "english": "Wang Peng's" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "宿舍", "pinyin": "sùshè", "english": "dormitory" },
+              { "chinese": "不", "pinyin": "bù", "english": "not" },
+              { "chinese": "远", "pinyin": "yuǎn", "english": "far" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "电脑中心离图书馆很近，就在图书馆和学生活动中心中间。",
+            "b": "Diànnǎo zhōngxīn lí túshūguǎn hěn jìn, jiù zài túshūguǎn hé xuéshēng huódòng zhōngxīn zhōngjiān.",
+            "c": "The computer center is very close to the library, right between the library and the student activity center.",
+            "wordAlignments": [
+              { "chinese": "电脑", "pinyin": "Diànnǎo", "english": "computer" },
+              { "chinese": "中心", "pinyin": "zhōngxīn", "english": "center" },
+              { "chinese": "离", "pinyin": "lí", "english": "from" },
+              { "chinese": "图书馆", "pinyin": "túshūguǎn", "english": "the library" },
+              { "chinese": "很", "pinyin": "hěn", "english": "very" },
+              { "chinese": "近", "pinyin": "jìn", "english": "close" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "就", "pinyin": "jiù", "english": "right" },
+              { "chinese": "在", "pinyin": "zài", "english": "" },
+              { "chinese": "图书馆", "pinyin": "túshūguǎn", "english": "the library" },
+              { "chinese": "和", "pinyin": "hé", "english": "and" },
+              { "chinese": "学生", "pinyin": "xuéshēng", "english": "student" },
+              { "chinese": "活动", "pinyin": "huódòng", "english": "activity" },
+              { "chinese": "中心", "pinyin": "zhōngxīn", "english": "center" },
+              { "chinese": "中间", "pinyin": "zhōngjiān", "english": "between" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          }
+        ]
+      },
+      "dialogue_002": {
+        "title": "Going to the Bookstore Together",
+        "description": "Textbook dialogue: finding the bookstore on campus",
+        "lines": [
+          {
+            "a": "常老师，您去哪儿呢？",
+            "b": "Cháng lǎoshī, nín qù nǎr ne?",
+            "c": "Teacher Chang, where are you going?",
+            "wordAlignments": [
+              { "chinese": "常", "pinyin": "Cháng", "english": "Chang" },
+              { "chinese": "老师", "pinyin": "lǎoshī", "english": "Teacher" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "您", "pinyin": "nín", "english": "you" },
+              { "chinese": "去", "pinyin": "qù", "english": "going" },
+              { "chinese": "哪儿", "pinyin": "nǎr", "english": "where" },
+              { "chinese": "呢", "pinyin": "ne", "english": "" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "我想到学校书店去买书。",
+            "b": "Wǒ xiǎng dào xuéxiào shūdiàn qù mǎi shū.",
+            "c": "I want to go to the school bookstore to buy books.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "想", "pinyin": "xiǎng", "english": "want to" },
+              { "chinese": "到", "pinyin": "dào", "english": "to" },
+              { "chinese": "学校", "pinyin": "xuéxiào", "english": "school" },
+              { "chinese": "书店", "pinyin": "shūdiàn", "english": "bookstore" },
+              { "chinese": "去", "pinyin": "qù", "english": "go" },
+              { "chinese": "买", "pinyin": "mǎi", "english": "buy" },
+              { "chinese": "书", "pinyin": "shū", "english": "books" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "书店在什么地方？",
+            "b": "Shūdiàn zài shénme dìfang?",
+            "c": "Where is the bookstore?",
+            "wordAlignments": [
+              { "chinese": "书店", "pinyin": "Shūdiàn", "english": "bookstore" },
+              { "chinese": "在", "pinyin": "zài", "english": "is" },
+              { "chinese": "什么", "pinyin": "shénme", "english": "what" },
+              { "chinese": "地方", "pinyin": "dìfang", "english": "place" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "就在学生活动中心里边。我们一起走吧。",
+            "b": "Jiù zài xuéshēng huódòng zhōngxīn lǐbian. Wǒmen yìqǐ zǒu ba.",
+            "c": "It's inside the student activity center. Let's walk together.",
+            "wordAlignments": [
+              { "chinese": "就", "pinyin": "Jiù", "english": "" },
+              { "chinese": "在", "pinyin": "zài", "english": "inside" },
+              { "chinese": "学生", "pinyin": "xuéshēng", "english": "student" },
+              { "chinese": "活动", "pinyin": "huódòng", "english": "activity" },
+              { "chinese": "中心", "pinyin": "zhōngxīn", "english": "center" },
+              { "chinese": "里边", "pinyin": "lǐbian", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." },
+              { "chinese": "我们", "pinyin": "Wǒmen", "english": "Let's" },
+              { "chinese": "一起", "pinyin": "yìqǐ", "english": "together" },
+              { "chinese": "走", "pinyin": "zǒu", "english": "walk" },
+              { "chinese": "吧", "pinyin": "ba", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          }
+        ]
+      },
+      "grammar_001": {
+        "title": "Direction & Location Words: 边/面/头 Suffixes",
+        "description": "Direction words combine with 边, 面, 头 to form location words",
+        "lines": [
+          {
+            "a": "图书馆在学校的北边。",
+            "b": "Túshūguǎn zài xuéxiào de běibiān.",
+            "c": "The library is on the north side of the school.",
+            "wordAlignments": [
+              { "chinese": "图书馆", "pinyin": "Túshūguǎn", "english": "The library" },
+              { "chinese": "在", "pinyin": "zài", "english": "is on" },
+              { "chinese": "学校", "pinyin": "xuéxiào", "english": "school" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "北边", "pinyin": "běibiān", "english": "the north side" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "桌子上有一本书。",
+            "b": "Zhuōzi shang yǒu yì běn shū.",
+            "c": "There is a book on the table.",
+            "wordAlignments": [
+              { "chinese": "桌子", "pinyin": "Zhuōzi", "english": "table" },
+              { "chinese": "上", "pinyin": "shang", "english": "on" },
+              { "chinese": "有", "pinyin": "yǒu", "english": "There is" },
+              { "chinese": "一本", "pinyin": "yì běn", "english": "a" },
+              { "chinese": "书", "pinyin": "shū", "english": "book" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "学校里有很多学生。",
+            "b": "Xuéxiào li yǒu hěn duō xuéshēng.",
+            "c": "There are many students at school.",
+            "wordAlignments": [
+              { "chinese": "学校", "pinyin": "Xuéxiào", "english": "school" },
+              { "chinese": "里", "pinyin": "li", "english": "at" },
+              { "chinese": "有", "pinyin": "yǒu", "english": "There are" },
+              { "chinese": "很多", "pinyin": "hěn duō", "english": "many" },
+              { "chinese": "学生", "pinyin": "xuéshēng", "english": "students" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "教室外面有一棵树。",
+            "b": "Jiàoshì wàimiàn yǒu yì kē shù.",
+            "c": "There is a tree outside the classroom.",
+            "wordAlignments": [
+              { "chinese": "教室", "pinyin": "Jiàoshì", "english": "classroom" },
+              { "chinese": "外面", "pinyin": "wàimiàn", "english": "outside" },
+              { "chinese": "有", "pinyin": "yǒu", "english": "There is" },
+              { "chinese": "一棵", "pinyin": "yì kē", "english": "a" },
+              { "chinese": "树", "pinyin": "shù", "english": "tree" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "运动场在学校的南边。",
+            "b": "Yùndòngchǎng zài xuéxiào de nánbiān.",
+            "c": "The sports field is on the south side of the school.",
+            "wordAlignments": [
+              { "chinese": "运动场", "pinyin": "Yùndòngchǎng", "english": "The sports field" },
+              { "chinese": "在", "pinyin": "zài", "english": "is on" },
+              { "chinese": "学校", "pinyin": "xuéxiào", "english": "school" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "南边", "pinyin": "nánbiān", "english": "the south side" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          }
+        ]
+      },
+      "grammar_002": {
+        "title": "Comparisons with 没有: A 没有 B (那么) Adj",
+        "description": "Using meiyou to say A is not as [adjective] as B",
+        "lines": [
+          {
+            "a": "我弟弟没有我高。",
+            "b": "Wǒ dìdi méiyǒu wǒ gāo.",
+            "c": "My younger brother is not as tall as I am.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "My" },
+              { "chinese": "弟弟", "pinyin": "dìdi", "english": "younger brother" },
+              { "chinese": "没有", "pinyin": "méiyǒu", "english": "not as" },
+              { "chinese": "我", "pinyin": "wǒ", "english": "I" },
+              { "chinese": "高", "pinyin": "gāo", "english": "tall" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "北京没有上海热。",
+            "b": "Běijīng méiyǒu Shànghǎi rè.",
+            "c": "It is not as hot in Beijing as in Shanghai.",
+            "wordAlignments": [
+              { "chinese": "北京", "pinyin": "Běijīng", "english": "Beijing" },
+              { "chinese": "没有", "pinyin": "méiyǒu", "english": "not as" },
+              { "chinese": "上海", "pinyin": "Shànghǎi", "english": "Shanghai" },
+              { "chinese": "热", "pinyin": "rè", "english": "hot" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "电脑中心没有运动场那么远。",
+            "b": "Diànnǎo zhōngxīn méiyǒu yùndòngchǎng nàme yuǎn.",
+            "c": "The computer center isn't as far as the sports field.",
+            "wordAlignments": [
+              { "chinese": "电脑", "pinyin": "Diànnǎo", "english": "computer" },
+              { "chinese": "中心", "pinyin": "zhōngxīn", "english": "center" },
+              { "chinese": "没有", "pinyin": "méiyǒu", "english": "not as" },
+              { "chinese": "运动场", "pinyin": "yùndòngchǎng", "english": "sports field" },
+              { "chinese": "那么", "pinyin": "nàme", "english": "that" },
+              { "chinese": "远", "pinyin": "yuǎn", "english": "far" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "他姐姐没有他妹妹那么喜欢买东西。",
+            "b": "Tā jiějie méiyǒu tā mèimei nàme xǐhuan mǎi dōngxi.",
+            "c": "His older sister doesn't like shopping as much as his younger sister.",
+            "wordAlignments": [
+              { "chinese": "他", "pinyin": "Tā", "english": "His" },
+              { "chinese": "姐姐", "pinyin": "jiějie", "english": "older sister" },
+              { "chinese": "没有", "pinyin": "méiyǒu", "english": "not as" },
+              { "chinese": "他", "pinyin": "tā", "english": "his" },
+              { "chinese": "妹妹", "pinyin": "mèimei", "english": "younger sister" },
+              { "chinese": "那么", "pinyin": "nàme", "english": "that much" },
+              { "chinese": "喜欢", "pinyin": "xǐhuan", "english": "like" },
+              { "chinese": "买", "pinyin": "mǎi", "english": "shopping" },
+              { "chinese": "东西", "pinyin": "dōngxi", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "今天不比昨天热。",
+            "b": "Jīntiān bù bǐ zuótiān rè.",
+            "c": "Today is not any hotter than yesterday.",
+            "wordAlignments": [
+              { "chinese": "今天", "pinyin": "Jīntiān", "english": "Today" },
+              { "chinese": "不比", "pinyin": "bù bǐ", "english": "not any more than" },
+              { "chinese": "昨天", "pinyin": "zuótiān", "english": "yesterday" },
+              { "chinese": "热", "pinyin": "rè", "english": "hot" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          }
+        ]
+      },
+      "grammar_003": {
+        "title": "那么 Indicating Degree",
+        "description": "Using nàme before adjectives/verbs to express a high degree or 'not reaching that degree'",
+        "lines": [
+          {
+            "a": "你那么不喜欢写日记，就别写了吧。",
+            "b": "Nǐ nàme bù xǐhuan xiě rìjì, jiù bié xiě le ba.",
+            "c": "Since you dislike writing journals so much, why don't you quit?",
+            "wordAlignments": [
+              { "chinese": "你", "pinyin": "Nǐ", "english": "you" },
+              { "chinese": "那么", "pinyin": "nàme", "english": "so much" },
+              { "chinese": "不", "pinyin": "bù", "english": "" },
+              { "chinese": "喜欢", "pinyin": "xǐhuan", "english": "dislike" },
+              { "chinese": "写", "pinyin": "xiě", "english": "writing" },
+              { "chinese": "日记", "pinyin": "rìjì", "english": "journals" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "就", "pinyin": "jiù", "english": "then" },
+              { "chinese": "别", "pinyin": "bié", "english": "don't" },
+              { "chinese": "写", "pinyin": "xiě", "english": "write" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "吧", "pinyin": "ba", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "弟弟没有哥哥那么帅，那么酷。",
+            "b": "Dìdi méiyǒu gēge nàme shuài, nàme kù.",
+            "c": "The younger brother is not as handsome and cool as the older brother.",
+            "wordAlignments": [
+              { "chinese": "弟弟", "pinyin": "Dìdi", "english": "younger brother" },
+              { "chinese": "没有", "pinyin": "méiyǒu", "english": "not as" },
+              { "chinese": "哥哥", "pinyin": "gēge", "english": "older brother" },
+              { "chinese": "那么", "pinyin": "nàme", "english": "that" },
+              { "chinese": "帅", "pinyin": "shuài", "english": "handsome" },
+              { "chinese": "，", "pinyin": ",", "english": "and" },
+              { "chinese": "那么", "pinyin": "nàme", "english": "that" },
+              { "chinese": "酷", "pinyin": "kù", "english": "cool" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "坐地铁没有坐公共汽车那么麻烦。",
+            "b": "Zuò dìtiě méiyǒu zuò gōnggòng qìchē nàme máfan.",
+            "c": "Riding the subway is not as much of a hassle as riding the bus.",
+            "wordAlignments": [
+              { "chinese": "坐", "pinyin": "Zuò", "english": "Riding" },
+              { "chinese": "地铁", "pinyin": "dìtiě", "english": "the subway" },
+              { "chinese": "没有", "pinyin": "méiyǒu", "english": "not as" },
+              { "chinese": "坐", "pinyin": "zuò", "english": "riding" },
+              { "chinese": "公共汽车", "pinyin": "gōnggòng qìchē", "english": "the bus" },
+              { "chinese": "那么", "pinyin": "nàme", "english": "that much of" },
+              { "chinese": "麻烦", "pinyin": "máfan", "english": "a hassle" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "这张地图没有那张地图那么新。",
+            "b": "Zhè zhāng dìtú méiyǒu nà zhāng dìtú nàme xīn.",
+            "c": "This map is not as new as that one.",
+            "wordAlignments": [
+              { "chinese": "这", "pinyin": "Zhè", "english": "This" },
+              { "chinese": "张", "pinyin": "zhāng", "english": "" },
+              { "chinese": "地图", "pinyin": "dìtú", "english": "map" },
+              { "chinese": "没有", "pinyin": "méiyǒu", "english": "not as" },
+              { "chinese": "那", "pinyin": "nà", "english": "that" },
+              { "chinese": "张", "pinyin": "zhāng", "english": "" },
+              { "chinese": "地图", "pinyin": "dìtú", "english": "one" },
+              { "chinese": "那么", "pinyin": "nàme", "english": "that" },
+              { "chinese": "新", "pinyin": "xīn", "english": "new" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          }
+        ]
+      },
+      "grammar_004": {
+        "title": "到 + Place + 去 + Action",
+        "description": "Expressing the purpose of going somewhere",
+        "lines": [
+          {
+            "a": "我要到电脑中心去上网。",
+            "b": "Wǒ yào dào diànnǎo zhōngxīn qù shàng wǎng.",
+            "c": "I want to go to the computer center to use the internet.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "要", "pinyin": "yào", "english": "want to" },
+              { "chinese": "到", "pinyin": "dào", "english": "to" },
+              { "chinese": "电脑", "pinyin": "diànnǎo", "english": "computer" },
+              { "chinese": "中心", "pinyin": "zhōngxīn", "english": "center" },
+              { "chinese": "去", "pinyin": "qù", "english": "go" },
+              { "chinese": "上网", "pinyin": "shàng wǎng", "english": "use the internet" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "他到朋友的宿舍去聊天儿了。",
+            "b": "Tā dào péngyou de sùshè qù liáo tiānr le.",
+            "c": "He went to his friend's dorm to chat.",
+            "wordAlignments": [
+              { "chinese": "他", "pinyin": "Tā", "english": "He" },
+              { "chinese": "到", "pinyin": "dào", "english": "to" },
+              { "chinese": "朋友", "pinyin": "péngyou", "english": "friend's" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "宿舍", "pinyin": "sùshè", "english": "dorm" },
+              { "chinese": "去", "pinyin": "qù", "english": "went" },
+              { "chinese": "聊天儿", "pinyin": "liáo tiānr", "english": "chat" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "我们到飞机场去送李小姐。",
+            "b": "Wǒmen dào fēijīchǎng qù sòng Lǐ xiǎojiě.",
+            "c": "We went to the airport to see Miss Li off.",
+            "wordAlignments": [
+              { "chinese": "我们", "pinyin": "Wǒmen", "english": "We" },
+              { "chinese": "到", "pinyin": "dào", "english": "to" },
+              { "chinese": "飞机场", "pinyin": "fēijīchǎng", "english": "the airport" },
+              { "chinese": "去", "pinyin": "qù", "english": "went" },
+              { "chinese": "送", "pinyin": "sòng", "english": "see off" },
+              { "chinese": "李", "pinyin": "Lǐ", "english": "Li" },
+              { "chinese": "小姐", "pinyin": "xiǎojiě", "english": "Miss" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "我想到学校书店去买书。",
+            "b": "Wǒ xiǎng dào xuéxiào shūdiàn qù mǎi shū.",
+            "c": "I want to go to the school bookstore to buy books.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "想", "pinyin": "xiǎng", "english": "want to" },
+              { "chinese": "到", "pinyin": "dào", "english": "to" },
+              { "chinese": "学校", "pinyin": "xuéxiào", "english": "school" },
+              { "chinese": "书店", "pinyin": "shūdiàn", "english": "bookstore" },
+              { "chinese": "去", "pinyin": "qù", "english": "go" },
+              { "chinese": "买", "pinyin": "mǎi", "english": "buy" },
+              { "chinese": "书", "pinyin": "shū", "english": "books" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          }
+        ]
+      }
+    }
+  }
 }

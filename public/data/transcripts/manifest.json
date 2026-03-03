@@ -95,13 +95,6 @@
       "audioFile": "chinese_chpt13_1_phrases.mp3"
     },
     {
-      "id": "chinese_chpt13_1_bonus_grammar",
-      "deckId": "chinese_chpt13_1",
-      "type": "dialogue",
-      "filename": "chinese_chpt13_1_bonus_grammar.txt",
-      "displayName": "Grammar Practice"
-    },
-    {
       "id": "chinese_chpt2_2_dialogue",
       "deckId": "chinese_chpt2_2",
       "type": "dialogue",
