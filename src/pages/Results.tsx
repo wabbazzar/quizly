@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { LearnSessionResults, LearnModeSettings, Card } from '@/types';
 import { useDeckStore } from '@/store/deckStore';
 import { useSettingsStore } from '@/store/settingsStore';
+import { useCardMasteryStore } from '@/store/cardMasteryStore';
 import ReviewCard from '@/components/cards/ReviewCard';
 import styles from './Results.module.css';
 
@@ -13,6 +14,7 @@ const Results: FC = () => {
   const location = useLocation();
   const { currentDeck, loadDeck } = useDeckStore();
   const { updateSettings: updateStoredSettings } = useSettingsStore();
+  const cardMastery = useCardMasteryStore(state => (deckId ? state.mastery[deckId] : undefined));
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const [showCardModal, setShowCardModal] = useState(false);
 
@@ -87,9 +89,16 @@ const Results: FC = () => {
     !!learnSettings &&
     learnSettings.questionTypes?.length === 1 &&
     learnSettings.questionTypes[0] === 'multiple_choice';
-  const completedFullDeck =
-    !!currentDeck && (results.passedCards?.length || 0) >= currentDeck.content.length;
-  const showRepeatFreeText = isMultipleChoiceOnly && completedFullDeck;
+  // The user has conquered the whole deck in MC if every card in the deck has
+  // been answered correctly at least once as a multiple-choice question, even
+  // across multiple sessions / retry rounds.
+  const deckConqueredInMultipleChoice = !!currentDeck
+    && currentDeck.content.length > 0
+    && currentDeck.content.every(card => {
+      const rec = cardMastery?.masteredCards?.get(card.idx);
+      return !!rec?.correctMultipleChoice;
+    });
+  const showRepeatFreeText = isMultipleChoiceOnly && deckConqueredInMultipleChoice;
 
   const handleBackToDeck = () => {
     navigate(`/deck/${deckId}`);

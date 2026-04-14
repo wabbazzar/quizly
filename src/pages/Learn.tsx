@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useDeckStore } from '@/store/deckStore';
 import { useProgressStore } from '@/store/progressStore';
@@ -41,7 +41,9 @@ const Learn: FC = () => {
   const location = useLocation();
   const { currentDeck, loadDeck, isLoading, error, shuffleMasteredCardsBack } = useDeckStore();
   const { updateDeckProgress } = useProgressStore();
-  const { getMasteredCards } = useCardMasteryStore();
+  // Select only the action so this component doesn't re-render on every
+  // mastery mutation (mastery is updated inline during the session).
+  const getMasteredCards = useCardMasteryStore(state => state.getMasteredCards);
   const { updateSettings: updateStoredSettings } = useSettingsStore();
 
   // Get excluded cards and struggling cards from navigation state
@@ -110,6 +112,29 @@ const Learn: FC = () => {
     navigate(`/deck/${deckId}`);
   };
 
+  // Filter deck content based on excludeCards and mastered cards.
+  // Memoize so the object reference stays stable across renders — otherwise
+  // LearnContainer's init effect (deps on `deck`) re-runs and resets the
+  // session on every parent render.
+  const cardsToExcludeKey = useMemo(() => {
+    const base = excludeCards ? [...excludeCards] : [];
+    if (!shuffleMasteredCardsBack && masteredCards.length > 0) {
+      const set = new Set([...base, ...masteredCards]);
+      return Array.from(set).sort((a, b) => a - b).join(',');
+    }
+    return base.sort((a, b) => a - b).join(',');
+  }, [excludeCards, masteredCards, shuffleMasteredCardsBack]);
+
+  const filteredDeck = useMemo(() => {
+    if (!currentDeck) return currentDeck;
+    if (!cardsToExcludeKey) return currentDeck;
+    const excludeSet = new Set(cardsToExcludeKey.split(',').map(Number));
+    return {
+      ...currentDeck,
+      content: currentDeck.content.filter(card => !excludeSet.has(card.idx)),
+    };
+  }, [currentDeck, cardsToExcludeKey]);
+
   if (isLoading) {
     return null; // Let PageLazyBoundary handle loading state
   }
@@ -131,26 +156,10 @@ const Learn: FC = () => {
     return null; // Let PageLazyBoundary handle loading state
   }
 
-  // Filter deck content based on excludeCards and mastered cards
-  let cardsToExclude = excludeCards || [];
-
-  // If shuffle is NOT enabled, exclude mastered cards
-  if (!shuffleMasteredCardsBack && masteredCards.length > 0) {
-    cardsToExclude = [...new Set([...cardsToExclude, ...masteredCards])];
-  }
-
-  const filteredDeck =
-    cardsToExclude.length > 0
-      ? {
-          ...currentDeck,
-          content: currentDeck.content.filter(card => !cardsToExclude.includes(card.idx)),
-        }
-      : currentDeck;
-
   return (
     <div className={styles.learnPage}>
       <LearnContainer
-        deck={filteredDeck}
+        deck={filteredDeck as NonNullable<typeof filteredDeck>}
         settings={settings}
         strugglingCardIndices={strugglingCards}
         onComplete={handleComplete}

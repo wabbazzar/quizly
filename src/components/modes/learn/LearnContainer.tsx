@@ -52,7 +52,9 @@ const LearnContainer: FC<LearnContainerProps> = memo(
       nextQuestion: nextGeneratedQuestion,
     } = useQuestionGenerator(deck, settings);
     const scheduler = useCardScheduler(settings);
-    const { isCardMastered, updateCardAttempt } = useCardMasteryStore();
+    // Select individual actions to avoid re-renders on unrelated store mutations.
+    const isCardMastered = useCardMasteryStore(s => s.isCardMastered);
+    const updateCardAttempt = useCardMasteryStore(s => s.updateCardAttempt);
 
     // Update current question when generator changes
     useEffect(() => {

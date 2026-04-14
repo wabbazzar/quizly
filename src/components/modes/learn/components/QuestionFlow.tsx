@@ -64,7 +64,11 @@ export const QuestionFlow: FC<QuestionFlowProps> = memo(
       <div className={styles.questionFlowContainer} data-testid="question-flow">
         <AnimatePresence mode="wait">
           <motion.div
-            key={currentQuestion?.id || 'no-question'}
+            // Key on question TYPE rather than id so consecutive questions of the
+            // same type (e.g. back-to-back free_text) keep the same DOM subtree
+            // mounted. This preserves input focus and the mobile soft keyboard
+            // across questions; animations still fire when the type switches.
+            key={currentQuestion?.type || 'no-question'}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
