@@ -12,7 +12,10 @@
   position: fixed;
   left: 0;
   right: 0;
-  top: 0;
+  /* Pin to the visual viewport top (not layout top) so the container stays
+     on-screen even when iOS scrolls the visual viewport up to reveal a
+     focused input — regardless of whether focus was user- or programmatic. */
+  top: var(--kbd-viewport-t, 0px);
 }
 
 /* Container is already a flex column, QuestionFlow handles centering */

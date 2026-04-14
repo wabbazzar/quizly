@@ -24,14 +24,10 @@
   justify-content: center;
   min-height: 0;
   flex: 0 1 auto; /* Allow proper centering on all screen sizes */
-  max-height: 90vh; /* Prevent overflow while maintaining centering */
-}
-
-/* Adjust max height for desktop */
-@media (min-width: 1024px) {
-  .questionWrapper {
-    max-height: 80vh;
-  }
+  /* Bound by the flex container (which itself shrinks to the visual
+     viewport height via --kbd-viewport-h), not by layout-viewport vh, so
+     the input can't extend beneath the iOS soft keyboard. */
+  max-height: 100%;
 }
 
 .questionSection {
@@ -155,10 +151,6 @@
     padding: var(--space-2);
   }
 
-  .questionWrapper {
-    max-height: 85vh; /* Slightly more space on mobile */
-  }
-
   .textInputForm {
     flex-direction: column;
   }
@@ -172,10 +164,6 @@
 @media (min-width: 641px) and (max-width: 1023px) {
   .questionFlowContainer {
     padding: var(--space-6) var(--space-4);
-  }
-
-  .questionWrapper {
-    max-height: 82vh;
   }
 }
 
