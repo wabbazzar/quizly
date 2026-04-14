@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import { LearnSessionResults, LearnModeSettings, Card } from '@/types';
 import { useDeckStore } from '@/store/deckStore';
 import { useSettingsStore } from '@/store/settingsStore';
-import { useCardMasteryStore } from '@/store/cardMasteryStore';
 import ReviewCard from '@/components/cards/ReviewCard';
+import { shouldShowRepeatFreeText } from '@/utils/learnResults';
 import styles from './Results.module.css';
 
 const Results: FC = () => {
@@ -14,7 +14,6 @@ const Results: FC = () => {
   const location = useLocation();
   const { currentDeck, loadDeck } = useDeckStore();
   const { updateSettings: updateStoredSettings } = useSettingsStore();
-  const cardMastery = useCardMasteryStore(state => (deckId ? state.mastery[deckId] : undefined));
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const [showCardModal, setShowCardModal] = useState(false);
 
@@ -94,21 +93,12 @@ const Results: FC = () => {
     navigate(`/learn/${deckId}`, { state: {} });
   };
 
-  const isMultipleChoiceOnly =
-    !!learnSettings &&
-    learnSettings.questionTypes?.length === 1 &&
-    learnSettings.questionTypes[0] === 'multiple_choice';
-  // Treat the deck as conquered when every card has reached its mastery
-  // threshold (consecutive-correct model). Covers single-round and
-  // multi-round retry sequences equivalently.
-  const masteryThreshold = cardMastery?.masteryThreshold ?? 3;
-  const deckConquered = !!currentDeck
-    && currentDeck.content.length > 0
-    && currentDeck.content.every(card => {
-      const rec = cardMastery?.masteredCards?.get(card.idx);
-      return !!rec && rec.consecutiveCorrect >= masteryThreshold;
-    });
-  const showRepeatFreeText = isMultipleChoiceOnly && deckConquered;
+  const showRepeatFreeText = shouldShowRepeatFreeText({
+    settings: learnSettings,
+    deckCardCount: currentDeck?.content.length ?? 0,
+    passedCardIndices: results.passedCards || [],
+    previouslyExcludedIndices: previouslyExcluded,
+  });
 
   const handleBackToDeck = () => {
     navigate(`/deck/${deckId}`);
