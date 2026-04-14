@@ -52,9 +52,8 @@ const LearnContainer: FC<LearnContainerProps> = memo(
       nextQuestion: nextGeneratedQuestion,
     } = useQuestionGenerator(deck, settings);
     const scheduler = useCardScheduler(settings);
-    // Select individual actions to avoid re-renders on unrelated store mutations.
+    // Select the action so this component doesn't re-render on unrelated mutations.
     const isCardMastered = useCardMasteryStore(s => s.isCardMastered);
-    const updateCardAttempt = useCardMasteryStore(s => s.updateCardAttempt);
 
     // Update current question when generator changes
     useEffect(() => {
@@ -139,24 +138,7 @@ const LearnContainer: FC<LearnContainerProps> = memo(
         // Update session state
         handleAnswer(answer, isCorrect, cardIdx);
 
-        // Record the attempt with question type for mastery tracking
-        if (deckId) {
-          const questionType = sessionState.currentQuestion?.type as
-            | 'multiple_choice'
-            | 'free_text'
-            | undefined;
-          const totalCards = deck.content?.length || 0;
-          updateCardAttempt(
-            deckId,
-            cardIdx,
-            isCorrect,
-            totalCards,
-            settings.masteryThreshold || 3,
-            questionType
-          );
-        }
-
-        // Check if card is mastered (after the update above)
+        // Check if card is mastered
         const isMastered = deckId ? isCardMastered(deckId, cardIdx) : false;
 
         // Set feedback
@@ -168,15 +150,7 @@ const LearnContainer: FC<LearnContainerProps> = memo(
         });
         setShowFeedback(true);
       },
-      [
-        handleAnswer,
-        deckId,
-        isCardMastered,
-        updateCardAttempt,
-        sessionState.currentQuestion,
-        deck.content,
-        settings.masteryThreshold,
-      ]
+      [handleAnswer, deckId, isCardMastered, sessionState.currentQuestion]
     );
 
     // Handle moving to next question

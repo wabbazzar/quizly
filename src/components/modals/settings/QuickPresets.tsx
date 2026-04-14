@@ -1,10 +1,12 @@
 import { FC, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { UNIVERSAL_PRESETS } from '@/constants/presets';
+import { useDeckStore } from '@/store/deckStore';
 import { SectionProps } from '../UnifiedSettings';
 import styles from './QuickPresets.module.css';
 
 const QuickPresets: FC<SectionProps> = ({ settings, onChange, mode = 'flashcards', deck }) => {
+  const setShuffleMastered = useDeckStore(s => s.setShuffleMastered);
   // Get presets applicable to current mode
   const applicablePresets = useMemo(() => {
     return UNIVERSAL_PRESETS.filter(preset => preset.supportedModes.includes(mode));
@@ -33,6 +35,13 @@ const QuickPresets: FC<SectionProps> = ({ settings, onChange, mode = 'flashcards
     Object.entries(presetSettings).forEach(([key, value]) => {
       onChange(key, value);
     });
+
+    // For the learn mode's "simple" and "complete" presets, force the
+    // deck-level "shuffle mastered cards back" flag off so earlier-correct
+    // cards aren't mixed back into retry rounds.
+    if (mode === 'learn' && (presetId === 'simple' || presetId === 'comprehensive')) {
+      setShuffleMastered(false);
+    }
   };
 
   if (applicablePresets.length === 0) {

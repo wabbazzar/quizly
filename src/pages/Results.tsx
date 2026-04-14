@@ -21,6 +21,7 @@ const Results: FC = () => {
   // Get results from navigation state
   const results = location.state?.results as LearnSessionResults | undefined;
   const learnSettings = location.state?.settings as LearnModeSettings | undefined;
+  const previouslyExcluded = (location.state?.previouslyExcluded as number[] | undefined) || [];
 
   // Load deck if not already loaded
   useEffect(() => {
@@ -61,10 +62,14 @@ const Results: FC = () => {
       return;
     }
 
-    // For "Continue with New Cards": exclude only passed cards
-    // This keeps struggling cards in the pool to be mixed with new cards
-    // For "Try Again": don't exclude any cards (when no cards were passed)
-    const cardsToExclude = results.passedCards?.length > 0 ? results.passedCards : [];
+    // Accumulate exclusions across retry rounds so cards passed in any earlier
+    // round stay out of the pool — without this, round-1 passes reappear once
+    // round-2 shrinks the "available but unseen" pool.
+    const newPassed = results.passedCards || [];
+    const cardsToExclude =
+      previouslyExcluded.length + newPassed.length > 0
+        ? Array.from(new Set([...previouslyExcluded, ...newPassed]))
+        : [];
 
     navigate(`/learn/${deckId}`, {
       state: {
@@ -89,16 +94,17 @@ const Results: FC = () => {
     !!learnSettings &&
     learnSettings.questionTypes?.length === 1 &&
     learnSettings.questionTypes[0] === 'multiple_choice';
-  // The user has conquered the whole deck in MC if every card in the deck has
-  // been answered correctly at least once as a multiple-choice question, even
-  // across multiple sessions / retry rounds.
-  const deckConqueredInMultipleChoice = !!currentDeck
+  // Treat the deck as conquered when every card has reached its mastery
+  // threshold (consecutive-correct model). Covers single-round and
+  // multi-round retry sequences equivalently.
+  const masteryThreshold = cardMastery?.masteryThreshold ?? 3;
+  const deckConquered = !!currentDeck
     && currentDeck.content.length > 0
     && currentDeck.content.every(card => {
       const rec = cardMastery?.masteredCards?.get(card.idx);
-      return !!rec?.correctMultipleChoice;
+      return !!rec && rec.consecutiveCorrect >= masteryThreshold;
     });
-  const showRepeatFreeText = isMultipleChoiceOnly && deckConqueredInMultipleChoice;
+  const showRepeatFreeText = isMultipleChoiceOnly && deckConquered;
 
   const handleBackToDeck = () => {
     navigate(`/deck/${deckId}`);

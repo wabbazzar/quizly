@@ -1,16 +1,12 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-export type LearnQuestionType = 'multiple_choice' | 'free_text';
-
 export interface CardMasteryRecord {
   cardIndex: number;
   masteredAt: Date;
   attemptCount: number;
   lastSeen: Date;
   consecutiveCorrect: number;
-  correctMultipleChoice?: boolean;
-  correctFreeText?: boolean;
 }
 
 export interface DeckMastery {
@@ -36,16 +32,10 @@ interface CardMasteryStore {
     cardIndex: number,
     isCorrect: boolean,
     totalCards: number,
-    masteryThreshold?: number,
-    questionType?: LearnQuestionType
+    masteryThreshold?: number
   ) => void;
   isCardMastered: (deckId: string, cardIndex: number) => boolean;
 }
-
-const isRecordMastered = (record: CardMasteryRecord | undefined): boolean => {
-  if (!record) return false;
-  return !!record.correctMultipleChoice && !!record.correctFreeText;
-};
 
 export const useCardMasteryStore = create<CardMasteryStore>()(
   persist(
@@ -63,15 +53,12 @@ export const useCardMasteryStore = create<CardMasteryStore>()(
           };
 
           const updatedMasteredCards = new Map(deckMastery.masteredCards);
-          const existing = updatedMasteredCards.get(cardIndex);
           updatedMasteredCards.set(cardIndex, {
             cardIndex,
-            masteredAt: existing?.masteredAt || new Date(),
-            attemptCount: existing?.attemptCount ?? 1,
+            masteredAt: new Date(),
+            attemptCount: 1,
             lastSeen: new Date(),
             consecutiveCorrect: deckMastery.masteryThreshold || 3,
-            correctMultipleChoice: true,
-            correctFreeText: true,
           });
 
           return {
@@ -115,10 +102,10 @@ export const useCardMasteryStore = create<CardMasteryStore>()(
         const deckMastery = get().mastery[deckId];
         if (!deckMastery) return [];
 
-        // Mastery = answered correctly at least once as both multiple choice and free text
+        // Only return cards that have actually achieved mastery (threshold+ consecutive correct)
         const masteredIndices: number[] = [];
         deckMastery.masteredCards.forEach((record, cardIndex) => {
-          if (isRecordMastered(record)) {
+          if (record.consecutiveCorrect >= (deckMastery.masteryThreshold || 3)) {
             masteredIndices.push(cardIndex);
           }
         });
@@ -127,14 +114,13 @@ export const useCardMasteryStore = create<CardMasteryStore>()(
 
       getDeckMasteryPercentage: (deckId: string, actualTotalCards?: number) => {
         const deckMastery = get().mastery[deckId];
-        // Use actualTotalCards if provided, otherwise fall back to stored totalCards
         const totalCards = actualTotalCards ?? deckMastery?.totalCards ?? 0;
 
         if (!deckMastery || totalCards === 0) return 0;
 
         let masteredCount = 0;
         deckMastery.masteredCards.forEach(record => {
-          if (isRecordMastered(record)) {
+          if (record.consecutiveCorrect >= (deckMastery.masteryThreshold || 3)) {
             masteredCount++;
           }
         });
@@ -155,8 +141,7 @@ export const useCardMasteryStore = create<CardMasteryStore>()(
         cardIndex: number,
         isCorrect: boolean,
         totalCards: number,
-        masteryThreshold: number = 3,
-        questionType?: LearnQuestionType
+        masteryThreshold: number = 3
       ) => {
         set(state => {
           const deckMastery = state.mastery[deckId] || {
@@ -170,31 +155,30 @@ export const useCardMasteryStore = create<CardMasteryStore>()(
           const updatedMasteredCards = new Map(deckMastery.masteredCards);
           const existingRecord = updatedMasteredCards.get(cardIndex);
 
-          const baseRecord: CardMasteryRecord = existingRecord
-            ? { ...existingRecord }
-            : {
-                cardIndex,
-                masteredAt: new Date(),
-                attemptCount: 0,
-                lastSeen: new Date(),
-                consecutiveCorrect: 0,
-              };
-
-          baseRecord.attemptCount += 1;
-          baseRecord.lastSeen = new Date();
-
           if (isCorrect) {
-            baseRecord.consecutiveCorrect = (existingRecord?.consecutiveCorrect ?? 0) + 1;
-            if (questionType === 'multiple_choice') {
-              baseRecord.correctMultipleChoice = true;
-            } else if (questionType === 'free_text') {
-              baseRecord.correctFreeText = true;
-            }
+            const consecutiveCorrect = existingRecord ? existingRecord.consecutiveCorrect + 1 : 1;
+            const attemptCount = existingRecord ? existingRecord.attemptCount + 1 : 1;
+            updatedMasteredCards.set(cardIndex, {
+              cardIndex,
+              masteredAt: existingRecord?.masteredAt || new Date(),
+              attemptCount,
+              lastSeen: new Date(),
+              consecutiveCorrect,
+            });
           } else {
-            baseRecord.consecutiveCorrect = 0;
+            if (existingRecord) {
+              if (existingRecord.consecutiveCorrect >= masteryThreshold) {
+                updatedMasteredCards.delete(cardIndex);
+              } else {
+                updatedMasteredCards.set(cardIndex, {
+                  ...existingRecord,
+                  attemptCount: existingRecord.attemptCount + 1,
+                  lastSeen: new Date(),
+                  consecutiveCorrect: 0,
+                });
+              }
+            }
           }
-
-          updatedMasteredCards.set(cardIndex, baseRecord);
 
           return {
             mastery: {
@@ -215,7 +199,8 @@ export const useCardMasteryStore = create<CardMasteryStore>()(
         const deckMastery = get().mastery[deckId];
         if (!deckMastery) return false;
         const record = deckMastery.masteredCards.get(cardIndex);
-        return isRecordMastered(record);
+        const masteryThreshold = deckMastery?.masteryThreshold || 3;
+        return record ? record.consecutiveCorrect >= masteryThreshold : false;
       },
     }),
     {

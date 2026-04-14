@@ -27,6 +27,7 @@ interface DeckStore {
   setMasteredCards: (deckId: string, cardIndices: number[]) => void;
   getMasteredCardsForDeck: (deckId: string) => number[];
   toggleShuffleMastered: () => void;
+  setShuffleMastered: (value: boolean) => void;
 }
 
 export const useDeckStore = create<DeckStore>()(
@@ -153,6 +154,10 @@ export const useDeckStore = create<DeckStore>()(
         set(state => ({
           shuffleMasteredCardsBack: !state.shuffleMasteredCardsBack,
         }));
+      },
+
+      setShuffleMastered: (value: boolean) => {
+        set({ shuffleMasteredCardsBack: value });
       },
     }),
     {

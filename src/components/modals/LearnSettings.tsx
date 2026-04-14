@@ -87,6 +87,8 @@ const LearnSettings: FC<LearnSettingsProps> = ({
           questionSides: [availableSides[0] || 'side_a'],
           answerSides: [availableSides[1] || 'side_b'],
         });
+        // Keep mastered cards out of retry rounds for this preset.
+        useDeckStore.getState().setShuffleMastered(false);
         break;
       case 'reverse':
         // Second side as question, first side as answer
@@ -103,6 +105,8 @@ const LearnSettings: FC<LearnSettingsProps> = ({
           questionSides: [availableSides[0] || 'side_a'],
           answerSides: availableSides.slice(1),
         });
+        // Keep mastered cards out of retry rounds for this preset.
+        useDeckStore.getState().setShuffleMastered(false);
         break;
       case 'mixed':
         // Alternating questions and answers

@@ -22,6 +22,7 @@ export const UNIVERSAL_PRESETS: PresetDefinition[] = [
           questionTypes: ['free_text'],
           questionTypeMix: 'free_text' as const,
           cardsPerRound: 25,
+          masteryThreshold: 2,
         };
       }
       if (mode === 'match') {
@@ -78,6 +79,7 @@ export const UNIVERSAL_PRESETS: PresetDefinition[] = [
           questionTypes: ['multiple_choice'],
           questionTypeMix: 'multiple_choice' as const,
           cardsPerRound: 25,
+          masteryThreshold: 2,
         };
       }
       return {};

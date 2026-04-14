@@ -41,9 +41,10 @@ const Learn: FC = () => {
   const location = useLocation();
   const { currentDeck, loadDeck, isLoading, error, shuffleMasteredCardsBack } = useDeckStore();
   const { updateDeckProgress } = useProgressStore();
-  // Select only the action so this component doesn't re-render on every
-  // mastery mutation (mastery is updated inline during the session).
+  // Select individual actions so this component doesn't re-render on
+  // unrelated mastery-store mutations.
   const getMasteredCards = useCardMasteryStore(state => state.getMasteredCards);
+  const updateCardAttempt = useCardMasteryStore(state => state.updateCardAttempt);
   const { updateSettings: updateStoredSettings } = useSettingsStore();
 
   // Get excluded cards and struggling cards from navigation state
@@ -90,11 +91,22 @@ const Learn: FC = () => {
   }, []);
 
   const handleComplete = (results: LearnSessionResults) => {
-    // Update progress store with the session results.
-    // Per-card mastery is recorded inline during the session by LearnContainer
-    // (so it has access to the question type).
     if (deckId && currentDeck) {
+      const totalCards = currentDeck.content.length;
       const correctCards = results.correctAnswers;
+      const masteryThreshold = settings.masteryThreshold || 3;
+
+      if (results.passedCards) {
+        results.passedCards.forEach(cardIndex => {
+          updateCardAttempt(deckId, cardIndex, true, totalCards, masteryThreshold);
+        });
+      }
+      if (results.strugglingCards) {
+        results.strugglingCards.forEach(cardIndex => {
+          updateCardAttempt(deckId, cardIndex, false, totalCards, masteryThreshold);
+        });
+      }
+
       updateDeckProgress(
         deckId,
         'learn',
@@ -104,8 +116,11 @@ const Learn: FC = () => {
       );
     }
 
-    // Navigate to results page or back to deck
-    navigate(`/deck/${deckId}/results`, { state: { results, settings } });
+    // Forward this session's exclusion list to Results so a subsequent retry
+    // can keep excluding cards that were already passed in an earlier round.
+    navigate(`/deck/${deckId}/results`, {
+      state: { results, settings, previouslyExcluded: excludeCards || [] },
+    });
   };
 
   const handleExit = () => {
