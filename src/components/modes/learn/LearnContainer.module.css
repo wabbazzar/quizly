@@ -1,12 +1,18 @@
 .container {
+  /* Fallback chain: vh → dvh (newer browsers, excludes UA chrome) →
+     --kbd-viewport-h (JS-maintained, tracks the visual viewport so the
+     container shrinks when the iOS on-screen keyboard opens). */
   height: 100vh;
-  height: 100dvh; /* Dynamic viewport height for mobile */
+  height: 100dvh;
+  height: var(--kbd-viewport-h, 100dvh);
   display: flex;
   flex-direction: column;
   background: var(--bg-primary);
   overflow: hidden;
   position: fixed;
-  inset: 0;
+  left: 0;
+  right: 0;
+  top: 0;
 }
 
 /* Container is already a flex column, QuestionFlow handles centering */

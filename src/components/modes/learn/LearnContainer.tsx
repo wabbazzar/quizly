@@ -3,6 +3,7 @@ import { Card, Deck, LearnModeSettings, LearnSessionResults } from '@/types';
 import { useQuestionGenerator } from '@/hooks/useQuestionGenerator';
 import { useCardScheduler } from '@/hooks/useCardScheduler';
 import { useCardMasteryStore } from '@/store/cardMasteryStore';
+import { useKeyboardAwareViewport } from '@/hooks/useKeyboardAwareViewport';
 import { useSessionState } from './hooks/useSessionState';
 import { QuestionFlow } from './components/QuestionFlow';
 import { FeedbackData } from './types';
@@ -32,6 +33,10 @@ const LearnContainer: FC<LearnContainerProps> = memo(
     deckId,
     allDeckCards,
   }) => {
+    // Keep the fixed container flush with the visual viewport so the iOS
+    // soft keyboard can't cover the question card.
+    useKeyboardAwareViewport();
+
     // Use the new session state hook
     const { sessionState, updateSessionState, handleAnswer, nextQuestion, cardTracking } =
       useSessionState(deck, settings);
