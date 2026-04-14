@@ -41,7 +41,7 @@ const Learn: FC = () => {
   const location = useLocation();
   const { currentDeck, loadDeck, isLoading, error, shuffleMasteredCardsBack } = useDeckStore();
   const { updateDeckProgress } = useProgressStore();
-  const { updateCardAttempt, getMasteredCards } = useCardMasteryStore();
+  const { getMasteredCards } = useCardMasteryStore();
   const { updateSettings: updateStoredSettings } = useSettingsStore();
 
   // Get excluded cards and struggling cards from navigation state
@@ -88,27 +88,11 @@ const Learn: FC = () => {
   }, []);
 
   const handleComplete = (results: LearnSessionResults) => {
-    // Update progress store with the session results
+    // Update progress store with the session results.
+    // Per-card mastery is recorded inline during the session by LearnContainer
+    // (so it has access to the question type).
     if (deckId && currentDeck) {
-      const totalCards = currentDeck.content.length;
       const correctCards = results.correctAnswers;
-
-      // Update card mastery for each card that was answered correctly
-      // Pass the masteryThreshold from settings
-      const masteryThreshold = settings.masteryThreshold || 3;
-
-      if (results.passedCards) {
-        results.passedCards.forEach(cardIndex => {
-          updateCardAttempt(deckId, cardIndex, true, totalCards, masteryThreshold);
-        });
-      }
-
-      if (results.strugglingCards) {
-        results.strugglingCards.forEach(cardIndex => {
-          updateCardAttempt(deckId, cardIndex, false, totalCards, masteryThreshold);
-        });
-      }
-
       updateDeckProgress(
         deckId,
         'learn',

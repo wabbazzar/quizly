@@ -52,7 +52,7 @@ const LearnContainer: FC<LearnContainerProps> = memo(
       nextQuestion: nextGeneratedQuestion,
     } = useQuestionGenerator(deck, settings);
     const scheduler = useCardScheduler(settings);
-    const { isCardMastered } = useCardMasteryStore();
+    const { isCardMastered, updateCardAttempt } = useCardMasteryStore();
 
     // Update current question when generator changes
     useEffect(() => {
@@ -137,7 +137,24 @@ const LearnContainer: FC<LearnContainerProps> = memo(
         // Update session state
         handleAnswer(answer, isCorrect, cardIdx);
 
-        // Check if card is mastered
+        // Record the attempt with question type for mastery tracking
+        if (deckId) {
+          const questionType = sessionState.currentQuestion?.type as
+            | 'multiple_choice'
+            | 'free_text'
+            | undefined;
+          const totalCards = deck.content?.length || 0;
+          updateCardAttempt(
+            deckId,
+            cardIdx,
+            isCorrect,
+            totalCards,
+            settings.masteryThreshold || 3,
+            questionType
+          );
+        }
+
+        // Check if card is mastered (after the update above)
         const isMastered = deckId ? isCardMastered(deckId, cardIdx) : false;
 
         // Set feedback
@@ -149,7 +166,15 @@ const LearnContainer: FC<LearnContainerProps> = memo(
         });
         setShowFeedback(true);
       },
-      [handleAnswer, deckId, isCardMastered, sessionState.currentQuestion]
+      [
+        handleAnswer,
+        deckId,
+        isCardMastered,
+        updateCardAttempt,
+        sessionState.currentQuestion,
+        deck.content,
+        settings.masteryThreshold,
+      ]
     );
 
     // Handle moving to next question
