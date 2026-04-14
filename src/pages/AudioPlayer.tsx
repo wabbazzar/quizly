@@ -39,8 +39,15 @@ const AudioPlayer: FC = () => {
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const trackListRef = useRef<HTMLDivElement>(null);
+  const currentSrcRef = useRef<string>('');
+  const isPlayingRef = useRef(isPlaying);
+  const playbackRateRef = useRef(playbackRate);
   const [isLoading, setIsLoading] = useState(true);
   const isTransitioningRef = useRef(false);
+
+  // Keep refs in sync for use in effects that shouldn't re-run on these changes
+  isPlayingRef.current = isPlaying;
+  playbackRateRef.current = playbackRate;
 
   // Load tracks from manifest on mount
   useEffect(() => {
@@ -90,7 +97,7 @@ const AudioPlayer: FC = () => {
     };
     // Ensure playback rate is applied after audio loads
     const handleLoadedMetadata = () => {
-      audio.playbackRate = playbackRate / 100;
+      audio.playbackRate = playbackRateRef.current / 100;
     };
 
     audio.addEventListener('timeupdate', handleTimeUpdate);
@@ -108,7 +115,7 @@ const AudioPlayer: FC = () => {
       audio.removeEventListener('pause', handlePause);
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
     };
-  }, [setCurrentTime, setDuration, setIsPlaying, nextTrack, playbackRate]);
+  }, [setCurrentTime, setDuration, setIsPlaying, nextTrack]);
 
   // Control playback
   useEffect(() => {
@@ -132,17 +139,16 @@ const AudioPlayer: FC = () => {
     const currentTrack = tracks[currentTrackIndex];
     if (currentTrack) {
       const newSrc = `${BASE_URL}data/audio/${currentTrack.audioFile}`;
-      if (audio.src !== newSrc) {
+      if (currentSrcRef.current !== newSrc) {
+        currentSrcRef.current = newSrc;
         audio.src = newSrc;
         audio.load();
-        // Apply playback rate after loading (load() resets it to 1.0)
-        audio.playbackRate = playbackRate / 100;
-        if (isPlaying) {
+        if (isPlayingRef.current) {
           audio.play().catch(() => setIsPlaying(false));
         }
       }
     }
-  }, [currentTrackIndex, tracks, isPlaying, setIsPlaying, playbackRate]);
+  }, [currentTrackIndex, tracks, setIsPlaying]);
 
   // Scroll current track into view
   useEffect(() => {

@@ -221,6 +221,14 @@ const LearnContainer: FC<LearnContainerProps> = memo(
     if (sessionState.roundCards.length === 0) {
       return (
         <div className={styles.container}>
+          <SharedModeHeader
+            deckName={deck.metadata.deck_name}
+            currentCard={0}
+            totalCards={0}
+            onBackClick={onExit}
+            onSettingsClick={handleSettingsClick}
+            showSettings={true}
+          />
           <div className={styles.emptyState}>
             <h2>No cards available</h2>
             <p>Adjust your settings to include more cards.</p>
