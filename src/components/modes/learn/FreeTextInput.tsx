@@ -1,4 +1,4 @@
-import { FC, memo, useState, useCallback, FormEvent, useEffect } from 'react';
+import { FC, memo, useState, useCallback, FormEvent, useEffect, useRef } from 'react';
 import cn from 'classnames';
 import { TextMatcher } from '@/utils/textMatching';
 import styles from './FreeTextInput.module.css';
@@ -17,12 +17,30 @@ export const FreeTextInput: FC<FreeTextInputProps> = memo(
   ({ correctAnswer, acceptedAnswers, onSubmit, showFeedback, feedback, disabled, resetKey }) => {
     const [userInput, setUserInput] = useState('');
     const [hasSubmitted, setHasSubmitted] = useState(false);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     // Reset input when resetKey changes (new question)
     useEffect(() => {
       setUserInput('');
       setHasSubmitted(false);
     }, [resetKey]);
+
+    // Focus the input whenever a new question arrives or feedback is cleared,
+    // so the user can start typing immediately without clicking the field.
+    useEffect(() => {
+      if (disabled || showFeedback) return;
+      const el = inputRef.current;
+      if (!el) return;
+      // Focus synchronously first (preserves any active user-gesture context on mobile),
+      // then again on the next frame in case framer-motion's mount animation stole focus.
+      el.focus({ preventScroll: true });
+      const raf = requestAnimationFrame(() => {
+        if (document.activeElement !== el) {
+          el.focus({ preventScroll: true });
+        }
+      });
+      return () => cancelAnimationFrame(raf);
+    }, [resetKey, disabled, showFeedback]);
 
     const handleSubmit = useCallback(
       (e: FormEvent) => {
@@ -85,6 +103,7 @@ export const FreeTextInput: FC<FreeTextInputProps> = memo(
       <form className={styles.freeTextForm} onSubmit={handleSubmit}>
         <div className={styles.inputGroup}>
           <input
+            ref={inputRef}
             type="text"
             value={userInput}
             onChange={e => setUserInput(e.target.value)}
@@ -101,6 +120,11 @@ export const FreeTextInput: FC<FreeTextInputProps> = memo(
             aria-invalid={showFeedback && !feedback?.isCorrect}
             aria-describedby={showFeedback ? 'feedback-message' : undefined}
             autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="none"
+            spellCheck={false}
+            inputMode="text"
+            enterKeyHint="send"
             autoFocus
             data-testid="text-input"
           />
