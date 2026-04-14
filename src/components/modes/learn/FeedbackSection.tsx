@@ -29,7 +29,7 @@ export const FeedbackSection: FC<FeedbackSectionProps> = memo(
         </div>
 
         <div className={styles.feedbackContent}>
-          {!isCorrect && correctAnswer && (
+          {correctAnswer && (
             <div
               className={cn(styles.correctAnswerWrapper, onShowCardDetails && styles.clickable)}
               onClick={onShowCardDetails}
@@ -47,7 +47,9 @@ export const FeedbackSection: FC<FeedbackSectionProps> = memo(
               }
               aria-label={onShowCardDetails ? 'Click to view full card details' : undefined}
             >
-              <span className={styles.correctAnswerLabel}>Correct answer:</span>
+              <span className={styles.correctAnswerLabel}>
+                {isCorrect ? 'Your answer:' : 'Correct answer:'}
+              </span>
               <span className={styles.correctAnswerText}>{correctAnswer}</span>
               {onShowCardDetails && (
                 <span className={styles.viewDetailsHint} aria-hidden="true">

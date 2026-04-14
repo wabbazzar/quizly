@@ -1,8 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { LearnSessionResults, Card } from '@/types';
+import { LearnSessionResults, LearnModeSettings, Card } from '@/types';
 import { useDeckStore } from '@/store/deckStore';
+import { useSettingsStore } from '@/store/settingsStore';
 import ReviewCard from '@/components/cards/ReviewCard';
 import styles from './Results.module.css';
 
@@ -11,11 +12,13 @@ const Results: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { currentDeck, loadDeck } = useDeckStore();
+  const { updateSettings: updateStoredSettings } = useSettingsStore();
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const [showCardModal, setShowCardModal] = useState(false);
 
   // Get results from navigation state
   const results = location.state?.results as LearnSessionResults | undefined;
+  const learnSettings = location.state?.settings as LearnModeSettings | undefined;
 
   // Load deck if not already loaded
   useEffect(() => {
@@ -68,6 +71,25 @@ const Results: FC = () => {
       },
     });
   };
+
+  const handleRepeatWithFreeText = () => {
+    if (!learnSettings || !deckId) return;
+    const newSettings: LearnModeSettings = {
+      ...learnSettings,
+      questionTypes: ['free_text'],
+    };
+    localStorage.setItem('learnModeSettings', JSON.stringify(newSettings));
+    updateStoredSettings(deckId, 'learn', newSettings);
+    navigate(`/learn/${deckId}`, { state: {} });
+  };
+
+  const isMultipleChoiceOnly =
+    !!learnSettings &&
+    learnSettings.questionTypes?.length === 1 &&
+    learnSettings.questionTypes[0] === 'multiple_choice';
+  const completedFullDeck =
+    !!currentDeck && (results.passedCards?.length || 0) >= currentDeck.content.length;
+  const showRepeatFreeText = isMultipleChoiceOnly && completedFullDeck;
 
   const handleBackToDeck = () => {
     navigate(`/deck/${deckId}`);
@@ -157,6 +179,14 @@ const Results: FC = () => {
                 ? 'Continue with New Cards'
                 : 'Try Again'}
           </button>
+          {showRepeatFreeText && (
+            <button
+              onClick={handleRepeatWithFreeText}
+              className={`${styles.actionButton} ${styles.secondaryButton}`}
+            >
+              Repeat with free text mode
+            </button>
+          )}
           <button
             onClick={handleBackToDeck}
             className={`${styles.actionButton} ${styles.secondaryButton}`}

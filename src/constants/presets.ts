@@ -19,7 +19,9 @@ export const UNIVERSAL_PRESETS: PresetDefinition[] = [
         return {
           questionSides: [sides[0] || 'side_a'],
           answerSides: [sides[1] || 'side_b'],
-          questionTypeMix: 'auto' as const,
+          questionTypes: ['free_text'],
+          questionTypeMix: 'free_text' as const,
+          cardsPerRound: 25,
         };
       }
       if (mode === 'match') {
@@ -73,8 +75,9 @@ export const UNIVERSAL_PRESETS: PresetDefinition[] = [
         return {
           questionSides: [sides[0] || 'side_a'],
           answerSides: sides.slice(1).length > 0 ? sides.slice(1) : ['side_b'],
+          questionTypes: ['multiple_choice'],
           questionTypeMix: 'multiple_choice' as const,
-          cardsPerRound: 20,
+          cardsPerRound: 25,
         };
       }
       return {};

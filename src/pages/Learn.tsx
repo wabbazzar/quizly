@@ -119,7 +119,7 @@ const Learn: FC = () => {
     }
 
     // Navigate to results page or back to deck
-    navigate(`/deck/${deckId}/results`, { state: { results } });
+    navigate(`/deck/${deckId}/results`, { state: { results, settings } });
   };
 
   const handleExit = () => {
