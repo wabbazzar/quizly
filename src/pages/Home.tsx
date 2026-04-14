@@ -7,6 +7,7 @@ import { useDeckVisibilityStore } from '@/store/deckVisibilityStore';
 import EnhancedDeckCard from '@/components/EnhancedDeckCard';
 import { CompactDeckGrid } from '@/components/deck/CompactDeckGrid';
 import { FamilySection } from '@/components/deck/FamilySection';
+import { loadTranscriptManifest } from '@/services/transcriptService';
 import { DeckVisibilityModal } from '@/components/modals/DeckVisibilityModal';
 import { SearchResults, CardSearchResult } from '@/components/search/SearchResults';
 import { SearchIcon, CloseIcon } from '@/components/icons/NavigationIcons';
@@ -107,6 +108,10 @@ const Home: FC = () => {
   useEffect(() => {
     loadDecks();
     loadFamilies();
+    // Preload the transcript manifest so CompactDeckCard can synchronously
+    // decide whether to render the Reading badge on first paint (prevents a
+    // post-mount re-render + layout animation that looks like page jitter).
+    loadTranscriptManifest().catch(() => {});
   }, [loadDecks, loadFamilies]);
 
   const handleModeSelect = useCallback(

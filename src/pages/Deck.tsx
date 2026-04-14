@@ -12,7 +12,7 @@ import { ModeCard } from '@/components/deck/types';
 import UnifiedSettings from '@/components/modals/UnifiedSettings';
 import { useSettingsStore } from '@/store/settingsStore';
 import { FlashcardsIcon, LearnIcon, MatchIcon, ReadIcon } from '@/components/icons/ModeIcons';
-import { hasTranscriptsForDeck } from '@/services/transcriptService';
+import { hasTranscriptsForDeck, hasTranscriptsForDeckSync } from '@/services/transcriptService';
 import styles from './Deck.module.css';
 
 const Deck: FC = () => {
@@ -37,13 +37,17 @@ const Deck: FC = () => {
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const [showCardModal, setShowCardModal] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [hasTranscripts, setHasTranscripts] = useState(false);
+  const [hasTranscripts, setHasTranscripts] = useState<boolean>(() =>
+    hasTranscriptsForDeckSync(deckId ?? '') ?? false
+  );
 
   useEffect(() => {
     if (deckId) {
       loadDeck(deckId);
-      // Check for transcripts availability
-      hasTranscriptsForDeck(deckId).then(setHasTranscripts);
+      // Only resolve asynchronously if the manifest isn't already cached.
+      if (hasTranscriptsForDeckSync(deckId) === null) {
+        hasTranscriptsForDeck(deckId).then(setHasTranscripts);
+      }
     }
   }, [deckId, loadDeck]);
 

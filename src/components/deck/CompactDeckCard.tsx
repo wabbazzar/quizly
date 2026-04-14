@@ -2,7 +2,10 @@ import { FC, memo, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Deck } from '@/types';
 import { ReadIcon } from '@/components/icons/ModeIcons';
-import { hasTranscriptsForDeck } from '@/services/transcriptService';
+import {
+  hasTranscriptsForDeck,
+  hasTranscriptsForDeckSync,
+} from '@/services/transcriptService';
 import styles from './CompactDeckCard.module.css';
 
 interface CompactDeckCardProps {
@@ -14,7 +17,13 @@ export const CompactDeckCard: FC<CompactDeckCardProps> = memo(({
   deck,
   onSelect,
 }) => {
-  const [hasTranscripts, setHasTranscripts] = useState(false);
+  // Seed synchronously from the manifest cache so the first paint already
+  // knows whether the Reading badge should show. Falls back to the async
+  // check when the manifest hasn't been fetched yet (avoids a layout-shift
+  // re-render that the grid's layout animation would otherwise amplify).
+  const [hasTranscripts, setHasTranscripts] = useState<boolean>(
+    () => hasTranscriptsForDeckSync(deck.id) ?? false
+  );
   const cardCount = deck.metadata.card_count;
 
   const displayTitle = deck.metadata.abbreviated_title || deck.metadata.deck_name;
@@ -25,7 +34,15 @@ export const CompactDeckCard: FC<CompactDeckCardProps> = memo(({
     (deck.reading && Object.keys(deck.reading.dialogues).length > 0);
 
   useEffect(() => {
-    hasTranscriptsForDeck(deck.id).then(setHasTranscripts);
+    const sync = hasTranscriptsForDeckSync(deck.id);
+    if (sync !== null) return; // already resolved on first render
+    let cancelled = false;
+    hasTranscriptsForDeck(deck.id).then(v => {
+      if (!cancelled) setHasTranscripts(v);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, [deck.id]);
 
   const handleClick = () => {

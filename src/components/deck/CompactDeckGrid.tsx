@@ -51,10 +51,13 @@ export const CompactDeckGrid: FC<CompactDeckGridProps> = memo(({
     >
       <AnimatePresence mode="popLayout">
         {decks.map((deck) => (
+          // NOTE: intentionally no `layout` prop here — layout animations
+          // amplify any mid-render size change (e.g. the Reading badge
+          // appearing after an async manifest load) into a visible
+          // "jitter"/"reload" effect as the user scrolls.
           <motion.div
             key={deck.id}
             variants={itemVariants}
-            layout
           >
             <CompactDeckCard
               deck={deck}

@@ -60,3 +60,12 @@ export async function hasTranscriptsForDeck(deckId: string): Promise<boolean> {
   const transcripts = await getTranscriptsForDeck(deckId);
   return transcripts.length > 0;
 }
+
+/**
+ * Synchronous variant: returns the answer if the manifest is already cached,
+ * otherwise null. Use with `hasTranscriptsForDeck` as an async fallback.
+ */
+export function hasTranscriptsForDeckSync(deckId: string): boolean | null {
+  if (!manifestCache) return null;
+  return manifestCache.transcripts.some(t => t.deckId === deckId);
+}
