@@ -42,17 +42,31 @@ export const useDeckStore = create<DeckStore>()(
       shuffleMasteredCardsBack: false,
 
       loadDecks: async () => {
-        set({ isLoading: true, error: null });
-        try {
-          const loadedDecks = await loadAllDecks();
-          set({ decks: loadedDecks, isLoading: false });
-        } catch (error) {
-          set({
-            error: 'Failed to load decks',
-            isLoading: false,
-          });
-          console.error('Error loading decks:', error);
+        // Dedupe concurrent callers. Without this, App.tsx's mount effect and
+        // Home.tsx's mount effect both fire loadDecks(), which triggers two
+        // overlapping waterfalls of per-deck fetches and two render cycles —
+        // the user sees the home page paint, then "reload" ~1s later.
+        const state = get() as any;
+        if (state._decksInFlight) {
+          return state._decksInFlight as Promise<void>;
         }
+        if (state.decks.length > 0 && !state.error) {
+          return; // already loaded
+        }
+        const p = (async () => {
+          set({ isLoading: true, error: null });
+          try {
+            const loadedDecks = await loadAllDecks();
+            set({ decks: loadedDecks, isLoading: false });
+          } catch (error) {
+            set({ error: 'Failed to load decks', isLoading: false });
+            console.error('Error loading decks:', error);
+          } finally {
+            set({ _decksInFlight: undefined } as any);
+          }
+        })();
+        set({ _decksInFlight: p } as any);
+        return p;
       },
 
       loadDeck: async (deckId: string) => {

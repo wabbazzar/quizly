@@ -9,22 +9,35 @@ import { TranscriptFile, TranscriptManifest } from '@/types';
 const getTranscriptsBasePath = () => `${import.meta.env.BASE_URL}data/transcripts`;
 
 let manifestCache: TranscriptManifest | null = null;
+let manifestInFlight: Promise<TranscriptManifest> | null = null;
 
 /**
- * Load the transcript manifest (cached after first load)
+ * Load the transcript manifest (cached after first load).
+ * Concurrent callers share the same in-flight fetch — otherwise every
+ * CompactDeckCard fires its own network request on mount.
  */
 export async function loadTranscriptManifest(): Promise<TranscriptManifest> {
   if (manifestCache) {
     return manifestCache;
   }
-
-  const response = await fetch(`${getTranscriptsBasePath()}/manifest.json`);
-  if (!response.ok) {
-    throw new Error('Failed to load transcript manifest');
+  if (manifestInFlight) {
+    return manifestInFlight;
   }
 
-  manifestCache = await response.json();
-  return manifestCache as TranscriptManifest;
+  manifestInFlight = (async () => {
+    try {
+      const response = await fetch(`${getTranscriptsBasePath()}/manifest.json`);
+      if (!response.ok) {
+        throw new Error('Failed to load transcript manifest');
+      }
+      manifestCache = (await response.json()) as TranscriptManifest;
+      return manifestCache;
+    } finally {
+      manifestInFlight = null;
+    }
+  })();
+
+  return manifestInFlight;
 }
 
 /**
