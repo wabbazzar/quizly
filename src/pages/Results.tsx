@@ -81,9 +81,13 @@ const Results: FC = () => {
 
   const handleRepeatWithFreeText = () => {
     if (!learnSettings || !deckId) return;
+    // Flip both fields — questionTypeMix takes precedence over questionTypes
+    // in QuestionGenerator.selectQuestionType, so setting only questionTypes
+    // leaves the session in its previous ('multiple_choice') mix.
     const newSettings: LearnModeSettings = {
       ...learnSettings,
       questionTypes: ['free_text'],
+      questionTypeMix: 'free_text',
     };
     localStorage.setItem('learnModeSettings', JSON.stringify(newSettings));
     updateStoredSettings(deckId, 'learn', newSettings);
