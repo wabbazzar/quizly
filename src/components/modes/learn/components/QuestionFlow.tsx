@@ -89,7 +89,24 @@ export const QuestionFlow: FC<QuestionFlowProps> = memo(
             {showFeedback && (
               <div className={styles.continueSection}>
                 <button
-                  onClick={onQuestionComplete}
+                  onClick={() => {
+                    // On free-text questions, synchronously (inside this tap's
+                    // gesture) focus the now-disabled input so mobile Safari /
+                    // Chrome keep the soft keyboard open across the transition.
+                    // Because QuestionFlow keys the wrapper by question TYPE,
+                    // the same <input> stays mounted across consecutive
+                    // free-text questions — we just need to re-enable + focus.
+                    if (currentQuestion?.type === 'free_text') {
+                      const input = document.querySelector(
+                        '[data-testid="text-input"]'
+                      ) as HTMLInputElement | null;
+                      if (input) {
+                        input.disabled = false;
+                        input.focus({ preventScroll: true });
+                      }
+                    }
+                    onQuestionComplete();
+                  }}
                   className={styles.continueButton}
                   autoFocus
                   data-testid="continue-button"
