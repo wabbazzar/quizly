@@ -4,16 +4,17 @@
   align-items: center;
   justify-content: center;
   padding: var(--space-4);
-  background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-light) 100%);
+  background: var(--bg-secondary);
 }
 
 .container {
-  background: var(--neutral-white);
+  background: var(--bg-primary);
   border-radius: 20px;
   padding: var(--space-5);
   max-width: 600px;
   width: 100%;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-color);
 }
 
 /* Header */
@@ -26,7 +27,7 @@
   font-size: var(--text-2xl);
   font-weight: var(--font-bold);
   margin: 0 0 var(--space-1) 0;
-  color: var(--neutral-gray-800);
+  color: var(--text-primary);
 }
 
 .title.excellent {
@@ -51,7 +52,7 @@
 
 .subtitle {
   font-size: var(--text-sm);
-  color: var(--neutral-gray-600);
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -64,7 +65,12 @@
 }
 
 .resultCard {
-  background: var(--neutral-gray-50);
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.1),
+    rgba(74, 144, 226, 0.05)
+  );
+  border: 1px solid rgba(74, 144, 226, 0.15);
   padding: var(--space-2) var(--space-1);
   border-radius: 10px;
   text-align: center;
@@ -79,14 +85,19 @@
 
 .resultLabel {
   font-size: 10px;
-  color: var(--neutral-gray-600);
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 /* Mastery Section */
 .masterySection {
-  background: var(--neutral-gray-50);
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.08),
+    rgba(74, 144, 226, 0.03)
+  );
+  border: 1px solid rgba(74, 144, 226, 0.12);
   border-radius: 10px;
   padding: var(--space-2) var(--space-3);
   margin-bottom: var(--space-3);
@@ -119,19 +130,19 @@
 }
 
 .masteryText {
-  color: var(--neutral-gray-700);
+  color: var(--text-secondary);
   font-size: var(--text-sm);
 }
 
 .masteryText strong {
-  color: var(--neutral-gray-800);
+  color: var(--text-primary);
   font-weight: var(--font-semibold);
 }
 
 /* Duration */
 .duration {
   text-align: center;
-  color: var(--neutral-gray-600);
+  color: var(--text-secondary);
   font-size: var(--text-xs);
   margin-bottom: var(--space-3);
 }
@@ -176,7 +187,7 @@
 
 .actionButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 .actionButton:active {
@@ -185,7 +196,7 @@
 
 .actionButton.primary {
   background: var(--primary-main);
-  color: var(--neutral-white);
+  color: var(--text-primary-on-dark);
 }
 
 .actionButton.primary:hover {
@@ -193,7 +204,7 @@
 }
 
 .actionButton.secondary {
-  background: var(--neutral-white);
+  background: transparent;
   color: var(--primary-main);
   border: 2px solid var(--primary-main);
 }
@@ -201,38 +212,38 @@
 .actionButton.secondary .keyHint {
   background: var(--primary-light);
   border-color: var(--primary-main);
-  color: var(--neutral-white);
+  color: var(--text-primary-on-dark);
 }
 
 .actionButton.secondary:hover {
-  background: rgba(74, 144, 226, 0.05);
+  background: rgba(74, 144, 226, 0.1);
 }
 
 .actionButton.tertiary {
   background: transparent;
-  color: var(--neutral-gray-600);
-  border: 2px solid var(--neutral-gray-300);
+  color: var(--text-secondary);
+  border: 2px solid var(--border-color);
 }
 
 .actionButton.tertiary .keyHint {
-  background: var(--neutral-gray-200);
-  border-color: var(--neutral-gray-400);
-  color: var(--neutral-gray-700);
+  background: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-secondary);
 }
 
 .actionButton.tertiary:hover {
-  background: var(--neutral-gray-50);
-  border-color: var(--neutral-gray-400);
+  background: var(--bg-secondary);
+  border-color: var(--text-tertiary);
 }
 
 /* Motivational Message */
 .motivationalMessage {
   margin-top: var(--space-6);
   padding: var(--space-4);
-  background: rgba(74, 144, 226, 0.05);
+  background: rgba(74, 144, 226, 0.08);
   border-left: 4px solid var(--primary-main);
   border-radius: 8px;
-  color: var(--neutral-gray-700);
+  color: var(--text-secondary);
   font-size: var(--text-sm);
   font-style: italic;
   line-height: var(--leading-relaxed);
@@ -265,75 +276,6 @@
   }
 }
 
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  .sessionComplete {
-    background: linear-gradient(135deg, var(--neutral-gray-800) 0%, var(--neutral-gray-700) 100%);
-  }
-
-  .container {
-    background: var(--neutral-gray-900);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  }
-
-  .title {
-    color: var(--neutral-gray-100);
-  }
-
-  .subtitle {
-    color: var(--neutral-gray-400);
-  }
-
-  .resultCard {
-    background: var(--neutral-gray-800);
-  }
-
-  .resultValue {
-    color: var(--primary-light);
-  }
-
-  .resultLabel {
-    color: var(--neutral-gray-500);
-  }
-
-  .masterySection {
-    background: var(--neutral-gray-800);
-  }
-
-  .masteryText {
-    color: var(--neutral-gray-300);
-  }
-
-  .masteryText strong {
-    color: var(--neutral-gray-100);
-  }
-
-  .duration {
-    color: var(--neutral-gray-400);
-  }
-
-  .actionButton.secondary {
-    background: var(--neutral-gray-800);
-    border-color: var(--primary-light);
-    color: var(--primary-light);
-  }
-
-  .actionButton.tertiary {
-    color: var(--neutral-gray-400);
-    border-color: var(--neutral-gray-600);
-  }
-
-  .actionButton.tertiary:hover {
-    background: var(--neutral-gray-800);
-    border-color: var(--neutral-gray-500);
-  }
-
-  .motivationalMessage {
-    background: rgba(74, 144, 226, 0.1);
-    color: var(--neutral-gray-300);
-  }
-}
-
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .resultCard,
@@ -345,7 +287,7 @@
 /* High Contrast Mode */
 @media (prefers-contrast: high) {
   .resultCard {
-    border: 2px solid var(--neutral-gray-800);
+    border: 2px solid var(--text-primary);
   }
 
   .actionButton {
