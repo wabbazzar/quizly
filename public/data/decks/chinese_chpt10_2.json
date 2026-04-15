@@ -40,7 +40,7 @@
       "side_a": "Email",
       "side_b": "diànzǐ yóujiàn",
       "side_c": "电子邮件",
-      "side_d": "Electronic mail",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -50,7 +50,7 @@
       "side_a": "Electron; electronic",
       "side_b": "diànzǐ",
       "side_c": "电子",
-      "side_d": "Electronic or electron",
+      "side_d": "noun",
       "level": 2
     },
     {
@@ -60,7 +60,7 @@
       "side_a": "To allow or cause (somebody to do something)",
       "side_b": "ràng",
       "side_c": "让",
-      "side_d": "To let; to allow; to cause",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -70,7 +70,7 @@
       "side_a": "To spend",
       "side_b": "huā",
       "side_c": "花",
-      "side_d": "To spend (money or time)",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -80,7 +80,7 @@
       "side_a": "To feel embarrassed",
       "side_b": "bù hǎoyìsi",
       "side_c": "不好意思",
-      "side_d": "To feel embarrassed or sorry",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -90,7 +90,7 @@
       "side_a": "Every; each",
       "side_b": "měi",
       "side_c": "每",
-      "side_d": "Every single one; each",
+      "side_d": "pronoun",
       "level": 1
     },
     {
@@ -100,7 +100,7 @@
       "side_a": "City",
       "side_b": "chéngshì",
       "side_c": "城市",
-      "side_d": "Urban area; city",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -110,7 +110,7 @@
       "side_a": "Especially",
       "side_b": "tèbié",
       "side_c": "特别",
-      "side_d": "Particularly; especially",
+      "side_d": "adverb",
       "level": 1
     },
     {
@@ -120,7 +120,7 @@
       "side_a": "Highway",
       "side_b": "gāosù gōnglù",
       "side_c": "高速公路",
-      "side_d": "High-speed highway; expressway",
+      "side_d": "noun",
       "level": 2
     },
     {
@@ -130,7 +130,7 @@
       "side_a": "High speed",
       "side_b": "gāosù",
       "side_c": "高速",
-      "side_d": "High speed; fast",
+      "side_d": "adjective",
       "level": 2
     },
     {
@@ -140,7 +140,7 @@
       "side_a": "Highway; public road",
       "side_b": "gōnglù",
       "side_c": "公路",
-      "side_d": "Public road; highway",
+      "side_d": "noun",
       "level": 2
     },
     {
@@ -150,7 +150,7 @@
       "side_a": "Road; path",
       "side_b": "lù",
       "side_c": "路",
-      "side_d": "Road; route; way",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -160,7 +160,7 @@
       "side_a": "Nervous; anxious",
       "side_b": "jǐnzhāng",
       "side_c": "紧张",
-      "side_d": "Tense; nervous; anxious",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -170,7 +170,7 @@
       "side_a": "Oneself",
       "side_b": "zìjǐ",
       "side_c": "自己",
-      "side_d": "Self; oneself",
+      "side_d": "pronoun",
       "level": 1
     },
     {
@@ -180,7 +180,7 @@
       "side_a": "Cell phone",
       "side_b": "shǒujī",
       "side_c": "手机",
-      "side_d": "Mobile phone; cellphone",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -190,7 +190,7 @@
       "side_a": "To send a text message",
       "side_b": "fā duǎnxìn",
       "side_c": "发短信",
-      "side_d": "To send a short message; to text",
+      "side_d": "verb object",
       "level": 2
     },
     {
@@ -200,7 +200,7 @@
       "side_a": "New year",
       "side_b": "xīnnián",
       "side_c": "新年",
-      "side_d": "New Year",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -210,7 +210,7 @@
       "side_a": "Happy",
       "side_b": "kuàilè",
       "side_c": "快乐",
-      "side_d": "Happy; joyful",
+      "side_d": "adjective",
       "level": 1
     }
   ],

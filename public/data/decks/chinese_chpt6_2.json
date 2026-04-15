@@ -39,7 +39,7 @@
       "side_a": "next one",
       "side_b": "xià ge",
       "side_c": "下个",
-      "side_d": "pr",
+      "side_d": "pronoun",
       "level": 1
     },
     {
@@ -49,7 +49,7 @@
       "side_a": "below; next",
       "side_b": "xià",
       "side_c": "下",
-      "side_d": "adj",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -59,7 +59,7 @@
       "side_a": "Chinese language",
       "side_b": "Zhōngwén",
       "side_c": "中文",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -69,7 +69,7 @@
       "side_a": "language; script; written language",
       "side_b": "wén",
       "side_c": "文",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -79,7 +79,7 @@
       "side_a": "to help",
       "side_b": "bāng",
       "side_c": "帮",
-      "side_d": "v",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -89,7 +89,7 @@
       "side_a": "to prepare",
       "side_b": "zhǔnbèi",
       "side_c": "准备",
-      "side_d": "v",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -99,7 +99,7 @@
       "side_a": "to practice",
       "side_b": "liànxí",
       "side_c": "练习",
-      "side_d": "v",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -109,7 +109,7 @@
       "side_a": "to say; to speak",
       "side_b": "shuō",
       "side_c": "说",
-      "side_d": "v",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -119,7 +119,7 @@
       "side_a": "(sentence-final particle of exclamation, interrogation, etc.)",
       "side_b": "a",
       "side_c": "啊",
-      "side_d": "p",
+      "side_d": "particle",
       "level": 1
     },
     {
@@ -129,7 +129,7 @@
       "side_a": "but",
       "side_b": "dànshì",
       "side_c": "但是",
-      "side_d": "conj",
+      "side_d": "conjunction",
       "level": 1
     },
     {
@@ -139,7 +139,7 @@
       "side_a": "must; to have to",
       "side_b": "děi",
       "side_c": "得",
-      "side_d": "av",
+      "side_d": "modal verb",
       "level": 1
     },
     {
@@ -149,7 +149,7 @@
       "side_a": "with",
       "side_b": "gēn",
       "side_c": "跟",
-      "side_d": "prep",
+      "side_d": "preposition",
       "level": 1
     },
     {
@@ -159,7 +159,7 @@
       "side_a": "to meet up; to meet with",
       "side_b": "jiàn miàn",
       "side_c": "见面",
-      "side_d": "vo",
+      "side_d": "verb object",
       "level": 1
     },
     {
@@ -169,7 +169,7 @@
       "side_a": "face",
       "side_b": "miàn",
       "side_c": "面",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -179,7 +179,7 @@
       "side_a": "to come back",
       "side_b": "huí lái",
       "side_c": "回来",
-      "side_d": "vc",
+      "side_d": "verb complement",
       "level": 1
     }
   ]

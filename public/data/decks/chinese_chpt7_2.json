@@ -39,7 +39,7 @@
       "side_a": "usually",
       "side_b": "píngcháng",
       "side_c": "平常",
-      "side_d": "adv",
+      "side_d": "adverb",
       "level": 1
     },
     {
@@ -49,7 +49,7 @@
       "side_a": "early",
       "side_b": "zǎo",
       "side_c": "早",
-      "side_d": "adj",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -59,7 +59,7 @@
       "side_a": "so; this (late, etc.)",
       "side_b": "zhème",
       "side_c": "这么",
-      "side_d": "pr",
+      "side_d": "pronoun",
       "level": 1
     },
     {
@@ -69,7 +69,7 @@
       "side_a": "late",
       "side_b": "wǎn",
       "side_c": "晚",
-      "side_d": "adj",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -79,7 +79,7 @@
       "side_a": "morning",
       "side_b": "zǎoshang",
       "side_c": "早上",
-      "side_d": "t",
+      "side_d": "time word",
       "level": 1
     },
     {
@@ -89,7 +89,7 @@
       "side_a": "homework; schoolwork",
       "side_b": "gōngkè",
       "side_c": "功课",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -99,7 +99,7 @@
       "side_a": "everybody",
       "side_b": "dàjiā",
       "side_c": "大家",
-      "side_d": "pr",
+      "side_d": "pronoun",
       "level": 1
     },
     {
@@ -109,7 +109,7 @@
       "side_a": "to go to a class; to start a class; to be in class",
       "side_b": "shàng kè",
       "side_c": "上课",
-      "side_d": "vo",
+      "side_d": "verb object",
       "level": 1
     },
     {
@@ -119,7 +119,7 @@
       "side_a": "to begin, to start; beginning",
       "side_b": "kāishǐ",
       "side_c": "开始",
-      "side_d": "v/n",
+      "side_d": "verb or noun",
       "level": 1
     },
     {
@@ -129,7 +129,7 @@
       "side_a": "to read aloud",
       "side_b": "niàn",
       "side_c": "念",
-      "side_d": "v",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -139,7 +139,7 @@
       "side_a": "text of a lesson",
       "side_b": "kèwén",
       "side_c": "课文",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -149,7 +149,7 @@
       "side_a": "sound recording; to record",
       "side_b": "lùyīn",
       "side_c": "录音",
-      "side_d": "n/vo",
+      "side_d": "noun or verb object",
       "level": 1
     },
     {
@@ -159,7 +159,7 @@
       "side_a": "to study; to learn",
       "side_b": "xuéxí",
       "side_c": "学习",
-      "side_d": "v",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -169,7 +169,7 @@
       "side_a": "handsome",
       "side_b": "shuài",
       "side_c": "帅",
-      "side_d": "adj",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -179,7 +179,7 @@
       "side_a": "cool",
       "side_b": "kù",
       "side_c": "酷",
-      "side_d": "adj",
+      "side_d": "adjective",
       "level": 1
     }
   ]

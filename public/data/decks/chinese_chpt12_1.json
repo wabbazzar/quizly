@@ -42,7 +42,7 @@
       "side_a": "Restaurant",
       "side_b": "fànguǎnr",
       "side_c": "饭馆儿",
-      "side_d": "Noun for a place where meals are served",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -52,7 +52,7 @@
       "side_a": "To seem; to be like",
       "side_b": "hǎoxiàng",
       "side_c": "好像",
-      "side_d": "Verb indicating appearance or similarity",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -62,7 +62,7 @@
       "side_a": "Seat",
       "side_b": "wèizi",
       "side_c": "位子",
-      "side_d": "Noun for a place to sit",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -72,7 +72,7 @@
       "side_a": "Waiter; attendant",
       "side_b": "fúwùyuán",
       "side_c": "服务员",
-      "side_d": "Noun for restaurant service staff",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -82,7 +82,7 @@
       "side_a": "Table",
       "side_b": "zhuōzi",
       "side_c": "桌子",
-      "side_d": "Noun for furniture used for dining",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -92,7 +92,7 @@
       "side_a": "To order food",
       "side_b": "diǎn cài",
       "side_c": "点菜",
-      "side_d": "Verb-object phrase for selecting dishes at a restaurant",
+      "side_d": "verb object",
       "level": 1
     },
     {
@@ -102,7 +102,7 @@
       "side_a": "Plate; dish",
       "side_b": "pán",
       "side_c": "盘",
-      "side_d": "Noun and measure word for dishes of food",
+      "side_d": "noun and measure word",
       "level": 1
     },
     {
@@ -112,7 +112,7 @@
       "side_a": "Dumplings",
       "side_b": "jiǎozi",
       "side_c": "饺子",
-      "side_d": "Noun for Chinese dumplings with vegetable and/or meat filling",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -122,7 +122,7 @@
       "side_a": "Vegetarian; made from vegetables",
       "side_b": "sù",
       "side_c": "素",
-      "side_d": "Adjective describing meatless food",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -132,7 +132,7 @@
       "side_a": "Home-style",
       "side_b": "jiācháng",
       "side_c": "家常",
-      "side_d": "Noun describing traditional home cooking style",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -142,7 +142,7 @@
       "side_a": "Tofu; bean curd",
       "side_b": "dòufu",
       "side_c": "豆腐",
-      "side_d": "Noun for a food made from soybeans",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -152,7 +152,7 @@
       "side_a": "To put; to place",
       "side_b": "fàng",
       "side_c": "放",
-      "side_d": "Verb for placing or adding ingredients",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -162,7 +162,7 @@
       "side_a": "Meat",
       "side_b": "ròu",
       "side_c": "肉",
-      "side_d": "Noun for animal flesh used as food",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -172,7 +172,7 @@
       "side_a": "Bowl",
       "side_b": "wǎn",
       "side_c": "碗",
-      "side_d": "Noun and measure word for bowls of food",
+      "side_d": "noun and measure word",
       "level": 1
     },
     {
@@ -182,7 +182,7 @@
       "side_a": "Hot and sour soup",
       "side_b": "suānlàtāng",
       "side_c": "酸辣汤",
-      "side_d": "Noun for a traditional Chinese soup",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -192,7 +192,7 @@
       "side_a": "Monosodium glutamate (MSG)",
       "side_b": "wèijīng",
       "side_c": "味精",
-      "side_d": "Noun for a flavor enhancer",
+      "side_d": "noun",
       "level": 2
     },
     {
@@ -202,7 +202,7 @@
       "side_a": "Salt",
       "side_b": "yán",
       "side_c": "盐",
-      "side_d": "Noun for a common seasoning",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -212,7 +212,7 @@
       "side_a": "Bok choy",
       "side_b": "báicài",
       "side_c": "白菜",
-      "side_d": "Noun for a Chinese leafy vegetable",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -222,7 +222,7 @@
       "side_a": "Just (indicating recent past)",
       "side_b": "gāng",
       "side_c": "刚",
-      "side_d": "Adverb meaning something just happened",
+      "side_d": "adverb",
       "level": 1
     },
     {
@@ -232,7 +232,7 @@
       "side_a": "To be sold out",
       "side_b": "mài wán",
       "side_c": "卖完",
-      "side_d": "Verb-complement phrase indicating no more available",
+      "side_d": "verb complement",
       "level": 1
     },
     {
@@ -242,7 +242,7 @@
       "side_a": "Green/leafy vegetable",
       "side_b": "qīngcài",
       "side_c": "青菜",
-      "side_d": "Noun for green leafy vegetables",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -252,7 +252,7 @@
       "side_a": "Iced tea",
       "side_b": "bīngchá",
       "side_c": "冰茶",
-      "side_d": "Noun for cold tea beverage",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -262,7 +262,7 @@
       "side_a": "Thirsty",
       "side_b": "kě",
       "side_c": "渴",
-      "side_d": "Adjective describing the need for water",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -272,7 +272,7 @@
       "side_a": "Some (measure word for indefinite amount)",
       "side_b": "xiē",
       "side_c": "些",
-      "side_d": "Measure word for an unspecified quantity",
+      "side_d": "measure word",
       "level": 1
     },
     {
@@ -282,7 +282,7 @@
       "side_a": "Enough",
       "side_b": "gòu",
       "side_c": "够",
-      "side_d": "Adjective meaning sufficient quantity",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -292,7 +292,7 @@
       "side_a": "Hungry",
       "side_b": "è",
       "side_c": "饿",
-      "side_d": "Adjective describing the need for food",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -302,7 +302,7 @@
       "side_a": "To serve food",
       "side_b": "shàng cài",
       "side_c": "上菜",
-      "side_d": "Verb-object phrase for bringing dishes to the table",
+      "side_d": "verb object",
       "level": 1
     }
   ],

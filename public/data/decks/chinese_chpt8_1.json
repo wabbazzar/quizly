@@ -39,7 +39,7 @@
       "side_a": "(measure word for essays, articles, etc.)",
       "side_b": "piǎn",
       "side_c": "篇",
-      "side_d": "m",
+      "side_d": "measure word",
       "level": 1
     },
     {
@@ -49,7 +49,7 @@
       "side_a": "diary",
       "side_b": "rìjì",
       "side_c": "日记",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -59,7 +59,7 @@
       "side_a": "tired",
       "side_b": "lèi",
       "side_c": "累",
-      "side_d": "adj",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -69,7 +69,7 @@
       "side_a": "vo to get up",
       "side_b": "qǐ",
       "side_c": "起床",
-      "side_d": "chuáng",
+      "side_d": "verb object",
       "level": 1
     },
     {
@@ -79,7 +79,7 @@
       "side_a": "vo to take a bath/shower",
       "side_b": "xǐ",
       "side_c": "洗澡",
-      "side_d": "zיo",
+      "side_d": "verb object",
       "level": 1
     },
     {
@@ -89,7 +89,7 @@
       "side_a": "breakfast",
       "side_b": "zǎofàn",
       "side_c": "早饭",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -99,7 +99,7 @@
       "side_a": "simultaneously; at the same time",
       "side_b": "yìbiǎn",
       "side_c": "一边",
-      "side_d": "adv",
+      "side_d": "adverb",
       "level": 1
     },
     {
@@ -109,7 +109,7 @@
       "side_a": "classroom",
       "side_b": "jiàoshì",
       "side_c": "教室",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -119,7 +119,7 @@
       "side_a": "pronunciation",
       "side_b": "fǎyīn",
       "side_c": "发音",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -129,7 +129,7 @@
       "side_a": "new",
       "side_b": "xīn",
       "side_c": "新",
-      "side_d": "adj",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -139,7 +139,7 @@
       "side_a": "computer",
       "side_b": "diànnǎo",
       "side_c": "电脑",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -149,7 +149,7 @@
       "side_a": "noon",
       "side_b": "zhōngwǔ",
       "side_c": "中午",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -159,7 +159,7 @@
       "side_a": "dining room, cafeteria",
       "side_b": "cǎntīng",
       "side_c": "餐厅",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -169,7 +169,7 @@
       "side_a": "lunch, midday meal",
       "side_b": "wǔfàn",
       "side_c": "午饭",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -179,7 +179,7 @@
       "side_a": "vo to go online; to surf the internet",
       "side_b": "shàng",
       "side_c": "上网",
-      "side_d": "wיng",
+      "side_d": "verb object",
       "level": 1
     },
     {
@@ -189,7 +189,7 @@
       "side_a": "dormitory",
       "side_b": "sùshè",
       "side_c": "宿舍",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -199,7 +199,7 @@
       "side_a": "there",
       "side_b": "nàr",
       "side_c": "那儿",
-      "side_d": "pr",
+      "side_d": "pronoun",
       "level": 1
     },
     {
@@ -209,7 +209,7 @@
       "side_a": "in the middle of (doing something)",
       "side_b": "zhèngzài",
       "side_c": "正在",
-      "side_d": "adv",
+      "side_d": "adverb",
       "level": 1
     },
     {
@@ -219,7 +219,7 @@
       "side_a": "before",
       "side_b": "yǐqián",
       "side_c": "以前",
-      "side_d": "t",
+      "side_d": "time word",
       "level": 1
     },
     {
@@ -229,7 +229,7 @@
       "side_a": "to tell",
       "side_b": "gàosu",
       "side_c": "告诉",
-      "side_d": "v",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -239,7 +239,7 @@
       "side_a": "already",
       "side_b": "yǐjīng",
       "side_c": "已经",
-      "side_d": "adv",
+      "side_d": "adverb",
       "level": 1
     },
     {
@@ -249,7 +249,7 @@
       "side_a": "to know",
       "side_b": "zhīdao",
       "side_c": "知道",
-      "side_d": "v",
+      "side_d": "verb",
       "level": 1
     }
   ]

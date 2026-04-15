@@ -40,7 +40,7 @@
       "side_a": "(measure word for a pair)",
       "side_b": "shuāng",
       "side_c": "双",
-      "side_d": "m",
+      "side_d": "measure word",
       "level": 1
     },
     {
@@ -50,7 +50,7 @@
       "side_a": "shoes",
       "side_b": "xié",
       "side_c": "鞋",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -60,7 +60,7 @@
       "side_a": "to exchange; to change",
       "side_b": "huàn",
       "side_c": "换",
-      "side_d": "v",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -70,7 +70,7 @@
       "side_a": "same; alike",
       "side_b": "yíyàng",
       "side_c": "一样",
-      "side_d": "adj",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -80,7 +80,7 @@
       "side_a": "although",
       "side_b": "suīrán",
       "side_c": "虽然",
-      "side_d": "conj",
+      "side_d": "conjunction",
       "level": 2
     },
     {
@@ -90,7 +90,7 @@
       "side_a": "size",
       "side_b": "dàxiǎo",
       "side_c": "大小",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -100,7 +100,7 @@
       "side_a": "brown; coffee color",
       "side_b": "kāfēisè",
       "side_c": "咖啡色",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -110,7 +110,7 @@
       "side_a": "(measure word for kinds, sorts, types)",
       "side_b": "zhǒng",
       "side_c": "种",
-      "side_d": "m",
+      "side_d": "measure word",
       "level": 1
     },
     {
@@ -120,7 +120,7 @@
       "side_a": "black",
       "side_b": "hēi",
       "side_c": "黑",
-      "side_d": "adj",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -130,7 +130,7 @@
       "side_a": "style",
       "side_b": "yàngzi",
       "side_c": "样子",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -140,7 +140,7 @@
       "side_a": "very; rather",
       "side_b": "tǐng",
       "side_c": "挺",
-      "side_d": "adv",
+      "side_d": "adverb",
       "level": 1
     },
     {
@@ -150,7 +150,7 @@
       "side_a": "it",
       "side_b": "tā",
       "side_c": "它",
-      "side_d": "pr",
+      "side_d": "pronoun",
       "level": 1
     },
     {
@@ -160,7 +160,7 @@
       "side_a": "here",
       "side_b": "zhèr",
       "side_c": "这儿",
-      "side_d": "pr",
+      "side_d": "pronoun",
       "level": 1
     },
     {
@@ -170,7 +170,7 @@
       "side_a": "to pay with a credit card",
       "side_b": "shuā kǎ",
       "side_c": "刷卡",
-      "side_d": "vo",
+      "side_d": "verb object",
       "level": 1
     },
     {
@@ -180,7 +180,7 @@
       "side_a": "to brush; to swipe",
       "side_b": "shuā",
       "side_c": "刷",
-      "side_d": "v",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -190,7 +190,7 @@
       "side_a": "card",
       "side_b": "kǎ",
       "side_c": "卡",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -200,7 +200,7 @@
       "side_a": "to receive; to accept",
       "side_b": "shōu",
       "side_c": "收",
-      "side_d": "v",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -210,7 +210,7 @@
       "side_a": "credit card",
       "side_b": "xìnyòngkǎ",
       "side_c": "信用卡",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -220,7 +220,7 @@
       "side_a": "however; but",
       "side_b": "búguò",
       "side_c": "不过",
-      "side_d": "conj",
+      "side_d": "conjunction",
       "level": 1
     },
     {
@@ -230,7 +230,7 @@
       "side_a": "again",
       "side_b": "zài",
       "side_c": "再",
-      "side_d": "adv",
+      "side_d": "adverb",
       "level": 1
     },
     {
@@ -240,7 +240,7 @@
       "side_a": "to pay money",
       "side_b": "fù qián",
       "side_c": "付钱",
-      "side_d": "vo",
+      "side_d": "verb object",
       "level": 1
     },
     {
@@ -250,7 +250,7 @@
       "side_a": "to pay",
       "side_b": "fù",
       "side_c": "付",
-      "side_d": "v",
+      "side_d": "verb",
       "level": 1
     }
   ]

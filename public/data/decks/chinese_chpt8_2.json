@@ -39,7 +39,7 @@
       "side_a": "(measure word for letters)",
       "side_b": "fēng",
       "side_c": "封",
-      "side_d": "m",
+      "side_d": "measure word",
       "level": 1
     },
     {
@@ -49,7 +49,7 @@
       "side_a": "letter (correspondence)",
       "side_b": "xìn",
       "side_c": "信",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -59,7 +59,7 @@
       "side_a": "recently",
       "side_b": "zuìjìn",
       "side_c": "最近",
-      "side_d": "t",
+      "side_d": "time word",
       "level": 1
     },
     {
@@ -69,7 +69,7 @@
       "side_a": "(of superlative degree; most, -est)",
       "side_b": "zuì",
       "side_c": "最",
-      "side_d": "adv",
+      "side_d": "adverb",
       "level": 1
     },
     {
@@ -79,7 +79,7 @@
       "side_a": "close; near",
       "side_b": "jìn",
       "side_c": "近",
-      "side_d": "adj",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -89,7 +89,7 @@
       "side_a": "school term; semester/quarter",
       "side_b": "xuéqī",
       "side_c": "学期",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -99,7 +99,7 @@
       "side_a": "in addition to; besides",
       "side_b": "chúle...yǐwài",
       "side_c": "除了...以外",
-      "side_d": "conj",
+      "side_d": "conjunction",
       "level": 1
     },
     {
@@ -109,7 +109,7 @@
       "side_a": "major (in college); specialty",
       "side_b": "zhuānyè",
       "side_c": "专业",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -119,7 +119,7 @@
       "side_a": "can; know how to",
       "side_b": "huì",
       "side_c": "会",
-      "side_d": "av",
+      "side_d": "modal verb",
       "level": 1
     },
     {
@@ -129,7 +129,7 @@
       "side_a": "later",
       "side_b": "hòulái",
       "side_c": "后来",
-      "side_d": "t",
+      "side_d": "time word",
       "level": 1
     },
     {
@@ -139,7 +139,7 @@
       "side_a": "concert",
       "side_b": "yīnyuèhuì",
       "side_c": "音乐会",
-      "side_d": "n",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -149,7 +149,7 @@
       "side_a": "to hope; hope",
       "side_b": "xīwàng",
       "side_c": "希望",
-      "side_d": "v/n",
+      "side_d": "verb or noun",
       "level": 1
     },
     {
@@ -159,7 +159,7 @@
       "side_a": "can; to be able to",
       "side_b": "néng",
       "side_c": "能",
-      "side_d": "av",
+      "side_d": "modal verb",
       "level": 1
     },
     {
@@ -169,7 +169,7 @@
       "side_a": "to use",
       "side_b": "yòng",
       "side_c": "用",
-      "side_d": "v",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -179,7 +179,7 @@
       "side_a": "to laugh at; to laugh; to smile",
       "side_b": "xiào",
       "side_c": "笑",
-      "side_d": "v",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -189,7 +189,7 @@
       "side_a": "to wish (well)",
       "side_b": "zhù",
       "side_c": "祝",
-      "side_d": "v",
+      "side_d": "verb",
       "level": 1
     }
   ]

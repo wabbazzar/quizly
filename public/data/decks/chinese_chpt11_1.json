@@ -41,7 +41,7 @@
       "side_a": "So; such (indicating degree)",
       "side_b": "nàme",
       "side_c": "那么",
-      "side_d": "Pronoun indicating degree or extent",
+      "side_d": "pronoun",
       "level": 1
     },
     {
@@ -51,7 +51,7 @@
       "side_a": "Fun; amusing; interesting",
       "side_b": "hǎowánr",
       "side_c": "好玩儿",
-      "side_d": "Adjective describing something enjoyable",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -61,7 +61,7 @@
       "side_a": "To go out",
       "side_b": "chū qu",
       "side_c": "出去",
-      "side_d": "Verb complement meaning to exit or leave",
+      "side_d": "verb complement",
       "level": 1
     },
     {
@@ -71,7 +71,7 @@
       "side_a": "Very; extremely; exceedingly",
       "side_b": "fēicháng",
       "side_c": "非常",
-      "side_d": "Adverb emphasizing high degree",
+      "side_d": "adverb",
       "level": 1
     },
     {
@@ -81,7 +81,7 @@
       "side_a": "In a terrible mess; how terrible",
       "side_b": "zāogāo",
       "side_c": "糟糕",
-      "side_d": "Adjective describing a bad situation",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -91,7 +91,7 @@
       "side_a": "To rain",
       "side_b": "xià yǔ",
       "side_c": "下雨",
-      "side_d": "Verb-object phrase for precipitation",
+      "side_d": "verb object",
       "level": 1
     },
     {
@@ -101,7 +101,7 @@
       "side_a": "Again",
       "side_b": "yòu",
       "side_c": "又",
-      "side_d": "Adverb indicating repetition of a past action",
+      "side_d": "adverb",
       "level": 1
     },
     {
@@ -111,7 +111,7 @@
       "side_a": "To interview; interview",
       "side_b": "miànshì",
       "side_c": "面试",
-      "side_d": "Verb or noun for a formal meeting to assess qualifications",
+      "side_d": "verb or noun",
       "level": 1
     },
     {
@@ -121,7 +121,7 @@
       "side_a": "To go back; to return",
       "side_b": "huí qu",
       "side_c": "回去",
-      "side_d": "Verb complement meaning to return to a place",
+      "side_d": "verb complement",
       "level": 1
     },
     {
@@ -131,7 +131,7 @@
       "side_a": "Winter",
       "side_b": "dōngtiān",
       "side_c": "冬天",
-      "side_d": "The coldest season of the year",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -141,7 +141,7 @@
       "side_a": "Summer",
       "side_b": "xiàtiān",
       "side_c": "夏天",
-      "side_d": "The warmest season of the year",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -151,7 +151,7 @@
       "side_a": "Hot",
       "side_b": "rè",
       "side_c": "热",
-      "side_d": "Adjective describing high temperature",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -161,7 +161,7 @@
       "side_a": "Spring",
       "side_b": "chūntiān",
       "side_c": "春天",
-      "side_d": "Season between winter and summer",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -171,7 +171,7 @@
       "side_a": "Autumn; fall",
       "side_b": "qiūtiān",
       "side_c": "秋天",
-      "side_d": "Season between summer and winter",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -181,7 +181,7 @@
       "side_a": "Comfortable",
       "side_b": "shūfu",
       "side_c": "舒服",
-      "side_d": "Adjective describing a pleasant physical state",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -191,7 +191,7 @@
       "side_a": "California",
       "side_b": "Jiāzhōu",
       "side_c": "加州",
-      "side_d": "US state on the west coast",
+      "side_d": "proper noun",
       "level": 2
     }
   ]

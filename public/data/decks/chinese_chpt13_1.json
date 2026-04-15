@@ -42,7 +42,7 @@
       "side_a": "To go (colloquial)",
       "side_b": "shàng",
       "side_c": "上",
-      "side_d": "Verb meaning to go, used colloquially",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -52,7 +52,7 @@
       "side_a": "Center",
       "side_b": "zhōngxīn",
       "side_c": "中心",
-      "side_d": "Noun for center or middle point",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -62,7 +62,7 @@
       "side_a": "To be told; to hear of",
       "side_b": "tīngshuō",
       "side_c": "听说",
-      "side_d": "Verb meaning to be told or to hear of something",
+      "side_d": "verb",
       "level": 1
     },
     {
@@ -72,7 +72,7 @@
       "side_a": "Sports",
       "side_b": "yùndòng",
       "side_c": "运动",
-      "side_d": "Noun for sports or physical exercise",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -82,7 +82,7 @@
       "side_a": "Field",
       "side_b": "chǎng",
       "side_c": "场",
-      "side_d": "Noun for a field or open area",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -92,7 +92,7 @@
       "side_a": "Side",
       "side_b": "pángbiān",
       "side_c": "旁边",
-      "side_d": "Noun for side or beside (see Grammar 1)",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -102,7 +102,7 @@
       "side_a": "Far",
       "side_b": "yuǎn",
       "side_c": "远",
-      "side_d": "Adjective meaning far or distant",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -112,7 +112,7 @@
       "side_a": "Away from",
       "side_b": "lí",
       "side_c": "离",
-      "side_d": "Preposition indicating distance from something",
+      "side_d": "preposition",
       "level": 1
     },
     {
@@ -122,7 +122,7 @@
       "side_a": "Near",
       "side_b": "jìn",
       "side_c": "近",
-      "side_d": "Adjective meaning near or close",
+      "side_d": "adjective",
       "level": 1
     },
     {
@@ -132,7 +132,7 @@
       "side_a": "Activity",
       "side_b": "huódòng",
       "side_c": "活动",
-      "side_d": "Noun for an activity or event",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -142,7 +142,7 @@
       "side_a": "Middle",
       "side_b": "zhōngjiān",
       "side_c": "中间",
-      "side_d": "Noun for the middle or in between",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -152,7 +152,7 @@
       "side_a": "Bookstore",
       "side_b": "shūdiàn",
       "side_c": "书店",
-      "side_d": "Noun for a bookstore or book shop",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -162,7 +162,7 @@
       "side_a": "Place",
       "side_b": "dìfang",
       "side_c": "地方",
-      "side_d": "Noun for a place or location",
+      "side_d": "noun",
       "level": 1
     },
     {
@@ -172,7 +172,7 @@
       "side_a": "Inside",
       "side_b": "lǐbian",
       "side_c": "里边",
-      "side_d": "Noun for inside or within (see Grammar 1)",
+      "side_d": "noun",
       "level": 1
     }
   ],
