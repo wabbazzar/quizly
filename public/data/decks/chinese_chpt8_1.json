@@ -11,12 +11,15 @@
       2,
       3
     ],
-    "available_sides": 4,
+    "available_sides": 7,
     "side_labels": {
       "side_a": "english",
       "side_b": "pinyin",
       "side_c": "characters",
-      "side_d": "description"
+      "side_d": "description",
+      "side_e": "example (pinyin)",
+      "side_f": "example translation",
+      "side_g": "usage notes"
     },
     "card_count": 22,
     "difficulty": "beginner",
@@ -40,6 +43,9 @@
       "side_b": "piǎn",
       "side_c": "篇",
       "side_d": "measure word",
+      "side_e": "Wǒ xiě le yì piān rìjì.",
+      "side_f": "I wrote a diary entry. (lit. one [MW] diary)",
+      "side_g": "篇 is the measure word for discrete written pieces—diary entries, essays, articles, chapters—not for books (本) or letters (封). Always pair with 一/两/这/那 + 篇 + noun.",
       "level": 1
     },
     {
@@ -50,6 +56,9 @@
       "side_b": "rìjì",
       "side_c": "日记",
       "side_d": "noun",
+      "side_e": "Tā měi tiān wǎnshang xiě rìjì.",
+      "side_f": "He writes a diary every night.",
+      "side_g": "日记 literally 'day-record.' Typical verbs: 写日记 (write), 记日记 (keep). Counted with 篇 for individual entries or 本 for the notebook itself. Neutral register, both spoken and written.",
       "level": 1
     },
     {
@@ -60,6 +69,9 @@
       "side_b": "lèi",
       "side_c": "累",
       "side_d": "adjective",
+      "side_e": "Jīntiān gōngzuò tài duō, wǒ hěn lèi.",
+      "side_f": "There's too much work today; I'm very tired.",
+      "side_g": "累 (lèi) as an adjective needs 很/太/非常 in affirmatives to avoid sounding comparative. Distinguish from 困 (kùn, sleepy) and 辛苦 (xīnkǔ, arduous). 你累不累? is a common A-not-A form.",
       "level": 1
     },
     {
@@ -70,6 +82,9 @@
       "side_b": "qǐ",
       "side_c": "起床",
       "side_d": "verb object",
+      "side_e": "Wǒ měi tiān qī diǎn qǐchuáng.",
+      "side_f": "I get up at seven every day. (lit. rise-bed)",
+      "side_g": "起床 is a verb-object (离合词 separable) compound: you can say 起了床, 起过床, or 起不了床, but not *起床了我. Means literally 'rise from bed,' i.e., get out of bed—not simply wake up (that's 醒 xǐng).",
       "level": 1
     },
     {
@@ -80,6 +95,9 @@
       "side_b": "xǐ",
       "side_c": "洗澡",
       "side_d": "verb object",
+      "side_e": "Tā qǐchuáng yǐhòu jiù qù xǐzǎo.",
+      "side_f": "After getting up he goes to shower. (lit. wash-bath)",
+      "side_g": "洗澡 is another separable verb-object: 洗了一个澡, 洗个热水澡. Covers both bathing and showering; specify with 淋浴 (shower) or 泡澡 (soak) if needed. Neutral register.",
       "level": 1
     },
     {
@@ -90,6 +108,9 @@
       "side_b": "zǎofàn",
       "side_c": "早饭",
       "side_d": "noun",
+      "side_e": "Zǎofàn nǐ xiǎng chī shénme?",
+      "side_f": "What do you want for breakfast?",
+      "side_g": "早饭 is the colloquial term; 早餐 (zǎocān) is slightly more formal and common on menus. Verb: 吃早饭. Parallel set: 早饭/午饭/晚饭 vs. formal 早餐/午餐/晚餐.",
       "level": 1
     },
     {
@@ -100,6 +121,9 @@
       "side_b": "yìbiǎn",
       "side_c": "一边",
       "side_d": "adverb",
+      "side_e": "Wǒ yìbiān chī zǎofàn, yìbiān kàn shū.",
+      "side_f": "I eat breakfast and read at the same time.",
+      "side_g": "Standard pronunciation is yìbiān (tone sandhi from yī). The grammar pattern 一边 V1，一边 V2 expresses two actions performed concurrently by the same subject.",
       "level": 1
     },
     {
@@ -110,6 +134,9 @@
       "side_b": "jiàoshì",
       "side_c": "教室",
       "side_d": "noun",
+      "side_e": "Lǎoshī yǐjīng zài jiàoshì li le.",
+      "side_f": "The teacher is already in the classroom.",
+      "side_g": "教室 (jiàoshì) vs. 教师 (jiàoshī, teacher) differ only in tone—take care. Use 在教室里 for location. Classifier: 间 (yì jiān jiàoshì).",
       "level": 1
     },
     {
@@ -120,6 +147,9 @@
       "side_b": "fǎyīn",
       "side_c": "发音",
       "side_d": "noun",
+      "side_e": "Tā de Zhōngwén fāyīn hěn hǎo.",
+      "side_f": "His Chinese pronunciation is very good.",
+      "side_g": "Standard pinyin is fāyīn (1st+1st). Common collocations: 练发音 (practice), 纠正发音 (correct), 发音标准 (standard pronunciation). Contrast 口音 kǒuyīn 'accent.'",
       "level": 1
     },
     {
@@ -130,6 +160,9 @@
       "side_b": "xīn",
       "side_c": "新",
       "side_d": "adjective",
+      "side_e": "Wǒ mǎi le yí ge xīn diànnǎo.",
+      "side_f": "I bought a new computer.",
+      "side_g": "新 is attributive and needs no 的 before most nouns (新书, 新朋友). As predicate, needs 很: 这本书很新. Opposite 旧 jiù. In 新年 'New Year' it's fixed.",
       "level": 1
     },
     {
@@ -140,6 +173,9 @@
       "side_b": "diànnǎo",
       "side_c": "电脑",
       "side_d": "noun",
+      "side_e": "Wǒ de xīn diànnǎo hěn kuài.",
+      "side_f": "My new computer is very fast. (lit. electric-brain)",
+      "side_g": "电脑 is the colloquial standard; 计算机 jìsuànjī is the formal/technical term. Measure word 台 (yì tái diànnǎo). Common verbs: 用, 开, 关, 修.",
       "level": 1
     },
     {
@@ -150,6 +186,9 @@
       "side_b": "zhōngwǔ",
       "side_c": "中午",
       "side_d": "noun",
+      "side_e": "Zhōngwǔ wǒmen yìqǐ qù chī wǔfàn, hǎo ma?",
+      "side_f": "At noon let's go eat lunch together, okay?",
+      "side_g": "中午 covers roughly 11 a.m.–1 p.m. Fits the time-word slot before the verb: 我中午吃饭, not after. Parallel set: 早上/上午/中午/下午/晚上.",
       "level": 1
     },
     {
@@ -160,6 +199,9 @@
       "side_b": "cǎntīng",
       "side_c": "餐厅",
       "side_d": "noun",
+      "side_e": "Xuéxiào de cāntīng bú tài guì.",
+      "side_f": "The school cafeteria isn't too expensive.",
+      "side_g": "Correct pinyin is cāntīng (1st+1st). 餐厅 is any dining hall or restaurant room; a student cafeteria is often 食堂 shítáng, which is more informal/campus-specific.",
       "level": 1
     },
     {
@@ -170,6 +212,9 @@
       "side_b": "wǔfàn",
       "side_c": "午饭",
       "side_d": "noun",
+      "side_e": "Wǒ zhōngwǔ zài cāntīng chī wǔfàn.",
+      "side_f": "I eat lunch in the cafeteria at noon.",
+      "side_g": "午饭 pairs with 吃. More formal equivalent: 午餐. Don't confuse with 午觉 wǔjiào 'midday nap.' Time-place-verb order: 中午 + 在餐厅 + 吃午饭.",
       "level": 1
     },
     {
@@ -180,6 +225,9 @@
       "side_b": "shàng",
       "side_c": "上网",
       "side_d": "verb object",
+      "side_e": "Tā měi tiān wǎnshang dōu shàngwǎng.",
+      "side_f": "He goes online every evening.",
+      "side_g": "上网 is separable: 上了一个小时网, 上不了网 'can't get online.' Use 用电脑上网 or 用手机上网 to specify device. Modern alternative: 刷手机/刷微博 for casual browsing.",
       "level": 1
     },
     {
@@ -190,6 +238,9 @@
       "side_b": "sùshè",
       "side_c": "宿舍",
       "side_d": "noun",
+      "side_e": "Wǒ de sùshè lí jiàoshì hěn jìn.",
+      "side_f": "My dorm is close to the classroom.",
+      "side_g": "宿舍 (sùshè) is standard for dormitory; measure word 间 for a room, 栋/座 for the building. Distance pattern A 离 B 很近/远 is the canonical frame.",
       "level": 1
     },
     {
@@ -200,6 +251,9 @@
       "side_b": "nàr",
       "side_c": "那儿",
       "side_d": "pronoun",
+      "side_e": "Lǎoshī zài nàr, nǐ qù wèn tā ba.",
+      "side_f": "The teacher is there—go ask him.",
+      "side_g": "那儿 (nàr, Beijing/northern erhua) and 那里 (nàlǐ, southern/written) are interchangeable. Use after verbs of location/motion: 在那儿, 去那儿, 从那儿来. Contrast 这儿 zhèr 'here,' 哪儿 nǎr 'where.'",
       "level": 1
     },
     {
@@ -210,6 +264,9 @@
       "side_b": "zhèngzài",
       "side_c": "正在",
       "side_d": "adverb",
+      "side_e": "Tā zhèngzài jiàoshì li liànxí fāyīn.",
+      "side_f": "She is in the middle of practicing pronunciation in the classroom.",
+      "side_g": "正在 marks ongoing action, often with sentence-final 呢: 正在…呢. Compare 在 (simple progressive), 正 (just at that moment), 正在 (emphasizes both 'right now' and 'in progress'). Precedes the verb directly; cannot take 了 or 过.",
       "level": 1
     },
     {
@@ -220,6 +277,9 @@
       "side_b": "yǐqián",
       "side_c": "以前",
       "side_d": "time word",
+      "side_e": "Yǐqián wǒ bù zhīdao tā yǒu xīn diànnǎo.",
+      "side_f": "I didn't know before that he had a new computer.",
+      "side_g": "以前 can stand alone ('in the past') or follow a phrase ('before X'): 吃饭以前 'before eating,' 三年以前 'three years ago.' Opposite 以后. In this use, no 的 is needed before 以前.",
       "level": 1
     },
     {
@@ -230,6 +290,9 @@
       "side_b": "gàosu",
       "side_c": "告诉",
       "side_d": "verb",
+      "side_e": "Qǐng nǐ gàosu tā wǒ yǐjīng qǐchuáng le.",
+      "side_f": "Please tell him I've already gotten up.",
+      "side_g": "告诉 takes a double object: 告诉 + 人 + 事 (告诉我答案). The su is neutral tone. Don't substitute 说 shuō, which doesn't take an indirect-object person directly (*说我… is wrong; say 跟我说). Common pattern: 告诉你一件事.",
       "level": 1
     },
     {
@@ -240,6 +303,9 @@
       "side_b": "yǐjīng",
       "side_c": "已经",
       "side_d": "adverb",
+      "side_e": "Wǒ yǐjīng chī le zǎofàn le.",
+      "side_f": "I've already eaten breakfast.",
+      "side_g": "已经 typically pairs with sentence-final 了 to mark a completed/current-relevant state: 已经…了. Precedes the verb. Contrast with 才 cái 'only then / not until,' which implies late or limited.",
       "level": 1
     },
     {
@@ -250,6 +316,9 @@
       "side_b": "zhīdao",
       "side_c": "知道",
       "side_d": "verb",
+      "side_e": "Wǒ zhīdao tā zhèngzài xǐzǎo.",
+      "side_f": "I know she's in the middle of showering.",
+      "side_g": "知道 (zhīdao, 2nd syllable neutral tone) = know a fact; contrast 认识 rènshi 'be acquainted with (person/place).' Negation: 不知道, not *没知道. Common fixed: 我知道了 'got it / understood.'",
       "level": 1
     }
   ]

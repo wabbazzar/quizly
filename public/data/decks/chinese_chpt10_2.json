@@ -11,12 +11,15 @@
       2,
       3
     ],
-    "available_sides": 4,
+    "available_sides": 7,
     "side_labels": {
       "side_a": "english",
       "side_b": "pinyin",
       "side_c": "characters",
-      "side_d": "description"
+      "side_d": "description",
+      "side_e": "example (pinyin)",
+      "side_f": "example translation",
+      "side_g": "usage notes"
     },
     "card_count": 18,
     "difficulty": "intermediate",
@@ -41,6 +44,9 @@
       "side_b": "diànzǐ yóujiàn",
       "side_c": "电子邮件",
       "side_d": "noun",
+      "side_e": "Wǒ xiǎng gěi nǐ fā yí gè diànzǐ yóujiàn.",
+      "side_f": "I want to send you an email.",
+      "side_g": "电子邮件 is the formal written term for email; in casual speech people often shorten it to 邮件 or just say 伊妹儿 (yīmèir, a phonetic loan). Pairs with 发 (fā, to send) and 收 (shōu, to receive). Measure word: 封 (fēng) or 个 (gè).",
       "level": 1
     },
     {
@@ -51,6 +57,9 @@
       "side_b": "diànzǐ",
       "side_c": "电子",
       "side_d": "noun",
+      "side_e": "Xiànzài shǒujī shì yì zhǒng diànzǐ chǎnpǐn.",
+      "side_f": "Nowadays cell phones are a kind of electronic product.",
+      "side_g": "电子 literally 'electric + son/particle' acts as a prefix meaning 'electronic,' forming compounds like 电子邮件, 电子书 (e-book), 电子产品 (electronic products). Not used alone as a standalone noun in everyday speech.",
       "level": 2
     },
     {
@@ -61,6 +70,9 @@
       "side_b": "ràng",
       "side_c": "让",
       "side_d": "verb",
+      "side_e": "Māma bú ràng wǒ wǎnshang hē kāfēi.",
+      "side_f": "Mom doesn't let me drink coffee at night.",
+      "side_g": "让 is a pivotal (兼语) verb: Subject + 让 + Person + Verb, meaning 'let/make somebody do something.' Negate with 不让 (not allow) — stronger than English 'not let.' Also used in polite contexts (让我想想, let me think) and traffic signs (让 = yield).",
       "level": 1
     },
     {
@@ -71,6 +83,9 @@
       "side_b": "huā",
       "side_c": "花",
       "side_d": "verb",
+      "side_e": "Dǎchē qù fēijīchǎng yào huā yì bǎi kuài.",
+      "side_f": "Taking a taxi to the airport costs 100 yuan (lit. spends 100 kuai).",
+      "side_g": "花 covers both spending money (花钱) and spending time (花时间); pattern: 花 + amount + 在…上 or 花 + amount + Verb. Distinct from 用 (use) and 费 (expend/waste). Base meaning is 'flower,' so context disambiguates.",
       "level": 1
     },
     {
@@ -81,6 +96,9 @@
       "side_b": "bù hǎoyìsi",
       "side_c": "不好意思",
       "side_d": "adjective",
+      "side_e": "Máfan nǐ bàba, wǒ zhēn bù hǎoyìsi.",
+      "side_f": "Troubling your dad — I'm really embarrassed (lit. 'not good meaning').",
+      "side_g": "不好意思 is a mild, social-grease expression: 'embarrassed,' 'sorry to trouble you,' or a soft 'excuse me' — lighter than 对不起. Also used to decline politely (不好意思，我不能去). Opposite 好意思 often appears rhetorically: 你好意思吗? (How can you!)",
       "level": 1
     },
     {
@@ -91,6 +109,9 @@
       "side_b": "měi",
       "side_c": "每",
       "side_d": "pronoun",
+      "side_e": "Měi ge chéngshì dōu yǒu dìtiě.",
+      "side_f": "Every city has a subway.",
+      "side_g": "每 pairs almost obligatorily with 都 in the predicate: 每 + (measure word) + Noun … 都 …. Unlike English 'every,' 每 usually needs a measure word (每个人, 每本书) except in fixed time phrases (每天, 每年).",
       "level": 1
     },
     {
@@ -101,6 +122,9 @@
       "side_b": "chéngshì",
       "side_c": "城市",
       "side_d": "noun",
+      "side_e": "Běijīng shì yí ge hěn dà de chéngshì.",
+      "side_f": "Beijing is a very big city.",
+      "side_g": "城市 (city) is a bound disyllabic noun; 城 alone means 'city wall' or appears in names (长城). Contrast with 城镇 (towns) and 农村 (countryside). Common collocations: 大城市, 小城市, 城市生活.",
       "level": 1
     },
     {
@@ -111,6 +135,9 @@
       "side_b": "tèbié",
       "side_c": "特别",
       "side_d": "adverb",
+      "side_e": "Běijīng de dìtiě xiàn tèbié duō.",
+      "side_f": "Beijing's subway lines are especially numerous.",
+      "side_g": "特别 functions both as an adverb ('especially,' 特别好) and an adjective ('special,' 很特别). As adverb it intensifies like 非常; as adjective it means unusual/distinctive. Near-synonym 尤其 is more formal and usually starts a clause.",
       "level": 1
     },
     {
@@ -121,6 +148,9 @@
       "side_b": "gāosù gōnglù",
       "side_c": "高速公路",
       "side_d": "noun",
+      "side_e": "Kāichē qù fēijīchǎng yào zǒu gāosù gōnglù.",
+      "side_f": "Driving to the airport means taking the highway.",
+      "side_g": "高速公路 is the full formal term; in speech people often clip it to 高速 (上高速 = get on the highway). Take the verb 走 (走高速公路) rather than 坐 since you drive on it. Compare 国道 (national road) and 省道 (provincial road).",
       "level": 2
     },
     {
@@ -131,6 +161,9 @@
       "side_b": "gāosù",
       "side_c": "高速",
       "side_d": "adjective",
+      "side_e": "Gāosù gōnglù shàng yǒu de rén kāichē kāi de tài kuài.",
+      "side_f": "On the highway some people drive too fast.",
+      "side_g": "高速 ('high-speed') is an adjective/prefix: 高速火车 (high-speed train = 高铁), 高速网络 (high-speed internet). Rarely stands alone except as shorthand for 高速公路 in driving contexts.",
       "level": 2
     },
     {
@@ -141,6 +174,9 @@
       "side_b": "gōnglù",
       "side_c": "公路",
       "side_d": "noun",
+      "side_e": "Zhè tiáo gōnglù bǐjiào xīn.",
+      "side_f": "This road is relatively new.",
+      "side_g": "公路 refers to paved intercity roads ('public road'). Measure word 条 (tiáo). Distinguish from 马路 (urban street), 街 (street in a city), 路 (generic road/route). 公 here means 'public,' same character as in 公共汽车.",
       "level": 2
     },
     {
@@ -151,6 +187,9 @@
       "side_b": "lù",
       "side_c": "路",
       "side_d": "noun",
+      "side_e": "Lù shang bù dǔchē, dàgài sānshí fēnzhōng.",
+      "side_f": "If there's no traffic on the road, about 30 minutes.",
+      "side_g": "路 is both concrete (road, 条 tiáo) and abstract (way/route, as in 二十三路 = bus route 23, 路上 = on the way). Fixed phrases: 走路 (to walk), 路上 (en route), 一路顺风 (bon voyage).",
       "level": 1
     },
     {
@@ -161,6 +200,9 @@
       "side_b": "jǐnzhāng",
       "side_c": "紧张",
       "side_d": "adjective",
+      "side_e": "Wǒ bàba kāichē cónglái bù jǐnzhāng.",
+      "side_f": "My dad is never nervous when driving.",
+      "side_g": "紧张 covers both emotional tension (nervous) and situational tightness (时间很紧张 = time is tight; 关系紧张 = strained relations). Commonly intensified by 有点儿, 非常, 太. Antonym 放松 (relaxed).",
       "level": 1
     },
     {
@@ -171,6 +213,9 @@
       "side_b": "zìjǐ",
       "side_c": "自己",
       "side_d": "pronoun",
+      "side_e": "Nǐ bú yòng zìjǐ zuò chē le, wǒ bàba sòng nǐ.",
+      "side_f": "You don't have to take transit yourself — my dad will drive you.",
+      "side_g": "自己 is reflexive/emphatic ('oneself'): appears as 我自己, 你自己, or alone meaning 'on one's own.' Adverbially emphasizes independent action (自己做饭 = cook by oneself). Also forms 自己人 (insider, one of us).",
       "level": 1
     },
     {
@@ -181,6 +226,9 @@
       "side_b": "shǒujī",
       "side_c": "手机",
       "side_d": "noun",
+      "side_e": "Shǒujī shang yǒu dìtú, hěn fāngbiàn.",
+      "side_f": "There's a map on the phone — very convenient.",
+      "side_g": "手机 literally 'hand-machine' is the universal word for cellphone/smartphone. Compare 电话 (telephone, 座机 for landline). Common verbs: 用手机, 看手机, 玩手机 (play on phone, often disapproving).",
       "level": 1
     },
     {
@@ -191,6 +239,9 @@
       "side_b": "fā duǎnxìn",
       "side_c": "发短信",
       "side_d": "verb object",
+      "side_e": "Wǒ xiǎng zài chūfā qián gěi nǐ fā duǎnxìn.",
+      "side_f": "I want to send you a text before we leave.",
+      "side_g": "发短信 is a verb-object compound: 发 (send) + 短信 (short message). Separable — can insert: 发一个短信, 发了三条短信 (measure 条). Nowadays 发微信 (send WeChat) has largely replaced SMS texting in daily use in mainland China.",
       "level": 2
     },
     {
@@ -201,6 +252,9 @@
       "side_b": "xīnnián",
       "side_c": "新年",
       "side_d": "noun",
+      "side_e": "Xīnnián nǐ yào qù nǎli lǚxíng?",
+      "side_f": "Where are you traveling for New Year?",
+      "side_g": "新年 can mean either solar New Year (Jan 1) or more loosely the Lunar New Year period; 春节 specifically denotes Spring Festival/Lunar New Year. Common greetings: 新年好, 新年快乐.",
       "level": 1
     },
     {
@@ -211,6 +265,9 @@
       "side_b": "kuàilè",
       "side_c": "快乐",
       "side_d": "adjective",
+      "side_e": "Xīnnián kuàilè! Hánjià kuàilè!",
+      "side_f": "Happy New Year! Happy winter vacation!",
+      "side_g": "快乐 (happy) is the standard ending for holiday greetings: 新年快乐, 生日快乐, 圣诞快乐. Contrasts with 高兴 (pleased, momentary feeling) and 开心 (cheerful, more colloquial). 快乐 is slightly more formal/written and used as a blessing.",
       "level": 1
     }
   ],

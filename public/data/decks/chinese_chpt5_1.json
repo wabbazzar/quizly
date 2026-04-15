@@ -11,12 +11,15 @@
       2,
       3
     ],
-    "available_sides": 4,
+    "available_sides": 7,
     "side_labels": {
       "side_a": "english",
       "side_b": "pinyin",
       "side_c": "characters",
-      "side_d": "description"
+      "side_d": "description",
+      "side_e": "example (pinyin)",
+      "side_f": "example translation",
+      "side_g": "usage notes"
     },
     "card_count": 9,
     "difficulty": "beginner",
@@ -40,6 +43,9 @@
       "side_b": "ya",
       "side_c": "呀",
       "side_d": "particle",
+      "side_e": "Nǐ hǎo ya!",
+      "side_f": "Hello there! (lit. 'You good YA')",
+      "side_g": "呀 is a softening sentence-final particle, a phonetic variant of 啊 used after vowels ending in -a, -e, -i, -o, -ü. It lightens tone in greetings, questions, and exclamations; never use in formal writing.",
       "level": 1
     },
     {
@@ -50,6 +56,9 @@
       "side_b": "jìn",
       "side_c": "进",
       "side_d": "verb",
+      "side_e": "Qǐng jìn.",
+      "side_f": "Please enter. (lit. 'Please enter')",
+      "side_g": "进 is a directional verb often paired with a complement (进来 'come in', 进去 'go in'). Standalone 进 is common in signs and imperatives like 请进. Opposite is 出 (chū, exit).",
       "level": 1
     },
     {
@@ -60,6 +69,9 @@
       "side_b": "kuài",
       "side_c": "快",
       "side_d": "adverb or adjective",
+      "side_e": "Kuài jìn lai!",
+      "side_f": "Come in quickly! (lit. 'Quick enter-come')",
+      "side_g": "快 works as both adjective ('fast') and adverb ('quickly, hurry up'). As an urging adverb before a verb (快来, 快走) it conveys impatience or warmth. Contrast with 慢 (màn, slow); reduplication 快快 intensifies in children's speech.",
       "level": 1
     },
     {
@@ -70,6 +82,9 @@
       "side_b": "jìn lai",
       "side_c": "进来",
       "side_d": "verb complement",
+      "side_e": "Qǐng jìn lai zuò.",
+      "side_f": "Please come in and sit. (lit. 'Please enter-come sit')",
+      "side_g": "进来 is a verb+directional-complement compound: 进 (action) + 来 (toward speaker). Use 进去 if movement is away from speaker. The 来 is neutral tone in this compound. Objects go between: 进屋来 'come into the room'.",
       "level": 1
     },
     {
@@ -80,6 +95,9 @@
       "side_b": "lái",
       "side_c": "来",
       "side_d": "verb",
+      "side_e": "Tā míngtiān lái wǒ jiā.",
+      "side_f": "He is coming to my house tomorrow. (lit. 'He tomorrow come my home')",
+      "side_g": "来 indicates motion toward the speaker's location, opposite of 去 (qù). It also serves as a directional complement (进来, 回来) and a light verb meaning 'do/have' (来一杯 'have a cup'). Time words precede 来.",
       "level": 1
     },
     {
@@ -90,6 +108,9 @@
       "side_b": "jièshào",
       "side_c": "介绍",
       "side_d": "verb",
+      "side_e": "Wǒ lái jièshào yí xià.",
+      "side_f": "Let me introduce (briefly). (lit. 'I come introduce one-time')",
+      "side_g": "介绍 is a two-syllable verb meaning 'introduce' (people, products, topics). The pattern 我来介绍一下 is a fixed polite formula at first meetings. Object order: 给 A 介绍 B ('introduce B to A'). Can also be a noun: 自我介绍 'self-introduction'.",
       "level": 1
     },
     {
@@ -100,6 +121,9 @@
       "side_b": "yí xià",
       "side_c": "一下",
       "side_d": "number + measure",
+      "side_e": "Nǐ kàn yí xià.",
+      "side_f": "Take a look. (lit. 'You look one-time')",
+      "side_g": "一下 after a verb softens the action and implies 'briefly, a bit', similar to reduplication (看看 ≈ 看一下). Tone sandhi: 一 shifts to yí before a 4th-tone syllable (xià). Very common for polite requests; more casual than 请.",
       "level": 1
     },
     {
@@ -110,6 +134,9 @@
       "side_b": "gāoxìng",
       "side_c": "高兴",
       "side_d": "adjective",
+      "side_e": "Rènshi nǐ, wǒ hěn gāoxìng.",
+      "side_f": "I'm happy to meet you. (lit. 'Know you, I very happy')",
+      "side_g": "高兴 describes momentary pleasure about a specific event; for lasting happiness use 快乐 (kuàilè) or 幸福 (xìngfú). Common pattern: 很高兴+VP ('glad to…'). As a verb it can take an object: 高兴什么 'what's there to be happy about?'",
       "level": 1
     },
     {
@@ -120,6 +147,9 @@
       "side_b": "piàoliang",
       "side_c": "漂亮",
       "side_d": "adjective",
+      "side_e": "Nǐ jiā hěn piàoliang.",
+      "side_f": "Your home is very pretty. (lit. 'Your home very pretty')",
+      "side_g": "漂亮 applies to people, places, objects, and even actions (一个漂亮的进球 'a beautiful goal'). The 亮 is neutral tone in this word. Synonyms: 美 (měi, more literary), 好看 (hǎokàn, colloquial 'good-looking'). Typically needs 很 or another degree adverb when predicative.",
       "level": 1
     }
   ]

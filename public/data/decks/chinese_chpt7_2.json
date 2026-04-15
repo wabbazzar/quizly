@@ -11,12 +11,15 @@
       2,
       3
     ],
-    "available_sides": 4,
+    "available_sides": 7,
     "side_labels": {
       "side_a": "english",
       "side_b": "pinyin",
       "side_c": "characters",
-      "side_d": "description"
+      "side_d": "description",
+      "side_e": "example (pinyin)",
+      "side_f": "example translation",
+      "side_g": "usage notes"
     },
     "card_count": 15,
     "difficulty": "beginner",
@@ -40,6 +43,9 @@
       "side_b": "píngcháng",
       "side_c": "平常",
       "side_d": "adverb",
+      "side_e": "Wǒ píngcháng liù diǎn qǐchuáng.",
+      "side_f": "I usually wake up at six. (lit. I usually six o'clock get-up.)",
+      "side_g": "平常 is an adverb meaning 'usually/ordinarily' and typically precedes the verb or time phrase it modifies. It contrasts with 今天/现在 to mark habitual vs. exceptional behavior, and is close in meaning to 通常 but more colloquial. Often paired with 不 as 平常不… to mean 'not usually.'",
       "level": 1
     },
     {
@@ -50,6 +56,9 @@
       "side_b": "zǎo",
       "side_c": "早",
       "side_d": "adjective",
+      "side_e": "Nǐ jīntiān qǐ de hěn zǎo.",
+      "side_f": "You got up very early today. (lit. You today rise DE very early.)",
+      "side_g": "早 functions as an adjective ('early') and also as a casual greeting (早！= 'morning!'). In 起得早/来得早 it follows V+得 as a descriptive complement. Compare with the time word 早上 (morning); 早 alone emphasizes the quality of earliness.",
       "level": 1
     },
     {
@@ -60,6 +69,9 @@
       "side_b": "zhème",
       "side_c": "这么",
       "side_d": "pronoun",
+      "side_e": "Jīntiān gōngkè zhème duō!",
+      "side_f": "There's so much homework today! (lit. Today homework this-much much!)",
+      "side_g": "这么 is a demonstrative intensifier meaning 'so/this (much/late/etc.)' before an adjective or verb, expressing speaker surprise. Pair with 那么 for distal ('that/so'). In exclamations like 这么晚/这么多, it carries a tone of complaint or astonishment, unlike neutral 很.",
       "level": 1
     },
     {
@@ -70,6 +82,9 @@
       "side_b": "wǎn",
       "side_c": "晚",
       "side_d": "adjective",
+      "side_e": "Nǐ jīntiān qǐ de zhème wǎn!",
+      "side_f": "You got up so late today! (lit. You today rise DE this-much late!)",
+      "side_g": "晚 means 'late' as an adjective and also 'evening' in 晚上. As a complement (V+得+晚) it describes the action's timing, e.g. 来得太晚了. Its antonym is 早; 太晚了 is a fixed phrase signaling regret or reproach.",
       "level": 1
     },
     {
@@ -80,6 +95,9 @@
       "side_b": "zǎoshang",
       "side_c": "早上",
       "side_d": "time word",
+      "side_e": "Zǎoshang wǒ zuò gōngkè, ránhòu shàng kè.",
+      "side_f": "In the morning I do homework, then go to class. (lit. Morning I do homework, after-that attend class.)",
+      "side_g": "早上 is a time word (usually 5–9 a.m.) and goes before the verb without 在, e.g. 早上八点. Contrast with 上午 (later morning, ~9–12) and 早晨 (dawn, literary). No measure word needed, and it can stand alone as an adverbial.",
       "level": 1
     },
     {
@@ -90,6 +108,9 @@
       "side_b": "gōngkè",
       "side_c": "功课",
       "side_d": "noun",
+      "side_e": "Wǒ wǎnshang zuò gōngkè.",
+      "side_f": "I do homework at night. (lit. I evening do homework.)",
+      "side_g": "功课 is a countable/mass noun for schoolwork assigned at school; the verb is 做功课 ('do homework'). It overlaps with 作业 (more formal/mainland-standard) — 功课 is slightly more colloquial and common in Taiwan.",
       "level": 1
     },
     {
@@ -100,6 +121,9 @@
       "side_b": "dàjiā",
       "side_c": "大家",
       "side_d": "pronoun",
+      "side_e": "Dàjiā dōu hěn máng.",
+      "side_f": "Everybody is busy. (lit. Big-family all very busy.)",
+      "side_g": "大家 means 'everyone' and typically pairs with 都 for emphasis: 大家都… It can be a subject ('everyone') or vocative ('Hey everyone!'). Literally 'big family,' it feels inclusive and warm, unlike the more formal 所有人.",
       "level": 1
     },
     {
@@ -110,6 +134,9 @@
       "side_b": "shàng kè",
       "side_c": "上课",
       "side_d": "verb object",
+      "side_e": "Dàjiā bā diǎn kāishǐ shàng kè.",
+      "side_f": "Everybody starts class at eight. (lit. Everyone eight o'clock begin attend-class.)",
+      "side_g": "上课 is a verb-object compound ('ascend-class') meaning to attend, teach, or be in session. Because 课 is already the object, you cannot say 上课中文; use 上中文课 instead. Its opposite is 下课 ('class ends').",
       "level": 1
     },
     {
@@ -120,6 +147,9 @@
       "side_b": "kāishǐ",
       "side_c": "开始",
       "side_d": "verb or noun",
+      "side_e": "Shàng kè bā diǎn kāishǐ.",
+      "side_f": "Class begins at eight. (lit. Attend-class eight o'clock begin.)",
+      "side_g": "开始 can be a verb ('to begin') or noun ('the beginning'). As a verb it takes another verb phrase: 开始念课文 ('start reading the text'). Its opposite is 结束 ('to end'); 从…开始 is a fixed frame meaning 'starting from…'.",
       "level": 1
     },
     {
@@ -130,6 +160,9 @@
       "side_b": "niàn",
       "side_c": "念",
       "side_d": "verb",
+      "side_e": "Wǒmen xiān niàn kèwén.",
+      "side_f": "We first read the text aloud. (lit. We first read-aloud lesson-text.)",
+      "side_g": "念 specifically means reading out loud, chanting, or reciting — distinct from 看 (read silently) and 读 (read, study, both silent and aloud). 念书 idiomatically means 'to study/attend school.' Tone matters: 念 (4th tone) ≠ 年 (2nd, 'year').",
       "level": 1
     },
     {
@@ -140,6 +173,9 @@
       "side_b": "kèwén",
       "side_c": "课文",
       "side_d": "noun",
+      "side_e": "Zhège kèwén hěn nán.",
+      "side_f": "This text is very difficult. (lit. This lesson-text very difficult.)",
+      "side_g": "课文 is a compound of 课 (lesson) + 文 (writing), referring specifically to the reading passage in a textbook. Measure word is 篇 (一篇课文). Distinguish from 课本 (textbook) and 文章 (article, more general).",
       "level": 1
     },
     {
@@ -150,6 +186,9 @@
       "side_b": "lùyīn",
       "side_c": "录音",
       "side_d": "noun or verb object",
+      "side_e": "Wǒmen tīng lùyīn xuéxí.",
+      "side_f": "We listen to recordings to study. (lit. We listen recording study.)",
+      "side_g": "录音 is both a noun ('a recording') and a verb-object ('to record,' literally 'record-sound'). As V-O, it splits: 录了一个音. For the recorded file/device, use 录音 as a noun with measure words 个/段. Related: 录像 (video recording).",
       "level": 1
     },
     {
@@ -160,6 +199,9 @@
       "side_b": "xuéxí",
       "side_c": "学习",
       "side_d": "verb",
+      "side_e": "Wǒ měitiān xuéxí Zhōngwén.",
+      "side_f": "I study Chinese every day. (lit. I every-day study Chinese.)",
+      "side_g": "学习 ('study/learn') is slightly more formal than its near-synonym 学; 学 is preferred in short colloquial phrases (学中文 vs. 学习中文, both OK). 学习 can also be a noun ('studies/learning'), as in 学习很重要. It doesn't take 了 as easily as 学.",
       "level": 1
     },
     {
@@ -170,6 +212,9 @@
       "side_b": "shuài",
       "side_c": "帅",
       "side_d": "adjective",
+      "side_e": "Nǐ hěn shuài, yě hěn kù.",
+      "side_f": "You're very handsome and also very cool. (lit. You very handsome, also very cool.)",
+      "side_g": "帅 describes male attractiveness ('handsome/sharp-looking'); for women, use 漂亮 or 美. It can extend metaphorically to 'slick/stylish' actions (这球打得真帅). Colloquially, 帅哥 ('handsome guy') is a friendly address for any young man.",
       "level": 1
     },
     {
@@ -180,6 +225,9 @@
       "side_b": "kù",
       "side_c": "酷",
       "side_d": "adjective",
+      "side_e": "Zhège fāngfǎ hěn kù.",
+      "side_f": "This method is very cool. (lit. This method very cool.)",
+      "side_g": "酷 is a phonetic loan from English 'cool' and is strictly colloquial/trendy, used for things or people with an edgy, stylish vibe. Unlike 帅, it doesn't focus on looks; unlike 好, it carries attitude. Common in youth speech: 太酷了！",
       "level": 1
     }
   ]

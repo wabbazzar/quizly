@@ -11,12 +11,15 @@
       2,
       3
     ],
-    "available_sides": 4,
+    "available_sides": 7,
     "side_labels": {
       "side_a": "english",
       "side_b": "pinyin",
       "side_c": "characters",
-      "side_d": "description"
+      "side_d": "description",
+      "side_e": "example (pinyin)",
+      "side_f": "example translation",
+      "side_g": "usage notes"
     },
     "card_count": 18,
     "difficulty": "beginner",
@@ -40,6 +43,9 @@
       "side_b": "jiā",
       "side_c": "家",
       "side_d": "n",
+      "side_e": "Nǐ jiā yǒu jǐ kǒu rén?",
+      "side_f": "How many people are in your family?",
+      "side_g": "家 means both 'family' and 'home'; 回家 = go home, 家人 = family members. The set question 你家有几口人？uses 口 as the measure word for family members.",
       "level": 1
     },
     {
@@ -50,6 +56,9 @@
       "side_b": "jǐ",
       "side_c": "几",
       "side_d": "nu",
+      "side_e": "Nǐ yǒu jǐ gè gēge?",
+      "side_f": "How many older brothers do you have?",
+      "side_g": "几 asks about small numbers (usually under 10) and requires a measure word: 几个, 几口. For larger or unknown quantities use 多少 instead.",
       "level": 1
     },
     {
@@ -60,6 +69,9 @@
       "side_b": "kǒu",
       "side_c": "口",
       "side_d": "m",
+      "side_e": "Wǒ jiā yǒu wǔ kǒu rén.",
+      "side_f": "There are five people in my family.",
+      "side_g": "口 is used almost exclusively for counting family members; for people in general use 个 (几个人). Literal meaning is 'mouth', reflecting the old sense of mouths to feed.",
       "level": 1
     },
     {
@@ -70,6 +82,9 @@
       "side_b": "gēge",
       "side_c": "哥哥",
       "side_d": "n",
+      "side_e": "Wǒ gēge shì lǜshī.",
+      "side_f": "My older brother is a lawyer.",
+      "side_g": "The second 哥 is neutral tone: gē-ge. 大哥 = eldest brother, 二哥 = second older brother. In kinship terms 我哥哥 often drops the 的.",
       "level": 1
     },
     {
@@ -80,6 +95,9 @@
       "side_b": "liǎng",
       "side_c": "两",
       "side_d": "nu",
+      "side_e": "Wǒ yǒu liǎng gè mèimei.",
+      "side_f": "I have two younger sisters.",
+      "side_g": "Use 两 (not 二) before measure words for quantities of two: 两个人, 两口人. 二 is used for ordinals, phone numbers, and in compounds like 二姐.",
       "level": 1
     },
     {
@@ -90,6 +108,9 @@
       "side_b": "mèimei",
       "side_c": "妹妹",
       "side_d": "n",
+      "side_e": "Wǒ mèimei xué Yīngwén.",
+      "side_f": "My younger sister studies English.",
+      "side_g": "Second 妹 is neutral tone: mèi-mei. 大妹妹 = older of one's younger sisters, 小妹妹 = youngest sister, a distinction used in the chapter dialogue.",
       "level": 1
     },
     {
@@ -100,6 +121,9 @@
       "side_b": "hé",
       "side_c": "和",
       "side_d": "conj",
+      "side_e": "Wǒ yǒu dàjiě hé èrjiě.",
+      "side_f": "I have an eldest sister and a second sister.",
+      "side_g": "和 (hé) connects nouns, not clauses — don't use it to mean 'and then' between sentences. In mainland speech 和 is usually hé; Taiwan often pronounces it hàn.",
       "level": 1
     },
     {
@@ -110,6 +134,9 @@
       "side_b": "dàjiě",
       "side_c": "大姐",
       "side_d": "n",
+      "side_e": "Wǒ dàjiě shì lǜshī.",
+      "side_f": "My eldest sister is a lawyer.",
+      "side_g": "大 + kinship term marks the eldest: 大姐, 大哥. 大姐 can also be a polite address for an older woman roughly one's own age.",
       "level": 1
     },
     {
@@ -120,6 +147,9 @@
       "side_b": "èrjiě",
       "side_c": "二姐",
       "side_d": "n",
+      "side_e": "Wǒ èrjiě shì yīshēng.",
+      "side_f": "My second-oldest sister is a doctor.",
+      "side_g": "Ordinal 二 + kinship term ranks siblings: 二姐, 二哥, 三姐. Unlike quantity 两, ordinals always use 二.",
       "level": 1
     },
     {
@@ -130,6 +160,9 @@
       "side_b": "zuò",
       "side_c": "做",
       "side_d": "v",
+      "side_e": "Nǐ zuò shénme gōngzuò?",
+      "side_f": "What work do you do?",
+      "side_g": "做 covers 'do/make/become' — 做工作 (do a job), 做饭 (cook), 做老师 (be/become a teacher). 做什么工作？is the standard way to ask about someone's occupation.",
       "level": 1
     },
     {
@@ -140,6 +173,9 @@
       "side_b": "gōngzuò",
       "side_c": "工作",
       "side_d": "n/v",
+      "side_e": "Tā de gōngzuò hěn máng.",
+      "side_f": "Her job is very busy.",
+      "side_g": "工作 is both noun ('job') and verb ('to work'): 他在纽约工作 = he works in New York. As a noun it takes 个: 一个工作.",
       "level": 1
     },
     {
@@ -150,6 +186,9 @@
       "side_b": "lǜshī",
       "side_c": "律师",
       "side_d": "n",
+      "side_e": "Wǒ gēge yě shì lǜshī.",
+      "side_f": "My older brother is also a lawyer.",
+      "side_g": "Occupations follow 是 directly with no article: 是律师, not 是一个律师 (though 一个 is possible for emphasis). 律 = law, 师 = master/professional, a suffix shared with 老师.",
       "level": 1
     },
     {
@@ -160,6 +199,9 @@
       "side_b": "Yīngwén",
       "side_c": "英文",
       "side_d": "n",
+      "side_e": "Wǒ mèimei xué Yīngwén.",
+      "side_f": "My younger sister studies English.",
+      "side_g": "英文 emphasizes the written/literary language, while 英语 leans spoken; in practice they're largely interchangeable. Same pattern: 中文, 法文, 日文.",
       "level": 1
     },
     {
@@ -170,6 +212,9 @@
       "side_b": "dōu",
       "side_c": "都",
       "side_d": "adv",
+      "side_e": "Wǒmen dōu hěn máng.",
+      "side_f": "We are all very busy.",
+      "side_g": "都 must follow the subject it quantifies and precede the verb: 我们都是学生 (✓), not *都我们是. With negation, 都不 = none, 不都 = not all.",
       "level": 1
     },
     {
@@ -180,6 +225,9 @@
       "side_b": "dàxuéshēng",
       "side_c": "大学生",
       "side_d": "n",
+      "side_e": "Tāmen dōu shì dàxuéshēng.",
+      "side_f": "They are all college students.",
+      "side_g": "Literally 大学 + 生 ('university student'). Contrast with 中学生 (middle/high schooler) and 小学生 (elementary student); 研究生 = graduate student.",
       "level": 1
     },
     {
@@ -190,6 +238,9 @@
       "side_b": "dàxué",
       "side_c": "大学",
       "side_d": "n",
+      "side_e": "Wǒ zài Běijīng shàng dàxué.",
+      "side_f": "I attend university in Beijing.",
+      "side_g": "上大学 = attend college (enrolled); 去大学 would just mean physically going there. 在 + place + 上大学 is the set pattern heard in the dialogue.",
       "level": 1
     },
     {
@@ -200,6 +251,9 @@
       "side_b": "yīshēng",
       "side_c": "医生",
       "side_d": "n",
+      "side_e": "Wǒ èrjiě shì yīshēng.",
+      "side_f": "My second-oldest sister is a doctor.",
+      "side_g": "医生 is the everyday word; 大夫 (dàifu) is a colloquial synonym, and 医师 is more formal/written. 看医生 = see a doctor.",
       "level": 1
     }
   ]

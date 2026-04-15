@@ -11,12 +11,15 @@
       2,
       3
     ],
-    "available_sides": 4,
+    "available_sides": 7,
     "side_labels": {
       "side_a": "english",
       "side_b": "pinyin",
       "side_c": "characters",
-      "side_d": "description"
+      "side_d": "description",
+      "side_e": "example (pinyin)",
+      "side_f": "example translation",
+      "side_g": "usage notes"
     },
     "card_count": 14,
     "difficulty": "beginner",
@@ -40,6 +43,9 @@
       "side_b": "fēng",
       "side_c": "封",
       "side_d": "measure word",
+      "side_e": "Zhège xuéqī wǒ shōudào le sān fēng xìn.",
+      "side_f": "This semester I received three letters.",
+      "side_g": "封 fēng is the standard measure word for 信 (letters) and sealed items; use 一封信, not 一个信. Also measures emails/telegrams in formal contexts. Don't confuse with 风 fēng 'wind'.",
       "level": 1
     },
     {
@@ -50,6 +56,9 @@
       "side_b": "xìn",
       "side_c": "信",
       "side_d": "noun",
+      "side_e": "Wǒ zuìjìn xiě le liǎng fēng xìn gěi jiārén.",
+      "side_f": "Recently I wrote two letters to family.",
+      "side_g": "信 xìn means a physical/written letter; for email prefer 电子邮件 or 邮件. Common verbs: 写信, 收到信, 寄信. Don't confuse with 信 in 相信 (to believe) — same character, different meaning.",
       "level": 1
     },
     {
@@ -60,6 +69,9 @@
       "side_b": "zuìjìn",
       "side_c": "最近",
       "side_d": "time word",
+      "side_e": "Nǐ zuìjìn máng ma?",
+      "side_f": "Are you busy recently?",
+      "side_g": "最近 zuìjìn = 'recently / lately / these days'; covers both near past and near future ('in the coming days'). Usually placed before the subject or right after it; pairs naturally with 怎么样, 忙吗, 好吗.",
       "level": 1
     },
     {
@@ -70,6 +82,9 @@
       "side_b": "zuì",
       "side_c": "最",
       "side_d": "adverb",
+      "side_e": "Wǒ zuì xǐhuān tīng yīnyuè.",
+      "side_f": "I most like listening to music (I like music the most).",
+      "side_g": "最 zuì is the superlative adverb, placed directly before an adjective or mental verb: 最好, 最喜欢, 最大. No 'than' structure needed — absolute superlative. Contrast with 比较 (relatively) and 更 (even more).",
       "level": 1
     },
     {
@@ -80,6 +95,9 @@
       "side_b": "jìn",
       "side_c": "近",
       "side_d": "adjective",
+      "side_e": "Wǒ jiā lí xuéxiào hěn jìn.",
+      "side_f": "My home is very close to school.",
+      "side_g": "近 jìn = 'near/close' in distance; paired with 离 (A 离 B 近/远). For relationships use 亲近 or 关系近. Opposite is 远 yuǎn. Also appears in 最近 (recently) where 近 metaphorically extends to time.",
       "level": 1
     },
     {
@@ -90,6 +108,9 @@
       "side_b": "xuéqī",
       "side_c": "学期",
       "side_d": "noun",
+      "side_e": "Zhège xuéqī wǒ xué Zhōngwén hé yīnyuè.",
+      "side_f": "This semester I'm studying Chinese and music.",
+      "side_g": "学期 xuéqī = academic term/semester; 这个学期 / 上个学期 / 下个学期 for this/last/next. Related: 学年 (school year), 寒假/暑假 (winter/summer break).",
       "level": 1
     },
     {
@@ -100,6 +121,9 @@
       "side_b": "chúle...yǐwài",
       "side_c": "除了...以外",
       "side_d": "conjunction",
+      "side_e": "Chúle xué Zhōngwén yǐwài, wǒ hái xué yīnyuè.",
+      "side_f": "Besides studying Chinese, I also study music. (Apart from studying Chinese, further…)",
+      "side_g": "除了…以外 pairs with 还/也 for inclusion ('besides X, also Y') and with 都 for exclusion ('except X, all…'). 以外 is often dropped in speech: 除了中文，我还学音乐. Keep the second clause's adverb — 还/也/都 is obligatory.",
       "level": 1
     },
     {
@@ -110,6 +134,9 @@
       "side_b": "zhuānyè",
       "side_c": "专业",
       "side_d": "noun",
+      "side_e": "Nǐ de zhuānyè shì shénme?",
+      "side_f": "What is your major?",
+      "side_g": "专业 zhuānyè is the college 'major/specialty'; for 'profession/job' use 职业 zhíyè. Can also mean 'professional' as an adjective: 很专业 (very professional). Ask majors with 你学什么专业？or 你的专业是什么？",
       "level": 1
     },
     {
@@ -120,6 +147,9 @@
       "side_b": "huì",
       "side_c": "会",
       "side_d": "modal verb",
+      "side_e": "Wǒ huì shuō yìdiǎn Zhōngwén.",
+      "side_f": "I can speak a little Chinese.",
+      "side_g": "会 huì expresses learned ability (skills acquired through study): 会说中文, 会开车, 会弹钢琴. Also marks future likelihood: 明天会下雨. Negate with 不会. Contrast with 能 (capacity/permission) and 可以 (allowed).",
       "level": 1
     },
     {
@@ -130,6 +160,9 @@
       "side_b": "hòulái",
       "side_c": "后来",
       "side_d": "time word",
+      "side_e": "Hòulái wǒ qù le yīnyuèhuì.",
+      "side_f": "Later I went to the concert.",
+      "side_g": "后来 hòulái is narrative 'later/afterwards' and only describes past sequences — do NOT use for future. For future 'later' use 以后 yǐhòu. Often starts a sentence to continue a story.",
       "level": 1
     },
     {
@@ -140,6 +173,9 @@
       "side_b": "yīnyuèhuì",
       "side_c": "音乐会",
       "side_d": "noun",
+      "side_e": "Wǒ xīwàng néng qù hěn duō yīnyuèhuì.",
+      "side_f": "I hope I can go to many concerts.",
+      "side_g": "音乐会 yīnyuèhuì = concert (classical/formal); pop/rock concerts are more often 演唱会 yǎnchànghuì. 开音乐会 = to hold a concert; 听音乐会 / 去音乐会 = to attend one.",
       "level": 1
     },
     {
@@ -150,6 +186,9 @@
       "side_b": "xīwàng",
       "side_c": "希望",
       "side_d": "verb or noun",
+      "side_e": "Wǒ xīwàng néng yòng Zhōngwén xiě xìn.",
+      "side_f": "I hope I can write letters in Chinese.",
+      "side_g": "希望 xīwàng works as verb ('to hope') and noun ('hope'). Followed by a clause, not just a noun: 希望你来 (not 希望你). Contrast with 想 (want/think), 愿意 (willing), 盼望 (long for, stronger). Very common with 能 or 可以 inside the hoped clause.",
       "level": 1
     },
     {
@@ -160,6 +199,9 @@
       "side_b": "néng",
       "side_c": "能",
       "side_d": "modal verb",
+      "side_e": "Wǒ xīwàng hòulái néng xué tán gāngqín.",
+      "side_f": "I hope I can learn piano later.",
+      "side_g": "能 néng expresses capability (physical/circumstantial) or permission: 我今天能去 (I'm able to go today). Contrast with 会 (learned skill) — 我会开车 vs 我今天不能开车. Negate with 不能. Often paired with 希望/可以.",
       "level": 1
     },
     {
@@ -170,6 +212,9 @@
       "side_b": "yòng",
       "side_c": "用",
       "side_d": "verb",
+      "side_e": "Dàjiā dōu yòng Zhōngwén liáotiān.",
+      "side_f": "Everyone chats using Chinese.",
+      "side_g": "用 yòng = 'to use / with / by means of'; functions as a coverb introducing the instrument: 用中文写信, 用筷子吃饭. Also noun 'use/usefulness': 有用 / 没用. Don't confuse with 要用 (need to use).",
       "level": 1
     },
     {
@@ -180,6 +225,9 @@
       "side_b": "xiào",
       "side_c": "笑",
       "side_d": "verb",
+      "side_e": "Bié xiào wǒ, wǒ de Zhōngwén bù hǎo.",
+      "side_f": "Don't laugh at me, my Chinese is not good.",
+      "side_g": "笑 xiào covers both 'to smile' and 'to laugh'; 笑 + object = 'laugh at/mock': 别笑我. Compounds: 笑话 (joke), 开玩笑 (to joke), 微笑 (to smile). 笑着 + verb = 'doing V while smiling' (e.g., 笑着说).",
       "level": 1
     },
     {
@@ -190,6 +238,9 @@
       "side_b": "zhù",
       "side_c": "祝",
       "side_d": "verb",
+      "side_e": "Zhù nǐ zhège xuéqī shùnlì!",
+      "side_f": "I wish you a smooth semester!",
+      "side_g": "祝 zhù opens set well-wishes and is followed directly by the recipient + wish: 祝你生日快乐, 祝你学习顺利, 祝你身体健康. Slightly formal/warm; in very close speech people may drop 祝 and just say 生日快乐. Distinct from 住 zhù 'to live'.",
       "level": 1
     }
   ]

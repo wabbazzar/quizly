@@ -11,12 +11,15 @@
       2,
       3
     ],
-    "available_sides": 4,
+    "available_sides": 7,
     "side_labels": {
       "side_a": "english",
       "side_b": "pinyin",
       "side_c": "characters",
-      "side_d": "description"
+      "side_d": "description",
+      "side_e": "example (pinyin)",
+      "side_f": "example translation",
+      "side_g": "usage notes"
     },
     "card_count": 15,
     "difficulty": "beginner",
@@ -40,6 +43,9 @@
       "side_b": "gěi",
       "side_c": "给",
       "side_d": "preposition",
+      "side_e": "Wǒ gěi nǐ dǎ diànhuà.",
+      "side_f": "I'll call you. (lit. I give you hit telephone.)",
+      "side_g": "给 is a versatile preposition meaning 'to/for' introducing a recipient; it also functions as a verb meaning 'to give'. In phone/message contexts 给 + person + 打电话/发短信 is the standard pattern. Distinct from 对 (duì, 'toward') which is used for speech directed at someone but not for benefactive actions.",
       "level": 1
     },
     {
@@ -50,6 +56,9 @@
       "side_b": "dǎ diànhuà",
       "side_c": "打电话",
       "side_d": "verb object",
+      "side_e": "Nǐ wǎnshang gěi wǒ dǎ diànhuà, hǎo ma?",
+      "side_f": "Call me tonight, OK? (lit. hit telephone)",
+      "side_g": "打电话 is a verb-object compound; the object 电话 can be split from 打 by duration/aspect markers: 打了一个电话 ('made a phone call'). Use 给 + person before 打电话 to mark the recipient. Colloquial variants include 来电话 (incoming) and 回电话 (call back).",
       "level": 1
     },
     {
@@ -60,6 +69,9 @@
       "side_b": "wéi/wèi",
       "side_c": "喂",
       "side_d": "interjection",
+      "side_e": "Wéi, nín hǎo, qǐng wèn nín zhǎo nǎ wèi?",
+      "side_f": "Hello, who are you looking for? (lit. Hello, you good, please ask you seek which [polite-MW]?)",
+      "side_g": "喂 is used almost exclusively to open phone calls or to get someone's attention. Second tone (wéi) is the polite/standard telephone greeting; fourth tone (wèi) is more abrupt, like 'Hey!' It is not used face-to-face as a greeting — use 你好 instead.",
       "level": 1
     },
     {
@@ -70,6 +82,9 @@
       "side_b": "zài",
       "side_c": "在",
       "side_d": "verb",
+      "side_e": "Lǎoshī zài ma? — Tā bú zài.",
+      "side_f": "Is the teacher in? — She's not in.",
+      "side_g": "在 has three uses: (1) main verb 'to be at/present' (他在家); (2) preposition before a location (在学校学习); (3) progressive-aspect marker 'be -ing' (他在吃饭). On the phone, 他在吗？is the standard 'Is he there?'",
       "level": 1
     },
     {
@@ -80,6 +95,9 @@
       "side_b": "jiù",
       "side_c": "就",
       "side_d": "adverb",
+      "side_e": "Wǒ jiù shì Wáng lǎoshī.",
+      "side_f": "I'm precisely Teacher Wang (speaking). (lit. I exactly am Wang teacher.)",
+      "side_g": "就 as an emphatic adverb confirms identity or narrows focus ('exactly/none other than'), very common in phone replies: 我就是 = 'Speaking.' Distinguish from 就 meaning 'then/right away' (他就来) — same character, different functions identified by position and context.",
       "level": 1
     },
     {
@@ -90,6 +108,9 @@
       "side_b": "nín",
       "side_c": "您",
       "side_d": "pronoun",
+      "side_e": "Nín hǎo, Lǐ xiānsheng zài ma?",
+      "side_f": "Hello, is Mr. Li there? (honorific 'you')",
+      "side_g": "您 is the respectful form of 你, used for elders, customers, teachers, and strangers in formal settings. It has no plural 您们 in standard Mandarin — use 您几位 or 你们 instead. Overusing 您 with peers can sound distant or sarcastic.",
       "level": 1
     },
     {
@@ -100,6 +121,9 @@
       "side_b": "nǎ/něi",
       "side_c": "哪",
       "side_d": "question pronoun",
+      "side_e": "Nín zhǎo nǎ wèi? / Něi ge lǎoshī?",
+      "side_f": "Which one are you looking for? / Which teacher?",
+      "side_g": "哪 is the interrogative 'which', normally followed by a measure word + noun (哪本书, 哪位老师). Pronounced nǎ in careful speech; colloquially it fuses with 一 to become něi. Do not confuse with 那 (nà, 'that') — same radical, different tone and meaning.",
       "level": 1
     },
     {
@@ -110,6 +134,9 @@
       "side_b": "wèi",
       "side_c": "位",
       "side_d": "measure word",
+      "side_e": "Qǐng wèn nín shì nǎ wèi?",
+      "side_f": "May I ask who is speaking? (lit. please ask you are which polite-MW?)",
+      "side_g": "位 is the polite measure word for people, implying respect (guests, teachers, customers). Never use 位 for oneself or for children/low-status referents — use 个 instead. Phone etiquette: 哪位? = 'Who's calling?'",
       "level": 1
     },
     {
@@ -120,6 +147,9 @@
       "side_b": "xiàwǔ",
       "side_c": "下午",
       "side_d": "time word",
+      "side_e": "Jīntiān xiàwǔ nǐ yǒu shíjiān ma?",
+      "side_f": "Do you have time this afternoon?",
+      "side_g": "下午 is a time-word (时间词), so it goes before the verb, not after: 我下午开会 ('I have a meeting in the afternoon'), never 我开会下午. No preposition 在 is required before time words. Contrasts with 上午 (morning) and 中午 (noon).",
       "level": 1
     },
     {
@@ -130,6 +160,9 @@
       "side_b": "shíjiān",
       "side_c": "时间",
       "side_d": "noun",
+      "side_e": "Duìbuqǐ, wǒ xiàwǔ méiyǒu shíjiān.",
+      "side_f": "Sorry, I don't have time this afternoon.",
+      "side_g": "时间 refers to duration/availability of time, while 时候 (shíhou) refers to a moment/point in time (什么时候 = 'when'). 有时间 = 'have time (be free)'; negate with 没有时间, not 不有. Common collocations: 花时间 (spend time), 省时间 (save time).",
       "level": 1
     },
     {
@@ -140,6 +173,9 @@
       "side_b": "wèntí",
       "side_c": "问题",
       "side_d": "noun",
+      "side_e": "Wǒ yǒu yí ge wèntí xiǎng wèn nín.",
+      "side_f": "I have a question to ask you.",
+      "side_g": "问题 covers both 'question' and 'problem/issue' — context disambiguates: 回答问题 (answer a question) vs. 有问题 (there's a problem). Measure word is 个. The noun 问 (wèn, ask) inside is the verb root; compare 提问题 (pose a question) and 没问题 ('no problem').",
       "level": 1
     },
     {
@@ -150,6 +186,9 @@
       "side_b": "yào",
       "side_c": "要",
       "side_d": "modal verb",
+      "side_e": "Wǒ míngtiān yào kāi huì.",
+      "side_f": "I have a meeting tomorrow. / I'm going to have a meeting.",
+      "side_g": "要 has three overlapping senses: (1) future/intention 'be going to' (我要去); (2) desire 'want' (我要咖啡); (3) necessity 'must' (你要小心). Negate intention with 不 (不要 often means 'don't!'); negate past action with 没. Distinguish from 想 (xiǎng, would like) which is softer.",
       "level": 1
     },
     {
@@ -160,6 +199,9 @@
       "side_b": "kāi huì",
       "side_c": "开会",
       "side_d": "verb object",
+      "side_e": "Wǒ xiàwǔ yào kāi huì, méiyǒu shíjiān.",
+      "side_f": "I have a meeting this afternoon, so I have no time. (lit. open meeting)",
+      "side_g": "开会 is a separable verb-object (离合词): objects/duration go between 开 and 会 — 开了一个会, 开过几次会. Cannot take a direct object after 会; say 跟他开会 ('have a meeting with him'), not 开会他. Register is neutral — used in school and business.",
       "level": 1
     },
     {
@@ -170,6 +212,9 @@
       "side_b": "shàngwǔ",
       "side_c": "上午",
       "side_d": "time word",
+      "side_e": "Wǒ shàngwǔ yǒu kè, xiàwǔ yǒu shíjiān.",
+      "side_f": "I have class in the morning and am free in the afternoon.",
+      "side_g": "上午 refers to roughly 8am–noon; pair with 下午 (afternoon) and 晚上 (evening). As a time word, it precedes the verb without 在. Contrast with 早上 (zǎoshang, early morning, before work) — 上午 specifically denotes mid-morning working hours.",
       "level": 1
     },
     {
@@ -180,6 +225,9 @@
       "side_b": "jié",
       "side_c": "节",
       "side_d": "measure word",
+      "side_e": "Wǒ shàngwǔ yǒu sān jié kè.",
+      "side_f": "I have three class periods in the morning.",
+      "side_g": "节 is the measure word for class periods (一节课) and also segments of things in sections (一节车厢 'train car', 一节电池 'battery'). Do not use 个 for class periods. A 节课 is typically 45–50 minutes at Chinese schools.",
       "level": 1
     }
   ]

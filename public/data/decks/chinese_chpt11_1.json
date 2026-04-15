@@ -11,12 +11,15 @@
       2,
       3
     ],
-    "available_sides": 4,
+    "available_sides": 7,
     "side_labels": {
       "side_a": "english",
       "side_b": "pinyin",
       "side_c": "characters",
-      "side_d": "description"
+      "side_d": "description",
+      "side_e": "example (pinyin)",
+      "side_f": "example translation",
+      "side_g": "usage notes"
     },
     "card_count": 16,
     "difficulty": "intermediate",
@@ -42,6 +45,9 @@
       "side_b": "nàme",
       "side_c": "那么",
       "side_d": "pronoun",
+      "side_e": "Jīntiān zěnme nàme rè?",
+      "side_f": "Why is it so hot today?",
+      "side_g": "那么 modifies adjectives/verbs to mean 'so/that (much).' Often paired with 怎么 for surprise ('怎么那么...?' = 'how come so...?'). Contrast with 这么 (zhème, 'this'): 那么 points to a degree already known or assumed; 这么 points to what's right here. Also a discourse connector ('then, in that case').",
       "level": 1
     },
     {
@@ -52,6 +58,9 @@
       "side_b": "hǎowánr",
       "side_c": "好玩儿",
       "side_d": "adjective",
+      "side_e": "Zhèige gōngyuán hěn hǎowánr, wǒmen chángcháng qù.",
+      "side_f": "This park is fun; we often go. (lit. 'good-play')",
+      "side_g": "好玩儿 is colloquial Beijing speech with the 儿化 suffix; describes places, activities, toys, people. Not used for jokes/movies (use 有意思/好笑). Typical collocates: 好玩儿的地方, 真好玩儿. Southern speakers often drop the 儿.",
       "level": 1
     },
     {
@@ -62,6 +71,9 @@
       "side_b": "chū qu",
       "side_c": "出去",
       "side_d": "verb complement",
+      "side_e": "Wàitou xià yǔ, wǒ bù xiǎng chū qu.",
+      "side_f": "It's raining outside; I don't want to go out.",
+      "side_g": "出去 is a directional complement: 出 (exit) + 去 (away from speaker). Opposite of 出来. Object inserts between: 出去玩儿, 出门去, or split 出学校去. Neutral-tone 去 in spoken use. Contrast 出去 (leaving to elsewhere) with 回去 (returning).",
       "level": 1
     },
     {
@@ -72,6 +84,9 @@
       "side_b": "fēicháng",
       "side_c": "非常",
       "side_d": "adverb",
+      "side_e": "Zhèr de xiàtiān fēicháng rè.",
+      "side_f": "Summers here are extremely hot.",
+      "side_g": "非常 is a high-degree adverb, stronger than 很 and more formal than 特别. Modifies adjectives and psych-verbs (非常喜欢) but not action verbs directly. Common in written/formal speech; spoken register favors 特别 or 真. Can stack: 非常非常 for emphasis.",
       "level": 1
     },
     {
@@ -82,6 +97,9 @@
       "side_b": "zāogāo",
       "side_c": "糟糕",
       "side_d": "adjective",
+      "side_e": "Zāogāo, wǒ wàng le dài sǎn!",
+      "side_f": "How terrible — I forgot to bring an umbrella! (lit. 'rotten-cake')",
+      "side_g": "糟糕 is an exclamation of dismay or an adjective ('awful, a mess'). Functions like English 'oh no' / 'shoot.' Collocates: 真糟糕, 糟糕透了 (utterly awful), 情况很糟糕. Informal but not vulgar — safe in any casual context.",
       "level": 1
     },
     {
@@ -92,6 +110,9 @@
       "side_b": "xià yǔ",
       "side_c": "下雨",
       "side_d": "verb object",
+      "side_e": "Jīntiān yòu xià yǔ le, zhēn zāogāo.",
+      "side_f": "It's raining again today — how awful.",
+      "side_g": "下雨 is a verb-object compound: 下 (fall) + 雨 (rain). Insert modifiers between: 下大雨, 下了一场雨. Same pattern builds 下雪 (snow). Use 在下雨 for ongoing, 下雨了 for onset. Subject is usually omitted — weather is impersonal.",
       "level": 1
     },
     {
@@ -102,6 +123,9 @@
       "side_b": "yòu",
       "side_c": "又",
       "side_d": "adverb",
+      "side_e": "Zuótiān xià yǔ, jīntiān yòu xià yǔ.",
+      "side_f": "It rained yesterday, and it's raining again today.",
+      "side_g": "又 marks a repetition that has already happened or is happening — past/present. Contrast 再 (zài), which marks a repetition that will happen. So 又下雨了 (rained again, realized) vs 再下一次 (rain one more time, future). Often pairs with 了: 又...了.",
       "level": 1
     },
     {
@@ -112,6 +136,9 @@
       "side_b": "miànshì",
       "side_c": "面试",
       "side_d": "verb or noun",
+      "side_e": "Míngtiān wǒ yǒu yí ge hěn zhòngyào de miànshì.",
+      "side_f": "Tomorrow I have a very important interview.",
+      "side_g": "面试 works as both verb ('to interview') and noun ('an interview'), usually for jobs or school admissions. Collocates: 参加面试, 准备面试, 面试官 (interviewer). Contrast with 采访 (cǎifǎng, journalistic interview). Measure word: 个 or 次.",
       "level": 1
     },
     {
@@ -122,6 +149,9 @@
       "side_b": "huí qu",
       "side_c": "回去",
       "side_d": "verb complement",
+      "side_e": "Tài wǎn le, wǒ děi huí qu le.",
+      "side_f": "It's too late; I have to go back now.",
+      "side_g": "回去 = 回 (return) + 去 (away from speaker). Use 回去 when speaking from a location you're leaving; use 回来 when the destination is the speaker's location. Object inserts: 回家去, 回宿舍去. Often sentence-final with 了 to mark imminent departure.",
       "level": 1
     },
     {
@@ -132,6 +162,9 @@
       "side_b": "dōngtiān",
       "side_c": "冬天",
       "side_d": "noun",
+      "side_e": "Běijīng de dōngtiān fēicháng lěng, chángcháng xià xuě.",
+      "side_f": "Winters in Beijing are extremely cold; it often snows.",
+      "side_g": "冬天 is the everyday word for winter; the more literary 冬季 (dōngjì) appears in forecasts and formal writing. No measure word needed after 在 or 的: 在冬天, 冬天的时候. Common collocates: 过冬 (spend winter), 冬天来了.",
       "level": 1
     },
     {
@@ -142,6 +175,9 @@
       "side_b": "xiàtiān",
       "side_c": "夏天",
       "side_d": "noun",
+      "side_e": "Jiāzhōu de xiàtiān bù tài rè, hěn shūfu.",
+      "side_f": "California summers aren't too hot; they're very comfortable.",
+      "side_g": "夏天 is the colloquial word for summer, formal equivalent 夏季. Pattern 夏天的时候 = 'in summer.' Pairs naturally with 热, 热闹, 放假. Weather sentences often drop the subject: 夏天热 is a complete, idiomatic sentence.",
       "level": 1
     },
     {
@@ -152,6 +188,9 @@
       "side_b": "rè",
       "side_c": "热",
       "side_d": "adjective",
+      "side_e": "Jīntiān tài rè le, wǒ bù xiǎng chū qu.",
+      "side_f": "It's too hot today; I don't want to go out.",
+      "side_g": "热 describes temperature (天气热), food (热菜), and metaphorically popularity (热门). Predicate-adjective use does not take 是: say 今天很热, not 今天是热. Intensifiers: 很热, 非常热, 热死了 (hot to death = unbearably hot).",
       "level": 1
     },
     {
@@ -162,6 +201,9 @@
       "side_b": "chūntiān",
       "side_c": "春天",
       "side_d": "noun",
+      "side_e": "Chūntiān de shíhou, huār dōu kāi le.",
+      "side_f": "In spring, all the flowers bloom.",
+      "side_g": "春天 evokes renewal; formal 春季. Common set phrases: 春天来了 (spring has come), 春暖花开 (warm spring, blooming flowers — a chengyu). Pairs with 暖和 (nuǎnhuo, warm). Culturally tied to 春节 (Spring Festival / Lunar New Year).",
       "level": 1
     },
     {
@@ -172,6 +214,9 @@
       "side_b": "qiūtiān",
       "side_c": "秋天",
       "side_d": "noun",
+      "side_e": "Qiūtiān bù lěng yě bú rè, fēicháng shūfu.",
+      "side_f": "Autumn is neither cold nor hot; it's extremely comfortable.",
+      "side_g": "秋天 = autumn/fall; formal 秋季. Often described with 凉快 (liángkuai, cool-pleasant) and 舒服. Cultural resonances: 中秋节 (Mid-Autumn Festival), 秋高气爽 (crisp autumn air — chengyu). Pattern 不...也不... expresses balanced negation.",
       "level": 1
     },
     {
@@ -182,6 +227,9 @@
       "side_b": "shūfu",
       "side_c": "舒服",
       "side_d": "adjective",
+      "side_e": "Jiāzhōu de tiānqì hěn shūfu, bù lěng yě bú rè.",
+      "side_f": "California's weather is very comfortable — not cold, not hot.",
+      "side_g": "舒服 covers physical comfort (bed, clothes, weather) and bodily well-being: 不舒服 is the standard way to say 'feel unwell/sick.' Reduplication 舒舒服服(地) intensifies as an adverb. Contrast 舒适 (shūshì), which is more written/formal.",
       "level": 1
     },
     {
@@ -192,6 +240,9 @@
       "side_b": "Jiāzhōu",
       "side_c": "加州",
       "side_d": "proper noun",
+      "side_e": "Wǒ jiějie zhù zài Jiāzhōu, nàr de chūntiān fēicháng hǎo.",
+      "side_f": "My older sister lives in California; spring there is wonderful.",
+      "side_g": "加州 is the short form of 加利福尼亚州 (Jiālìfúníyà zhōu). 州 = U.S.-style state; Chinese provinces take 省. Used without 的 before place suffix: 加州大学, 加州人.",
       "level": 2
     }
   ]

@@ -11,12 +11,15 @@
       2,
       3
     ],
-    "available_sides": 4,
+    "available_sides": 7,
     "side_labels": {
       "side_a": "english",
       "side_b": "pinyin",
       "side_c": "characters",
-      "side_d": "description"
+      "side_d": "description",
+      "side_e": "example (pinyin)",
+      "side_f": "example translation",
+      "side_g": "usage notes"
     },
     "card_count": 22,
     "difficulty": "intermediate",
@@ -41,6 +44,9 @@
       "side_b": "shuāng",
       "side_c": "双",
       "side_d": "measure word",
+      "side_e": "wǒ xiǎng mǎi yì shuāng xīn xié.",
+      "side_f": "I want to buy a pair of new shoes.",
+      "side_g": "双 is the measure word for items that come in natural pairs (shoes 鞋, chopsticks 筷子, eyes 眼睛, hands 手). Contrast with 对 (duì), which pairs items by convention rather than nature (earrings, couples). Always use 一双 before 鞋, never 一个鞋.",
       "level": 1
     },
     {
@@ -51,6 +57,9 @@
       "side_b": "xié",
       "side_c": "鞋",
       "side_d": "noun",
+      "side_e": "zhè shuāng xié dàxiǎo hěn héshì.",
+      "side_f": "This pair of shoes fits well in size.",
+      "side_g": "鞋 is a generic noun for shoes/footwear; in speech it's usually 鞋子 (xiézi) in mainland northern usage, but 鞋 alone is fine in shop contexts. Common collocations: 穿鞋 (put on shoes), 一双鞋, 皮鞋 (leather shoes), 运动鞋 (sneakers).",
       "level": 1
     },
     {
@@ -61,6 +70,9 @@
       "side_b": "huàn",
       "side_c": "换",
       "side_d": "verb",
+      "side_e": "zhè shuāng xié tài xiǎo, néng bu néng huàn yì shuāng dà yìdiǎnr de?",
+      "side_f": "These shoes are too small — can you exchange them for a bigger pair?",
+      "side_g": "换 covers both 'exchange one for another' (换一件, 换钱) and 'change/switch' (换车 change trains, 换工作 change jobs). In shopping, 给我换一X ba is the standard polite request. Do not confuse with 还 (huán, to return).",
       "level": 1
     },
     {
@@ -71,6 +83,9 @@
       "side_b": "yíyàng",
       "side_c": "一样",
       "side_d": "adjective",
+      "side_e": "zhè jiàn chènshān hé nà jiàn yíyàng.",
+      "side_f": "This shirt is the same as that one.",
+      "side_g": "一样 functions as a stative adjective meaning 'the same/alike'. Pattern: A 跟/和 B 一样 (+ adjective) — e.g., 他跟我一样高. Negation is A 跟 B 不一样. Do not say 很一样; degree is already built in.",
       "level": 1
     },
     {
@@ -81,6 +96,9 @@
       "side_b": "suīrán",
       "side_c": "虽然",
       "side_d": "conjunction",
+      "side_e": "suīrán huā le bù shǎo qián, kěshì mǎi de dōngxi dōu hěn hǎo.",
+      "side_f": "Although we spent quite a bit, everything we bought is great.",
+      "side_g": "虽然 almost always pairs with 可是/但是/不过 in the second clause ('although…, still…'). It can appear before or after the subject: 虽然他很忙 / 他虽然很忙. Don't drop the second-clause conjunction in writing, even though English 'although' stands alone.",
       "level": 2
     },
     {
@@ -91,6 +109,9 @@
       "side_b": "dàxiǎo",
       "side_c": "大小",
       "side_d": "noun",
+      "side_e": "zhè tiáo kùzi dàxiǎo hěn héshì, chángduǎn yě gānghǎo.",
+      "side_f": "These pants fit well in size, and the length is just right.",
+      "side_g": "大小 is an antonym-compound noun (lit. 'big-small') meaning 'size,' parallel to 长短 (length) and 多少 (quantity). It's the generic noun for size; 号 (hào) is the specific numeric size. Do not say 你的大小是多少 — use 你穿多大号?",
       "level": 1
     },
     {
@@ -101,6 +122,9 @@
       "side_b": "kāfēisè",
       "side_c": "咖啡色",
       "side_d": "noun",
+      "side_e": "wǒ xiǎng kànkan kāfēisè de xié.",
+      "side_f": "I'd like to see the brown shoes.",
+      "side_g": "咖啡色 literally means 'coffee color' and is the most common word for brown in everyday speech; 棕色 (zōngsè) is more formal/written. The 色 suffix attaches to many color nouns (红色, 黑色, 蓝色) when used as standalone nominals.",
       "level": 1
     },
     {
@@ -111,6 +135,9 @@
       "side_b": "zhǒng",
       "side_c": "种",
       "side_d": "measure word",
+      "side_e": "zhè zhǒng xié zhǐ yǒu hēisè de.",
+      "side_f": "This kind of shoe only comes in black.",
+      "side_g": "种 classifies types/kinds/varieties, not individual items: 这种鞋 (this kind of shoe), 一种颜色 (one kind of color), 两种方法 (two methods). Contrast with 双 (natural pairs) and 件 (articles of clothing). 种 also appears in 种类 (category).",
       "level": 1
     },
     {
@@ -121,6 +148,9 @@
       "side_b": "hēi",
       "side_c": "黑",
       "side_d": "adjective",
+      "side_e": "hēisè de kùzi pèi lánsè de chènshān hěn hǎokàn.",
+      "side_f": "Black pants with a blue shirt look great (lit. match well).",
+      "side_g": "黑 is the monosyllabic root; as a standalone color noun use 黑色. 黑 compounds widely: 黑板 (blackboard), 黑夜 (dark night), 黑色幽默 (black humor). As an adjective before a noun, both 黑裤子 and 黑色的裤子 are acceptable, the latter slightly more formal.",
       "level": 1
     },
     {
@@ -131,6 +161,9 @@
       "side_b": "yàngzi",
       "side_c": "样子",
       "side_d": "noun",
+      "side_e": "zhè jiàn yàngzi tǐng hǎo de.",
+      "side_f": "This one's style is pretty nice.",
+      "side_g": "样子 means 'style/appearance/look' of a physical item or a person (他的样子很累 'he looks tired'). For abstract 'style/genre' use 风格 (fēnggé). Common: 样子好看, 什么样子, 老样子 (same as always). Contrast with 种类 (category) and 款式 (formal 'model/design').",
       "level": 1
     },
     {
@@ -141,6 +174,9 @@
       "side_b": "tǐng",
       "side_c": "挺",
       "side_d": "adverb",
+      "side_e": "zhè shuāng xié tǐng hǎokàn de.",
+      "side_f": "These shoes are quite nice-looking.",
+      "side_g": "挺 is a colloquial degree adverb roughly equivalent to 'pretty/quite,' softer than 很 and warmer than 比较. It typically takes the frame 挺 + adj + 的 (挺好的, 挺忙的); dropping 的 sounds truncated. Common in northern spoken Mandarin; 蛮 (mán) is the southern equivalent.",
       "level": 1
     },
     {
@@ -151,6 +187,9 @@
       "side_b": "tā",
       "side_c": "它",
       "side_d": "pronoun",
+      "side_e": "zhè jiàn chènshān hěn hǎokàn, wǒ jiù yào tā le.",
+      "side_f": "This shirt looks great — I'll take it.",
+      "side_g": "它 is the neuter third-person pronoun for things and (non-pet) animals. It is far less used than English 'it': Chinese frequently drops the object entirely when context is clear. Pronounced identically to 他/她 (tā); the distinction is purely written. Plural is 它们.",
       "level": 1
     },
     {
@@ -161,6 +200,9 @@
       "side_b": "zhèr",
       "side_c": "这儿",
       "side_d": "pronoun",
+      "side_e": "shìyījiān zài zhèr ma?",
+      "side_f": "Is the fitting room here?",
+      "side_g": "这儿 is the northern/Beijing colloquial form of 'here,' equivalent to 这里 (zhèlǐ), which is more neutral/southern/written. Use 在这儿 (here), 到这儿来 (come here), 从这儿 (from here). The 儿 suffix (erhua) is obligatory in pronunciation, not a separate syllable.",
       "level": 1
     },
     {
@@ -171,6 +213,9 @@
       "side_b": "shuā kǎ",
       "side_c": "刷卡",
       "side_d": "verb object",
+      "side_e": "wǒ kěyǐ shuā kǎ ma?",
+      "side_f": "Can I pay by card? (lit. swipe card)",
+      "side_g": "刷卡 is a verb-object compound: 刷 (swipe) + 卡 (card). It's separable — 刷了卡, 刷一下卡, 刷过卡. The umbrella term covers credit/debit cards. In modern China, 扫码 (sǎo mǎ, scan QR code) has largely replaced 刷卡; 刷卡 still works in retail and formal contexts.",
       "level": 1
     },
     {
@@ -181,6 +226,9 @@
       "side_b": "shuā",
       "side_c": "刷",
       "side_d": "verb",
+      "side_e": "qǐng nín shuā yíxià kǎ.",
+      "side_f": "Please swipe your card.",
+      "side_g": "刷 originally means 'to brush/scrub' (刷牙 brush teeth, 刷鞋 brush shoes) and by extension 'to swipe through a reader' (刷卡, 刷门禁). Internet slang extends it further: 刷微博 (scroll Weibo), 刷剧 (binge-watch), 刷屏 (flood a feed). Context disambiguates.",
       "level": 1
     },
     {
@@ -191,6 +239,9 @@
       "side_b": "kǎ",
       "side_c": "卡",
       "side_d": "noun",
+      "side_e": "nín yǒu kǎ ma?",
+      "side_f": "Do you have a card?",
+      "side_g": "卡 is a transliteration of English 'card' and functions as a free morpheme: 信用卡, 银行卡, 饭卡, 公交卡, 贺卡 (greeting card). As a full verb 卡 (qiǎ) means 'to get stuck' — a different reading. In payment contexts always kǎ.",
       "level": 1
     },
     {
@@ -201,6 +252,9 @@
       "side_b": "shōu",
       "side_c": "收",
       "side_d": "verb",
+      "side_e": "duìbuqǐ, wǒmen bù shōu xìnyòngkǎ.",
+      "side_f": "Sorry, we don't accept credit cards.",
+      "side_g": "收 means 'to accept/take in/collect' (收钱, 收信 receive a letter, 收礼物 accept a gift). In commerce 我们不收…/我们只收… is the standard formula for payment acceptance. Related compounds: 收到 (have received), 收据 (receipt), 收入 (income). Contrast with 接 (jiē, meet/receive a person) and 得到 (dédào, obtain).",
       "level": 1
     },
     {
@@ -211,6 +265,9 @@
       "side_b": "xìnyòngkǎ",
       "side_c": "信用卡",
       "side_d": "noun",
+      "side_e": "zhèr shōu xìnyòngkǎ ma?",
+      "side_f": "Do you accept credit cards here?",
+      "side_g": "信用卡 literally 'credit card' (信用 trust/credit + 卡 card). In mainland usage, 信用卡 specifically implies a revolving-credit card; debit cards are 储蓄卡 (chǔxùkǎ) or 借记卡. Questions: 收不收信用卡? / 能刷信用卡吗? / 可以用信用卡付吗?",
       "level": 1
     },
     {
@@ -221,6 +278,9 @@
       "side_b": "búguò",
       "side_c": "不过",
       "side_d": "conjunction",
+      "side_e": "zhè jiàn chènshān hěn hǎokàn, búguò yǒudiǎnr guì.",
+      "side_f": "This shirt is nice, however it's a bit pricey.",
+      "side_g": "不过 is a softer, more conversational adversative than 但是 or 可是 — roughly 'but/however/then again.' It often hedges rather than strongly contrasts. Also functions as an adverb meaning 'merely/only' (我不过是学生). Place at the start of the second clause.",
       "level": 1
     },
     {
@@ -231,6 +291,9 @@
       "side_b": "zài",
       "side_c": "再",
       "side_d": "adverb",
+      "side_e": "wǒ zài shìshi zhè jiàn.",
+      "side_f": "Let me try this one again.",
+      "side_g": "再 marks a future repetition ('again, next time'): 再试试, 再来一次, 明天再说. Contrast with 又 (yòu), which marks past/habitual repetition (他又来了 'he came again'). 再 also means 'then/and then' in sequential actions: 先吃饭再走.",
       "level": 1
     },
     {
@@ -241,6 +304,9 @@
       "side_b": "fù qián",
       "side_c": "付钱",
       "side_d": "verb object",
+      "side_e": "wǒmen zhèr zhǐ shōu fù qián, bù shōu kǎ.",
+      "side_f": "Here we only take cash payment, no cards.",
+      "side_g": "付钱 is a verb-object compound meaning 'pay money/pay cash' — separable: 付了钱, 付一点儿钱. In Chapter 9 dialogue it's used in opposition to 刷卡, so it often implies 'pay in cash' even though literally it just means 'pay.' For 'cash' specifically use 现金 (xiànjīn).",
       "level": 1
     },
     {
@@ -251,6 +317,9 @@
       "side_b": "fù",
       "side_c": "付",
       "side_d": "verb",
+      "side_e": "zhè jiàn chènshān yígòng yìbǎi kuài, wǒ lái fù.",
+      "side_f": "This shirt is 100 yuan total — I'll pay.",
+      "side_g": "付 is the formal 'pay' verb, taking objects like 付钱, 付款 (pay a bill), 付账 (settle the bill), 付房租 (pay rent). Compared to 给钱 (give money, colloquial), 付 sounds more transactional/formal.",
       "level": 1
     }
   ]

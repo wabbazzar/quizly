@@ -11,12 +11,15 @@
       2,
       3
     ],
-    "available_sides": 4,
+    "available_sides": 7,
     "side_labels": {
       "side_a": "english",
       "side_b": "pinyin",
       "side_c": "characters",
-      "side_d": "description"
+      "side_d": "description",
+      "side_e": "example (pinyin)",
+      "side_f": "example translation",
+      "side_g": "usage notes"
     },
     "card_count": 29,
     "difficulty": "beginner",
@@ -40,6 +43,9 @@
       "side_b": "jiǔyuè",
       "side_c": "九月",
       "side_d": "noun",
+      "side_e": "Wǒ jiǔyuè qù Zhōngguó.",
+      "side_f": "I'm going to China in September.",
+      "side_g": "九月 literally 'nine-month.' Months 1–12 are formed as number + 月 with no measure word. Time-when phrases like 九月 precede the verb: Subject + Time + Verb.",
       "level": 1
     },
     {
@@ -50,6 +56,9 @@
       "side_b": "yuè",
       "side_c": "月",
       "side_d": "noun",
+      "side_e": "Zhège yuè hěn máng.",
+      "side_f": "This month is very busy.",
+      "side_g": "月 means 'month' and is the building block for month names (一月–十二月). As a noun it usually takes 这个/那个 or a number+个 when counted (三个月 = 'three months'). Don't confuse 月 (month) with 月亮 (moon).",
       "level": 1
     },
     {
@@ -60,6 +69,9 @@
       "side_b": "shí'èr",
       "side_c": "十二",
       "side_d": "number",
+      "side_e": "Wǒ yǒu shí'èr ge péngyou.",
+      "side_f": "I have twelve friends.",
+      "side_g": "十二 = 10+2. Note the apostrophe in shí'èr marks a syllable break before a vowel. 二 is used in counting and compound numbers; 两 is used before measure words (两个, not 二个).",
       "level": 1
     },
     {
@@ -70,6 +82,9 @@
       "side_b": "hào",
       "side_c": "号",
       "side_d": "measure word",
+      "side_e": "Jīntiān jǐ hào?",
+      "side_f": "What's the date today? (lit. today what-number?)",
+      "side_g": "号 is the colloquial measure word for day-of-month; 日 is its more formal/written equivalent (九月十二号 vs. 九月十二日). Always pairs with a specific number: 几号 asks the date.",
       "level": 1
     },
     {
@@ -80,6 +95,9 @@
       "side_b": "xīngqī",
       "side_c": "星期",
       "side_d": "noun",
+      "side_e": "Zhège xīngqī hěn máng.",
+      "side_f": "This week is very busy.",
+      "side_g": "星期 literally 'star-period.' Synonyms 周 (zhōu) and 礼拜 (lǐbài) are interchangeable but differ in register: 星期 is neutral, 周 is written/formal, 礼拜 is colloquial.",
       "level": 1
     },
     {
@@ -90,6 +108,9 @@
       "side_b": "xīngqīsì",
       "side_c": "星期四",
       "side_d": "noun",
+      "side_e": "Xīngqīsì wǒ yǒu kè.",
+      "side_f": "On Thursday I have class.",
+      "side_g": "Weekdays = 星期 + number (星期一 Mon … 星期六 Sat), but Sunday is 星期日/星期天, never 星期七. Day-of-week phrases, like dates, go before the verb without 在.",
       "level": 1
     },
     {
@@ -100,6 +121,9 @@
       "side_b": "tiān",
       "side_c": "天",
       "side_d": "noun",
+      "side_e": "Jīntiān shì hǎo tiān.",
+      "side_f": "Today is a nice day.",
+      "side_g": "天 means 'day' as a unit of time and, unlike most nouns, acts as its own measure word: 三天 ('three days'), 每天 ('every day'). Also appears in 今天/明天/昨天. Separate meaning 'sky/heaven.'",
       "level": 1
     },
     {
@@ -110,6 +134,9 @@
       "side_b": "shēngrì",
       "side_c": "生日",
       "side_d": "noun",
+      "side_e": "Nǐ de shēngrì shì jǐ hào?",
+      "side_f": "What date is your birthday? (lit. your birthday is which number?)",
+      "side_g": "生日 = 生 ('born') + 日 ('day'). The copula 是 is required: X 的生日是…. To wish happy birthday: 生日快乐 (shēngrì kuàilè).",
       "level": 1
     },
     {
@@ -120,6 +147,9 @@
       "side_b": "jīnnián",
       "side_c": "今年",
       "side_d": "time word",
+      "side_e": "Jīnnián wǒ shíbā suì.",
+      "side_f": "This year I am eighteen years old.",
+      "side_g": "今年 ('this year') is a time word and therefore does not take 在 or 的. Parallel forms: 去年 (last year), 明年 (next year). Age statements drop 是: 我十八岁, not 我是十八岁.",
       "level": 1
     },
     {
@@ -130,6 +160,9 @@
       "side_b": "duō",
       "side_c": "多",
       "side_d": "adverb",
+      "side_e": "Nǐ duō dà?",
+      "side_f": "How old are you? (lit. you how big?)",
+      "side_g": "多 + adjective asks degree: 多大 (how old/big), 多高 (how tall), 多长 (how long). Used alone, 多 means 'many/much' (很多人 'many people'). Neutral tone 多少 asks 'how many' for larger or unknown numbers.",
       "level": 1
     },
     {
@@ -140,6 +173,9 @@
       "side_b": "dà",
       "side_c": "大",
       "side_d": "adjective",
+      "side_e": "Wǒ gēge hěn dà.",
+      "side_f": "My older brother is quite grown-up.",
+      "side_g": "大 covers both physical size and age/seniority (大哥 'eldest brother,' 多大 'how old'). For children under ~10, ask 你几岁; for teens/adults, 你多大. Opposite: 小 (xiǎo).",
       "level": 1
     },
     {
@@ -150,6 +186,9 @@
       "side_b": "shíbā",
       "side_c": "十八",
       "side_d": "number",
+      "side_e": "Tā jīnnián shíbā suì.",
+      "side_f": "She is eighteen this year.",
+      "side_g": "十八 = 10+8, a regular compound number. For ages, always pair with 岁. In Chinese culture 十八岁 marks legal adulthood and is often celebrated.",
       "level": 1
     },
     {
@@ -160,6 +199,9 @@
       "side_b": "suì",
       "side_c": "岁",
       "side_d": "noun",
+      "side_e": "Wǒ shíbā suì.",
+      "side_f": "I am eighteen years old.",
+      "side_g": "岁 is the measure word for years of age and must follow the number directly; no 是 or 年 is used. For babies under one year use 个月 ('months old'). Children often answer 几岁; adults 多大.",
       "level": 1
     },
     {
@@ -170,6 +212,9 @@
       "side_b": "chī",
       "side_c": "吃",
       "side_d": "verb",
+      "side_e": "Wǒmen qù chī fàn ba.",
+      "side_f": "Let's go eat, shall we?",
+      "side_g": "吃 is a transitive verb and almost always takes an object—use the dummy 饭 when no specific food is named (吃饭 = 'to have a meal'). Sentence-final 吧 softens to a suggestion.",
       "level": 1
     },
     {
@@ -180,6 +225,9 @@
       "side_b": "fàn",
       "side_c": "饭",
       "side_d": "noun",
+      "side_e": "Wǒ xǐhuan chī Zhōngguó fàn.",
+      "side_f": "I like to eat Chinese food.",
+      "side_g": "饭 can mean cooked rice specifically or 'meal' generally (早饭 breakfast, 午饭 lunch, 晚饭 dinner). 吃饭 is the default way to say 'eat' when no object is specified.",
       "level": 1
     },
     {
@@ -190,6 +238,9 @@
       "side_b": "zěnmeyàng",
       "side_c": "怎么样",
       "side_d": "question phrase",
+      "side_e": "Jīntiān wǎnshang chī fàn, zěnmeyàng?",
+      "side_f": "Dinner tonight — how does that sound?",
+      "side_g": "怎么样 is a tag question soliciting opinion/agreement, always at the end of a suggestion or after describing something (…, 怎么样?). Also serves as a stand-alone 'How's it going?' or 'How is X?' question.",
       "level": 1
     },
     {
@@ -200,6 +251,9 @@
       "side_b": "tài...le",
       "side_c": "太...了",
       "side_d": "adverb",
+      "side_e": "Tài hǎo le!",
+      "side_f": "That's great! (lit. too good [particle])",
+      "side_g": "太…了 is a fixed frame expressing a high degree, almost always positive ('too' as in 'wonderfully'). The final 了 is obligatory in this pattern. Without 了, 太 can sound like a complaint ('too expensive').",
       "level": 1
     },
     {
@@ -210,6 +264,9 @@
       "side_b": "xièxie",
       "side_c": "谢谢",
       "side_d": "verb",
+      "side_e": "Xièxie nǐ!",
+      "side_f": "Thank you!",
+      "side_g": "谢谢 is typically reduplicated; the second syllable is neutral tone. Can stand alone or take an object: 谢谢你/谢谢老师. Standard reply: 不客气 (bú kèqi) or 不谢.",
       "level": 1
     },
     {
@@ -220,6 +277,9 @@
       "side_b": "xǐhuan",
       "side_c": "喜欢",
       "side_d": "verb",
+      "side_e": "Wǒ xǐhuan chī Zhōngguó cài.",
+      "side_f": "I like to eat Chinese food.",
+      "side_g": "喜欢 takes either a noun (喜欢中国菜) or a verb phrase (喜欢吃). The second syllable 欢 is neutral tone. Stronger: 爱 (ài); weaker/polite: 还可以.",
       "level": 1
     },
     {
@@ -230,6 +290,9 @@
       "side_b": "cài",
       "side_c": "菜",
       "side_d": "noun",
+      "side_e": "Zhōngguó cài hěn hǎochī.",
+      "side_f": "Chinese food is very tasty.",
+      "side_g": "菜 means 'prepared dish/cuisine' (中国菜, 做菜) and also 'vegetable' in context (买菜 'buy vegetables'). Measure word for a dish: 个 or 道 (一道菜).",
       "level": 1
     },
     {
@@ -240,6 +303,9 @@
       "side_b": "háishi",
       "side_c": "还是",
       "side_d": "conjunction",
+      "side_e": "Nǐ chī fàn háishi chī miàn?",
+      "side_f": "Are you eating rice or noodles?",
+      "side_g": "还是 is used only in alternative questions ('A or B?'). For 'or' in statements ('rice or noodles are fine'), use 或者 (huòzhě). Don't add 吗 to a 还是 question.",
       "level": 1
     },
     {
@@ -250,6 +316,9 @@
       "side_b": "kěshì",
       "side_c": "可是",
       "side_d": "conjunction",
+      "side_e": "Wǒ xǐhuan, kěshì tā bù xǐhuan.",
+      "side_f": "I like it, but he doesn't.",
+      "side_g": "可是 and 但是 (dànshì) both mean 'but'; 可是 is slightly more colloquial, 但是 more neutral/written. Often paired with 虽然 (suīrán) at the start of the first clause.",
       "level": 1
     },
     {
@@ -260,6 +329,9 @@
       "side_b": "wǒmen",
       "side_c": "我们",
       "side_d": "pronoun",
+      "side_e": "Wǒmen jīntiān wǎnshang chī fàn.",
+      "side_f": "We'll have dinner tonight.",
+      "side_g": "我们 is inclusive or exclusive depending on context; 咱们 (zánmen) is explicitly inclusive ('you and I') and mainly northern. Plural marker 们 attaches only to pronouns and human nouns.",
       "level": 1
     },
     {
@@ -270,6 +342,9 @@
       "side_b": "diǎn",
       "side_c": "点",
       "side_d": "measure word",
+      "side_e": "Xiànzài qī diǎn.",
+      "side_f": "It's seven o'clock now.",
+      "side_g": "点 = 'o'clock' and follows the hour number directly: 七点. The copula 是 is usually dropped in time statements. For '2 o'clock' use 两点, never 二点.",
       "level": 1
     },
     {
@@ -280,6 +355,9 @@
       "side_b": "bàn",
       "side_c": "半",
       "side_d": "number",
+      "side_e": "Qī diǎn bàn chī fàn.",
+      "side_f": "Eat at 7:30.",
+      "side_g": "半 follows 点 to mean 'half past' (七点半 = 7:30). Quarter past = 一刻 (yí kè); quarter to = 差一刻. 半 also works as 'half a' + measure word: 半个小时 ('half an hour').",
       "level": 1
     },
     {
@@ -290,6 +368,9 @@
       "side_b": "wǎnshang",
       "side_c": "晚上",
       "side_d": "time word or noun",
+      "side_e": "Wǎnshang qī diǎn jiàn.",
+      "side_f": "See you at 7 p.m.",
+      "side_g": "晚上 covers roughly 6 p.m.–midnight; the second syllable is neutral tone. Time-of-day words (早上/上午/中午/下午/晚上) precede the clock time: 晚上七点, not 七点晚上.",
       "level": 1
     },
     {
@@ -300,6 +381,9 @@
       "side_b": "jiàn",
       "side_c": "见",
       "side_d": "verb",
+      "side_e": "Míngtiān jiàn!",
+      "side_f": "See you tomorrow!",
+      "side_g": "见 as a standalone verb means 'to meet/see (someone).' Common farewell frame: time/place + 见 (明天见, 晚上见, 学校见). Formal synonym 见面 takes no direct object (和他见面).",
       "level": 1
     },
     {
@@ -310,6 +394,9 @@
       "side_b": "zàijiàn",
       "side_c": "再见",
       "side_d": "verb",
+      "side_e": "Hǎo, zàijiàn!",
+      "side_f": "Okay, goodbye! (lit. again-see)",
+      "side_g": "再见 literally 'see again.' In tone sandhi, 不见 shifts 不 to bú (before 4th tone). Casual alternatives: 拜拜 (báibái), 回头见 (huítóu jiàn).",
       "level": 1
     },
     {
@@ -320,6 +407,9 @@
       "side_b": "Yīngguó",
       "side_c": "英国",
       "side_d": "proper noun",
+      "side_e": "Tā shì Yīngguó rén.",
+      "side_f": "He is British. (lit. he is England person)",
+      "side_g": "英国 = 英 (phonetic for 'Eng-') + 国 ('country'), a pattern used for many country names (美国, 法国, 德国). Nationality = country + 人: 英国人. Language = country + 语 or just 英语/英文.",
       "level": 1
     }
   ]

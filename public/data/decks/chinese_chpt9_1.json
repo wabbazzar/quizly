@@ -11,12 +11,15 @@
       2,
       3
     ],
-    "available_sides": 4,
+    "available_sides": 7,
     "side_labels": {
       "side_a": "english",
       "side_b": "pinyin",
       "side_c": "characters",
-      "side_d": "description"
+      "side_d": "description",
+      "side_e": "example (pinyin)",
+      "side_f": "example translation",
+      "side_g": "usage notes"
     },
     "card_count": 31,
     "difficulty": "intermediate",
@@ -41,6 +44,9 @@
       "side_b": "shāngdiàn",
       "side_c": "商店",
       "side_d": "noun",
+      "side_e": "Wǒ qù shāngdiàn mǎi dōngxi.",
+      "side_f": "I'm going to the store to buy things.",
+      "side_g": "商店 is a generic 'shop/store'; for bigger venues use 超市 (supermarket) or 百货商店 (department store). Often preceded by 去 or 在. Neutral register.",
       "level": 1
     },
     {
@@ -51,6 +57,9 @@
       "side_b": "mǎi",
       "side_c": "买",
       "side_d": "verb",
+      "side_e": "Nǐ xiǎng mǎi shénme?",
+      "side_f": "What do you want to buy?",
+      "side_g": "买 mǎi (buy) and 卖 mài (sell) differ only in tone—classic minimal pair to drill. Takes a direct object; resultative 买到 means 'manage to buy'. Neutral register.",
       "level": 1
     },
     {
@@ -61,6 +70,9 @@
       "side_b": "dōngxi",
       "side_c": "东西",
       "side_d": "noun",
+      "side_e": "Wǒ yào mǎi yìdiǎnr dōngxi.",
+      "side_f": "I want to buy a few things.",
+      "side_g": "东西 is pronounced dōngxi (neutral tone on 西) when meaning 'things'; dōngxī (full tone) means 'east–west' directions. Can also colloquially refer to people, usually pejoratively (e.g., 坏东西).",
       "level": 1
     },
     {
@@ -71,6 +83,9 @@
       "side_b": "shòuhuòyuán",
       "side_c": "售货员",
       "side_d": "noun",
+      "side_e": "Shòuhuòyuán hěn rèqíng.",
+      "side_f": "The salesclerk is very warm/attentive.",
+      "side_g": "售货员 is the textbook word; in modern usage 店员 diànyuán or 服务员 fúwùyuán are more common. 员 -yuán is a productive suffix meaning 'staff member' (e.g., 服务员, 运动员).",
       "level": 2
     },
     {
@@ -81,6 +96,9 @@
       "side_b": "yīfu",
       "side_c": "衣服",
       "side_d": "noun",
+      "side_e": "Zhè jiàn yīfu hěn hǎokàn.",
+      "side_f": "This piece of clothing is very nice-looking.",
+      "side_g": "衣服 is a mass/generic term; 服 is neutral tone here. Use 件 as measure word. Note 衣服 covers tops and general clothing, while 裤子 (pants) takes 条.",
       "level": 1
     },
     {
@@ -91,6 +109,9 @@
       "side_b": "jiàn",
       "side_c": "件",
       "side_d": "measure word",
+      "side_e": "Wǒ mǎile liǎng jiàn chènshān.",
+      "side_f": "I bought two shirts.",
+      "side_g": "件 jiàn is the measure word for upper-body garments (shirts, jackets, coats) and also abstract 'items' like 事 (matters) and 礼物 (gifts). Does not fit pants or skirts.",
       "level": 2
     },
     {
@@ -101,6 +122,9 @@
       "side_b": "chènshān",
       "side_c": "衬衫",
       "side_d": "noun",
+      "side_e": "Zhè jiàn chènshān shì hóng de.",
+      "side_f": "This shirt is red.",
+      "side_g": "衬衫 specifically means a button-up/dress shirt; 'T-shirt' is T恤 (T-xù). Pair with 件. Often precedes colors via 的 structure: 红的衬衫 or 衬衫是红的.",
       "level": 1
     },
     {
@@ -111,6 +135,9 @@
       "side_b": "yánsè",
       "side_c": "颜色",
       "side_d": "noun",
+      "side_e": "Nǐ xǐhuan shénme yánsè?",
+      "side_f": "What color do you like?",
+      "side_g": "颜色 is the abstract noun 'color'; individual colors (红, 黄, 蓝) are adjectives that typically take 色 suffix (红色, 黄色) when used as nouns. Question pattern: 什么颜色 is the go-to.",
       "level": 1
     },
     {
@@ -121,6 +148,9 @@
       "side_b": "huáng",
       "side_c": "黄",
       "side_d": "adjective",
+      "side_e": "Wǒ xǐhuan huáng chènshān.",
+      "side_f": "I like yellow shirts.",
+      "side_g": "黄 as adjective attaches directly (黄衬衫) or with 色的 (黄色的衬衫). Culturally, 黄 can connote 'smutty/obscene' in 黄色电影—rely on context. Classical association with the emperor.",
       "level": 1
     },
     {
@@ -131,6 +161,9 @@
       "side_b": "hóng",
       "side_c": "红",
       "side_d": "adjective",
+      "side_e": "Zhè tiáo kùzi tài hóng le.",
+      "side_f": "These pants are too red.",
+      "side_g": "红 is auspicious in Chinese culture (weddings, New Year) and also means 'popular/famous' (他很红 = he's famous). As attributive adjective add 的 when polysyllabic context: 红色的.",
       "level": 1
     },
     {
@@ -141,6 +174,9 @@
       "side_b": "chuān",
       "side_c": "穿",
       "side_d": "verb",
+      "side_e": "Tā jīntiān chuānle yí jiàn hóng chènshān.",
+      "side_f": "She's wearing a red shirt today.",
+      "side_g": "穿 is for items you put your body into/through: clothes, pants, shoes, socks. Accessories (hats, glasses, watches, scarves) take 戴 dài instead. Past/completed state often uses 穿着 chuānzhe.",
       "level": 1
     },
     {
@@ -151,6 +187,9 @@
       "side_b": "tiáo",
       "side_c": "条",
       "side_d": "measure word",
+      "side_e": "Wǒ xiǎng mǎi yì tiáo kùzi.",
+      "side_f": "I want to buy a pair of pants.",
+      "side_g": "条 tiáo is the measure word for long, narrow things: pants, skirts, rivers, roads, fish, dogs, ties, news (新闻). Contrasts with 件 for upper garments.",
       "level": 2
     },
     {
@@ -161,6 +200,9 @@
       "side_b": "kùzi",
       "side_c": "裤子",
       "side_d": "noun",
+      "side_e": "Zhè tiáo kùzi bù cháng yě bù duǎn.",
+      "side_f": "These pants are neither long nor short.",
+      "side_g": "裤子 always takes 条, never 件. 子 is neutral tone. Shorts = 短裤; jeans = 牛仔裤 niúzǎikù. Singular form refers to one pair.",
       "level": 1
     },
     {
@@ -171,6 +213,9 @@
       "side_b": "hào",
       "side_c": "号",
       "side_d": "noun",
+      "side_e": "Nǐ chuān duō dà hào?",
+      "side_f": "What size do you wear? (Literally: you wear how-big a size?)",
+      "side_g": "号 hào means 'number/size' and also 'date' (五月三号). For clothing sizes, ask 多大号 or 几号. Don't confuse with 大小 dàxiǎo which is abstract 'size' as a noun.",
       "level": 1
     },
     {
@@ -181,6 +226,9 @@
       "side_b": "zhōng",
       "side_c": "中",
       "side_d": "adjective",
+      "side_e": "Wǒ chuān zhōng hào.",
+      "side_f": "I wear size medium.",
+      "side_g": "中 zhōng means 'medium/middle'; sizes S/M/L are 小号/中号/大号. 中 also appears in 中国 (Middle Kingdom), 中午 (noon). When used as verb 'to hit' it's pronounced zhòng (4th tone).",
       "level": 1
     },
     {
@@ -191,6 +239,9 @@
       "side_b": "piányi",
       "side_c": "便宜",
       "side_d": "adjective",
+      "side_e": "Zhè jiàn yīfu hěn piányi.",
+      "side_f": "This piece of clothing is very cheap.",
+      "side_g": "便宜 piányi (neutral tone on 宜) is the everyday word—neutral connotation, no 'cheap quality' implication. Opposite is 贵 guì. Note 便 here is pián, not biàn (as in 方便 fāngbiàn).",
       "level": 1
     },
     {
@@ -201,6 +252,9 @@
       "side_b": "rúguǒ...de huà",
       "side_c": "如果...的话",
       "side_d": "conjunction",
+      "side_e": "Rúguǒ piányi de huà, wǒ jiù mǎi.",
+      "side_f": "If it's cheap, then I'll buy it. (Literally: if-cheap-'s speech, I then buy.)",
+      "side_g": "如果...的话 is a paired conditional frame; the 的话 tag is optional and softens the tone. The second clause usually takes 就 jiù. Colloquially 要是 yàoshi...的话 is more casual.",
       "level": 2
     },
     {
@@ -211,6 +265,9 @@
       "side_b": "chángduǎn",
       "side_c": "长短",
       "side_d": "noun",
+      "side_e": "Zhè tiáo kùzi de chángduǎn zěnmeyàng?",
+      "side_f": "How is the length of these pants? (Literally: long-short)",
+      "side_g": "长短 is an antonym-compound noun meaning 'length' (lit. long-short). Similar pattern: 大小 (size), 多少 (amount), 高矮 (height), 好坏 (quality). Abstract/measurable dimension noun.",
       "level": 2
     },
     {
@@ -221,6 +278,9 @@
       "side_b": "cháng",
       "side_c": "长",
       "side_d": "adjective",
+      "side_e": "Zhè tiáo kùzi yǒudiǎnr cháng.",
+      "side_f": "These pants are a bit long.",
+      "side_g": "长 has two readings: cháng (long, adj.) and zhǎng (to grow; elder, as in 长大, 校长). Context and grammar distinguish them. Antonym 短 duǎn.",
       "level": 1
     },
     {
@@ -231,6 +291,9 @@
       "side_b": "duǎn",
       "side_c": "短",
       "side_d": "adjective",
+      "side_e": "Chènshān tài duǎn le, bù héshì.",
+      "side_f": "The shirt is too short, it doesn't fit.",
+      "side_g": "短 duǎn is for physical length and time spans (短时间). For 'short in height' of a person, use 矮 ǎi, not 短. Pairs with 长 cháng.",
       "level": 1
     },
     {
@@ -241,6 +304,9 @@
       "side_b": "héshì",
       "side_c": "合适",
       "side_d": "adjective",
+      "side_e": "Zhè jiàn chènshān hěn héshì.",
+      "side_f": "This shirt fits/suits well.",
+      "side_g": "合适 covers both 'fits (size)' and 'suitable (appropriate)'. Adjective only—cannot take an object directly. For 'suitable for X' use 对 X 合适 or 适合 shìhé (which is a verb and CAN take objects: 适合你).",
       "level": 2
     },
     {
@@ -251,6 +317,9 @@
       "side_b": "shì",
       "side_c": "试",
       "side_d": "verb",
+      "side_e": "Wǒ kěyǐ shì yíxià ma?",
+      "side_f": "Can I try it on?",
+      "side_g": "试 often reduplicates as 试试 or combines with 一下 to soften ('give it a try'). For trying on clothes specifically, 试穿 shìchuān is the compound. Also 考试 (to test/exam) and 试试看 (try and see).",
       "level": 1
     },
     {
@@ -261,6 +330,9 @@
       "side_b": "búyòng",
       "side_c": "不用",
       "side_d": "phrase",
+      "side_e": "Búyòng shì le, wǒ zhīdào héshì.",
+      "side_f": "No need to try, I know it fits. (Literally: not-use)",
+      "side_g": "不用 = 'need not / no need to', a polite refusal equivalent to English 'don't bother'. 不 becomes bú (2nd tone) before 4th-tone 用. Compare 不必 búbì (more formal) and 别 bié (don't, prohibitive).",
       "level": 2
     },
     {
@@ -271,6 +343,9 @@
       "side_b": "yígòng",
       "side_c": "一共",
       "side_d": "adverb",
+      "side_e": "Yígòng duōshao qián?",
+      "side_f": "How much altogether?",
+      "side_g": "一共 yígòng sums up totals; often paired with 多少钱 in shopping. Similar: 总共 zǒnggòng (more formal), 一块儿 (together, spatial).",
       "level": 2
     },
     {
@@ -281,6 +356,9 @@
       "side_b": "duōshao",
       "side_c": "多少",
       "side_d": "question pronoun",
+      "side_e": "Zhè jiàn yīfu duōshao qián?",
+      "side_f": "How much is this piece of clothing?",
+      "side_g": "多少 works for any quantity (no upper bound) and for prices/phone numbers; 几 jǐ is for small expected numbers (<10) and requires a measure word. 多少 often omits the measure word.",
       "level": 1
     },
     {
@@ -291,6 +369,9 @@
       "side_b": "qián",
       "side_c": "钱",
       "side_d": "noun",
+      "side_e": "Wǒ méiyǒu qián.",
+      "side_f": "I don't have money.",
+      "side_g": "钱 is the generic noun 'money'; cash = 现金 xiànjīn, change = 零钱 língqián. Common compounds: 花钱 (spend), 赚钱/挣钱 (earn), 找钱 (give change), 付钱 (pay).",
       "level": 1
     },
     {
@@ -301,6 +382,9 @@
       "side_b": "kuài",
       "side_c": "块",
       "side_d": "measure word",
+      "side_e": "Zhè jiàn chènshān wǔshí kuài qián.",
+      "side_f": "This shirt is fifty kuai.",
+      "side_g": "块 kuài is the colloquial spoken measure word for yuan 元 (the formal/written form). Use 块 when speaking, 元 on receipts/formal. Also means 'piece/chunk' (一块蛋糕). Omit 钱 when followed by 毛/分.",
       "level": 2
     },
     {
@@ -311,6 +395,9 @@
       "side_b": "máo",
       "side_c": "毛",
       "side_d": "measure word",
+      "side_e": "Sān kuài wǔ máo qián.",
+      "side_f": "Three kuai five mao. (i.e., 3.5 yuan)",
+      "side_g": "毛 máo = 1/10 yuan (jiao 角 in formal writing). In spoken prices, when 毛 is the last unit, 钱 is optional and the 毛 itself may be dropped: 三块五 = 3.50. Also means 'fur/hair' (毛发).",
       "level": 2
     },
     {
@@ -321,6 +408,9 @@
       "side_b": "fēn",
       "side_c": "分",
       "side_d": "measure word",
+      "side_e": "Yí kuài èr máo wǔ fēn.",
+      "side_f": "One kuai, two mao, five fen. (1.25 yuan)",
+      "side_g": "分 fēn = 1/100 yuan (cent); rarely used today due to inflation. 分 also means 'minute' (时间), 'point/score' (考试), and as verb 'to divide'. Formal written equivalent for currency is 分.",
       "level": 2
     },
     {
@@ -331,6 +421,9 @@
       "side_b": "bǎi",
       "side_c": "百",
       "side_d": "number",
+      "side_e": "Yígòng yìbǎi kuài qián.",
+      "side_f": "One hundred kuai altogether.",
+      "side_g": "百 always needs 一 before it in counting (一百, not just 百). For 100+ numbers: 一百零五 (105, with 零 for the zero slot). Tone change: 一 is 4th tone before 3rd-tone 百 → yìbǎi.",
       "level": 1
     },
     {
@@ -341,6 +434,9 @@
       "side_b": "zhǎo (qián)",
       "side_c": "找(钱)",
       "side_d": "verb object",
+      "side_e": "Zhǎo nǐ wǔ kuài qián.",
+      "side_f": "(Here's) five kuai change for you. (Literally: find you five kuai money)",
+      "side_g": "找 as 'give change' is a verb-object compound where 找 literally means 'seek/find'. The same character 找 also means 'to look for' (我找你 = I'm looking for you). Pattern: 找 + [person] + [amount] 钱.",
       "level": 2
     }
   ],
