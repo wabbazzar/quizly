@@ -3,6 +3,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useDeckStore } from '@/store/deckStore';
 import { useProgressStore } from '@/store/progressStore';
 import { useCardMasteryStore } from '@/store/cardMasteryStore';
+import { useNotificationStore } from '@/store/notificationStore';
 import LearnContainer from '@/components/modes/learn/LearnContainer';
 import UnifiedSettings from '@/components/modals/UnifiedSettings';
 import { useSettingsStore } from '@/store/settingsStore';
@@ -45,7 +46,9 @@ const Learn: FC = () => {
   // unrelated mastery-store mutations.
   const getMasteredCards = useCardMasteryStore(state => state.getMasteredCards);
   const updateCardAttempt = useCardMasteryStore(state => state.updateCardAttempt);
-  const { updateSettings: updateStoredSettings } = useSettingsStore();
+  const resetDeckMastery = useCardMasteryStore(state => state.resetDeckMastery);
+  const { updateSettings: updateStoredSettings, getSettingsForMode } = useSettingsStore();
+  const { showNotification } = useNotificationStore();
 
   // Get excluded cards and struggling cards from navigation state
   const excludeCards = location.state?.excludeCards as number[] | undefined;
@@ -68,6 +71,7 @@ const Learn: FC = () => {
   });
 
   const [showSettings, setShowSettings] = useState(false);
+  const [showDeckSettings, setShowDeckSettings] = useState(false);
 
   // Save settings to localStorage whenever they change
   useEffect(() => {
@@ -180,6 +184,7 @@ const Learn: FC = () => {
         onComplete={handleComplete}
         onExit={handleExit}
         onOpenSettings={() => setShowSettings(true)}
+        onOpenMasterySettings={() => setShowDeckSettings(true)}
         deckId={deckId}
         allDeckCards={currentDeck.content}
       />
@@ -195,6 +200,36 @@ const Learn: FC = () => {
           if (deckId) {
             updateStoredSettings(deckId, 'learn', learnSettings);
           }
+        }}
+      />
+      <UnifiedSettings
+        visible={showDeckSettings}
+        onClose={() => setShowDeckSettings(false)}
+        deck={currentDeck}
+        mode="deck"
+        settings={
+          deckId
+            ? getSettingsForMode(deckId, 'deck')
+            : {
+                frontSides: [],
+                backSides: [],
+                cardsPerRound: 10,
+                enableTimer: false,
+                enableAudio: false,
+                randomize: false,
+                progressionMode: 'sequential' as const,
+              }
+        }
+        onUpdateSettings={() => {}}
+        onResetMastery={() => {
+          if (!deckId) return;
+          resetDeckMastery(deckId);
+          setShowDeckSettings(false);
+          showNotification({
+            message: 'Mastered cards reset for this deck.',
+            type: 'info',
+            duration: 2000,
+          });
         }}
       />
     </div>

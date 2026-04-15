@@ -1,5 +1,20 @@
 # Quizly Project Guidelines for Claude
 
+## CRITICAL: Always Test Before Declaring Work Finished
+
+**⚠️ MANDATORY: NEVER say a task is "done", "fixed", "complete", or "ready" until you have actually tested the change.**
+
+Testing means — for every task, at minimum:
+1. `npm run type-check` passes (no new TS errors)
+2. `npm run lint` passes (no new lint errors)
+3. `npm test` passes (or the specific affected test files pass)
+4. `npm run build` succeeds for any non-trivial source change
+5. For UI/UX changes: start the dev server (port 5173) and manually exercise the feature end-to-end in a real browser — click the button, trigger the state, confirm the modal/message/behavior actually matches the requirement. Do not assume the change works from reading the diff.
+
+If you cannot run a check (e.g. no browser available), say so explicitly instead of claiming success. "I made the edit and the types pass but did not verify in a browser" is acceptable. "Fixed!" without verification is NOT.
+
+Applies equally to bug fixes, refactors, new features, and one-line tweaks. Self-congratulation before verification has caused regressions — always verify first, then report.
+
 ## CRITICAL: Read spec.md Before Starting Any Work
 
 **⚠️ MANDATORY: Before implementing ANY feature or making ANY changes, you

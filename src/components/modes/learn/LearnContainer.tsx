@@ -18,6 +18,7 @@ interface LearnContainerProps {
   onComplete: (results: LearnSessionResults) => void;
   onExit: () => void;
   onOpenSettings: () => void;
+  onOpenMasterySettings?: () => void;
   deckId?: string;
   allDeckCards?: Card[];
 }
@@ -30,6 +31,7 @@ const LearnContainer: FC<LearnContainerProps> = memo(
     onComplete,
     onExit,
     onOpenSettings,
+    onOpenMasterySettings,
     deckId,
     allDeckCards,
   }) => {
@@ -237,9 +239,12 @@ const LearnContainer: FC<LearnContainerProps> = memo(
           />
           <div className={styles.emptyState}>
             <h2>No cards available</h2>
-            <p>Adjust your settings to include more cards.</p>
-            <button onClick={onOpenSettings} className={styles.settingsButton}>
-              Open Settings
+            <p>All cards may be mastered, or your filters exclude them. Open deck settings to reset mastery.</p>
+            <button
+              onClick={onOpenMasterySettings ?? onOpenSettings}
+              className={styles.settingsButton}
+            >
+              Open Deck Settings
             </button>
           </div>
         </div>
