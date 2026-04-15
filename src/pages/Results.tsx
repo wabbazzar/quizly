@@ -6,13 +6,16 @@ import { useDeckStore } from '@/store/deckStore';
 import { useSettingsStore } from '@/store/settingsStore';
 import ReviewCard from '@/components/cards/ReviewCard';
 import { shouldShowRepeatFreeText } from '@/utils/learnResults';
+import { UNIVERSAL_PRESETS } from '@/constants/presets';
 import styles from './Results.module.css';
+
+const ALL_SIDE_KEYS = ['side_a', 'side_b', 'side_c', 'side_d', 'side_e', 'side_f'] as const;
 
 const Results: FC = () => {
   const { deckId } = useParams<{ deckId: string }>();
   const navigate = useNavigate();
   const location = useLocation();
-  const { currentDeck, loadDeck } = useDeckStore();
+  const { currentDeck, loadDeck, setShuffleMastered } = useDeckStore();
   const { updateSettings: updateStoredSettings } = useSettingsStore();
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const [showCardModal, setShowCardModal] = useState(false);
@@ -80,16 +83,27 @@ const Results: FC = () => {
 
   const handleRepeatWithFreeText = () => {
     if (!learnSettings || !deckId) return;
-    // Flip both fields — questionTypeMix takes precedence over questionTypes
-    // in QuestionGenerator.selectQuestionType, so setting only questionTypes
-    // leaves the session in its previous ('multiple_choice') mix.
+    // Apply the full "Simple" preset so the user only has to type the second
+    // side (e.g., pinyin for Chinese decks) — not just flip question types.
+    const firstCard = currentDeck?.content?.[0];
+    const availableSides = firstCard
+      ? ALL_SIDE_KEYS.filter(k => firstCard[k] !== undefined && firstCard[k] !== null)
+      : ['side_a', 'side_b'];
+    const simplePreset = UNIVERSAL_PRESETS.find(p => p.id === 'simple');
+    const presetPatch = (simplePreset?.applyToMode('learn', availableSides) ?? {}) as Partial<LearnModeSettings>;
     const newSettings: LearnModeSettings = {
       ...learnSettings,
+      ...presetPatch,
+      // Belt-and-braces: ensure both fields flip since questionTypeMix wins
+      // over questionTypes in QuestionGenerator.selectQuestionType.
       questionTypes: ['free_text'],
       questionTypeMix: 'free_text',
     };
     localStorage.setItem('learnModeSettings', JSON.stringify(newSettings));
     updateStoredSettings(deckId, 'learn', newSettings);
+    // Mirror QuickPresets' Simple-preset side effect so earlier-mastered cards
+    // don't get shuffled back into the retry round.
+    setShuffleMastered(false);
     navigate(`/learn/${deckId}`, { state: {} });
   };
 
