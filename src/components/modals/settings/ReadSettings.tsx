@@ -25,6 +25,7 @@ const ReadSettings: FC<SectionProps> = ({ settings, onChange, deck }) => {
       if (labels.side_d) sides.d = labels.side_d;
       if (labels.side_e) sides.e = labels.side_e;
       if (labels.side_f) sides.f = labels.side_f;
+      if (labels.side_g) sides.g = labels.side_g;
 
       if (Object.keys(sides).length > 0) {
         return sides;

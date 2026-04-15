@@ -26,8 +26,8 @@ const MatchSettings: FC<SectionProps> = ({ settings, onChange, deck }) => {
   // Get available sides from the deck based on available_sides count
   const availableSidesCount = deck?.metadata?.available_sides || 2;
   const availableSides: string[] = [];
-  for (let i = 0; i < Math.min(availableSidesCount, 6); i++) {
-    const sideKeys = ['side_a', 'side_b', 'side_c', 'side_d', 'side_e', 'side_f'];
+  for (let i = 0; i < Math.min(availableSidesCount, 7); i++) {
+    const sideKeys = ['side_a', 'side_b', 'side_c', 'side_d', 'side_e', 'side_f', 'side_g'];
     availableSides.push(sideKeys[i]);
   }
 
@@ -48,6 +48,7 @@ const MatchSettings: FC<SectionProps> = ({ settings, onChange, deck }) => {
       side_d: 'Side D',
       side_e: 'Side E',
       side_f: 'Side F',
+      side_g: 'Side G',
     };
     return sideMap[side] || side.replace('side_', 'Side ').toUpperCase();
   };

@@ -26,6 +26,7 @@ const SideConfiguration: FC<ExtendedSectionProps> = ({ settings, onChange, deck,
     if (firstCard.side_d) sides.push('side_d');
     if (firstCard.side_e) sides.push('side_e');
     if (firstCard.side_f) sides.push('side_f');
+    if (firstCard.side_g) sides.push('side_g');
 
     return sides;
   }, [deck]);

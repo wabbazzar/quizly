@@ -273,6 +273,17 @@ const Deck: FC = () => {
                   <p>{selectedCard.side_f}</p>
                 </div>
               )}
+              {selectedCard.side_g && (
+                <div className={styles.modalSide}>
+                  <h4>
+                    {currentDeck?.metadata?.side_labels?.side_g
+                      ? currentDeck.metadata.side_labels.side_g.charAt(0).toUpperCase() +
+                        currentDeck.metadata.side_labels.side_g.slice(1)
+                      : 'Side G'}
+                  </h4>
+                  <p>{selectedCard.side_g}</p>
+                </div>
+              )}
             </div>
           </motion.div>
         </motion.div>

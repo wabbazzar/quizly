@@ -167,7 +167,7 @@ const Home: FC = () => {
     return groups;
   }, [visibleDecks, families]);
 
-  const SIDE_KEYS: (keyof Card)[] = ['side_a', 'side_b', 'side_c', 'side_d', 'side_e', 'side_f'];
+  const SIDE_KEYS: (keyof Card)[] = ['side_a', 'side_b', 'side_c', 'side_d', 'side_e', 'side_f', 'side_g'];
 
   const isSearching = searchQuery.trim().length > 0;
 

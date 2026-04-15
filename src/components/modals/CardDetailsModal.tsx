@@ -54,7 +54,7 @@ const CardDetailsModal: FC<CardDetailsModalProps> = ({
   const backContent = getSideContent(backSides);
 
   // Get all available sides for full detail view
-  const allSides = ['side_a', 'side_b', 'side_c', 'side_d', 'side_e', 'side_f']
+  const allSides = ['side_a', 'side_b', 'side_c', 'side_d', 'side_e', 'side_f', 'side_g']
     .filter(side => card[side as keyof Card])
     .map(side => ({
       label: side.replace('side_', 'Side ').toUpperCase(),

@@ -83,6 +83,9 @@ const validateMetadata = (metadata: unknown): DeckMetadata | null => {
           side_f: metadata.side_labels.side_f
             ? sanitizeString(metadata.side_labels.side_f)
             : undefined,
+          side_g: metadata.side_labels.side_g
+            ? sanitizeString(metadata.side_labels.side_g)
+            : undefined,
         }
       : undefined,
     card_count: typeof metadata.card_count === 'number' ? metadata.card_count : 0,
@@ -120,6 +123,7 @@ const validateCard = (card: unknown, index: number): Card | null => {
     side_d: card.side_d ? sanitizeString(card.side_d) : undefined,
     side_e: card.side_e ? sanitizeString(card.side_e) : undefined,
     side_f: card.side_f ? sanitizeString(card.side_f) : undefined,
+    side_g: card.side_g ? sanitizeString(card.side_g) : undefined,
     level: typeof card.level === 'number' ? Math.max(1, card.level) : 1,
   };
 };
@@ -129,7 +133,7 @@ const validateReadingLine = (line: unknown): ReadingLine | null => {
   if (!isRecord(line)) return null;
 
   // At least one side should be present
-  const hasContent = line.a || line.b || line.c || line.d || line.e || line.f;
+  const hasContent = line.a || line.b || line.c || line.d || line.e || line.f || line.g;
   if (!hasContent) return null;
 
   return {
@@ -139,6 +143,7 @@ const validateReadingLine = (line: unknown): ReadingLine | null => {
     d: line.d ? sanitizeString(line.d) : undefined,
     e: line.e ? sanitizeString(line.e) : undefined,
     f: line.f ? sanitizeString(line.f) : undefined,
+    g: line.g ? sanitizeString(line.g) : undefined,
     alignments: Array.isArray(line.alignments) ? line.alignments : undefined,
     wordAlignments: Array.isArray(line.wordAlignments) ? line.wordAlignments : undefined
   };
@@ -162,7 +167,7 @@ const validateReadingSides = (sides: unknown): ReadingSidesMap | null => {
   if (!isRecord(sides)) return null;
 
   const validSides: ReadingSidesMap = {};
-  const sideIds: SideId[] = ['a', 'b', 'c', 'd', 'e', 'f'];
+  const sideIds: SideId[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 
   for (const side of sideIds) {
     if (sides[side] && typeof sides[side] === 'string') {
@@ -184,14 +189,15 @@ const validateTokenization = (tokenization: unknown): ReadingTokenizationConfig 
       c: 'space',
       d: undefined,
       e: undefined,
-      f: undefined
+      f: undefined,
+      g: undefined
     },
     preservePunctuation: true,
     alignment: undefined
   };
 
   if (isRecord(tokenization.unit)) {
-    const sideIds: SideId[] = ['a', 'b', 'c', 'd', 'e', 'f'];
+    const sideIds: SideId[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
     for (const side of sideIds) {
       const unit = tokenization.unit[side];
       if (unit === 'character' || unit === 'word' || unit === 'space') {

@@ -49,6 +49,7 @@ const FlashcardsSettings: FC<FlashcardsSettingsProps> = ({
   if (deck.content[0].side_d) availableSides.push('side_d');
   if (deck.content[0].side_e) availableSides.push('side_e');
   if (deck.content[0].side_f) availableSides.push('side_f');
+  if (deck.content[0].side_g) availableSides.push('side_g');
 
   // Get side labels from deck metadata or fallback to generic labels
   const getSideLabel = (side: string): string => {

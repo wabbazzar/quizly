@@ -49,6 +49,7 @@ const LearnSettings: FC<LearnSettingsProps> = ({
   if (firstCard?.side_d) availableSides.push('side_d');
   if (firstCard?.side_e) availableSides.push('side_e');
   if (firstCard?.side_f) availableSides.push('side_f');
+  if (firstCard?.side_g) availableSides.push('side_g');
 
   // Get side labels from deck metadata or fallback to generic labels
   const getSideLabel = (side: string): string => {

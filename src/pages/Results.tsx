@@ -9,7 +9,7 @@ import { shouldShowRepeatFreeText } from '@/utils/learnResults';
 import { UNIVERSAL_PRESETS } from '@/constants/presets';
 import styles from './Results.module.css';
 
-const ALL_SIDE_KEYS = ['side_a', 'side_b', 'side_c', 'side_d', 'side_e', 'side_f'] as const;
+const ALL_SIDE_KEYS = ['side_a', 'side_b', 'side_c', 'side_d', 'side_e', 'side_f', 'side_g'] as const;
 
 const Results: FC = () => {
   const { deckId } = useParams<{ deckId: string }>();
@@ -332,6 +332,17 @@ const Results: FC = () => {
                         : 'Side F'}
                     </h4>
                     <p>{selectedCard.side_f}</p>
+                  </div>
+                )}
+                {selectedCard.side_g && (
+                  <div className={styles.modalSide}>
+                    <h4>
+                      {currentDeck?.metadata?.side_labels?.side_g
+                        ? currentDeck.metadata.side_labels.side_g.charAt(0).toUpperCase() +
+                          currentDeck.metadata.side_labels.side_g.slice(1)
+                        : 'Side G'}
+                    </h4>
+                    <p>{selectedCard.side_g}</p>
                   </div>
                 )}
               </div>

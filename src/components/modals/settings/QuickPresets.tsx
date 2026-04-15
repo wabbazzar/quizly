@@ -89,6 +89,7 @@ const getAvailableSides = (_settings: any, deck: any): string[] => {
     if (firstCard.side_d !== undefined && firstCard.side_d !== null) availableSides.push('side_d');
     if (firstCard.side_e !== undefined && firstCard.side_e !== null) availableSides.push('side_e');
     if (firstCard.side_f !== undefined && firstCard.side_f !== null) availableSides.push('side_f');
+    if (firstCard.side_g !== undefined && firstCard.side_g !== null) availableSides.push('side_g');
 
     // Return available sides if we found any
     if (availableSides.length > 0) {

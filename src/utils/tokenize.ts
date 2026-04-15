@@ -16,7 +16,8 @@ const DEFAULT_TOKENIZATION: ReadingTokenizationConfig = {
     c: 'space',
     d: undefined,
     e: undefined,
-    f: undefined
+    f: undefined,
+    g: undefined
   },
   preservePunctuation: true
 };
@@ -136,7 +137,7 @@ export const tokenizeLine = (
 
   // Fallback to original tokenization method
   const result: LineTokens = {};
-  const sideIds: SideId[] = ['a', 'b', 'c', 'd', 'e', 'f'];
+  const sideIds: SideId[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 
   for (const side of sideIds) {
     const text = line[side];

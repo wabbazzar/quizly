@@ -44,7 +44,8 @@ export const ReadLine: FC<Props> = ({
         c: 'space',
         d: undefined,
         e: undefined,
-        f: undefined
+        f: undefined,
+        g: undefined
       },
       preservePunctuation: true
     };

@@ -28,6 +28,7 @@ export interface DeckMetadata {
     side_d?: string;
     side_e?: string;
     side_f?: string;
+    side_g?: string;
   };
   card_count: number;
   difficulty: 'beginner' | 'intermediate' | 'advanced' | 'beginner_to_intermediate';
@@ -47,11 +48,12 @@ export interface Card {
   side_d?: string;
   side_e?: string;
   side_f?: string;
+  side_g?: string;
   level: number;
 }
 
 // Reading Types
-export type SideId = 'a' | 'b' | 'c' | 'd' | 'e' | 'f';
+export type SideId = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g';
 export type TokenUnit = 'character' | 'word' | 'space';
 
 export type ReadingSidesMap = Partial<Record<SideId, string>>;
@@ -77,6 +79,7 @@ export interface ReadingLine {
   d?: string;
   e?: string;
   f?: string;
+  g?: string;
   // Optional explicit token alignment entries, deferred by default
   // Example unified mapping entries: { a?: number; b?: number; c?: number }
   alignments?: Array<Partial<Record<SideId, number>>>;

@@ -63,6 +63,7 @@ function calculateRelevanceScore(card: Card, query: string): number {
     card.side_d,
     card.side_e,
     card.side_f,
+    card.side_g,
   ].filter(Boolean) as string[];
 
   fields.forEach((field, fieldIndex) => {
@@ -132,7 +133,7 @@ function analyzeCards(cards: Card[]): CardStatistics {
 
   cards.forEach(card => {
     // Calculate text length across all sides
-    const allText = [card.side_a, card.side_b, card.side_c, card.side_d, card.side_e, card.side_f]
+    const allText = [card.side_a, card.side_b, card.side_c, card.side_d, card.side_e, card.side_f, card.side_g]
       .filter(Boolean)
       .join(' ');
 
@@ -178,6 +179,7 @@ function searchCards(cards: Card[], query: string, limit = 50): SearchResult[] {
         { name: 'side_d', text: card.side_d },
         { name: 'side_e', text: card.side_e },
         { name: 'side_f', text: card.side_f },
+        { name: 'side_g', text: card.side_g },
       ];
 
       fields.forEach(field => {

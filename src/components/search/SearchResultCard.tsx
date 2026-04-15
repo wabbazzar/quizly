@@ -2,8 +2,8 @@ import { FC, memo, KeyboardEvent } from 'react';
 import { Card } from '@/types';
 import styles from './SearchResultCard.module.css';
 
-const SIDE_KEYS = ['side_a', 'side_b', 'side_c', 'side_d', 'side_e', 'side_f'] as const;
-const DEFAULT_LABELS = ['Side A', 'Side B', 'Side C', 'Side D', 'Side E', 'Side F'];
+const SIDE_KEYS = ['side_a', 'side_b', 'side_c', 'side_d', 'side_e', 'side_f', 'side_g'] as const;
+const DEFAULT_LABELS = ['Side A', 'Side B', 'Side C', 'Side D', 'Side E', 'Side F', 'Side G'];
 
 interface SearchResultCardProps {
   card: Card;
