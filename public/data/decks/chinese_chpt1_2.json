@@ -11,12 +11,15 @@
       2,
       3
     ],
-    "available_sides": 4,
+    "available_sides": 7,
     "side_labels": {
       "side_a": "english",
       "side_b": "pinyin",
       "side_c": "characters",
-      "side_d": "description"
+      "side_d": "description",
+      "side_e": "example (pinyin)",
+      "side_f": "example translation",
+      "side_g": "usage notes"
     },
     "card_count": 11,
     "difficulty": "beginner",
@@ -40,6 +43,9 @@
       "side_b": "shì",
       "side_c": "是",
       "side_d": "v",
+      "side_e": "Wǒ shì xuésheng, wǒ bú shì lǎoshī.",
+      "side_f": "I am a student; I am not a teacher.",
+      "side_g": "是 (shì) is the copula linking two nouns: A 是 B = 'A is B' (identity/equation), as in 我是学生 and 你是老师吗？Negate only with 不是 (never 很是/没是): 我不是老师。Do not use 是 before adjectives — say 北京很大, not 北京是大; 是 is reserved for noun-to-noun identity, not general 'to be.'",
       "level": 1
     },
     {
@@ -50,6 +56,9 @@
       "side_b": "lǎoshī",
       "side_c": "老师",
       "side_d": "n",
+      "side_e": "Nǐ shì lǎoshī ma?",
+      "side_f": "Are you a teacher?",
+      "side_g": "老师 (lǎoshī) is the respectful term for 'teacher' and is commonly used as a title after a surname, e.g., 王老师 (Wáng lǎoshī, 'Teacher Wang'). It has no plural marker and applies to instructors at all education levels, from kindergarten through university.",
       "level": 1
     },
     {
@@ -60,6 +69,9 @@
       "side_b": "ma",
       "side_c": "吗",
       "side_d": "qp",
+      "side_e": "Nǐ shì lǎoshī ma?",
+      "side_f": "Are you a teacher? (lit. 'You are teacher [Q]?')",
+      "side_g": "吗 (ma) is a sentence-final particle in neutral tone that turns any declarative statement into a yes/no question without changing word order. Unlike 什么 (shénme), which forms content questions asking 'what,' 吗 only asks for confirmation or denial. It also contrasts with 呢 (ne), which raises a contextual follow-up question ('and you?') rather than a polar one.",
       "level": 1
     },
     {
@@ -70,6 +82,9 @@
       "side_b": "bù",
       "side_c": "不",
       "side_d": "adv",
+      "side_e": "Wǒ bú shì lǎoshī.",
+      "side_f": "I am not a teacher.",
+      "side_g": "不 (bù) negates verbs and adjectives and is placed directly before the word it negates (for past actions or 'not have,' use 没 méi instead). Tone sandhi: 不 changes from bù to bú when followed by a 4th-tone syllable, so 不是 is pronounced bú shì, not bù shì. Before 1st, 2nd, or 3rd tones it stays bù.",
       "level": 1
     },
     {
@@ -80,6 +95,9 @@
       "side_b": "xuésheng",
       "side_c": "学生",
       "side_d": "n",
+      "side_e": "Wǒ shì xuésheng, nǐ shì lǎoshī ma?",
+      "side_f": "I am a student; are you a teacher?",
+      "side_g": "学生 (xuésheng) applies to any level of learner — elementary, high school, or university — and pairs naturally with 老师 (teacher) in classroom introductions. Literally 'study-life/person' (学 = to study, 生 = life/person), a pattern seen in many role words. Note the neutral tone on -sheng in the compound (xuésheng, not xuéshēng).",
       "level": 1
     },
     {
@@ -90,6 +108,9 @@
       "side_b": "yě",
       "side_c": "也",
       "side_d": "adv",
+      "side_e": "Wǒ yě shì xuésheng.",
+      "side_f": "I am also a student.",
+      "side_g": "也 is an adverb meaning 'also/too' and must be placed directly before the verb, never after the subject like English 'too' at the end of a sentence. It very commonly pairs with 是 in the pattern 'Subject + 也 + 是 + Noun' to say 'X is also...'. Note that 也 cannot stand alone at the end of a sentence.",
       "level": 1
     },
     {
@@ -100,6 +121,9 @@
       "side_b": "rén",
       "side_c": "人",
       "side_d": "n",
+      "side_e": "Nǐ shì shénme rén?",
+      "side_f": "What nationality are you? (lit. 'You are what person?')",
+      "side_g": "人 (rén) means 'person' or 'people' and is one of the most productive nouns in Chinese: attach it after a country name to form a nationality, e.g. 中国人 (Chinese person) or 美国人 (American). Chinese nouns do not inflect for number, so 人 serves as both 'person' and 'people' — context or a measure word/number tells you how many.",
       "level": 1
     },
     {
@@ -110,6 +134,9 @@
       "side_b": "Zhōngguó",
       "side_c": "中国",
       "side_d": "pn",
+      "side_e": "Wǒ shì Zhōngguó rén.",
+      "side_f": "I am Chinese. (lit. 'I am Middle-Kingdom person.')",
+      "side_g": "中国 literally means 'Middle Kingdom' (中 zhōng = middle/center, 国 guó = country), reflecting the historical self-conception of China as the central realm. Combine with 人 to form 中国人 (Zhōngguórén), 'Chinese person' — the same 'place + 人' pattern used for any nationality. As a proper noun, Zhōngguó is capitalized in pinyin.",
       "level": 1
     },
     {
@@ -120,6 +147,9 @@
       "side_b": "Běijīng",
       "side_c": "北京",
       "side_d": "pn",
+      "side_e": "Wǒ shì Běijīng rén.",
+      "side_f": "I am a Beijinger. (lit. 'Northern Capital person.')",
+      "side_g": "北京 literally means 'Northern Capital' (北 = north, 京 = capital) and is the capital of 中国. The pattern [city]+人 states where someone is from, so 我是北京人 means 'I'm from Beijing.' Swap in any city to say your own hometown (e.g., 我是上海人).",
       "level": 1
     },
     {
@@ -130,6 +160,9 @@
       "side_b": "Měiguó",
       "side_c": "美国",
       "side_d": "pn",
+      "side_e": "Wǒ shì Měiguó rén.",
+      "side_f": "I am American. (lit. 'I am Beautiful-Country person.')",
+      "side_g": "美国 (Měiguó) combines 美 'beautiful' + 国 'country' as a phonetic-semantic rendering of 'America' (the 'mei' sound approximates 'A-me-rica'). Add 人 (rén, 'person') to form 美国人 (Měiguó rén), 'American,' exactly parallel to 中国 → 中国人. This country + 人 pattern works for nationalities across the board.",
       "level": 1
     },
     {
@@ -140,6 +173,9 @@
       "side_b": "Niǔyuē",
       "side_c": "纽约",
       "side_d": "pn",
+      "side_e": "Wǒ shì Niǔyuē rén.",
+      "side_f": "I am from New York.",
+      "side_g": "Niǔyuē is the phonetic transliteration of 'New York': 纽 (niǔ) approximates 'New' and 约 (yuē) approximates 'York.' The [city]+人 pattern means 'a person from [city],' so 纽约人 = 'New Yorker.' New York is a major city in 美国.",
       "level": 1
     }
   ]
