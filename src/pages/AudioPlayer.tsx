@@ -80,13 +80,23 @@ const AudioPlayer: FC = () => {
     const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
     const handleDurationChange = () => setDuration(audio.duration || 0);
     const handleEnded = () => {
-      // Set flag to prevent pause event from overriding isPlaying
-      isTransitioningRef.current = true;
-      nextTrack();
-      // Clear flag after a short delay to allow state updates
-      setTimeout(() => {
-        isTransitioningRef.current = false;
-      }, 100);
+      // Auto-advance to next track on natural end. Read fresh state from the
+      // store (not the closed-over values) to handle the end-of-playlist edge
+      // case correctly.
+      const { tracks, currentTrackIndex } = useAudioPlayerStore.getState();
+      if (currentTrackIndex < tracks.length - 1) {
+        // Set flag to prevent the browser's pause event (fired alongside
+        // ended) from flipping isPlaying to false before nextTrack() sets it
+        // back to true.
+        isTransitioningRef.current = true;
+        nextTrack();
+        setTimeout(() => {
+          isTransitioningRef.current = false;
+        }, 100);
+      } else {
+        // End of playlist: stop cleanly.
+        setIsPlaying(false);
+      }
     };
     const handlePlay = () => setIsPlaying(true);
     const handlePause = () => {
@@ -160,10 +170,17 @@ const AudioPlayer: FC = () => {
     }
   }, [currentTrackIndex]);
 
-  // Update playback rate when it changes
+  // Update playback rate when it changes. Preserve currentTime defensively:
+  // some browsers (notably older iOS Safari) briefly reset currentTime when
+  // playbackRate is assigned. Restoring it guarantees the track keeps playing
+  // in place instead of jumping back to the start.
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.playbackRate = playbackRate / 100;
+    const audio = audioRef.current;
+    if (!audio) return;
+    const savedTime = audio.currentTime;
+    audio.playbackRate = playbackRate / 100;
+    if (Number.isFinite(savedTime) && audio.currentTime !== savedTime) {
+      audio.currentTime = savedTime;
     }
   }, [playbackRate]);
 
