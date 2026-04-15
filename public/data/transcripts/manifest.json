@@ -49,20 +49,6 @@
       "audioFile": "chinese_chpt11_1_phrases.mp3"
     },
     {
-      "id": "chinese_chpt11_2_dialogue",
-      "deckId": "chinese_chpt11_2",
-      "type": "dialogue",
-      "filename": "chinese_chpt11_2_dialogue.txt",
-      "displayName": "Dialogue"
-    },
-    {
-      "id": "chinese_chpt11_2_phrases",
-      "deckId": "chinese_chpt11_2",
-      "type": "phrases",
-      "filename": "chinese_chpt11_2_phrases.txt",
-      "displayName": "Phrases"
-    },
-    {
       "id": "chinese_chpt12_1_dialogue",
       "deckId": "chinese_chpt12_1",
       "type": "dialogue",
