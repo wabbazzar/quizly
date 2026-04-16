@@ -3,7 +3,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-light) 100%);
+  /* Use the app's standard page background (matches Home, Deck, and Learn's
+     SessionComplete). The old bright-blue gradient clashed with the rest of
+     the app and was blinding in dark mode. */
+  background: var(--bg-secondary);
   padding: var(--space-4);
 }
 
@@ -13,12 +16,13 @@
 }
 
 .resultsContainer {
-  background: var(--neutral-white);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: var(--space-5);
   max-width: 500px;
   width: 100%;
-  box-shadow: var(--shadow-2xl);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
 }
 
 /* Header: title + accuracy side by side */
@@ -32,7 +36,7 @@
 .title {
   font-size: var(--text-xl);
   font-weight: var(--font-bold);
-  color: var(--neutral-gray-800);
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -49,7 +53,7 @@
   justify-content: center;
   gap: var(--space-2);
   font-size: var(--text-sm);
-  color: var(--neutral-gray-600);
+  color: var(--text-secondary);
   margin-bottom: var(--space-3);
 }
 
@@ -57,7 +61,7 @@
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: var(--neutral-gray-400);
+  background: var(--text-tertiary);
   flex-shrink: 0;
 }
 
@@ -91,7 +95,7 @@
 
 .primaryButton {
   background: var(--primary-main);
-  color: var(--neutral-white);
+  color: var(--text-primary-on-dark);
 }
 
 .primaryButton:hover {
@@ -99,23 +103,23 @@
 }
 
 .secondaryButton {
-  background: var(--neutral-gray-200);
-  color: var(--neutral-gray-800);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
 }
 
 .secondaryButton:hover {
-  background: var(--neutral-gray-300);
+  background: var(--border-color);
 }
 
 .tertiaryButton {
   background: transparent;
-  color: var(--neutral-gray-600);
-  border: 2px solid var(--neutral-gray-300);
+  color: var(--text-secondary);
+  border: 2px solid var(--border-color);
 }
 
 .tertiaryButton:hover {
-  background: var(--neutral-gray-100);
-  border-color: var(--neutral-gray-400);
+  background: var(--bg-secondary);
+  border-color: var(--text-tertiary);
 }
 
 /* Mobile Responsive */
@@ -129,13 +133,13 @@
 .missedCardsSection {
   margin-top: var(--space-8);
   padding-top: var(--space-8);
-  border-top: 2px solid var(--neutral-gray-200);
+  border-top: 2px solid var(--border-color);
 }
 
 .missedCardsTitle {
   font-size: var(--text-xl);
   font-weight: var(--font-semibold);
-  color: var(--neutral-gray-800);
+  color: var(--text-primary);
   margin-bottom: var(--space-4);
   text-align: center;
 }
@@ -155,17 +159,17 @@
 }
 
 .missedCardsGrid::-webkit-scrollbar-track {
-  background: var(--neutral-gray-100);
+  background: var(--bg-secondary);
   border-radius: var(--radius-sm);
 }
 
 .missedCardsGrid::-webkit-scrollbar-thumb {
-  background: var(--neutral-gray-400);
+  background: var(--text-tertiary);
   border-radius: var(--radius-sm);
 }
 
 .missedCardsGrid::-webkit-scrollbar-thumb:hover {
-  background: var(--neutral-gray-500);
+  background: var(--text-secondary);
 }
 
 /* Mobile adjustments for missed cards */
@@ -197,7 +201,8 @@
 }
 
 .modalContent {
-  background: var(--neutral-white);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
   padding: var(--space-6);
   max-width: 600px;
@@ -215,7 +220,7 @@
   background: none;
   border: none;
   font-size: var(--text-3xl);
-  color: var(--neutral-gray-500);
+  color: var(--text-tertiary);
   cursor: pointer;
   width: 40px;
   height: 40px;
@@ -227,14 +232,14 @@
 }
 
 .closeButton:hover {
-  background: var(--neutral-gray-100);
-  color: var(--neutral-gray-700);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 .modalTitle {
   font-size: var(--text-2xl);
   font-weight: 600;
-  color: var(--neutral-gray-800);
+  color: var(--text-primary);
   margin-bottom: var(--space-6);
 }
 
@@ -246,15 +251,15 @@
 
 .modalSide {
   padding: var(--space-4);
-  background: var(--neutral-gray-50);
+  background: var(--bg-secondary);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--neutral-gray-200);
+  border: 1px solid var(--border-color);
 }
 
 .modalSide h4 {
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--neutral-gray-600);
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: var(--space-2);
@@ -262,7 +267,7 @@
 
 .modalSide p {
   font-size: var(--text-lg);
-  color: var(--neutral-gray-800);
+  color: var(--text-primary);
   line-height: 1.5;
   margin: 0;
 }
