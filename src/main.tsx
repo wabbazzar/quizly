@@ -5,22 +5,27 @@ import './styles/global.css';
 import './styles/theme.css';
 import { registerSW } from 'virtual:pwa-register';
 
-// Register service worker for PWA support with Vite PWA plugin
-const updateSW = registerSW({
+// Register service worker for PWA support with Vite PWA plugin.
+//
+// IMPORTANT: do NOT call updateSW(true) anywhere in the success path and do
+// NOT show a confirm() that can bounce the page. The previous version used
+// registerType:'autoUpdate' which, via workbox-window, calls
+// window.location.reload() the moment a new SW activates. That is what
+// produced the "page loads, then reloads after 1-2s" symptom the user sees
+// on every visit after a deploy. With registerType:'prompt' and skipWaiting
+// disabled in the workbox config, the new SW installs silently and waits;
+// it only takes effect on the next natural navigation, never mid-session.
+registerSW({
   immediate: true,
   onNeedRefresh() {
-    // Show a prompt to the user to refresh for new content
-    if (confirm('New content available! Click OK to refresh.')) {
-      updateSW(true);
-    }
+    // Intentionally a no-op: new content is cached, but we don't interrupt
+    // the user. They will get the update on their next full page load.
   },
   onOfflineReady() {
     // App is ready to work offline
   },
   onRegisteredSW(_swScriptUrl, registration) {
-    // Service Worker registered
-
-    // Check for updates periodically
+    // Check for updates periodically, but never force a reload here.
     if (registration) {
       setInterval(
         () => {

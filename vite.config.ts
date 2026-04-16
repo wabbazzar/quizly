@@ -10,7 +10,13 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'autoUpdate',
+      // 'prompt' instead of 'autoUpdate' because autoUpdate calls
+      // window.location.reload() inside workbox-window whenever a new SW
+      // activates — which produces a visible "page loads, then reloads 1-2s
+      // later" every time the build changes. With 'prompt' + no-op
+      // onNeedRefresh, the new SW installs silently and takes effect on the
+      // next natural navigation, never mid-session.
+      registerType: 'prompt',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
       base: '/quizly/',
       manifest: {
@@ -51,6 +57,13 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
         navigateFallback: null, // Disable the default navigation fallback
+        // Let the new SW sit in "waiting" until every tab of the app is
+        // closed. Without this, generateSW injects self.skipWaiting() +
+        // clientsClaim() into sw.js, which forces a mid-session takeover and
+        // (in combination with autoUpdate registration) causes a forced
+        // reload. We want updates to be strictly non-disruptive.
+        skipWaiting: false,
+        clientsClaim: false,
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
