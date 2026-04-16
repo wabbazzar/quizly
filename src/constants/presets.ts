@@ -1,5 +1,19 @@
 import { PresetDefinition } from '@/components/modals/UnifiedSettings';
 
+// For Learn mode we only drill the "core recall" sides and deliberately omit
+// the trailing reference/context sides (description, example, usage notes,
+// etc.). Those are useful for flashcards and reading but noisy when being
+// quizzed. Rule: drop the last three sides, but always keep at least two.
+// Example: [a, b, c, d, e, f, g] -> [a, b, c, d]
+//          [a, b, c, d, e, f]    -> [a, b, c]
+//          [a, b, c, d]          -> [a, b]  (clamp)
+//          [a, b, c]             -> [a, b, c] (no trim possible)
+const trimSidesForLearn = (sides: string[]): string[] => {
+  if (sides.length <= 3) return sides;
+  const trimmed = sides.slice(0, sides.length - 3);
+  return trimmed.length >= 2 ? trimmed : sides.slice(0, 2);
+};
+
 export const UNIVERSAL_PRESETS: PresetDefinition[] = [
   {
     id: 'simple',
@@ -16,9 +30,10 @@ export const UNIVERSAL_PRESETS: PresetDefinition[] = [
         };
       }
       if (mode === 'learn') {
+        const learnSides = trimSidesForLearn(sides);
         return {
-          questionSides: [sides[0] || 'side_a'],
-          answerSides: [sides[1] || 'side_b'],
+          questionSides: [learnSides[0] || 'side_a'],
+          answerSides: [learnSides[1] || 'side_b'],
           questionTypes: ['free_text'],
           questionTypeMix: 'free_text' as const,
           cardsPerRound: 25,
@@ -49,9 +64,10 @@ export const UNIVERSAL_PRESETS: PresetDefinition[] = [
         };
       }
       if (mode === 'learn') {
+        const learnSides = trimSidesForLearn(sides);
         return {
-          questionSides: [sides[1] || 'side_b'],
-          answerSides: [sides[0] || 'side_a'],
+          questionSides: [learnSides[1] || 'side_b'],
+          answerSides: [learnSides[0] || 'side_a'],
           questionTypeMix: 'auto' as const,
         };
       }
@@ -73,9 +89,11 @@ export const UNIVERSAL_PRESETS: PresetDefinition[] = [
         };
       }
       if (mode === 'learn') {
+        const learnSides = trimSidesForLearn(sides);
+        const answers = learnSides.slice(1);
         return {
-          questionSides: [sides[0] || 'side_a'],
-          answerSides: sides.slice(1).length > 0 ? sides.slice(1) : ['side_b'],
+          questionSides: [learnSides[0] || 'side_a'],
+          answerSides: answers.length > 0 ? answers : ['side_b'],
           questionTypes: ['multiple_choice'],
           questionTypeMix: 'multiple_choice' as const,
           cardsPerRound: 25,
@@ -102,8 +120,9 @@ export const UNIVERSAL_PRESETS: PresetDefinition[] = [
         };
       }
       if (mode === 'learn') {
-        const questions = sides.filter((_, i) => i % 2 === 0);
-        const answers = sides.filter((_, i) => i % 2 === 1);
+        const learnSides = trimSidesForLearn(sides);
+        const questions = learnSides.filter((_, i) => i % 2 === 0);
+        const answers = learnSides.filter((_, i) => i % 2 === 1);
         return {
           questionSides: questions.length > 0 ? questions : ['side_a'],
           answerSides: answers.length > 0 ? answers : ['side_b'],
