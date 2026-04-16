@@ -1,19 +1,32 @@
 .navBar {
   position: fixed;
-  bottom: 0;
+  /* Extend the bar 96px below the viewport. Mobile Safari/Chrome auto-hide
+     their toolbar on scroll — during that transition the visual viewport
+     grows downward faster than `position: fixed; bottom: 0` can repaint,
+     briefly leaving a gap below this bar where the page background shows
+     through. Rendering a tall invisible "skirt" below the visible viewport
+     means that as soon as the browser chrome slides away, the skirt moves
+     into view and covers the gap so the bar always appears flush with the
+     bottom edge. The skirt is absorbed by padding-bottom so the actual
+     button row stays at the same visual position. */
+  bottom: -96px;
   left: 0;
   right: 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: var(--space-1) var(--space-2);
-  padding-bottom: calc(var(--space-1) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(96px + var(--space-1) + env(safe-area-inset-bottom, 0px));
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(247, 248, 250, 0.92));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-top: 1px solid var(--border-color);
   z-index: var(--z-sticky);
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  /* Force a compositing layer so mobile browsers keep this repainted
+     in sync with the scroll/chrome animation. */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .navButton {
