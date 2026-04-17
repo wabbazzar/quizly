@@ -207,7 +207,63 @@
       "filename": "chinese_chpt9_2_phrases.txt",
       "displayName": "Phrases",
       "audioFile": "chinese_chpt9_2_phrases.mp3"
+    },
+    {
+      "id": "chinese_common_review_1_dialogue",
+      "deckId": "chinese_common_review_1",
+      "type": "dialogue",
+      "filename": "chinese_common_review_1_dialogue.txt",
+      "displayName": "Dialogue"
+    },
+    {
+      "id": "chinese_common_review_1_phrases",
+      "deckId": "chinese_common_review_1",
+      "type": "phrases",
+      "filename": "chinese_common_review_1_phrases.txt",
+      "displayName": "Phrases"
+    },
+    {
+      "id": "chinese_living_1_dialogue",
+      "deckId": "chinese_living_1",
+      "type": "dialogue",
+      "filename": "chinese_living_1_dialogue.txt",
+      "displayName": "Dialogue"
+    },
+    {
+      "id": "chinese_living_1_phrases",
+      "deckId": "chinese_living_1",
+      "type": "phrases",
+      "filename": "chinese_living_1_phrases.txt",
+      "displayName": "Phrases"
+    },
+    {
+      "id": "chinese_review_1_dialogue",
+      "deckId": "chinese_review_1",
+      "type": "dialogue",
+      "filename": "chinese_review_1_dialogue.txt",
+      "displayName": "Dialogue"
+    },
+    {
+      "id": "chinese_review_1_phrases",
+      "deckId": "chinese_review_1",
+      "type": "phrases",
+      "filename": "chinese_review_1_phrases.txt",
+      "displayName": "Phrases"
+    },
+    {
+      "id": "chinese_travel_1_dialogue",
+      "deckId": "chinese_travel_1",
+      "type": "dialogue",
+      "filename": "chinese_travel_1_dialogue.txt",
+      "displayName": "Dialogue"
+    },
+    {
+      "id": "chinese_travel_1_phrases",
+      "deckId": "chinese_travel_1",
+      "type": "phrases",
+      "filename": "chinese_travel_1_phrases.txt",
+      "displayName": "Phrases"
     }
   ],
-  "generatedAt": "2026-04-17T01:41:56.442Z"
+  "generatedAt": "2026-04-17T11:53:30.881Z"
 }
