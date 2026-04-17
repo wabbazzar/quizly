@@ -9,6 +9,7 @@ import { CompactDeckGrid } from '@/components/deck/CompactDeckGrid';
 import { FamilySection } from '@/components/deck/FamilySection';
 import { loadTranscriptManifest } from '@/services/transcriptService';
 import { DeckVisibilityModal } from '@/components/modals/DeckVisibilityModal';
+import CardDetailsModal from '@/components/modals/CardDetailsModal';
 import { SearchResults, CardSearchResult } from '@/components/search/SearchResults';
 import { SearchIcon, CloseIcon } from '@/components/icons/NavigationIcons';
 import { SlidersIcon } from '@/components/icons/DeckManagementIcons';
@@ -43,6 +44,7 @@ const Home: FC = () => {
   const isMobile = useIsMobile();
   const [modalOpen, setModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCard, setSelectedCard] = useState<Card | null>(null);
 
   useEffect(() => {
     const node = headerRef.current;
@@ -168,6 +170,16 @@ const Home: FC = () => {
   }, [visibleDecks, families]);
 
   const SIDE_KEYS: (keyof Card)[] = ['side_a', 'side_b', 'side_c', 'side_d', 'side_e', 'side_f', 'side_g'];
+  // Lower weight ranks first. side_b is preferred, then side_a, then the rest.
+  const SIDE_WEIGHT: Partial<Record<keyof Card, number>> = {
+    side_b: 0,
+    side_a: 1,
+    side_c: 2,
+    side_d: 3,
+    side_e: 4,
+    side_f: 5,
+    side_g: 6,
+  };
 
   const isSearching = searchQuery.trim().length > 0;
 
@@ -176,21 +188,101 @@ const Home: FC = () => {
     const q = strip(searchQuery.trim());
     if (!q) return [];
 
-    const results: CardSearchResult[] = [];
+    // Levenshtein distance with two-row DP (O(n*m) time, O(min) space).
+    const lev = (a: string, b: string): number => {
+      if (a === b) return 0;
+      if (!a.length) return b.length;
+      if (!b.length) return a.length;
+      let prev = new Array(b.length + 1);
+      let curr = new Array(b.length + 1);
+      for (let j = 0; j <= b.length; j++) prev[j] = j;
+      for (let i = 1; i <= a.length; i++) {
+        curr[0] = i;
+        for (let j = 1; j <= b.length; j++) {
+          const cost = a.charCodeAt(i - 1) === b.charCodeAt(j - 1) ? 0 : 1;
+          curr[j] = Math.min(
+            curr[j - 1] + 1,
+            prev[j] + 1,
+            prev[j - 1] + cost
+          );
+        }
+        [prev, curr] = [curr, prev];
+      }
+      return prev[b.length];
+    };
+
+    // Split into tokens for whole-word / starts-with checks. Works across
+    // Latin and CJK: CJK text has no spaces, so the whole string becomes
+    // one token, and substring/Lev tiers still catch partial matches.
+    const tokenize = (s: string): string[] =>
+      s.split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+
+    // Tier ordering (lower = better):
+    //   0 whole-word match
+    //   1 token starts with query
+    //   2 query appears as substring anywhere in side
+    //   3 fuzzy-only (ranked by Lev distance)
+    const scoreSide = (raw: string): { tier: number; lev: number } | null => {
+      const s = strip(raw);
+      if (!s) return null;
+      const tokens = tokenize(s);
+      let tier = 3;
+      let bestLev = Infinity;
+      for (const tok of tokens) {
+        if (tok === q) tier = Math.min(tier, 0);
+        else if (tok.startsWith(q)) tier = Math.min(tier, 1);
+        const d = lev(q, tok);
+        if (d < bestLev) bestLev = d;
+      }
+      if (tier > 2 && s.includes(q)) tier = 2;
+      if (bestLev === Infinity) bestLev = lev(q, s);
+      return { tier, lev: bestLev };
+    };
+
+    type Scored = CardSearchResult & { tier: number; lev: number; sideWeight: number };
+    const scored: Scored[] = [];
+    // Fuzzy tier (3) is noisy for very short queries — only keep it when
+    // the query is long enough for edit distance to be meaningful.
+    const allowFuzzy = q.length >= 3;
+    const fuzzyCap = Math.max(1, Math.floor(q.length / 3));
+
     for (const deck of visibleDecks) {
       if (!deck.content) continue;
       for (const card of deck.content) {
-        const nameMatch = card.name ? strip(card.name).includes(q) : false;
-        const sideMatch = SIDE_KEYS.some(key => {
+        let best: { tier: number; lev: number; sideWeight: number } | null = null;
+        for (const key of SIDE_KEYS) {
           const val = card[key];
-          return typeof val === 'string' && strip(val).includes(q);
-        });
-        if (nameMatch || sideMatch) {
-          results.push({ card, deck });
+          if (typeof val !== 'string') continue;
+          const s = scoreSide(val);
+          if (!s) continue;
+          if (s.tier === 3 && (!allowFuzzy || s.lev > fuzzyCap)) continue;
+          const weight = SIDE_WEIGHT[key] ?? 99;
+          const entry = { tier: s.tier, lev: s.lev, sideWeight: weight };
+          if (
+            !best ||
+            entry.tier < best.tier ||
+            (entry.tier === best.tier && entry.lev < best.lev) ||
+            (entry.tier === best.tier && entry.lev === best.lev && entry.sideWeight < best.sideWeight)
+          ) {
+            best = entry;
+          }
         }
+        // Also consider card.name as a weak extra signal, but don't let it
+        // surface cards that have no side match.
+        if (best) scored.push({ card, deck, ...best });
       }
     }
-    return results;
+
+    scored.sort((a, b) => {
+      if (a.tier !== b.tier) return a.tier - b.tier;
+      if (a.lev !== b.lev) return a.lev - b.lev;
+      if (a.sideWeight !== b.sideWeight) return a.sideWeight - b.sideWeight;
+      // Stable-ish tiebreakers for deterministic order.
+      if (a.deck.id !== b.deck.id) return a.deck.id.localeCompare(b.deck.id);
+      return (a.card.idx ?? 0) - (b.card.idx ?? 0);
+    });
+
+    return scored.map(({ card, deck }) => ({ card, deck }));
   }, [searchQuery, visibleDecks]);
 
   // When there's only one family, skip the section header
@@ -322,7 +414,7 @@ const Home: FC = () => {
             <SearchResults
               results={searchResults}
               query={searchQuery.trim()}
-              onNavigateToDeck={handleCompactDeckSelect}
+              onSelectCard={setSelectedCard}
             />
           ) : visibleDecks.length === 0 ? (
             <motion.div
@@ -380,6 +472,12 @@ const Home: FC = () => {
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
         decks={decks}
+      />
+
+      <CardDetailsModal
+        card={selectedCard}
+        visible={selectedCard !== null}
+        onClose={() => setSelectedCard(null)}
       />
     </div>
   );

@@ -7,21 +7,20 @@ const DEFAULT_LABELS = ['Side A', 'Side B', 'Side C', 'Side D', 'Side E', 'Side 
 
 interface SearchResultCardProps {
   card: Card;
-  deckId: string;
   deckName: string;
   sideLabels: Record<string, string | undefined> | undefined;
   availableSides: number;
-  onNavigateToDeck: (deckId: string) => void;
+  onSelectCard: (card: Card) => void;
 }
 
 export const SearchResultCard: FC<SearchResultCardProps> = memo(
-  ({ card, deckId, deckName, sideLabels, availableSides, onNavigateToDeck }) => {
-    const handleClick = () => onNavigateToDeck(deckId);
+  ({ card, deckName, sideLabels, availableSides, onSelectCard }) => {
+    const handleClick = () => onSelectCard(card);
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        onNavigateToDeck(deckId);
+        onSelectCard(card);
       }
     };
 

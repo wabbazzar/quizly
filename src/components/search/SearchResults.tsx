@@ -11,10 +11,10 @@ export interface CardSearchResult {
 interface SearchResultsProps {
   results: CardSearchResult[];
   query: string;
-  onNavigateToDeck: (deckId: string) => void;
+  onSelectCard: (card: Card) => void;
 }
 
-export const SearchResults: FC<SearchResultsProps> = ({ results, query, onNavigateToDeck }) => {
+export const SearchResults: FC<SearchResultsProps> = ({ results, query, onSelectCard }) => {
   if (results.length === 0) {
     return (
       <div className={styles.emptyState}>
@@ -35,11 +35,10 @@ export const SearchResults: FC<SearchResultsProps> = ({ results, query, onNaviga
           <SearchResultCard
             key={`${deck.id}-${card.idx}`}
             card={card}
-            deckId={deck.id}
             deckName={deck.metadata.abbreviated_title || deck.metadata.deck_name}
             sideLabels={deck.metadata.side_labels}
             availableSides={deck.metadata.available_sides}
-            onNavigateToDeck={onNavigateToDeck}
+            onSelectCard={onSelectCard}
           />
         ))}
       </ul>
