@@ -229,14 +229,16 @@
       "deckId": "chinese_living_1",
       "type": "dialogue",
       "filename": "chinese_living_1_dialogue.txt",
-      "displayName": "Dialogue"
+      "displayName": "Dialogue",
+      "audioFile": "chinese_living_1_dialogue.mp3"
     },
     {
       "id": "chinese_living_1_phrases",
       "deckId": "chinese_living_1",
       "type": "phrases",
       "filename": "chinese_living_1_phrases.txt",
-      "displayName": "Phrases"
+      "displayName": "Phrases",
+      "audioFile": "chinese_living_1_phrases.mp3"
     },
     {
       "id": "chinese_review_1_dialogue",
@@ -250,7 +252,8 @@
       "deckId": "chinese_review_1",
       "type": "phrases",
       "filename": "chinese_review_1_phrases.txt",
-      "displayName": "Phrases"
+      "displayName": "Phrases",
+      "audioFile": "chinese_review_1_phrases.mp3"
     },
     {
       "id": "chinese_travel_1_dialogue",
