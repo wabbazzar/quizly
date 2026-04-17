@@ -213,14 +213,16 @@
       "deckId": "chinese_common_review_1",
       "type": "dialogue",
       "filename": "chinese_common_review_1_dialogue.txt",
-      "displayName": "Dialogue"
+      "displayName": "Dialogue",
+      "audioFile": "chinese_common_review_1_dialogue.mp3"
     },
     {
       "id": "chinese_common_review_1_phrases",
       "deckId": "chinese_common_review_1",
       "type": "phrases",
       "filename": "chinese_common_review_1_phrases.txt",
-      "displayName": "Phrases"
+      "displayName": "Phrases",
+      "audioFile": "chinese_common_review_1_phrases.mp3"
     },
     {
       "id": "chinese_living_1_dialogue",
@@ -265,5 +267,5 @@
       "displayName": "Phrases"
     }
   ],
-  "generatedAt": "2026-04-17T11:53:30.881Z"
+  "generatedAt": "2026-04-17T16:13:48.012Z"
 }
