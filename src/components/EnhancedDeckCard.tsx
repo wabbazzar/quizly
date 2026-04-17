@@ -2,6 +2,7 @@ import { FC, memo, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Deck } from '@/types';
 import { useNotificationStore } from '@/store/notificationStore';
+import { usePinnedDecksStore } from '@/store/pinnedDecksStore';
 import { hasTranscriptsForDeck } from '@/services/transcriptService';
 import {
   FlashcardsIcon,
@@ -12,6 +13,7 @@ import {
   LevelsIcon,
   ClockIcon,
 } from '@/components/icons/ModeIcons';
+import { PinIcon, PinFilledIcon } from '@/components/icons/PinIcon';
 import styles from './EnhancedDeckCard.module.css';
 
 interface ModeConfig {
@@ -114,6 +116,8 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(
     const [hasTranscripts, setHasTranscripts] = useState(false);
     const navigate = useNavigate();
     const { showNotification } = useNotificationStore();
+    const pinned = usePinnedDecksStore(state => state.pinnedDeckIds.includes(deck.id));
+    const togglePin = usePinnedDecksStore(state => state.togglePin);
     const { metadata } = deck;
 
     // Check for transcripts availability
@@ -180,11 +184,26 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(
       navigate(`/deck/${deck.id}`);
     };
 
+    const handlePinClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      togglePin(deck.id);
+    };
+
     return (
       <article
         className={styles.enhancedDeckCard}
         onClick={handleCardClick}
       >
+        <button
+          type="button"
+          className={`${styles.pinButton} ${pinned ? styles.pinned : ''}`}
+          onClick={handlePinClick}
+          aria-label={pinned ? 'Unpin deck' : 'Pin deck'}
+          aria-pressed={pinned}
+        >
+          {pinned ? <PinFilledIcon size={18} /> : <PinIcon size={18} />}
+        </button>
+
         {/* Progress Ring - Shows mastery percentage of entire deck */}
         {progress.overall > 0 && (
           <div className={styles.progressRing}>

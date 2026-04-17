@@ -2,6 +2,8 @@ import { FC, memo, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Deck } from '@/types';
 import { ReadIcon } from '@/components/icons/ModeIcons';
+import { PinIcon, PinFilledIcon } from '@/components/icons/PinIcon';
+import { usePinnedDecksStore } from '@/store/pinnedDecksStore';
 import {
   hasTranscriptsForDeck,
   hasTranscriptsForDeckSync,
@@ -28,6 +30,9 @@ export const CompactDeckCard: FC<CompactDeckCardProps> = memo(({
 
   const displayTitle = deck.metadata.abbreviated_title || deck.metadata.deck_name;
   const subtitle = deck.metadata.deck_subtitle;
+
+  const pinned = usePinnedDecksStore(state => state.pinnedDeckIds.includes(deck.id));
+  const togglePin = usePinnedDecksStore(state => state.togglePin);
 
   // Check for reading content availability
   const hasReadingContent = hasTranscripts ||
@@ -56,6 +61,11 @@ export const CompactDeckCard: FC<CompactDeckCardProps> = memo(({
     }
   };
 
+  const handlePinClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    togglePin(deck.id);
+  };
+
   return (
     <motion.div
       className={styles.card}
@@ -66,6 +76,17 @@ export const CompactDeckCard: FC<CompactDeckCardProps> = memo(({
       aria-label={`${deck.metadata.deck_name}. ${cardCount} cards.`}
       whileTap={{ scale: 0.98 }}
     >
+      <motion.button
+        type="button"
+        className={`${styles.pinButton} ${pinned ? styles.pinned : ''}`}
+        onClick={handlePinClick}
+        aria-label={pinned ? 'Unpin deck' : 'Pin deck'}
+        aria-pressed={pinned}
+        whileTap={{ scale: 0.85 }}
+      >
+        {pinned ? <PinFilledIcon size={16} /> : <PinIcon size={16} />}
+      </motion.button>
+
       <div className={styles.title}>{displayTitle}</div>
 
       <div className={styles.subtitle}>{subtitle}</div>

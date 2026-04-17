@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useDeckStore } from '@/store/deckStore';
 import { useProgressStore } from '@/store/progressStore';
 import { useDeckVisibilityStore } from '@/store/deckVisibilityStore';
+import { usePinnedDecksStore } from '@/store/pinnedDecksStore';
 import EnhancedDeckCard from '@/components/EnhancedDeckCard';
 import { CompactDeckGrid } from '@/components/deck/CompactDeckGrid';
 import { FamilySection } from '@/components/deck/FamilySection';
@@ -40,6 +41,7 @@ const Home: FC = () => {
     families,
     loadFamilies,
   } = useDeckVisibilityStore();
+  const pinnedDeckIds = usePinnedDecksStore(state => state.pinnedDeckIds);
   const headerRef = useRef<HTMLElement | null>(null);
   const isMobile = useIsMobile();
   const [modalOpen, setModalOpen] = useState(false);
@@ -141,6 +143,7 @@ const Home: FC = () => {
 
   const familyGroups = useMemo((): FamilyGroup[] => {
     const groupMap = new Map<string, Deck[]>();
+    const pinnedSet = new Set(pinnedDeckIds);
 
     visibleDecks.forEach(deck => {
       const familyId = deck.metadata.family_id || '__other__';
@@ -149,13 +152,21 @@ const Home: FC = () => {
       groupMap.set(familyId, existing);
     });
 
+    // Float pinned decks to the top of each family, preserving within-group order.
+    const sortPinnedFirst = (decks: Deck[]): Deck[] => {
+      const pinned: Deck[] = [];
+      const unpinned: Deck[] = [];
+      decks.forEach(d => (pinnedSet.has(d.id) ? pinned : unpinned).push(d));
+      return pinned.length > 0 ? [...pinned, ...unpinned] : decks;
+    };
+
     const groups: FamilyGroup[] = [];
 
     // Add families in sort order
     families.forEach(family => {
       const familyDecks = groupMap.get(family.id);
       if (familyDecks && familyDecks.length > 0) {
-        groups.push({ family, decks: familyDecks });
+        groups.push({ family, decks: sortPinnedFirst(familyDecks) });
         groupMap.delete(family.id);
       }
     });
@@ -163,11 +174,11 @@ const Home: FC = () => {
     // Add "Other" group for remaining decks
     const otherDecks = groupMap.get('__other__');
     if (otherDecks && otherDecks.length > 0) {
-      groups.push({ family: OTHER_FAMILY, decks: otherDecks });
+      groups.push({ family: OTHER_FAMILY, decks: sortPinnedFirst(otherDecks) });
     }
 
     return groups;
-  }, [visibleDecks, families]);
+  }, [visibleDecks, families, pinnedDeckIds]);
 
   const SIDE_KEYS: (keyof Card)[] = ['side_a', 'side_b', 'side_c', 'side_d', 'side_e', 'side_f', 'side_g'];
   // Lower weight ranks first. side_b is preferred, then side_a, then the rest.
