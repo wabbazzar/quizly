@@ -317,7 +317,8 @@
       "filename": "chinese_review_1_dialogue.txt",
       "displayName": "Dialogue",
       "displayTitle": "Travel Review",
-      "sortOrder": 15
+      "sortOrder": 15,
+      "audioFile": "chinese_review_1_dialogue.mp3"
     },
     {
       "id": "chinese_travel_1_phrases",
@@ -326,7 +327,8 @@
       "filename": "chinese_travel_1_phrases.txt",
       "displayName": "Phrases",
       "displayTitle": "Travel",
-      "sortOrder": 16
+      "sortOrder": 16,
+      "audioFile": "chinese_travel_1_phrases.mp3"
     },
     {
       "id": "chinese_travel_1_dialogue",
