@@ -100,11 +100,19 @@
 .wordToken.clickable:hover {
   background: rgba(74, 144, 226, 0.2);
   transform: translateY(-1px);
+  /* Lift the stacking context so the child tooltip paints above sibling
+     tokens.  Without this, the transform creates a stacking context at
+     z-index auto, and later-DOM siblings can paint over the popup. */
+  z-index: 20;
 }
 
 .wordToken.clickable.revealed {
   background: rgba(74, 144, 226, 0.25);
   border-color: var(--primary-main);
+  /* Same stacking-context lift for the tapped/revealed state — on iOS
+     Safari the :hover state sticks after tap, but ensure revealed state
+     also elevates even if hover is cleared. */
+  z-index: 20;
 }
 
 .wordToken.static {
@@ -115,7 +123,9 @@
   position: absolute;
   top: 100%;
   left: 50%;
-  transform: translateX(-50%);
+  /* translate3d promotes the popup to its own GPU compositor layer on iOS
+     Safari, preventing the first-paint transparency glitch. */
+  transform: translate3d(-50%, 0, 0);
   margin-top: 4px;
   padding: var(--space-1-5) var(--space-3);
   background: var(--bg-primary);
@@ -126,7 +136,7 @@
   font-weight: 500;
   color: var(--text-primary);
   white-space: nowrap;
-  z-index: 10;
+  z-index: 100;
   pointer-events: none;
 }
 

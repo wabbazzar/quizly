@@ -90,12 +90,20 @@
   position: absolute;
   bottom: 100%;
   left: 50%;
-  transform: translateX(-50%);
+  /* translateZ(0) promotes the tooltip to its own compositor layer on first
+     paint. Without it, iOS Safari may render the backdrop-filter below as
+     transparent until a scroll forces a layer repaint. */
+  transform: translate3d(-50%, 0, 0);
   margin-bottom: 8px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
   z-index: 100;
+  will-change: opacity;
+}
+
+.tooltipVisible {
+  z-index: 101;
 }
 
 .tooltipVisible .tooltip {
@@ -104,18 +112,22 @@
 }
 
 .tooltipContent {
+  /* Fully opaque background: backdrop-filter is an enhancement, not a
+     requirement for readability. On iOS Safari the filter can fail to
+     composite on first paint, so the base color must stand on its own. */
   background: linear-gradient(
     135deg,
-    rgba(31, 41, 55, 0.95),
-    rgba(31, 41, 55, 0.9)
+    rgb(31, 41, 55),
+    rgb(40, 52, 68)
   );
   color: var(--text-primary-on-dark);
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-md);
   border: 1px solid rgba(74, 144, 226, 0.3);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   min-width: 60px;
   text-align: center;
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
 }
 
@@ -126,7 +138,7 @@
   left: 50%;
   transform: translateX(-50%);
   border: 6px solid transparent;
-  border-top-color: rgba(31, 41, 55, 0.9);
+  border-top-color: rgb(31, 41, 55);
 }
 
 .tooltipPinyin {
@@ -241,15 +253,15 @@
   .tooltipContent {
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.95),
-      rgba(255, 255, 255, 0.9)
+      rgb(255, 255, 255),
+      rgb(245, 247, 250)
     );
     color: var(--text-primary);
     border-color: rgba(74, 144, 226, 0.4);
   }
 
   .tooltipContent::after {
-    border-top-color: rgba(255, 255, 255, 0.9);
+    border-top-color: rgb(255, 255, 255);
   }
 
   .tooltipPinyin {
