@@ -11,6 +11,7 @@ import {
   PauseFilledIcon,
   PreviousTrackIcon,
   NextTrackIcon,
+  RepeatIcon,
 } from '@/components/icons/ModeIcons';
 import { ArrowLeftIcon } from '@/components/icons/NavigationIcons';
 import styles from './AudioPlayer.module.css';
@@ -27,6 +28,7 @@ const AudioPlayer: FC = () => {
     currentTime,
     duration,
     playbackRate,
+    repeat,
     setIsPlaying,
     setCurrentTime,
     setDuration,
@@ -35,6 +37,7 @@ const AudioPlayer: FC = () => {
     nextTrack,
     previousTrack,
     togglePlay,
+    toggleRepeat,
   } = useAudioPlayerStore();
 
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -83,13 +86,28 @@ const AudioPlayer: FC = () => {
       // Auto-advance to next track on natural end. Read fresh state from the
       // store (not the closed-over values) to handle the end-of-playlist edge
       // case correctly.
-      const { tracks, currentTrackIndex } = useAudioPlayerStore.getState();
+      const { tracks, currentTrackIndex, repeat } = useAudioPlayerStore.getState();
       if (currentTrackIndex < tracks.length - 1) {
         // Set flag to prevent the browser's pause event (fired alongside
         // ended) from flipping isPlaying to false before nextTrack() sets it
         // back to true.
         isTransitioningRef.current = true;
         nextTrack();
+        setTimeout(() => {
+          isTransitioningRef.current = false;
+        }, 100);
+      } else if (repeat && tracks.length > 0) {
+        // End of playlist with repeat on: wrap to the first track and keep playing.
+        isTransitioningRef.current = true;
+        if (tracks.length === 1) {
+          // Single-track playlist: store index doesn't change, so the
+          // source-change effect won't fire. Rewind and resume the audio
+          // element directly.
+          audio.currentTime = 0;
+          audio.play().catch(() => setIsPlaying(false));
+        } else {
+          useAudioPlayerStore.getState().playTrack(0);
+        }
         setTimeout(() => {
           isTransitioningRef.current = false;
         }, 100);
@@ -304,6 +322,14 @@ const AudioPlayer: FC = () => {
               aria-label="Next track"
             >
               <NextTrackIcon size={28} />
+            </button>
+            <button
+              className={`${styles.controlButton} ${repeat ? styles.controlButtonActive : ''}`}
+              onClick={toggleRepeat}
+              aria-label={repeat ? 'Turn off repeat' : 'Turn on repeat'}
+              aria-pressed={repeat}
+            >
+              <RepeatIcon size={24} />
             </button>
           </div>
 

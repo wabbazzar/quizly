@@ -123,6 +123,41 @@
   cursor: not-allowed;
 }
 
+/* Repeat button - centered flow, no absolute positioning */
+.repeatBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.repeatBtn:hover:not(:disabled) {
+  color: var(--primary-main);
+  background: rgba(74, 144, 226, 0.1);
+}
+
+.repeatBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.repeatBtnActive {
+  color: var(--primary-main);
+  background: rgba(74, 144, 226, 0.12);
+}
+
+.repeatBtnActive:hover:not(:disabled) {
+  background: rgba(74, 144, 226, 0.2);
+  color: var(--primary-main);
+}
+
 /* Skip buttons - larger */
 .skipBtn {
   display: flex;
@@ -409,6 +444,11 @@
   }
 
   .controlBtn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .repeatBtn {
     width: 36px;
     height: 36px;
   }

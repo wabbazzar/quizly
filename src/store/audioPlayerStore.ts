@@ -19,6 +19,7 @@ interface AudioPlayerState {
   currentTime: number;
   duration: number;
   playbackRate: number;
+  repeat: boolean;
 
   // Actions
   setTracks: (tracks: AudioTrack[]) => void;
@@ -31,6 +32,7 @@ interface AudioPlayerState {
   nextTrack: () => void;
   previousTrack: () => void;
   togglePlay: () => void;
+  toggleRepeat: () => void;
 }
 
 export const useAudioPlayerStore = create<AudioPlayerState>()(
@@ -42,6 +44,7 @@ export const useAudioPlayerStore = create<AudioPlayerState>()(
       currentTime: 0,
       duration: 0,
       playbackRate: 100,
+      repeat: false,
 
       setTracks: (tracks) => set({ tracks }),
 
@@ -83,12 +86,17 @@ export const useAudioPlayerStore = create<AudioPlayerState>()(
         const { isPlaying } = get();
         set({ isPlaying: !isPlaying });
       },
+
+      toggleRepeat: () => {
+        set({ repeat: !get().repeat });
+      },
     }),
     {
       name: 'audio-player-store',
       partialize: (state) => ({
         currentTrackIndex: state.currentTrackIndex,
         playbackRate: state.playbackRate,
+        repeat: state.repeat,
       }),
     }
   )

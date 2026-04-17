@@ -1,7 +1,7 @@
 import { FC, useCallback, useState, useRef, useEffect } from 'react';
 import { Modal } from '@/components/ui/Modal';
 import CopyIcon from '@/components/icons/CopyIcon';
-import { PlayIcon, PauseIcon, SkipBackIcon, SkipForwardIcon, RestartIcon } from '@/components/icons/ModeIcons';
+import { PlayIcon, PauseIcon, SkipBackIcon, SkipForwardIcon, RestartIcon, RepeatIcon } from '@/components/icons/ModeIcons';
 import { useTranscriptStore } from '@/store/transcriptStore';
 import styles from './TranscriptModal.module.css';
 
@@ -20,6 +20,7 @@ export const TranscriptModal: FC = () => {
   const [playbackRate, setPlaybackRate] = useState(100);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [repeat, setRepeat] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const audioFile = selectedTranscript?.audioFile;
@@ -155,7 +156,7 @@ export const TranscriptModal: FC = () => {
       <div className={styles.modalContent}>
         {audioUrl ? (
           <>
-            <audio ref={audioRef} src={audioUrl} preload="metadata" />
+            <audio ref={audioRef} src={audioUrl} preload="metadata" loop={repeat} />
             <div className={styles.audioPlayer}>
               <div className={styles.progressContainer}>
                 <span className={styles.time}>{formatTime(currentTime)}</span>
@@ -202,6 +203,15 @@ export const TranscriptModal: FC = () => {
                   disabled={isLoadingContent}
                 >
                   <SkipForwardIcon size={36} />
+                </button>
+                <button
+                  onClick={() => setRepeat(r => !r)}
+                  className={`${styles.repeatBtn} ${repeat ? styles.repeatBtnActive : ''}`}
+                  aria-label={repeat ? 'Turn off repeat' : 'Turn on repeat'}
+                  aria-pressed={repeat}
+                  disabled={isLoadingContent}
+                >
+                  <RepeatIcon size={22} />
                 </button>
                 <div className={styles.copyContainer}>
                   {copySuccess && <span className={styles.copiedText}>Copied!</span>}

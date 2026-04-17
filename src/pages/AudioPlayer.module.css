@@ -163,6 +163,16 @@
   cursor: not-allowed;
 }
 
+.controlButtonActive {
+  color: var(--primary-main);
+  background: rgba(74, 144, 226, 0.12);
+}
+
+.controlButtonActive:hover:not(:disabled) {
+  background: rgba(74, 144, 226, 0.2);
+  color: var(--primary-main);
+}
+
 .playButton {
   display: flex;
   align-items: center;
