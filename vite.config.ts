@@ -6,7 +6,7 @@ import path from 'path';
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/quizly/',
+  base: '/',
   plugins: [
     react(),
     VitePWA({
@@ -18,7 +18,7 @@ export default defineConfig({
       // next natural navigation, never mid-session.
       registerType: 'prompt',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
-      base: '/quizly/',
+      base: '/',
       manifest: {
         name: 'Quizly - Flashcard Learning',
         short_name: 'Quizly',
@@ -27,8 +27,8 @@ export default defineConfig({
         background_color: '#FFFFFF',
         display: 'standalone',
         orientation: 'portrait',
-        scope: '/quizly/',
-        start_url: '/quizly/',
+        scope: '/',
+        start_url: '/',
         icons: [
           {
             src: 'pwa-64x64.png',

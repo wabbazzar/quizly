@@ -14,11 +14,10 @@ async function fixManifest() {
     const manifestContent = await fs.readFile(manifestPath, 'utf-8');
     const manifest = JSON.parse(manifestContent);
 
-    // Fix the URLs for GitHub Pages
-    manifest.start_url = '/quizly/';
-    manifest.scope = '/quizly/';
+    // Pin root paths so the PWA installs correctly at the custom domain root.
+    manifest.start_url = '/';
+    manifest.scope = '/';
 
-    // Write back the fixed manifest
     await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 0));
     console.log('✅ Fixed manifest.webmanifest for GitHub Pages');
   } catch (error) {
@@ -33,13 +32,12 @@ async function fixIndexHtml() {
   try {
     let htmlContent = await fs.readFile(indexPath, 'utf-8');
 
-    // Fix favicon and icon paths
+    // Normalize any leftover relative icon paths to absolute root paths.
     htmlContent = htmlContent
-      .replace(/href="\.\/favicon\.ico"/g, 'href="/quizly/favicon.ico"')
-      .replace(/href="\.\/icons\//g, 'href="/quizly/icons/')
-      .replace(/content="\.\/icons\//g, 'content="/quizly/icons/');
+      .replace(/href="\.\/favicon\.ico"/g, 'href="/favicon.ico"')
+      .replace(/href="\.\/icons\//g, 'href="/icons/')
+      .replace(/content="\.\/icons\//g, 'content="/icons/');
 
-    // Write back the fixed HTML
     await fs.writeFile(indexPath, htmlContent);
     console.log('✅ Fixed index.html icon paths for GitHub Pages');
   } catch (error) {

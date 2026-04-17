@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node scripts/generate-deck-manifest.js && node scripts/generate-transcript-manifest.js && vite",
     "build": "node scripts/generate-deck-manifest.js && node scripts/generate-transcript-manifest.js && tsc -b && vite build",
-    "build:gh-pages": "node scripts/generate-deck-manifest.js && node scripts/generate-transcript-manifest.js && tsc -b && vite build --base /quizly/ && node scripts/fix-gh-pages-manifest.js",
+    "build:gh-pages": "node scripts/generate-deck-manifest.js && node scripts/generate-transcript-manifest.js && tsc -b && vite build && node scripts/fix-gh-pages-manifest.js",
     "build:analyze": "npm run build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
