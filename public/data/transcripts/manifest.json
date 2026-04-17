@@ -337,7 +337,8 @@
       "filename": "chinese_travel_1_dialogue.txt",
       "displayName": "Dialogue",
       "displayTitle": "Travel",
-      "sortOrder": 16
+      "sortOrder": 16,
+      "audioFile": "chinese_travel_1_dialogue.mp3"
     }
   ],
   "generatedAt": "2026-04-17T17:43:35.411Z"
