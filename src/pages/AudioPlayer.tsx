@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import {
   useAudioPlayerStore,
   transformManifestToTracks,
-  sortTracksAlternating,
+  sortTracks,
   AudioTrack,
 } from '@/store/audioPlayerStore';
+import { usePinnedDecksStore } from '@/store/pinnedDecksStore';
 import {
   PlayFilledIcon,
   PauseFilledIcon,
@@ -39,6 +40,7 @@ const AudioPlayer: FC = () => {
     togglePlay,
     toggleRepeat,
   } = useAudioPlayerStore();
+  const pinnedDeckIds = usePinnedDecksStore(state => state.pinnedDeckIds);
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const trackListRef = useRef<HTMLDivElement>(null);
@@ -52,14 +54,14 @@ const AudioPlayer: FC = () => {
   isPlayingRef.current = isPlaying;
   playbackRateRef.current = playbackRate;
 
-  // Load tracks from manifest on mount
+  // Load tracks from manifest on mount.
   useEffect(() => {
     const loadTracks = async () => {
       try {
         const response = await fetch(`${BASE_URL}data/transcripts/manifest.json`);
         const data = await response.json();
         const audioTracks = transformManifestToTracks(data.transcripts);
-        const sortedTracks = sortTracksAlternating(audioTracks);
+        const sortedTracks = sortTracks(audioTracks, pinnedDeckIds);
         setTracks(sortedTracks);
       } catch (error) {
         console.error('Failed to load audio tracks:', error);
@@ -73,7 +75,28 @@ const AudioPlayer: FC = () => {
     } else {
       setIsLoading(false);
     }
-  }, [setTracks, tracks.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setTracks]);
+
+  // Re-sort the current playlist when the pinned-deck set changes.
+  useEffect(() => {
+    const { tracks: current } = useAudioPlayerStore.getState();
+    if (current.length === 0) return;
+    const resorted = sortTracks(current, pinnedDeckIds);
+    // Preserve the currently-playing track's position so the user doesn't
+    // get bounced to a different track when they pin/unpin.
+    const currentTrack = current[currentTrackIndex];
+    if (currentTrack) {
+      const newIndex = resorted.findIndex(t => t.id === currentTrack.id);
+      if (newIndex !== -1 && newIndex !== currentTrackIndex) {
+        setTracks(resorted);
+        useAudioPlayerStore.getState().setCurrentTrackIndex(newIndex);
+        return;
+      }
+    }
+    setTracks(resorted);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pinnedDeckIds]);
 
   // Handle audio element events
   useEffect(() => {
@@ -246,7 +269,7 @@ const AudioPlayer: FC = () => {
   };
 
   const getTrackDisplayName = (track: AudioTrack): string => {
-    return `Ch ${track.chapterNumber}.${track.partNumber} - ${track.type === 'phrases' ? 'Phrases' : 'Dialogue'}`;
+    return `${track.displayTitle} - ${track.type === 'phrases' ? 'Phrases' : 'Dialogue'}`;
   };
 
   const currentTrack = tracks[currentTrackIndex];
@@ -271,9 +294,7 @@ const AudioPlayer: FC = () => {
           <div className={styles.trackInfo}>
             {currentTrack ? (
               <>
-                <span className={styles.trackChapter}>
-                  Chapter {currentTrack.chapterNumber}.{currentTrack.partNumber}
-                </span>
+                <span className={styles.trackChapter}>{currentTrack.displayTitle}</span>
                 <span className={styles.trackType}>
                   {currentTrack.type === 'phrases' ? 'Phrases' : 'Dialogue'}
                 </span>
@@ -323,18 +344,18 @@ const AudioPlayer: FC = () => {
             >
               <NextTrackIcon size={28} />
             </button>
-            <button
-              className={`${styles.controlButton} ${repeat ? styles.controlButtonActive : ''}`}
-              onClick={toggleRepeat}
-              aria-label={repeat ? 'Turn off repeat' : 'Turn on repeat'}
-              aria-pressed={repeat}
-            >
-              <RepeatIcon size={24} />
-            </button>
           </div>
 
           {/* Speed Control */}
           <div className={styles.speedControl}>
+            <button
+              className={`${styles.repeatButton} ${repeat ? styles.repeatButtonActive : ''}`}
+              onClick={toggleRepeat}
+              aria-label={repeat ? 'Turn off repeat' : 'Turn on repeat'}
+              aria-pressed={repeat}
+            >
+              <RepeatIcon size={22} />
+            </button>
             <button
               onClick={handleSpeedDecrease}
               className={styles.speedBtn}

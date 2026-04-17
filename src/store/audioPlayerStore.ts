@@ -8,8 +8,8 @@ export interface AudioTrack {
   filename: string;
   displayName: string;
   audioFile: string;
-  chapterNumber: number;
-  partNumber: number;
+  displayTitle: string;
+  sortOrder: number;
 }
 
 interface AudioPlayerState {
@@ -102,54 +102,8 @@ export const useAudioPlayerStore = create<AudioPlayerState>()(
   )
 );
 
-// Helper function to parse chapter and part from deckId
-function parseChapterInfo(deckId: string): { chapter: number; part: number } {
-  // Format: chinese_chptX_Y where X is chapter and Y is part
-  const match = deckId.match(/chinese_chpt(\d+)_(\d+)/);
-  if (match) {
-    return { chapter: parseInt(match[1], 10), part: parseInt(match[2], 10) };
-  }
-  return { chapter: 0, part: 0 };
-}
-
-// Function to sort tracks: by chapter, then part, alternating phrases/dialogue
-export function sortTracksAlternating(tracks: AudioTrack[]): AudioTrack[] {
-  // First, group by chapter and part
-  const grouped = new Map<string, { phrases?: AudioTrack; dialogue?: AudioTrack }>();
-
-  tracks.forEach((track) => {
-    const key = `${track.chapterNumber}_${track.partNumber}`;
-    if (!grouped.has(key)) {
-      grouped.set(key, {});
-    }
-    const group = grouped.get(key)!;
-    if (track.type === 'phrases') {
-      group.phrases = track;
-    } else {
-      group.dialogue = track;
-    }
-  });
-
-  // Sort keys by chapter and part
-  const sortedKeys = Array.from(grouped.keys()).sort((a, b) => {
-    const [chapterA, partA] = a.split('_').map(Number);
-    const [chapterB, partB] = b.split('_').map(Number);
-    if (chapterA !== chapterB) return chapterA - chapterB;
-    return partA - partB;
-  });
-
-  // Build sorted array alternating phrases then dialogue
-  const sorted: AudioTrack[] = [];
-  sortedKeys.forEach((key) => {
-    const group = grouped.get(key)!;
-    if (group.phrases) sorted.push(group.phrases);
-    if (group.dialogue) sorted.push(group.dialogue);
-  });
-
-  return sorted;
-}
-
-// Function to transform manifest data to AudioTrack[]
+// Transforms manifest entries into AudioTrack[] preserving the manifest's
+// order (already sorted by the generator).
 export function transformManifestToTracks(
   transcripts: Array<{
     id: string;
@@ -158,21 +112,41 @@ export function transformManifestToTracks(
     filename: string;
     displayName: string;
     audioFile?: string;
+    displayTitle?: string;
+    sortOrder?: number;
   }>
 ): AudioTrack[] {
   return transcripts
     .filter((t) => t.audioFile && (t.type === 'phrases' || t.type === 'dialogue'))
-    .map((t) => {
-      const { chapter, part } = parseChapterInfo(t.deckId);
-      return {
-        id: t.id,
-        deckId: t.deckId,
-        type: t.type as 'phrases' | 'dialogue',
-        filename: t.filename,
-        displayName: t.displayName,
-        audioFile: t.audioFile!,
-        chapterNumber: chapter,
-        partNumber: part,
-      };
-    });
+    .map((t) => ({
+      id: t.id,
+      deckId: t.deckId,
+      type: t.type as 'phrases' | 'dialogue',
+      filename: t.filename,
+      displayName: t.displayName,
+      audioFile: t.audioFile!,
+      displayTitle: t.displayTitle ?? t.deckId,
+      sortOrder: t.sortOrder ?? 0,
+    }));
+}
+
+// Sort by deck sortOrder, then phrases before dialogue. Optionally floats a
+// set of pinned deck IDs to the top (preserving original relative order
+// within each partition).
+export function sortTracks(tracks: AudioTrack[], pinnedDeckIds: string[] = []): AudioTrack[] {
+  const byOrder = [...tracks].sort((a, b) => {
+    if (a.sortOrder !== b.sortOrder) return a.sortOrder - b.sortOrder;
+    if (a.type !== b.type) return a.type === 'phrases' ? -1 : 1;
+    return 0;
+  });
+
+  if (pinnedDeckIds.length === 0) return byOrder;
+
+  const pinnedSet = new Set(pinnedDeckIds);
+  const pinned: AudioTrack[] = [];
+  const unpinned: AudioTrack[] = [];
+  for (const t of byOrder) {
+    (pinnedSet.has(t.deckId) ? pinned : unpinned).push(t);
+  }
+  return pinned.length > 0 ? [...pinned, ...unpinned] : byOrder;
 }

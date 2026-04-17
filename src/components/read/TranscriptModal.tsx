@@ -204,15 +204,6 @@ export const TranscriptModal: FC = () => {
                 >
                   <SkipForwardIcon size={36} />
                 </button>
-                <button
-                  onClick={() => setRepeat(r => !r)}
-                  className={`${styles.repeatBtn} ${repeat ? styles.repeatBtnActive : ''}`}
-                  aria-label={repeat ? 'Turn off repeat' : 'Turn on repeat'}
-                  aria-pressed={repeat}
-                  disabled={isLoadingContent}
-                >
-                  <RepeatIcon size={22} />
-                </button>
                 <div className={styles.copyContainer}>
                   {copySuccess && <span className={styles.copiedText}>Copied!</span>}
                   <button
@@ -227,6 +218,15 @@ export const TranscriptModal: FC = () => {
                 </div>
               </div>
               <div className={styles.speedControl}>
+                <button
+                  onClick={() => setRepeat(r => !r)}
+                  className={`${styles.repeatBtn} ${repeat ? styles.repeatBtnActive : ''}`}
+                  aria-label={repeat ? 'Turn off repeat' : 'Turn on repeat'}
+                  aria-pressed={repeat}
+                  disabled={isLoadingContent}
+                >
+                  <RepeatIcon size={22} />
+                </button>
                 <button
                   onClick={handleSpeedDecrease}
                   className={styles.speedBtn}

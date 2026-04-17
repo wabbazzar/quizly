@@ -123,13 +123,18 @@
   cursor: not-allowed;
 }
 
-/* Repeat button - centered flow, no absolute positioning */
+/* Repeat button - absolute-left inside the speed-control row so the speed
+   controls stay visually centered. */
 .repeatBtn {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   border: none;
   background: transparent;
   color: var(--text-secondary);
@@ -262,6 +267,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
+  position: relative;
 }
 
 .speedLabel {
@@ -444,11 +450,6 @@
   }
 
   .controlBtn {
-    width: 36px;
-    height: 36px;
-  }
-
-  .repeatBtn {
     width: 36px;
     height: 36px;
   }

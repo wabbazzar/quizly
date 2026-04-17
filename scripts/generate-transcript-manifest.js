@@ -5,9 +5,13 @@
  * Transcript files follow the naming pattern: {deckId}_{type}.txt
  * where type is either 'dialogue' or 'phrases'
  * Also links matching audio files from public/data/audio/
+ *
+ * Enriches each entry with displayTitle (from the deck's abbreviated_title)
+ * and sortOrder so the audio player can render and sort without any
+ * deck-id-pattern parsing in client code.
  */
 
-import { readdir, writeFile, access } from 'fs/promises';
+import { readdir, readFile, writeFile, access } from 'fs/promises';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -16,6 +20,7 @@ const __dirname = dirname(__filename);
 
 const TRANSCRIPTS_DIR = join(__dirname, '../public/data/transcripts');
 const AUDIO_DIR = join(__dirname, '../public/data/audio');
+const DECKS_DIR = join(__dirname, '../public/data/decks');
 const MANIFEST_FILE = join(TRANSCRIPTS_DIR, 'manifest.json');
 
 async function getAudioFiles() {
@@ -24,79 +29,106 @@ async function getAudioFiles() {
     const files = await readdir(AUDIO_DIR);
     return files.filter(file => file.endsWith('.mp3'));
   } catch {
-    // Audio directory doesn't exist, that's fine
     return [];
   }
 }
 
+async function loadDeckMetadata(deckId) {
+  try {
+    const path = join(DECKS_DIR, `${deckId}.json`);
+    const raw = await readFile(path, 'utf-8');
+    const json = JSON.parse(raw);
+    const metadata = json?.metadata ?? {};
+    return {
+      abbreviated_title: metadata.abbreviated_title,
+      deck_name: metadata.deck_name,
+    };
+  } catch {
+    return null;
+  }
+}
+
+// Natural-order compare so "chpt2_2" sorts before "chpt10_2" and lifestyle
+// decks fall alphabetically at the end.
+function compareDeckIds(a, b) {
+  return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+}
+
 async function generateTranscriptManifest() {
   try {
-    // Read all files in the transcripts directory
     const files = await readdir(TRANSCRIPTS_DIR);
-
-    // Get available audio files
     const audioFiles = await getAudioFiles();
     const audioFileSet = new Set(audioFiles);
 
-    // Filter for .txt files only
     const txtFiles = files.filter(file => file.endsWith('.txt'));
 
-    // Parse each file into transcript metadata
-    const transcripts = txtFiles
+    const parsed = txtFiles
       .map(filename => {
-        // Parse filename: {deckId}_{type}.txt
         const match = filename.match(/^(.+)_(dialogue|phrases)\.txt$/);
         if (!match) {
           console.warn(`   Skipping ${filename} - doesn't match pattern {deckId}_{type}.txt`);
           return null;
         }
-
         const [, deckId, type] = match;
         const baseId = filename.replace('.txt', '');
-
-        // Check for matching audio file
         const audioFilename = `${baseId}.mp3`;
         const hasAudio = audioFileSet.has(audioFilename);
-
-        const transcript = {
-          id: baseId,
-          deckId,
-          type,
-          filename,
-          displayName: type.charAt(0).toUpperCase() + type.slice(1)
-        };
-
-        // Only add audioFile if it exists
-        if (hasAudio) {
-          transcript.audioFile = audioFilename;
-        }
-
-        return transcript;
+        return { filename, baseId, deckId, type, hasAudio, audioFilename };
       })
       .filter(Boolean);
 
-    // Sort by deckId then by type (dialogue before phrases)
-    transcripts.sort((a, b) => {
-      if (a.deckId !== b.deckId) {
-        return a.deckId.localeCompare(b.deckId);
+    // Build deck-order map from the natural-sorted unique deckId list so that
+    // sortOrder is stable, gap-free, and shared across phrases/dialogue of the
+    // same deck. New decks slot in without any code change.
+    const uniqueDeckIds = Array.from(new Set(parsed.map(p => p.deckId))).sort(compareDeckIds);
+    const deckOrder = new Map(uniqueDeckIds.map((id, i) => [id, i]));
+
+    // Load deck metadata once per unique deckId.
+    const deckMetaEntries = await Promise.all(
+      uniqueDeckIds.map(async id => [id, await loadDeckMetadata(id)])
+    );
+    const deckMeta = new Map(deckMetaEntries);
+
+    const transcripts = parsed.map(({ filename, baseId, deckId, type, hasAudio, audioFilename }) => {
+      const meta = deckMeta.get(deckId);
+      const displayTitle = meta?.abbreviated_title || meta?.deck_name || deckId;
+
+      const transcript = {
+        id: baseId,
+        deckId,
+        type,
+        filename,
+        displayName: type.charAt(0).toUpperCase() + type.slice(1),
+        displayTitle,
+        sortOrder: deckOrder.get(deckId) ?? 0,
+      };
+
+      if (hasAudio) {
+        transcript.audioFile = audioFilename;
       }
-      return a.type.localeCompare(b.type);
+
+      return transcript;
     });
 
-    // Create manifest object
+    // Primary: deck sortOrder. Secondary: phrases before dialogue.
+    transcripts.sort((a, b) => {
+      if (a.sortOrder !== b.sortOrder) return a.sortOrder - b.sortOrder;
+      if (a.type !== b.type) return a.type === 'phrases' ? -1 : 1;
+      return 0;
+    });
+
     const manifest = {
       transcripts,
-      generatedAt: new Date().toISOString()
+      generatedAt: new Date().toISOString(),
     };
 
-    // Write the manifest
     await writeFile(MANIFEST_FILE, JSON.stringify(manifest, null, 2));
 
     const withAudio = transcripts.filter(t => t.audioFile).length;
     console.log(`Generated transcript manifest with ${transcripts.length} files (${withAudio} with audio):`);
     transcripts.forEach(t => {
       const audioIndicator = t.audioFile ? ' [audio]' : '';
-      console.log(`   - ${t.filename} (deck: ${t.deckId}, type: ${t.type})${audioIndicator}`);
+      console.log(`   - ${t.filename} (deck: ${t.deckId}, title: ${t.displayTitle}, type: ${t.type})${audioIndicator}`);
     });
   } catch (error) {
     console.error('Error generating transcript manifest:', error);
