@@ -26,8 +26,10 @@ export const UserMenu: FC = () => {
   }, [logout, navigate]);
 
   const handleSignIn = useCallback(() => {
-    navigate('/login');
-  }, [navigate]);
+    // Clear guest mode so Login page doesn't redirect back
+    logout();
+    navigate('/login', { replace: true });
+  }, [logout, navigate]);
 
   if (!isConnected && !isGuest) {
     return null; // Not yet initialized
