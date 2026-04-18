@@ -15,7 +15,7 @@
  */
 
 import { connect, waitForPageLoad } from "@/client.js";
-import { readFileSync, existsSync, writeFileSync } from "fs";
+import { readFileSync, existsSync, writeFileSync, copyFileSync } from "fs";
 import { resolve } from "path";
 import { execSync } from "child_process";
 
@@ -24,11 +24,16 @@ const DECK_FILE = "/home/wabbazzar/code/quizly/public/data/decks/chinese_chpt1_1
 const DECK_ID = "chinese_chpt1_1";
 const AUDIO_DIR = "/home/wabbazzar/code/quizly/public/data/audio/words";
 
+// Voice assignments:
+//   side_a (English) -> Junjie (male)
+//   side_b (Chinese) -> Yarui (female) -- uses side_c characters as TTS input
+//   side_c = copy of side_b (same audio)
 const VOICE_MAP: Record<string, string> = {
-  a: "Junjie",  // English
-  b: "Yarui",   // Chinese
+  a: "Junjie",
+  b: "Yarui",
 };
 
+// Only generate a and b; side_c is a copy of side_b
 const SIDES: Array<"a" | "b"> = ["a", "b"];
 
 // ---- LOAD DECK ----
@@ -128,11 +133,31 @@ async function generateOne(
     });
     await page.waitForTimeout(2000);
 
-    // 5. Select voice
+    // 5. Select voice - click the row containing the voice name
     await page.evaluate((name: string) => {
-      const els = Array.from(document.querySelectorAll("*"));
-      const v = els.find((e: any) => e.textContent?.includes(name));
-      if (v) ((v as any).closest("li, button, [role='option']") || v).click();
+      // Find all elements with the voice name text
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      let node;
+      while (node = walker.nextNode()) {
+        if (node.textContent?.trim() === name) {
+          // Click the closest clickable parent (the voice row)
+          let target = node.parentElement;
+          while (target && target !== document.body) {
+            if (target.onclick || target.getAttribute('role') === 'option' ||
+                target.tagName === 'BUTTON' || target.tagName === 'LI' ||
+                target.classList.toString().includes('voice') ||
+                target.classList.toString().includes('item') ||
+                target.classList.toString().includes('row')) {
+              target.click();
+              return;
+            }
+            target = target.parentElement;
+          }
+          // Fallback: click the grandparent
+          node.parentElement?.parentElement?.click();
+          return;
+        }
+      }
     }, voiceName);
     await page.waitForTimeout(1000);
 
@@ -196,9 +221,19 @@ async function generateOne(
 
     // Fallback: check Downloads folder
     await page.waitForTimeout(3000);
-    const dlPath = resolve("/home/wabbazzar/Downloads", `${title}.mp3`);
-    if (existsSync(dlPath)) {
-      execSync(`mv "${dlPath}" "${targetPath}"`);
+    // Check Downloads - handle Chrome's (1), (2) suffixes
+    const dlBase = resolve("/home/wabbazzar/Downloads", `${title}.mp3`);
+    let found = "";
+    if (existsSync(dlBase)) {
+      found = dlBase;
+    } else {
+      for (let n = 1; n <= 5; n++) {
+        const suffixed = resolve("/home/wabbazzar/Downloads", `${title} (${n}).mp3`);
+        if (existsSync(suffixed)) { found = suffixed; break; }
+      }
+    }
+    if (found) {
+      execSync(`mv "${found}" "${targetPath}"`);
       console.log(`  OK (from Downloads): ${targetPath.split("/").pop()}`);
       return true;
     }
@@ -229,6 +264,7 @@ async function main() {
         continue;
       }
 
+      // side_a = English text, side_b = Chinese characters (from side_c field)
       const text = side === "a" ? card.side_a : card.side_c;
       const voice = VOICE_MAP[side];
 
@@ -240,7 +276,18 @@ async function main() {
     }
   }
 
-  console.log(`\n=== DONE: ${generated} generated, ${skipped} skipped, ${failed} failed ===`);
+  // Copy side_b to side_c for each card
+  let copied = 0;
+  for (const card of cards) {
+    const sideB = resolve(AUDIO_DIR, `${DECK_ID}_card${card.idx}_side_b.mp3`);
+    const sideC = resolve(AUDIO_DIR, `${DECK_ID}_card${card.idx}_side_c.mp3`);
+    if (existsSync(sideB)) {
+      copyFileSync(sideB, sideC);
+      copied++;
+    }
+  }
+
+  console.log(`\n=== DONE: ${generated} generated, ${skipped} skipped, ${failed} failed, ${copied} side_c copies ===`);
   await client.disconnect();
 }
 
