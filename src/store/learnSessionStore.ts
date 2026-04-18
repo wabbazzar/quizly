@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { LearnSessionState, LearnSessionResults, LearnModeSettings } from '@/types';
 import { LearnSessionProgress } from '@/components/modes/learn/LearnProgress';
+import { createIDBStorage } from '../services/idbStorage';
+import { dbGet, dbPut, dbDelete, STORES } from '../services/db';
 
 interface LearnSessionStore {
   // Active session
@@ -105,33 +107,51 @@ export const useLearnSessionStore = create<LearnSessionStore>()(
       },
 
       pauseSession: () => {
-        // Save current session state to localStorage
+        // Save current session state to IndexedDB
         const state = get();
         if (state.activeSession) {
-          localStorage.setItem('pausedLearnSession', JSON.stringify(state.activeSession));
+          dbPut(STORES.SESSIONS, {
+            key: 'pausedLearnSession',
+            data: JSON.stringify(state.activeSession),
+          }).catch(() => {});
         }
       },
 
       resumeSession: () => {
-        // Restore session from localStorage
-        const pausedSession = localStorage.getItem('pausedLearnSession');
-        if (pausedSession) {
-          try {
-            const session = JSON.parse(pausedSession);
-            // Convert Set objects back from arrays
-            session.correctCards = new Set(session.correctCards);
-            session.incorrectCards = new Set(session.incorrectCards);
-            set({ activeSession: session });
-            localStorage.removeItem('pausedLearnSession');
-          } catch (error) {
-            console.error('Failed to resume session:', error);
+        // Restore session from IndexedDB (async)
+        dbGet<{ key: string; data: string }>(STORES.SESSIONS, 'pausedLearnSession').then(record => {
+          if (record?.data) {
+            try {
+              const session = JSON.parse(record.data);
+              session.correctCards = new Set(session.correctCards);
+              session.incorrectCards = new Set(session.incorrectCards);
+              set({ activeSession: session });
+              dbDelete(STORES.SESSIONS, 'pausedLearnSession').catch(() => {});
+              return;
+            } catch {
+              // Failed to parse, fall through to localStorage migration
+            }
           }
-        }
+          // Migrate from old localStorage key
+          const old = localStorage.getItem('pausedLearnSession');
+          if (old) {
+            try {
+              const session = JSON.parse(old);
+              session.correctCards = new Set(session.correctCards);
+              session.incorrectCards = new Set(session.incorrectCards);
+              set({ activeSession: session });
+            } catch {
+              // ignore
+            }
+            localStorage.removeItem('pausedLearnSession');
+          }
+        }).catch(() => {});
       },
 
       endSession: () => {
         set({ activeSession: null });
-        localStorage.removeItem('pausedLearnSession');
+        dbDelete(STORES.SESSIONS, 'pausedLearnSession').catch(() => {});
+        localStorage.removeItem('pausedLearnSession'); // Clean up any old key
       },
 
       // Preferences
@@ -142,20 +162,23 @@ export const useLearnSessionStore = create<LearnSessionStore>()(
       },
 
       loadPreferences: () => {
+        // Preferences are loaded via Zustand persist (IndexedDB).
+        // Migrate old localStorage key if present.
         const stored = localStorage.getItem('learnModePreferences');
         if (stored) {
           try {
             const preferences = JSON.parse(stored);
             set({ preferences });
-          } catch (error) {
-            console.error('Failed to load preferences:', error);
+          } catch {
+            // ignore
           }
+          localStorage.removeItem('learnModePreferences');
         }
       },
 
       savePreferences: () => {
-        const state = get();
-        localStorage.setItem('learnModePreferences', JSON.stringify(state.preferences));
+        // Preferences are saved via Zustand persist middleware (IndexedDB).
+        // No-op: kept for API compatibility.
       },
 
       // Statistics
@@ -196,7 +219,7 @@ export const useLearnSessionStore = create<LearnSessionStore>()(
     }),
     {
       name: 'learn-session-store',
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => createIDBStorage(STORES.SESSIONS, 'learn-session', 'learn-session-store')),
       partialize: state => ({
         sessionHistory: state.sessionHistory.slice(-50), // Keep last 50 sessions
         preferences: state.preferences,

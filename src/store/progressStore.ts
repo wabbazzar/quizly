@@ -1,7 +1,9 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import { useCardMasteryStore } from './cardMasteryStore';
 import { useDeckStore } from './deckStore';
+import { createIDBStorage } from '../services/idbStorage';
+import { STORES } from '../services/db';
 
 export interface DeckProgress {
   overall: number;
@@ -196,6 +198,7 @@ export const useProgressStore = create<ProgressStore>()(
     }),
     {
       name: 'progress-store',
+      storage: createJSONStorage(() => createIDBStorage(STORES.PROGRESS, '__progress__', 'progress-store')),
       // Ensure dates are properly serialized and deserialized
       partialize: state => ({
         progress: Object.entries(state.progress).reduce(

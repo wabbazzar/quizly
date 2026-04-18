@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { createIDBStorage } from '../services/idbStorage';
+import { STORES } from '../services/db';
 
 export interface MatchBestTime {
   deckId: string;
@@ -112,31 +114,34 @@ export const useMatchBestTimesStore = create<MatchBestTimesStore>()(
     }),
     {
       name: 'match-best-times-store',
-      // Custom storage to handle Date objects
-      storage: {
-        getItem: name => {
-          const str = localStorage.getItem(name);
-          if (!str) return null;
+      // Custom storage to handle Date objects, backed by IndexedDB
+      storage: (() => {
+        const idb = createIDBStorage(STORES.PROGRESS, '__match-best-times__', 'match-best-times-store');
+        return {
+          getItem: async (name: string) => {
+            const str = await idb.getItem(name);
+            if (!str) return null;
 
-          const parsed = JSON.parse(str);
-          if (parsed.state && parsed.state.bestTimes) {
-            // Convert date strings back to Date objects
-            Object.keys(parsed.state.bestTimes).forEach(deckId => {
-              const bestTime = parsed.state.bestTimes[deckId];
-              if (bestTime.achievedAt) {
-                bestTime.achievedAt = new Date(bestTime.achievedAt);
-              }
-            });
-          }
-          return parsed;
-        },
-        setItem: (name, value) => {
-          localStorage.setItem(name, JSON.stringify(value));
-        },
-        removeItem: name => {
-          localStorage.removeItem(name);
-        },
-      },
+            const parsed = JSON.parse(str);
+            if (parsed.state && parsed.state.bestTimes) {
+              // Convert date strings back to Date objects
+              Object.keys(parsed.state.bestTimes).forEach(deckId => {
+                const bestTime = parsed.state.bestTimes[deckId];
+                if (bestTime.achievedAt) {
+                  bestTime.achievedAt = new Date(bestTime.achievedAt);
+                }
+              });
+            }
+            return parsed;
+          },
+          setItem: async (name: string, value: unknown) => {
+            await idb.setItem(name, JSON.stringify(value));
+          },
+          removeItem: async (name: string) => {
+            await idb.removeItem(name);
+          },
+        };
+      })(),
     }
   )
 );

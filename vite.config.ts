@@ -169,7 +169,7 @@ export default defineConfig({
 
   // Development optimizations
   server: {
-    port: 5173,
+    port: 5177,
     open: true,
     cors: true,
   },

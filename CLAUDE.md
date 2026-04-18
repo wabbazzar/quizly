@@ -9,7 +9,11 @@ Testing means — for every task, at minimum:
 2. `npm run lint` passes (no new lint errors)
 3. `npm test` passes (or the specific affected test files pass)
 4. `npm run build` succeeds for any non-trivial source change
-5. For UI/UX changes: start the dev server (port 5173) and manually exercise the feature end-to-end in a real browser — click the button, trigger the state, confirm the modal/message/behavior actually matches the requirement. Do not assume the change works from reading the diff.
+5. For UI/UX changes: start the dev server (port 5177) and **visually verify** the change using the dev-browser tool (Playwright). You MUST:
+   - Take a screenshot at **desktop** viewport (1280x900) AND **mobile/iPhone** viewport (375x667)
+   - Confirm the layout is correct at both sizes — no overlapping elements, no overflow, proper spacing
+   - Never assume a CSS or layout change looks correct from reading the diff alone
+   - If the change involves interactive elements, use the dev-browser to click/interact and screenshot the result
 
 If you cannot run a check (e.g. no browser available), say so explicitly instead of claiming success. "I made the edit and the types pass but did not verify in a browser" is acceptable. "Fixed!" without verification is NOT.
 
@@ -870,7 +874,7 @@ npm run test:e2e           # E2E tests with Playwright
 ### Development Commands
 
 ```bash
-npm run dev                # Start Vite dev server (port 5173)
+npm run dev                # Start Vite dev server (port 5177)
 npm run build              # Production build
 npm run preview            # Preview production build
 npm run type-check         # TypeScript validation
@@ -880,7 +884,7 @@ npm run lighthouse        # Performance audit
 
 ### Dev Server Configuration
 
-**IMPORTANT**: The development server runs on port **5173** (Vite default).
+**IMPORTANT**: The development server runs on port **5177** (Vite default).
 
 ```javascript
 // vite.config.ts
@@ -890,7 +894,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 5173,
+    port: 5177,
     open: true,
   },
 });
@@ -1042,6 +1046,139 @@ After generating audio, update `public/data/transcripts/manifest.json` to add th
 - Enhanced features with JavaScript enabled
 - Offline support with Service Worker
 - Install as PWA on supported platforms
+
+## Hosting: Self-Hosted Sync Server (api.quizly.me)
+
+The sync server is a self-hosted Node.js process on Wesley's home machine
+(`wabbazzar-ice`), exposed to the public internet via **Caddy reverse proxy**.
+Clients connect over plain HTTPS -- no VPN, no tunnel.
+
+### Architecture
+
+```
+Phone/Browser (quizly.me PWA)
+    |
+    | HTTPS (port 443)
+    v
+Caddy (api.quizly.me)          -- auto-provisions Let's Encrypt TLS certs
+    |
+    | HTTP (localhost:3001)
+    v
+Node.js (server/server.js)     -- Express, standalone (not Vite SSR)
+    |
+    v
+SQLite (server/data/quizly.db) -- WAL mode, Drizzle ORM
+```
+
+**Port 3001** (not 3000) to avoid conflicting with Shredly's sync server on
+the same machine.
+
+### Deploying Server-Side Changes
+
+The GitHub Pages / static deploy does NOT touch the sync server. Server-side
+changes require a manual rebuild + restart on `wabbazzar-ice`:
+
+```bash
+cd /home/wabbazzar/code/quizly/server
+npm run build           # if using TypeScript compilation
+sudo systemctl restart quizly
+sudo systemctl status quizly | head -5
+curl -sf https://api.quizly.me/api/health
+```
+
+**You will get burned by this.** A frontend-only change goes live via deploy; a
+server-side change sits unloaded until the service is restarted. Always classify
+a change as frontend / server / both before declaring it shipped.
+
+### Server-Side Key Files
+
+| Path | What it is | Restart needed? |
+|------|-----------|-----------------|
+| `server/server.js` | Node entry point | Yes |
+| `server/schema.ts` | Drizzle ORM schema | Yes |
+| `server/db.ts` | Database init (WAL, FK) | Yes |
+| `server/auth.ts` | JWT, bcrypt, rate limiting | Yes |
+| `server/routes/auth.ts` | Login/me endpoints | Yes |
+| `server/routes/sync.ts` | Sync push/pull endpoints | Yes |
+| `server/routes/admin.ts` | Admin user management | Yes |
+| `infrastructure/Caddyfile` | Reverse proxy config | `sudo systemctl reload caddy` |
+
+### Authentication
+
+- JWT (HS256) with 30-day expiry, secret from `QUIZLY_JWT_SECRET` env var
+- Passwords: bcrypt with 12 rounds
+- Rate limiting: 5 login attempts per 15 minutes per username (in-memory)
+- Roles: admin, user
+- No self-registration: admin creates accounts via seed script or admin API
+
+### Sync Engine
+
+- Delta sync every 5 minutes via `setTimeout` (NOT setInterval)
+- On failure: exponential backoff (5min -> 10min -> 20min -> 30min cap)
+- Full sync on first login (pushes all local data, pulls all server data)
+- Conflict resolution: LWW (Last-Write-Wins) based on `updatedAt` timestamps
+- Offline queue in localStorage, flushed during delta sync push phase
+- Max 3 retries per queue entry, then silently discarded
+
+### API Endpoints
+
+| Method | Path | Auth | Purpose |
+|--------|------|------|---------|
+| GET | `/api/health` | none | Health check |
+| POST | `/api/auth/login` | none | Login, returns JWT |
+| GET | `/api/auth/me` | Bearer | Current user info |
+| POST | `/api/admin/users` | admin | Create user account |
+| POST | `/api/sync/full` | Bearer | Full sync (push+pull all) |
+| POST | `/api/sync/decks` | Bearer | Push deck changes |
+| GET | `/api/sync/decks?since=` | Bearer | Pull deck changes since timestamp |
+| POST | `/api/sync/progress` | Bearer | Push progress changes |
+| GET | `/api/sync/progress?since=` | Bearer | Pull progress since timestamp |
+| GET | `/api/sync/summary` | Bearer | Data counts for user |
+
+## Client-Side Storage
+
+### IndexedDB Database: `quizly-data`
+
+Large data is stored in IndexedDB for performance and to avoid localStorage's
+5-10MB limit. Zustand remains the in-memory reactive layer.
+
+| Object Store | Key Path | Contents |
+|-------------|----------|----------|
+| `decks` | `id` | User deck JSON (created/imported decks) |
+| `progress` | `deckId` | Card mastery, progress scores, match best times |
+| `sessions` | `key` | Paused learn/flashcard/match session state |
+
+### localStorage Key Registry
+
+Only small preferences and sync config belong in localStorage.
+
+| Key | Store/Module | Contents |
+|-----|-------------|----------|
+| `unified-settings-store` | settingsStore | Per-deck mode settings, preset selections |
+| `deck-store` | deckStore | currentDeckId, masteredCards map, shuffleMasteredCardsBack |
+| `pinned-decks-store` | pinnedDecksStore | Array of pinned deck IDs |
+| `deck-visibility-store` | deckVisibilityStore | Array of hidden deck IDs |
+| `audio-player-store` | audioPlayerStore | Track index, playback rate, repeat toggle |
+| `read-store` | readStore | Read mode progress + settings |
+| `quizly_sync_config` | syncStore | serverUrl, username, userId, role |
+| `quizly_sync_token` | syncStore | JWT Bearer token |
+| `quizly_sync_last` | syncStore | ISO timestamp of last successful sync |
+| `quizly_sync_queue` | offlineQueue | JSON array of pending sync mutations |
+| `quizly_sync_device_synced` | syncStore | Per-user dict tracking first login on device |
+| `quizly_guest_mode` | constants | `"true"` when visitor opts into guest mode |
+| `quizly_walkthrough_complete` | walkthrough | `"true"` after first-time tour completed |
+| `errorReports` | errorLogger | Recent error objects |
+| `quizly-pwa-heartbeat` | usePWAVisibility | Timestamp for iOS PWA termination detection |
+| `quizly-pwa-state` | usePWAVisibility | URL + scroll position for iOS PWA restore |
+| `settings-migration-version` | settingsStore | Migration tracking |
+
+### Storage Rules
+
+- **IndexedDB** for: deck content, progress/mastery data, session state
+- **localStorage** for: user preferences, sync config/tokens, UI state
+- **Never persist** full library deck content -- reload from `public/data/`
+- **Always validate** persisted data on rehydration
+- When adding a new localStorage key, update this registry
 
 ---
 

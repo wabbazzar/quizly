@@ -10,8 +10,9 @@ export const BottomNavBar: FC = memo(() => {
   const location = useLocation();
   const { isPlaying } = useAudioPlayerStore();
 
-  // Hide on deck-specific mode pages (except read which shows nav)
+  // Hide on login and deck-specific mode pages (except read which shows nav)
   if (
+    location.pathname === '/login' ||
     location.pathname.includes('/flashcards/') ||
     location.pathname.includes('/match/') ||
     location.pathname.includes('/learn/')

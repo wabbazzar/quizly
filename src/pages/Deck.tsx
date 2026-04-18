@@ -318,6 +318,7 @@ const Deck: FC = () => {
             duration: 2000,
           });
         }}
+        onEditDeck={() => navigate(`/deck/${deckId}/edit`)}
       />
     </div>
   );

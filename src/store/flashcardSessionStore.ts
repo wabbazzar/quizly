@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { createIDBStorage } from '../services/idbStorage';
+import { STORES } from '../services/db';
 
 export interface FlashcardSession {
   deckId: string;
@@ -159,32 +161,37 @@ export const useFlashcardSessionStore = create<FlashcardSessionStore>()(
     }),
     {
       name: 'flashcard-session-store',
-      // Custom storage to handle Map serialization
-      storage: {
-        getItem: name => {
-          const str = localStorage.getItem(name);
-          if (!str) return null;
+      // Custom storage to handle Map serialization, backed by IndexedDB
+      storage: (() => {
+        const idb = createIDBStorage(STORES.SESSIONS, 'flashcard-session', 'flashcard-session-store');
+        return {
+          getItem: async (name: string) => {
+            const str = await idb.getItem(name);
+            if (!str) return null;
 
-          const { state } = JSON.parse(str);
-          return {
-            state: {
-              ...state,
-              sessions: new Map(state.sessions || []),
-            },
-          };
-        },
-        setItem: (name, value) => {
-          const { state } = value;
-          const serialized = {
-            state: {
-              ...state,
-              sessions: Array.from(state.sessions.entries()),
-            },
-          };
-          localStorage.setItem(name, JSON.stringify(serialized));
-        },
-        removeItem: name => localStorage.removeItem(name),
-      },
+            const { state } = JSON.parse(str);
+            return {
+              state: {
+                ...state,
+                sessions: new Map(state.sessions || []),
+              },
+            };
+          },
+          setItem: async (name: string, value: unknown) => {
+            const { state } = value as { state: { sessions: Map<string, unknown> } };
+            const serialized = {
+              state: {
+                ...state,
+                sessions: Array.from(state.sessions.entries()),
+              },
+            };
+            await idb.setItem(name, JSON.stringify(serialized));
+          },
+          removeItem: async (name: string) => {
+            await idb.removeItem(name);
+          },
+        };
+      })(),
     }
   )
 );

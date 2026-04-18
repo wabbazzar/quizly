@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { PageLazyBoundary } from '@/components/common/LazyLoadBoundary';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
+import { AuthGuard } from '@/components/auth/AuthGuard';
 import AppErrorPage from '@/pages/AppErrorPage';
 import ErrorPage from '@/pages/ErrorPage';
 import {
@@ -16,6 +17,9 @@ import {
   LazyAudioPlayer,
   LazyAllFlashcards,
   LazyAllMatch,
+  LazyCreateDeck,
+  LazyDeckEditor,
+  LazyLogin,
   preloadCriticalComponents,
 } from '@/utils/lazyImports';
 
@@ -39,12 +43,24 @@ export function AppRouter() {
     >
       <Routes>
         <Route
+          path="/login"
+          element={
+            <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
+              <PageLazyBoundary pageName="Login">
+                <LazyLogin />
+              </PageLazyBoundary>
+            </ErrorBoundary>
+          }
+        />
+        <Route
           path="/"
           element={
             <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
-              <PageLazyBoundary pageName="Home">
-                <LazyHome />
-              </PageLazyBoundary>
+              <AuthGuard>
+                <PageLazyBoundary pageName="Home">
+                  <LazyHome />
+                </PageLazyBoundary>
+              </AuthGuard>
             </ErrorBoundary>
           }
         />
@@ -52,9 +68,11 @@ export function AppRouter() {
           path="/deck/:deckId"
           element={
             <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
-              <PageLazyBoundary pageName="Deck">
-                <LazyDeck />
-              </PageLazyBoundary>
+              <AuthGuard>
+                <PageLazyBoundary pageName="Deck">
+                  <LazyDeck />
+                </PageLazyBoundary>
+              </AuthGuard>
             </ErrorBoundary>
           }
         />
@@ -62,9 +80,11 @@ export function AppRouter() {
           path="/deck/:deckId/results"
           element={
             <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
-              <PageLazyBoundary pageName="Results">
-                <LazyResults />
-              </PageLazyBoundary>
+              <AuthGuard>
+                <PageLazyBoundary pageName="Results">
+                  <LazyResults />
+                </PageLazyBoundary>
+              </AuthGuard>
             </ErrorBoundary>
           }
         />
@@ -72,9 +92,11 @@ export function AppRouter() {
           path="/flashcards/:deckId"
           element={
             <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
-              <PageLazyBoundary pageName="Flashcards">
-                <LazyFlashcards />
-              </PageLazyBoundary>
+              <AuthGuard>
+                <PageLazyBoundary pageName="Flashcards">
+                  <LazyFlashcards />
+                </PageLazyBoundary>
+              </AuthGuard>
             </ErrorBoundary>
           }
         />
@@ -82,9 +104,11 @@ export function AppRouter() {
           path="/learn/:deckId"
           element={
             <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
-              <PageLazyBoundary pageName="Learn">
-                <LazyLearn />
-              </PageLazyBoundary>
+              <AuthGuard>
+                <PageLazyBoundary pageName="Learn">
+                  <LazyLearn />
+                </PageLazyBoundary>
+              </AuthGuard>
             </ErrorBoundary>
           }
         />
@@ -92,9 +116,11 @@ export function AppRouter() {
           path="/match/:deckId"
           element={
             <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
-              <PageLazyBoundary pageName="Match">
-                <LazyMatch />
-              </PageLazyBoundary>
+              <AuthGuard>
+                <PageLazyBoundary pageName="Match">
+                  <LazyMatch />
+                </PageLazyBoundary>
+              </AuthGuard>
             </ErrorBoundary>
           }
         />
@@ -102,9 +128,11 @@ export function AppRouter() {
           path="/read/:deckId"
           element={
             <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
-              <PageLazyBoundary pageName="Read">
-                <LazyRead />
-              </PageLazyBoundary>
+              <AuthGuard>
+                <PageLazyBoundary pageName="Read">
+                  <LazyRead />
+                </PageLazyBoundary>
+              </AuthGuard>
             </ErrorBoundary>
           }
         />
@@ -112,9 +140,11 @@ export function AppRouter() {
           path="/learn-demo"
           element={
             <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
-              <PageLazyBoundary pageName="Learn Demo">
-                <LazyLearnDemo />
-              </PageLazyBoundary>
+              <AuthGuard>
+                <PageLazyBoundary pageName="Learn Demo">
+                  <LazyLearnDemo />
+                </PageLazyBoundary>
+              </AuthGuard>
             </ErrorBoundary>
           }
         />
@@ -122,9 +152,11 @@ export function AppRouter() {
           path="/audio"
           element={
             <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
-              <PageLazyBoundary pageName="Audio Player">
-                <LazyAudioPlayer />
-              </PageLazyBoundary>
+              <AuthGuard>
+                <PageLazyBoundary pageName="Audio Player">
+                  <LazyAudioPlayer />
+                </PageLazyBoundary>
+              </AuthGuard>
             </ErrorBoundary>
           }
         />
@@ -132,9 +164,11 @@ export function AppRouter() {
           path="/all-flashcards"
           element={
             <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
-              <PageLazyBoundary pageName="All Flashcards">
-                <LazyAllFlashcards />
-              </PageLazyBoundary>
+              <AuthGuard>
+                <PageLazyBoundary pageName="All Flashcards">
+                  <LazyAllFlashcards />
+                </PageLazyBoundary>
+              </AuthGuard>
             </ErrorBoundary>
           }
         />
@@ -142,9 +176,36 @@ export function AppRouter() {
           path="/all-match"
           element={
             <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
-              <PageLazyBoundary pageName="All Match">
-                <LazyAllMatch />
-              </PageLazyBoundary>
+              <AuthGuard>
+                <PageLazyBoundary pageName="All Match">
+                  <LazyAllMatch />
+                </PageLazyBoundary>
+              </AuthGuard>
+            </ErrorBoundary>
+          }
+        />
+
+        <Route
+          path="/create-deck"
+          element={
+            <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
+              <AuthGuard>
+                <PageLazyBoundary pageName="Create Deck">
+                  <LazyCreateDeck />
+                </PageLazyBoundary>
+              </AuthGuard>
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/deck/:deckId/edit"
+          element={
+            <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
+              <AuthGuard>
+                <PageLazyBoundary pageName="Deck Editor">
+                  <LazyDeckEditor />
+                </PageLazyBoundary>
+              </AuthGuard>
             </ErrorBoundary>
           }
         />

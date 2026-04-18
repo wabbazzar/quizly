@@ -114,3 +114,8 @@ bundle-analysis.json
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+
+# Server data (SQLite DB, runtime files)
+server/data/
+server/node_modules/
+server/.env

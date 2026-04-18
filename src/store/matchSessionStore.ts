@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { createIDBStorage } from '../services/idbStorage';
+import { STORES } from '../services/db';
 import {
   MatchSessionState,
   MatchSessionStore,
@@ -426,30 +428,34 @@ export const useMatchSessionStore = create<MatchSessionStore>()(
     }),
     {
       name: 'match-session-store',
-      // Custom storage to handle complex objects
-      storage: {
-        getItem: name => {
-          const str = localStorage.getItem(name);
-          if (!str) return null;
+      // Custom storage to handle complex objects, backed by IndexedDB
+      storage: (() => {
+        const idb = createIDBStorage(STORES.SESSIONS, 'match-session', 'match-session-store');
+        return {
+          getItem: async (name: string) => {
+            const str = await idb.getItem(name);
+            if (!str) return null;
 
-          try {
-            const { state } = JSON.parse(str);
-            return { state };
-          } catch (error) {
-            console.warn('Failed to parse match session storage:', error);
-            return null;
-          }
-        },
-        setItem: (name, value) => {
-          try {
-            const { state } = value;
-            localStorage.setItem(name, JSON.stringify({ state }));
-          } catch (error) {
-            console.warn('Failed to save match session storage:', error);
-          }
-        },
-        removeItem: name => localStorage.removeItem(name),
-      },
+            try {
+              const { state } = JSON.parse(str);
+              return { state };
+            } catch {
+              return null;
+            }
+          },
+          setItem: async (name: string, value: unknown) => {
+            try {
+              const { state } = value as { state: unknown };
+              await idb.setItem(name, JSON.stringify({ state }));
+            } catch {
+              // Silently fail on storage write errors
+            }
+          },
+          removeItem: async (name: string) => {
+            await idb.removeItem(name);
+          },
+        };
+      })(),
       // Only persist essential session data
       partialize: state => ({
         session: state.session,

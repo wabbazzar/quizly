@@ -1,0 +1,16 @@
+[Unit]
+Description=Quizly Sync Server
+After=network.target
+
+[Service]
+Type=simple
+User=wabbazzar
+WorkingDirectory=/home/wabbazzar/code/quizly/server
+ExecStart=/usr/local/bin/node server.js
+Restart=on-failure
+RestartSec=10
+Environment=NODE_ENV=production
+EnvironmentFile=/home/wabbazzar/code/quizly/server/.env
+
+[Install]
+WantedBy=multi-user.target

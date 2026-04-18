@@ -234,6 +234,33 @@ export const LazyAllMatch = createLazyImport(
   'all-match'
 );
 
+export const LazyCreateDeck = createLazyImport(
+  () => import('@/pages/CreateDeck'),
+  {
+    onError: error => console.error('Failed to load CreateDeck component:', error),
+    retryAttempts: 3,
+  },
+  'create-deck'
+);
+
+export const LazyDeckEditor = createLazyImport(
+  () => import('@/pages/DeckEditor'),
+  {
+    onError: error => console.error('Failed to load DeckEditor component:', error),
+    retryAttempts: 3,
+  },
+  'deck-editor'
+);
+
+export const LazyLogin = createLazyImport(
+  () => import('@/pages/Login'),
+  {
+    onError: error => console.error('Failed to load Login component:', error),
+    retryAttempts: 3,
+  },
+  'login'
+);
+
 /**
  * Preload critical components on app initialization
  */

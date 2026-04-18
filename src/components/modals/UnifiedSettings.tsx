@@ -23,6 +23,7 @@ export interface UnifiedSettingsProps {
   settings: FlashcardsSettings | LearnModeSettings | ModeSettings | MatchSettingsType | ReadModeSettings;
   onUpdateSettings: (settings: FlashcardsSettings | LearnModeSettings | ModeSettings | MatchSettingsType | ReadModeSettings) => void;
   onResetMastery?: () => void; // Only for deck mode
+  onEditDeck?: () => void; // Navigate to deck editor
 }
 
 export interface UnifiedSettingsConfig {
@@ -312,7 +313,7 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
 };
 
 export const UnifiedSettings: FC<UnifiedSettingsProps> = memo(
-  ({ visible, onClose, deck, mode, settings, onUpdateSettings, onResetMastery }) => {
+  ({ visible, onClose, deck, mode, settings, onUpdateSettings, onResetMastery, onEditDeck }) => {
     const [isLoading] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
     const [errors, setErrors] = useState<Record<string, string>>({});
@@ -462,21 +463,37 @@ export const UnifiedSettings: FC<UnifiedSettingsProps> = memo(
               </div>
 
               <footer className={styles.footer}>
-                <button className={styles.cancelButton} onClick={onClose}>
-                  Cancel
-                </button>
-                {mode === 'deck' && onResetMastery ? (
-                  <button className={styles.resetButton} onClick={onResetMastery}>
-                    Reset Mastery
-                  </button>
+                {mode === 'deck' ? (
+                  <>
+                    <button className={styles.cancelButton} onClick={onClose}>
+                      Close
+                    </button>
+                    <div className={styles.footerActions}>
+                      {onEditDeck && (
+                        <button className={styles.editDeckButton} onClick={() => { onClose(); onEditDeck(); }}>
+                          Edit Cards
+                        </button>
+                      )}
+                      {onResetMastery && (
+                        <button className={styles.resetButton} onClick={onResetMastery}>
+                          Reset Mastery
+                        </button>
+                      )}
+                    </div>
+                  </>
                 ) : (
-                  <button
-                    className={styles.saveButton}
-                    onClick={onSave}
-                    disabled={isSaving || Object.keys(errors).length > 0}
-                  >
-                    {isSaving ? 'Saving...' : 'Save Settings'}
-                  </button>
+                  <>
+                    <button className={styles.cancelButton} onClick={onClose}>
+                      Cancel
+                    </button>
+                    <button
+                      className={styles.saveButton}
+                      onClick={onSave}
+                      disabled={isSaving || Object.keys(errors).length > 0}
+                    >
+                      {isSaving ? 'Saving...' : 'Save Settings'}
+                    </button>
+                  </>
                 )}
               </footer>
             </motion.div>

@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { Deck } from '@/types';
 import { loadAllDecks } from '@/utils/deckLoader';
+import { mergeWithUserDecks } from '@/services/userDeckDb';
 
 interface MasteredCardsData {
   [deckId: string]: number[]; // Array of card indices that are mastered
@@ -56,7 +57,8 @@ export const useDeckStore = create<DeckStore>()(
         const p = (async () => {
           set({ isLoading: true, error: null });
           try {
-            const loadedDecks = await loadAllDecks();
+            const libraryDecks = await loadAllDecks();
+            const loadedDecks = await mergeWithUserDecks(libraryDecks);
             set({ decks: loadedDecks, isLoading: false });
           } catch (error) {
             set({ error: 'Failed to load decks', isLoading: false });
@@ -76,8 +78,9 @@ export const useDeckStore = create<DeckStore>()(
           let deck = get().decks.find(d => d.id === deckId);
 
           if (!deck) {
-            // If not in memory, load all decks and find the one we need
-            const loadedDecks = await loadAllDecks();
+            // If not in memory, load all decks (library + user) and find the one we need
+            const libraryDecks = await loadAllDecks();
+            const loadedDecks = await mergeWithUserDecks(libraryDecks);
             deck = loadedDecks.find(d => d.id === deckId);
 
             if (deck) {

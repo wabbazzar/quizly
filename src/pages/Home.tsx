@@ -13,11 +13,40 @@ import { DeckVisibilityModal } from '@/components/modals/DeckVisibilityModal';
 import CardDetailsModal from '@/components/modals/CardDetailsModal';
 import { SearchResults, CardSearchResult } from '@/components/search/SearchResults';
 import { SearchIcon, CloseIcon } from '@/components/icons/NavigationIcons';
-import { SlidersIcon } from '@/components/icons/DeckManagementIcons';
+import { DeckActionMenu } from '@/components/deck/DeckActionMenu';
 import { Input } from '@/components/ui/Input';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { Deck, DeckFamily, Card } from '@/types';
+import { UserMenu } from '@/components/auth/UserMenu';
+import { DeckImportModal } from '@/components/deck/DeckImportModal';
+import { WalkthroughOverlay, WalkthroughStep } from '@/components/common/WalkthroughOverlay';
+import { useSyncStore } from '@/store/syncStore';
 import styles from './Home.module.css';
+
+const GUEST_WALKTHROUGH_STEPS: WalkthroughStep[] = [
+  {
+    title: 'Welcome to Quizly!',
+    description: 'A flashcard app for serious learners. Browse decks, study with multiple modes, and track your mastery.',
+  },
+  {
+    targetSelector: '[class*="sectionTitle"]',
+    title: 'Your Decks',
+    description: 'This is your deck library. Tap any deck to see study modes like Flashcards, Learn, Match, and Read.',
+    position: 'bottom',
+  },
+  {
+    targetSelector: 'button[aria-label="Deck actions"]',
+    title: 'Create & Import',
+    description: 'Use this menu to create new decks, import from JSON files, or manage which decks are visible.',
+    position: 'bottom',
+  },
+  {
+    targetSelector: '[class*="userMenuContainer"]',
+    title: 'Sync Across Devices',
+    description: 'Sign in to save your decks and progress to the cloud. Your data syncs automatically.',
+    position: 'bottom',
+  },
+];
 
 const OTHER_FAMILY: DeckFamily = {
   id: '__other__',
@@ -42,9 +71,11 @@ const Home: FC = () => {
     loadFamilies,
   } = useDeckVisibilityStore();
   const pinnedDeckIds = usePinnedDecksStore(state => state.pinnedDeckIds);
+  const isGuest = useSyncStore(state => state.isGuest);
   const headerRef = useRef<HTMLElement | null>(null);
   const isMobile = useIsMobile();
   const [modalOpen, setModalOpen] = useState(false);
+  const [importModalOpen, setImportModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
 
@@ -323,6 +354,9 @@ const Home: FC = () => {
         ref={headerRef}
       >
             <div className={styles.iosSafeTop} aria-hidden="true" />
+            <div className={styles.userMenuContainer}>
+              <UserMenu />
+            </div>
             <img
               src={`${import.meta.env.BASE_URL}icons/mrquizly.png`}
               alt="Mr. Quizly"
@@ -388,13 +422,11 @@ const Home: FC = () => {
         <section className={styles.deckSection}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>Available Decks</h2>
-            <button
-              className={styles.manageButton}
-              onClick={() => setModalOpen(true)}
-              aria-label="Manage deck visibility"
-            >
-              <SlidersIcon size={20} />
-            </button>
+            <DeckActionMenu
+              onNewDeck={() => navigate('/create-deck')}
+              onImport={() => setImportModalOpen(true)}
+              onManageVisibility={() => setModalOpen(true)}
+            />
           </div>
 
           <div className={styles.searchBar}>
@@ -490,6 +522,19 @@ const Home: FC = () => {
         visible={selectedCard !== null}
         onClose={() => setSelectedCard(null)}
       />
+
+      <DeckImportModal
+        open={importModalOpen}
+        onClose={() => setImportModalOpen(false)}
+        onImported={(deckId) => navigate(`/deck/${deckId}`)}
+      />
+
+      {isGuest && !isLoading && visibleDecks.length > 0 && (
+        <WalkthroughOverlay
+          steps={GUEST_WALKTHROUGH_STEPS}
+          storageKey="quizly_walkthrough_complete"
+        />
+      )}
     </div>
   );
 };

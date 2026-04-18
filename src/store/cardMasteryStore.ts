@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { createIDBStorage } from '../services/idbStorage';
+import { STORES } from '../services/db';
 
 export interface CardMasteryRecord {
   cardIndex: number;
@@ -205,68 +207,72 @@ export const useCardMasteryStore = create<CardMasteryStore>()(
     }),
     {
       name: 'card-mastery-store',
-      // Custom serialization to handle Map objects
-      storage: {
-        getItem: name => {
-          const str = localStorage.getItem(name);
-          if (!str) return null;
+      // Custom serialization to handle Map objects, backed by IndexedDB
+      storage: (() => {
+        const idb = createIDBStorage(STORES.PROGRESS, '__card-mastery__', 'card-mastery-store');
+        return {
+          getItem: async (name: string) => {
+            const str = await idb.getItem(name);
+            if (!str) return null;
 
-          const parsed = JSON.parse(str);
-          if (parsed.state && parsed.state.mastery) {
-            // Convert arrays back to Maps
-            Object.keys(parsed.state.mastery).forEach(deckId => {
-              const deckMastery = parsed.state.mastery[deckId];
-              if (Array.isArray(deckMastery.masteredCards)) {
-                deckMastery.masteredCards = new Map(deckMastery.masteredCards);
-              }
-              // Convert date strings back to Date objects
-              if (deckMastery.lastUpdated) {
-                deckMastery.lastUpdated = new Date(deckMastery.lastUpdated);
-              }
-              // Convert dates in mastery records
-              deckMastery.masteredCards.forEach((record: CardMasteryRecord) => {
-                if (record.masteredAt) record.masteredAt = new Date(record.masteredAt);
-                if (record.lastSeen) record.lastSeen = new Date(record.lastSeen);
+            const parsed = JSON.parse(str);
+            if (parsed.state && parsed.state.mastery) {
+              // Convert arrays back to Maps
+              Object.keys(parsed.state.mastery).forEach(deckId => {
+                const deckMastery = parsed.state.mastery[deckId];
+                if (Array.isArray(deckMastery.masteredCards)) {
+                  deckMastery.masteredCards = new Map(deckMastery.masteredCards);
+                }
+                // Convert date strings back to Date objects
+                if (deckMastery.lastUpdated) {
+                  deckMastery.lastUpdated = new Date(deckMastery.lastUpdated);
+                }
+                // Convert dates in mastery records
+                deckMastery.masteredCards.forEach((record: CardMasteryRecord) => {
+                  if (record.masteredAt) record.masteredAt = new Date(record.masteredAt);
+                  if (record.lastSeen) record.lastSeen = new Date(record.lastSeen);
+                });
               });
-            });
-          }
-          return parsed;
-        },
-        setItem: (name, value) => {
-          // Convert Maps to arrays for serialization
-          const toStore = {
-            ...value,
-            state: {
-              ...value.state,
-              mastery: Object.keys(value.state.mastery).reduce(
-                (
-                  acc: Record<
-                    string,
-                    Omit<DeckMastery, 'masteredCards'> & {
-                      masteredCards: [number, CardMasteryRecord][];
-                    }
-                  >,
-                  deckId: string
-                ) => {
-                  const deckMastery = value.state.mastery[deckId];
-                  acc[deckId] = {
-                    ...deckMastery,
-                    masteredCards: deckMastery.masteredCards
-                      ? Array.from(deckMastery.masteredCards.entries())
-                      : [],
-                  };
-                  return acc;
-                },
-                {}
-              ),
-            },
-          };
-          localStorage.setItem(name, JSON.stringify(toStore));
-        },
-        removeItem: name => {
-          localStorage.removeItem(name);
-        },
-      },
+            }
+            return parsed;
+          },
+          setItem: async (name: string, value: unknown) => {
+            // Convert Maps to arrays for serialization
+            const typedValue = value as { state: { mastery: Record<string, DeckMastery> } };
+            const toStore = {
+              ...typedValue,
+              state: {
+                ...typedValue.state,
+                mastery: Object.keys(typedValue.state.mastery).reduce(
+                  (
+                    acc: Record<
+                      string,
+                      Omit<DeckMastery, 'masteredCards'> & {
+                        masteredCards: [number, CardMasteryRecord][];
+                      }
+                    >,
+                    deckId: string
+                  ) => {
+                    const deckMastery = typedValue.state.mastery[deckId];
+                    acc[deckId] = {
+                      ...deckMastery,
+                      masteredCards: deckMastery.masteredCards
+                        ? Array.from(deckMastery.masteredCards.entries())
+                        : [],
+                    };
+                    return acc;
+                  },
+                  {}
+                ),
+              },
+            };
+            await idb.setItem(name, JSON.stringify(toStore));
+          },
+          removeItem: async (name: string) => {
+            await idb.removeItem(name);
+          },
+        };
+      })(),
     }
   )
 );

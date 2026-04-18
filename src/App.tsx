@@ -2,12 +2,22 @@ import { BrowserRouter } from 'react-router-dom';
 import { useEffect } from 'react';
 import { AppRouter } from './router/AppRouter';
 import { useDeckStore } from './store/deckStore';
+import { useSyncStore, initSyncPullHandler } from './store/syncStore';
 import Notification from './components/common/Notification';
 import { BottomNavBar } from './components/navigation/BottomNavBar';
+
+// Register sync pull handler once at module load
+initSyncPullHandler();
 
 // Main App component with global notification support
 function App() {
   const { loadDecks } = useDeckStore();
+  const { initFromStorage } = useSyncStore();
+
+  // Initialize sync state from localStorage (checks for existing session/guest)
+  useEffect(() => {
+    initFromStorage();
+  }, [initFromStorage]);
 
   // Load all decks on app initialization
   useEffect(() => {
