@@ -95,11 +95,15 @@ export const CardManagement: FC<CardManagementProps> = memo(
         <div className={styles.cardContent}>
           <div className={styles.cardSide}>
             <span className={styles.sideLabel}>{sideALabel}:</span>
-            <span className={styles.sideText}>{card.side_a}</span>
+            <span className={styles.sideText} title={card.side_a}>
+              {card.side_a}
+            </span>
           </div>
           <div className={styles.cardSide}>
             <span className={styles.sideLabel}>{sideBLabel}:</span>
-            <span className={styles.sideText}>{card.side_b}</span>
+            <span className={styles.sideText} title={card.side_b}>
+              {card.side_b}
+            </span>
           </div>
         </div>
         <button
