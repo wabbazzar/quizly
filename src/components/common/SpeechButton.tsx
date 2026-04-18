@@ -68,7 +68,10 @@ export const SpeechButton: FC<SpeechButtonProps> = ({
 
   return (
     <button
-      onClick={(e) => { e.stopPropagation(); handlePlay(); }}
+      onPointerDown={(e) => { e.stopPropagation(); }}
+      onMouseDown={(e) => { e.stopPropagation(); }}
+      onTouchStart={(e) => { e.stopPropagation(); }}
+      onClick={(e) => { e.stopPropagation(); e.preventDefault(); handlePlay(); }}
       className={className}
       type="button"
       aria-label="Play pronunciation"
@@ -76,13 +79,17 @@ export const SpeechButton: FC<SpeechButtonProps> = ({
         background: 'none',
         border: 'none',
         cursor: 'pointer',
-        padding: '4px',
+        padding: '8px',
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
         color: playing ? 'var(--primary-main)' : 'var(--text-tertiary)',
         transition: 'color 0.15s',
         flexShrink: 0,
+        position: 'relative',
+        zIndex: 10,
+        minWidth: '44px',
+        minHeight: '44px',
       }}
     >
       <svg
