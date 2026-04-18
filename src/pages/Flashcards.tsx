@@ -551,6 +551,7 @@ const Flashcards: FC = () => {
               onFlip={handleFlip}
               frontSides={frontSides}
               backSides={backSides}
+              deckId={deckId}
             />
 
             {/* Swipe indicators */}

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/types';
+import { SpeechButton } from '@/components/common/SpeechButton';
 import styles from './FlashCard.module.css';
 
 interface FlashCardProps {
@@ -10,6 +11,7 @@ interface FlashCardProps {
   frontSides?: string[];
   backSides?: string[];
   badgeText?: string;
+  deckId?: string;
 }
 
 const FlashCard: FC<FlashCardProps> = ({
@@ -19,17 +21,20 @@ const FlashCard: FC<FlashCardProps> = ({
   frontSides = ['side_a'],
   backSides = ['side_b'],
   badgeText,
+  deckId,
 }) => {
   const frontContent = frontSides
     .filter(side => card[side as keyof Card])
     .map(side => ({
       content: card[side as keyof Card] as string,
+      sideKey: side.replace('side_', ''), // 'a', 'b', 'c', etc.
     }));
 
   const backContent = backSides
     .filter(side => card[side as keyof Card])
     .map(side => ({
       content: card[side as keyof Card] as string,
+      sideKey: side.replace('side_', ''),
     }));
 
   return (
@@ -46,6 +51,13 @@ const FlashCard: FC<FlashCardProps> = ({
             {frontContent.map((item, index) => (
               <div key={index} className={styles.contentItem}>
                 <div className={styles.text}>{item.content}</div>
+                {deckId && (
+                  <SpeechButton
+                    deckId={deckId}
+                    cardIdx={card.idx}
+                    side={item.sideKey}
+                  />
+                )}
               </div>
             ))}
           </div>
@@ -60,6 +72,13 @@ const FlashCard: FC<FlashCardProps> = ({
             {backContent.map((item, index) => (
               <div key={index} className={styles.contentItem}>
                 <div className={styles.text}>{item.content}</div>
+                {deckId && (
+                  <SpeechButton
+                    deckId={deckId}
+                    cardIdx={card.idx}
+                    side={item.sideKey}
+                  />
+                )}
               </div>
             ))}
           </div>
