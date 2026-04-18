@@ -8,6 +8,7 @@ import { Card } from '@/types';
 import { DeckHeader } from '@/components/deck/DeckHeader';
 import { ModeSelector } from '@/components/deck/ModeSelector';
 import { CardManagement } from '@/components/deck/CardManagement';
+import { SpeechButton } from '@/components/common/SpeechButton';
 import { ModeCard } from '@/components/deck/types';
 import UnifiedSettings from '@/components/modals/UnifiedSettings';
 import { useSettingsStore } from '@/store/settingsStore';
@@ -211,79 +212,40 @@ const Deck: FC = () => {
             </button>
             <h3 className={styles.modalTitle}>Card Details</h3>
             <div className={styles.modalCard}>
-              <div className={styles.modalSide}>
-                <h4>
-                  {currentDeck?.metadata?.side_labels?.side_a
-                    ? currentDeck.metadata.side_labels.side_a.charAt(0).toUpperCase() +
-                      currentDeck.metadata.side_labels.side_a.slice(1)
-                    : 'Side A (Front)'}
-                </h4>
-                <p>{selectedCard.side_a}</p>
-              </div>
-              <div className={styles.modalSide}>
-                <h4>
-                  {currentDeck?.metadata?.side_labels?.side_b
-                    ? currentDeck.metadata.side_labels.side_b.charAt(0).toUpperCase() +
-                      currentDeck.metadata.side_labels.side_b.slice(1)
-                    : 'Side B (Back)'}
-                </h4>
-                <p>{selectedCard.side_b}</p>
-              </div>
-              {selectedCard.side_c && (
-                <div className={styles.modalSide}>
-                  <h4>
-                    {currentDeck?.metadata?.side_labels?.side_c
-                      ? currentDeck.metadata.side_labels.side_c.charAt(0).toUpperCase() +
-                        currentDeck.metadata.side_labels.side_c.slice(1)
-                      : 'Side C (Extra)'}
-                  </h4>
-                  <p>{selectedCard.side_c}</p>
-                </div>
-              )}
-              {selectedCard.side_d && (
-                <div className={styles.modalSide}>
-                  <h4>
-                    {currentDeck?.metadata?.side_labels?.side_d
-                      ? currentDeck.metadata.side_labels.side_d.charAt(0).toUpperCase() +
-                        currentDeck.metadata.side_labels.side_d.slice(1)
-                      : 'Side D'}
-                  </h4>
-                  <p>{selectedCard.side_d}</p>
-                </div>
-              )}
-              {selectedCard.side_e && (
-                <div className={styles.modalSide}>
-                  <h4>
-                    {currentDeck?.metadata?.side_labels?.side_e
-                      ? currentDeck.metadata.side_labels.side_e.charAt(0).toUpperCase() +
-                        currentDeck.metadata.side_labels.side_e.slice(1)
-                      : 'Side E'}
-                  </h4>
-                  <p>{selectedCard.side_e}</p>
-                </div>
-              )}
-              {selectedCard.side_f && (
-                <div className={styles.modalSide}>
-                  <h4>
-                    {currentDeck?.metadata?.side_labels?.side_f
-                      ? currentDeck.metadata.side_labels.side_f.charAt(0).toUpperCase() +
-                        currentDeck.metadata.side_labels.side_f.slice(1)
-                      : 'Side F'}
-                  </h4>
-                  <p>{selectedCard.side_f}</p>
-                </div>
-              )}
-              {selectedCard.side_g && (
-                <div className={styles.modalSide}>
-                  <h4>
-                    {currentDeck?.metadata?.side_labels?.side_g
-                      ? currentDeck.metadata.side_labels.side_g.charAt(0).toUpperCase() +
-                        currentDeck.metadata.side_labels.side_g.slice(1)
-                      : 'Side G'}
-                  </h4>
-                  <p>{selectedCard.side_g}</p>
-                </div>
-              )}
+              {(() => {
+                const sides = ['a', 'b', 'c', 'd', 'e', 'f', 'g'] as const;
+                const sideLabels: Record<string, string> = {
+                  a: 'Side A (Front)', b: 'Side B (Back)', c: 'Side C (Extra)',
+                  d: 'Side D', e: 'Side E', f: 'Side F', g: 'Side G',
+                };
+                return sides.map(s => {
+                  const sideKey = `side_${s}` as keyof Card;
+                  const content = selectedCard[sideKey];
+                  if (!content) return null;
+                  const labels = currentDeck?.metadata?.side_labels as Record<string, string> | undefined;
+                  const label = labels?.[`side_${s}`];
+                  const displayLabel = label
+                    ? label.charAt(0).toUpperCase() + label.slice(1)
+                    : sideLabels[s];
+                  return (
+                    <div key={s} className={styles.modalSide}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        <h4>{displayLabel}</h4>
+                        {deckId && (
+                          <SpeechButton
+                            deckId={deckId}
+                            cardIdx={selectedCard.idx}
+                            side={s}
+                            size={16}
+                          />
+                        )}
+                      </div>
+                      <p>{content as string}</p>
+                    </div>
+                  );
+                });
+              })()}
+              {/* All sides rendered by the loop above */}
             </div>
           </motion.div>
         </motion.div>
