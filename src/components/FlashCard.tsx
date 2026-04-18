@@ -51,7 +51,7 @@ const FlashCard: FC<FlashCardProps> = ({
             {frontContent.map((item, index) => (
               <div key={index} className={styles.contentItem}>
                 <div className={styles.text}>{item.content}</div>
-                {deckId && (
+                {deckId && !isFlipped && (
                   <SpeechButton
                     deckId={deckId}
                     cardIdx={card.idx}
@@ -72,7 +72,7 @@ const FlashCard: FC<FlashCardProps> = ({
             {backContent.map((item, index) => (
               <div key={index} className={styles.contentItem}>
                 <div className={styles.text}>{item.content}</div>
-                {deckId && (
+                {deckId && isFlipped && (
                   <SpeechButton
                     deckId={deckId}
                     cardIdx={card.idx}
