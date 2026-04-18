@@ -228,19 +228,19 @@ const Deck: FC = () => {
                     ? label.charAt(0).toUpperCase() + label.slice(1)
                     : sideLabels[s];
                   return (
-                    <div key={s} className={styles.modalSide}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <h4>{displayLabel}</h4>
-                        {deckId && (
+                    <div key={s} className={styles.modalSide} style={{ position: 'relative' }}>
+                      <h4>{displayLabel}</h4>
+                      <p>{content as string}</p>
+                      {deckId && (
+                        <div style={{ position: 'absolute', top: '4px', right: '4px' }}>
                           <SpeechButton
                             deckId={deckId}
                             cardIdx={selectedCard.idx}
                             side={s}
                             size={16}
                           />
-                        )}
-                      </div>
-                      <p>{content as string}</p>
+                        </div>
+                      )}
                     </div>
                   );
                 });
