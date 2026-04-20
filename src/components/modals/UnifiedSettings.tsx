@@ -1,4 +1,4 @@
-import { FC, memo, useState, useMemo, useEffect } from 'react';
+import { FC, memo, useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Deck, FlashcardsSettings, LearnModeSettings, ModeSettings, ReadModeSettings } from '@/types';
 import { MatchSettings as MatchSettingsType } from '@/components/modes/match/types';
@@ -320,11 +320,36 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
   };
 };
 
+// Custom comparator for memo: use deep comparison for settings object,
+// skip function props (they change reference every render but are stable via refs in the hook),
+// and shallow-compare everything else. This prevents re-renders when the parent
+// passes inline object literals or arrow functions as props.
+const arePropsEqual = (prev: UnifiedSettingsProps, next: UnifiedSettingsProps): boolean => {
+  if (prev.visible !== next.visible) return false;
+  if (prev.mode !== next.mode) return false;
+  if (prev.deck !== next.deck) return false;
+  // Deep compare settings to handle inline object literals
+  if (JSON.stringify(prev.settings) !== JSON.stringify(next.settings)) return false;
+  // Function props: skip comparison (stabilized via refs in the hook)
+  return true;
+};
+
 export const UnifiedSettings: FC<UnifiedSettingsProps> = memo(
   ({ visible, onClose, deck, mode, settings, onUpdateSettings, onResetMastery, onEditDeck }) => {
     const [isLoading] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
     const [errors, setErrors] = useState<Record<string, string>>({});
+
+    // Stabilize callback refs to prevent child re-renders from new function references
+    const onCloseRef = useRef(onClose);
+    onCloseRef.current = onClose;
+    const stableOnClose = useCallback(() => onCloseRef.current(), []);
+
+    const onResetMasteryRef = useRef(onResetMastery);
+    onResetMasteryRef.current = onResetMastery;
+
+    const onEditDeckRef = useRef(onEditDeck);
+    onEditDeckRef.current = onEditDeck;
 
     const config = useMemo(() => getConfigForMode(mode, deck), [mode, deck]);
 
@@ -353,7 +378,7 @@ export const UnifiedSettings: FC<UnifiedSettingsProps> = memo(
       setIsSaving(true);
       try {
         await handleSave();
-        onClose();
+        stableOnClose();
       } catch (error) {
         setErrors({ save: 'Failed to save settings. Please try again.' });
       } finally {
@@ -385,7 +410,7 @@ export const UnifiedSettings: FC<UnifiedSettingsProps> = memo(
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={onClose}
+              onClick={stableOnClose}
             />
             <motion.div
               className={styles.modal}
@@ -402,7 +427,7 @@ export const UnifiedSettings: FC<UnifiedSettingsProps> = memo(
                 <h2 className={styles.title}>{getModalTitle()}</h2>
                 <button
                   className={styles.closeButton}
-                  onClick={onClose}
+                  onClick={stableOnClose}
                   aria-label="Close settings"
                 >
                   ✕
@@ -473,17 +498,17 @@ export const UnifiedSettings: FC<UnifiedSettingsProps> = memo(
               <footer className={styles.footer}>
                 {mode === 'deck' ? (
                   <>
-                    <button className={styles.cancelButton} onClick={onClose}>
+                    <button className={styles.cancelButton} onClick={stableOnClose}>
                       Close
                     </button>
                     <div className={styles.footerActions}>
-                      {onEditDeck && (
-                        <button className={styles.editDeckButton} onClick={() => { onClose(); onEditDeck(); }}>
+                      {onEditDeckRef.current && (
+                        <button className={styles.editDeckButton} onClick={() => { stableOnClose(); onEditDeckRef.current?.(); }}>
                           Edit Cards
                         </button>
                       )}
-                      {onResetMastery && (
-                        <button className={styles.resetButton} onClick={onResetMastery}>
+                      {onResetMasteryRef.current && (
+                        <button className={styles.resetButton} onClick={() => onResetMasteryRef.current?.()}>
                           Reset Mastery
                         </button>
                       )}
@@ -491,7 +516,7 @@ export const UnifiedSettings: FC<UnifiedSettingsProps> = memo(
                   </>
                 ) : (
                   <>
-                    <button className={styles.cancelButton} onClick={onClose}>
+                    <button className={styles.cancelButton} onClick={stableOnClose}>
                       Cancel
                     </button>
                     <button
@@ -509,7 +534,8 @@ export const UnifiedSettings: FC<UnifiedSettingsProps> = memo(
         )}
       </AnimatePresence>
     );
-  }
+  },
+  arePropsEqual
 );
 
 // Helper function to map section IDs to settings

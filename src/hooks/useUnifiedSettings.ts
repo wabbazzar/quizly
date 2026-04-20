@@ -11,6 +11,17 @@ export const useUnifiedSettings = (
   const [localSettings, setLocalSettings] = useState(initialSettings);
   const { saveSettings, getSettings } = useSettingsStore();
 
+  // Stabilize initialSettings reference using deep comparison to prevent
+  // re-render loops when parent passes an inline object literal
+  const stableSettingsRef = useRef(initialSettings);
+  const serializedSettings = JSON.stringify(initialSettings);
+  const stableSettings = useMemo(() => {
+    // Only create a new reference when the serialized value actually changes
+    stableSettingsRef.current = initialSettings;
+    return stableSettingsRef.current;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serializedSettings]);
+
   // Track if we've already loaded settings to prevent re-running on initialSettings reference changes
   const hasLoadedRef = useRef(false);
   const persistenceKeyRef = useRef(config.persistenceKey);
@@ -31,12 +42,12 @@ export const useUnifiedSettings = (
     const stored = getSettings(config.persistenceKey);
     if (stored) {
       // Merge stored settings with initial settings to handle new fields
-      setLocalSettings({ ...initialSettings, ...stored });
+      setLocalSettings({ ...stableSettings, ...stored });
     } else {
-      setLocalSettings(initialSettings);
+      setLocalSettings(stableSettings);
     }
     hasLoadedRef.current = true;
-  }, [config.persistenceKey, getSettings, initialSettings]);
+  }, [config.persistenceKey, getSettings, stableSettings]);
 
   // Update a single setting
   const updateSetting = useCallback((key: string, value: any) => {
@@ -82,6 +93,10 @@ export const useUnifiedSettings = (
     [config.validationRules]
   );
 
+  // Stabilize onUpdateSettings to avoid re-creating handleSave on every parent render
+  const onUpdateSettingsRef = useRef(onUpdateSettings);
+  onUpdateSettingsRef.current = onUpdateSettings;
+
   // Save settings
   const handleSave = useCallback(async () => {
     const validationErrors = validate(localSettings);
@@ -93,8 +108,8 @@ export const useUnifiedSettings = (
     saveSettings(config.persistenceKey, localSettings);
 
     // Call parent update handler
-    onUpdateSettings(localSettings);
-  }, [localSettings, validate, saveSettings, config.persistenceKey, onUpdateSettings]);
+    onUpdateSettingsRef.current(localSettings);
+  }, [localSettings, validate, saveSettings, config.persistenceKey]);
 
   // Get applicable presets for current mode
   const applicablePresets = useMemo(() => {
