@@ -502,6 +502,9 @@ const Flashcards: FC = () => {
         return;
       }
 
+      // Ignore keyboard shortcuts when modals are open
+      if (showSettings) return;
+
       switch (e.key) {
         case ' ':
           e.preventDefault();
@@ -521,7 +524,7 @@ const Flashcards: FC = () => {
           break;
       }
     },
-    [handleFlip, handleNext, handlePrevious, markCard]
+    [handleFlip, handleNext, handlePrevious, markCard, showSettings]
   );
 
   useEffect(() => {
@@ -529,18 +532,33 @@ const Flashcards: FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
-  // Scroll wheel navigation (desktop)
+  // Scroll wheel navigation (desktop) - debounced
+  const wheelCooldownRef = useRef(false);
   const handleWheel = useCallback(
     (e: WheelEvent) => {
-      if (handsfreeActive) return; // disable during handsfree
+      if (handsfreeActive || showSettings || showCompletionModal) return;
+      if (wheelCooldownRef.current) return;
+      if (Math.abs(e.deltaY) < 30) return;
+
       e.preventDefault();
-      if (e.deltaY > 30) {
-        handleNext();
-      } else if (e.deltaY < -30) {
+      wheelCooldownRef.current = true;
+      setTimeout(() => { wheelCooldownRef.current = false; }, 400);
+
+      if (e.deltaY > 0) {
+        setIsFlipped(prev => {
+          if (!prev) {
+            // First scroll down: flip the card
+            return true;
+          }
+          // Already flipped: go to next card
+          handleNext();
+          return false;
+        });
+      } else {
         handlePrevious();
       }
     },
-    [handleNext, handlePrevious, handsfreeActive]
+    [handleNext, handlePrevious, handsfreeActive, showSettings, showCompletionModal]
   );
 
   useEffect(() => {
