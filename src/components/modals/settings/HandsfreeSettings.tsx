@@ -54,10 +54,18 @@ const HandsfreeSettings: FC<SectionProps> = ({ settings, onChange }) => {
             </div>
           </label>
 
-          <div className={styles.infoBox}>
-            <strong>How it works:</strong> The app plays the front side audio, then listens for your
-            response. Your pronunciation is compared against the back side reference audio using
-            spectral analysis. A success/fail chime plays after each card.
+          <div className={styles.settingRow}>
+            <span className={styles.settingLabel}>Retries after incorrect</span>
+            <select
+              value={settings.handsfreeRetries ?? 1}
+              onChange={e => onChange('handsfreeRetries', parseInt(e.target.value))}
+              className={styles.select}
+            >
+              <option value={0}>No retries</option>
+              <option value={1}>1 retry</option>
+              <option value={2}>2 retries</option>
+              <option value={3}>3 retries</option>
+            </select>
           </div>
         </>
       )}

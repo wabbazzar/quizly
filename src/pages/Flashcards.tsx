@@ -50,6 +50,7 @@ const Flashcards: FC = () => {
   const [includeMastered, setIncludeMastered] = useState(true);
   const [handsfreeActive, setHandsfreeActive] = useState(false);
   const [handsfreePlaybackOnIncorrect, setHandsfreePlaybackOnIncorrect] = useState(true);
+  const [handsfreeRetries, setHandsfreeRetries] = useState(1);
 
   // Load deck and restore session on mount
   useEffect(() => {
@@ -349,6 +350,7 @@ const Flashcards: FC = () => {
     frontSides,
     backSides,
     playbackOnIncorrect: handsfreePlaybackOnIncorrect,
+    maxRetries: handsfreeRetries,
     onCorrect: handleHandsfreeCorrect,
     onIncorrect: handleHandsfreeIncorrect,
   });
@@ -443,6 +445,9 @@ const Flashcards: FC = () => {
       if (settings.handsfreePlaybackOnIncorrect !== undefined) {
         setHandsfreePlaybackOnIncorrect(settings.handsfreePlaybackOnIncorrect);
       }
+      if (settings.handsfreeRetries !== undefined) {
+        setHandsfreeRetries(settings.handsfreeRetries);
+      }
 
       setFrontSides(newFrontSides);
       setBackSides(newBackSides);
@@ -524,6 +529,25 @@ const Flashcards: FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
+  // Scroll wheel navigation (desktop)
+  const handleWheel = useCallback(
+    (e: WheelEvent) => {
+      if (handsfreeActive) return; // disable during handsfree
+      e.preventDefault();
+      if (e.deltaY > 30) {
+        handleNext();
+      } else if (e.deltaY < -30) {
+        handlePrevious();
+      }
+    },
+    [handleNext, handlePrevious, handsfreeActive]
+  );
+
+  useEffect(() => {
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    return () => window.removeEventListener('wheel', handleWheel);
+  }, [handleWheel]);
+
   if (!activeDeck) {
     return null; // Let PageLazyBoundary handle loading state
   }
@@ -579,8 +603,8 @@ const Flashcards: FC = () => {
       <main className={styles.main}>
         {handsfreeActive ? (
           /* Handsfree mode: show card (no drag) + overlay */
-          <>
-            <div className={styles.cardWrapper}>
+          <div className={styles.cardWrapper}>
+            <div className={styles.handsfreeCard}>
               <FlashCard
                 card={currentCard}
                 isFlipped={isFlipped}
@@ -589,17 +613,18 @@ const Flashcards: FC = () => {
                 backSides={backSides}
                 deckId={deckId}
               />
+              <HandsfreeOverlay
+                state={handsfree.state}
+                level={handsfree.level}
+                distance={handsfree.distance}
+                isCorrect={handsfree.isCorrect}
+                attempt={handsfree.attempt}
+                error={handsfree.error}
+                onSkip={handsfree.skip}
+                onStop={() => setHandsfreeActive(false)}
+              />
             </div>
-            <HandsfreeOverlay
-              state={handsfree.state}
-              level={handsfree.level}
-              distance={handsfree.distance}
-              isCorrect={handsfree.isCorrect}
-              error={handsfree.error}
-              onSkip={handsfree.skip}
-              onStop={() => setHandsfreeActive(false)}
-            />
-          </>
+          </div>
         ) : (
           /* Normal mode: draggable cards + controls */
           <>
@@ -721,6 +746,7 @@ const Flashcards: FC = () => {
             groupSides: {},
             handsfreeMode: handsfreeActive,
             handsfreePlaybackOnIncorrect,
+            handsfreeRetries,
           } as FlashcardsSettings
         }
         onUpdateSettings={(newSettings) => {

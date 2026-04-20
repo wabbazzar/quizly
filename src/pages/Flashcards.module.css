@@ -84,6 +84,15 @@
   cursor: grabbing;
 }
 
+.handsfreeCard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
 .swipeIndicator {
   position: absolute;
   top: 50%;

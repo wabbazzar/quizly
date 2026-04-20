@@ -1,137 +1,123 @@
-.overlay {
+.bar {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-6);
-  padding: var(--space-6);
-  min-height: 200px;
-}
-
-.stateSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-4);
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.06), rgba(74, 144, 226, 0.02));
+  border-top: 1px solid rgba(74, 144, 226, 0.1);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  min-height: 44px;
   gap: var(--space-3);
 }
 
-.stateIcon {
+.status {
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: var(--space-2);
+  min-width: 0;
 }
 
-.stateLabel {
+.dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--primary-main);
+  background: rgba(74, 144, 226, 0.1);
+}
+
+.micDot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--semantic-error);
+  background: rgba(239, 68, 68, 0.1);
+  transition: box-shadow 80ms ease-out;
+}
+
+.spinning {
+  background: none;
+  border: 2.5px solid;
+  animation: spin 0.7s linear infinite;
+}
+
+.correctDot {
+  color: var(--semantic-success);
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.incorrectDot {
+  color: var(--semantic-error);
+  background: rgba(239, 68, 68, 0.12);
+}
+
+.label {
   font-size: var(--text-sm);
   color: var(--text-secondary);
   font-weight: 500;
+  white-space: nowrap;
 }
 
-.speakerIcon {
-  color: var(--primary-main);
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-.micContainer {
-  position: relative;
-  color: var(--semantic-error);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.levelRing {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 3px solid var(--semantic-error);
-  transition: transform 80ms ease-out, opacity 80ms ease-out;
-}
-
-.spinner {
-  width: 32px;
-  height: 32px;
-  border: 3px solid var(--border-color);
-  border-top-color: var(--primary-main);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-.resultIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  animation: scaleIn 0.3s ease-out;
-}
-
-.resultIcon.correct {
+.correctText {
   color: var(--semantic-success);
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
-  border: 2px solid rgba(16, 185, 129, 0.3);
 }
 
-.resultIcon.incorrect {
+.incorrectText {
   color: var(--semantic-error);
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));
-  border: 2px solid rgba(239, 68, 68, 0.3);
 }
 
-.distanceLabel {
-  font-size: var(--text-xs);
-  color: var(--text-tertiary);
-}
-
-.errorText {
+.errorLabel {
   font-size: var(--text-sm);
   color: var(--semantic-warning);
-  text-align: center;
 }
 
-.controls {
+.actions {
   display: flex;
-  gap: var(--space-3);
-  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
 }
 
-.skipButton {
-  background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(74, 144, 226, 0.05));
-  border: 1px solid rgba(74, 144, 226, 0.3);
-  color: var(--primary-main);
-  padding: var(--space-2) var(--space-4);
+.actionBtn {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: var(--space-1) var(--space-3);
   border-radius: var(--radius-md);
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
+  font-weight: 500;
   cursor: pointer;
-  min-height: 44px;
-  min-width: 44px;
+  min-height: 32px;
+  min-width: 32px;
+  transition: all 0.15s;
 }
 
-.stopButton {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
-  border: 1px solid rgba(239, 68, 68, 0.3);
+.actionBtn:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.stopBtn {
   color: var(--semantic-error);
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-md);
-  font-size: var(--text-sm);
-  cursor: pointer;
-  min-height: 44px;
-  min-width: 44px;
+  border-color: rgba(239, 68, 68, 0.2);
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.05); }
+.stopBtn:hover {
+  background: rgba(239, 68, 68, 0.08);
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
-@keyframes scaleIn {
-  from { transform: scale(0.5); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+@media (max-width: 640px) {
+  .bar {
+    padding: var(--space-2) var(--space-3);
+  }
 }

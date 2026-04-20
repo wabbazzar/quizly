@@ -174,6 +174,7 @@ export interface FlashcardsSettings extends ModeSettings {
   groupSides: Record<string, string[]>;
   handsfreeMode?: boolean;
   handsfreePlaybackOnIncorrect?: boolean;
+  handsfreeRetries?: number;
 }
 
 // Learn Mode Specific Types

@@ -10,52 +10,37 @@ export type HandsfreeState =
   | 'listening'
   | 'evaluating'
   | 'showing_result'
-  | 'playing_correction';
+  | 'playing_correction'
+  | 'retrying';
 
 interface UseHandsfreeModeOptions {
   enabled: boolean;
   deckId: string;
   card: Card | null;
   cardIndex: number;
-  /** Which side(s) the app plays as the prompt */
   frontSides: string[];
-  /** Which side(s) the user speaks (used to determine reference audio) */
   backSides: string[];
-  /** Play back the correct audio on incorrect answer (default: true) */
   playbackOnIncorrect?: boolean;
+  /** Max retry attempts after hearing correction (0 = no retries) */
+  maxRetries?: number;
   onCorrect: () => void;
   onIncorrect: () => void;
 }
 
 interface UseHandsfreeModeReturn {
   state: HandsfreeState;
-  /** Normalized DTW distance from last comparison */
   distance: number | null;
-  /** Whether the last answer was correct */
   isCorrect: boolean | null;
-  /** Audio input level (0-100) for visualization */
   level: number;
-  /** Skip current card manually */
+  /** Current attempt number (1-based) */
+  attempt: number;
   skip: () => void;
-  /** Whether the recorder/comparison system is supported */
   isSupported: boolean;
-  /** Error message if any */
   error: string | null;
 }
 
 const RESULT_DISPLAY_MS = 2000;
 
-/**
- * Orchestrates the handsfree flashcard loop:
- * idle -> playing_prompt -> listening -> evaluating -> showing_result -> (callback) -> idle
- *
- * On each card:
- * 1. Plays the prompt audio (front side)
- * 2. Records user's response
- * 3. Compares against reference audio (back side) via MFCC + DTW
- * 4. Plays success/fail chime
- * 5. Calls onCorrect/onIncorrect after showing result
- */
 export function useHandsfreeMode({
   enabled,
   deckId,
@@ -64,6 +49,7 @@ export function useHandsfreeMode({
   frontSides,
   backSides,
   playbackOnIncorrect = true,
+  maxRetries = 1,
   onCorrect,
   onIncorrect,
 }: UseHandsfreeModeOptions): UseHandsfreeModeReturn {
@@ -71,6 +57,7 @@ export function useHandsfreeMode({
   const [distance, setDistance] = useState<number | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [attempt, setAttempt] = useState(1);
 
   const recorder = useAudioRecorder();
   const comparison = useAudioComparison();
@@ -79,36 +66,36 @@ export function useHandsfreeMode({
   const resultTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const stateRef = useRef(state);
   stateRef.current = state;
-
-  // Track if we should auto-start on card change
   const enabledRef = useRef(enabled);
   enabledRef.current = enabled;
+  const attemptRef = useRef(attempt);
+  attemptRef.current = attempt;
 
   const getAudioUrl = useCallback((side: string, idx: number) => {
     const sideLetter = side.replace('side_', '');
     return `${import.meta.env.BASE_URL}data/audio/words/${deckId}_card${idx}_side_${sideLetter}.mp3`;
   }, [deckId]);
 
-  // Get the reference audio URL (the side the user should speak)
   const getReferenceUrl = useCallback(() => {
     if (!backSides.length) return null;
     return getAudioUrl(backSides[0], cardIndex);
   }, [backSides, cardIndex, getAudioUrl]);
 
-  // Get the prompt audio URL (the side the app plays)
   const getPromptUrl = useCallback(() => {
     if (!frontSides.length) return null;
     return getAudioUrl(frontSides[0], cardIndex);
   }, [frontSides, cardIndex, getAudioUrl]);
 
-  // Preload reference audio for next card
   const preloadNext = useCallback((nextIdx: number) => {
     if (!backSides.length) return;
-    const url = getAudioUrl(backSides[0], nextIdx);
-    comparison.preloadReference(url);
+    comparison.preloadReference(getAudioUrl(backSides[0], nextIdx));
   }, [backSides, getAudioUrl, comparison]);
 
-  // --- State machine transitions ---
+  // Start listening (used for both initial and retry)
+  const startListening = useCallback(() => {
+    setState('listening');
+    recorder.start();
+  }, [recorder]);
 
   const playPrompt = useCallback(() => {
     const url = getPromptUrl();
@@ -128,25 +115,21 @@ export function useHandsfreeMode({
 
     audio.onended = () => {
       if (stateRef.current === 'playing_prompt') {
-        setState('listening');
-        recorder.start();
+        startListening();
       }
     };
 
     audio.onerror = () => {
-      // If prompt audio doesn't exist, skip to listening directly
-      setState('listening');
-      recorder.start();
+      startListening();
     };
 
     audio.play().catch(() => {
-      // Autoplay blocked - need user gesture
       setError('Tap to start (audio permission needed)');
       setState('idle');
     });
-  }, [getPromptUrl, recorder]);
+  }, [getPromptUrl, startListening]);
 
-  // When recording completes (audioBlob changes), evaluate
+  // When recording completes, evaluate
   useEffect(() => {
     if (!enabled || state !== 'listening' || !recorder.audioBlob) return;
 
@@ -161,18 +144,13 @@ export function useHandsfreeMode({
 
     comparison.compare(recorder.audioBlob, refUrl).then(result => {
       if (!result) {
-        // Silent recording
         playSound('match_failure');
         setIsCorrect(false);
         setDistance(null);
       } else {
         setDistance(result.normalizedDistance);
         setIsCorrect(result.isMatch);
-        if (result.isMatch) {
-          playSound('match_success');
-        } else {
-          playSound('match_failure');
-        }
+        playSound(result.isMatch ? 'match_success' : 'match_failure');
       }
       setState('showing_result');
       recorder.reset();
@@ -184,12 +162,12 @@ export function useHandsfreeMode({
     });
   }, [recorder.audioBlob]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // After showing result: if incorrect and playbackOnIncorrect, play the correct audio
+  // After showing result: handle correction playback and retries
   useEffect(() => {
     if (state !== 'showing_result') return;
 
     if (!isCorrect && playbackOnIncorrect) {
-      // Wait a beat then play the correct pronunciation
+      // Play correction audio, then possibly retry
       resultTimerRef.current = setTimeout(() => {
         const refUrl = getReferenceUrl();
         if (refUrl) {
@@ -197,11 +175,22 @@ export function useHandsfreeMode({
           const correctionAudio = new Audio(refUrl);
           audioRef.current = correctionAudio;
           correctionAudio.onended = () => {
-            // Brief pause after correction plays, then advance
-            resultTimerRef.current = setTimeout(() => {
-              onIncorrect();
-              setState('idle');
-            }, 800);
+            const canRetry = attemptRef.current <= maxRetries;
+            if (canRetry) {
+              // Retry: go back to listening
+              resultTimerRef.current = setTimeout(() => {
+                setAttempt(prev => prev + 1);
+                setDistance(null);
+                setIsCorrect(null);
+                setState('retrying');
+              }, 500);
+            } else {
+              // Out of retries
+              resultTimerRef.current = setTimeout(() => {
+                onIncorrect();
+                setState('idle');
+              }, 800);
+            }
           };
           correctionAudio.onerror = () => {
             onIncorrect();
@@ -216,14 +205,16 @@ export function useHandsfreeMode({
           setState('idle');
         }
       }, 1000);
-    } else {
-      // Correct answer or playback disabled - just advance after delay
+    } else if (!isCorrect) {
+      // No playback, no retry
       resultTimerRef.current = setTimeout(() => {
-        if (isCorrect) {
-          onCorrect();
-        } else {
-          onIncorrect();
-        }
+        onIncorrect();
+        setState('idle');
+      }, RESULT_DISPLAY_MS);
+    } else {
+      // Correct
+      resultTimerRef.current = setTimeout(() => {
+        onCorrect();
         setState('idle');
       }, RESULT_DISPLAY_MS);
     }
@@ -233,38 +224,37 @@ export function useHandsfreeMode({
     };
   }, [state]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Start playing prompt when card changes and mode is enabled
+  // Handle retry state -> start listening again
+  useEffect(() => {
+    if (state !== 'retrying') return;
+    startListening();
+  }, [state]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Start on card change
   useEffect(() => {
     if (!enabled || !card) {
       setState('idle');
       return;
     }
 
-    // Small delay to let animations settle
+    setAttempt(1);
     const timer = setTimeout(() => {
-      if (enabledRef.current) {
-        playPrompt();
-      }
+      if (enabledRef.current) playPrompt();
     }, 500);
 
     return () => clearTimeout(timer);
   }, [enabled, cardIndex]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Preload next card's reference
+  // Preload next
   useEffect(() => {
-    if (enabled && card) {
-      preloadNext(cardIndex + 1);
-    }
+    if (enabled && card) preloadNext(cardIndex + 1);
   }, [enabled, cardIndex]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Cleanup on disable
   useEffect(() => {
     if (!enabled) {
       setState('idle');
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
+      if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
       if (recorder.isRecording) recorder.stop();
     }
   }, [enabled]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -272,19 +262,13 @@ export function useHandsfreeMode({
   // Cleanup on unmount
   useEffect(() => {
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
+      if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
       if (resultTimerRef.current) clearTimeout(resultTimerRef.current);
     };
   }, []);
 
   const skip = useCallback(() => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current = null;
-    }
+    if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
     if (recorder.isRecording) recorder.stop();
     recorder.reset();
     setState('idle');
@@ -296,6 +280,7 @@ export function useHandsfreeMode({
     distance,
     isCorrect,
     level: recorder.level,
+    attempt,
     skip,
     isSupported: recorder.isSupported,
     error: error || recorder.error,

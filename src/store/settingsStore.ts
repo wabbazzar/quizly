@@ -43,6 +43,7 @@ const getDefaultSettings = (mode: string): any => {
       groupSides: {},
       handsfreeMode: false,
       handsfreePlaybackOnIncorrect: true,
+      handsfreeRetries: 1,
     },
     learn: {
       questionSides: ['side_a'],
