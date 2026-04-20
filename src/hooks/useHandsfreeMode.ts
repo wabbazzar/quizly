@@ -21,7 +21,6 @@ interface UseHandsfreeModeOptions {
   frontSides: string[];
   backSides: string[];
   playbackOnIncorrect?: boolean;
-  /** Max retry attempts after hearing correction (0 = no retries) */
   maxRetries?: number;
   onCorrect: () => void;
   onIncorrect: () => void;
@@ -32,14 +31,13 @@ interface UseHandsfreeModeReturn {
   distance: number | null;
   isCorrect: boolean | null;
   level: number;
-  /** Current attempt number (1-based) */
   attempt: number;
   skip: () => void;
   isSupported: boolean;
   error: string | null;
 }
 
-const RESULT_DISPLAY_MS = 2000;
+const RESULT_DISPLAY_MS = 1500;
 
 export function useHandsfreeMode({
   enabled,
@@ -71,10 +69,17 @@ export function useHandsfreeMode({
   enabledRef.current = enabled;
   const attemptRef = useRef(attempt);
   attemptRef.current = attempt;
+  // Stable refs for callbacks that change every render
+  const onCorrectRef = useRef(onCorrect);
+  onCorrectRef.current = onCorrect;
+  const onIncorrectRef = useRef(onIncorrect);
+  onIncorrectRef.current = onIncorrect;
+  const playbackOnIncorrectRef = useRef(playbackOnIncorrect);
+  playbackOnIncorrectRef.current = playbackOnIncorrect;
+  const maxRetriesRef = useRef(maxRetries);
+  maxRetriesRef.current = maxRetries;
 
-  // iOS Safari requires audio.play() from a user gesture. We "unlock" audio
-  // playback by playing a silent buffer once during the first user interaction
-  // (the settings save that enables handsfree). This persists for the page session.
+  // --- Audio unlock for iOS ---
   const audioUnlockedRef = useRef(false);
   const unlockAudio = useCallback(() => {
     if (audioUnlockedRef.current) return;
@@ -85,17 +90,16 @@ export function useHandsfreeMode({
       src.buffer = buf;
       src.connect(ctx.destination);
       src.start(0);
-      // Also play and immediately pause an Audio element to unlock HTMLAudioElement
       const a = new Audio();
       a.src = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=';
       a.play().then(() => a.pause()).catch(() => {});
       audioUnlockedRef.current = true;
     } catch {
-      // ignore - will retry on next interaction
+      // will retry
     }
   }, []);
 
-  // On enable: unlock audio playback AND warm up mic (both need user gesture context)
+  // --- Warmup on enable, release on disable ---
   useEffect(() => {
     if (enabled) {
       unlockAudio();
@@ -105,6 +109,7 @@ export function useHandsfreeMode({
     }
   }, [enabled]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // --- URL helpers ---
   const getAudioUrl = useCallback((side: string, idx: number) => {
     const sideLetter = side.replace('side_', '');
     return `${import.meta.env.BASE_URL}data/audio/words/${deckId}_card${idx}_side_${sideLetter}.mp3`;
@@ -125,18 +130,37 @@ export function useHandsfreeMode({
     comparison.preloadReference(getAudioUrl(backSides[0], nextIdx));
   }, [backSides, getAudioUrl, comparison]);
 
-  // Start listening (used for both initial and retry)
-  const startListening = useCallback(() => {
-    processedBlobRef.current = null; // allow next blob to be processed
+  // --- Helpers to stop any in-flight audio/timers ---
+  const cancelInFlight = useCallback(() => {
+    if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
+    if (resultTimerRef.current) { clearTimeout(resultTimerRef.current); resultTimerRef.current = null; }
+  }, []);
+
+  // --- Play audio with iOS fallback ---
+  const playAudioUrl = useCallback((url: string): Promise<HTMLAudioElement> => {
+    return new Promise((resolve, reject) => {
+      const audio = new Audio(url);
+      audio.volume = 0.5;
+      audioRef.current = audio;
+      audio.onended = () => resolve(audio);
+      audio.onerror = () => reject(new Error('audio error'));
+      audio.play().catch(() => reject(new Error('play blocked')));
+    });
+  }, []);
+
+  // --- Core state machine actions ---
+
+  const doStartListening = useCallback(() => {
+    processedBlobRef.current = null;
     setState('listening');
     recorder.start();
   }, [recorder]);
 
-  const playPrompt = useCallback(() => {
+  const doPlayPromptThenListen = useCallback(() => {
     const url = getPromptUrl();
     if (!url) {
-      setError('No prompt audio available');
-      setState('idle');
+      // No prompt audio, go straight to listening
+      doStartListening();
       return;
     }
 
@@ -145,33 +169,73 @@ export function useHandsfreeMode({
     setIsCorrect(null);
     setError(null);
 
-    const audio = new Audio(url);
-    audioRef.current = audio;
+    playAudioUrl(url)
+      .then(() => {
+        if (stateRef.current === 'playing_prompt') {
+          doStartListening();
+        }
+      })
+      .catch(() => {
+        // Audio play failed (iOS autoplay, missing file) — skip to listening
+        if (stateRef.current === 'playing_prompt') {
+          doStartListening();
+        }
+      });
+  }, [getPromptUrl, doStartListening, playAudioUrl]);
 
-    audio.onended = () => {
-      if (stateRef.current === 'playing_prompt') {
-        startListening();
-      }
-    };
+  const doAdvanceCorrect = useCallback(() => {
+    onCorrectRef.current();
+    setState('idle');
+  }, []);
 
-    audio.onerror = () => {
-      startListening();
-    };
+  const doAdvanceIncorrect = useCallback(() => {
+    onIncorrectRef.current();
+    setState('idle');
+  }, []);
 
-    audio.play().catch(() => {
-      // iOS autoplay blocked - skip prompt audio, go straight to listening
-      // The mic getUserMedia will serve as the user gesture gate
-      startListening();
-    });
-  }, [getPromptUrl, startListening]);
+  const doPlayCorrectionThenMaybeRetry = useCallback(() => {
+    const refUrl = getReferenceUrl();
+    if (!refUrl) {
+      doAdvanceIncorrect();
+      return;
+    }
 
-  // When recording completes, evaluate
+    setState('playing_correction');
+
+    playAudioUrl(refUrl)
+      .then(() => {
+        // Correction played. Can we retry?
+        if (attemptRef.current <= maxRetriesRef.current) {
+          resultTimerRef.current = setTimeout(() => {
+            setAttempt(prev => prev + 1);
+            setDistance(null);
+            setIsCorrect(null);
+            doStartListening();
+          }, 500);
+        } else {
+          resultTimerRef.current = setTimeout(doAdvanceIncorrect, 800);
+        }
+      })
+      .catch(() => {
+        // Correction audio failed to play — still retry if we can
+        if (attemptRef.current <= maxRetriesRef.current) {
+          resultTimerRef.current = setTimeout(() => {
+            setAttempt(prev => prev + 1);
+            setDistance(null);
+            setIsCorrect(null);
+            doStartListening();
+          }, 500);
+        } else {
+          resultTimerRef.current = setTimeout(doAdvanceIncorrect, 800);
+        }
+      });
+  }, [getReferenceUrl, playAudioUrl, doStartListening, doAdvanceIncorrect]);
+
+  // --- Recording complete → evaluate ---
   useEffect(() => {
     const blob = recorder.audioBlob;
     if (!enabled || !blob) return;
-    // Only process if this is a new blob we haven't seen
     if (blob === processedBlobRef.current) return;
-    // Only process if we're in a state where we expect a recording
     if (stateRef.current !== 'listening') return;
 
     processedBlobRef.current = blob;
@@ -205,61 +269,18 @@ export function useHandsfreeMode({
     });
   }, [recorder.audioBlob]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // After showing result: handle correction playback and retries
+  // --- Showing result → advance or correction/retry ---
   useEffect(() => {
     if (state !== 'showing_result') return;
 
-    if (!isCorrect && playbackOnIncorrect) {
-      // Play correction audio, then possibly retry
-      resultTimerRef.current = setTimeout(() => {
-        const refUrl = getReferenceUrl();
-        if (refUrl) {
-          setState('playing_correction');
-          const correctionAudio = new Audio(refUrl);
-          audioRef.current = correctionAudio;
-          correctionAudio.onended = () => {
-            const canRetry = attemptRef.current <= maxRetries;
-            if (canRetry) {
-              // Retry: go back to listening
-              resultTimerRef.current = setTimeout(() => {
-                setAttempt(prev => prev + 1);
-                setDistance(null);
-                setIsCorrect(null);
-                setState('retrying');
-              }, 500);
-            } else {
-              // Out of retries
-              resultTimerRef.current = setTimeout(() => {
-                onIncorrect();
-                setState('idle');
-              }, 800);
-            }
-          };
-          correctionAudio.onerror = () => {
-            onIncorrect();
-            setState('idle');
-          };
-          correctionAudio.play().catch(() => {
-            onIncorrect();
-            setState('idle');
-          });
-        } else {
-          onIncorrect();
-          setState('idle');
-        }
-      }, 1000);
-    } else if (!isCorrect) {
-      // No playback, no retry
-      resultTimerRef.current = setTimeout(() => {
-        onIncorrect();
-        setState('idle');
-      }, RESULT_DISPLAY_MS);
+    if (isCorrect) {
+      resultTimerRef.current = setTimeout(doAdvanceCorrect, RESULT_DISPLAY_MS);
+    } else if (playbackOnIncorrectRef.current) {
+      // Incorrect + playback enabled: wait, then play correction
+      resultTimerRef.current = setTimeout(doPlayCorrectionThenMaybeRetry, 1000);
     } else {
-      // Correct
-      resultTimerRef.current = setTimeout(() => {
-        onCorrect();
-        setState('idle');
-      }, RESULT_DISPLAY_MS);
+      // Incorrect, no playback
+      resultTimerRef.current = setTimeout(doAdvanceIncorrect, RESULT_DISPLAY_MS);
     }
 
     return () => {
@@ -267,58 +288,63 @@ export function useHandsfreeMode({
     };
   }, [state]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Handle retry state -> start listening again
+  // --- Start flow on card change (only when enabled and not already running) ---
   useEffect(() => {
-    if (state !== 'retrying') return;
-    startListening();
-  }, [state]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (!enabled || !card) return;
 
-  // Start on card change
-  useEffect(() => {
-    if (!enabled || !card) {
-      setState('idle');
-      return;
-    }
+    // If we're already in a non-idle state (e.g. returning from settings),
+    // don't restart — the flow is still in progress
+    if (stateRef.current !== 'idle') return;
 
     setAttempt(1);
     processedBlobRef.current = null;
     const timer = setTimeout(() => {
-      if (enabledRef.current) playPrompt();
+      if (enabledRef.current && stateRef.current === 'idle') {
+        doPlayPromptThenListen();
+      }
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [enabled, cardIndex]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [enabled, cardIndex, card]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Preload next
+  // --- Preload next card ---
   useEffect(() => {
     if (enabled && card) preloadNext(cardIndex + 1);
   }, [enabled, cardIndex]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Cleanup on disable (mic release handled in the enable/disable effect above)
-  useEffect(() => {
-    if (!enabled) {
-      setState('idle');
-      if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
-      if (recorder.isRecording) recorder.stop();
-      if (resultTimerRef.current) { clearTimeout(resultTimerRef.current); resultTimerRef.current = null; }
-    }
-  }, [enabled]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Cleanup on unmount
+  // --- Cleanup on unmount ---
   useEffect(() => {
     return () => {
-      if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
-      if (resultTimerRef.current) clearTimeout(resultTimerRef.current);
+      cancelInFlight();
+      if (recorder.isRecording) recorder.stop();
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // --- Resume after app foreground / visibility change ---
+  useEffect(() => {
+    if (!enabled) return;
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible' && enabledRef.current) {
+        // Re-warmup mic (stream may have died in background)
+        recorder.warmup();
+        // If we're stuck in idle, restart the current card
+        if (stateRef.current === 'idle') {
+          processedBlobRef.current = null;
+          doPlayPromptThenListen();
+        }
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
+  }, [enabled]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const skip = useCallback(() => {
-    if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
+    cancelInFlight();
     if (recorder.isRecording) recorder.stop();
     recorder.reset();
     setState('idle');
-    onIncorrect();
-  }, [recorder, onIncorrect]);
+    onIncorrectRef.current();
+  }, [recorder, cancelInFlight]);
 
   return {
     state,

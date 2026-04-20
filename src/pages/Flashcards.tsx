@@ -27,7 +27,7 @@ const Flashcards: FC = () => {
   const { getSession, saveSession, startNewRound, startMissedCardsRound, getMissedCardIndices } =
     useFlashcardSessionStore();
   const { updateDeckProgress } = useProgressStore();
-  const { updateSettings: updateStoredSettings } = useSettingsStore();
+  const { updateSettings: updateStoredSettings, getSettingsForMode } = useSettingsStore();
   const isInitialMount = useRef(true);
 
   // Initialize state from persisted session or defaults
@@ -48,9 +48,11 @@ const Flashcards: FC = () => {
     'shuffle'
   );
   const [includeMastered, setIncludeMastered] = useState(true);
-  const [handsfreeActive, setHandsfreeActive] = useState(false);
-  const [handsfreePlaybackOnIncorrect, setHandsfreePlaybackOnIncorrect] = useState(true);
-  const [handsfreeRetries, setHandsfreeRetries] = useState(1);
+  // Initialize handsfree settings from persisted store
+  const storedFlashcardSettings = deckId ? getSettingsForMode(deckId, 'flashcards') as FlashcardsSettings : null;
+  const [handsfreeActive, setHandsfreeActive] = useState(storedFlashcardSettings?.handsfreeMode ?? false);
+  const [handsfreePlaybackOnIncorrect, setHandsfreePlaybackOnIncorrect] = useState(storedFlashcardSettings?.handsfreePlaybackOnIncorrect ?? true);
+  const [handsfreeRetries, setHandsfreeRetries] = useState(storedFlashcardSettings?.handsfreeRetries ?? 1);
 
   // Load deck and restore session on mount
   useEffect(() => {
