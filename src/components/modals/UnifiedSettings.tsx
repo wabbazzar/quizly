@@ -14,6 +14,7 @@ import MasterySettings from './settings/MasterySettings';
 import DeckInformation from './settings/DeckInformation';
 import MatchSettingsComponent from './settings/MatchSettings';
 import ReadSettings from './settings/ReadSettings';
+import HandsfreeSettings from './settings/HandsfreeSettings';
 
 export interface UnifiedSettingsProps {
   visible: boolean;
@@ -111,6 +112,13 @@ const getConfigForMode = (mode: string, _deck: Deck | null): UnifiedSettingsConf
         visible: true,
         component: MasterySettings,
         order: 5,
+      },
+      {
+        id: 'handsfree',
+        title: 'Handsfree Mode',
+        visible: true,
+        component: HandsfreeSettings,
+        order: 6,
       },
     ],
     learn: [

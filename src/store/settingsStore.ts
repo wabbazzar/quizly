@@ -41,6 +41,8 @@ const getDefaultSettings = (mode: string): any => {
       timerSeconds: 30,
       enableAudio: false,
       groupSides: {},
+      handsfreeMode: false,
+      handsfreePlaybackOnIncorrect: true,
     },
     learn: {
       questionSides: ['side_a'],

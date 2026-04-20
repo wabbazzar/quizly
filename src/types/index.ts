@@ -172,6 +172,8 @@ export interface FlashcardsSettings extends ModeSettings {
   progressionMode: 'sequential' | 'shuffle' | 'level';
   includeMastered?: boolean;
   groupSides: Record<string, string[]>;
+  handsfreeMode?: boolean;
+  handsfreePlaybackOnIncorrect?: boolean;
 }
 
 // Learn Mode Specific Types

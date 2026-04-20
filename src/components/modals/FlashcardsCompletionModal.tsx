@@ -122,9 +122,9 @@ const FlashcardsCompletionModal: FC<FlashcardsCompletionModalProps> = ({
           />
           <motion.div
             className={styles.modal}
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            initial={{ opacity: 0, scale: 0.9, y: '-45%', x: '-50%' }}
+            animate={{ opacity: 1, scale: 1, y: '-50%', x: '-50%' }}
+            exit={{ opacity: 0, scale: 0.9, y: '-45%', x: '-50%' }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
             {/* Performance Header */}

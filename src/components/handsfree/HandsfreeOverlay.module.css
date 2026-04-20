@@ -1,0 +1,137 @@
+.overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  min-height: 200px;
+}
+
+.stateSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.stateIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.stateLabel {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.speakerIcon {
+  color: var(--primary-main);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.micContainer {
+  position: relative;
+  color: var(--semantic-error);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.levelRing {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid var(--semantic-error);
+  transition: transform 80ms ease-out, opacity 80ms ease-out;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--primary-main);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.resultIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  animation: scaleIn 0.3s ease-out;
+}
+
+.resultIcon.correct {
+  color: var(--semantic-success);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+  border: 2px solid rgba(16, 185, 129, 0.3);
+}
+
+.resultIcon.incorrect {
+  color: var(--semantic-error);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));
+  border: 2px solid rgba(239, 68, 68, 0.3);
+}
+
+.distanceLabel {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+}
+
+.errorText {
+  font-size: var(--text-sm);
+  color: var(--semantic-warning);
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.skipButton {
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(74, 144, 226, 0.05));
+  border: 1px solid rgba(74, 144, 226, 0.3);
+  color: var(--primary-main);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.stopButton {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: var(--semantic-error);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

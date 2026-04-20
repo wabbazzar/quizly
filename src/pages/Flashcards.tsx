@@ -16,6 +16,8 @@ import { FlashcardsSettings } from '@/types';
 import { useSettingsStore } from '@/store/settingsStore';
 import FlashcardsCompletionModal from '@/components/modals/FlashcardsCompletionModal';
 import { SharedModeHeader } from '@/components/common/SharedModeHeader';
+import { useHandsfreeMode } from '@/hooks/useHandsfreeMode';
+import HandsfreeOverlay from '@/components/handsfree/HandsfreeOverlay';
 import styles from './Flashcards.module.css';
 
 const Flashcards: FC = () => {
@@ -46,6 +48,8 @@ const Flashcards: FC = () => {
     'shuffle'
   );
   const [includeMastered, setIncludeMastered] = useState(true);
+  const [handsfreeActive, setHandsfreeActive] = useState(false);
+  const [handsfreePlaybackOnIncorrect, setHandsfreePlaybackOnIncorrect] = useState(true);
 
   // Load deck and restore session on mount
   useEffect(() => {
@@ -325,6 +329,30 @@ const Flashcards: FC = () => {
     [currentCardIndex, handleNext]
   );
 
+  // Handsfree mode callbacks (no swipe animation, just advance)
+  const handleHandsfreeCorrect = useCallback(() => {
+    setProgress(prev => ({ ...prev, [currentCardIndex]: 'correct' }));
+    handleNext();
+  }, [currentCardIndex, handleNext]);
+
+  const handleHandsfreeIncorrect = useCallback(() => {
+    setProgress(prev => ({ ...prev, [currentCardIndex]: 'incorrect' }));
+    handleNext();
+  }, [currentCardIndex, handleNext]);
+
+  // Handsfree mode hook
+  const handsfree = useHandsfreeMode({
+    enabled: handsfreeActive,
+    deckId: deckId || '',
+    card: activeDeck?.content[cardOrder.length > 0 ? cardOrder[Math.min(currentCardIndex, cardOrder.length - 1)] : currentCardIndex] || null,
+    cardIndex: cardOrder.length > 0 ? cardOrder[Math.min(currentCardIndex, cardOrder.length - 1)] : currentCardIndex,
+    frontSides,
+    backSides,
+    playbackOnIncorrect: handsfreePlaybackOnIncorrect,
+    onCorrect: handleHandsfreeCorrect,
+    onIncorrect: handleHandsfreeIncorrect,
+  });
+
   const handleContinueWithMissed = useCallback(() => {
     if (!completionResults || !deckId || !activeDeck) return;
 
@@ -407,6 +435,14 @@ const Flashcards: FC = () => {
       const newProgressionMode = settings.progressionMode || progressionMode;
       const newIncludeMastered =
         settings.includeMastered !== undefined ? settings.includeMastered : includeMastered;
+
+      // Handle handsfree mode toggle
+      if (settings.handsfreeMode !== undefined) {
+        setHandsfreeActive(settings.handsfreeMode);
+      }
+      if (settings.handsfreePlaybackOnIncorrect !== undefined) {
+        setHandsfreePlaybackOnIncorrect(settings.handsfreePlaybackOnIncorrect);
+      }
 
       setFrontSides(newFrontSides);
       setBackSides(newBackSides);
@@ -541,102 +577,132 @@ const Flashcards: FC = () => {
       </div>
 
       <main className={styles.main}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentCardIndex}
-            className={styles.cardWrapper}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={1}
-            onDragEnd={handleDragEnd}
-            style={{ touchAction: 'none' }}
-            initial={{ y: window.innerHeight, opacity: 0 }}
-            animate={{
-              y: 0,
-              opacity: 1,
-              x:
-                swipeDirection === 'right'
-                  ? window.innerWidth
-                  : swipeDirection === 'left'
-                    ? -window.innerWidth
-                    : 0,
-              rotate: swipeDirection === 'right' ? 20 : swipeDirection === 'left' ? -20 : 0,
-            }}
-            exit={{
-              opacity: 0,
-              transition: { duration: 0.2 },
-            }}
-            transition={{
-              type: 'spring',
-              stiffness: 300,
-              damping: 30,
-            }}
-          >
-            <FlashCard
-              card={currentCard}
-              isFlipped={isFlipped}
-              onFlip={handleFlip}
-              frontSides={frontSides}
-              backSides={backSides}
-              deckId={deckId}
+        {handsfreeActive ? (
+          /* Handsfree mode: show card (no drag) + overlay */
+          <>
+            <div className={styles.cardWrapper}>
+              <FlashCard
+                card={currentCard}
+                isFlipped={isFlipped}
+                onFlip={handleFlip}
+                frontSides={frontSides}
+                backSides={backSides}
+                deckId={deckId}
+              />
+            </div>
+            <HandsfreeOverlay
+              state={handsfree.state}
+              level={handsfree.level}
+              distance={handsfree.distance}
+              isCorrect={handsfree.isCorrect}
+              error={handsfree.error}
+              onSkip={handsfree.skip}
+              onStop={() => setHandsfreeActive(false)}
             />
+          </>
+        ) : (
+          /* Normal mode: draggable cards + controls */
+          <>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentCardIndex}
+                className={styles.cardWrapper}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={1}
+                onDragEnd={handleDragEnd}
+                style={{ touchAction: 'none' }}
+                initial={{ y: window.innerHeight, opacity: 0 }}
+                animate={{
+                  y: 0,
+                  opacity: 1,
+                  x:
+                    swipeDirection === 'right'
+                      ? window.innerWidth
+                      : swipeDirection === 'left'
+                        ? -window.innerWidth
+                        : 0,
+                  rotate: swipeDirection === 'right' ? 20 : swipeDirection === 'left' ? -20 : 0,
+                }}
+                exit={{
+                  opacity: 0,
+                  transition: { duration: 0.2 },
+                }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 300,
+                  damping: 30,
+                }}
+              >
+                <FlashCard
+                  card={currentCard}
+                  isFlipped={isFlipped}
+                  onFlip={handleFlip}
+                  frontSides={frontSides}
+                  backSides={backSides}
+                  deckId={deckId}
+                />
 
-            {/* Swipe indicators */}
-            <div
-              className={`${styles.swipeIndicator} ${styles.incorrect}`}
-              style={{ opacity: swipeDirection === 'left' ? 1 : 0 }}
-            >
-              ✗
-            </div>
-            <div
-              className={`${styles.swipeIndicator} ${styles.correct}`}
-              style={{ opacity: swipeDirection === 'right' ? 1 : 0 }}
-            >
-              ✓
-            </div>
-          </motion.div>
-        </AnimatePresence>
+                {/* Swipe indicators */}
+                <div
+                  className={`${styles.swipeIndicator} ${styles.incorrect}`}
+                  style={{ opacity: swipeDirection === 'left' ? 1 : 0 }}
+                >
+                  ✗
+                </div>
+                <div
+                  className={`${styles.swipeIndicator} ${styles.correct}`}
+                  style={{ opacity: swipeDirection === 'right' ? 1 : 0 }}
+                >
+                  ✓
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </>
+        )}
       </main>
 
-      <div className={styles.controls}>
-        <button
-          className={styles.navButton}
-          onClick={handlePrevious}
-          disabled={currentCardIndex === 0}
-          aria-label="Previous card"
-        >
-          ←
-        </button>
+      {!handsfreeActive && (
+        <div className={styles.controls}>
+          <button
+            className={styles.navButton}
+            onClick={handlePrevious}
+            disabled={currentCardIndex === 0}
+            aria-label="Previous card"
+          >
+            ←
+          </button>
 
-        <div className={styles.actionButtons}>
+          <div className={styles.actionButtons}>
+            <button
+              className={`${styles.markButton} ${styles.incorrect}`}
+              onClick={() => markCard('incorrect')}
+              aria-label="Mark as incorrect"
+            >
+              ✗ Incorrect
+            </button>
+            <button className={styles.flipButton} onClick={handleFlip} aria-label="Flip card">
+              Flip
+            </button>
+            <button
+              className={`${styles.markButton} ${styles.correct}`}
+              onClick={() => markCard('correct')}
+              aria-label="Mark as correct"
+            >
+              ✓ Correct
+            </button>
+          </div>
+
           <button
-            className={`${styles.markButton} ${styles.incorrect}`}
-            onClick={() => markCard('incorrect')}
-            aria-label="Mark as incorrect"
+            className={styles.navButton}
+            onClick={handleNext}
+            disabled={currentCardIndex === totalCards - 1}
+            aria-label="Next card"
           >
-            ✗ Incorrect
-          </button>
-          <button className={styles.flipButton} onClick={handleFlip} aria-label="Flip card">
-            Flip
-          </button>
-          <button
-            className={`${styles.markButton} ${styles.correct}`}
-            onClick={() => markCard('correct')}
-            aria-label="Mark as correct"
-          >
-            ✓ Correct
+            →
           </button>
         </div>
-
-        <button
-          className={styles.navButton}
-          onClick={handleNext}
-          disabled={currentCardIndex === totalCards - 1}
-          aria-label="Next card"
-        >
-          →
-        </button>
-      </div>
+      )}
 
       <UnifiedSettings
         visible={showSettings}
@@ -653,6 +719,8 @@ const Flashcards: FC = () => {
             timerSeconds: 30,
             enableAudio: false,
             groupSides: {},
+            handsfreeMode: handsfreeActive,
+            handsfreePlaybackOnIncorrect,
           } as FlashcardsSettings
         }
         onUpdateSettings={(newSettings) => {
