@@ -58,7 +58,6 @@ const Flashcards: FC = () => {
         if (isInitialMount.current) {
           const session = getSession(deckId);
           if (session) {
-            setCurrentCardIndex(session.currentCardIndex);
             setProgress(session.progress);
             setFrontSides(session.frontSides);
             setBackSides(session.backSides);
@@ -72,25 +71,43 @@ const Flashcards: FC = () => {
               session.includeMastered !== undefined ? session.includeMastered : true;
             setIncludeMastered(sessionIncludeMastered);
 
-            // Validate card order against current mastered cards
+            // Resolve the cardOrder first so we can clamp currentCardIndex against it.
+            // Otherwise, if filtering shrinks the order, the restored index can point
+            // past the end and crash when rendering the card.
+            let resolvedOrder: number[];
             if (session.cardOrder && !session.isMissedCardsRound) {
               const { getMasteredCards } = useCardMasteryStore.getState();
               const masteredIndices = getMasteredCards(deckId);
 
               if (!sessionIncludeMastered && masteredIndices.length > 0) {
-                // Filter out mastered cards from the order
                 const filteredOrder = session.cardOrder.filter(
                   (idx: number) => !masteredIndices.includes(idx)
                 );
-                setCardOrder(filteredOrder.length > 0 ? filteredOrder : session.cardOrder);
+                resolvedOrder = filteredOrder.length > 0 ? filteredOrder : session.cardOrder;
               } else {
-                setCardOrder(session.cardOrder);
+                resolvedOrder = session.cardOrder;
               }
             } else {
-              setCardOrder(
-                session.cardOrder || Array.from({ length: deck.content.length }, (_, i) => i)
-              );
+              resolvedOrder = (session.cardOrder && session.cardOrder.length > 0)
+                ? session.cardOrder
+                : Array.from({ length: deck.content.length }, (_, i) => i);
             }
+
+            // Drop any stale indices that no longer point into the current deck,
+            // then clamp currentCardIndex to the resolved order's bounds.
+            resolvedOrder = resolvedOrder.filter(
+              idx => idx >= 0 && idx < deck.content.length
+            );
+            if (resolvedOrder.length === 0) {
+              resolvedOrder = Array.from({ length: deck.content.length }, (_, i) => i);
+            }
+            setCardOrder(resolvedOrder);
+
+            const clampedIndex = Math.max(
+              0,
+              Math.min(session.currentCardIndex ?? 0, resolvedOrder.length - 1)
+            );
+            setCurrentCardIndex(clampedIndex);
           } else {
             // Initialize new session with shuffled cards (excluding mastered if needed)
             const { getMasteredCards } = useCardMasteryStore.getState();
@@ -475,10 +492,20 @@ const Flashcards: FC = () => {
     return null; // Let PageLazyBoundary handle loading state
   }
 
-  // Get the actual card based on the card order (always use cardOrder for proper shuffling)
-  const actualCardIndex = cardOrder.length > 0 ? cardOrder[currentCardIndex] : currentCardIndex;
+  // Get the actual card based on the card order (always use cardOrder for proper shuffling).
+  // Guard against out-of-bounds indices: a stale currentCardIndex from a previous session
+  // can outlive a shrunk cardOrder, producing an undefined card that crashes FlashCard.
+  const safeCurrentIndex =
+    cardOrder.length > 0
+      ? Math.min(currentCardIndex, cardOrder.length - 1)
+      : Math.min(currentCardIndex, activeDeck.content.length - 1);
+  const actualCardIndex = cardOrder.length > 0 ? cardOrder[safeCurrentIndex] : safeCurrentIndex;
   const currentCard = activeDeck.content[actualCardIndex];
   const totalCards = cardOrder.length > 0 ? cardOrder.length : activeDeck.content.length;
+
+  if (!currentCard) {
+    return null;
+  }
   const progressPercentage = (Object.keys(progress).length / totalCards) * 100;
   const correctCount = Object.values(progress).filter(p => p === 'correct').length;
   const incorrectCount = Object.values(progress).filter(p => p === 'incorrect').length;
@@ -487,7 +514,7 @@ const Flashcards: FC = () => {
     <div className={styles.container}>
       <SharedModeHeader
         deckName={activeDeck.metadata.deck_name}
-        currentCard={currentCardIndex + 1}
+        currentCard={safeCurrentIndex + 1}
         totalCards={totalCards}
         onBackClick={() => {
           // Session is automatically saved via useEffect

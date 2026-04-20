@@ -23,6 +23,11 @@ const FlashCard: FC<FlashCardProps> = ({
   badgeText,
   deckId,
 }) => {
+  // Guard against an undefined card: the parent should always pass a valid
+  // card, but a stale cardOrder index can briefly produce one during
+  // session restoration, and we shouldn't crash the whole route.
+  if (!card) return null;
+
   const frontContent = frontSides
     .filter(side => card[side as keyof Card])
     .map(side => ({
