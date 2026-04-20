@@ -534,6 +534,9 @@ const Flashcards: FC = () => {
 
   // Scroll wheel navigation (desktop) - debounced
   const wheelCooldownRef = useRef(false);
+  const isFlippedRef = useRef(isFlipped);
+  isFlippedRef.current = isFlipped;
+
   const handleWheel = useCallback(
     (e: WheelEvent) => {
       if (handsfreeActive || showSettings || showCompletionModal) return;
@@ -545,15 +548,12 @@ const Flashcards: FC = () => {
       setTimeout(() => { wheelCooldownRef.current = false; }, 400);
 
       if (e.deltaY > 0) {
-        setIsFlipped(prev => {
-          if (!prev) {
-            // First scroll down: flip the card
-            return true;
-          }
-          // Already flipped: go to next card
+        if (!isFlippedRef.current) {
+          setIsFlipped(true);
+        } else {
+          setIsFlipped(false);
           handleNext();
-          return false;
-        });
+        }
       } else {
         handlePrevious();
       }

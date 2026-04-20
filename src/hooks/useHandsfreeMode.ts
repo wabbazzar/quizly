@@ -72,6 +72,39 @@ export function useHandsfreeMode({
   const attemptRef = useRef(attempt);
   attemptRef.current = attempt;
 
+  // iOS Safari requires audio.play() from a user gesture. We "unlock" audio
+  // playback by playing a silent buffer once during the first user interaction
+  // (the settings save that enables handsfree). This persists for the page session.
+  const audioUnlockedRef = useRef(false);
+  const unlockAudio = useCallback(() => {
+    if (audioUnlockedRef.current) return;
+    try {
+      const ctx = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+      const buf = ctx.createBuffer(1, 1, 22050);
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      src.connect(ctx.destination);
+      src.start(0);
+      // Also play and immediately pause an Audio element to unlock HTMLAudioElement
+      const a = new Audio();
+      a.src = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=';
+      a.play().then(() => a.pause()).catch(() => {});
+      audioUnlockedRef.current = true;
+    } catch {
+      // ignore - will retry on next interaction
+    }
+  }, []);
+
+  // On enable: unlock audio playback AND warm up mic (both need user gesture context)
+  useEffect(() => {
+    if (enabled) {
+      unlockAudio();
+      recorder.warmup();
+    } else {
+      recorder.release();
+    }
+  }, [enabled]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const getAudioUrl = useCallback((side: string, idx: number) => {
     const sideLetter = side.replace('side_', '');
     return `${import.meta.env.BASE_URL}data/audio/words/${deckId}_card${idx}_side_${sideLetter}.mp3`;
@@ -126,8 +159,9 @@ export function useHandsfreeMode({
     };
 
     audio.play().catch(() => {
-      setError('Tap to start (audio permission needed)');
-      setState('idle');
+      // iOS autoplay blocked - skip prompt audio, go straight to listening
+      // The mic getUserMedia will serve as the user gesture gate
+      startListening();
     });
   }, [getPromptUrl, startListening]);
 
@@ -260,12 +294,13 @@ export function useHandsfreeMode({
     if (enabled && card) preloadNext(cardIndex + 1);
   }, [enabled, cardIndex]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Cleanup on disable
+  // Cleanup on disable (mic release handled in the enable/disable effect above)
   useEffect(() => {
     if (!enabled) {
       setState('idle');
       if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
       if (recorder.isRecording) recorder.stop();
+      if (resultTimerRef.current) { clearTimeout(resultTimerRef.current); resultTimerRef.current = null; }
     }
   }, [enabled]); // eslint-disable-line react-hooks/exhaustive-deps
 

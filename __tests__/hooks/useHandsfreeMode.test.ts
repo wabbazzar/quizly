@@ -24,13 +24,13 @@ let triggerBlob: ((blob: Blob | null) => void) | null = null;
 const mockRecorderStart = vi.fn();
 const mockRecorderStop = vi.fn();
 const mockRecorderReset = vi.fn();
+const mockRecorderWarmup = vi.fn(() => Promise.resolve(true));
+const mockRecorderRelease = vi.fn();
 
 vi.mock('@/hooks/useAudioRecorder', () => ({
   useAudioRecorder: () => {
     const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
-    // Expose the setter for tests
     triggerBlob = setAudioBlob;
-    // When reset is called, clear the blob
     const reset = useCallback(() => { setAudioBlob(null); mockRecorderReset(); }, []);
     const start = useCallback(() => { setAudioBlob(null); mockRecorderStart(); }, []);
     return {
@@ -42,6 +42,8 @@ vi.mock('@/hooks/useAudioRecorder', () => ({
       start,
       stop: mockRecorderStop,
       reset,
+      warmup: mockRecorderWarmup,
+      release: mockRecorderRelease,
     };
   },
 }));

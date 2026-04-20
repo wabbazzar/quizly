@@ -9,16 +9,24 @@ interface UseAudioRecorderReturn {
   audioBlob: Blob | null;
   error: string | null;
   isSupported: boolean;
-  /** Current RMS level (0-1) for visualization */
+  /** Current RMS level (0-100) for visualization */
   level: number;
   start: () => Promise<void>;
   stop: () => void;
   reset: () => void;
+  /** Pre-acquire mic permission and keep stream alive */
+  warmup: () => Promise<boolean>;
+  /** Release mic stream */
+  release: () => void;
 }
 
 /**
  * Records audio via MediaRecorder with automatic silence detection.
  * Auto-stops after SILENCE_DURATION_MS of silence or MAX_RECORD_MS total.
+ *
+ * Supports warmup() to pre-acquire the mic stream during a user gesture
+ * (important for iOS Safari). The stream is reused across recordings
+ * until release() is called.
  */
 export function useAudioRecorder(): UseAudioRecorderReturn {
   const [isRecording, setIsRecording] = useState(false);
@@ -27,7 +35,7 @@ export function useAudioRecorder(): UseAudioRecorderReturn {
   const [level, setLevel] = useState(0);
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const mediaStreamRef = useRef<MediaStream | null>(null);
+  const persistentStreamRef = useRef<MediaStream | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const levelIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -37,7 +45,34 @@ export function useAudioRecorder(): UseAudioRecorderReturn {
   const isSupported = typeof MediaRecorder !== 'undefined'
     && typeof navigator.mediaDevices?.getUserMedia === 'function';
 
-  const cleanup = useCallback(() => {
+  const getAudioContext = useCallback(() => {
+    if (!audioContextRef.current || audioContextRef.current.state === 'closed') {
+      audioContextRef.current = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+    }
+    return audioContextRef.current;
+  }, []);
+
+  const getStream = useCallback(async (): Promise<MediaStream | null> => {
+    // Reuse existing stream if alive
+    if (persistentStreamRef.current) {
+      const tracks = persistentStreamRef.current.getAudioTracks();
+      if (tracks.length > 0 && tracks[0].readyState === 'live') {
+        return persistentStreamRef.current;
+      }
+      // Stream died, clear it
+      persistentStreamRef.current = null;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      persistentStreamRef.current = stream;
+      return stream;
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Microphone access denied');
+      return null;
+    }
+  }, []);
+
+  const stopRecording = useCallback(() => {
     if (levelIntervalRef.current) {
       clearInterval(levelIntervalRef.current);
       levelIntervalRef.current = null;
@@ -46,41 +81,41 @@ export function useAudioRecorder(): UseAudioRecorderReturn {
       clearTimeout(maxTimerRef.current);
       maxTimerRef.current = null;
     }
-    if (mediaStreamRef.current) {
-      mediaStreamRef.current.getTracks().forEach(t => t.stop());
-      mediaStreamRef.current = null;
-    }
-    analyserRef.current = null;
-    setLevel(0);
-  }, []);
-
-  const stop = useCallback(() => {
     if (mediaRecorderRef.current?.state === 'recording') {
       mediaRecorderRef.current.stop();
     }
-    cleanup();
+    mediaRecorderRef.current = null;
+    analyserRef.current = null;
+    setLevel(0);
     setIsRecording(false);
-  }, [cleanup]);
+  }, []);
+
+  /** Pre-acquire mic during a user gesture (e.g. button tap). Returns true if successful. */
+  const warmup = useCallback(async (): Promise<boolean> => {
+    const ctx = getAudioContext();
+    if (ctx.state === 'suspended') await ctx.resume();
+    const stream = await getStream();
+    return stream !== null;
+  }, [getAudioContext, getStream]);
+
+  /** Release the persistent mic stream */
+  const release = useCallback(() => {
+    if (persistentStreamRef.current) {
+      persistentStreamRef.current.getTracks().forEach(t => t.stop());
+      persistentStreamRef.current = null;
+    }
+  }, []);
 
   const start = useCallback(async () => {
     setError(null);
     setAudioBlob(null);
     chunksRef.current = [];
 
-    if (!audioContextRef.current) {
-      audioContextRef.current = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
-    }
-    const ctx = audioContextRef.current;
+    const ctx = getAudioContext();
     if (ctx.state === 'suspended') await ctx.resume();
 
-    let stream: MediaStream;
-    try {
-      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Microphone access denied');
-      return;
-    }
-    mediaStreamRef.current = stream;
+    const stream = await getStream();
+    if (!stream) return;
 
     // Analyser for silence detection + level meter
     const source = ctx.createMediaStreamSource(stream);
@@ -124,7 +159,7 @@ export function useAudioRecorder(): UseAudioRecorderReturn {
       if (hasHadSound && rms < SILENCE_THRESHOLD) {
         if (!silentSince) silentSince = Date.now();
         else if (Date.now() - silentSince > SILENCE_DURATION_MS) {
-          stop();
+          stopRecording();
         }
       } else {
         silentSince = null;
@@ -133,9 +168,13 @@ export function useAudioRecorder(): UseAudioRecorderReturn {
 
     // Safety cap
     maxTimerRef.current = setTimeout(() => {
-      if (mediaRecorderRef.current?.state === 'recording') stop();
+      if (mediaRecorderRef.current?.state === 'recording') stopRecording();
     }, MAX_RECORD_MS);
-  }, [stop]);
+  }, [getAudioContext, getStream, stopRecording]);
+
+  const stop = useCallback(() => {
+    stopRecording();
+  }, [stopRecording]);
 
   const reset = useCallback(() => {
     setAudioBlob(null);
@@ -149,12 +188,16 @@ export function useAudioRecorder(): UseAudioRecorderReturn {
       if (mediaRecorderRef.current?.state === 'recording') {
         mediaRecorderRef.current.stop();
       }
-      cleanup();
+      if (levelIntervalRef.current) clearInterval(levelIntervalRef.current);
+      if (maxTimerRef.current) clearTimeout(maxTimerRef.current);
+      if (persistentStreamRef.current) {
+        persistentStreamRef.current.getTracks().forEach(t => t.stop());
+      }
       if (audioContextRef.current?.state !== 'closed') {
         audioContextRef.current?.close();
       }
     };
-  }, [cleanup]);
+  }, []);
 
-  return { isRecording, audioBlob, error, isSupported, level, start, stop, reset };
+  return { isRecording, audioBlob, error, isSupported, level, start, stop, reset, warmup, release };
 }
