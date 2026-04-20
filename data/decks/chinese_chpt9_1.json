@@ -1,0 +1,1862 @@
+{
+  "id": "chinese_chpt9_1",
+  "metadata": {
+    "deck_name": "Chinese Chapter 9 Part 1",
+    "abbreviated_title": "Chp 9 pt 1",
+    "deck_subtitle": "Shopping",
+    "description": "Essential Chinese vocabulary for shopping, including store items, colors, sizes, and money",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 7,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description",
+      "side_e": "example (pinyin)",
+      "side_f": "example translation",
+      "side_g": "usage notes"
+    },
+    "card_count": 31,
+    "difficulty": "intermediate",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "shopping",
+      "vocabulary",
+      "chapter9"
+    ],
+    "version": "1.0.0",
+    "created_date": "2025-01-22T10:00:00Z",
+    "last_updated": "2025-01-22T16:00:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "store",
+      "side_a": "Store; shop",
+      "side_b": "shāngdiàn",
+      "side_c": "商店",
+      "side_d": "noun",
+      "side_e": "Wǒ qù shāngdiàn mǎi dōngxi.",
+      "side_f": "I'm going to the store to buy things.",
+      "side_g": "商店 is a generic 'shop/store'; for bigger venues use 超市 (supermarket) or 百货商店 (department store). Often preceded by 去 or 在. Neutral register.",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "buy",
+      "side_a": "To buy",
+      "side_b": "mǎi",
+      "side_c": "买",
+      "side_d": "verb",
+      "side_e": "Nǐ xiǎng mǎi shénme?",
+      "side_f": "What do you want to buy?",
+      "side_g": "买 mǎi (buy) and 卖 mài (sell) differ only in tone—classic minimal pair to drill. Takes a direct object; resultative 买到 means 'manage to buy'. Neutral register.",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "things",
+      "side_a": "Things; objects",
+      "side_b": "dōngxi",
+      "side_c": "东西",
+      "side_d": "noun",
+      "side_e": "Wǒ yào mǎi yìdiǎnr dōngxi.",
+      "side_f": "I want to buy a few things.",
+      "side_g": "东西 is pronounced dōngxi (neutral tone on 西) when meaning 'things'; dōngxī (full tone) means 'east–west' directions. Can also colloquially refer to people, usually pejoratively (e.g., 坏东西).",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "shop_assistant",
+      "side_a": "Shop assistant; salesclerk",
+      "side_b": "shòuhuòyuán",
+      "side_c": "售货员",
+      "side_d": "noun",
+      "side_e": "Shòuhuòyuán hěn rèqíng.",
+      "side_f": "The salesclerk is very warm/attentive.",
+      "side_g": "售货员 is the textbook word; in modern usage 店员 diànyuán or 服务员 fúwùyuán are more common. 员 -yuán is a productive suffix meaning 'staff member' (e.g., 服务员, 运动员).",
+      "level": 2
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "clothes",
+      "side_a": "Clothes",
+      "side_b": "yīfu",
+      "side_c": "衣服",
+      "side_d": "noun",
+      "side_e": "Zhè jiàn yīfu hěn hǎokàn.",
+      "side_f": "This piece of clothing is very nice-looking.",
+      "side_g": "衣服 is a mass/generic term; 服 is neutral tone here. Use 件 as measure word. Note 衣服 covers tops and general clothing, while 裤子 (pants) takes 条.",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "measure_word_shirt",
+      "side_a": "Measure word for shirts, dresses, jackets, coats, etc.",
+      "side_b": "jiàn",
+      "side_c": "件",
+      "side_d": "measure word",
+      "side_e": "Wǒ mǎile liǎng jiàn chènshān.",
+      "side_f": "I bought two shirts.",
+      "side_g": "件 jiàn is the measure word for upper-body garments (shirts, jackets, coats) and also abstract 'items' like 事 (matters) and 礼物 (gifts). Does not fit pants or skirts.",
+      "level": 2
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "shirt",
+      "side_a": "Shirt",
+      "side_b": "chènshān",
+      "side_c": "衬衫",
+      "side_d": "noun",
+      "side_e": "Zhè jiàn chènshān shì hóng de.",
+      "side_f": "This shirt is red.",
+      "side_g": "衬衫 specifically means a button-up/dress shirt; 'T-shirt' is T恤 (T-xù). Pair with 件. Often precedes colors via 的 structure: 红的衬衫 or 衬衫是红的.",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "color",
+      "side_a": "Color",
+      "side_b": "yánsè",
+      "side_c": "颜色",
+      "side_d": "noun",
+      "side_e": "Nǐ xǐhuan shénme yánsè?",
+      "side_f": "What color do you like?",
+      "side_g": "颜色 is the abstract noun 'color'; individual colors (红, 黄, 蓝) are adjectives that typically take 色 suffix (红色, 黄色) when used as nouns. Question pattern: 什么颜色 is the go-to.",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "yellow",
+      "side_a": "Yellow",
+      "side_b": "huáng",
+      "side_c": "黄",
+      "side_d": "adjective",
+      "side_e": "Wǒ xǐhuan huáng chènshān.",
+      "side_f": "I like yellow shirts.",
+      "side_g": "黄 as adjective attaches directly (黄衬衫) or with 色的 (黄色的衬衫). Culturally, 黄 can connote 'smutty/obscene' in 黄色电影—rely on context. Classical association with the emperor.",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "red",
+      "side_a": "Red",
+      "side_b": "hóng",
+      "side_c": "红",
+      "side_d": "adjective",
+      "side_e": "Zhè tiáo kùzi tài hóng le.",
+      "side_f": "These pants are too red.",
+      "side_g": "红 is auspicious in Chinese culture (weddings, New Year) and also means 'popular/famous' (他很红 = he's famous). As attributive adjective add 的 when polysyllabic context: 红色的.",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "wear",
+      "side_a": "To wear; to put on",
+      "side_b": "chuān",
+      "side_c": "穿",
+      "side_d": "verb",
+      "side_e": "Tā jīntiān chuānle yí jiàn hóng chènshān.",
+      "side_f": "She's wearing a red shirt today.",
+      "side_g": "穿 is for items you put your body into/through: clothes, pants, shoes, socks. Accessories (hats, glasses, watches, scarves) take 戴 dài instead. Past/completed state often uses 穿着 chuānzhe.",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "measure_word_pants",
+      "side_a": "Measure word for pants and long, thin objects",
+      "side_b": "tiáo",
+      "side_c": "条",
+      "side_d": "measure word",
+      "side_e": "Wǒ xiǎng mǎi yì tiáo kùzi.",
+      "side_f": "I want to buy a pair of pants.",
+      "side_g": "条 tiáo is the measure word for long, narrow things: pants, skirts, rivers, roads, fish, dogs, ties, news (新闻). Contrasts with 件 for upper garments.",
+      "level": 2
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "pants",
+      "side_a": "Pants",
+      "side_b": "kùzi",
+      "side_c": "裤子",
+      "side_d": "noun",
+      "side_e": "Zhè tiáo kùzi bù cháng yě bù duǎn.",
+      "side_f": "These pants are neither long nor short.",
+      "side_g": "裤子 always takes 条, never 件. 子 is neutral tone. Shorts = 短裤; jeans = 牛仔裤 niúzǎikù. Singular form refers to one pair.",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "size",
+      "side_a": "Size",
+      "side_b": "hào",
+      "side_c": "号",
+      "side_d": "noun",
+      "side_e": "Nǐ chuān duō dà hào?",
+      "side_f": "What size do you wear? (Literally: you wear how-big a size?)",
+      "side_g": "号 hào means 'number/size' and also 'date' (五月三号). For clothing sizes, ask 多大号 or 几号. Don't confuse with 大小 dàxiǎo which is abstract 'size' as a noun.",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "medium",
+      "side_a": "Medium; middle",
+      "side_b": "zhōng",
+      "side_c": "中",
+      "side_d": "adjective",
+      "side_e": "Wǒ chuān zhōng hào.",
+      "side_f": "I wear size medium.",
+      "side_g": "中 zhōng means 'medium/middle'; sizes S/M/L are 小号/中号/大号. 中 also appears in 中国 (Middle Kingdom), 中午 (noon). When used as verb 'to hit' it's pronounced zhòng (4th tone).",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "cheap",
+      "side_a": "Cheap; inexpensive",
+      "side_b": "piányi",
+      "side_c": "便宜",
+      "side_d": "adjective",
+      "side_e": "Zhè jiàn yīfu hěn piányi.",
+      "side_f": "This piece of clothing is very cheap.",
+      "side_g": "便宜 piányi (neutral tone on 宜) is the everyday word—neutral connotation, no 'cheap quality' implication. Opposite is 贵 guì. Note 便 here is pián, not biàn (as in 方便 fāngbiàn).",
+      "level": 1
+    },
+    {
+      "card_id": "card-017",
+      "idx": 16,
+      "name": "if",
+      "side_a": "If",
+      "side_b": "rúguǒ...de huà",
+      "side_c": "如果...的话",
+      "side_d": "conjunction",
+      "side_e": "Rúguǒ piányi de huà, wǒ jiù mǎi.",
+      "side_f": "If it's cheap, then I'll buy it. (Literally: if-cheap-'s speech, I then buy.)",
+      "side_g": "如果...的话 is a paired conditional frame; the 的话 tag is optional and softens the tone. The second clause usually takes 就 jiù. Colloquially 要是 yàoshi...的话 is more casual.",
+      "level": 2
+    },
+    {
+      "card_id": "card-018",
+      "idx": 17,
+      "name": "length",
+      "side_a": "Length",
+      "side_b": "chángduǎn",
+      "side_c": "长短",
+      "side_d": "noun",
+      "side_e": "Zhè tiáo kùzi de chángduǎn zěnmeyàng?",
+      "side_f": "How is the length of these pants? (Literally: long-short)",
+      "side_g": "长短 is an antonym-compound noun meaning 'length' (lit. long-short). Similar pattern: 大小 (size), 多少 (amount), 高矮 (height), 好坏 (quality). Abstract/measurable dimension noun.",
+      "level": 2
+    },
+    {
+      "card_id": "card-019",
+      "idx": 18,
+      "name": "long",
+      "side_a": "Long",
+      "side_b": "cháng",
+      "side_c": "长",
+      "side_d": "adjective",
+      "side_e": "Zhè tiáo kùzi yǒudiǎnr cháng.",
+      "side_f": "These pants are a bit long.",
+      "side_g": "长 has two readings: cháng (long, adj.) and zhǎng (to grow; elder, as in 长大, 校长). Context and grammar distinguish them. Antonym 短 duǎn.",
+      "level": 1
+    },
+    {
+      "card_id": "card-020",
+      "idx": 19,
+      "name": "short",
+      "side_a": "Short",
+      "side_b": "duǎn",
+      "side_c": "短",
+      "side_d": "adjective",
+      "side_e": "Chènshān tài duǎn le, bù héshì.",
+      "side_f": "The shirt is too short, it doesn't fit.",
+      "side_g": "短 duǎn is for physical length and time spans (短时间). For 'short in height' of a person, use 矮 ǎi, not 短. Pairs with 长 cháng.",
+      "level": 1
+    },
+    {
+      "card_id": "card-021",
+      "idx": 20,
+      "name": "suitable",
+      "side_a": "Suitable",
+      "side_b": "héshì",
+      "side_c": "合适",
+      "side_d": "adjective",
+      "side_e": "Zhè jiàn chènshān hěn héshì.",
+      "side_f": "This shirt fits/suits well.",
+      "side_g": "合适 covers both 'fits (size)' and 'suitable (appropriate)'. Adjective only—cannot take an object directly. For 'suitable for X' use 对 X 合适 or 适合 shìhé (which is a verb and CAN take objects: 适合你).",
+      "level": 2
+    },
+    {
+      "card_id": "card-022",
+      "idx": 21,
+      "name": "try",
+      "side_a": "To try",
+      "side_b": "shì",
+      "side_c": "试",
+      "side_d": "verb",
+      "side_e": "Wǒ kěyǐ shì yíxià ma?",
+      "side_f": "Can I try it on?",
+      "side_g": "试 often reduplicates as 试试 or combines with 一下 to soften ('give it a try'). For trying on clothes specifically, 试穿 shìchuān is the compound. Also 考试 (to test/exam) and 试试看 (try and see).",
+      "level": 1
+    },
+    {
+      "card_id": "card-023",
+      "idx": 22,
+      "name": "need_not",
+      "side_a": "Need not",
+      "side_b": "búyòng",
+      "side_c": "不用",
+      "side_d": "phrase",
+      "side_e": "Búyòng shì le, wǒ zhīdào héshì.",
+      "side_f": "No need to try, I know it fits. (Literally: not-use)",
+      "side_g": "不用 = 'need not / no need to', a polite refusal equivalent to English 'don't bother'. 不 becomes bú (2nd tone) before 4th-tone 用. Compare 不必 búbì (more formal) and 别 bié (don't, prohibitive).",
+      "level": 2
+    },
+    {
+      "card_id": "card-024",
+      "idx": 23,
+      "name": "altogether",
+      "side_a": "Altogether",
+      "side_b": "yígòng",
+      "side_c": "一共",
+      "side_d": "adverb",
+      "side_e": "Yígòng duōshao qián?",
+      "side_f": "How much altogether?",
+      "side_g": "一共 yígòng sums up totals; often paired with 多少钱 in shopping. Similar: 总共 zǒnggòng (more formal), 一块儿 (together, spatial).",
+      "level": 2
+    },
+    {
+      "card_id": "card-025",
+      "idx": 24,
+      "name": "how_much",
+      "side_a": "How much or many",
+      "side_b": "duōshao",
+      "side_c": "多少",
+      "side_d": "question pronoun",
+      "side_e": "Zhè jiàn yīfu duōshao qián?",
+      "side_f": "How much is this piece of clothing?",
+      "side_g": "多少 works for any quantity (no upper bound) and for prices/phone numbers; 几 jǐ is for small expected numbers (<10) and requires a measure word. 多少 often omits the measure word.",
+      "level": 1
+    },
+    {
+      "card_id": "card-026",
+      "idx": 25,
+      "name": "money",
+      "side_a": "Money",
+      "side_b": "qián",
+      "side_c": "钱",
+      "side_d": "noun",
+      "side_e": "Wǒ méiyǒu qián.",
+      "side_f": "I don't have money.",
+      "side_g": "钱 is the generic noun 'money'; cash = 现金 xiànjīn, change = 零钱 língqián. Common compounds: 花钱 (spend), 赚钱/挣钱 (earn), 找钱 (give change), 付钱 (pay).",
+      "level": 1
+    },
+    {
+      "card_id": "card-027",
+      "idx": 26,
+      "name": "kuai",
+      "side_a": "measure word for Chinese monetary unit)",
+      "side_b": "kuài",
+      "side_c": "块",
+      "side_d": "measure word",
+      "side_e": "Zhè jiàn chènshān wǔshí kuài qián.",
+      "side_f": "This shirt is fifty kuai.",
+      "side_g": "块 kuài is the colloquial spoken measure word for yuan 元 (the formal/written form). Use 块 when speaking, 元 on receipts/formal. Also means 'piece/chunk' (一块蛋糕). Omit 钱 when followed by 毛/分.",
+      "level": 2
+    },
+    {
+      "card_id": "card-028",
+      "idx": 27,
+      "name": "mao",
+      "side_a": "measure word for 1/10 of a kuai, dime",
+      "side_b": "máo",
+      "side_c": "毛",
+      "side_d": "measure word",
+      "side_e": "Sān kuài wǔ máo qián.",
+      "side_f": "Three kuai five mao. (i.e., 3.5 yuan)",
+      "side_g": "毛 máo = 1/10 yuan (jiao 角 in formal writing). In spoken prices, when 毛 is the last unit, 钱 is optional and the 毛 itself may be dropped: 三块五 = 3.50. Also means 'fur/hair' (毛发).",
+      "level": 2
+    },
+    {
+      "card_id": "card-029",
+      "idx": 28,
+      "name": "fen",
+      "side_a": "measure word for 1/100 of a kuai, cent)",
+      "side_b": "fēn",
+      "side_c": "分",
+      "side_d": "measure word",
+      "side_e": "Yí kuài èr máo wǔ fēn.",
+      "side_f": "One kuai, two mao, five fen. (1.25 yuan)",
+      "side_g": "分 fēn = 1/100 yuan (cent); rarely used today due to inflation. 分 also means 'minute' (时间), 'point/score' (考试), and as verb 'to divide'. Formal written equivalent for currency is 分.",
+      "level": 2
+    },
+    {
+      "card_id": "card-030",
+      "idx": 29,
+      "name": "hundred",
+      "side_a": "Hundred",
+      "side_b": "bǎi",
+      "side_c": "百",
+      "side_d": "number",
+      "side_e": "Yígòng yìbǎi kuài qián.",
+      "side_f": "One hundred kuai altogether.",
+      "side_g": "百 always needs 一 before it in counting (一百, not just 百). For 100+ numbers: 一百零五 (105, with 零 for the zero slot). Tone change: 一 is 4th tone before 3rd-tone 百 → yìbǎi.",
+      "level": 1
+    },
+    {
+      "card_id": "card-031",
+      "idx": 30,
+      "name": "give_change",
+      "side_a": "To give change",
+      "side_b": "zhǎo (qián)",
+      "side_c": "找(钱)",
+      "side_d": "verb object",
+      "side_e": "Zhǎo nǐ wǔ kuài qián.",
+      "side_f": "(Here's) five kuai change for you. (Literally: find you five kuai money)",
+      "side_g": "找 as 'give change' is a verb-object compound where 找 literally means 'seek/find'. The same character 找 also means 'to look for' (我找你 = I'm looking for you). Pattern: 找 + [person] + [amount] 钱.",
+      "level": 2
+    }
+  ],
+  "reading": {
+    "sides": {
+      "a": "characters",
+      "b": "pinyin",
+      "c": "english"
+    },
+    "tokenization": {
+      "unit": {
+        "a": "character",
+        "b": "space",
+        "c": "space"
+      },
+      "preservePunctuation": true,
+      "alignment": "index"
+    },
+    "dialogues": {
+      "dialogue1": {
+        "lines": [
+          {
+            "a": "对不起，这双鞋太小了。能不能换一双？",
+            "b": "Duìbuqǐ, zhè shuāng xié tài xiǎo le. Néng bu néng huàn yì shuāng?",
+            "c": "Excuse me, this pair of shoes is too small. Can I exchange them?",
+            "wordAlignments": [
+              {
+                "chinese": "对不起",
+                "pinyin": "Duìbuqǐ",
+                "english": "Excuse me"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "这双",
+                "pinyin": "zhè shuāng",
+                "english": "this pair"
+              },
+              {
+                "chinese": "鞋",
+                "pinyin": "xié",
+                "english": "of shoes"
+              },
+              {
+                "chinese": "太",
+                "pinyin": "tài",
+                "english": "is too"
+              },
+              {
+                "chinese": "小",
+                "pinyin": "xiǎo",
+                "english": "small"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "."
+              },
+              {
+                "chinese": "能不能",
+                "pinyin": "Néng bu néng",
+                "english": "Can I"
+              },
+              {
+                "chinese": "换",
+                "pinyin": "huàn",
+                "english": "exchange"
+              },
+              {
+                "chinese": "一双",
+                "pinyin": "yì shuāng",
+                "english": "them"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
+            ]
+          },
+          {
+            "a": "没问题。您看，这双怎么样？",
+            "b": "Méi wèntí. Nín kàn, zhè shuāng zěnmeyàng?",
+            "c": "No problem. Please take a look—how about this pair?",
+            "wordAlignments": [
+              {
+                "chinese": "没问题",
+                "pinyin": "Méi wèntí",
+                "english": "No problem"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              },
+              {
+                "chinese": "您",
+                "pinyin": "Nín",
+                "english": "Please"
+              },
+              {
+                "chinese": "看",
+                "pinyin": "kàn",
+                "english": "take a look"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": "—"
+              },
+              {
+                "chinese": "这双",
+                "pinyin": "zhè shuāng",
+                "english": "this pair"
+              },
+              {
+                "chinese": "怎么样",
+                "pinyin": "zěnmeyàng",
+                "english": "how about"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
+            ]
+          },
+          {
+            "a": "也不行，这双跟那双一样大。",
+            "b": "Yě bù xíng, zhè shuāng gēn nà shuāng yíyàng dà.",
+            "c": "Still not okay; this pair is the same size as that pair.",
+            "wordAlignments": [
+              {
+                "chinese": "也",
+                "pinyin": "Yě",
+                "english": "Still"
+              },
+              {
+                "chinese": "不行",
+                "pinyin": "bù xíng",
+                "english": "not okay"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ";"
+              },
+              {
+                "chinese": "这双",
+                "pinyin": "zhè shuāng",
+                "english": "this pair"
+              },
+              {
+                "chinese": "跟",
+                "pinyin": "gēn",
+                "english": "is"
+              },
+              {
+                "chinese": "那双",
+                "pinyin": "nà shuāng",
+                "english": "that pair"
+              },
+              {
+                "chinese": "一样",
+                "pinyin": "yíyàng",
+                "english": "the same"
+              },
+              {
+                "chinese": "大",
+                "pinyin": "dà",
+                "english": "size as"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "那这双黑的呢？",
+            "b": "Nà zhè shuāng hēi de ne?",
+            "c": "Then how about this black pair?",
+            "wordAlignments": [
+              {
+                "chinese": "那",
+                "pinyin": "Nà",
+                "english": "Then"
+              },
+              {
+                "chinese": "这双",
+                "pinyin": "zhè shuāng",
+                "english": "this"
+              },
+              {
+                "chinese": "黑",
+                "pinyin": "hēi",
+                "english": "black"
+              },
+              {
+                "chinese": "的",
+                "pinyin": "de",
+                "english": "pair"
+              },
+              {
+                "chinese": "呢",
+                "pinyin": "ne",
+                "english": "how about"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
+            ]
+          },
+          {
+            "a": "这双鞋虽然大小合适，可是颜色不好。有没有咖啡色的？",
+            "b": "Zhè shuāng xié suīrán dàxiǎo héshì, kěshì yánsè bù hǎo. Yǒu méiyǒu kāfēisè de?",
+            "c": "Although this pair fits, the color isn't good. Do you have brown ones?",
+            "wordAlignments": [
+              {
+                "chinese": "虽然",
+                "pinyin": "suīrán",
+                "english": "Although"
+              },
+              {
+                "chinese": "这双",
+                "pinyin": "zhè shuāng",
+                "english": "this pair"
+              },
+              {
+                "chinese": "鞋",
+                "pinyin": "xié",
+                "english": ""
+              },
+              {
+                "chinese": "大小",
+                "pinyin": "dàxiǎo",
+                "english": "fits"
+              },
+              {
+                "chinese": "合适",
+                "pinyin": "héshì",
+                "english": ""
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "可是",
+                "pinyin": "kěshì",
+                "english": "the"
+              },
+              {
+                "chinese": "颜色",
+                "pinyin": "yánsè",
+                "english": "color"
+              },
+              {
+                "chinese": "不",
+                "pinyin": "bù",
+                "english": "isn't"
+              },
+              {
+                "chinese": "好",
+                "pinyin": "hǎo",
+                "english": "good"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              },
+              {
+                "chinese": "有没有",
+                "pinyin": "Yǒu méiyǒu",
+                "english": "Do you have"
+              },
+              {
+                "chinese": "咖啡色",
+                "pinyin": "kāfēisè",
+                "english": "brown"
+              },
+              {
+                "chinese": "的",
+                "pinyin": "de",
+                "english": "ones"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
+            ]
+          },
+          {
+            "a": "对不起，这种鞋只有黑的。",
+            "b": "Duìbuqǐ, zhè zhǒng xié zhǐ yǒu hēi de.",
+            "c": "Sorry, this style only comes in black.",
+            "wordAlignments": [
+              {
+                "chinese": "对不起",
+                "pinyin": "Duìbuqǐ",
+                "english": "Sorry"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "这种",
+                "pinyin": "zhè zhǒng",
+                "english": "this style"
+              },
+              {
+                "chinese": "鞋",
+                "pinyin": "xié",
+                "english": ""
+              },
+              {
+                "chinese": "只有",
+                "pinyin": "zhǐ yǒu",
+                "english": "only comes in"
+              },
+              {
+                "chinese": "黑",
+                "pinyin": "hēi",
+                "english": "black"
+              },
+              {
+                "chinese": "的",
+                "pinyin": "de",
+                "english": ""
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "这双鞋样子挺好的……就是它吧。你们这儿可以刷卡吗？",
+            "b": "Zhè shuāng xié yàngzi tǐng hǎo de... jiù shì tā ba. Nǐmen zhèr kěyǐ shuā kǎ ma?",
+            "c": "This pair looks pretty good... I'll take it. Can I pay by card?",
+            "wordAlignments": [
+              {
+                "chinese": "这双",
+                "pinyin": "Zhè shuāng",
+                "english": "This pair"
+              },
+              {
+                "chinese": "鞋",
+                "pinyin": "xié",
+                "english": ""
+              },
+              {
+                "chinese": "样子",
+                "pinyin": "yàngzi",
+                "english": "looks"
+              },
+              {
+                "chinese": "挺",
+                "pinyin": "tǐng",
+                "english": "pretty"
+              },
+              {
+                "chinese": "好",
+                "pinyin": "hǎo",
+                "english": "good"
+              },
+              {
+                "chinese": "的",
+                "pinyin": "de",
+                "english": ""
+              },
+              {
+                "chinese": "……",
+                "pinyin": "...",
+                "english": "..."
+              },
+              {
+                "chinese": "就是",
+                "pinyin": "jiù shì",
+                "english": "I'll take"
+              },
+              {
+                "chinese": "它",
+                "pinyin": "tā",
+                "english": "it"
+              },
+              {
+                "chinese": "吧",
+                "pinyin": "ba",
+                "english": ""
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              },
+              {
+                "chinese": "你们",
+                "pinyin": "Nǐmen",
+                "english": "Can I"
+              },
+              {
+                "chinese": "这儿",
+                "pinyin": "zhèr",
+                "english": ""
+              },
+              {
+                "chinese": "可以",
+                "pinyin": "kěyǐ",
+                "english": ""
+              },
+              {
+                "chinese": "刷卡",
+                "pinyin": "shuā kǎ",
+                "english": "pay by card"
+              },
+              {
+                "chinese": "吗",
+                "pinyin": "ma",
+                "english": ""
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
+            ]
+          },
+          {
+            "a": "对不起，我们不收信用卡。不过，这双的钱跟那双一样，您不用再付钱了。",
+            "b": "Duìbuqǐ, wǒmen bù shōu xìnyòngkǎ. Búguò, zhè shuāng de qián gēn nà shuāng yíyàng, nín búyòng zài fù qián le.",
+            "c": "Sorry, we don't accept credit cards. However, this pair costs the same as that pair, so you don't need to pay again.",
+            "wordAlignments": [
+              {
+                "chinese": "对不起",
+                "pinyin": "Duìbuqǐ",
+                "english": "Sorry"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "我们",
+                "pinyin": "wǒmen",
+                "english": "we"
+              },
+              {
+                "chinese": "不",
+                "pinyin": "bù",
+                "english": "don't"
+              },
+              {
+                "chinese": "收",
+                "pinyin": "shōu",
+                "english": "accept"
+              },
+              {
+                "chinese": "信用卡",
+                "pinyin": "xìnyòngkǎ",
+                "english": "credit cards"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              },
+              {
+                "chinese": "不过",
+                "pinyin": "Búguò",
+                "english": "However"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "这双",
+                "pinyin": "zhè shuāng",
+                "english": "this pair"
+              },
+              {
+                "chinese": "的",
+                "pinyin": "de",
+                "english": ""
+              },
+              {
+                "chinese": "钱",
+                "pinyin": "qián",
+                "english": "costs"
+              },
+              {
+                "chinese": "跟",
+                "pinyin": "gēn",
+                "english": "the same as"
+              },
+              {
+                "chinese": "那双",
+                "pinyin": "nà shuāng",
+                "english": "that pair"
+              },
+              {
+                "chinese": "一样",
+                "pinyin": "yíyàng",
+                "english": ""
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "您",
+                "pinyin": "nín",
+                "english": "so you"
+              },
+              {
+                "chinese": "不用",
+                "pinyin": "búyòng",
+                "english": "don't need to"
+              },
+              {
+                "chinese": "再",
+                "pinyin": "zài",
+                "english": ""
+              },
+              {
+                "chinese": "付钱",
+                "pinyin": "fù qián",
+                "english": "pay"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "again"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          }
+        ]
+      },
+      "dialogue2": {
+        "lines": [
+          {
+            "a": "我在商店要买东西，看看衣服。",
+            "b": "Wǒ zài shāngdiàn yào mǎi dōngxi, kànkan yīfu.",
+            "c": "I'm at the store to buy some things, taking a look at clothes.",
+            "wordAlignments": [
+              {
+                "chinese": "我",
+                "pinyin": "Wǒ",
+                "english": "I'm"
+              },
+              {
+                "chinese": "在",
+                "pinyin": "zài",
+                "english": "at"
+              },
+              {
+                "chinese": "商店",
+                "pinyin": "shāngdiàn",
+                "english": "the store"
+              },
+              {
+                "chinese": "要",
+                "pinyin": "yào",
+                "english": "to"
+              },
+              {
+                "chinese": "买",
+                "pinyin": "mǎi",
+                "english": "buy"
+              },
+              {
+                "chinese": "东西",
+                "pinyin": "dōngxi",
+                "english": "some things"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "看看",
+                "pinyin": "kànkan",
+                "english": "taking a look at"
+              },
+              {
+                "chinese": "衣服",
+                "pinyin": "yīfu",
+                "english": "clothes"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "我找售货员问一下：这件衬衫什么颜色？",
+            "b": "Wǒ zhǎo shòuhuòyuán wèn yíxià: zhè jiàn chènshān shénme yánsè?",
+            "c": "I'll find a shop assistant and ask: what color is this shirt?",
+            "wordAlignments": [
+              {
+                "chinese": "我",
+                "pinyin": "Wǒ",
+                "english": "I'll"
+              },
+              {
+                "chinese": "找",
+                "pinyin": "zhǎo",
+                "english": "find"
+              },
+              {
+                "chinese": "售货员",
+                "pinyin": "shòuhuòyuán",
+                "english": "a shop assistant"
+              },
+              {
+                "chinese": "问",
+                "pinyin": "wèn",
+                "english": "and ask"
+              },
+              {
+                "chinese": "一下",
+                "pinyin": "yíxià",
+                "english": ""
+              },
+              {
+                "chinese": "：",
+                "pinyin": ":",
+                "english": ":"
+              },
+              {
+                "chinese": "这件",
+                "pinyin": "zhè jiàn",
+                "english": "this"
+              },
+              {
+                "chinese": "衬衫",
+                "pinyin": "chènshān",
+                "english": "shirt"
+              },
+              {
+                "chinese": "什么",
+                "pinyin": "shénme",
+                "english": "what"
+              },
+              {
+                "chinese": "颜色",
+                "pinyin": "yánsè",
+                "english": "color is"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
+            ]
+          },
+          {
+            "a": "有黄色的和红色的。您可以试试。",
+            "b": "Yǒu huángsè de hé hóngsè de. Nín kěyǐ shìshi.",
+            "c": "We have yellow and red. You can try them on.",
+            "wordAlignments": [
+              {
+                "chinese": "有",
+                "pinyin": "Yǒu",
+                "english": "We have"
+              },
+              {
+                "chinese": "黄色",
+                "pinyin": "huángsè",
+                "english": "yellow"
+              },
+              {
+                "chinese": "的",
+                "pinyin": "de",
+                "english": ""
+              },
+              {
+                "chinese": "和",
+                "pinyin": "hé",
+                "english": "and"
+              },
+              {
+                "chinese": "红色",
+                "pinyin": "hóngsè",
+                "english": "red"
+              },
+              {
+                "chinese": "的",
+                "pinyin": "de",
+                "english": ""
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              },
+              {
+                "chinese": "您",
+                "pinyin": "Nín",
+                "english": "You"
+              },
+              {
+                "chinese": "可以",
+                "pinyin": "kěyǐ",
+                "english": "can"
+              },
+              {
+                "chinese": "试试",
+                "pinyin": "shìshi",
+                "english": "try them on"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "我试这件中号的，看看合不合适。",
+            "b": "Wǒ shì zhè jiàn zhōng hào de, kànkan hé bu héshì.",
+            "c": "I'll try this medium one and see if it fits.",
+            "wordAlignments": [
+              {
+                "chinese": "我",
+                "pinyin": "Wǒ",
+                "english": "I'll"
+              },
+              {
+                "chinese": "试",
+                "pinyin": "shì",
+                "english": "try"
+              },
+              {
+                "chinese": "这件",
+                "pinyin": "zhè jiàn",
+                "english": "this"
+              },
+              {
+                "chinese": "中号",
+                "pinyin": "zhōng hào",
+                "english": "medium"
+              },
+              {
+                "chinese": "的",
+                "pinyin": "de",
+                "english": "one"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": " and"
+              },
+              {
+                "chinese": "看看",
+                "pinyin": "kànkan",
+                "english": "see"
+              },
+              {
+                "chinese": "合不合适",
+                "pinyin": "hé bu héshì",
+                "english": "if it fits"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "穿穿看，颜色可以，就是有点儿长，不要太短。",
+            "b": "Chuān chuān kàn, yánsè kěyǐ, jiù shì yǒudiǎnr cháng, búyào tài duǎn.",
+            "c": "Trying it on—the color is fine, but the length isn't quite right.",
+            "wordAlignments": [
+              {
+                "chinese": "穿穿看",
+                "pinyin": "Chuān chuān kàn",
+                "english": "Trying it on"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": "—"
+              },
+              {
+                "chinese": "颜色",
+                "pinyin": "yánsè",
+                "english": "the color"
+              },
+              {
+                "chinese": "可以",
+                "pinyin": "kěyǐ",
+                "english": "is fine"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "就是",
+                "pinyin": "jiù shì",
+                "english": "but"
+              },
+              {
+                "chinese": "有点儿",
+                "pinyin": "yǒudiǎnr",
+                "english": "the"
+              },
+              {
+                "chinese": "长",
+                "pinyin": "cháng",
+                "english": "length"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": " isn't"
+              },
+              {
+                "chinese": "不要",
+                "pinyin": "búyào",
+                "english": "quite"
+              },
+              {
+                "chinese": "太",
+                "pinyin": "tài",
+                "english": ""
+              },
+              {
+                "chinese": "短",
+                "pinyin": "duǎn",
+                "english": "right"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "这条裤子呢？如果便宜一点儿的话，我就买。",
+            "b": "Zhè tiáo kùzi ne? Rúguǒ piányi yìdiǎnr de huà, wǒ jiù mǎi.",
+            "c": "How about these pants? If they're a bit cheaper, I'll buy them.",
+            "wordAlignments": [
+              {
+                "chinese": "这条",
+                "pinyin": "Zhè tiáo",
+                "english": "How about these"
+              },
+              {
+                "chinese": "裤子",
+                "pinyin": "kùzi",
+                "english": "pants"
+              },
+              {
+                "chinese": "呢",
+                "pinyin": "ne",
+                "english": ""
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              },
+              {
+                "chinese": "如果",
+                "pinyin": "Rúguǒ",
+                "english": "If"
+              },
+              {
+                "chinese": "便宜",
+                "pinyin": "piányi",
+                "english": "they're"
+              },
+              {
+                "chinese": "一点儿",
+                "pinyin": "yìdiǎnr",
+                "english": "a bit cheaper"
+              },
+              {
+                "chinese": "的话",
+                "pinyin": "de huà",
+                "english": ""
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "我",
+                "pinyin": "wǒ",
+                "english": "I'll"
+              },
+              {
+                "chinese": "就",
+                "pinyin": "jiù",
+                "english": ""
+              },
+              {
+                "chinese": "买",
+                "pinyin": "mǎi",
+                "english": "buy them"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "这条很便宜，样子也挺好。您再试试长短。",
+            "b": "Zhè tiáo hěn piányi, yàngzi yě tǐng hǎo. Nín zài shìshi chángduǎn.",
+            "c": "These are very cheap, and the style is quite good. Please try the length again.",
+            "wordAlignments": [
+              {
+                "chinese": "这条",
+                "pinyin": "Zhè tiáo",
+                "english": "These are"
+              },
+              {
+                "chinese": "很",
+                "pinyin": "hěn",
+                "english": "very"
+              },
+              {
+                "chinese": "便宜",
+                "pinyin": "piányi",
+                "english": "cheap"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "样子",
+                "pinyin": "yàngzi",
+                "english": "and the style"
+              },
+              {
+                "chinese": "也",
+                "pinyin": "yě",
+                "english": "is"
+              },
+              {
+                "chinese": "挺",
+                "pinyin": "tǐng",
+                "english": "quite"
+              },
+              {
+                "chinese": "好",
+                "pinyin": "hǎo",
+                "english": "good"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              },
+              {
+                "chinese": "您",
+                "pinyin": "Nín",
+                "english": "Please"
+              },
+              {
+                "chinese": "再",
+                "pinyin": "zài",
+                "english": ""
+              },
+              {
+                "chinese": "试试",
+                "pinyin": "shìshi",
+                "english": "try"
+              },
+              {
+                "chinese": "长短",
+                "pinyin": "chángduǎn",
+                "english": "the length again"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "现在大小合适了。我就要它吧。",
+            "b": "Xiànzài dàxiǎo héshì le. Wǒ jiù yào tā ba.",
+            "c": "Now the size is right. I'll take it.",
+            "wordAlignments": [
+              {
+                "chinese": "现在",
+                "pinyin": "Xiànzài",
+                "english": "Now"
+              },
+              {
+                "chinese": "大小",
+                "pinyin": "dàxiǎo",
+                "english": "the size"
+              },
+              {
+                "chinese": "合适",
+                "pinyin": "héshì",
+                "english": "is right"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": ""
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              },
+              {
+                "chinese": "我",
+                "pinyin": "Wǒ",
+                "english": "I'll"
+              },
+              {
+                "chinese": "就",
+                "pinyin": "jiù",
+                "english": ""
+              },
+              {
+                "chinese": "要",
+                "pinyin": "yào",
+                "english": "take"
+              },
+              {
+                "chinese": "它",
+                "pinyin": "tā",
+                "english": "it"
+              },
+              {
+                "chinese": "吧",
+                "pinyin": "ba",
+                "english": ""
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          }
+        ]
+      },
+      "dialogue3": {
+        "lines": [
+          {
+            "a": "这件和那件衣服一共多少钱？",
+            "b": "Zhè jiàn hé nà jiàn yīfu yígòng duōshao qián?",
+            "c": "How much are this one and that one altogether?",
+            "wordAlignments": [
+              {
+                "chinese": "这件",
+                "pinyin": "Zhè jiàn",
+                "english": "this one"
+              },
+              {
+                "chinese": "和",
+                "pinyin": "hé",
+                "english": "and"
+              },
+              {
+                "chinese": "那件",
+                "pinyin": "nà jiàn",
+                "english": "that one"
+              },
+              {
+                "chinese": "衣服",
+                "pinyin": "yīfu",
+                "english": ""
+              },
+              {
+                "chinese": "一共",
+                "pinyin": "yígòng",
+                "english": "altogether"
+              },
+              {
+                "chinese": "多少",
+                "pinyin": "duōshao",
+                "english": "How much are"
+              },
+              {
+                "chinese": "钱",
+                "pinyin": "qián",
+                "english": ""
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
+            ]
+          },
+          {
+            "a": "一共一百二十块五毛三分。",
+            "b": "Yígòng yì bǎi èrshí kuài wǔ máo sān fēn.",
+            "c": "Altogether it's 120 yuan and 53 cents.",
+            "wordAlignments": [
+              {
+                "chinese": "一共",
+                "pinyin": "Yígòng",
+                "english": "Altogether it's"
+              },
+              {
+                "chinese": "一百",
+                "pinyin": "yì bǎi",
+                "english": "120"
+              },
+              {
+                "chinese": "二十",
+                "pinyin": "èrshí",
+                "english": ""
+              },
+              {
+                "chinese": "块",
+                "pinyin": "kuài",
+                "english": "yuan"
+              },
+              {
+                "chinese": "五",
+                "pinyin": "wǔ",
+                "english": "and"
+              },
+              {
+                "chinese": "毛",
+                "pinyin": "máo",
+                "english": ""
+              },
+              {
+                "chinese": "三",
+                "pinyin": "sān",
+                "english": "53"
+              },
+              {
+                "chinese": "分",
+                "pinyin": "fēn",
+                "english": "cents"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "我用卡付，可以刷卡吗？",
+            "b": "Wǒ yòng kǎ fù, kěyǐ shuā kǎ ma?",
+            "c": "I'll pay with a card—can I swipe it?",
+            "wordAlignments": [
+              {
+                "chinese": "我",
+                "pinyin": "Wǒ",
+                "english": "I'll"
+              },
+              {
+                "chinese": "用",
+                "pinyin": "yòng",
+                "english": "pay with"
+              },
+              {
+                "chinese": "卡",
+                "pinyin": "kǎ",
+                "english": "a card"
+              },
+              {
+                "chinese": "付",
+                "pinyin": "fù",
+                "english": ""
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": "—"
+              },
+              {
+                "chinese": "可以",
+                "pinyin": "kěyǐ",
+                "english": "can I"
+              },
+              {
+                "chinese": "刷卡",
+                "pinyin": "shuā kǎ",
+                "english": "swipe it"
+              },
+              {
+                "chinese": "吗",
+                "pinyin": "ma",
+                "english": ""
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
+            ]
+          },
+          {
+            "a": "对不起，我们不收信用卡。请付钱。",
+            "b": "Duìbuqǐ, wǒmen bù shōu xìnyòngkǎ. Qǐng fù qián.",
+            "c": "Sorry, we don't accept credit cards. Please pay.",
+            "wordAlignments": [
+              {
+                "chinese": "对不起",
+                "pinyin": "Duìbuqǐ",
+                "english": "Sorry"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "我们",
+                "pinyin": "wǒmen",
+                "english": "we"
+              },
+              {
+                "chinese": "不",
+                "pinyin": "bù",
+                "english": "don't"
+              },
+              {
+                "chinese": "收",
+                "pinyin": "shōu",
+                "english": "accept"
+              },
+              {
+                "chinese": "信用卡",
+                "pinyin": "xìnyòngkǎ",
+                "english": "credit cards"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              },
+              {
+                "chinese": "请",
+                "pinyin": "Qǐng",
+                "english": "Please"
+              },
+              {
+                "chinese": "付钱",
+                "pinyin": "fù qián",
+                "english": "pay"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "好，我给您二百块。",
+            "b": "Hǎo, wǒ gěi nín èr bǎi kuài.",
+            "c": "Okay, here are 200 yuan.",
+            "wordAlignments": [
+              {
+                "chinese": "好",
+                "pinyin": "Hǎo",
+                "english": "Okay"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "我",
+                "pinyin": "wǒ",
+                "english": "here are"
+              },
+              {
+                "chinese": "给",
+                "pinyin": "gěi",
+                "english": ""
+              },
+              {
+                "chinese": "您",
+                "pinyin": "nín",
+                "english": ""
+              },
+              {
+                "chinese": "二百",
+                "pinyin": "èr bǎi",
+                "english": "200"
+              },
+              {
+                "chinese": "块",
+                "pinyin": "kuài",
+                "english": "yuan"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "我找您七十九块四毛七分钱。收好，谢谢。",
+            "b": "Wǒ zhǎo nín qīshí jiǔ kuài sì máo qī fēn qián. Shōu hǎo, xièxie.",
+            "c": "I'll give you 79 yuan and 47 cents in change. Please keep it safe—thanks.",
+            "wordAlignments": [
+              {
+                "chinese": "我",
+                "pinyin": "Wǒ",
+                "english": "I'll give you"
+              },
+              {
+                "chinese": "找",
+                "pinyin": "zhǎo",
+                "english": ""
+              },
+              {
+                "chinese": "您",
+                "pinyin": "nín",
+                "english": ""
+              },
+              {
+                "chinese": "七十九",
+                "pinyin": "qīshí jiǔ",
+                "english": "79"
+              },
+              {
+                "chinese": "块",
+                "pinyin": "kuài",
+                "english": "yuan"
+              },
+              {
+                "chinese": "四",
+                "pinyin": "sì",
+                "english": "and"
+              },
+              {
+                "chinese": "毛",
+                "pinyin": "máo",
+                "english": ""
+              },
+              {
+                "chinese": "七",
+                "pinyin": "qī",
+                "english": "47"
+              },
+              {
+                "chinese": "分",
+                "pinyin": "fēn",
+                "english": "cents"
+              },
+              {
+                "chinese": "钱",
+                "pinyin": "qián",
+                "english": "in change"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              },
+              {
+                "chinese": "收好",
+                "pinyin": "Shōu hǎo",
+                "english": "Please keep it safe"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": "—"
+              },
+              {
+                "chinese": "谢谢",
+                "pinyin": "xièxie",
+                "english": "thanks"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

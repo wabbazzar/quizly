@@ -1,0 +1,1 @@
+import{U as t,V as e,W as d}from"./index-BqLBligk.js";function i(i){"undefined"!=typeof window&&localStorage.getItem(d)&&(t({id:i.id,type:"deck",action:"upsert",payload:{id:i.id,deckJson:JSON.stringify(i),updatedAt:(new Date).toISOString()}}),e())}export{i as s};

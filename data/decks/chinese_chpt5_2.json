@@ -1,0 +1,169 @@
+{
+  "id": "chinese_chpt5_2",
+  "metadata": {
+    "deck_name": "Chinese Chapter 5 Part 2",
+    "abbreviated_title": "Chp 5 pt 2",
+    "deck_subtitle": "Activities and Going Home",
+    "description": "Chinese vocabulary for activities, chatting, and returning home",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 7,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description",
+      "side_e": "example (pinyin)",
+      "side_f": "example translation",
+      "side_g": "usage notes"
+    },
+    "card_count": 9,
+    "difficulty": "beginner",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "chapter5",
+      "vocabulary"
+    ],
+    "version": "1.0.0",
+    "created_date": "2026-01-06T00:00:00Z",
+    "last_updated": "2026-01-06T00:00:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "to_have_fun_play",
+      "side_a": "to have fun; to play",
+      "side_b": "wán(r)",
+      "side_c": "玩(儿)",
+      "side_d": "v",
+      "side_e": "Wǒ xiǎng qù túshūguǎn wán(r).",
+      "side_f": "I want to go to the library to have fun.",
+      "side_g": "玩(儿) is colloquial and broad: 'play,' 'hang out,' or 'have fun.' The 儿 suffix (érhuà) is typical of northern/Beijing speech and often dropped in the south or in writing. Common collocations: 好玩 (fun), 出去玩 (go out to have fun), 玩游戏 (play games).",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "dynamic_particle",
+      "side_a": "(a dynamic particle)",
+      "side_b": "le",
+      "side_c": "了",
+      "side_d": "p",
+      "side_e": "Wǒ qù le túshūguǎn.",
+      "side_f": "I went to the library.",
+      "side_g": "了 is a high-frequency aspect/modal particle. Post-verb 了 signals a completed/realized action (我吃了饭); sentence-final 了 signals a changed state or new situation (下雨了). Don't equate it with English past tense — 我每天七点回家 has no 了 even though it's habitual. Tone is neutral.",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "library",
+      "side_a": "library",
+      "side_b": "túshūguǎn",
+      "side_c": "图书馆",
+      "side_d": "n",
+      "side_e": "Túshūguǎn yǒu hěn duō shū.",
+      "side_f": "The library has a lot of books.",
+      "side_g": "图书馆 literally 'picture-book-building' (图书 = books/publications, 馆 = hall/venue). 馆 is a productive suffix for public venues: 博物馆 (museum), 餐馆 (restaurant), 咖啡馆 (café). Neutral register, used in speech and writing alike.",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "together",
+      "side_a": "together",
+      "side_b": "yìqǐ",
+      "side_c": "一起",
+      "side_d": "adv",
+      "side_e": "Wǒmen yìqǐ qù ba.",
+      "side_f": "Let's go together.",
+      "side_g": "一起 is an adverb meaning 'together; alongside.' It precedes the verb: 我们一起吃饭 (we eat together), not after. Often paired with 和/跟 (和朋友一起去). Contrast with 一块儿 (yíkuàir), a colloquial near-synonym more common in the north.",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "to_chat",
+      "side_a": "to chat",
+      "side_b": "liáo tiān(r)",
+      "side_c": "聊天(儿)",
+      "side_d": "vo",
+      "side_e": "Wǒmen zài túshūguǎn liáo tiān(r).",
+      "side_f": "We chat at the library.",
+      "side_g": "聊天(儿) is a verb-object (离合词/separable verb): the object 天 can be split from 聊 by measures or aspect markers — 聊了一会儿天, 聊了很久的天. Cannot take a further object directly; say 跟他聊天, not 聊天他. Casual/neutral register.",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "chat",
+      "side_a": "to chat",
+      "side_b": "liáo",
+      "side_c": "聊",
+      "side_d": "v",
+      "side_e": "Wǒ gēn tā liáo le hěn jiǔ.",
+      "side_f": "I chatted with him for a long time.",
+      "side_g": "聊 alone is a transitive/intransitive verb meaning 'chat casually,' lighter than 说话 or 谈. Unlike 聊天, it can take explicit objects/topics: 聊工作, 聊这个问题. Common collocations: 聊一聊, 聊一下, 好好聊聊. Informal register.",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "sky",
+      "side_a": "sky",
+      "side_b": "tiān",
+      "side_c": "天",
+      "side_d": "n",
+      "side_e": "Jīntiān tiān hěn liàng.",
+      "side_f": "Today the sky is very bright.",
+      "side_g": "天 has multiple senses: 'sky' (天很蓝), 'day' (三天, 今天, 每天), and 'weather/heaven' (天气, 老天). As a measure of days it is a 'bare' noun — no 个: 三天 not 三个天. In 聊天, 天 is semantically bleached toward 'topic/matter of the day.'",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "not_until_only_then",
+      "side_a": "not until; only then",
+      "side_b": "cái",
+      "side_c": "才",
+      "side_d": "adv",
+      "side_e": "Wǒ wǎnshang jiǔ diǎn cái huí jiā.",
+      "side_f": "I didn't go home until nine at night. (lit. 'nine o'clock only-then return home')",
+      "side_g": "才 marks that something happens later/less/with more difficulty than expected; no 了 follows in this 'not until' pattern (九点才回家, not 九点才回家了). Contrast with 就 (jiù), which marks 'as early/easily as' (九点就回家了 = 'already home by nine'). Also used for 'only' in amounts: 才五块钱.",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "to_go_home",
+      "side_a": "to go home",
+      "side_b": "huí jiā",
+      "side_c": "回家",
+      "side_d": "vo",
+      "side_e": "Wǒ měi tiān liù diǎn huí jiā.",
+      "side_f": "I go home at six every day.",
+      "side_g": "回家 is a verb-object compound (回 'return' + 家 'home'); 家 here is bare — no 到 or possessive needed. Separable: 回了一趟家, 回不了家. For 'go back to [other place]' use 回 + place: 回学校, 回中国, 回宿舍.",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "to_return",
+      "side_a": "to return",
+      "side_b": "huí",
+      "side_c": "回",
+      "side_d": "v",
+      "side_e": "Wǒ xiǎng huí sùshè.",
+      "side_f": "I want to return to the dorm.",
+      "side_g": "回 means 'return to somewhere one belongs/came from' — directional, unlike 去 (go to) or 来 (come). Takes a place directly: 回北京, 回学校, 回国. Also used as a measure for occurrences (这回, 下一回 = this/next time) and in 回答 (reply) and 回来/回去 (directional complements).",
+      "level": 1
+    }
+  ]
+}

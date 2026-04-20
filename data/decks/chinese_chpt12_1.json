@@ -1,0 +1,1684 @@
+{
+  "id": "chinese_chpt12_1",
+  "metadata": {
+    "deck_name": "Chinese Chapter 12 Part 1",
+    "abbreviated_title": "Chp 12 pt 1",
+    "deck_subtitle": "Dining",
+    "description": "Essential Chinese vocabulary for dining out, ordering food, and restaurant interactions",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 7,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description",
+      "side_e": "example (pinyin)",
+      "side_f": "example translation",
+      "side_g": "usage notes"
+    },
+    "card_count": 27,
+    "difficulty": "intermediate",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "dining",
+      "restaurant",
+      "food",
+      "vocabulary",
+      "chapter12"
+    ],
+    "version": "1.0.0",
+    "created_date": "2026-01-28T00:00:00Z",
+    "last_updated": "2026-02-03T00:00:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "restaurant",
+      "side_a": "Restaurant",
+      "side_b": "fànguǎnr",
+      "side_c": "饭馆儿",
+      "side_d": "noun",
+      "side_e": "Wǒmen qù nàge fànguǎnr chīfàn ba!",
+      "side_f": "Let's go eat at that restaurant!",
+      "side_g": "饭馆儿 takes the 儿化 (érhuà) suffix, typical of northern Mandarin; the non-retroflex form 饭馆 is equally correct. Used for small-to-midsize eateries; fancier places are 餐厅 (cāntīng) or 酒楼 (jiǔlóu). Common collocations: 去饭馆儿吃饭, 这家饭馆儿.",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "seem",
+      "side_a": "To seem; to be like",
+      "side_b": "hǎoxiàng",
+      "side_c": "好像",
+      "side_d": "verb",
+      "side_e": "Hǎoxiàng rén hěn duō, bù zhīdào yǒu méiyǒu wèizi.",
+      "side_f": "It seems like there are a lot of people; I don't know if there are seats.",
+      "side_g": "好像 softens assertions to 'seems/apparently' and often pairs with 的样子 at the end for extra hedging. It can mean both subjective guess ('seems') and resemblance ('A 好像 B' = A is like B). Does not need 是 before adjectives: 好像很累, not 好像是很累的.",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "seat",
+      "side_a": "Seat",
+      "side_b": "wèizi",
+      "side_c": "位子",
+      "side_d": "noun",
+      "side_e": "Nà zhāng zhuōzi hǎoxiàng méiyǒu rén, yǒu wèizi ma?",
+      "side_f": "That table seems unoccupied — is there a seat?",
+      "side_g": "位子 is the physical seat/spot; 座位 (zuòwèi) is the more formal synonym used on tickets, trains, theaters. 订位子 = 'reserve a seat'. Measure word 个: 一个位子.",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "waiter",
+      "side_a": "Waiter; attendant",
+      "side_b": "fúwùyuán",
+      "side_c": "服务员",
+      "side_d": "noun",
+      "side_e": "Fúwùyuán, qǐngwèn hái yǒu méiyǒu wèizi?",
+      "side_f": "Waiter, excuse me, are there any seats left?",
+      "side_g": "服务员 is the standard, polite way to hail restaurant staff in mainland China (do not use 小姐 in the north, it can be offensive). In Taiwan 服务生 is more common. Always pair with 请问 or 麻烦你 for politeness.",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "table",
+      "side_a": "Table",
+      "side_b": "zhuōzi",
+      "side_c": "桌子",
+      "side_d": "noun",
+      "side_e": "Zhè zhāng zhuōzi hěn gānjìng, wǒmen zuò zhèr ba.",
+      "side_f": "This table is very clean; let's sit here.",
+      "side_g": "桌子 takes the measure word 张 (zhāng, used for flat surfaces): 一张桌子. Compounds: 书桌 (desk), 饭桌 (dining table), 餐桌. Do not use 个 with 桌子 in careful speech.",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "order_food",
+      "side_a": "To order food",
+      "side_b": "diǎn cài",
+      "side_c": "点菜",
+      "side_d": "verb object",
+      "side_e": "Wǒmen diǎn cài ba, nǐ xiǎng chī shénme?",
+      "side_f": "Let's order — what do you want to eat?",
+      "side_g": "点菜 is a separable verb-object (离合词): you can say 点了三个菜, 点什么菜. 点 alone = 'to select/order'; also used for drinks 点饮料. Menu = 菜单 (càidān).",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "plate",
+      "side_a": "Plate; dish",
+      "side_b": "pán",
+      "side_c": "盘",
+      "side_d": "noun and measure word",
+      "side_e": "Lái yì pán jiǎozi ba.",
+      "side_f": "Let's have a plate of dumplings.",
+      "side_g": "盘 functions as both noun (a plate) and measure word for plated dishes: 一盘菜, 两盘饺子. Contrast 碗 (bowl, for soups/rice/noodles) and 份 (fèn, a portion/serving). 来 + 盘 is the canonical restaurant-ordering pattern: 来一盘.",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "dumplings",
+      "side_a": "Dumplings",
+      "side_b": "jiǎozi",
+      "side_c": "饺子",
+      "side_d": "noun",
+      "side_e": "Wǒ xiǎng chī sù de, lái yì pán jiǎozi.",
+      "side_f": "I want vegetarian — let's get a plate of dumplings.",
+      "side_g": "饺子 are boiled/steamed/fried dumplings, traditionally eaten at Spring Festival. Verb 包饺子 = 'to wrap dumplings'. Distinguish 包子 (bāozi, steamed buns), 馄饨 (húntun, wontons), 锅贴 (guōtiē, potstickers).",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "vegetarian",
+      "side_a": "Vegetarian; made from vegetables",
+      "side_b": "sù",
+      "side_c": "素",
+      "side_d": "adjective",
+      "side_e": "Wǒ chī sù, bù chī ròu.",
+      "side_f": "I eat vegetarian — I don't eat meat.",
+      "side_g": "素 modifies nouns as 素菜 (vegetarian dish), 素饺子 (veg dumplings), or stands alone as 素的 ('the vegetarian one'). 吃素 = 'to be vegetarian' (lifestyle). Opposite: 荤 (hūn, meat-containing).",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "home_style",
+      "side_a": "Home-style",
+      "side_b": "jiācháng",
+      "side_c": "家常",
+      "side_d": "noun",
+      "side_e": "Wǒ xiǎng chī jiācháng dòufu, qǐng bú yào fàng ròu.",
+      "side_f": "I'd like home-style tofu, please don't add meat.",
+      "side_g": "家常 literally 'household everyday', modifies dishes: 家常菜, 家常豆腐. Connotes simple, comforting, non-fancy cooking. Also used figuratively: 家常便饭 (jiācháng biànfàn) = 'a common occurrence, routine matter'.",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "tofu",
+      "side_a": "Tofu; bean curd",
+      "side_b": "dòufu",
+      "side_c": "豆腐",
+      "side_d": "noun",
+      "side_e": "Jiācháng dòufu hěn hǎochī, méiyǒu fàng ròu.",
+      "side_f": "The home-style tofu is delicious — no meat added.",
+      "side_g": "豆腐 appears in many set dishes: 麻婆豆腐 (Mapo tofu), 家常豆腐, 臭豆腐 (stinky tofu). Colloquially, 吃豆腐 is a slang idiom meaning 'to flirt with / take advantage of (someone, esp. a woman)' — use literally only in food contexts.",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "put",
+      "side_a": "To put; to place",
+      "side_b": "fàng",
+      "side_c": "放",
+      "side_d": "verb",
+      "side_e": "Qǐng bié fàng wèijīng, shǎo fàng diǎnr yán.",
+      "side_f": "Please don't add MSG, and put in a little less salt.",
+      "side_g": "放 = 'put/place/add in'; in cooking contexts it means 'add (an ingredient)'. Pattern: 放 + ingredient. Also means 'to release/let go' (放假 = vacation) and 'to put down' (放下). 别放 / 不要放 = polite 'don't add'.",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "meat",
+      "side_a": "Meat",
+      "side_b": "ròu",
+      "side_c": "肉",
+      "side_d": "noun",
+      "side_e": "Wǒ bù chī ròu, qǐng bù yào fàng ròu.",
+      "side_f": "I don't eat meat, please don't put in meat.",
+      "side_g": "肉 is generic 'meat'; specify type with a prefix: 牛肉 (beef), 猪肉 (pork), 鸡肉 (chicken), 羊肉 (lamb), 鱼肉 (fish meat). In China 肉 without qualifier often defaults to pork. Measure word: 一块肉 (a piece of meat).",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "bowl",
+      "side_a": "Bowl",
+      "side_b": "wǎn",
+      "side_c": "碗",
+      "side_d": "noun and measure word",
+      "side_e": "Zài lái liǎng wǎn suānlàtāng ba.",
+      "side_f": "Let's also have two bowls of hot and sour soup.",
+      "side_g": "碗 is both noun ('bowl') and measure word for bowl-contained foods: 一碗饭, 两碗汤, 三碗面. Contrast with 盘 (plate) for solid dishes. 再来 + number + 碗 is a standard ordering phrase.",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "hot_sour_soup",
+      "side_a": "Hot and sour soup",
+      "side_b": "suānlàtāng",
+      "side_c": "酸辣汤",
+      "side_d": "noun",
+      "side_e": "Suānlàtāng qǐng bié fàng wèijīng.",
+      "side_f": "For the hot and sour soup, please don't add MSG.",
+      "side_g": "酸辣汤 literally 酸 (sour) + 辣 (spicy) + 汤 (soup); a classic Sichuan/northern soup with vinegar, pepper, tofu, egg. Verb 喝 (hē, 'drink'), not 吃, for soup: 喝汤. The descriptive pattern 酸+辣 also appears in 酸辣粉 (sour-spicy noodles).",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "msg",
+      "side_a": "Monosodium glutamate (MSG)",
+      "side_b": "wèijīng",
+      "side_c": "味精",
+      "side_d": "noun",
+      "side_e": "Qǐng bié fàng wèijīng, shǎo fàng yán.",
+      "side_f": "Please don't add MSG, and use less salt.",
+      "side_g": "味精 literally 'flavor essence'; many diners ask for 不放味精 citing health concerns. More neutral alternative: 鸡精 (jījīng, 'chicken bouillon powder'). Useful restaurant phrase: 请不要放味精 / 请少放味精.",
+      "level": 2
+    },
+    {
+      "card_id": "card-017",
+      "idx": 16,
+      "name": "salt",
+      "side_a": "Salt",
+      "side_b": "yán",
+      "side_c": "盐",
+      "side_d": "noun",
+      "side_e": "Shǎo fàng diǎnr yán, zhèyàng bǐjiào jiànkāng.",
+      "side_f": "Put in a little less salt — that's healthier.",
+      "side_g": "盐 is mass noun — no typical measure word when added as seasoning, just 多/少放盐. Set phrases: 加盐 (jiā yán, add salt), 咸 (xián, adj. 'salty'). Distinguish character 盐 (salt) from 严 (strict) and 研 (research).",
+      "level": 1
+    },
+    {
+      "card_id": "card-018",
+      "idx": 17,
+      "name": "bok_choy",
+      "side_a": "Bok choy",
+      "side_b": "báicài",
+      "side_c": "白菜",
+      "side_d": "noun",
+      "side_e": "Yǒu méiyǒu báicài? Wǒ xiǎng chī yì pán báicài.",
+      "side_f": "Do you have bok choy? I'd like a plate of bok choy.",
+      "side_g": "白菜 literally 'white vegetable' — napa cabbage / Chinese cabbage, a northern winter staple. 小白菜 refers to bok choy (the small green-leafed kind). Idiom 白菜价 = 'dirt cheap price'.",
+      "level": 1
+    },
+    {
+      "card_id": "card-019",
+      "idx": 18,
+      "name": "just",
+      "side_a": "Just (indicating recent past)",
+      "side_b": "gāng",
+      "side_c": "刚",
+      "side_d": "adverb",
+      "side_e": "Duìbuqǐ, báicài gāng mài wán le.",
+      "side_f": "Sorry, the bok choy just sold out.",
+      "side_g": "刚 is an adverb of immediate recent past ('just now'), placed before the verb. Contrast 刚刚 (just a moment ago, stronger emphasis) and 刚才 (gāngcái, noun: 'a moment ago', can be sentence-initial). 刚 pairs with 了 for completed recent actions: 刚卖完了.",
+      "level": 1
+    },
+    {
+      "card_id": "card-020",
+      "idx": 19,
+      "name": "sold_out",
+      "side_a": "To be sold out",
+      "side_b": "mài wán",
+      "side_c": "卖完",
+      "side_d": "verb complement",
+      "side_e": "Duìbuqǐ, báicài gāng mài wán le.",
+      "side_f": "Sorry, the bok choy was just sold out.",
+      "side_g": "卖完 is a resultative verb compound: 卖 (sell) + 完 (finish). The 完 complement marks exhaustive completion. Potential forms: 卖得完 ('can sell out'), 卖不完 ('can't finish selling'). Parallel patterns: 吃完, 喝完, 做完, 用完.",
+      "level": 1
+    },
+    {
+      "card_id": "card-021",
+      "idx": 20,
+      "name": "green_vegetable",
+      "side_a": "Green/leafy vegetable",
+      "side_b": "qīngcài",
+      "side_c": "青菜",
+      "side_d": "noun",
+      "side_e": "Nà jiù yào yì pán qīngcài ba.",
+      "side_f": "Then let's get a plate of green vegetables.",
+      "side_g": "青菜 is a general term for leafy greens (especially seasonal stir-fried greens); the specific plant varies by region. Contrast with 蔬菜 (shūcài, 'vegetables' as a category, more formal) and 白菜 (specific cabbage).",
+      "level": 1
+    },
+    {
+      "card_id": "card-022",
+      "idx": 21,
+      "name": "iced_tea",
+      "side_a": "Iced tea",
+      "side_b": "bīngchá",
+      "side_c": "冰茶",
+      "side_d": "noun",
+      "side_e": "Wǒ hěn kě, lái yì bēi bīngchá ba.",
+      "side_f": "I'm very thirsty — let me have an iced tea.",
+      "side_g": "冰茶 = 冰 (ice) + 茶 (tea). Measure word 杯 (bēi, cup/glass): 一杯冰茶. Other drink compounds: 冰水 (ice water), 冰咖啡 (iced coffee). Note: traditional Chinese tea culture favors hot tea; iced tea is a modern/Western influence.",
+      "level": 1
+    },
+    {
+      "card_id": "card-023",
+      "idx": 22,
+      "name": "thirsty",
+      "side_a": "Thirsty",
+      "side_b": "kě",
+      "side_c": "渴",
+      "side_d": "adjective",
+      "side_e": "Nǐ kě bu kě? Yào bu yào hē diǎnr shénme?",
+      "side_f": "Are you thirsty? Want something to drink?",
+      "side_g": "渴 is a stative adjective; use 很渴, 不渴, 渴不渴. Do not confuse with homophone 可 (kě, 'can/may'). The A-not-A question 渴不渴 is the normal way to ask. Idiom 如饥似渴 (rú jī sì kě, 'as if hungry and thirsty') = very eagerly.",
+      "level": 1
+    },
+    {
+      "card_id": "card-024",
+      "idx": 23,
+      "name": "some",
+      "side_a": "Some (measure word for indefinite amount)",
+      "side_b": "xiē",
+      "side_c": "些",
+      "side_d": "measure word",
+      "side_e": "Zhè xiē cài gòu bu gòu?",
+      "side_f": "Is this food [these dishes] enough?",
+      "side_g": "些 is a plural/indefinite measure word always following 这/那/哪/一: 这些, 那些, 一些, 好些. Never takes a number directly (*两些 is wrong). 一些 = 'some, a few'; 这些 = 'these'. It cannot stand alone.",
+      "level": 1
+    },
+    {
+      "card_id": "card-025",
+      "idx": 24,
+      "name": "enough",
+      "side_a": "Enough",
+      "side_b": "gòu",
+      "side_c": "够",
+      "side_d": "adjective",
+      "side_e": "Gòu le gòu le, wǒmen diǎn de gānggāng hǎo.",
+      "side_f": "Enough, enough — what we ordered is just right. (lit. 'just-just good')",
+      "side_g": "够 functions as both adjective ('sufficient') and verb ('to be enough for'): 钱够吗? / 这些够我们吃. Reduplication 够了够了 is a colloquial 'that's enough!'. Common pattern: 够 + verb, e.g. 够吃, 够用.",
+      "level": 1
+    },
+    {
+      "card_id": "card-026",
+      "idx": 25,
+      "name": "hungry",
+      "side_a": "Hungry",
+      "side_b": "è",
+      "side_c": "饿",
+      "side_d": "adjective",
+      "side_e": "Wǒmen dōu è le, qǐng kuài diǎnr shàng cài.",
+      "side_f": "We're both hungry — please serve the food quickly.",
+      "side_g": "饿 is a stative adjective/verb; with 了 it marks change-of-state: 我饿了 = 'I've become hungry / I'm hungry now'. 饿死了 is hyperbolic 'starving to death' (very common colloquial). Causative: 饿坏了 (starving). Opposite: 饱 (bǎo, full).",
+      "level": 1
+    },
+    {
+      "card_id": "card-027",
+      "idx": 26,
+      "name": "serve_food",
+      "side_a": "To serve food",
+      "side_b": "shàng cài",
+      "side_c": "上菜",
+      "side_d": "verb object",
+      "side_e": "Fúwùyuán, qǐng kuài diǎnr shàng cài.",
+      "side_f": "Waiter, please serve the food a bit faster.",
+      "side_g": "上菜 is a separable verb-object (上 'bring up' + 菜 'dish'): 上了三个菜, 菜上完了. 上 in service contexts means 'bring/serve to the table' (also 上茶, 上酒). Restaurant staff announce 上菜了! when dishes arrive. Opposite direction: 撤 (chè, clear dishes).",
+      "level": 1
+    }
+  ],
+  "reading": {
+    "sides": {
+      "a": "characters",
+      "b": "pinyin",
+      "c": "english"
+    },
+    "tokenization": {
+      "unit": {
+        "a": "character",
+        "b": "space",
+        "c": "space"
+      },
+      "preservePunctuation": true,
+      "alignment": "index"
+    },
+    "dialogues": {
+      "grammar_001": {
+        "title": "Emphatic Negation: 一...也/都...不/没",
+        "description": "Pattern for expressing 'not at all' or 'not even one'",
+        "lines": [
+          {
+            "a": "小李一个朋友也没有。",
+            "b": "Xiǎo Lǐ yí ge péngyou yě méiyǒu.",
+            "c": "Xiao Li does not have a single friend.",
+            "wordAlignments": [
+              {
+                "chinese": "小李",
+                "pinyin": "Xiǎo Lǐ",
+                "english": "Xiao Li"
+              },
+              {
+                "chinese": "一个",
+                "pinyin": "yí ge",
+                "english": "a single"
+              },
+              {
+                "chinese": "朋友",
+                "pinyin": "péngyou",
+                "english": "friend"
+              },
+              {
+                "chinese": "也",
+                "pinyin": "yě",
+                "english": "even"
+              },
+              {
+                "chinese": "没有",
+                "pinyin": "méiyǒu",
+                "english": "does not have"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "爸爸今天一杯茶都没喝。",
+            "b": "Bàba jīntiān yì bēi chá dōu méi hē.",
+            "c": "Dad did not drink a single cup of tea today.",
+            "wordAlignments": [
+              {
+                "chinese": "爸爸",
+                "pinyin": "Bàba",
+                "english": "Dad"
+              },
+              {
+                "chinese": "今天",
+                "pinyin": "jīntiān",
+                "english": "today"
+              },
+              {
+                "chinese": "一杯",
+                "pinyin": "yì bēi",
+                "english": "a single cup of"
+              },
+              {
+                "chinese": "茶",
+                "pinyin": "chá",
+                "english": "tea"
+              },
+              {
+                "chinese": "都",
+                "pinyin": "dōu",
+                "english": "even"
+              },
+              {
+                "chinese": "没",
+                "pinyin": "méi",
+                "english": "did not"
+              },
+              {
+                "chinese": "喝",
+                "pinyin": "hē",
+                "english": "drink"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "这些衬衫我一件也不喜欢。",
+            "b": "Zhè xiē chènshān wǒ yí jiàn yě bù xǐhuan.",
+            "c": "I do not like any of these shirts.",
+            "wordAlignments": [
+              {
+                "chinese": "这些",
+                "pinyin": "Zhè xiē",
+                "english": "these"
+              },
+              {
+                "chinese": "衬衫",
+                "pinyin": "chènshān",
+                "english": "shirts"
+              },
+              {
+                "chinese": "我",
+                "pinyin": "wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "一件",
+                "pinyin": "yí jiàn",
+                "english": "a single"
+              },
+              {
+                "chinese": "也",
+                "pinyin": "yě",
+                "english": "even"
+              },
+              {
+                "chinese": "不",
+                "pinyin": "bù",
+                "english": "do not"
+              },
+              {
+                "chinese": "喜欢",
+                "pinyin": "xǐhuan",
+                "english": "like"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "妈妈做菜一点儿味精都不放。",
+            "b": "Māma zuò cài yìdiǎnr wèijīng dōu bú fàng.",
+            "c": "Mom does not use any MSG in her cooking.",
+            "wordAlignments": [
+              {
+                "chinese": "妈妈",
+                "pinyin": "Māma",
+                "english": "Mom"
+              },
+              {
+                "chinese": "做菜",
+                "pinyin": "zuò cài",
+                "english": "cooking"
+              },
+              {
+                "chinese": "一点儿",
+                "pinyin": "yìdiǎnr",
+                "english": "any"
+              },
+              {
+                "chinese": "味精",
+                "pinyin": "wèijīng",
+                "english": "MSG"
+              },
+              {
+                "chinese": "都",
+                "pinyin": "dōu",
+                "english": "at all"
+              },
+              {
+                "chinese": "不",
+                "pinyin": "bú",
+                "english": "does not"
+              },
+              {
+                "chinese": "放",
+                "pinyin": "fàng",
+                "english": "use"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "这杯冰茶一点儿都不好喝。",
+            "b": "Zhè bēi bīngchá yìdiǎnr dōu bù hǎohē.",
+            "c": "This iced tea does not taste good at all.",
+            "wordAlignments": [
+              {
+                "chinese": "这",
+                "pinyin": "Zhè",
+                "english": "This"
+              },
+              {
+                "chinese": "杯",
+                "pinyin": "bēi",
+                "english": "cup of"
+              },
+              {
+                "chinese": "冰茶",
+                "pinyin": "bīngchá",
+                "english": "iced tea"
+              },
+              {
+                "chinese": "一点儿",
+                "pinyin": "yìdiǎnr",
+                "english": "at all"
+              },
+              {
+                "chinese": "都",
+                "pinyin": "dōu",
+                "english": ""
+              },
+              {
+                "chinese": "不",
+                "pinyin": "bù",
+                "english": "does not"
+              },
+              {
+                "chinese": "好喝",
+                "pinyin": "hǎohē",
+                "english": "taste good"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          }
+        ]
+      },
+      "grammar_002": {
+        "title": "More/Less: 多/少 + Verb",
+        "description": "Using duo and shao before verbs to mean 'more' or 'less'",
+        "lines": [
+          {
+            "a": "做菜的时候少放盐，多放点儿糖。",
+            "b": "Zuò cài de shíhou shǎo fàng yán, duō fàng diǎnr táng.",
+            "c": "When cooking, add less salt and more sugar.",
+            "wordAlignments": [
+              {
+                "chinese": "做菜",
+                "pinyin": "Zuò cài",
+                "english": "cooking"
+              },
+              {
+                "chinese": "的",
+                "pinyin": "de",
+                "english": ""
+              },
+              {
+                "chinese": "时候",
+                "pinyin": "shíhou",
+                "english": "When"
+              },
+              {
+                "chinese": "少",
+                "pinyin": "shǎo",
+                "english": "less"
+              },
+              {
+                "chinese": "放",
+                "pinyin": "fàng",
+                "english": "add"
+              },
+              {
+                "chinese": "盐",
+                "pinyin": "yán",
+                "english": "salt"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "多",
+                "pinyin": "duō",
+                "english": "more"
+              },
+              {
+                "chinese": "放",
+                "pinyin": "fàng",
+                "english": "add"
+              },
+              {
+                "chinese": "点儿",
+                "pinyin": "diǎnr",
+                "english": "a little"
+              },
+              {
+                "chinese": "糖",
+                "pinyin": "táng",
+                "english": "sugar"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "上中文课得多说中文，少说英文。",
+            "b": "Shàng Zhōngwén kè děi duō shuō Zhōngwén, shǎo shuō Yīngwén.",
+            "c": "In Chinese class, one should speak more Chinese and less English.",
+            "wordAlignments": [
+              {
+                "chinese": "上",
+                "pinyin": "Shàng",
+                "english": "In"
+              },
+              {
+                "chinese": "中文",
+                "pinyin": "Zhōngwén",
+                "english": "Chinese"
+              },
+              {
+                "chinese": "课",
+                "pinyin": "kè",
+                "english": "class"
+              },
+              {
+                "chinese": "得",
+                "pinyin": "děi",
+                "english": "should"
+              },
+              {
+                "chinese": "多",
+                "pinyin": "duō",
+                "english": "more"
+              },
+              {
+                "chinese": "说",
+                "pinyin": "shuō",
+                "english": "speak"
+              },
+              {
+                "chinese": "中文",
+                "pinyin": "Zhōngwén",
+                "english": "Chinese"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "少",
+                "pinyin": "shǎo",
+                "english": "less"
+              },
+              {
+                "chinese": "说",
+                "pinyin": "shuō",
+                "english": "speak"
+              },
+              {
+                "chinese": "英文",
+                "pinyin": "Yīngwén",
+                "english": "English"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "你多找了我一块钱。",
+            "b": "Nǐ duō zhǎo le wǒ yí kuài qián.",
+            "c": "You gave me one dollar too many.",
+            "wordAlignments": [
+              {
+                "chinese": "你",
+                "pinyin": "Nǐ",
+                "english": "You"
+              },
+              {
+                "chinese": "多",
+                "pinyin": "duō",
+                "english": "too many"
+              },
+              {
+                "chinese": "找",
+                "pinyin": "zhǎo",
+                "english": "gave"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": ""
+              },
+              {
+                "chinese": "我",
+                "pinyin": "wǒ",
+                "english": "me"
+              },
+              {
+                "chinese": "一块",
+                "pinyin": "yí kuài",
+                "english": "one dollar"
+              },
+              {
+                "chinese": "钱",
+                "pinyin": "qián",
+                "english": ""
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "老师说要写五十个字，我少写了五个。",
+            "b": "Lǎoshī shuō yào xiě wǔshí ge zì, wǒ shǎo xiě le wǔ ge.",
+            "c": "The teacher said to write fifty characters, I wrote five too few.",
+            "wordAlignments": [
+              {
+                "chinese": "老师",
+                "pinyin": "Lǎoshī",
+                "english": "The teacher"
+              },
+              {
+                "chinese": "说",
+                "pinyin": "shuō",
+                "english": "said"
+              },
+              {
+                "chinese": "要",
+                "pinyin": "yào",
+                "english": "to"
+              },
+              {
+                "chinese": "写",
+                "pinyin": "xiě",
+                "english": "write"
+              },
+              {
+                "chinese": "五十个",
+                "pinyin": "wǔshí ge",
+                "english": "fifty"
+              },
+              {
+                "chinese": "字",
+                "pinyin": "zì",
+                "english": "characters"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "我",
+                "pinyin": "wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "少",
+                "pinyin": "shǎo",
+                "english": "too few"
+              },
+              {
+                "chinese": "写",
+                "pinyin": "xiě",
+                "english": "wrote"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": ""
+              },
+              {
+                "chinese": "五个",
+                "pinyin": "wǔ ge",
+                "english": "five"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          }
+        ]
+      },
+      "grammar_003": {
+        "title": "刚 vs 刚才",
+        "description": "Difference between gang (adverb) and gangcai (noun for recent past)",
+        "lines": [
+          {
+            "a": "我哥哥刚从中国来，一个朋友都没有。",
+            "b": "Wǒ gēge gāng cóng Zhōngguó lái, yí ge péngyou dōu méiyǒu.",
+            "c": "My older brother just came from China. He doesn't have a single friend.",
+            "wordAlignments": [
+              {
+                "chinese": "我",
+                "pinyin": "Wǒ",
+                "english": "My"
+              },
+              {
+                "chinese": "哥哥",
+                "pinyin": "gēge",
+                "english": "older brother"
+              },
+              {
+                "chinese": "刚",
+                "pinyin": "gāng",
+                "english": "just"
+              },
+              {
+                "chinese": "从",
+                "pinyin": "cóng",
+                "english": "from"
+              },
+              {
+                "chinese": "中国",
+                "pinyin": "Zhōngguó",
+                "english": "China"
+              },
+              {
+                "chinese": "来",
+                "pinyin": "lái",
+                "english": "came"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": "."
+              },
+              {
+                "chinese": "一个",
+                "pinyin": "yí ge",
+                "english": "a single"
+              },
+              {
+                "chinese": "朋友",
+                "pinyin": "péngyou",
+                "english": "friend"
+              },
+              {
+                "chinese": "都",
+                "pinyin": "dōu",
+                "english": ""
+              },
+              {
+                "chinese": "没有",
+                "pinyin": "méiyǒu",
+                "english": "doesn't have"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "我刚洗完澡，舒服极了。",
+            "b": "Wǒ gāng xǐ wán zǎo, shūfu jí le.",
+            "c": "I just showered and feel so great.",
+            "wordAlignments": [
+              {
+                "chinese": "我",
+                "pinyin": "Wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "刚",
+                "pinyin": "gāng",
+                "english": "just"
+              },
+              {
+                "chinese": "洗",
+                "pinyin": "xǐ",
+                "english": ""
+              },
+              {
+                "chinese": "完",
+                "pinyin": "wán",
+                "english": "finished"
+              },
+              {
+                "chinese": "澡",
+                "pinyin": "zǎo",
+                "english": "showering"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": "and"
+              },
+              {
+                "chinese": "舒服",
+                "pinyin": "shūfu",
+                "english": "feel great"
+              },
+              {
+                "chinese": "极了",
+                "pinyin": "jí le",
+                "english": "so"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "他刚才在这儿，我不知道他去哪儿了。",
+            "b": "Tā gāngcái zài zhèr, wǒ bù zhīdào tā qù nǎr le.",
+            "c": "He was here a moment ago. I don't know where he went.",
+            "wordAlignments": [
+              {
+                "chinese": "他",
+                "pinyin": "Tā",
+                "english": "He"
+              },
+              {
+                "chinese": "刚才",
+                "pinyin": "gāngcái",
+                "english": "a moment ago"
+              },
+              {
+                "chinese": "在",
+                "pinyin": "zài",
+                "english": "was"
+              },
+              {
+                "chinese": "这儿",
+                "pinyin": "zhèr",
+                "english": "here"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": "."
+              },
+              {
+                "chinese": "我",
+                "pinyin": "wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "不",
+                "pinyin": "bù",
+                "english": "don't"
+              },
+              {
+                "chinese": "知道",
+                "pinyin": "zhīdào",
+                "english": "know"
+              },
+              {
+                "chinese": "他",
+                "pinyin": "tā",
+                "english": "he"
+              },
+              {
+                "chinese": "去",
+                "pinyin": "qù",
+                "english": "went"
+              },
+              {
+                "chinese": "哪儿",
+                "pinyin": "nǎr",
+                "english": "where"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": ""
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "弟弟刚才吃了十五个饺子。",
+            "b": "Dìdi gāngcái chī le shíwǔ ge jiǎozi.",
+            "c": "My younger brother ate fifteen dumplings a moment ago.",
+            "wordAlignments": [
+              {
+                "chinese": "弟弟",
+                "pinyin": "Dìdi",
+                "english": "My younger brother"
+              },
+              {
+                "chinese": "刚才",
+                "pinyin": "gāngcái",
+                "english": "a moment ago"
+              },
+              {
+                "chinese": "吃",
+                "pinyin": "chī",
+                "english": "ate"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": ""
+              },
+              {
+                "chinese": "十五个",
+                "pinyin": "shíwǔ ge",
+                "english": "fifteen"
+              },
+              {
+                "chinese": "饺子",
+                "pinyin": "jiǎozi",
+                "english": "dumplings"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "他刚走了两天。",
+            "b": "Tā gāng zǒu le liǎng tiān.",
+            "c": "He left only two days ago.",
+            "wordAlignments": [
+              {
+                "chinese": "他",
+                "pinyin": "Tā",
+                "english": "He"
+              },
+              {
+                "chinese": "刚",
+                "pinyin": "gāng",
+                "english": "only"
+              },
+              {
+                "chinese": "走",
+                "pinyin": "zǒu",
+                "english": "left"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": ""
+              },
+              {
+                "chinese": "两天",
+                "pinyin": "liǎng tiān",
+                "english": "two days ago"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          }
+        ]
+      },
+      "grammar_004": {
+        "title": "Resultative Complements",
+        "description": "Verb + complement showing result (完, 错, 清楚, 对)",
+        "lines": [
+          {
+            "a": "小白菜卖完了。",
+            "b": "Xiǎo báicài mài wán le.",
+            "c": "Baby bok choy is sold out.",
+            "wordAlignments": [
+              {
+                "chinese": "小白菜",
+                "pinyin": "Xiǎo báicài",
+                "english": "Baby bok choy"
+              },
+              {
+                "chinese": "卖",
+                "pinyin": "mài",
+                "english": "sold"
+              },
+              {
+                "chinese": "完",
+                "pinyin": "wán",
+                "english": "out"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": ""
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "你找错钱了。",
+            "b": "Nǐ zhǎo cuò qián le.",
+            "c": "You gave me the wrong change.",
+            "wordAlignments": [
+              {
+                "chinese": "你",
+                "pinyin": "Nǐ",
+                "english": "You"
+              },
+              {
+                "chinese": "找",
+                "pinyin": "zhǎo",
+                "english": "gave"
+              },
+              {
+                "chinese": "错",
+                "pinyin": "cuò",
+                "english": "wrong"
+              },
+              {
+                "chinese": "钱",
+                "pinyin": "qián",
+                "english": "change"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": ""
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "那个人是谁你看清楚了吗？",
+            "b": "Nà ge rén shì shéi nǐ kàn qīngchu le ma?",
+            "c": "Did you see clearly who that person was?",
+            "wordAlignments": [
+              {
+                "chinese": "那个",
+                "pinyin": "Nà ge",
+                "english": "that"
+              },
+              {
+                "chinese": "人",
+                "pinyin": "rén",
+                "english": "person"
+              },
+              {
+                "chinese": "是",
+                "pinyin": "shì",
+                "english": "was"
+              },
+              {
+                "chinese": "谁",
+                "pinyin": "shéi",
+                "english": "who"
+              },
+              {
+                "chinese": "你",
+                "pinyin": "nǐ",
+                "english": "you"
+              },
+              {
+                "chinese": "看",
+                "pinyin": "kàn",
+                "english": "see"
+              },
+              {
+                "chinese": "清楚",
+                "pinyin": "qīngchu",
+                "english": "clearly"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": ""
+              },
+              {
+                "chinese": "吗",
+                "pinyin": "ma",
+                "english": "Did"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
+            ]
+          },
+          {
+            "a": "太好了，这个字你写对了。",
+            "b": "Tài hǎo le, zhè ge zì nǐ xiě duì le.",
+            "c": "Great! You wrote this character correctly.",
+            "wordAlignments": [
+              {
+                "chinese": "太好了",
+                "pinyin": "Tài hǎo le",
+                "english": "Great!"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ""
+              },
+              {
+                "chinese": "这个",
+                "pinyin": "zhè ge",
+                "english": "this"
+              },
+              {
+                "chinese": "字",
+                "pinyin": "zì",
+                "english": "character"
+              },
+              {
+                "chinese": "你",
+                "pinyin": "nǐ",
+                "english": "You"
+              },
+              {
+                "chinese": "写",
+                "pinyin": "xiě",
+                "english": "wrote"
+              },
+              {
+                "chinese": "对",
+                "pinyin": "duì",
+                "english": "correctly"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": ""
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "小白菜还没卖完。",
+            "b": "Xiǎo báicài hái méi mài wán.",
+            "c": "Baby bok choy is not sold out yet.",
+            "wordAlignments": [
+              {
+                "chinese": "小白菜",
+                "pinyin": "Xiǎo báicài",
+                "english": "Baby bok choy"
+              },
+              {
+                "chinese": "还",
+                "pinyin": "hái",
+                "english": "yet"
+              },
+              {
+                "chinese": "没",
+                "pinyin": "méi",
+                "english": "not"
+              },
+              {
+                "chinese": "卖",
+                "pinyin": "mài",
+                "english": "sold"
+              },
+              {
+                "chinese": "完",
+                "pinyin": "wán",
+                "english": "out"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "糟糕，这个字你没有写对。",
+            "b": "Zāogāo, zhè ge zì nǐ méiyǒu xiě duì.",
+            "c": "Oh no! You did not write this character correctly.",
+            "wordAlignments": [
+              {
+                "chinese": "糟糕",
+                "pinyin": "Zāogāo",
+                "english": "Oh no!"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ""
+              },
+              {
+                "chinese": "这个",
+                "pinyin": "zhè ge",
+                "english": "this"
+              },
+              {
+                "chinese": "字",
+                "pinyin": "zì",
+                "english": "character"
+              },
+              {
+                "chinese": "你",
+                "pinyin": "nǐ",
+                "english": "You"
+              },
+              {
+                "chinese": "没有",
+                "pinyin": "méiyǒu",
+                "english": "did not"
+              },
+              {
+                "chinese": "写",
+                "pinyin": "xiě",
+                "english": "write"
+              },
+              {
+                "chinese": "对",
+                "pinyin": "duì",
+                "english": "correctly"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          }
+        ]
+      },
+      "grammar_005": {
+        "title": "好 as Resultative Complement",
+        "description": "Using hao after verbs to indicate completion and readiness",
+        "lines": [
+          {
+            "a": "饭做好了，快来吃吧。",
+            "b": "Fàn zuò hǎo le, kuài lái chī ba.",
+            "c": "The food is ready. Come and eat.",
+            "wordAlignments": [
+              {
+                "chinese": "饭",
+                "pinyin": "Fàn",
+                "english": "The food"
+              },
+              {
+                "chinese": "做",
+                "pinyin": "zuò",
+                "english": ""
+              },
+              {
+                "chinese": "好",
+                "pinyin": "hǎo",
+                "english": "ready"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "is"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": "."
+              },
+              {
+                "chinese": "快",
+                "pinyin": "kuài",
+                "english": ""
+              },
+              {
+                "chinese": "来",
+                "pinyin": "lái",
+                "english": "Come"
+              },
+              {
+                "chinese": "吃",
+                "pinyin": "chī",
+                "english": "eat"
+              },
+              {
+                "chinese": "吧",
+                "pinyin": "ba",
+                "english": "and"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "功课做好了，我要睡觉了。",
+            "b": "Gōngkè zuò hǎo le, wǒ yào shuìjiào le.",
+            "c": "My homework is done. I want to go to bed.",
+            "wordAlignments": [
+              {
+                "chinese": "功课",
+                "pinyin": "Gōngkè",
+                "english": "homework"
+              },
+              {
+                "chinese": "做",
+                "pinyin": "zuò",
+                "english": ""
+              },
+              {
+                "chinese": "好",
+                "pinyin": "hǎo",
+                "english": "done"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "is"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": "."
+              },
+              {
+                "chinese": "我",
+                "pinyin": "wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "要",
+                "pinyin": "yào",
+                "english": "want to"
+              },
+              {
+                "chinese": "睡觉",
+                "pinyin": "shuìjiào",
+                "english": "go to bed"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": ""
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "衣服我已经帮你买好了。",
+            "b": "Yīfu wǒ yǐjīng bāng nǐ mǎi hǎo le.",
+            "c": "I have already bought the clothes for you.",
+            "wordAlignments": [
+              {
+                "chinese": "衣服",
+                "pinyin": "Yīfu",
+                "english": "clothes"
+              },
+              {
+                "chinese": "我",
+                "pinyin": "wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "已经",
+                "pinyin": "yǐjīng",
+                "english": "already"
+              },
+              {
+                "chinese": "帮",
+                "pinyin": "bāng",
+                "english": "for"
+              },
+              {
+                "chinese": "你",
+                "pinyin": "nǐ",
+                "english": "you"
+              },
+              {
+                "chinese": "买",
+                "pinyin": "mǎi",
+                "english": "bought"
+              },
+              {
+                "chinese": "好",
+                "pinyin": "hǎo",
+                "english": ""
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "have"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "一切都准备好了，我们可以出发了。",
+            "b": "Yíqiè dōu zhǔnbèi hǎo le, wǒmen kěyǐ chūfā le.",
+            "c": "Everything is ready. We can depart now.",
+            "wordAlignments": [
+              {
+                "chinese": "一切",
+                "pinyin": "Yíqiè",
+                "english": "Everything"
+              },
+              {
+                "chinese": "都",
+                "pinyin": "dōu",
+                "english": ""
+              },
+              {
+                "chinese": "准备",
+                "pinyin": "zhǔnbèi",
+                "english": ""
+              },
+              {
+                "chinese": "好",
+                "pinyin": "hǎo",
+                "english": "ready"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "is"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": "."
+              },
+              {
+                "chinese": "我们",
+                "pinyin": "wǒmen",
+                "english": "We"
+              },
+              {
+                "chinese": "可以",
+                "pinyin": "kěyǐ",
+                "english": "can"
+              },
+              {
+                "chinese": "出发",
+                "pinyin": "chūfā",
+                "english": "depart"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "now"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
