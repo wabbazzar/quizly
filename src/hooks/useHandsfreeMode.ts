@@ -64,6 +64,7 @@ export function useHandsfreeMode({
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const resultTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const processedBlobRef = useRef<Blob | null>(null);
   const stateRef = useRef(state);
   stateRef.current = state;
   const enabledRef = useRef(enabled);
@@ -93,6 +94,7 @@ export function useHandsfreeMode({
 
   // Start listening (used for both initial and retry)
   const startListening = useCallback(() => {
+    processedBlobRef.current = null; // allow next blob to be processed
     setState('listening');
     recorder.start();
   }, [recorder]);
@@ -131,7 +133,14 @@ export function useHandsfreeMode({
 
   // When recording completes, evaluate
   useEffect(() => {
-    if (!enabled || state !== 'listening' || !recorder.audioBlob) return;
+    const blob = recorder.audioBlob;
+    if (!enabled || !blob) return;
+    // Only process if this is a new blob we haven't seen
+    if (blob === processedBlobRef.current) return;
+    // Only process if we're in a state where we expect a recording
+    if (stateRef.current !== 'listening') return;
+
+    processedBlobRef.current = blob;
 
     const refUrl = getReferenceUrl();
     if (!refUrl) {
@@ -142,7 +151,7 @@ export function useHandsfreeMode({
 
     setState('evaluating');
 
-    comparison.compare(recorder.audioBlob, refUrl).then(result => {
+    comparison.compare(blob, refUrl).then(result => {
       if (!result) {
         playSound('match_failure');
         setIsCorrect(false);
@@ -238,6 +247,7 @@ export function useHandsfreeMode({
     }
 
     setAttempt(1);
+    processedBlobRef.current = null;
     const timer = setTimeout(() => {
       if (enabledRef.current) playPrompt();
     }, 500);
