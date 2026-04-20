@@ -33,6 +33,8 @@ interface UseHandsfreeModeReturn {
   level: number;
   attempt: number;
   skip: () => void;
+  /** Restart the current card - call from a click handler (provides user gesture) */
+  restart: () => void;
   isSupported: boolean;
   error: string | null;
 }
@@ -159,7 +161,6 @@ export function useHandsfreeMode({
   const doPlayPromptThenListen = useCallback(() => {
     const url = getPromptUrl();
     if (!url) {
-      // No prompt audio, go straight to listening
       doStartListening();
       return;
     }
@@ -176,9 +177,11 @@ export function useHandsfreeMode({
         }
       })
       .catch(() => {
-        // Audio play failed (iOS autoplay, missing file) — skip to listening
+        // Audio play blocked (iOS autoplay, no user gesture yet).
+        // Show error so user knows to tap. On tap (skip button), flow restarts.
         if (stateRef.current === 'playing_prompt') {
-          doStartListening();
+          setError('Tap to start');
+          setState('idle');
         }
       });
   }, [getPromptUrl, doStartListening, playAudioUrl]);
@@ -346,6 +349,19 @@ export function useHandsfreeMode({
     onIncorrectRef.current();
   }, [recorder, cancelInFlight]);
 
+  /** Restart the current card (use as onClick handler — provides user gesture for audio) */
+  const restart = useCallback(() => {
+    cancelInFlight();
+    if (recorder.isRecording) recorder.stop();
+    recorder.reset();
+    unlockAudio();
+    recorder.warmup();
+    setAttempt(1);
+    processedBlobRef.current = null;
+    setError(null);
+    doPlayPromptThenListen();
+  }, [recorder, cancelInFlight, unlockAudio, doPlayPromptThenListen]);
+
   return {
     state,
     distance,
@@ -353,6 +369,7 @@ export function useHandsfreeMode({
     level: recorder.level,
     attempt,
     skip,
+    restart,
     isSupported: recorder.isSupported,
     error: error || recorder.error,
   };

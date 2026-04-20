@@ -78,6 +78,18 @@
   color: var(--semantic-warning);
 }
 
+.tapToStart {
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.15), rgba(74, 144, 226, 0.05));
+  border: 1px solid rgba(74, 144, 226, 0.3);
+  color: var(--primary-main);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 44px;
+}
+
 .actions {
   display: flex;
   gap: var(--space-2);

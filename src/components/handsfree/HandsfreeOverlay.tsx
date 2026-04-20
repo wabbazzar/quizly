@@ -11,6 +11,7 @@ interface HandsfreeOverlayProps {
   error: string | null;
   onSkip: () => void;
   onStop: () => void;
+  onRestart: () => void;
 }
 
 /**
@@ -25,6 +26,7 @@ const HandsfreeOverlay: FC<HandsfreeOverlayProps> = memo(({
   error,
   onSkip,
   onStop,
+  onRestart,
 }) => {
   const showSkip = state === 'listening' || state === 'playing_prompt' || state === 'retrying';
   const isActive = state !== 'idle';
@@ -81,7 +83,9 @@ const HandsfreeOverlay: FC<HandsfreeOverlayProps> = memo(({
         )}
 
         {state === 'idle' && error && (
-          <span className={styles.errorLabel}>{error}</span>
+          <button className={styles.tapToStart} onClick={onRestart}>
+            {error}
+          </button>
         )}
       </div>
 

@@ -642,6 +642,7 @@ const Flashcards: FC = () => {
                 error={handsfree.error}
                 onSkip={handsfree.skip}
                 onStop={() => setHandsfreeActive(false)}
+                onRestart={handsfree.restart}
               />
             </div>
           </div>
