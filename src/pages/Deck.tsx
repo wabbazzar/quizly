@@ -43,6 +43,10 @@ const Deck: FC = () => {
   );
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     if (deckId) {
       loadDeck(deckId);
       // Only resolve asynchronously if the manifest isn't already cached.
