@@ -1001,6 +1001,104 @@ After generating audio, update `public/data/transcripts/manifest.json` to add th
 }
 ```
 
+## Speechify Per-Card Audio Generation
+
+Per-card audio files (side_a, side_b, side_c) are generated via **Speechify's
+synthesis API** called directly -- no UI automation needed.
+
+### Prerequisites
+
+1. Chrome running with `--remote-debugging-port=9333`:
+   ```bash
+   google-chrome --remote-debugging-port=9333 --user-data-dir=/tmp/chrome-cdp --no-first-run https://app.speechify.com/
+   ```
+2. Logged into app.speechify.com in that Chrome instance (Google OAuth)
+
+### Getting the Firebase Auth Token
+
+The script borrows the auth token from the logged-in Speechify session via
+Chrome DevTools Protocol (CDP). The token lives in IndexedDB:
+
+```javascript
+// Connect via Playwright CDP
+const browser = await chromium.connectOverCDP("http://127.0.0.1:9333");
+const page = browser.contexts()[0].pages().find(p => p.url().includes("speechify"));
+
+// Extract token from Firebase IndexedDB
+const token = await page.evaluate(() => {
+  return new Promise((resolve) => {
+    const req = indexedDB.open("firebaseLocalStorageDb");
+    req.onsuccess = (e) => {
+      const db = e.target.result;
+      const tx = db.transaction("firebaseLocalStorage", "readonly");
+      const store = tx.objectStore("firebaseLocalStorage");
+      const all = store.getAll();
+      all.onsuccess = () => {
+        for (const item of all.result) {
+          if (item?.value?.stsTokenManager?.accessToken) {
+            resolve(item.value.stsTokenManager.accessToken);
+            return;
+          }
+        }
+      };
+    };
+  });
+});
+```
+
+Tokens expire after ~1 hour. The batch script auto-refreshes every 50 calls.
+
+### Synthesis API
+
+```
+POST https://audio.api.speechify.com/v3/synthesis/get
+
+Headers:
+  Content-Type: application/json
+  Authorization: Bearer <firebase_token>
+  x-speechify-client: WebApp
+  x-speechify-client-version: 11.1.0
+  x-speechify-synthesis-options: sentence-splitting=false
+
+Body:
+  {"ssml": "<speak>你好</speak>", "voice": "xiaoxiao", "forcedAudioFormat": "mp3"}
+
+Response: application/protobuf (MP3 data starts at byte offset 3, after protobuf wrapper)
+```
+
+### Voice ID Mapping
+
+Speechify display names map to these API voice IDs:
+
+| Display Name | API Voice ID | Language | Gender | Used For |
+|-------------|-------------|----------|--------|----------|
+| **Junjie** | `yunfeng` | Chinese | Male | side_a (English definitions) |
+| **Yarui** | `xiaoxiao` | Chinese | Female | side_b (Chinese characters) |
+| Yating | `yixiao` | Chinese | Female | (available alternative) |
+
+Other working Chinese voices: `yunxi`, `yunyang`, `yunjian`, `yunhao`, `yunze`,
+`xiaoyan`, `xiaomeng`, `xiaomo`, `xiaohan`, `xiaorui`, `xiaoyi`, `xiaozhen`,
+`xiaochen`
+
+English voices: `oliver`, `tanner`, `geffenv1`
+
+### Batch Script Usage
+
+```bash
+# Generate audio for one deck (skips existing files)
+node scripts/speechify-cdp-batch.mjs public/data/decks/chinese_chpt1_1.json
+
+# Generate for all decks
+bash scripts/speechify-run-all.sh
+```
+
+### Audio File Naming
+
+- `{DECK_ID}_card{idx}_side_a.mp3` -- English definition (yunfeng/Junjie voice)
+- `{DECK_ID}_card{idx}_side_b.mp3` -- Chinese characters (xiaoxiao/Yarui voice)
+- `{DECK_ID}_card{idx}_side_c.mp3` -- Copy of side_b (same audio)
+- All saved to `public/data/audio/words/`
+
 ## Learning Resources
 
 - React docs: Use Context7 MCP for latest patterns
