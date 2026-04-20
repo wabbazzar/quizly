@@ -261,6 +261,15 @@ export const LazyLogin = createLazyImport(
   'login'
 );
 
+export const LazyAbout = createLazyImport(
+  () => import('@/pages/About'),
+  {
+    onError: error => console.error('Failed to load About component:', error),
+    retryAttempts: 3,
+  },
+  'about'
+);
+
 /**
  * Preload critical components on app initialization
  */

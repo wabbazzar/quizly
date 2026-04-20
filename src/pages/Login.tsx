@@ -1,5 +1,5 @@
 import { FC, useState, useCallback, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useSyncStore } from '@/store/syncStore';
 import styles from './Login.module.css';
 
@@ -125,6 +125,10 @@ const Login: FC = () => {
           >
             Continue as Guest
           </button>
+
+          <Link to="/about" className={styles.aboutLink}>
+            What is Quizly?
+          </Link>
         </div>
       </div>
     </div>

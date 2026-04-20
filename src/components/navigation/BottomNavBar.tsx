@@ -13,6 +13,7 @@ export const BottomNavBar: FC = memo(() => {
   // Hide on login and deck-specific mode pages (except read which shows nav)
   if (
     location.pathname === '/login' ||
+    location.pathname === '/about' ||
     location.pathname.includes('/flashcards/') ||
     location.pathname.includes('/match/') ||
     location.pathname.includes('/learn/')

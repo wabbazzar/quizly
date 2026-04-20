@@ -20,6 +20,7 @@ import {
   LazyCreateDeck,
   LazyDeckEditor,
   LazyLogin,
+  LazyAbout,
   preloadCriticalComponents,
 } from '@/utils/lazyImports';
 
@@ -48,6 +49,16 @@ export function AppRouter() {
             <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
               <PageLazyBoundary pageName="Login">
                 <LazyLogin />
+              </PageLazyBoundary>
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <ErrorBoundary level="route" resetKeys={[location.pathname]} resetOnPropsChange>
+              <PageLazyBoundary pageName="About">
+                <LazyAbout />
               </PageLazyBoundary>
             </ErrorBoundary>
           }
