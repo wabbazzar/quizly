@@ -3,13 +3,16 @@
  * Compares a user's recorded audio against a reference MP3 to determine
  * if they said the same word/phrase.
  *
- * Algorithm: Extract 13 MFCCs per frame (512 window, 256 hop @ 16kHz),
- * then compute DTW distance with euclidean metric.
- * Threshold: normalized distance < 70 = match.
+ * Algorithm:
+ *   1. Extract MFCCs c2-c12 (drop c0 energy + c1 pitch-sensitive)
+ *   2. Apply mean normalization per utterance
+ *   3. Multi-pitch comparison: try [-8..+8] semitone offsets, take minimum DTW
+ *   4. Threshold: normalized distance < 20 = match
  *
- * Calibrated from real voice tests:
- *   Correct pronunciation: norm distance 41-59
- *   Wrong word: norm distance 87-93
+ * Calibrated via synthetic pitch/speed variations across 8 cards:
+ *   Same-word variations max: 16.7 (with multi-pitch)
+ *   Different-word min: 22.3
+ *   Gap: +5.6
  */
 
 const FFT_SIZE = 512;
@@ -19,8 +22,11 @@ const NUM_MEL_FILTERS = 26;
 const TARGET_SAMPLE_RATE = 16000;
 const ENERGY_FLOOR = 0.005;
 
+/** Pitch offsets (in semitones) to try when comparing */
+const PITCH_OFFSETS = [-8, -6, -4, -2, 0, 2, 4, 6, 8];
+
 /** Normalized DTW distance below this = pass */
-export const MATCH_THRESHOLD = 85;
+export const MATCH_THRESHOLD = 20;
 
 // ============================================================
 // FFT (Cooley-Tukey radix-2, in-place)
@@ -94,7 +100,6 @@ function createMelFilterbank(): Float64Array[] {
   return filters;
 }
 
-// Pre-computed mel filterbank
 const melFilters = createMelFilterbank();
 
 // ============================================================
@@ -114,10 +119,6 @@ function dct(input: Float64Array, numCoeffs: number): number[] {
   return output;
 }
 
-// ============================================================
-// Hann window
-// ============================================================
-
 function hann(n: number, N: number): number {
   return 0.5 * (1 - Math.cos(2 * Math.PI * n / (N - 1)));
 }
@@ -130,30 +131,27 @@ export type MFCCFrames = number[][];
 
 /**
  * Extract MFCC frames from mono 16kHz audio samples.
- * Skips silent frames (energy below threshold).
+ * Uses coefficients c2-c12 (drops c0 energy and c1 pitch-sensitive).
+ * Applies mean normalization per utterance.
  */
 export function extractMFCC(samples: Float32Array): MFCCFrames {
   const frames: MFCCFrames = [];
   const numBins = FFT_SIZE / 2 + 1;
 
   for (let i = 0; i + FFT_SIZE <= samples.length; i += HOP_SIZE) {
-    // Energy check - skip silent frames
     let energy = 0;
     for (let j = 0; j < FFT_SIZE; j++) energy += samples[i + j] * samples[i + j];
     energy = Math.sqrt(energy / FFT_SIZE);
     if (energy < ENERGY_FLOOR) continue;
 
-    // Window + FFT
     const real = new Float64Array(FFT_SIZE);
     const imag = new Float64Array(FFT_SIZE);
     for (let j = 0; j < FFT_SIZE; j++) real[j] = samples[i + j] * hann(j, FFT_SIZE);
     fft(real, imag);
 
-    // Power spectrum
     const power = new Float64Array(numBins);
     for (let j = 0; j < numBins; j++) power[j] = real[j] * real[j] + imag[j] * imag[j];
 
-    // Mel filterbank + log
     const melEnergies = new Float64Array(NUM_MEL_FILTERS);
     for (let f = 0; f < NUM_MEL_FILTERS; f++) {
       let sum = 0;
@@ -161,11 +159,43 @@ export function extractMFCC(samples: Float32Array): MFCCFrames {
       melEnergies[f] = Math.log(sum + 1e-10);
     }
 
-    // DCT -> MFCCs
-    frames.push(dct(melEnergies, NUM_MFCC));
+    // DCT -> full MFCCs, then take c2-c12 (skip c0 and c1)
+    const allCoeffs = dct(melEnergies, NUM_MFCC);
+    frames.push(allCoeffs.slice(2));
+  }
+
+  if (frames.length === 0) return frames;
+
+  // Mean normalization: subtract per-coefficient mean across all frames
+  const dim = frames[0].length;
+  const mean = new Float64Array(dim);
+  for (const frame of frames) {
+    for (let d = 0; d < dim; d++) mean[d] += frame[d];
+  }
+  for (let d = 0; d < dim; d++) mean[d] /= frames.length;
+  for (const frame of frames) {
+    for (let d = 0; d < dim; d++) frame[d] -= mean[d];
   }
 
   return frames;
+}
+
+// ============================================================
+// Pitch shifting (linear interpolation resample)
+// ============================================================
+
+function pitchShiftSamples(samples: Float32Array, semitones: number): Float32Array {
+  const factor = Math.pow(2, semitones / 12);
+  const newLen = Math.floor(samples.length / factor);
+  const out = new Float32Array(newLen);
+  for (let i = 0; i < newLen; i++) {
+    const srcIdx = i * factor;
+    const lo = Math.floor(srcIdx);
+    const hi = Math.min(lo + 1, samples.length - 1);
+    const frac = srcIdx - lo;
+    out[i] = samples[lo] * (1 - frac) + samples[hi] * frac;
+  }
+  return out;
 }
 
 // ============================================================
@@ -222,22 +252,40 @@ export interface ComparisonResult {
 }
 
 /**
- * Compare two sets of MFCC frames and return the match result.
+ * Compare user audio against reference MFCC using multi-pitch DTW.
+ * Tries several pitch offsets on the user audio and returns the best match.
  * Returns null if either input has 0 frames (silence).
  */
-export function compareMFCC(refMFCC: MFCCFrames, userMFCC: MFCCFrames): ComparisonResult | null {
-  if (refMFCC.length === 0 || userMFCC.length === 0) return null;
+export function compareMFCC(refMFCC: MFCCFrames, userSamples: Float32Array): ComparisonResult | null {
+  if (refMFCC.length === 0) return null;
 
-  const rawDistance = dtwDistance(refMFCC, userMFCC);
-  const pathLen = Math.max(refMFCC.length, userMFCC.length);
-  const normalizedDistance = rawDistance / pathLen;
+  let bestDist = Infinity;
+  let bestRaw = Infinity;
+  let bestFrames = 0;
+
+  for (const offset of PITCH_OFFSETS) {
+    const shifted = offset === 0 ? userSamples : pitchShiftSamples(userSamples, offset);
+    const userMFCC = extractMFCC(shifted);
+    if (userMFCC.length === 0) continue;
+
+    const raw = dtwDistance(refMFCC, userMFCC);
+    const norm = raw / Math.max(refMFCC.length, userMFCC.length);
+
+    if (norm < bestDist) {
+      bestDist = norm;
+      bestRaw = raw;
+      bestFrames = userMFCC.length;
+    }
+  }
+
+  if (bestDist === Infinity) return null;
 
   return {
-    rawDistance,
-    normalizedDistance,
-    isMatch: normalizedDistance < MATCH_THRESHOLD,
+    rawDistance: bestRaw,
+    normalizedDistance: bestDist,
+    isMatch: bestDist < MATCH_THRESHOLD,
     refFrames: refMFCC.length,
-    userFrames: userMFCC.length,
+    userFrames: bestFrames,
   };
 }
 

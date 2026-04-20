@@ -22,7 +22,7 @@ interface UseAudioComparisonReturn {
 
 /**
  * Hook that compares a user's recorded audio blob against a reference MP3 URL
- * using MFCC extraction + DTW. Caches decoded reference MFCCs.
+ * using MFCC extraction + multi-pitch DTW. Caches decoded reference MFCCs.
  */
 export function useAudioComparison(): UseAudioComparisonReturn {
   const [isComparing, setIsComparing] = useState(false);
@@ -63,17 +63,16 @@ export function useAudioComparison(): UseAudioComparisonReturn {
       const ctx = getAudioContext();
       if (ctx.state === 'suspended') await ctx.resume();
 
-      // Decode user audio
+      // Decode user audio to raw 16kHz mono samples
       const userArrayBuf = await userBlob.arrayBuffer();
       const userAudioBuffer = await ctx.decodeAudioData(userArrayBuf);
       const userSamples = await resampleTo16kMono(userAudioBuffer);
-      const userMFCC = extractMFCC(userSamples);
 
       // Get reference MFCC (cached)
       const refMFCC = await getReferenceMFCC(referenceUrl);
 
-      // Compare
-      const compResult = compareMFCC(refMFCC, userMFCC);
+      // Multi-pitch comparison: compareMFCC tries several pitch offsets internally
+      const compResult = compareMFCC(refMFCC, userSamples);
       setResult(compResult);
       return compResult;
     } catch (e) {
