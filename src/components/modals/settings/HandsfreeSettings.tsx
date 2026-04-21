@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useRef, useEffect } from 'react';
 import { SectionProps } from '../UnifiedSettings';
 import styles from './HandsfreeSettings.module.css';
 
@@ -8,6 +8,18 @@ const isMediaRecorderSupported =
   typeof navigator.mediaDevices?.getUserMedia === 'function';
 
 const HandsfreeSettings: FC<SectionProps> = ({ settings, onChange }) => {
+  const subSettingsRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to show sub-settings when handsfree is toggled on
+  useEffect(() => {
+    if (settings.handsfreeMode && subSettingsRef.current) {
+      // Small delay to let the DOM update before scrolling
+      setTimeout(() => {
+        subSettingsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
+    }
+  }, [settings.handsfreeMode]);
+
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>Handsfree Mode</h3>
@@ -39,7 +51,7 @@ const HandsfreeSettings: FC<SectionProps> = ({ settings, onChange }) => {
       )}
 
       {settings.handsfreeMode && isMediaRecorderSupported && (
-        <>
+        <div ref={subSettingsRef}>
           <label className={styles.checkboxRow}>
             <div className={styles.checkboxContainer}>
               <input
@@ -67,7 +79,7 @@ const HandsfreeSettings: FC<SectionProps> = ({ settings, onChange }) => {
               <option value={3}>3 retries</option>
             </select>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

@@ -26,7 +26,7 @@ const ENERGY_FLOOR = 0.005;
 const PITCH_OFFSETS = [-8, -6, -4, -2, 0, 2, 4, 6, 8];
 
 /** Normalized DTW distance below this = pass */
-export const MATCH_THRESHOLD = 20;
+export const MATCH_THRESHOLD = 30;
 
 // ============================================================
 // FFT (Cooley-Tukey radix-2, in-place)

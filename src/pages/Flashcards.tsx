@@ -48,11 +48,20 @@ const Flashcards: FC = () => {
     'shuffle'
   );
   const [includeMastered, setIncludeMastered] = useState(true);
-  // Initialize handsfree settings from persisted store
-  const storedFlashcardSettings = deckId ? getSettingsForMode(deckId, 'flashcards') as FlashcardsSettings : null;
-  const [handsfreeActive, setHandsfreeActive] = useState(storedFlashcardSettings?.handsfreeMode ?? false);
-  const [handsfreePlaybackOnIncorrect, setHandsfreePlaybackOnIncorrect] = useState(storedFlashcardSettings?.handsfreePlaybackOnIncorrect ?? true);
-  const [handsfreeRetries, setHandsfreeRetries] = useState(storedFlashcardSettings?.handsfreeRetries ?? 1);
+  const [handsfreeActive, setHandsfreeActive] = useState(false);
+  const [handsfreePlaybackOnIncorrect, setHandsfreePlaybackOnIncorrect] = useState(true);
+  const [handsfreeRetries, setHandsfreeRetries] = useState(1);
+
+  // Load handsfree settings from persisted store after hydration
+  const handsfreeInitRef = useRef(false);
+  useEffect(() => {
+    if (handsfreeInitRef.current || !deckId) return;
+    handsfreeInitRef.current = true;
+    const stored = getSettingsForMode(deckId, 'flashcards') as FlashcardsSettings;
+    if (stored?.handsfreeMode) setHandsfreeActive(true);
+    if (stored?.handsfreePlaybackOnIncorrect !== undefined) setHandsfreePlaybackOnIncorrect(stored.handsfreePlaybackOnIncorrect);
+    if (stored?.handsfreeRetries !== undefined) setHandsfreeRetries(stored.handsfreeRetries);
+  }, [deckId, getSettingsForMode]);
 
   // Load deck and restore session on mount
   useEffect(() => {
