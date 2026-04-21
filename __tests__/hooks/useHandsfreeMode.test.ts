@@ -2,30 +2,48 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
 import { useState, useCallback } from 'react';
 
-// ---- Audio element mock ----
-const mockAudioInstances: Array<{
-  play: ReturnType<typeof vi.fn>;
-  pause: ReturnType<typeof vi.fn>;
-  onended: (() => void) | null;
-  onerror: (() => void) | null;
-}> = [];
+// ---- Web Audio API mock ----
+// Track AudioBufferSourceNode instances to fire onended
+const mockSourceNodes: Array<{ onended: (() => void) | null; stop: ReturnType<typeof vi.fn> }> = [];
 
-vi.stubGlobal('Audio', class MockAudio {
-  play = vi.fn(() => Promise.resolve());
-  pause = vi.fn();
-  onended: (() => void) | null = null;
-  onerror: (() => void) | null = null;
-  src = '';
-  constructor() { mockAudioInstances.push(this); }
-});
+const mockDecodeAudioData = vi.fn(() => Promise.resolve({ duration: 0.5, sampleRate: 16000 }));
 
-// Mock AudioContext for unlock
 vi.stubGlobal('AudioContext', class MockAudioContext {
-  createBuffer = () => ({ });
-  createBufferSource = () => ({ buffer: null, connect: vi.fn(), start: vi.fn() });
+  createBuffer = () => ({});
+  createBufferSource = () => {
+    const node = {
+      buffer: null,
+      connect: vi.fn(),
+      start: vi.fn(() => {
+        // Auto-fire onended after a microtask to simulate short audio
+        setTimeout(() => { if (node.onended) node.onended(); }, 0);
+      }),
+      stop: vi.fn(),
+      onended: null as (() => void) | null,
+      addEventListener: vi.fn(),
+    };
+    mockSourceNodes.push(node);
+    return node;
+  };
   destination = {};
   state = 'running';
   resume = vi.fn(() => Promise.resolve());
+  close = vi.fn(() => Promise.resolve());
+  decodeAudioData = mockDecodeAudioData;
+});
+
+// Mock fetch for audio file loading
+const mockFetch = vi.fn(() => Promise.resolve({
+  ok: true,
+  arrayBuffer: () => Promise.resolve(new ArrayBuffer(100)),
+}));
+vi.stubGlobal('fetch', mockFetch);
+
+// Mock Audio for unlock only
+vi.stubGlobal('Audio', class MockAudio {
+  play = vi.fn(() => Promise.resolve());
+  pause = vi.fn();
+  src = '';
 });
 
 // ---- Recorder mock using real React state ----
@@ -94,16 +112,23 @@ function makeProps(overrides = {}) {
   };
 }
 
-function fireLatestAudioEnded() {
-  const latest = mockAudioInstances[mockAudioInstances.length - 1];
-  if (latest?.onended) latest.onended();
+/** Advance timers to let the mock AudioBufferSourceNode fire onended */
+async function waitForAudioEnd() {
+  await vi.advanceTimersByTimeAsync(10);
 }
 
 describe('useHandsfreeMode', () => {
   beforeEach(() => {
     vi.useFakeTimers();
-    mockAudioInstances.length = 0;
+    mockSourceNodes.length = 0;
     mockCompareResult = null;
+    mockFetch.mockClear();
+    mockFetch.mockImplementation(() => Promise.resolve({
+      ok: true,
+      arrayBuffer: () => Promise.resolve(new ArrayBuffer(100)),
+    }));
+    mockDecodeAudioData.mockClear();
+    mockDecodeAudioData.mockImplementation(() => Promise.resolve({ duration: 0.5, sampleRate: 16000 }));
     mockRecorderStart.mockClear();
     mockRecorderStop.mockClear();
     mockRecorderReset.mockClear();
@@ -124,7 +149,8 @@ describe('useHandsfreeMode', () => {
   it('transitions playing_prompt -> listening on audio end', async () => {
     const { result } = renderHook(() => useHandsfreeMode(makeProps()));
     await act(async () => { vi.advanceTimersByTime(500); });
-    await act(async () => { fireLatestAudioEnded(); });
+    // Let fetch+decode+play resolve, then onended fires
+    await act(async () => { await waitForAudioEnd(); });
     expect(result.current.state).toBe('listening');
     expect(mockRecorderStart).toHaveBeenCalledTimes(1);
   });
@@ -135,7 +161,7 @@ describe('useHandsfreeMode', () => {
     const { result } = renderHook(() => useHandsfreeMode(props));
 
     await act(async () => { vi.advanceTimersByTime(500); });
-    await act(async () => { fireLatestAudioEnded(); });
+    await act(async () => { await waitForAudioEnd(); });
     await act(async () => { triggerBlob!(new Blob(['audio1'])); });
     await act(async () => { await vi.advanceTimersByTimeAsync(0); });
 
@@ -155,7 +181,7 @@ describe('useHandsfreeMode', () => {
 
       // Start -> prompt -> listen
       await act(async () => { vi.advanceTimersByTime(500); });
-      await act(async () => { fireLatestAudioEnded(); });
+      await act(async () => { await waitForAudioEnd(); });
       expect(result.current.attempt).toBe(1);
 
       // Record -> evaluate -> showing_result (incorrect)
@@ -169,7 +195,7 @@ describe('useHandsfreeMode', () => {
       expect(result.current.state).toBe('playing_correction');
 
       // Correction audio ends -> 500ms -> listening again
-      await act(async () => { fireLatestAudioEnded(); });
+      await act(async () => { await waitForAudioEnd(); });
       await act(async () => { vi.advanceTimersByTime(500); });
 
       expect(result.current.state).toBe('listening');
@@ -184,7 +210,7 @@ describe('useHandsfreeMode', () => {
       // === ATTEMPT 1: incorrect ===
       mockCompareResult = { normalizedDistance: 50, isMatch: false, rawDistance: 500, refFrames: 20, userFrames: 18 };
       await act(async () => { vi.advanceTimersByTime(500); });
-      await act(async () => { fireLatestAudioEnded(); });
+      await act(async () => { await waitForAudioEnd(); });
 
       const blob1 = new Blob(['attempt1']);
       await act(async () => { triggerBlob!(blob1); });
@@ -193,7 +219,7 @@ describe('useHandsfreeMode', () => {
 
       // Correction -> retry
       await act(async () => { vi.advanceTimersByTime(1000); });
-      await act(async () => { fireLatestAudioEnded(); });
+      await act(async () => { await waitForAudioEnd(); });
       await act(async () => { vi.advanceTimersByTime(500); });
       expect(result.current.attempt).toBe(2);
 
@@ -219,13 +245,13 @@ describe('useHandsfreeMode', () => {
 
       // Attempt 1
       await act(async () => { vi.advanceTimersByTime(500); });
-      await act(async () => { fireLatestAudioEnded(); });
+      await act(async () => { await waitForAudioEnd(); });
       await act(async () => { triggerBlob!(new Blob(['a1'])); });
       await act(async () => { await vi.advanceTimersByTimeAsync(0); });
 
       // Correction -> retry
       await act(async () => { vi.advanceTimersByTime(1000); });
-      await act(async () => { fireLatestAudioEnded(); });
+      await act(async () => { await waitForAudioEnd(); });
       await act(async () => { vi.advanceTimersByTime(500); });
 
       // Attempt 2: still incorrect
@@ -234,7 +260,7 @@ describe('useHandsfreeMode', () => {
 
       // Correction plays, but no more retries (attempt 2 > maxRetries 1)
       await act(async () => { vi.advanceTimersByTime(1000); });
-      await act(async () => { fireLatestAudioEnded(); });
+      await act(async () => { await waitForAudioEnd(); });
       await act(async () => { vi.advanceTimersByTime(800); });
 
       expect(props.onIncorrect).toHaveBeenCalledTimes(1);
@@ -248,13 +274,13 @@ describe('useHandsfreeMode', () => {
       const { result } = renderHook(() => useHandsfreeMode(props));
 
       await act(async () => { vi.advanceTimersByTime(500); });
-      await act(async () => { fireLatestAudioEnded(); });
+      await act(async () => { await waitForAudioEnd(); });
       await act(async () => { triggerBlob!(new Blob(['a1'])); });
       await act(async () => { await vi.advanceTimersByTimeAsync(0); });
 
       // Correction plays
       await act(async () => { vi.advanceTimersByTime(1000); });
-      await act(async () => { fireLatestAudioEnded(); });
+      await act(async () => { await waitForAudioEnd(); });
 
       // No retry, straight to onIncorrect
       await act(async () => { vi.advanceTimersByTime(800); });

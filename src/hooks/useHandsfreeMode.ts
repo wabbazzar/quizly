@@ -33,7 +33,6 @@ interface UseHandsfreeModeReturn {
   level: number;
   attempt: number;
   skip: () => void;
-  /** Restart the current card - call from a click handler (provides user gesture) */
   restart: () => void;
   isSupported: boolean;
   error: string | null;
@@ -62,16 +61,15 @@ export function useHandsfreeMode({
   const recorder = useAudioRecorder();
   const comparison = useAudioComparison();
 
-  const audioRef = useRef<HTMLAudioElement | null>(null);
   const resultTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const processedBlobRef = useRef<Blob | null>(null);
+  const activeSourceRef = useRef<AudioBufferSourceNode | null>(null);
   const stateRef = useRef(state);
   stateRef.current = state;
   const enabledRef = useRef(enabled);
   enabledRef.current = enabled;
   const attemptRef = useRef(attempt);
   attemptRef.current = attempt;
-  // Stable refs for callbacks that change every render
   const onCorrectRef = useRef(onCorrect);
   onCorrectRef.current = onCorrect;
   const onIncorrectRef = useRef(onIncorrect);
@@ -81,30 +79,35 @@ export function useHandsfreeMode({
   const maxRetriesRef = useRef(maxRetries);
   maxRetriesRef.current = maxRetries;
 
-  // --- Audio unlock for iOS ---
-  const audioUnlockedRef = useRef(false);
-  const unlockAudio = useCallback(() => {
-    if (audioUnlockedRef.current) return;
-    try {
-      const ctx = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
-      const buf = ctx.createBuffer(1, 1, 22050);
-      const src = ctx.createBufferSource();
-      src.buffer = buf;
-      src.connect(ctx.destination);
-      src.start(0);
-      const a = new Audio();
-      a.src = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=';
-      a.play().then(() => a.pause()).catch(() => {});
-      audioUnlockedRef.current = true;
-    } catch {
-      // will retry
+  // --- Shared AudioContext for playback ---
+  // Using Web Audio API instead of HTMLAudioElement to avoid iOS Safari's
+  // audio session conflict: HTMLAudioElement takes exclusive audio session
+  // control, which kills the MediaRecorder mic stream. Web Audio API and
+  // MediaRecorder can coexist on the same AudioContext.
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const audioBufferCacheRef = useRef<Map<string, AudioBuffer>>(new Map());
+
+  const getAudioContext = useCallback(() => {
+    if (!audioCtxRef.current || audioCtxRef.current.state === 'closed') {
+      audioCtxRef.current = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
     }
+    return audioCtxRef.current;
   }, []);
 
-  // --- Warmup on enable, release on disable ---
+  // --- Warmup on enable ---
   useEffect(() => {
     if (enabled) {
-      unlockAudio();
+      // Create AudioContext during user gesture to unlock on iOS
+      const ctx = getAudioContext();
+      if (ctx.state === 'suspended') ctx.resume();
+      // Play silent buffer to fully unlock
+      try {
+        const buf = ctx.createBuffer(1, 1, 22050);
+        const src = ctx.createBufferSource();
+        src.buffer = buf;
+        src.connect(ctx.destination);
+        src.start(0);
+      } catch { /* ignore */ }
       recorder.warmup();
     } else {
       recorder.release();
@@ -132,52 +135,59 @@ export function useHandsfreeMode({
     comparison.preloadReference(getAudioUrl(backSides[0], nextIdx));
   }, [backSides, getAudioUrl, comparison]);
 
-  // --- Helpers to stop any in-flight audio/timers ---
+  // --- Stop any in-flight audio/timers ---
   const cancelInFlight = useCallback(() => {
-    if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
-    if (resultTimerRef.current) { clearTimeout(resultTimerRef.current); resultTimerRef.current = null; }
+    if (activeSourceRef.current) {
+      try { activeSourceRef.current.stop(); } catch { /* already stopped */ }
+      activeSourceRef.current = null;
+    }
+    if (resultTimerRef.current) {
+      clearTimeout(resultTimerRef.current);
+      resultTimerRef.current = null;
+    }
   }, []);
 
-  // --- Play audio with iOS fallback ---
-  // Reuse a single Audio element to avoid iOS Safari issues where creating
-  // multiple Audio elements causes the browser to suspend/GC previous ones,
-  // preventing onended from firing.
-  const persistentAudioRef = useRef<HTMLAudioElement | null>(null);
+  // --- Play audio via Web Audio API (no HTMLAudioElement) ---
+  const playAudioUrl = useCallback(async (url: string): Promise<void> => {
+    const ctx = getAudioContext();
+    if (ctx.state === 'suspended') await ctx.resume();
 
-  const playAudioUrl = useCallback((url: string): Promise<void> => {
-    return new Promise((resolve, reject) => {
-      // Stop any previous playback
-      if (persistentAudioRef.current) {
-        persistentAudioRef.current.pause();
-        persistentAudioRef.current.onended = null;
-        persistentAudioRef.current.onerror = null;
-      }
+    // Check cache first
+    let buffer = audioBufferCacheRef.current.get(url);
+    if (!buffer) {
+      const resp = await fetch(url);
+      if (!resp.ok) throw new Error(`audio fetch failed: ${resp.status}`);
+      const arrayBuf = await resp.arrayBuffer();
+      buffer = await ctx.decodeAudioData(arrayBuf);
+      audioBufferCacheRef.current.set(url, buffer);
+    }
 
-      const audio = persistentAudioRef.current || new Audio();
-      persistentAudioRef.current = audio;
-      audioRef.current = audio;
+    // Stop any previous source
+    if (activeSourceRef.current) {
+      try { activeSourceRef.current.stop(); } catch { /* ok */ }
+    }
 
-      audio.volume = 1.0;
-      audio.src = url;
+    return new Promise<void>((resolve) => {
+      const source = ctx.createBufferSource();
+      source.buffer = buffer!;
+      source.connect(ctx.destination);
+      activeSourceRef.current = source;
 
-      let settled = false;
-      const settle = (fn: () => void) => {
-        if (settled) return;
-        settled = true;
-        clearTimeout(safetyTimer);
-        fn();
+      source.onended = () => {
+        activeSourceRef.current = null;
+        resolve();
       };
 
-      audio.onended = () => settle(resolve);
-      audio.onerror = () => settle(() => reject(new Error('audio error')));
+      // Safety timeout in case onended doesn't fire
+      const safety = setTimeout(() => {
+        activeSourceRef.current = null;
+        resolve();
+      }, (buffer!.duration + 1) * 1000);
 
-      // Safety timeout: if onended never fires (iOS bug), force-resolve
-      // Max expected audio length for a single word is ~3 seconds
-      const safetyTimer = setTimeout(() => settle(resolve), 5000);
-
-      audio.play().catch(() => settle(() => reject(new Error('play blocked'))));
+      source.addEventListener('ended', () => clearTimeout(safety), { once: true });
+      source.start(0);
     });
-  }, []);
+  }, [getAudioContext]);
 
   // --- Core state machine actions ---
 
@@ -206,8 +216,6 @@ export function useHandsfreeMode({
         }
       })
       .catch(() => {
-        // Audio play blocked (iOS autoplay, no user gesture yet).
-        // Show error so user knows to tap. On tap (skip button), flow restarts.
         if (stateRef.current === 'playing_prompt') {
           setError('Tap to start');
           setState('idle');
@@ -236,7 +244,6 @@ export function useHandsfreeMode({
 
     playAudioUrl(refUrl)
       .then(() => {
-        // Correction played. Can we retry?
         if (attemptRef.current <= maxRetriesRef.current) {
           resultTimerRef.current = setTimeout(() => {
             setAttempt(prev => prev + 1);
@@ -249,7 +256,7 @@ export function useHandsfreeMode({
         }
       })
       .catch(() => {
-        // Correction audio failed to play — still retry if we can
+        // Correction failed to play - still retry if we can
         if (attemptRef.current <= maxRetriesRef.current) {
           resultTimerRef.current = setTimeout(() => {
             setAttempt(prev => prev + 1);
@@ -308,10 +315,8 @@ export function useHandsfreeMode({
     if (isCorrect) {
       resultTimerRef.current = setTimeout(doAdvanceCorrect, RESULT_DISPLAY_MS);
     } else if (playbackOnIncorrectRef.current) {
-      // Incorrect + playback enabled: wait, then play correction
       resultTimerRef.current = setTimeout(doPlayCorrectionThenMaybeRetry, 1000);
     } else {
-      // Incorrect, no playback
       resultTimerRef.current = setTimeout(doAdvanceIncorrect, RESULT_DISPLAY_MS);
     }
 
@@ -320,12 +325,9 @@ export function useHandsfreeMode({
     };
   }, [state]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // --- Start flow on card change (only when enabled and not already running) ---
+  // --- Start flow on card change ---
   useEffect(() => {
     if (!enabled || !card) return;
-
-    // If we're already in a non-idle state (e.g. returning from settings),
-    // don't restart — the flow is still in progress
     if (stateRef.current !== 'idle') return;
 
     setAttempt(1);
@@ -341,7 +343,19 @@ export function useHandsfreeMode({
 
   // --- Preload next card ---
   useEffect(() => {
-    if (enabled && card) preloadNext(cardIndex + 1);
+    if (enabled && card) {
+      preloadNext(cardIndex + 1);
+      // Also pre-fetch and decode next card's prompt audio
+      const nextPromptUrl = frontSides.length ? getAudioUrl(frontSides[0], cardIndex + 1) : null;
+      if (nextPromptUrl) {
+        const ctx = getAudioContext();
+        fetch(nextPromptUrl).then(r => r.ok ? r.arrayBuffer() : null).then(buf => {
+          if (buf) ctx.decodeAudioData(buf).then(decoded => {
+            audioBufferCacheRef.current.set(nextPromptUrl, decoded);
+          }).catch(() => {});
+        }).catch(() => {});
+      }
+    }
   }, [enabled, cardIndex]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // --- Cleanup on unmount ---
@@ -349,22 +363,20 @@ export function useHandsfreeMode({
     return () => {
       cancelInFlight();
       if (recorder.isRecording) recorder.stop();
-      if (persistentAudioRef.current) {
-        persistentAudioRef.current.pause();
-        persistentAudioRef.current.src = '';
-        persistentAudioRef.current = null;
+      if (audioCtxRef.current && audioCtxRef.current.state !== 'closed') {
+        audioCtxRef.current.close();
       }
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // --- Resume after app foreground / visibility change ---
+  // --- Resume after app foreground ---
   useEffect(() => {
     if (!enabled) return;
     const handleVisibility = () => {
       if (document.visibilityState === 'visible' && enabledRef.current) {
-        // Re-warmup mic (stream may have died in background)
         recorder.warmup();
-        // If we're stuck in idle, restart the current card
+        const ctx = getAudioContext();
+        if (ctx.state === 'suspended') ctx.resume();
         if (stateRef.current === 'idle') {
           processedBlobRef.current = null;
           doPlayPromptThenListen();
@@ -383,18 +395,18 @@ export function useHandsfreeMode({
     onIncorrectRef.current();
   }, [recorder, cancelInFlight]);
 
-  /** Restart the current card (use as onClick handler — provides user gesture for audio) */
   const restart = useCallback(() => {
     cancelInFlight();
     if (recorder.isRecording) recorder.stop();
     recorder.reset();
-    unlockAudio();
+    const ctx = getAudioContext();
+    if (ctx.state === 'suspended') ctx.resume();
     recorder.warmup();
     setAttempt(1);
     processedBlobRef.current = null;
     setError(null);
     doPlayPromptThenListen();
-  }, [recorder, cancelInFlight, unlockAudio, doPlayPromptThenListen]);
+  }, [recorder, cancelInFlight, getAudioContext, doPlayPromptThenListen]);
 
   return {
     state,
