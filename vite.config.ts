@@ -85,8 +85,8 @@ export default defineConfig({
             options: {
               cacheName: 'deck-data-cache',
               expiration: {
-                maxEntries: 20,
-                maxAgeSeconds: 24 * 60 * 60, // 24 hours
+                maxEntries: 100,
+                maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
               },
             },
           },
@@ -96,8 +96,8 @@ export default defineConfig({
             options: {
               cacheName: 'audio-cache',
               expiration: {
-                maxEntries: 50,
-                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+                maxEntries: 2000,
+                maxAgeSeconds: 90 * 24 * 60 * 60, // 90 days
               },
               cacheableResponse: {
                 statuses: [0, 200],

@@ -2,7 +2,7 @@ import { FC, memo } from 'react';
 import { DeckHeaderProps } from './types';
 import { PageHeader } from '@/components/common/PageHeader';
 
-export const DeckHeader: FC<DeckHeaderProps> = memo(({ deck, onBackClick, onSettingsClick }) => {
+export const DeckHeader: FC<DeckHeaderProps> = memo(({ deck, onBackClick, onSettingsClick, rightContent }) => {
   if (!deck || !deck.content || !deck.metadata) {
     return null;
   }
@@ -17,6 +17,7 @@ export const DeckHeader: FC<DeckHeaderProps> = memo(({ deck, onBackClick, onSett
       backLabel="Home"
       onSettingsClick={onSettingsClick}
       showSettings={true}
+      rightContent={rightContent}
     />
   );
 });

@@ -8,6 +8,7 @@ import { Card } from '@/types';
 import { DeckHeader } from '@/components/deck/DeckHeader';
 import { ModeSelector } from '@/components/deck/ModeSelector';
 import { CardManagement } from '@/components/deck/CardManagement';
+import { OfflineButton } from '@/components/deck/OfflineButton';
 import { SpeechButton } from '@/components/common/SpeechButton';
 import { ModeCard } from '@/components/deck/types';
 import UnifiedSettings from '@/components/modals/UnifiedSettings';
@@ -183,6 +184,7 @@ const Deck: FC = () => {
         deck={currentDeck}
         onBackClick={() => navigate('/')}
         onSettingsClick={() => setShowSettings(true)}
+        rightContent={<OfflineButton deck={currentDeck} />}
       />
 
       <ModeSelector modes={modes} onModeClick={handleModeClick} />

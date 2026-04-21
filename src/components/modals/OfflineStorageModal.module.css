@@ -1,0 +1,136 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.summary {
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.08), rgba(74, 144, 226, 0.03));
+  border: 1px solid rgba(74, 144, 226, 0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summaryLabel {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.summaryValue {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+.empty {
+  text-align: center;
+  padding: var(--space-6) var(--space-4);
+}
+
+.emptyText {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  margin: 0 0 var(--space-2);
+}
+
+.emptyHint {
+  color: var(--text-tertiary);
+  font-size: var(--text-xs);
+  margin: 0;
+}
+
+.deckList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.deckRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3);
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.04), rgba(74, 144, 226, 0.01));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  gap: var(--space-3);
+}
+
+.deckInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+  flex: 1;
+}
+
+.deckName {
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.deckSize {
+  color: var(--text-tertiary);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.removeButton {
+  flex-shrink: 0;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.removeButton:hover:not(:disabled) {
+  color: var(--semantic-error);
+  border-color: var(--semantic-error);
+}
+
+.removeButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.removeAllButton {
+  width: 100%;
+  padding: var(--space-3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.removeAllButton:hover:not(:disabled) {
+  color: var(--semantic-error);
+  border-color: var(--semantic-error);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.removeAllButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

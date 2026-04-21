@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { Deck, Card } from '@/types';
 
 export interface DeckHeaderProps {
   deck: Deck;
   onBackClick: () => void;
   onSettingsClick: () => void;
+  rightContent?: ReactNode;
 }
 
 export interface ModeCard {

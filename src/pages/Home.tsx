@@ -19,6 +19,7 @@ import { useIsMobile } from '@/hooks/useIsMobile';
 import { Deck, DeckFamily, Card } from '@/types';
 import { UserMenu } from '@/components/auth/UserMenu';
 import { DeckImportModal } from '@/components/deck/DeckImportModal';
+import { OfflineStorageModal } from '@/components/modals/OfflineStorageModal';
 import { WalkthroughOverlay, WalkthroughStep } from '@/components/common/WalkthroughOverlay';
 import { useSyncStore } from '@/store/syncStore';
 import styles from './Home.module.css';
@@ -76,6 +77,7 @@ const Home: FC = () => {
   const isMobile = useIsMobile();
   const [modalOpen, setModalOpen] = useState(false);
   const [importModalOpen, setImportModalOpen] = useState(false);
+  const [offlineModalOpen, setOfflineModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
 
@@ -426,6 +428,7 @@ const Home: FC = () => {
               onNewDeck={() => navigate('/create-deck')}
               onImport={() => setImportModalOpen(true)}
               onManageVisibility={() => setModalOpen(true)}
+              onManageOffline={() => setOfflineModalOpen(true)}
             />
           </div>
 
@@ -527,6 +530,12 @@ const Home: FC = () => {
         open={importModalOpen}
         onClose={() => setImportModalOpen(false)}
         onImported={(deckId) => navigate(`/deck/${deckId}`)}
+      />
+
+      <OfflineStorageModal
+        isOpen={offlineModalOpen}
+        onClose={() => setOfflineModalOpen(false)}
+        decks={decks}
       />
 
       {isGuest && !isLoading && visibleDecks.length > 0 && (

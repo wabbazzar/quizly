@@ -1,0 +1,35 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: color 0.2s, background 0.2s;
+  padding: 0;
+}
+
+.button:hover {
+  background: rgba(74, 144, 226, 0.1);
+  color: var(--primary-main);
+}
+
+.button:active {
+  transform: scale(0.95);
+}
+
+.downloaded:hover {
+  color: var(--semantic-error);
+}
+
+.progressRing {
+  display: block;
+}
+
+.progressArc {
+  transition: stroke-dashoffset 0.3s ease;
+}
