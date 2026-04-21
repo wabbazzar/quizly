@@ -139,14 +139,43 @@ export function useHandsfreeMode({
   }, []);
 
   // --- Play audio with iOS fallback ---
-  const playAudioUrl = useCallback((url: string): Promise<HTMLAudioElement> => {
+  // Reuse a single Audio element to avoid iOS Safari issues where creating
+  // multiple Audio elements causes the browser to suspend/GC previous ones,
+  // preventing onended from firing.
+  const persistentAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  const playAudioUrl = useCallback((url: string): Promise<void> => {
     return new Promise((resolve, reject) => {
-      const audio = new Audio(url);
-      audio.volume = 0.5;
+      // Stop any previous playback
+      if (persistentAudioRef.current) {
+        persistentAudioRef.current.pause();
+        persistentAudioRef.current.onended = null;
+        persistentAudioRef.current.onerror = null;
+      }
+
+      const audio = persistentAudioRef.current || new Audio();
+      persistentAudioRef.current = audio;
       audioRef.current = audio;
-      audio.onended = () => resolve(audio);
-      audio.onerror = () => reject(new Error('audio error'));
-      audio.play().catch(() => reject(new Error('play blocked')));
+
+      audio.volume = 1.0;
+      audio.src = url;
+
+      let settled = false;
+      const settle = (fn: () => void) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(safetyTimer);
+        fn();
+      };
+
+      audio.onended = () => settle(resolve);
+      audio.onerror = () => settle(() => reject(new Error('audio error')));
+
+      // Safety timeout: if onended never fires (iOS bug), force-resolve
+      // Max expected audio length for a single word is ~3 seconds
+      const safetyTimer = setTimeout(() => settle(resolve), 5000);
+
+      audio.play().catch(() => settle(() => reject(new Error('play blocked'))));
     });
   }, []);
 
@@ -320,6 +349,11 @@ export function useHandsfreeMode({
     return () => {
       cancelInFlight();
       if (recorder.isRecording) recorder.stop();
+      if (persistentAudioRef.current) {
+        persistentAudioRef.current.pause();
+        persistentAudioRef.current.src = '';
+        persistentAudioRef.current = null;
+      }
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
