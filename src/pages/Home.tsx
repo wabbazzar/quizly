@@ -80,6 +80,7 @@ const Home: FC = () => {
   const [offlineModalOpen, setOfflineModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
+  const [selectedDeckId, setSelectedDeckId] = useState<string | null>(null);
 
   useEffect(() => {
     const node = headerRef.current;
@@ -460,7 +461,7 @@ const Home: FC = () => {
             <SearchResults
               results={searchResults}
               query={searchQuery.trim()}
-              onSelectCard={setSelectedCard}
+              onSelectCard={(card, deckId) => { setSelectedCard(card); setSelectedDeckId(deckId); }}
             />
           ) : visibleDecks.length === 0 ? (
             <motion.div
@@ -522,8 +523,9 @@ const Home: FC = () => {
 
       <CardDetailsModal
         card={selectedCard}
+        deckId={selectedDeckId}
         visible={selectedCard !== null}
-        onClose={() => setSelectedCard(null)}
+        onClose={() => { setSelectedCard(null); setSelectedDeckId(null); }}
       />
 
       <DeckImportModal

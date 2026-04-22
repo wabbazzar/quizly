@@ -11,7 +11,7 @@ export interface CardSearchResult {
 interface SearchResultsProps {
   results: CardSearchResult[];
   query: string;
-  onSelectCard: (card: Card) => void;
+  onSelectCard: (card: Card, deckId: string) => void;
 }
 
 export const SearchResults: FC<SearchResultsProps> = ({ results, query, onSelectCard }) => {
@@ -38,6 +38,7 @@ export const SearchResults: FC<SearchResultsProps> = ({ results, query, onSelect
             deckName={deck.metadata.abbreviated_title || deck.metadata.deck_name}
             sideLabels={deck.metadata.side_labels}
             availableSides={deck.metadata.available_sides}
+            deckId={deck.id}
             onSelectCard={onSelectCard}
           />
         ))}

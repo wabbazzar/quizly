@@ -1,10 +1,12 @@
 import { FC, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/types';
+import { SpeechButton } from '@/components/common/SpeechButton';
 import styles from './CardDetailsModal.module.css';
 
 interface CardDetailsModalProps {
   card: Card | null;
+  deckId?: string | null;
   visible: boolean;
   onClose: () => void;
   frontSides?: string[];
@@ -13,6 +15,7 @@ interface CardDetailsModalProps {
 
 const CardDetailsModal: FC<CardDetailsModalProps> = ({
   card,
+  deckId,
   visible,
   onClose,
   frontSides = ['side_a'],
@@ -47,6 +50,7 @@ const CardDetailsModal: FC<CardDetailsModalProps> = ({
       .map(side => ({
         label: side.replace('side_', 'Side ').toUpperCase(),
         content: card[side as keyof Card] as string,
+        sideLetter: side.replace('side_', ''),
       }));
   };
 
@@ -98,9 +102,14 @@ const CardDetailsModal: FC<CardDetailsModalProps> = ({
                       Front Side{frontContent.length > 1 ? 's' : ''}
                     </h3>
                     {frontContent.map((item, index) => (
-                      <div key={index} className={styles.sideItem}>
+                      <div key={index} className={styles.sideItem} style={{ position: 'relative' }}>
                         <span className={styles.sideLabel}>{item.label}:</span>
                         <p className={styles.sideContent}>{item.content}</p>
+                        {deckId && (
+                          <div style={{ position: 'absolute', top: '4px', right: '4px' }}>
+                            <SpeechButton deckId={deckId} cardIdx={card.idx} side={item.sideLetter} size={16} />
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -110,9 +119,14 @@ const CardDetailsModal: FC<CardDetailsModalProps> = ({
                       Back Side{backContent.length > 1 ? 's' : ''}
                     </h3>
                     {backContent.map((item, index) => (
-                      <div key={index} className={styles.sideItem}>
+                      <div key={index} className={styles.sideItem} style={{ position: 'relative' }}>
                         <span className={styles.sideLabel}>{item.label}:</span>
                         <p className={styles.sideContent}>{item.content}</p>
+                        {deckId && (
+                          <div style={{ position: 'absolute', top: '4px', right: '4px' }}>
+                            <SpeechButton deckId={deckId} cardIdx={card.idx} side={item.sideLetter} size={16} />
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -123,14 +137,27 @@ const CardDetailsModal: FC<CardDetailsModalProps> = ({
                   <section className={styles.allSides}>
                     <h3 className={styles.allSidesTitle}>All Available Sides</h3>
                     <div className={styles.sidesGrid}>
-                      {allSides.map((item, index) => (
-                        <div key={index} className={styles.sideCard}>
-                          <div className={styles.sideCardHeader}>
-                            <span className={styles.sideCardLabel}>{item.label}</span>
+                      {allSides.map((item, index) => {
+                        const sideLetter = item.label.split(' ')[1]?.toLowerCase();
+                        return (
+                          <div key={index} className={styles.sideCard} style={{ position: 'relative' }}>
+                            <div className={styles.sideCardHeader}>
+                              <span className={styles.sideCardLabel}>{item.label}</span>
+                            </div>
+                            <p className={styles.sideCardContent}>{item.content}</p>
+                            {deckId && card && sideLetter && (
+                              <div style={{ position: 'absolute', top: '4px', right: '4px' }}>
+                                <SpeechButton
+                                  deckId={deckId}
+                                  cardIdx={card.idx}
+                                  side={sideLetter}
+                                  size={16}
+                                />
+                              </div>
+                            )}
                           </div>
-                          <p className={styles.sideCardContent}>{item.content}</p>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </section>
                 )}
