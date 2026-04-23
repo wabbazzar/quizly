@@ -27,12 +27,6 @@
   margin-bottom: var(--space-8);
 }
 
-.emoji {
-  font-size: 72px;
-  margin-bottom: var(--space-4);
-  display: inline-block;
-}
-
 .title {
   font-size: var(--text-3xl);
   font-weight: var(--font-bold);
@@ -126,24 +120,6 @@
   font-size: var(--text-base);
 }
 
-.achievementIcon,
-.missedIcon {
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-}
-
-.achievementIcon.newBest {
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-.missedIcon.review {
-  animation: gentle-bounce 2s ease-in-out infinite;
-}
-
 .achievementText,
 .missedText {
   flex: 1;
@@ -234,36 +210,11 @@
   border-top: 1px solid var(--border-color);
 }
 
-/* Animations */
-@keyframes pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-}
-
-@keyframes gentle-bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-3px);
-  }
-}
-
 /* Mobile Responsive */
 @media (max-width: 640px) {
   .container {
     padding: var(--space-6);
     border-radius: 16px;
-  }
-
-  .emoji {
-    font-size: 56px;
   }
 
   .title {

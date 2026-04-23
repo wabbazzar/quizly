@@ -76,15 +76,15 @@ const MatchResults: FC<MatchResultsProps> = memo(({
     const averageTimePerMatch = results.totalTime / results.totalMatches;
 
     if (isNewBest) {
-      return { message: 'New Best Time!', emoji: '🏆', color: 'excellent' };
+      return { message: 'New Best Time!', color: 'excellent' };
     } else if (averageTimePerMatch < 3000) { // Less than 3 seconds per match
-      return { message: 'Lightning Fast!', emoji: '⚡', color: 'excellent' };
+      return { message: 'Lightning Fast!', color: 'excellent' };
     } else if (averageTimePerMatch < 5000) {
-      return { message: 'Great Speed!', emoji: '🌟', color: 'great' };
+      return { message: 'Great Speed!', color: 'great' };
     } else if (averageTimePerMatch < 8000) {
-      return { message: 'Good Work!', emoji: '👍', color: 'good' };
+      return { message: 'Good Work!', color: 'good' };
     } else {
-      return { message: 'Complete!', emoji: '🎉', color: 'fair' };
+      return { message: 'Complete!', color: 'fair' };
     }
   };
 
@@ -103,14 +103,6 @@ const MatchResults: FC<MatchResultsProps> = memo(({
       <div className={styles.container}>
         {/* Header */}
         <header className={styles.header}>
-          <motion.div
-            className={styles.emoji}
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-          >
-            {performance.emoji}
-          </motion.div>
           <h1 className={`${styles.title} ${styles[performance.color]}`}>
             {performance.message}
           </h1>
@@ -177,7 +169,6 @@ const MatchResults: FC<MatchResultsProps> = memo(({
             transition={{ delay: 0.7 }}
           >
             <div className={styles.achievementItem}>
-              <span className={`${styles.achievementIcon} ${styles.newBest}`}>🏆</span>
               <span className={styles.achievementText}>
                 New personal best! You beat your previous time by{' '}
                 <strong>{formatMatchTime(getBestTime(results.deckId)?.bestTimeMs! - results.totalTime)}</strong>
@@ -195,7 +186,6 @@ const MatchResults: FC<MatchResultsProps> = memo(({
             transition={{ delay: 0.8 }}
           >
             <div className={styles.missedItem}>
-              <span className={`${styles.missedIcon} ${styles.review}`}>📚</span>
               <span className={styles.missedText}>
                 <strong>{results.missedCardIndices.length}</strong> cards need more practice
               </span>

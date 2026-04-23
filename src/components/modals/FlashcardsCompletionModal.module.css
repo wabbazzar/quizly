@@ -33,22 +33,6 @@
   margin-bottom: var(--space-6);
 }
 
-.performanceEmoji {
-  font-size: 4rem;
-  margin-bottom: var(--space-3);
-  animation: bounce 0.5s ease-out;
-}
-
-@keyframes bounce {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-}
-
 .performanceMessage {
   font-size: var(--text-2xl);
   font-weight: var(--font-bold);
@@ -228,10 +212,6 @@
 @media (max-width: 768px) {
   .modal {
     padding: var(--space-6);
-  }
-
-  .performanceEmoji {
-    font-size: 3rem;
   }
 
   .performanceMessage {

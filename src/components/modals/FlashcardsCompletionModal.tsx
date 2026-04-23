@@ -39,14 +39,6 @@ const FlashcardsCompletionModal: FC<FlashcardsCompletionModalProps> = ({
   const seconds = timeInSeconds % 60;
   const hasMissedCards = results ? results.missedCardIndices.length > 0 : false;
 
-  const getPerformanceEmoji = () => {
-    if (accuracyPercentage === 100) return '🏆';
-    if (accuracyPercentage >= 90) return '🌟';
-    if (accuracyPercentage >= 75) return '✨';
-    if (accuracyPercentage >= 60) return '👍';
-    return '💪';
-  };
-
   const getPerformanceMessage = () => {
     if (accuracyPercentage === 100) return 'Perfect Round!';
     if (accuracyPercentage >= 90) return 'Outstanding!';
@@ -129,7 +121,6 @@ const FlashcardsCompletionModal: FC<FlashcardsCompletionModalProps> = ({
           >
             {/* Performance Header */}
             <div className={styles.performanceHeader}>
-              <div className={styles.performanceEmoji}>{getPerformanceEmoji()}</div>
               <h2 className={styles.performanceMessage}>{getPerformanceMessage()}</h2>
               <p className={styles.roundMessage}>{getRoundMessage()}</p>
             </div>
