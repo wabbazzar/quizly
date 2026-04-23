@@ -1,6 +1,6 @@
 /* Match Container Styles */
 .container {
-  min-height: 100vh;
+  height: 100vh;
   background: var(--bg-primary);
   display: flex;
   flex-direction: column;
@@ -126,7 +126,6 @@
   justify-content: center;
   position: relative;
   min-height: 0; /* Prevent flex item from growing beyond container */
-  overflow: hidden; /* Prevent any overflow from causing shifts */
 }
 
 .matchGrid {

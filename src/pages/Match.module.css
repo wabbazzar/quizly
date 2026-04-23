@@ -1,6 +1,6 @@
 /* Match Page Styles */
 .container {
-  min-height: 100vh;
+  height: 100vh;
   background: var(--bg-primary);
   overflow-x: hidden;
   max-width: 100vw;
