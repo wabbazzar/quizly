@@ -424,7 +424,7 @@ const Flashcards: FC = () => {
   }, [deckId, activeDeck, startNewRound, createCardOrder, progressionMode, includeMastered]);
 
   const handleBackToDeck = useCallback(() => {
-    navigate(`/deck/${deckId}`);
+    navigate(deckId === 'all-decks' ? '/' : `/deck/${deckId}`);
   }, [navigate, deckId]);
 
   const handleDragEnd = useCallback(
@@ -607,7 +607,7 @@ const Flashcards: FC = () => {
         totalCards={totalCards}
         onBackClick={() => {
           // Session is automatically saved via useEffect
-          navigate(`/deck/${deckId}`);
+          navigate(deckId === 'all-decks' ? '/' : `/deck/${deckId}`);
         }}
         onSettingsClick={() => setShowSettings(true)}
         showSettings={true}

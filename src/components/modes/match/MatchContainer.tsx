@@ -427,15 +427,18 @@ const MatchContainer: FC<MatchContainerProps> = memo(({ deck, onBackClick }) => 
             </button>
           )} */}
 
-          {session.selectedCards.length > 0 && (
-            <button
-              className={styles.clearButton}
-              onClick={clearSelection}
-              aria-label="Clear selection"
-            >
-              Clear Selection
-            </button>
-          )}
+          <button
+            className={styles.clearButton}
+            onClick={clearSelection}
+            aria-label="Clear selection"
+            aria-hidden={session.selectedCards.length === 0}
+            tabIndex={session.selectedCards.length === 0 ? -1 : 0}
+            style={{
+              visibility: session.selectedCards.length > 0 ? 'visible' : 'hidden',
+            }}
+          >
+            Clear Selection
+          </button>
         </div>
       </div>
 

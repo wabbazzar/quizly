@@ -10,10 +10,14 @@ export const BottomNavBar: FC = memo(() => {
   const location = useLocation();
   const { isPlaying } = useAudioPlayerStore();
 
-  // Hide on login and deck-specific mode pages (except read which shows nav)
+  // Hide on login and mode pages (both deck-specific and combined "all-*"
+  // variants) so the fixed nav bar cannot overlap the action controls at the
+  // bottom of those full-viewport mode screens.
   if (
     location.pathname === '/login' ||
     location.pathname === '/about' ||
+    location.pathname === '/all-flashcards' ||
+    location.pathname === '/all-match' ||
     location.pathname.includes('/flashcards/') ||
     location.pathname.includes('/match/') ||
     location.pathname.includes('/learn/')
