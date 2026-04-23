@@ -8,7 +8,10 @@
   margin: 0 auto;
   padding: var(--space-2);
   min-height: 0;
-  max-height: 100%;
+  /* Reserve space for header + gameStats above AND matching space below so the
+     grid can sit at the true vertical center of the viewport without going
+     behind the chrome. 360px ≈ 2 × (header + gameStats) at mobile sizes. */
+  max-height: calc(100vh - 360px);
   /* Prevent layout shifts */
   contain: layout style;
 }
@@ -19,6 +22,8 @@
     gap: var(--space-4);
     max-width: 800px;
     padding: var(--space-4);
+    /* Header + gameStats are slightly taller on desktop; reserve more space. */
+    max-height: calc(100vh - 400px);
   }
 }
 
