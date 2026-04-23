@@ -165,7 +165,7 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(
 
       // Check if Read mode is available for this deck
       if (mode.id === 'read') {
-        const hasReadingContent = deck.reading && Object.keys(deck.reading.dialogues).length > 0;
+        const hasReadingContent = deck.reading && Object.keys(deck.reading.practice).length > 0;
         if (!hasReadingContent && !hasTranscripts) {
           showNotification({
             message: 'No reading content available for this deck',
@@ -242,7 +242,7 @@ export const EnhancedDeckCard: FC<EnhancedDeckCardProps> = memo(
             </div>
           )}
 
-          {(hasTranscripts || (deck.reading && Object.keys(deck.reading.dialogues).length > 0)) && (
+          {(hasTranscripts || (deck.reading && Object.keys(deck.reading.practice).length > 0)) && (
             <div className={styles.statItem}>
               <ReadIcon className={styles.statIcon} size={16} />
               <span className={styles.statLabel}>reading</span>

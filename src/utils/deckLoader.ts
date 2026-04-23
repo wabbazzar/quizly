@@ -5,7 +5,7 @@ import {
   DeckReading,
   ReadingSidesMap,
   ReadingTokenizationConfig,
-  DeckReadingDialogue,
+  DeckReadingPractice,
   ReadingLine,
   SideId
 } from '@/types';
@@ -149,11 +149,11 @@ const validateReadingLine = (line: unknown): ReadingLine | null => {
   };
 };
 
-// Validate dialogue structure
-const validateDialogue = (dialogue: unknown): DeckReadingDialogue | null => {
-  if (!isRecord(dialogue) || !Array.isArray(dialogue.lines)) return null;
+// Validate practice entry structure
+const validatePracticeEntry = (entry: unknown): DeckReadingPractice | null => {
+  if (!isRecord(entry) || !Array.isArray(entry.lines)) return null;
 
-  const validLines = dialogue.lines
+  const validLines = entry.lines
     .map(validateReadingLine)
     .filter(Boolean) as ReadingLine[];
 
@@ -218,24 +218,27 @@ const validateTokenization = (tokenization: unknown): ReadingTokenizationConfig 
 };
 
 // Validate reading content
+// Accepts both "practice" (new) and "dialogues" (legacy) keys in JSON
 const validateReading = (reading: unknown): DeckReading | null => {
-  if (!isRecord(reading) || !isRecord(reading.dialogues)) return null;
+  if (!isRecord(reading)) return null;
+  const practiceData = reading.practice ?? reading.dialogues;
+  if (!isRecord(practiceData)) return null;
 
-  const validDialogues: Record<string, DeckReadingDialogue> = {};
+  const validPractice: Record<string, DeckReadingPractice> = {};
 
-  for (const [key, dialogue] of Object.entries(reading.dialogues)) {
-    const validDialogue = validateDialogue(dialogue);
-    if (validDialogue) {
-      validDialogues[key] = validDialogue;
+  for (const [key, entry] of Object.entries(practiceData)) {
+    const valid = validatePracticeEntry(entry);
+    if (valid) {
+      validPractice[key] = valid;
     }
   }
 
-  if (Object.keys(validDialogues).length === 0) return null;
+  if (Object.keys(validPractice).length === 0) return null;
 
   return {
     sides: reading.sides ? validateReadingSides(reading.sides) || undefined : undefined,
     tokenization: reading.tokenization ? validateTokenization(reading.tokenization) || undefined : undefined,
-    dialogues: validDialogues
+    practice: validPractice
   };
 };
 

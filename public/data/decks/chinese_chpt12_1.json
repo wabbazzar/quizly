@@ -405,7 +405,7 @@
       "preservePunctuation": true,
       "alignment": "index"
     },
-    "dialogues": {
+    "practice": {
       "grammar_001": {
         "title": "Emphatic Negation: 一...也/都...不/没",
         "description": "Pattern for expressing 'not at all' or 'not even one'",

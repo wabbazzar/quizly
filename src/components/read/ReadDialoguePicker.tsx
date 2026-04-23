@@ -31,7 +31,7 @@ export const ReadDialoguePicker: FC<Props> = ({
 
     const result: Record<string, { completed: number; total: number }> = {};
 
-    Object.entries(deck.reading.dialogues).forEach(([dialogueId, dialogue]) => {
+    Object.entries(deck.reading.practice).forEach(([dialogueId, dialogue]) => {
       const totalTokens = dialogue.lines.reduce((acc, line) => {
         // Count tokens based on available sides
         let tokenCount = 0;
@@ -58,7 +58,7 @@ export const ReadDialoguePicker: FC<Props> = ({
 
   if (!deck.reading) return null;
 
-  const dialogueEntries = Object.entries(deck.reading.dialogues);
+  const dialogueEntries = Object.entries(deck.reading.practice);
 
   return (
     <div className={styles.container}>

@@ -25,11 +25,11 @@ export const ReadSidebar: FC<Props> = ({
   onSelectDialogue,
   progress,
 }) => {
-  const hasDialogues = deck.reading && Object.keys(deck.reading.dialogues).length > 0;
+  const hasPractice = deck.reading && Object.keys(deck.reading.practice).length > 0;
 
   return (
     <div className={styles.sidebar}>
-      {hasDialogues && (
+      {hasPractice && (
         <ReadDialoguePicker
           deck={deck}
           selectedDialogueId={selectedDialogueId}

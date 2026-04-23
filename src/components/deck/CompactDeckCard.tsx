@@ -36,7 +36,7 @@ export const CompactDeckCard: FC<CompactDeckCardProps> = memo(({
 
   // Check for reading content availability
   const hasReadingContent = hasTranscripts ||
-    (deck.reading && Object.keys(deck.reading.dialogues).length > 0);
+    (deck.reading && Object.keys(deck.reading.practice).length > 0);
 
   useEffect(() => {
     const sync = hasTranscriptsForDeckSync(deck.id);

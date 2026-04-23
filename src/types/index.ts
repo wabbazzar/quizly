@@ -87,14 +87,14 @@ export interface ReadingLine {
   wordAlignments?: WordAlignment[];
 }
 
-export interface DeckReadingDialogue {
+export interface DeckReadingPractice {
   lines: ReadingLine[];
 }
 
 export interface DeckReading {
   sides?: ReadingSidesMap; // e.g., { a: 'characters', b: 'pinyin', c: 'english' }
   tokenization?: ReadingTokenizationConfig;
-  dialogues: Record<string, DeckReadingDialogue>;
+  practice: Record<string, DeckReadingPractice>;
 }
 
 export type ReadAnswerType = 'free_text' | 'multiple_choice';

@@ -6,7 +6,11 @@
     "deck_subtitle": "Daily Life for Couples",
     "description": "New vocabulary for everyday couple life — talking about work, food, exercise, weather, TV, and your cat",
     "category": "Language Learning",
-    "available_levels": [1, 2, 3],
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
     "available_sides": 7,
     "side_labels": {
       "side_a": "english",
@@ -19,7 +23,16 @@
     },
     "card_count": 15,
     "difficulty": "beginner",
-    "tags": ["chinese", "mandarin", "daily-life", "couple", "home", "work", "food", "exercise"],
+    "tags": [
+      "chinese",
+      "mandarin",
+      "daily-life",
+      "couple",
+      "home",
+      "work",
+      "food",
+      "exercise"
+    ],
     "version": "1.0.0",
     "created_date": "2026-04-17T00:00:00Z",
     "last_updated": "2026-04-17T00:00:00Z",
@@ -237,7 +250,7 @@
       "preservePunctuation": true,
       "alignment": "index"
     },
-    "dialogues": {
+    "practice": {
       "dialogue_001": {
         "title": "After Work",
         "description": "小明 and 小美 chat about their day after getting home from work.",
@@ -247,13 +260,41 @@
             "b": "Xiǎoměi, nǐ xià bān le ma?",
             "c": "Xiaomei, are you off work?",
             "wordAlignments": [
-              { "chinese": "小美", "pinyin": "Xiǎoměi", "english": "Xiaomei" },
-              { "chinese": "，", "pinyin": ",", "english": "," },
-              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
-              { "chinese": "下班", "pinyin": "xià bān", "english": "off work" },
-              { "chinese": "了", "pinyin": "le", "english": "(completed)" },
-              { "chinese": "吗", "pinyin": "ma", "english": "(question)" },
-              { "chinese": "？", "pinyin": "?", "english": "?" }
+              {
+                "chinese": "小美",
+                "pinyin": "Xiǎoměi",
+                "english": "Xiaomei"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "你",
+                "pinyin": "nǐ",
+                "english": "you"
+              },
+              {
+                "chinese": "下班",
+                "pinyin": "xià bān",
+                "english": "off work"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(completed)"
+              },
+              {
+                "chinese": "吗",
+                "pinyin": "ma",
+                "english": "(question)"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
             ]
           },
           {
@@ -261,14 +302,46 @@
             "b": "Xià bān le! Jīntiān shàng bān hǎo lèi.",
             "c": "Off work! Going to work today was so tiring.",
             "wordAlignments": [
-              { "chinese": "下班", "pinyin": "Xià bān", "english": "Off work" },
-              { "chinese": "了", "pinyin": "le", "english": "(completed)" },
-              { "chinese": "！", "pinyin": "!", "english": "!" },
-              { "chinese": "今天", "pinyin": "Jīntiān", "english": "Today" },
-              { "chinese": "上班", "pinyin": "shàng bān", "english": "going to work" },
-              { "chinese": "好", "pinyin": "hǎo", "english": "so" },
-              { "chinese": "累", "pinyin": "lèi", "english": "tiring" },
-              { "chinese": "。", "pinyin": ".", "english": "." }
+              {
+                "chinese": "下班",
+                "pinyin": "Xià bān",
+                "english": "Off work"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(completed)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              },
+              {
+                "chinese": "今天",
+                "pinyin": "Jīntiān",
+                "english": "Today"
+              },
+              {
+                "chinese": "上班",
+                "pinyin": "shàng bān",
+                "english": "going to work"
+              },
+              {
+                "chinese": "好",
+                "pinyin": "hǎo",
+                "english": "so"
+              },
+              {
+                "chinese": "累",
+                "pinyin": "lèi",
+                "english": "tiring"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
             ]
           },
           {
@@ -276,14 +349,46 @@
             "b": "Lǎopo xīnkǔ le! Nǐ kāixīn ma?",
             "c": "You worked hard, wife! Are you happy?",
             "wordAlignments": [
-              { "chinese": "老婆", "pinyin": "Lǎopo", "english": "Wife" },
-              { "chinese": "辛苦", "pinyin": "xīnkǔ", "english": "worked hard" },
-              { "chinese": "了", "pinyin": "le", "english": "(completed)" },
-              { "chinese": "！", "pinyin": "!", "english": "!" },
-              { "chinese": "你", "pinyin": "Nǐ", "english": "You" },
-              { "chinese": "开心", "pinyin": "kāixīn", "english": "happy" },
-              { "chinese": "吗", "pinyin": "ma", "english": "(question)" },
-              { "chinese": "？", "pinyin": "?", "english": "?" }
+              {
+                "chinese": "老婆",
+                "pinyin": "Lǎopo",
+                "english": "Wife"
+              },
+              {
+                "chinese": "辛苦",
+                "pinyin": "xīnkǔ",
+                "english": "worked hard"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(completed)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              },
+              {
+                "chinese": "你",
+                "pinyin": "Nǐ",
+                "english": "You"
+              },
+              {
+                "chinese": "开心",
+                "pinyin": "kāixīn",
+                "english": "happy"
+              },
+              {
+                "chinese": "吗",
+                "pinyin": "ma",
+                "english": "(question)"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
             ]
           },
           {
@@ -291,12 +396,36 @@
             "b": "Kàn dào nǐ jiù kāixīn le!",
             "c": "Seeing you makes me happy!",
             "wordAlignments": [
-              { "chinese": "看到", "pinyin": "Kàn dào", "english": "Seeing" },
-              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
-              { "chinese": "就", "pinyin": "jiù", "english": "then" },
-              { "chinese": "开心", "pinyin": "kāixīn", "english": "happy" },
-              { "chinese": "了", "pinyin": "le", "english": "(became)" },
-              { "chinese": "！", "pinyin": "!", "english": "!" }
+              {
+                "chinese": "看到",
+                "pinyin": "Kàn dào",
+                "english": "Seeing"
+              },
+              {
+                "chinese": "你",
+                "pinyin": "nǐ",
+                "english": "you"
+              },
+              {
+                "chinese": "就",
+                "pinyin": "jiù",
+                "english": "then"
+              },
+              {
+                "chinese": "开心",
+                "pinyin": "kāixīn",
+                "english": "happy"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(became)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              }
             ]
           },
           {
@@ -304,11 +433,31 @@
             "b": "Míngtiān nǐ jǐ diǎn shàng bān?",
             "c": "What time do you go to work tomorrow?",
             "wordAlignments": [
-              { "chinese": "明天", "pinyin": "Míngtiān", "english": "Tomorrow" },
-              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
-              { "chinese": "几点", "pinyin": "jǐ diǎn", "english": "what time" },
-              { "chinese": "上班", "pinyin": "shàng bān", "english": "go to work" },
-              { "chinese": "？", "pinyin": "?", "english": "?" }
+              {
+                "chinese": "明天",
+                "pinyin": "Míngtiān",
+                "english": "Tomorrow"
+              },
+              {
+                "chinese": "你",
+                "pinyin": "nǐ",
+                "english": "you"
+              },
+              {
+                "chinese": "几点",
+                "pinyin": "jǐ diǎn",
+                "english": "what time"
+              },
+              {
+                "chinese": "上班",
+                "pinyin": "shàng bān",
+                "english": "go to work"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
             ]
           }
         ]
@@ -322,13 +471,41 @@
             "b": "Lǎopo, jīntiān wǎnshang shéi zuò fàn?",
             "c": "Wife, who's cooking tonight?",
             "wordAlignments": [
-              { "chinese": "老婆", "pinyin": "Lǎopo", "english": "Wife" },
-              { "chinese": "，", "pinyin": ",", "english": "," },
-              { "chinese": "今天", "pinyin": "jīntiān", "english": "today" },
-              { "chinese": "晚上", "pinyin": "wǎnshang", "english": "tonight" },
-              { "chinese": "谁", "pinyin": "shéi", "english": "who" },
-              { "chinese": "做饭", "pinyin": "zuò fàn", "english": "cooking" },
-              { "chinese": "？", "pinyin": "?", "english": "?" }
+              {
+                "chinese": "老婆",
+                "pinyin": "Lǎopo",
+                "english": "Wife"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "今天",
+                "pinyin": "jīntiān",
+                "english": "today"
+              },
+              {
+                "chinese": "晚上",
+                "pinyin": "wǎnshang",
+                "english": "tonight"
+              },
+              {
+                "chinese": "谁",
+                "pinyin": "shéi",
+                "english": "who"
+              },
+              {
+                "chinese": "做饭",
+                "pinyin": "zuò fàn",
+                "english": "cooking"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
             ]
           },
           {
@@ -336,15 +513,51 @@
             "b": "Wǒ bù xiǎng zuò fàn, diǎn wàimài ba!",
             "c": "I don't want to cook, let's order takeout!",
             "wordAlignments": [
-              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
-              { "chinese": "不", "pinyin": "bù", "english": "don't" },
-              { "chinese": "想", "pinyin": "xiǎng", "english": "want to" },
-              { "chinese": "做饭", "pinyin": "zuò fàn", "english": "cook" },
-              { "chinese": "，", "pinyin": ",", "english": "," },
-              { "chinese": "点", "pinyin": "diǎn", "english": "order" },
-              { "chinese": "外卖", "pinyin": "wàimài", "english": "takeout" },
-              { "chinese": "吧", "pinyin": "ba", "english": "(suggestion)" },
-              { "chinese": "！", "pinyin": "!", "english": "!" }
+              {
+                "chinese": "我",
+                "pinyin": "Wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "不",
+                "pinyin": "bù",
+                "english": "don't"
+              },
+              {
+                "chinese": "想",
+                "pinyin": "xiǎng",
+                "english": "want to"
+              },
+              {
+                "chinese": "做饭",
+                "pinyin": "zuò fàn",
+                "english": "cook"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "点",
+                "pinyin": "diǎn",
+                "english": "order"
+              },
+              {
+                "chinese": "外卖",
+                "pinyin": "wàimài",
+                "english": "takeout"
+              },
+              {
+                "chinese": "吧",
+                "pinyin": "ba",
+                "english": "(suggestion)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              }
             ]
           },
           {
@@ -352,14 +565,46 @@
             "b": "Hǎo de, nǐ xiǎng chī shénme wàimài?",
             "c": "Okay, what takeout do you want to eat?",
             "wordAlignments": [
-              { "chinese": "好的", "pinyin": "Hǎo de", "english": "Okay" },
-              { "chinese": "，", "pinyin": ",", "english": "," },
-              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
-              { "chinese": "想", "pinyin": "xiǎng", "english": "want to" },
-              { "chinese": "吃", "pinyin": "chī", "english": "eat" },
-              { "chinese": "什么", "pinyin": "shénme", "english": "what" },
-              { "chinese": "外卖", "pinyin": "wàimài", "english": "takeout" },
-              { "chinese": "？", "pinyin": "?", "english": "?" }
+              {
+                "chinese": "好的",
+                "pinyin": "Hǎo de",
+                "english": "Okay"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "你",
+                "pinyin": "nǐ",
+                "english": "you"
+              },
+              {
+                "chinese": "想",
+                "pinyin": "xiǎng",
+                "english": "want to"
+              },
+              {
+                "chinese": "吃",
+                "pinyin": "chī",
+                "english": "eat"
+              },
+              {
+                "chinese": "什么",
+                "pinyin": "shénme",
+                "english": "what"
+              },
+              {
+                "chinese": "外卖",
+                "pinyin": "wàimài",
+                "english": "takeout"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
             ]
           },
           {
@@ -367,13 +612,41 @@
             "b": "Suíbiàn, nǐ lái xuǎn ba.",
             "c": "Whatever, you choose.",
             "wordAlignments": [
-              { "chinese": "随便", "pinyin": "Suíbiàn", "english": "Whatever" },
-              { "chinese": "，", "pinyin": ",", "english": "," },
-              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
-              { "chinese": "来", "pinyin": "lái", "english": "go ahead and" },
-              { "chinese": "选", "pinyin": "xuǎn", "english": "choose" },
-              { "chinese": "吧", "pinyin": "ba", "english": "(suggestion)" },
-              { "chinese": "。", "pinyin": ".", "english": "." }
+              {
+                "chinese": "随便",
+                "pinyin": "Suíbiàn",
+                "english": "Whatever"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "你",
+                "pinyin": "nǐ",
+                "english": "you"
+              },
+              {
+                "chinese": "来",
+                "pinyin": "lái",
+                "english": "go ahead and"
+              },
+              {
+                "chinese": "选",
+                "pinyin": "xuǎn",
+                "english": "choose"
+              },
+              {
+                "chinese": "吧",
+                "pinyin": "ba",
+                "english": "(suggestion)"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
             ]
           },
           {
@@ -381,15 +654,51 @@
             "b": "Chī wán fàn zài hē bēi kāfēi ba.",
             "c": "Let's have a cup of coffee after eating.",
             "wordAlignments": [
-              { "chinese": "吃", "pinyin": "Chī", "english": "Eat" },
-              { "chinese": "完", "pinyin": "wán", "english": "finish" },
-              { "chinese": "饭", "pinyin": "fàn", "english": "food" },
-              { "chinese": "再", "pinyin": "zài", "english": "then" },
-              { "chinese": "喝", "pinyin": "hē", "english": "drink" },
-              { "chinese": "杯", "pinyin": "bēi", "english": "cup of" },
-              { "chinese": "咖啡", "pinyin": "kāfēi", "english": "coffee" },
-              { "chinese": "吧", "pinyin": "ba", "english": "(suggestion)" },
-              { "chinese": "。", "pinyin": ".", "english": "." }
+              {
+                "chinese": "吃",
+                "pinyin": "Chī",
+                "english": "Eat"
+              },
+              {
+                "chinese": "完",
+                "pinyin": "wán",
+                "english": "finish"
+              },
+              {
+                "chinese": "饭",
+                "pinyin": "fàn",
+                "english": "food"
+              },
+              {
+                "chinese": "再",
+                "pinyin": "zài",
+                "english": "then"
+              },
+              {
+                "chinese": "喝",
+                "pinyin": "hē",
+                "english": "drink"
+              },
+              {
+                "chinese": "杯",
+                "pinyin": "bēi",
+                "english": "cup of"
+              },
+              {
+                "chinese": "咖啡",
+                "pinyin": "kāfēi",
+                "english": "coffee"
+              },
+              {
+                "chinese": "吧",
+                "pinyin": "ba",
+                "english": "(suggestion)"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
             ]
           }
         ]
@@ -403,15 +712,51 @@
             "b": "Jīntiān tiānqì zěnmeyàng? Wǒ xiǎng qù pǎo bù.",
             "c": "How's the weather today? I want to go running.",
             "wordAlignments": [
-              { "chinese": "今天", "pinyin": "Jīntiān", "english": "Today" },
-              { "chinese": "天气", "pinyin": "tiānqì", "english": "weather" },
-              { "chinese": "怎么样", "pinyin": "zěnmeyàng", "english": "how is it" },
-              { "chinese": "？", "pinyin": "?", "english": "?" },
-              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
-              { "chinese": "想", "pinyin": "xiǎng", "english": "want to" },
-              { "chinese": "去", "pinyin": "qù", "english": "go" },
-              { "chinese": "跑步", "pinyin": "pǎo bù", "english": "running" },
-              { "chinese": "。", "pinyin": ".", "english": "." }
+              {
+                "chinese": "今天",
+                "pinyin": "Jīntiān",
+                "english": "Today"
+              },
+              {
+                "chinese": "天气",
+                "pinyin": "tiānqì",
+                "english": "weather"
+              },
+              {
+                "chinese": "怎么样",
+                "pinyin": "zěnmeyàng",
+                "english": "how is it"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              },
+              {
+                "chinese": "我",
+                "pinyin": "Wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "想",
+                "pinyin": "xiǎng",
+                "english": "want to"
+              },
+              {
+                "chinese": "去",
+                "pinyin": "qù",
+                "english": "go"
+              },
+              {
+                "chinese": "跑步",
+                "pinyin": "pǎo bù",
+                "english": "running"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
             ]
           },
           {
@@ -419,15 +764,51 @@
             "b": "Wàimiàn hǎo lěng! Bié qù pǎo bù le.",
             "c": "It's so cold outside! Don't go running.",
             "wordAlignments": [
-              { "chinese": "外面", "pinyin": "Wàimiàn", "english": "Outside" },
-              { "chinese": "好", "pinyin": "hǎo", "english": "so" },
-              { "chinese": "冷", "pinyin": "lěng", "english": "cold" },
-              { "chinese": "！", "pinyin": "!", "english": "!" },
-              { "chinese": "别", "pinyin": "Bié", "english": "Don't" },
-              { "chinese": "去", "pinyin": "qù", "english": "go" },
-              { "chinese": "跑步", "pinyin": "pǎo bù", "english": "running" },
-              { "chinese": "了", "pinyin": "le", "english": "(anymore)" },
-              { "chinese": "。", "pinyin": ".", "english": "." }
+              {
+                "chinese": "外面",
+                "pinyin": "Wàimiàn",
+                "english": "Outside"
+              },
+              {
+                "chinese": "好",
+                "pinyin": "hǎo",
+                "english": "so"
+              },
+              {
+                "chinese": "冷",
+                "pinyin": "lěng",
+                "english": "cold"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              },
+              {
+                "chinese": "别",
+                "pinyin": "Bié",
+                "english": "Don't"
+              },
+              {
+                "chinese": "去",
+                "pinyin": "qù",
+                "english": "go"
+              },
+              {
+                "chinese": "跑步",
+                "pinyin": "pǎo bù",
+                "english": "running"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(anymore)"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
             ]
           },
           {
@@ -435,12 +816,36 @@
             "b": "Lěng yě yào duànliàn a!",
             "c": "Even if it's cold, you still need to exercise!",
             "wordAlignments": [
-              { "chinese": "冷", "pinyin": "Lěng", "english": "Cold" },
-              { "chinese": "也", "pinyin": "yě", "english": "also" },
-              { "chinese": "要", "pinyin": "yào", "english": "need to" },
-              { "chinese": "锻炼", "pinyin": "duànliàn", "english": "exercise" },
-              { "chinese": "啊", "pinyin": "a", "english": "(emphasis)" },
-              { "chinese": "！", "pinyin": "!", "english": "!" }
+              {
+                "chinese": "冷",
+                "pinyin": "Lěng",
+                "english": "Cold"
+              },
+              {
+                "chinese": "也",
+                "pinyin": "yě",
+                "english": "also"
+              },
+              {
+                "chinese": "要",
+                "pinyin": "yào",
+                "english": "need to"
+              },
+              {
+                "chinese": "锻炼",
+                "pinyin": "duànliàn",
+                "english": "exercise"
+              },
+              {
+                "chinese": "啊",
+                "pinyin": "a",
+                "english": "(emphasis)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              }
             ]
           },
           {
@@ -448,17 +853,61 @@
             "b": "Nà nǐ zìjǐ qù ba, wǒ zài jiā duànliàn.",
             "c": "Then go by yourself, I'll exercise at home.",
             "wordAlignments": [
-              { "chinese": "那", "pinyin": "Nà", "english": "Then" },
-              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
-              { "chinese": "自己", "pinyin": "zìjǐ", "english": "yourself" },
-              { "chinese": "去", "pinyin": "qù", "english": "go" },
-              { "chinese": "吧", "pinyin": "ba", "english": "(suggestion)" },
-              { "chinese": "，", "pinyin": ",", "english": "," },
-              { "chinese": "我", "pinyin": "wǒ", "english": "I" },
-              { "chinese": "在", "pinyin": "zài", "english": "at" },
-              { "chinese": "家", "pinyin": "jiā", "english": "home" },
-              { "chinese": "锻炼", "pinyin": "duànliàn", "english": "exercise" },
-              { "chinese": "。", "pinyin": ".", "english": "." }
+              {
+                "chinese": "那",
+                "pinyin": "Nà",
+                "english": "Then"
+              },
+              {
+                "chinese": "你",
+                "pinyin": "nǐ",
+                "english": "you"
+              },
+              {
+                "chinese": "自己",
+                "pinyin": "zìjǐ",
+                "english": "yourself"
+              },
+              {
+                "chinese": "去",
+                "pinyin": "qù",
+                "english": "go"
+              },
+              {
+                "chinese": "吧",
+                "pinyin": "ba",
+                "english": "(suggestion)"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "我",
+                "pinyin": "wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "在",
+                "pinyin": "zài",
+                "english": "at"
+              },
+              {
+                "chinese": "家",
+                "pinyin": "jiā",
+                "english": "home"
+              },
+              {
+                "chinese": "锻炼",
+                "pinyin": "duànliàn",
+                "english": "exercise"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
             ]
           },
           {
@@ -466,13 +915,41 @@
             "b": "Hǎo ba, tiānqì tài lěng le.",
             "c": "Fine, the weather is too cold.",
             "wordAlignments": [
-              { "chinese": "好吧", "pinyin": "Hǎo ba", "english": "Fine" },
-              { "chinese": "，", "pinyin": ",", "english": "," },
-              { "chinese": "天气", "pinyin": "tiānqì", "english": "the weather" },
-              { "chinese": "太", "pinyin": "tài", "english": "too" },
-              { "chinese": "冷", "pinyin": "lěng", "english": "cold" },
-              { "chinese": "了", "pinyin": "le", "english": "(excessively)" },
-              { "chinese": "。", "pinyin": ".", "english": "." }
+              {
+                "chinese": "好吧",
+                "pinyin": "Hǎo ba",
+                "english": "Fine"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "天气",
+                "pinyin": "tiānqì",
+                "english": "the weather"
+              },
+              {
+                "chinese": "太",
+                "pinyin": "tài",
+                "english": "too"
+              },
+              {
+                "chinese": "冷",
+                "pinyin": "lěng",
+                "english": "cold"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(excessively)"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
             ]
           }
         ]
@@ -486,14 +963,46 @@
             "b": "Hǎo wúliáo a, wǒmen zuò shénme?",
             "c": "So bored, what should we do?",
             "wordAlignments": [
-              { "chinese": "好", "pinyin": "Hǎo", "english": "So" },
-              { "chinese": "无聊", "pinyin": "wúliáo", "english": "bored" },
-              { "chinese": "啊", "pinyin": "a", "english": "(exclamation)" },
-              { "chinese": "，", "pinyin": ",", "english": "," },
-              { "chinese": "我们", "pinyin": "wǒmen", "english": "we" },
-              { "chinese": "做", "pinyin": "zuò", "english": "do" },
-              { "chinese": "什么", "pinyin": "shénme", "english": "what" },
-              { "chinese": "？", "pinyin": "?", "english": "?" }
+              {
+                "chinese": "好",
+                "pinyin": "Hǎo",
+                "english": "So"
+              },
+              {
+                "chinese": "无聊",
+                "pinyin": "wúliáo",
+                "english": "bored"
+              },
+              {
+                "chinese": "啊",
+                "pinyin": "a",
+                "english": "(exclamation)"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "我们",
+                "pinyin": "wǒmen",
+                "english": "we"
+              },
+              {
+                "chinese": "做",
+                "pinyin": "zuò",
+                "english": "do"
+              },
+              {
+                "chinese": "什么",
+                "pinyin": "shénme",
+                "english": "what"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
             ]
           },
           {
@@ -501,10 +1010,26 @@
             "b": "Kàn diànshìjù ba?",
             "c": "Watch a TV show?",
             "wordAlignments": [
-              { "chinese": "看", "pinyin": "Kàn", "english": "Watch" },
-              { "chinese": "电视剧", "pinyin": "diànshìjù", "english": "a TV show" },
-              { "chinese": "吧", "pinyin": "ba", "english": "(suggestion)" },
-              { "chinese": "？", "pinyin": "?", "english": "?" }
+              {
+                "chinese": "看",
+                "pinyin": "Kàn",
+                "english": "Watch"
+              },
+              {
+                "chinese": "电视剧",
+                "pinyin": "diànshìjù",
+                "english": "a TV show"
+              },
+              {
+                "chinese": "吧",
+                "pinyin": "ba",
+                "english": "(suggestion)"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
             ]
           },
           {
@@ -512,14 +1037,46 @@
             "b": "Diànshìjù yě wúliáo, bù xiǎng kàn.",
             "c": "TV shows are also boring, don't want to watch.",
             "wordAlignments": [
-              { "chinese": "电视剧", "pinyin": "Diànshìjù", "english": "TV shows" },
-              { "chinese": "也", "pinyin": "yě", "english": "also" },
-              { "chinese": "无聊", "pinyin": "wúliáo", "english": "boring" },
-              { "chinese": "，", "pinyin": ",", "english": "," },
-              { "chinese": "不", "pinyin": "bù", "english": "don't" },
-              { "chinese": "想", "pinyin": "xiǎng", "english": "want to" },
-              { "chinese": "看", "pinyin": "kàn", "english": "watch" },
-              { "chinese": "。", "pinyin": ".", "english": "." }
+              {
+                "chinese": "电视剧",
+                "pinyin": "Diànshìjù",
+                "english": "TV shows"
+              },
+              {
+                "chinese": "也",
+                "pinyin": "yě",
+                "english": "also"
+              },
+              {
+                "chinese": "无聊",
+                "pinyin": "wúliáo",
+                "english": "boring"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "不",
+                "pinyin": "bù",
+                "english": "don't"
+              },
+              {
+                "chinese": "想",
+                "pinyin": "xiǎng",
+                "english": "want to"
+              },
+              {
+                "chinese": "看",
+                "pinyin": "kàn",
+                "english": "watch"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
             ]
           },
           {
@@ -527,12 +1084,36 @@
             "b": "Nà wǒmen chūqù sànbù ba.",
             "c": "Then let's go out for a walk.",
             "wordAlignments": [
-              { "chinese": "那", "pinyin": "Nà", "english": "Then" },
-              { "chinese": "我们", "pinyin": "wǒmen", "english": "we" },
-              { "chinese": "出去", "pinyin": "chūqù", "english": "go out" },
-              { "chinese": "散步", "pinyin": "sànbù", "english": "for a walk" },
-              { "chinese": "吧", "pinyin": "ba", "english": "(suggestion)" },
-              { "chinese": "。", "pinyin": ".", "english": "." }
+              {
+                "chinese": "那",
+                "pinyin": "Nà",
+                "english": "Then"
+              },
+              {
+                "chinese": "我们",
+                "pinyin": "wǒmen",
+                "english": "we"
+              },
+              {
+                "chinese": "出去",
+                "pinyin": "chūqù",
+                "english": "go out"
+              },
+              {
+                "chinese": "散步",
+                "pinyin": "sànbù",
+                "english": "for a walk"
+              },
+              {
+                "chinese": "吧",
+                "pinyin": "ba",
+                "english": "(suggestion)"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
             ]
           },
           {
@@ -540,14 +1121,46 @@
             "b": "Hǎo a! Dài māo yìqǐ qù!",
             "c": "Great! Bring the cat along!",
             "wordAlignments": [
-              { "chinese": "好", "pinyin": "Hǎo", "english": "Great" },
-              { "chinese": "啊", "pinyin": "a", "english": "(exclamation)" },
-              { "chinese": "！", "pinyin": "!", "english": "!" },
-              { "chinese": "带", "pinyin": "Dài", "english": "Bring" },
-              { "chinese": "猫", "pinyin": "māo", "english": "the cat" },
-              { "chinese": "一起", "pinyin": "yìqǐ", "english": "together" },
-              { "chinese": "去", "pinyin": "qù", "english": "go" },
-              { "chinese": "！", "pinyin": "!", "english": "!" }
+              {
+                "chinese": "好",
+                "pinyin": "Hǎo",
+                "english": "Great"
+              },
+              {
+                "chinese": "啊",
+                "pinyin": "a",
+                "english": "(exclamation)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              },
+              {
+                "chinese": "带",
+                "pinyin": "Dài",
+                "english": "Bring"
+              },
+              {
+                "chinese": "猫",
+                "pinyin": "māo",
+                "english": "the cat"
+              },
+              {
+                "chinese": "一起",
+                "pinyin": "yìqǐ",
+                "english": "together"
+              },
+              {
+                "chinese": "去",
+                "pinyin": "qù",
+                "english": "go"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              }
             ]
           },
           {
@@ -555,15 +1168,51 @@
             "b": "Māo bù xiǎng chūqù, tā zài shuìjiào.",
             "c": "The cat doesn't want to go out, it's sleeping.",
             "wordAlignments": [
-              { "chinese": "猫", "pinyin": "Māo", "english": "The cat" },
-              { "chinese": "不", "pinyin": "bù", "english": "doesn't" },
-              { "chinese": "想", "pinyin": "xiǎng", "english": "want to" },
-              { "chinese": "出去", "pinyin": "chūqù", "english": "go out" },
-              { "chinese": "，", "pinyin": ",", "english": "," },
-              { "chinese": "它", "pinyin": "tā", "english": "it" },
-              { "chinese": "在", "pinyin": "zài", "english": "is" },
-              { "chinese": "睡觉", "pinyin": "shuìjiào", "english": "sleeping" },
-              { "chinese": "。", "pinyin": ".", "english": "." }
+              {
+                "chinese": "猫",
+                "pinyin": "Māo",
+                "english": "The cat"
+              },
+              {
+                "chinese": "不",
+                "pinyin": "bù",
+                "english": "doesn't"
+              },
+              {
+                "chinese": "想",
+                "pinyin": "xiǎng",
+                "english": "want to"
+              },
+              {
+                "chinese": "出去",
+                "pinyin": "chūqù",
+                "english": "go out"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "它",
+                "pinyin": "tā",
+                "english": "it"
+              },
+              {
+                "chinese": "在",
+                "pinyin": "zài",
+                "english": "is"
+              },
+              {
+                "chinese": "睡觉",
+                "pinyin": "shuìjiào",
+                "english": "sleeping"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
             ]
           }
         ]
@@ -577,15 +1226,51 @@
             "b": "Jīntiān tiānqì zhēn hǎo, wǒmen chūqù ba!",
             "c": "The weather is really nice today, let's go out!",
             "wordAlignments": [
-              { "chinese": "今天", "pinyin": "Jīntiān", "english": "Today" },
-              { "chinese": "天气", "pinyin": "tiānqì", "english": "weather" },
-              { "chinese": "真", "pinyin": "zhēn", "english": "really" },
-              { "chinese": "好", "pinyin": "hǎo", "english": "nice" },
-              { "chinese": "，", "pinyin": ",", "english": "," },
-              { "chinese": "我们", "pinyin": "wǒmen", "english": "we" },
-              { "chinese": "出去", "pinyin": "chūqù", "english": "go out" },
-              { "chinese": "吧", "pinyin": "ba", "english": "(suggestion)" },
-              { "chinese": "！", "pinyin": "!", "english": "!" }
+              {
+                "chinese": "今天",
+                "pinyin": "Jīntiān",
+                "english": "Today"
+              },
+              {
+                "chinese": "天气",
+                "pinyin": "tiānqì",
+                "english": "weather"
+              },
+              {
+                "chinese": "真",
+                "pinyin": "zhēn",
+                "english": "really"
+              },
+              {
+                "chinese": "好",
+                "pinyin": "hǎo",
+                "english": "nice"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "我们",
+                "pinyin": "wǒmen",
+                "english": "we"
+              },
+              {
+                "chinese": "出去",
+                "pinyin": "chūqù",
+                "english": "go out"
+              },
+              {
+                "chinese": "吧",
+                "pinyin": "ba",
+                "english": "(suggestion)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              }
             ]
           },
           {
@@ -593,14 +1278,46 @@
             "b": "Hǎo a! Qù gōngyuán sànbù ba.",
             "c": "Great! Let's go for a walk in the park.",
             "wordAlignments": [
-              { "chinese": "好", "pinyin": "Hǎo", "english": "Great" },
-              { "chinese": "啊", "pinyin": "a", "english": "(exclamation)" },
-              { "chinese": "！", "pinyin": "!", "english": "!" },
-              { "chinese": "去", "pinyin": "Qù", "english": "Go to" },
-              { "chinese": "公园", "pinyin": "gōngyuán", "english": "the park" },
-              { "chinese": "散步", "pinyin": "sànbù", "english": "for a walk" },
-              { "chinese": "吧", "pinyin": "ba", "english": "(suggestion)" },
-              { "chinese": "。", "pinyin": ".", "english": "." }
+              {
+                "chinese": "好",
+                "pinyin": "Hǎo",
+                "english": "Great"
+              },
+              {
+                "chinese": "啊",
+                "pinyin": "a",
+                "english": "(exclamation)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              },
+              {
+                "chinese": "去",
+                "pinyin": "Qù",
+                "english": "Go to"
+              },
+              {
+                "chinese": "公园",
+                "pinyin": "gōngyuán",
+                "english": "the park"
+              },
+              {
+                "chinese": "散步",
+                "pinyin": "sànbù",
+                "english": "for a walk"
+              },
+              {
+                "chinese": "吧",
+                "pinyin": "ba",
+                "english": "(suggestion)"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
             ]
           },
           {
@@ -608,14 +1325,46 @@
             "b": "Sànbù de shíhou mǎi bēi kāfēi ba.",
             "c": "Let's buy a cup of coffee while walking.",
             "wordAlignments": [
-              { "chinese": "散步", "pinyin": "Sànbù", "english": "Walking" },
-              { "chinese": "的", "pinyin": "de", "english": "(possessive)" },
-              { "chinese": "时候", "pinyin": "shíhou", "english": "time" },
-              { "chinese": "买", "pinyin": "mǎi", "english": "buy" },
-              { "chinese": "杯", "pinyin": "bēi", "english": "cup of" },
-              { "chinese": "咖啡", "pinyin": "kāfēi", "english": "coffee" },
-              { "chinese": "吧", "pinyin": "ba", "english": "(suggestion)" },
-              { "chinese": "。", "pinyin": ".", "english": "." }
+              {
+                "chinese": "散步",
+                "pinyin": "Sànbù",
+                "english": "Walking"
+              },
+              {
+                "chinese": "的",
+                "pinyin": "de",
+                "english": "(possessive)"
+              },
+              {
+                "chinese": "时候",
+                "pinyin": "shíhou",
+                "english": "time"
+              },
+              {
+                "chinese": "买",
+                "pinyin": "mǎi",
+                "english": "buy"
+              },
+              {
+                "chinese": "杯",
+                "pinyin": "bēi",
+                "english": "cup of"
+              },
+              {
+                "chinese": "咖啡",
+                "pinyin": "kāfēi",
+                "english": "coffee"
+              },
+              {
+                "chinese": "吧",
+                "pinyin": "ba",
+                "english": "(suggestion)"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
             ]
           },
           {
@@ -623,11 +1372,31 @@
             "b": "Dài māo qù ma?",
             "c": "Bring the cat?",
             "wordAlignments": [
-              { "chinese": "带", "pinyin": "Dài", "english": "Bring" },
-              { "chinese": "猫", "pinyin": "māo", "english": "the cat" },
-              { "chinese": "去", "pinyin": "qù", "english": "go" },
-              { "chinese": "吗", "pinyin": "ma", "english": "(question)" },
-              { "chinese": "？", "pinyin": "?", "english": "?" }
+              {
+                "chinese": "带",
+                "pinyin": "Dài",
+                "english": "Bring"
+              },
+              {
+                "chinese": "猫",
+                "pinyin": "māo",
+                "english": "the cat"
+              },
+              {
+                "chinese": "去",
+                "pinyin": "qù",
+                "english": "go"
+              },
+              {
+                "chinese": "吗",
+                "pinyin": "ma",
+                "english": "(question)"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
             ]
           },
           {
@@ -635,13 +1404,41 @@
             "b": "Dāngrán! Māo yě xǐhuan sànbù.",
             "c": "Of course! The cat also likes walks.",
             "wordAlignments": [
-              { "chinese": "当然", "pinyin": "Dāngrán", "english": "Of course" },
-              { "chinese": "！", "pinyin": "!", "english": "!" },
-              { "chinese": "猫", "pinyin": "Māo", "english": "The cat" },
-              { "chinese": "也", "pinyin": "yě", "english": "also" },
-              { "chinese": "喜欢", "pinyin": "xǐhuan", "english": "likes" },
-              { "chinese": "散步", "pinyin": "sànbù", "english": "walks" },
-              { "chinese": "。", "pinyin": ".", "english": "." }
+              {
+                "chinese": "当然",
+                "pinyin": "Dāngrán",
+                "english": "Of course"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              },
+              {
+                "chinese": "猫",
+                "pinyin": "Māo",
+                "english": "The cat"
+              },
+              {
+                "chinese": "也",
+                "pinyin": "yě",
+                "english": "also"
+              },
+              {
+                "chinese": "喜欢",
+                "pinyin": "xǐhuan",
+                "english": "likes"
+              },
+              {
+                "chinese": "散步",
+                "pinyin": "sànbù",
+                "english": "walks"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
             ]
           },
           {
@@ -649,14 +1446,46 @@
             "b": "Tài kāixīn le! Zhōumò zuì hǎo le.",
             "c": "So happy! Weekends are the best.",
             "wordAlignments": [
-              { "chinese": "太", "pinyin": "Tài", "english": "So" },
-              { "chinese": "开心", "pinyin": "kāixīn", "english": "happy" },
-              { "chinese": "了", "pinyin": "le", "english": "(exclamation)" },
-              { "chinese": "！", "pinyin": "!", "english": "!" },
-              { "chinese": "周末", "pinyin": "Zhōumò", "english": "Weekends" },
-              { "chinese": "最好", "pinyin": "zuì hǎo", "english": "are the best" },
-              { "chinese": "了", "pinyin": "le", "english": "(emphasis)" },
-              { "chinese": "。", "pinyin": ".", "english": "." }
+              {
+                "chinese": "太",
+                "pinyin": "Tài",
+                "english": "So"
+              },
+              {
+                "chinese": "开心",
+                "pinyin": "kāixīn",
+                "english": "happy"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(exclamation)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              },
+              {
+                "chinese": "周末",
+                "pinyin": "Zhōumò",
+                "english": "Weekends"
+              },
+              {
+                "chinese": "最好",
+                "pinyin": "zuì hǎo",
+                "english": "are the best"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(emphasis)"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
             ]
           }
         ]

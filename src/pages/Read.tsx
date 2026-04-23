@@ -57,7 +57,7 @@ const Read: FC = () => {
   // Initialize session when deck loads
   useEffect(() => {
     if (currentDeck?.reading && deckId) {
-      const dialogueIds = Object.keys(currentDeck.reading.dialogues);
+      const dialogueIds = Object.keys(currentDeck.reading.practice);
       if (dialogueIds.length > 0) {
         // Check for saved progress
         const savedProgress = getProgress(deckId);
@@ -88,7 +88,7 @@ const Read: FC = () => {
   // Get current dialogue and line data
   const currentDialogue = useMemo(() => {
     if (!currentDeck?.reading || !selectedDialogueId) return null;
-    return currentDeck.reading.dialogues[selectedDialogueId];
+    return currentDeck.reading.practice[selectedDialogueId];
   }, [currentDeck, selectedDialogueId]);
 
   const currentLine = useMemo(() => {
@@ -209,7 +209,7 @@ const Read: FC = () => {
   }
 
   // Determine if we have reading content
-  const hasReadingContent = currentDeck.reading && Object.keys(currentDeck.reading.dialogues).length > 0;
+  const hasReadingContent = currentDeck.reading && Object.keys(currentDeck.reading.practice).length > 0;
 
   // Wait for transcript check to complete
   if (hasTranscripts === null) {
@@ -221,7 +221,7 @@ const Read: FC = () => {
     return (
       <div className={styles.errorContainer}>
         <h2>No reading content available</h2>
-        <p>This deck doesn't have any reading dialogues or transcripts. Please choose a different deck.</p>
+        <p>This deck doesn't have any reading practice or transcripts. Please choose a different deck.</p>
         <button onClick={() => navigate(`/deck/${deckId}`)} className={styles.backButton}>
           Back to Deck
         </button>

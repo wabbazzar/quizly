@@ -114,7 +114,7 @@ const Deck: FC = () => {
     (mode: ModeCard) => {
       // Check if Read mode is available for this deck
       if (mode.id === 'read') {
-        const hasReadingContent = currentDeck?.reading && Object.keys(currentDeck.reading.dialogues).length > 0;
+        const hasReadingContent = currentDeck?.reading && Object.keys(currentDeck.reading.practice).length > 0;
         if (!hasReadingContent && !hasTranscripts) {
           showNotification({
             message: 'No reading content available for this deck',
