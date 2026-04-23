@@ -20,8 +20,8 @@ import { resolve } from "path";
 import { execSync } from "child_process";
 
 // ---- CONFIG ----
-const DECK_FILE = "/home/wabbazzar/code/quizly/public/data/decks/chinese_chpt1_1.json";
-const DECK_ID = "chinese_chpt1_1";
+const DECK_FILE = process.argv[2] || "/home/wabbazzar/code/quizly/public/data/decks/chinese_chpt1_1.json";
+const DECK_ID = DECK_FILE.split("/").pop()!.replace(".json", "");
 const AUDIO_DIR = "/home/wabbazzar/code/quizly/public/data/audio/words";
 
 // Voice assignments:
@@ -248,10 +248,24 @@ async function generateOne(
 
 // ---- MAIN ----
 async function main() {
-  const client = await connect();
-  const page = await client.page("speechify");
+  let client = await connect();
+  let page = await client.page("speechify");
 
   let generated = 0, skipped = 0, failed = 0;
+
+  // Helper: reconnect if the page/extension died
+  async function ensurePage() {
+    try {
+      await page.evaluate(() => true);
+    } catch {
+      console.log("  Reconnecting...");
+      try { await client.disconnect(); } catch {}
+      await new Promise(r => setTimeout(r, 3000));
+      client = await connect();
+      page = await client.page("speechify");
+      console.log("  Reconnected");
+    }
+  }
 
   for (const card of cards) {
     for (const side of SIDES) {
@@ -269,6 +283,7 @@ async function main() {
       const voice = VOICE_MAP[side];
 
       console.log(`GEN  card${card.idx} side_${side}: "${text}" (${voice})`);
+      await ensurePage();
       const ok = await generateOne(client, page, filename.replace(".mp3", ""), text, voice, targetPath);
 
       if (ok) generated++;
