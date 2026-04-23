@@ -119,3 +119,6 @@ Desktop.ini
 server/data/
 server/node_modules/
 server/.env
+
+# Claude Code runtime
+.claude/*.lock
