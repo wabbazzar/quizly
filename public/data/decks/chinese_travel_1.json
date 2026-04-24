@@ -21,7 +21,7 @@
       "side_f": "example translation",
       "side_g": "usage notes"
     },
-    "card_count": 15,
+    "card_count": 16,
     "difficulty": "beginner",
     "tags": [
       "chinese",
@@ -231,6 +231,17 @@
       "side_e": "Wǒmen mílù le! Qǐngwèn, zhè shì nǎr?",
       "side_f": "We're lost! Excuse me, where is this?",
       "side_g": "迷 means 'confused/lost' and 路 means 'road.' 迷路了 (mílù le) means 'got lost' — add 了 for the completed state. On hiking trails in Zhangjiajie, stick to marked paths. If lost: 我迷路了，请帮帮我 (Wǒ mílù le, qǐng bāngbang wǒ — 'I'm lost, please help me').",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "look_forward_to",
+      "side_a": "To look forward to; to be excited for (something upcoming)",
+      "side_b": "qīdài",
+      "side_c": "期待",
+      "side_d": "verb",
+      "side_e": "Wǒ hěn qīdài chī huǒguō! / 我很期待吃火锅！(I'm really excited for hot pot!)",
       "level": 1
     }
   ],
