@@ -1099,6 +1099,26 @@ bash scripts/speechify-run-all.sh
 - `{DECK_ID}_card{idx}_side_c.mp3` -- Copy of side_b (same audio)
 - All saved to `public/data/audio/words/`
 
+## Hands-Free Pronunciation Comparison
+
+The hands-free study mode cues the learner on whether they pronounced the
+prompted word correctly. The matcher decodes both clips to mono 16 kHz PCM via
+ffmpeg, runs MFCC + DTW, and returns a distance score. The threshold was tuned
+so same-word recordings (across pitch / speed / octave shifts) score below ~20
+while different-word pairs score above ~60.
+
+Tuning lives in two standalone Node scripts (not wired into the app -- run
+manually when re-tuning):
+
+- `scripts/audio-compare-test.mjs` -- self-test: compares card audio files
+  against themselves and each other to sanity-check the pipeline.
+- `scripts/audio-compare-iterate.mjs` -- iterative tuning harness: sweeps
+  algorithm variants against ground-truth pitch/speed/octave shifts to find
+  parameters that hit the same-word < 20 / different-word > 60 target.
+
+Both require `ffmpeg` on PATH. Re-run after any change to the MFCC or DTW
+parameters used by the in-app comparator.
+
 ## Learning Resources
 
 - React docs: Use Context7 MCP for latest patterns
