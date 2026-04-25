@@ -241,7 +241,9 @@
       "side_b": "qīdài",
       "side_c": "期待",
       "side_d": "verb",
-      "side_e": "Wǒ hěn qīdài chī huǒguō! / 我很期待吃火锅！(I'm really excited for hot pot!)",
+      "side_e": "Wǒ hěn qīdài chī huǒguō!",
+      "side_f": "I'm really excited for hot pot!",
+      "side_g": "期 means 'period of time' and 待 means 'to wait/await.' 期待 is more emotional than just 等 (děng, 'wait') — it conveys excitement or anticipation. Often paired with 很 (very) or 非常 (extremely): 我非常期待 (Wǒ fēicháng qīdài — 'I'm really looking forward to it'). Use it for upcoming trips, meals, meetings.",
       "level": 1
     },
     {
@@ -252,7 +254,9 @@
       "side_b": "tīng bù dǒng",
       "side_c": "听不懂",
       "side_d": "verb phrase",
-      "side_e": "Duìbuqǐ, wǒ tīng bù dǒng. / 对不起，我听不懂。(Sorry, I don't understand.)",
+      "side_e": "Duìbuqǐ, wǒ tīng bù dǒng.",
+      "side_f": "Sorry, I don't understand.",
+      "side_g": "听 (tīng) means 'to listen/hear' and 不懂 means 'don't understand.' Critical phrase when locals speak too fast — pair with 请说慢一点 (qǐng shuō màn yìdiǎn, 'please speak slowly'). Different from 看不懂 (kàn bù dǒng), which is 'can't read/understand visually.' Affirmative form: 听得懂 (tīng de dǒng, 'can understand'); to confirm understanding, just say 懂了 (dǒng le).",
       "level": 1
     },
     {
@@ -263,7 +267,9 @@
       "side_b": "duōshao qián",
       "side_c": "多少钱",
       "side_d": "question phrase",
-      "side_e": "Zhège duōshao qián? / 这个多少钱？(How much is this?)",
+      "side_e": "Zhège duōshao qián?",
+      "side_f": "How much is this?",
+      "side_g": "多少 (duōshao) means 'how many/how much' and 钱 (qián) means 'money.' The essential shopping phrase — point at an item and say 这个多少钱? to ask the price. Useful follow-ups: 太贵了 (tài guì le, 'too expensive'), 便宜一点 (piányi yìdiǎn, 'a bit cheaper'). At markets in China, bargaining is often expected; in malls and chains, prices are fixed.",
       "level": 1
     }
   ],
