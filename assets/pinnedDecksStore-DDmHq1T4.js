@@ -1,0 +1,1 @@
+import{k as e,p as n}from"./index-CzpDn2rJ.js";const d=e()(n((e,n)=>({pinnedDeckIds:[],togglePin:n=>{e(e=>({pinnedDeckIds:e.pinnedDeckIds.includes(n)?e.pinnedDeckIds.filter(e=>e!==n):[...e.pinnedDeckIds,n]}))},isPinned:e=>n().pinnedDeckIds.includes(e)}),{name:"pinned-decks-store",partialize:e=>({pinnedDeckIds:e.pinnedDeckIds})}));export{d as u};

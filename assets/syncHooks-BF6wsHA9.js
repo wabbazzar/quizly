@@ -1,0 +1,1 @@
+import{V as t,W as e,X as d}from"./index-CzpDn2rJ.js";function i(i){"undefined"!=typeof window&&localStorage.getItem(d)&&(t({id:i.id,type:"deck",action:"upsert",payload:{id:i.id,deckJson:JSON.stringify(i),updatedAt:(new Date).toISOString()}}),e())}export{i as s};

@@ -1,0 +1,345 @@
+{
+  "transcripts": [
+    {
+      "id": "chinese_chpt1_2_phrases",
+      "deckId": "chinese_chpt1_2",
+      "type": "phrases",
+      "filename": "chinese_chpt1_2_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Chp 1 pt 2",
+      "sortOrder": 0,
+      "audioFile": "chinese_chpt1_2_phrases.mp3"
+    },
+    {
+      "id": "chinese_chpt1_2_dialogue",
+      "deckId": "chinese_chpt1_2",
+      "type": "dialogue",
+      "filename": "chinese_chpt1_2_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Chp 1 pt 2",
+      "sortOrder": 0,
+      "audioFile": "chinese_chpt1_2_dialogue.mp3"
+    },
+    {
+      "id": "chinese_chpt2_2_phrases",
+      "deckId": "chinese_chpt2_2",
+      "type": "phrases",
+      "filename": "chinese_chpt2_2_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Chp 2 pt 2",
+      "sortOrder": 1,
+      "audioFile": "chinese_chpt2_2_phrases.mp3"
+    },
+    {
+      "id": "chinese_chpt2_2_dialogue",
+      "deckId": "chinese_chpt2_2",
+      "type": "dialogue",
+      "filename": "chinese_chpt2_2_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Chp 2 pt 2",
+      "sortOrder": 1,
+      "audioFile": "chinese_chpt2_2_dialogue.mp3"
+    },
+    {
+      "id": "chinese_chpt3_2_phrases",
+      "deckId": "chinese_chpt3_2",
+      "type": "phrases",
+      "filename": "chinese_chpt3_2_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Chp 3 pt 2",
+      "sortOrder": 2,
+      "audioFile": "chinese_chpt3_2_phrases.mp3"
+    },
+    {
+      "id": "chinese_chpt3_2_dialogue",
+      "deckId": "chinese_chpt3_2",
+      "type": "dialogue",
+      "filename": "chinese_chpt3_2_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Chp 3 pt 2",
+      "sortOrder": 2,
+      "audioFile": "chinese_chpt3_2_dialogue.mp3"
+    },
+    {
+      "id": "chinese_chpt4_2_phrases",
+      "deckId": "chinese_chpt4_2",
+      "type": "phrases",
+      "filename": "chinese_chpt4_2_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Chp 4 pt 2",
+      "sortOrder": 3,
+      "audioFile": "chinese_chpt4_2_phrases.mp3"
+    },
+    {
+      "id": "chinese_chpt4_2_dialogue",
+      "deckId": "chinese_chpt4_2",
+      "type": "dialogue",
+      "filename": "chinese_chpt4_2_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Chp 4 pt 2",
+      "sortOrder": 3,
+      "audioFile": "chinese_chpt4_2_dialogue.mp3"
+    },
+    {
+      "id": "chinese_chpt5_2_phrases",
+      "deckId": "chinese_chpt5_2",
+      "type": "phrases",
+      "filename": "chinese_chpt5_2_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Chp 5 pt 2",
+      "sortOrder": 4,
+      "audioFile": "chinese_chpt5_2_phrases.mp3"
+    },
+    {
+      "id": "chinese_chpt5_2_dialogue",
+      "deckId": "chinese_chpt5_2",
+      "type": "dialogue",
+      "filename": "chinese_chpt5_2_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Chp 5 pt 2",
+      "sortOrder": 4,
+      "audioFile": "chinese_chpt5_2_dialogue.mp3"
+    },
+    {
+      "id": "chinese_chpt6_2_phrases",
+      "deckId": "chinese_chpt6_2",
+      "type": "phrases",
+      "filename": "chinese_chpt6_2_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Chp 6 pt 2",
+      "sortOrder": 5,
+      "audioFile": "chinese_chpt6_2_phrases.mp3"
+    },
+    {
+      "id": "chinese_chpt6_2_dialogue",
+      "deckId": "chinese_chpt6_2",
+      "type": "dialogue",
+      "filename": "chinese_chpt6_2_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Chp 6 pt 2",
+      "sortOrder": 5,
+      "audioFile": "chinese_chpt6_2_dialogue.mp3"
+    },
+    {
+      "id": "chinese_chpt7_2_phrases",
+      "deckId": "chinese_chpt7_2",
+      "type": "phrases",
+      "filename": "chinese_chpt7_2_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Chp 7 pt 2",
+      "sortOrder": 6,
+      "audioFile": "chinese_chpt7_2_phrases.mp3"
+    },
+    {
+      "id": "chinese_chpt7_2_dialogue",
+      "deckId": "chinese_chpt7_2",
+      "type": "dialogue",
+      "filename": "chinese_chpt7_2_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Chp 7 pt 2",
+      "sortOrder": 6,
+      "audioFile": "chinese_chpt7_2_dialogue.mp3"
+    },
+    {
+      "id": "chinese_chpt8_2_phrases",
+      "deckId": "chinese_chpt8_2",
+      "type": "phrases",
+      "filename": "chinese_chpt8_2_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Chp 8 pt 2",
+      "sortOrder": 7,
+      "audioFile": "chinese_chpt8_2_phrases.mp3"
+    },
+    {
+      "id": "chinese_chpt8_2_dialogue",
+      "deckId": "chinese_chpt8_2",
+      "type": "dialogue",
+      "filename": "chinese_chpt8_2_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Chp 8 pt 2",
+      "sortOrder": 7,
+      "audioFile": "chinese_chpt8_2_dialogue.mp3"
+    },
+    {
+      "id": "chinese_chpt9_2_phrases",
+      "deckId": "chinese_chpt9_2",
+      "type": "phrases",
+      "filename": "chinese_chpt9_2_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Chp 9 pt 2",
+      "sortOrder": 8,
+      "audioFile": "chinese_chpt9_2_phrases.mp3"
+    },
+    {
+      "id": "chinese_chpt9_2_dialogue",
+      "deckId": "chinese_chpt9_2",
+      "type": "dialogue",
+      "filename": "chinese_chpt9_2_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Chp 9 pt 2",
+      "sortOrder": 8,
+      "audioFile": "chinese_chpt9_2_dialogue.mp3"
+    },
+    {
+      "id": "chinese_chpt10_2_phrases",
+      "deckId": "chinese_chpt10_2",
+      "type": "phrases",
+      "filename": "chinese_chpt10_2_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Chp 10 pt 2",
+      "sortOrder": 9,
+      "audioFile": "chinese_chpt10_2_phrases.mp3"
+    },
+    {
+      "id": "chinese_chpt10_2_dialogue",
+      "deckId": "chinese_chpt10_2",
+      "type": "dialogue",
+      "filename": "chinese_chpt10_2_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Chp 10 pt 2",
+      "sortOrder": 9,
+      "audioFile": "chinese_chpt10_2_dialogue.mp3"
+    },
+    {
+      "id": "chinese_chpt11_1_phrases",
+      "deckId": "chinese_chpt11_1",
+      "type": "phrases",
+      "filename": "chinese_chpt11_1_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Chp 11 pt 1",
+      "sortOrder": 10,
+      "audioFile": "chinese_chpt11_1_phrases.mp3"
+    },
+    {
+      "id": "chinese_chpt11_1_dialogue",
+      "deckId": "chinese_chpt11_1",
+      "type": "dialogue",
+      "filename": "chinese_chpt11_1_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Chp 11 pt 1",
+      "sortOrder": 10,
+      "audioFile": "chinese_chpt11_1_dialogue.mp3"
+    },
+    {
+      "id": "chinese_chpt12_1_phrases",
+      "deckId": "chinese_chpt12_1",
+      "type": "phrases",
+      "filename": "chinese_chpt12_1_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Chp 12 pt 1",
+      "sortOrder": 11,
+      "audioFile": "chinese_chpt12_1_phrases.mp3"
+    },
+    {
+      "id": "chinese_chpt12_1_dialogue",
+      "deckId": "chinese_chpt12_1",
+      "type": "dialogue",
+      "filename": "chinese_chpt12_1_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Chp 12 pt 1",
+      "sortOrder": 11,
+      "audioFile": "chinese_chpt12_1_dialogue.mp3"
+    },
+    {
+      "id": "chinese_chpt13_1_phrases",
+      "deckId": "chinese_chpt13_1",
+      "type": "phrases",
+      "filename": "chinese_chpt13_1_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Chp 13 pt 1",
+      "sortOrder": 12,
+      "audioFile": "chinese_chpt13_1_phrases.mp3"
+    },
+    {
+      "id": "chinese_chpt13_1_dialogue",
+      "deckId": "chinese_chpt13_1",
+      "type": "dialogue",
+      "filename": "chinese_chpt13_1_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Chp 13 pt 1",
+      "sortOrder": 12,
+      "audioFile": "chinese_chpt13_1_dialogue.mp3"
+    },
+    {
+      "id": "chinese_common_review_1_phrases",
+      "deckId": "chinese_common_review_1",
+      "type": "phrases",
+      "filename": "chinese_common_review_1_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Living Review",
+      "sortOrder": 13,
+      "audioFile": "chinese_common_review_1_phrases.mp3"
+    },
+    {
+      "id": "chinese_common_review_1_dialogue",
+      "deckId": "chinese_common_review_1",
+      "type": "dialogue",
+      "filename": "chinese_common_review_1_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Living Review",
+      "sortOrder": 13,
+      "audioFile": "chinese_common_review_1_dialogue.mp3"
+    },
+    {
+      "id": "chinese_living_1_phrases",
+      "deckId": "chinese_living_1",
+      "type": "phrases",
+      "filename": "chinese_living_1_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Living",
+      "sortOrder": 14,
+      "audioFile": "chinese_living_1_phrases.mp3"
+    },
+    {
+      "id": "chinese_living_1_dialogue",
+      "deckId": "chinese_living_1",
+      "type": "dialogue",
+      "filename": "chinese_living_1_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Living",
+      "sortOrder": 14,
+      "audioFile": "chinese_living_1_dialogue.mp3"
+    },
+    {
+      "id": "chinese_review_1_phrases",
+      "deckId": "chinese_review_1",
+      "type": "phrases",
+      "filename": "chinese_review_1_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Travel Review",
+      "sortOrder": 15,
+      "audioFile": "chinese_review_1_phrases.mp3"
+    },
+    {
+      "id": "chinese_review_1_dialogue",
+      "deckId": "chinese_review_1",
+      "type": "dialogue",
+      "filename": "chinese_review_1_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Travel Review",
+      "sortOrder": 15,
+      "audioFile": "chinese_review_1_dialogue.mp3"
+    },
+    {
+      "id": "chinese_travel_1_phrases",
+      "deckId": "chinese_travel_1",
+      "type": "phrases",
+      "filename": "chinese_travel_1_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Travel",
+      "sortOrder": 16,
+      "audioFile": "chinese_travel_1_phrases.mp3"
+    },
+    {
+      "id": "chinese_travel_1_dialogue",
+      "deckId": "chinese_travel_1",
+      "type": "dialogue",
+      "filename": "chinese_travel_1_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Travel",
+      "sortOrder": 16,
+      "audioFile": "chinese_travel_1_dialogue.mp3"
+    }
+  ],
+  "generatedAt": "2026-04-25T09:00:37.422Z"
+}
