@@ -21,7 +21,7 @@
       "side_f": "example translation",
       "side_g": "usage notes"
     },
-    "card_count": 16,
+    "card_count": 18,
     "difficulty": "beginner",
     "tags": [
       "chinese",
@@ -242,6 +242,28 @@
       "side_c": "期待",
       "side_d": "verb",
       "side_e": "Wǒ hěn qīdài chī huǒguō! / 我很期待吃火锅！(I'm really excited for hot pot!)",
+      "level": 1
+    },
+    {
+      "card_id": "card-017",
+      "idx": 16,
+      "name": "dont_understand",
+      "side_a": "(I) don't understand (what was said); can't understand (when listening)",
+      "side_b": "tīng bù dǒng",
+      "side_c": "听不懂",
+      "side_d": "verb phrase",
+      "side_e": "Duìbuqǐ, wǒ tīng bù dǒng. / 对不起，我听不懂。(Sorry, I don't understand.)",
+      "level": 1
+    },
+    {
+      "card_id": "card-018",
+      "idx": 17,
+      "name": "how_much_money",
+      "side_a": "How much? How much money? (asking the price)",
+      "side_b": "duōshao qián",
+      "side_c": "多少钱",
+      "side_d": "question phrase",
+      "side_e": "Zhège duōshao qián? / 这个多少钱？(How much is this?)",
       "level": 1
     }
   ],
