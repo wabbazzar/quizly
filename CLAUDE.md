@@ -1288,6 +1288,7 @@ Only small preferences and sync config belong in localStorage.
 | `errorReports` | errorLogger | Recent error objects |
 | `quizly-pwa-heartbeat` | usePWAVisibility | Timestamp for iOS PWA termination detection |
 | `quizly-pwa-state` | usePWAVisibility | URL + scroll position for iOS PWA restore |
+| `quizly-last-route` | useLastRoutePersistence | Last visited route; restored on PWA cold-launch from `/` |
 | `settings-migration-version` | settingsStore | Migration tracking |
 
 ### Storage Rules

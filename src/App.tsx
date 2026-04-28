@@ -24,6 +24,16 @@ function App() {
     loadDecks();
   }, [loadDecks]);
 
+  // Ask the browser to persist storage so localStorage / IndexedDB aren't
+  // evicted under pressure — important for the "resume to last page" behavior
+  // and offline deck data.
+  useEffect(() => {
+    if (!navigator.storage?.persist) return;
+    navigator.storage.persist().catch(() => {
+      // Best-effort; ignore failures (e.g. permissions denied).
+    });
+  }, []);
+
   // NOTE: A previous version rendered a full-viewport RestorationOverlay while
   // usePWAVisibility().isRestoring was true, and remounted the whole router
   // tree via <AppRouter key={resumeCount} />. Both caused the "black screen

@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { PageLazyBoundary } from '@/components/common/LazyLoadBoundary';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
 import { AuthGuard } from '@/components/auth/AuthGuard';
+import { useLastRoutePersistence } from '@/hooks/useLastRoutePersistence';
 import AppErrorPage from '@/pages/AppErrorPage';
 import ErrorPage from '@/pages/ErrorPage';
 import {
@@ -26,6 +27,8 @@ import {
 
 export function AppRouter() {
   const location = useLocation();
+
+  useLastRoutePersistence();
 
   // Preload critical components on router initialization
   useEffect(() => {
