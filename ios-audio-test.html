@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iOS Audio+Mic Test</title>
+<style>
+  body { font-family: system-ui; max-width: 500px; margin: 20px auto; padding: 16px; background: #1a1a2e; color: #eee; }
+  button { background: #4a90e2; color: white; border: none; border-radius: 8px; padding: 14px 20px; font-size: 1rem; cursor: pointer; margin: 4px; width: 100%; min-height: 50px; }
+  button:disabled { background: #555; }
+  .pass { color: #10b981; } .fail { color: #ef4444; }
+  #log { font-family: monospace; font-size: 0.7rem; background: #0f0f23; padding: 10px; border-radius: 8px; max-height: 300px; overflow-y: auto; white-space: pre-wrap; margin-top: 12px; }
+  .section { background: #16213e; border-radius: 10px; padding: 14px; margin: 10px 0; }
+  h3 { margin: 0 0 8px 0; font-size: 0.95rem; color: #4a90e2; }
+</style>
+</head><body>
+<h2>iOS Audio + Mic Cycle Test</h2>
+<p style="font-size:0.8rem;color:#9ca3af;">Tests the exact handsfree cycle: play audio via Web Audio API, then record via MediaRecorder, repeat. This verifies mic works after audio playback on iOS Safari.</p>
+
+<div class="section">
+  <h3>Step 1: Init (tap to unlock audio + mic)</h3>
+  <button id="initBtn">Initialize Audio + Mic</button>
+  <div id="initStatus" style="font-size:0.8rem;margin-top:6px;"></div>
+</div>
+
+<div class="section">
+  <h3>Step 2: Run Cycle (play → record → play → record)</h3>
+  <button id="cycleBtn" disabled>Run 3 Play+Record Cycles</button>
+  <div id="cycleStatus" style="font-size:0.8rem;margin-top:6px;"></div>
+</div>
+
+<div id="log"></div>
+
+<script>
+let audioCtx, micStream;
+const AUDIO_URL = '/data/audio/words/chinese_chpt10_1_card0_side_a.mp3';
+const log = (msg) => { const el = document.getElementById('log'); el.textContent += msg + '\n'; el.scrollTop = el.scrollHeight; };
+
+// Step 1: Initialize
+document.getElementById('initBtn').onclick = async () => {
+  const status = document.getElementById('initStatus');
+  log('--- INIT ---');
+
+  // Create AudioContext
+  try {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') await audioCtx.resume();
+    // Play silent buffer to unlock
+    const buf = audioCtx.createBuffer(1, 1, 22050);
+    const src = audioCtx.createBufferSource();
+    src.buffer = buf;
+    src.connect(audioCtx.destination);
+    src.start(0);
+    log('AudioContext: OK (' + audioCtx.state + ', sampleRate=' + audioCtx.sampleRate + ')');
+  } catch (e) {
+    log('AudioContext FAILED: ' + e.message);
+    status.innerHTML = '<span class="fail">AudioContext failed</span>';
+    return;
+  }
+
+  // Get mic
+  try {
+    micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const tracks = micStream.getAudioTracks();
+    log('Mic: OK (' + tracks.length + ' tracks, ' + tracks[0].label + ', state=' + tracks[0].readyState + ')');
+  } catch (e) {
+    log('Mic FAILED: ' + e.message);
+    status.innerHTML = '<span class="fail">Mic failed: ' + e.message + '</span>';
+    return;
+  }
+
+  // Test: can we play audio?
+  try {
+    const resp = await fetch(AUDIO_URL);
+    log('Audio fetch: ' + resp.status + ' ' + resp.headers.get('content-type'));
+    const arrBuf = await resp.arrayBuffer();
+    const decoded = await audioCtx.decodeAudioData(arrBuf);
+    log('Audio decoded: ' + decoded.duration.toFixed(2) + 's, ' + decoded.sampleRate + 'Hz');
+    status.innerHTML = '<span class="pass">All OK - AudioContext + Mic + Audio file ready</span>';
+  } catch (e) {
+    log('Audio decode FAILED: ' + e.message);
+    status.innerHTML = '<span class="fail">Audio decode failed</span>';
+    return;
+  }
+
+  document.getElementById('cycleBtn').disabled = false;
+};
+
+// Step 2: Run play+record cycles
+document.getElementById('cycleBtn').onclick = async () => {
+  const status = document.getElementById('cycleStatus');
+  const btn = document.getElementById('cycleBtn');
+  btn.disabled = true;
+
+  for (let cycle = 1; cycle <= 3; cycle++) {
+    log('\n=== CYCLE ' + cycle + ' ===');
+    status.textContent = 'Cycle ' + cycle + '/3: Playing...';
+
+    // PLAY via Web Audio API
+    try {
+      const resp = await fetch(AUDIO_URL);
+      const arrBuf = await resp.arrayBuffer();
+      const decoded = await audioCtx.decodeAudioData(arrBuf);
+
+      await new Promise((resolve, reject) => {
+        const source = audioCtx.createBufferSource();
+        source.buffer = decoded;
+        source.connect(audioCtx.destination);
+        source.onended = resolve;
+        setTimeout(resolve, (decoded.duration + 1) * 1000); // safety
+        source.start(0);
+        log('  Playing audio (' + decoded.duration.toFixed(2) + 's)...');
+      });
+      log('  Play finished OK');
+    } catch (e) {
+      log('  Play FAILED: ' + e.message);
+      status.innerHTML = '<span class="fail">Cycle ' + cycle + ' play failed</span>';
+      btn.disabled = false;
+      return;
+    }
+
+    // Check mic stream is still alive
+    const tracks = micStream.getAudioTracks();
+    log('  Mic track state after play: ' + tracks[0].readyState);
+    if (tracks[0].readyState !== 'live') {
+      log('  MIC TRACK DIED after audio playback!');
+      status.innerHTML = '<span class="fail">Mic died after play in cycle ' + cycle + '</span>';
+
+      // Try to re-acquire
+      log('  Attempting to re-acquire mic...');
+      try {
+        micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        log('  Re-acquired mic: ' + micStream.getAudioTracks()[0].readyState);
+      } catch (e) {
+        log('  Re-acquire FAILED: ' + e.message);
+        btn.disabled = false;
+        return;
+      }
+    }
+
+    // RECORD via MediaRecorder
+    status.textContent = 'Cycle ' + cycle + '/3: Recording (2s)...';
+    try {
+      const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus') ? 'audio/webm;codecs=opus' :
+                        MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' :
+                        MediaRecorder.isTypeSupported('audio/mp4') ? 'audio/mp4' : '';
+
+      log('  MediaRecorder mimeType: ' + (mimeType || 'default'));
+
+      const recorderOpts = mimeType ? { mimeType } : undefined;
+      const recorder = new MediaRecorder(micStream, recorderOpts);
+      const chunks = [];
+
+      await new Promise((resolve, reject) => {
+        recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+        recorder.onstop = resolve;
+        recorder.onerror = (e) => reject(new Error('recorder error'));
+        recorder.start();
+        log('  Recording started (state=' + recorder.state + ')');
+        setTimeout(() => {
+          if (recorder.state === 'recording') recorder.stop();
+        }, 2000);
+      });
+
+      const blob = new Blob(chunks, { type: mimeType || 'audio/webm' });
+      log('  Recorded: ' + (blob.size / 1024).toFixed(1) + 'KB, type=' + blob.type);
+
+      if (blob.size < 100) {
+        log('  WARNING: Blob suspiciously small - mic may not be capturing');
+        status.innerHTML = '<span class="fail">Cycle ' + cycle + ': recording too small (' + blob.size + ' bytes)</span>';
+      }
+    } catch (e) {
+      log('  Record FAILED: ' + e.message);
+      status.innerHTML = '<span class="fail">Cycle ' + cycle + ' record failed: ' + e.message + '</span>';
+      btn.disabled = false;
+      return;
+    }
+  }
+
+  log('\n=== ALL 3 CYCLES PASSED ===');
+  status.innerHTML = '<span class="pass">All 3 play+record cycles succeeded!</span>';
+  btn.disabled = false;
+};
+</script>
+</body></html>
