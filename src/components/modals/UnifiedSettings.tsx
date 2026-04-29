@@ -1,4 +1,5 @@
 import { FC, memo, useState, useMemo, useEffect, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Deck, FlashcardsSettings, LearnModeSettings, ModeSettings, ReadModeSettings } from '@/types';
 import { MatchSettings as MatchSettingsType } from '@/components/modes/match/types';
@@ -401,7 +402,13 @@ export const UnifiedSettings: FC<UnifiedSettingsProps> = memo(
 
     if (!deck && mode !== 'deck') return null;
 
-    return (
+    // Portal to document.body so the modal escapes the host page's stacking
+    // context. The pages that show this modal (Flashcards, Match, Learn) wrap
+    // their content in a `position: fixed` container, which per CSS spec
+    // creates a stacking context with z-index auto. A modal rendered inline
+    // would therefore be trapped beneath any sibling stacking context with
+    // higher z-index — notably the persistent BottomNavBar (z-sticky=200).
+    return createPortal(
       <AnimatePresence>
         {visible && (
           <>
@@ -532,7 +539,8 @@ export const UnifiedSettings: FC<UnifiedSettingsProps> = memo(
             </motion.div>
           </>
         )}
-      </AnimatePresence>
+      </AnimatePresence>,
+      document.body
     );
   },
   arePropsEqual

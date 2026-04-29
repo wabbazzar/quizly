@@ -1,4 +1,5 @@
 import { FC, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './FlashcardsCompletionModal.module.css';
 
@@ -101,7 +102,10 @@ const FlashcardsCompletionModal: FC<FlashcardsCompletionModalProps> = ({
 
   if (!results) return null;
 
-  return (
+  // Portal so the modal escapes the Flashcards page's `position: fixed`
+  // container stacking context — otherwise the persistent BottomNavBar
+  // (z-sticky) sits above the modal at the click layer.
+  return createPortal(
     <AnimatePresence>
       {visible && (
         <>
@@ -207,7 +211,8 @@ const FlashcardsCompletionModal: FC<FlashcardsCompletionModalProps> = ({
           </motion.div>
         </>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 
