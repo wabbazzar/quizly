@@ -16,6 +16,9 @@
      on-screen even when iOS scrolls the visual viewport up to reveal a
      focused input — regardless of whether focus was user- or programmatic. */
   top: var(--kbd-viewport-t, 0px);
+  /* Reserve space for the persistent BottomNavBar so the centered question
+     flow (and submit/continue buttons) clears it on every viewport. */
+  padding-bottom: var(--bottom-nav-height);
 }
 
 /* Container is already a flex column, QuestionFlow handles centering */

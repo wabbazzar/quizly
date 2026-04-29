@@ -149,6 +149,12 @@
   --content-width-lg: 1024px;
   --content-width-xl: 1280px;
 
+  /* Bottom navigation reserved space — used by full-viewport mode pages
+     (Flashcards, Match, Learn, etc.) to keep their bottom controls clear of
+     the persistent BottomNavBar. The bar's visible button row is ~52px on
+     mobile (full-width) plus the iOS safe-area inset. */
+  --bottom-nav-height: calc(60px + env(safe-area-inset-bottom, 0px));
+
   /* Default theme colors (fallback for iOS PWA) */
   --bg-primary: var(--neutral-white);
   --bg-secondary: var(--neutral-gray-100);
@@ -191,5 +197,14 @@
     --text-tertiary: var(--neutral-gray-500);
     --text-primary-on-dark: var(--neutral-white);
     --border-color: var(--neutral-gray-200);
+  }
+}
+
+/* Desktop: BottomNavBar becomes a floating pill in the bottom-right corner
+   instead of a full-width strip, so mode-page bottom controls only need a
+   smaller fixed reservation (no safe-area inset on desktop). */
+@media (min-width: 768px) {
+  :root {
+    --bottom-nav-height: 80px;
   }
 }

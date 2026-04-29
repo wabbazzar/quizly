@@ -8,6 +8,9 @@
   overflow-x: hidden;
   overflow-y: visible;
   position: relative;
+  /* Reserve space for the persistent BottomNavBar so the centered grid
+     (absolutely positioned with inset: 0 in .gridContainer) clears it. */
+  padding-bottom: var(--bottom-nav-height);
 }
 
 /* Game Statistics Section */

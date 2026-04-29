@@ -9,6 +9,7 @@
   line-height: 1.55;
   position: relative;
   overflow-x: hidden;
+  padding-bottom: var(--bottom-nav-height);
 }
 
 /* Ambient glow behind hero */
@@ -480,14 +481,19 @@
     padding: 32px 20px 60px;
   }
   .hero {
-    padding: 32px 0 56px;
+    padding: 24px 0 32px;
   }
   .heroMascot {
-    height: 130px;
+    height: 120px;
+    margin-bottom: 12px;
   }
   .taglineSvg {
     max-width: 300px;
     max-height: 60px;
+    margin-bottom: 20px;
+  }
+  .heroLede {
+    margin-bottom: 24px;
   }
   .section {
     padding: 40px 0;
