@@ -21,7 +21,7 @@
       "side_f": "example translation",
       "side_g": "usage notes"
     },
-    "card_count": 15,
+    "card_count": 16,
     "difficulty": "beginner",
     "tags": [
       "chinese",
@@ -232,6 +232,19 @@
       "side_e": "Nǐ zuìjìn kàn shénme diànshìjù?",
       "side_f": "What TV show are you watching recently?",
       "side_g": "电视 means 'television' and 剧 means 'drama/play.' Chinese TV dramas (中国电视剧) are hugely popular. 美剧 (Měijù) means 'American TV show.' Great conversation topic: 你喜欢看什么电视剧？(What TV shows do you like watching?).",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "wont_forget",
+      "side_a": "I will not forget; I won't forget",
+      "side_b": "wǒ bú huì wàngjì",
+      "side_c": "我不会忘记",
+      "side_d": "phrase",
+      "side_e": "Wǒ bú huì wàngjì nǐ de shēngrì.",
+      "side_f": "I won't forget your birthday.",
+      "side_g": "不 (bù) negates and 会 (huì) signals future/ability, so 不会 = 'will not / won't.' 忘记 (wàngjì) = 'to forget' (忘 alone is also fine, slightly more colloquial: 我不会忘). Reassuring phrase between couples and friends. Opposite: 我忘了 (wǒ wàng le, 'I forgot'). For an even stronger promise: 我永远不会忘记 (wǒ yǒngyuǎn bú huì wàngjì, 'I will never forget').",
       "level": 1
     }
   ],
