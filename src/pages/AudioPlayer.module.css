@@ -54,9 +54,10 @@
   overflow: hidden;
 }
 
-/* Now Playing Section */
+/* Now Playing Section — sized to match the in-deck TranscriptModal player.
+   Both should look like the same component on different surfaces. */
 .nowPlaying {
-  padding: var(--space-6);
+  padding: var(--space-4);
   background: linear-gradient(135deg, rgba(74, 144, 226, 0.08), rgba(74, 144, 226, 0.03));
   border-bottom: 1px solid var(--border-color);
 }
@@ -65,18 +66,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-1);
-  margin-bottom: var(--space-5);
+  gap: 2px;
+  margin-bottom: var(--space-3);
 }
 
 .trackChapter {
-  font-size: var(--text-xl);
+  font-size: var(--text-base);
   font-weight: var(--font-semibold);
   color: var(--text-primary);
 }
 
 .trackType {
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
   color: var(--text-secondary);
   text-transform: capitalize;
 }
@@ -86,7 +87,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  margin-bottom: var(--space-5);
+  margin-bottom: var(--space-3);
 }
 
 .progressBar {
@@ -135,16 +136,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-4);
-  margin-bottom: var(--space-4);
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
 }
 
 .controlButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   background: transparent;
   border: none;
   border-radius: var(--radius-full);
@@ -167,15 +168,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 64px;
-  height: 64px;
+  width: 60px;
+  height: 60px;
   background: var(--primary-main);
   border: none;
   border-radius: var(--radius-full);
   color: white;
   cursor: pointer;
   transition: all var(--transition-fast);
-  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 }
 
 .playButton:hover {
@@ -187,16 +187,14 @@
   transform: scale(0.98);
 }
 
-/* Speed Control */
+/* Speed Control — match TranscriptModal: plain flex row, no card. */
 .speedControl {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-3);
-  padding: var(--space-3);
-  background: var(--bg-secondary);
-  border-radius: var(--radius-lg);
   position: relative;
+  width: 100%;
 }
 
 /* Repeat button — absolute-right so the speed control stays visually centered */
@@ -416,10 +414,44 @@
   font-size: var(--text-sm);
 }
 
-/* Desktop styles */
+/* Mobile shrink — mirror TranscriptModal's mobile media query so the
+   control band stays compact on small viewports. */
+@media (max-width: 640px) {
+  .nowPlaying {
+    padding: var(--space-3);
+  }
+
+  .controls {
+    gap: var(--space-1);
+  }
+
+  .controlButton {
+    width: 36px;
+    height: 36px;
+  }
+
+  .playButton {
+    width: 52px;
+    height: 52px;
+  }
+
+  .speedBtn {
+    width: 28px;
+    height: 28px;
+    font-size: var(--text-base);
+  }
+
+  .speedSlider {
+    width: 60px;
+  }
+}
+
+/* Desktop styles — keep the player at the same compact dimensions used
+   in the in-deck TranscriptModal. The track list section is the only
+   thing that gets a max-width treatment, since it flows into the page. */
 @media (min-width: 768px) {
   .header {
-    padding: var(--space-6);
+    padding: var(--space-4) var(--space-6);
   }
 
   .title {
@@ -427,47 +459,26 @@
   }
 
   .nowPlaying {
-    padding: var(--space-8);
-  }
-
-  .trackInfo {
-    margin-bottom: var(--space-6);
-  }
-
-  .trackChapter {
-    font-size: var(--text-2xl);
+    padding: var(--space-5) var(--space-6);
   }
 
   .progressContainer {
-    margin-bottom: var(--space-6);
-    max-width: 500px;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: var(--space-3);
   }
 
   .controls {
-    gap: var(--space-6);
-    margin-bottom: var(--space-5);
-  }
-
-  .controlButton {
-    width: 56px;
-    height: 56px;
-  }
-
-  .playButton {
-    width: 72px;
-    height: 72px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: var(--space-3);
   }
 
   .speedControl {
     max-width: 400px;
     margin: 0 auto;
-    gap: var(--space-3);
-  }
-
-  .speedSlider {
-    width: 100px;
   }
 
   .trackList {
@@ -501,10 +512,6 @@
   .progressBar,
   .speedSlider {
     background: rgba(75, 85, 99, 0.5);
-  }
-
-  .speedControl {
-    background: rgba(55, 65, 81, 0.5);
   }
 
   .speedBtn {
