@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAudioRecorder } from './useAudioRecorder';
 import { useAudioComparison } from './useAudioComparison';
-import { playSound } from '@/utils/soundUtils';
+import { playSound, warmupSounds } from '@/utils/soundUtils';
 import {
   type Sensitivity,
   SENSITIVITY_THRESHOLDS,
@@ -119,6 +119,11 @@ export function useHandsfreeMode({
         src.start(0);
       } catch { /* ignore */ }
       recorder.warmup();
+      // Resume the soundManager's separate AudioContext too. iOS Safari
+      // suspends idle contexts whenever another one (ours, here) takes the
+      // audio session, which used to silence the success/failure beeps
+      // played after a comparison.
+      warmupSounds();
     } else {
       recorder.release();
     }

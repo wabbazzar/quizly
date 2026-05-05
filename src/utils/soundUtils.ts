@@ -162,10 +162,17 @@ class SoundManager {
       // Create audio context with user gesture handling
       this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
 
-      // Handle browser autoplay policies
+      // Handle browser autoplay policies. The previous version registered
+      // these listeners with `{ once: true }`, so after the first user
+      // gesture they were torn down. iOS Safari can resuspend the context
+      // when another AudioContext (e.g. the one handsfree mode creates and
+      // closes per session) takes the audio session — once that happens,
+      // the success/failure beeps stop playing because we synthesize into
+      // a suspended context. Keep the listeners alive so the context can
+      // be resumed again the next time the user taps.
       if (this.audioContext.state === 'suspended') {
-        document.addEventListener('click', this.resumeAudioContext.bind(this), { once: true });
-        document.addEventListener('touchstart', this.resumeAudioContext.bind(this), { once: true });
+        document.addEventListener('click', this.boundResume);
+        document.addEventListener('touchstart', this.boundResume);
       }
     } catch (error) {
       console.warn('Audio context initialization failed:', error);
@@ -173,15 +180,28 @@ class SoundManager {
     }
   }
 
+  private readonly boundResume = (): void => {
+    void this.resumeAudioContext();
+  };
+
   private async resumeAudioContext(): Promise<void> {
     if (this.audioContext && this.audioContext.state === 'suspended') {
       try {
         await this.audioContext.resume();
-        console.log('Audio context resumed');
       } catch (error) {
         console.warn('Failed to resume audio context:', error);
       }
     }
+  }
+
+  /**
+   * Resume the audio context inside an active user gesture. Call this from
+   * an event handler (e.g. when the user enables handsfree mode) so iOS
+   * Safari can't trap the success/failure beeps in a suspended context
+   * later, when playSound is invoked after the gesture has elapsed.
+   */
+  warmup(): void {
+    void this.resumeAudioContext();
   }
 
   /**
@@ -204,6 +224,23 @@ class SoundManager {
   async playSound(soundEffect: SoundEffect, volumeMultiplier = 1): Promise<void> {
     if (!this.settings.enabled || !this.settings.soundEffects || !this.audioContext) {
       return;
+    }
+
+    // Recover from a context that got resuspended (iOS Safari does this
+    // after another AudioContext takes the audio session — exactly what
+    // happens when handsfree mode opens/closes its own context per
+    // session). Without this, synthesizeAndPlay runs into a suspended
+    // context and the beep is silent. The resume call only succeeds if
+    // we're still in a user gesture, but playSound is invoked from event
+    // handlers / state transitions that ride a recent gesture, so it
+    // usually does. If it fails we fall through and try to play anyway —
+    // worst case is the original silent failure.
+    if (this.audioContext.state === 'suspended') {
+      try {
+        await this.audioContext.resume();
+      } catch {
+        /* fall through */
+      }
     }
 
     try {
@@ -400,6 +437,9 @@ const soundManager = new SoundManager();
 // Export convenience functions
 export const playSound = (effect: SoundEffect, volume = 1) =>
   soundManager.playSound(effect, volume);
+
+/** Resume the sound manager's audio context inside a user gesture. */
+export const warmupSounds = (): void => soundManager.warmup();
 
 export const playMatchSuccess = (intensity = 1) =>
   soundManager.playMatchSuccess(intensity);
