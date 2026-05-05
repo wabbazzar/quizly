@@ -7,7 +7,12 @@ export interface SharedModeHeaderProps {
   deckName: string;
   currentCard: number;
   totalCards: number;
-  onBackClick: () => void;
+  /**
+   * If omitted, the back button slot is rendered empty. Used by top-level
+   * destinations reached via the bottom-nav (e.g. the Audio page), where
+   * "back" has no meaningful target.
+   */
+  onBackClick?: () => void;
   onSettingsClick?: () => void;
   showSettings?: boolean;
   subtitle?: string;
@@ -28,10 +33,12 @@ export const SharedModeHeader: FC<SharedModeHeaderProps> = memo(
     return (
       <header className={`${styles.header} ${className || ''}`}>
         <div className={styles.headerLeft}>
-          <button onClick={onBackClick} className={styles.backButton} aria-label="Go back">
-            <ArrowLeftIcon size={20} />
-            <span className={styles.backLabel}>Back</span>
-          </button>
+          {onBackClick && (
+            <button onClick={onBackClick} className={styles.backButton} aria-label="Go back">
+              <ArrowLeftIcon size={20} />
+              <span className={styles.backLabel}>Back</span>
+            </button>
+          )}
         </div>
 
         <div className={styles.headerCenter}>

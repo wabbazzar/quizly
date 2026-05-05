@@ -1,50 +1,19 @@
+/* Pin to viewport bounds so iOS Safari can't body-scroll the page —
+   the SharedModeHeader and nowPlaying section must stay visible while
+   only the track list scrolls. min-height: 100vh on its own does not
+   prevent the master scroll on iOS standalone PWA. */
 .container {
+  position: fixed;
+  top: var(--kbd-viewport-t, 0px);
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  max-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
   background: var(--bg-primary);
   overflow: hidden;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--space-4);
-  padding-top: calc(var(--space-4) + env(safe-area-inset-top, 0px));
-  background: linear-gradient(135deg, rgba(74, 144, 226, 0.08), rgba(74, 144, 226, 0.03));
-  border-bottom: 1px solid var(--border-color);
-}
-
-.backButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: transparent;
-  border: none;
-  border-radius: var(--radius-lg);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.backButton:hover {
-  background: var(--bg-primary-alpha-10);
-  color: var(--primary-main);
-}
-
-.title {
-  font-size: var(--text-lg);
-  font-weight: var(--font-semibold);
-  color: var(--text-primary);
-  margin: 0;
-}
-
-.headerSpacer {
-  width: 40px;
 }
 
 .content {
@@ -52,11 +21,14 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  min-height: 0;
 }
 
 /* Now Playing Section — sized to match the in-deck TranscriptModal player.
-   Both should look like the same component on different surfaces. */
+   Both should look like the same component on different surfaces.
+   `flex-shrink: 0` keeps it from compressing when the track list grows. */
 .nowPlaying {
+  flex-shrink: 0;
   padding: var(--space-4);
   background: linear-gradient(135deg, rgba(74, 144, 226, 0.08), rgba(74, 144, 226, 0.03));
   border-bottom: 1px solid var(--border-color);
@@ -298,9 +270,13 @@
 /* Track List */
 .trackList {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding: var(--space-4);
-  padding-bottom: calc(var(--space-4) + 72px + env(safe-area-inset-bottom, 0px));
+  /* Reserve space for the persistent BottomNavBar (the only thing below
+     us in the page-level layout). */
+  padding-bottom: calc(var(--space-4) + var(--bottom-nav-height));
 }
 
 .trackListTitle {

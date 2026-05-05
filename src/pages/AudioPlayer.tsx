@@ -1,5 +1,4 @@
 import { FC, useEffect, useRef, useCallback, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   useAudioPlayerStore,
   transformManifestToTracks,
@@ -14,13 +13,12 @@ import {
   NextTrackIcon,
   RepeatIcon,
 } from '@/components/icons/ModeIcons';
-import { ArrowLeftIcon } from '@/components/icons/NavigationIcons';
+import { SharedModeHeader } from '@/components/common/SharedModeHeader';
 import styles from './AudioPlayer.module.css';
 
 const BASE_URL = import.meta.env.BASE_URL || '/';
 
 const AudioPlayer: FC = () => {
-  const navigate = useNavigate();
   const {
     tracks,
     setTracks,
@@ -276,17 +274,11 @@ const AudioPlayer: FC = () => {
 
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <button
-          className={styles.backButton}
-          onClick={() => navigate(-1)}
-          aria-label="Go back"
-        >
-          <ArrowLeftIcon size={24} />
-        </button>
-        <h1 className={styles.title}>Audio Player</h1>
-        <div className={styles.headerSpacer} />
-      </header>
+      <SharedModeHeader
+        deckName="All Tracks"
+        currentCard={tracks.length === 0 ? 0 : currentTrackIndex + 1}
+        totalCards={tracks.length}
+      />
 
       <div className={styles.content}>
         {/* Now Playing */}
