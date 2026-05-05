@@ -1,5 +1,5 @@
 /**
- * Audio comparison utilities using MFCC extraction + DTW.
+ * Audio comparison utilities using MFCC extraction + band-constrained DTW.
  * Compares a user's recorded audio against a reference MP3 to determine
  * if they said the same word/phrase.
  *
@@ -7,12 +7,16 @@
  *   1. Extract MFCCs c2-c12 (drop c0 energy + c1 pitch-sensitive)
  *   2. Apply mean normalization per utterance
  *   3. Multi-pitch comparison: try [-8..+8] semitone offsets, take minimum DTW
- *   4. Threshold: normalized distance < 20 = match
+ *   4. Sakoe-Chiba band (15% of frames) — prevents DTW from warping
+ *      unrelated audio into spurious alignment, which is the main source
+ *      of false positives in the unconstrained version.
+ *   5. Threshold: normalized distance < MATCH_THRESHOLD = pass
  *
- * Calibrated via synthetic pitch/speed variations across 8 cards:
- *   Same-word variations max: 16.7 (with multi-pitch)
- *   Different-word min: 22.3
- *   Gap: +5.6
+ * Calibrated via `scripts/audio-compare-bench.mjs` against:
+ *   - 360 synthetic positives (24 cards × 15 pitch/speed/octave variations)
+ *   - 1500 cross-card adversarial pairs sampled from 540+ Chinese references
+ *   AUC = 0.999, EER threshold = 16.2, T@5%FPR = 21.1
+ *   Threshold 20 = ~T@2%FPR with TPR ≈ 99% on synthetic positives.
  */
 
 const FFT_SIZE = 512;
@@ -25,8 +29,22 @@ const ENERGY_FLOOR = 0.005;
 /** Pitch offsets (in semitones) to try when comparing */
 const PITCH_OFFSETS = [-8, -6, -4, -2, 0, 2, 4, 6, 8];
 
-/** Normalized DTW distance below this = pass */
-export const MATCH_THRESHOLD = 30;
+/**
+ * Sakoe-Chiba band as a fraction of max(refFrames, userFrames). Lower =
+ * stricter. 0.15 ≈ ±15% timing slack — enough for natural speed variation
+ * but tight enough to stop unrelated audio from aligning end-to-end.
+ */
+const DTW_BAND_RATIO = 0.15;
+const DTW_BAND_MIN_WIDTH = 8;
+
+/**
+ * Normalized DTW distance below this = pass.
+ * Tuned against the full 540+ reference pool (see header comment). The
+ * previous value (30) sat above the negative distribution's p50 — i.e. it
+ * was looser than coin-flip on real wrong words. 20 lands between the
+ * synthetic-positive p95 (~13) and the adversarial-negative p5 (~21).
+ */
+export const MATCH_THRESHOLD = 20;
 
 // ============================================================
 // FFT (Cooley-Tukey radix-2, in-place)
@@ -212,19 +230,30 @@ function euclideanDist(a: number[], b: number[]): number {
 }
 
 /**
- * Compute DTW distance between two MFCC frame sequences.
- * Uses 2-row memory optimization.
+ * Compute Sakoe-Chiba band-constrained DTW distance between two MFCC
+ * sequences. The band width is `max(DTW_BAND_MIN_WIDTH, ratio * max(n,m))`,
+ * which prevents the warp path from straying far from the diagonal.
+ *
+ * Without a band, unconstrained DTW will happily align two unrelated
+ * recordings by warping one segment onto the other; the band stops that.
  */
-export function dtwDistance(s: MFCCFrames, t: MFCCFrames): number {
+export function dtwDistance(s: MFCCFrames, t: MFCCFrames, bandRatio = DTW_BAND_RATIO): number {
   const n = s.length;
   const m = t.length;
+  if (n === 0 || m === 0) return Infinity;
+  const band = Math.max(DTW_BAND_MIN_WIDTH, Math.floor(bandRatio * Math.max(n, m)));
+
   let prev = new Float64Array(m + 1).fill(Infinity);
   let curr = new Float64Array(m + 1).fill(Infinity);
   prev[0] = 0;
 
   for (let i = 1; i <= n; i++) {
     curr[0] = Infinity;
-    for (let j = 1; j <= m; j++) {
+    // Only update cells within the diagonal band — i maps to j ≈ i*m/n.
+    const ji = (i * m) / n;
+    const jLo = Math.max(1, Math.floor(ji - band));
+    const jHi = Math.min(m, Math.ceil(ji + band));
+    for (let j = jLo; j <= jHi; j++) {
       const cost = euclideanDist(s[i - 1], t[j - 1]);
       curr[j] = cost + Math.min(prev[j], curr[j - 1], prev[j - 1]);
     }
