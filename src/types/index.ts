@@ -175,6 +175,13 @@ export interface FlashcardsSettings extends ModeSettings {
   handsfreeMode?: boolean;
   handsfreePlaybackOnIncorrect?: boolean;
   handsfreeRetries?: number;
+  /**
+   * How forgiving the pronunciation matcher is.
+   * - strict   ≈ threshold 22 (best discrimination, may reject correct answers spoken in noisy mic / strong accent)
+   * - normal   ≈ threshold 26 (default; balanced for typical mic + voice)
+   * - lenient  ≈ threshold 30 (closest to legacy behavior; passes most real attempts but lets some wrong answers through)
+   */
+  handsfreeSensitivity?: 'strict' | 'normal' | 'lenient';
 }
 
 // Learn Mode Specific Types

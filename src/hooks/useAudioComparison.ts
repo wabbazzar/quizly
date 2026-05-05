@@ -8,8 +8,9 @@ import {
 } from '../utils/audioComparisonUtils';
 
 interface UseAudioComparisonReturn {
-  /** Compare a recorded blob against a reference audio URL */
-  compare: (userBlob: Blob, referenceUrl: string) => Promise<ComparisonResult | null>;
+  /** Compare a recorded blob against a reference audio URL.
+   *  Pass `threshold` to override the default match cutoff. */
+  compare: (userBlob: Blob, referenceUrl: string, threshold?: number) => Promise<ComparisonResult | null>;
   /** Whether comparison is in progress */
   isComparing: boolean;
   /** Last comparison result */
@@ -56,7 +57,7 @@ export function useAudioComparison(): UseAudioComparisonReturn {
     await getReferenceMFCC(url);
   }, [getReferenceMFCC]);
 
-  const compare = useCallback(async (userBlob: Blob, referenceUrl: string): Promise<ComparisonResult | null> => {
+  const compare = useCallback(async (userBlob: Blob, referenceUrl: string, threshold?: number): Promise<ComparisonResult | null> => {
     setIsComparing(true);
     setResult(null);
     try {
@@ -72,7 +73,7 @@ export function useAudioComparison(): UseAudioComparisonReturn {
       const refMFCC = await getReferenceMFCC(referenceUrl);
 
       // Multi-pitch comparison: compareMFCC tries several pitch offsets internally
-      const compResult = compareMFCC(refMFCC, userSamples);
+      const compResult = compareMFCC(refMFCC, userSamples, threshold);
       setResult(compResult);
       return compResult;
     } catch (e) {

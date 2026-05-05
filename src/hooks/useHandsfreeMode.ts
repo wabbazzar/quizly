@@ -2,6 +2,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAudioRecorder } from './useAudioRecorder';
 import { useAudioComparison } from './useAudioComparison';
 import { playSound } from '@/utils/soundUtils';
+import {
+  type Sensitivity,
+  SENSITIVITY_THRESHOLDS,
+  DEFAULT_SENSITIVITY,
+} from '@/utils/audioComparisonUtils';
 import type { Card } from '@/types';
 
 export type HandsfreeState =
@@ -22,6 +27,8 @@ interface UseHandsfreeModeOptions {
   backSides: string[];
   playbackOnIncorrect?: boolean;
   maxRetries?: number;
+  /** Pronunciation matcher strictness; defaults to `normal`. */
+  sensitivity?: Sensitivity;
   onCorrect: () => void;
   onIncorrect: () => void;
 }
@@ -49,6 +56,7 @@ export function useHandsfreeMode({
   backSides,
   playbackOnIncorrect = true,
   maxRetries = 1,
+  sensitivity = DEFAULT_SENSITIVITY,
   onCorrect,
   onIncorrect,
 }: UseHandsfreeModeOptions): UseHandsfreeModeReturn {
@@ -78,6 +86,8 @@ export function useHandsfreeMode({
   playbackOnIncorrectRef.current = playbackOnIncorrect;
   const maxRetriesRef = useRef(maxRetries);
   maxRetriesRef.current = maxRetries;
+  const sensitivityRef = useRef(sensitivity);
+  sensitivityRef.current = sensitivity;
 
   // --- Shared AudioContext for playback ---
   // Using Web Audio API instead of HTMLAudioElement to avoid iOS Safari's
@@ -288,7 +298,8 @@ export function useHandsfreeMode({
 
     setState('evaluating');
 
-    comparison.compare(blob, refUrl).then(result => {
+    const threshold = SENSITIVITY_THRESHOLDS[sensitivityRef.current];
+    comparison.compare(blob, refUrl, threshold).then(result => {
       if (!result) {
         playSound('match_failure');
         setIsCorrect(false);

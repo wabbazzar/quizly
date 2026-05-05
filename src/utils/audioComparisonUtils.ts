@@ -39,12 +39,29 @@ const DTW_BAND_MIN_WIDTH = 8;
 
 /**
  * Normalized DTW distance below this = pass.
- * Tuned against the full 540+ reference pool (see header comment). The
- * previous value (30) sat above the negative distribution's p50 — i.e. it
- * was looser than coin-flip on real wrong words. 20 lands between the
- * synthetic-positive p95 (~13) and the adversarial-negative p5 (~21).
+ *
+ * Three calibrated levels are exposed via `Sensitivity` so the user can
+ * tune for their own mic/voice/accent. The bench (`audio-compare-bench.mjs`)
+ * is run against synthetic positives (pitch/speed-shifted reference audio)
+ * which are easier than real human voice — real recordings tend to score
+ * 5-10 points higher than the synthetic equivalents. The middle level
+ * absorbs that shift.
+ *
+ *   strict   22 (≈ T@5%FPR on synthetic; rejects most wrong answers but may
+ *               also reject borderline-correct attempts)
+ *   normal   26 (default; lands in the human-voice overlap window)
+ *   lenient  30 (closest to legacy behavior; passes most real attempts but
+ *               lets some wrong answers through)
  */
-export const MATCH_THRESHOLD = 20;
+export type Sensitivity = 'strict' | 'normal' | 'lenient';
+export const SENSITIVITY_THRESHOLDS: Record<Sensitivity, number> = {
+  strict: 22,
+  normal: 26,
+  lenient: 30,
+};
+export const DEFAULT_SENSITIVITY: Sensitivity = 'normal';
+/** Back-compat constant for callers that just want the default. */
+export const MATCH_THRESHOLD = SENSITIVITY_THRESHOLDS[DEFAULT_SENSITIVITY];
 
 // ============================================================
 // FFT (Cooley-Tukey radix-2, in-place)
@@ -284,8 +301,10 @@ export interface ComparisonResult {
  * Compare user audio against reference MFCC using multi-pitch DTW.
  * Tries several pitch offsets on the user audio and returns the best match.
  * Returns null if either input has 0 frames (silence).
+ *
+ * Pass `threshold` to override the match cutoff (defaults to MATCH_THRESHOLD).
  */
-export function compareMFCC(refMFCC: MFCCFrames, userSamples: Float32Array): ComparisonResult | null {
+export function compareMFCC(refMFCC: MFCCFrames, userSamples: Float32Array, threshold: number = MATCH_THRESHOLD): ComparisonResult | null {
   if (refMFCC.length === 0) return null;
 
   let bestDist = Infinity;
@@ -312,7 +331,7 @@ export function compareMFCC(refMFCC: MFCCFrames, userSamples: Float32Array): Com
   return {
     rawDistance: bestRaw,
     normalizedDistance: bestDist,
-    isMatch: bestDist < MATCH_THRESHOLD,
+    isMatch: bestDist < threshold,
     refFrames: refMFCC.length,
     userFrames: bestFrames,
   };

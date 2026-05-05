@@ -79,6 +79,23 @@ const HandsfreeSettings: FC<SectionProps> = ({ settings, onChange }) => {
               <option value={3}>3 retries</option>
             </select>
           </div>
+
+          <div className={styles.settingRow}>
+            <span className={styles.settingLabel}>Match sensitivity</span>
+            <select
+              value={settings.handsfreeSensitivity ?? 'normal'}
+              onChange={e => onChange('handsfreeSensitivity', e.target.value)}
+              className={styles.select}
+            >
+              <option value="strict">Strict — fewer false passes</option>
+              <option value="normal">Normal (default)</option>
+              <option value="lenient">Lenient — easier to pass</option>
+            </select>
+          </div>
+          <div className={styles.description}>
+            If correct answers are getting marked wrong, switch to Lenient.
+            If wrong answers are getting through, switch to Strict.
+          </div>
         </div>
       )}
     </div>

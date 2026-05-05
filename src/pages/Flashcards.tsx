@@ -51,6 +51,8 @@ const Flashcards: FC = () => {
   const [handsfreeActive, setHandsfreeActive] = useState(false);
   const [handsfreePlaybackOnIncorrect, setHandsfreePlaybackOnIncorrect] = useState(true);
   const [handsfreeRetries, setHandsfreeRetries] = useState(1);
+  const [handsfreeSensitivity, setHandsfreeSensitivity] =
+    useState<'strict' | 'normal' | 'lenient'>('normal');
 
   // Load handsfree settings from persisted store after hydration
   const handsfreeInitRef = useRef(false);
@@ -61,6 +63,7 @@ const Flashcards: FC = () => {
     if (stored?.handsfreeMode) setHandsfreeActive(true);
     if (stored?.handsfreePlaybackOnIncorrect !== undefined) setHandsfreePlaybackOnIncorrect(stored.handsfreePlaybackOnIncorrect);
     if (stored?.handsfreeRetries !== undefined) setHandsfreeRetries(stored.handsfreeRetries);
+    if (stored?.handsfreeSensitivity) setHandsfreeSensitivity(stored.handsfreeSensitivity);
   }, [deckId, getSettingsForMode]);
 
   // Load deck and restore session on mount
@@ -362,6 +365,7 @@ const Flashcards: FC = () => {
     backSides,
     playbackOnIncorrect: handsfreePlaybackOnIncorrect,
     maxRetries: handsfreeRetries,
+    sensitivity: handsfreeSensitivity,
     onCorrect: handleHandsfreeCorrect,
     onIncorrect: handleHandsfreeIncorrect,
   });
@@ -458,6 +462,9 @@ const Flashcards: FC = () => {
       }
       if (settings.handsfreeRetries !== undefined) {
         setHandsfreeRetries(settings.handsfreeRetries);
+      }
+      if (settings.handsfreeSensitivity) {
+        setHandsfreeSensitivity(settings.handsfreeSensitivity);
       }
 
       setFrontSides(newFrontSides);
@@ -777,6 +784,7 @@ const Flashcards: FC = () => {
             handsfreeMode: handsfreeActive,
             handsfreePlaybackOnIncorrect,
             handsfreeRetries,
+            handsfreeSensitivity,
           } as FlashcardsSettings
         }
         onUpdateSettings={(newSettings) => {
