@@ -1,9 +1,12 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { usePwaStore } from '@/store/pwaStore';
 import styles from './About.module.css';
 
 const About: FC = () => {
   const navigate = useNavigate();
+  const forceHardRefresh = usePwaStore(s => s.forceHardRefresh);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -271,7 +274,22 @@ const About: FC = () => {
             Wesley Beckner
           </a>
         </div>
-        <div>quizly.me</div>
+        <div className={styles.footerActions}>
+          <button
+            type="button"
+            className={styles.forceRefreshLink}
+            onClick={() => {
+              if (isRefreshing) return;
+              setIsRefreshing(true);
+              forceHardRefresh();
+            }}
+            disabled={isRefreshing}
+            aria-label="Force refresh the app — clears cache and reloads"
+          >
+            {isRefreshing ? 'refreshing…' : 'force refresh'}
+          </button>
+          <span>quizly.me</span>
+        </div>
       </footer>
     </div>
   );

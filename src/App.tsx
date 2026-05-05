@@ -4,6 +4,7 @@ import { AppRouter } from './router/AppRouter';
 import { useDeckStore } from './store/deckStore';
 import { useSyncStore, initSyncPullHandler } from './store/syncStore';
 import Notification from './components/common/Notification';
+import { PWAUpdateBanner } from './components/common/PWAUpdateBanner';
 import { BottomNavBar } from './components/navigation/BottomNavBar';
 
 // Register sync pull handler once at module load
@@ -56,6 +57,7 @@ function App() {
   return (
     <BrowserRouter basename={basename}>
       <Notification />
+      <PWAUpdateBanner />
       <AppRouter />
       <BottomNavBar />
     </BrowserRouter>

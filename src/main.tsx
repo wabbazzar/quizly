@@ -4,40 +4,78 @@ import App from './App';
 import './styles/global.css';
 import './styles/theme.css';
 import { registerSW } from 'virtual:pwa-register';
+import { usePwaStore } from './store/pwaStore';
 
-// Register service worker for PWA support with Vite PWA plugin.
-//
-// IMPORTANT: do NOT call updateSW(true) anywhere in the success path and do
-// NOT show a confirm() that can bounce the page. The previous version used
-// registerType:'autoUpdate' which, via workbox-window, calls
-// window.location.reload() the moment a new SW activates. That is what
-// produced the "page loads, then reloads after 1-2s" symptom the user sees
-// on every visit after a deploy. With registerType:'prompt' and skipWaiting
-// disabled in the workbox config, the new SW installs silently and waits;
-// it only takes effect on the next natural navigation, never mid-session.
-registerSW({
+// PWA update flow, modeled on Shredly's:
+//   1. registerType is 'prompt' + workbox skipWaiting:false, so the new SW
+//      installs and parks in the waiting state — no mid-session takeover.
+//   2. We capture the `updateSW` function the plugin returns and stash it
+//      in `pwaStore` so the rest of the app (UI banner, settings page,
+//      auto-apply effect below) can call it on demand.
+//   3. When `onNeedRefresh` fires (= a new SW is waiting), we flip the
+//      store flag rather than no-op-ing. That bug — the no-op — is what
+//      caused the user to "have to reinstall the PWA" to get updates.
+//   4. Background→foreground auto-apply: if the user is away from the tab
+//      for >30s and an update is waiting, we silently call updateSW(true)
+//      before they come back. The reload happens while the tab is hidden,
+//      and `useLastRoutePersistence` puts them back on their last route.
+const updateSW = registerSW({
   immediate: true,
   onNeedRefresh() {
-    // Intentionally a no-op: new content is cached, but we don't interrupt
-    // the user. They will get the update on their next full page load.
+    usePwaStore.getState().setUpdateAvailable(true);
   },
   onOfflineReady() {
-    // App is ready to work offline
+    // App is ready to work offline.
   },
   onRegisteredSW(_swScriptUrl, registration) {
-    // Check for updates periodically, but never force a reload here.
-    if (registration) {
-      setInterval(
-        () => {
-          registration.update();
-        },
-        60 * 60 * 1000
-      ); // Check every hour
+    if (!registration) return;
+    usePwaStore.getState().setRegistration(registration);
+
+    // Periodic check (every 30 min).
+    setInterval(() => {
+      registration.update().catch(() => {});
+    }, 30 * 60 * 1000);
+
+    // Also check when the page is brought back into focus — covers the
+    // common case of the user backgrounding the PWA for a while.
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        registration.update().catch(() => {});
+      }
+    });
+
+    // Already-waiting worker (the page loaded after install completed).
+    if (registration.waiting) {
+      usePwaStore.getState().setUpdateAvailable(true);
     }
   },
-  onRegisterError(_error) {
-    // Service Worker registration error
+  onRegisterError(error) {
+    console.error('[pwa] SW registration failed:', error);
   },
+});
+
+usePwaStore.getState().setUpdateSW(updateSW);
+
+// Background→foreground silent auto-apply.
+let lastHiddenAt: number | null = null;
+const BACKGROUND_THRESHOLD_MS = 30_000; // user truly left the tab
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') {
+    lastHiddenAt = Date.now();
+  } else if (document.visibilityState === 'visible') {
+    const { updateAvailable, applyUpdate } = usePwaStore.getState();
+    if (
+      updateAvailable &&
+      lastHiddenAt &&
+      Date.now() - lastHiddenAt >= BACKGROUND_THRESHOLD_MS
+    ) {
+      // User was away long enough that a reload won't feel like a glitch —
+      // and `quizly-last-route` will land them back on whatever page they
+      // were viewing.
+      applyUpdate();
+    }
+    lastHiddenAt = null;
+  }
 });
 
 // iOS PWA specific handling - minimal event handling here since usePWAVisibility handles most lifecycle

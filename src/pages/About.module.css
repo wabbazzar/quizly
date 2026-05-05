@@ -441,6 +441,33 @@
   color: #f5f5f7;
 }
 
+.footerActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.forceRefreshLink {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: #6e7180;
+  text-decoration: underline;
+  text-decoration-color: rgba(110, 113, 128, 0.3);
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.forceRefreshLink:hover:not(:disabled) {
+  color: #f5f5f7;
+  text-decoration-color: rgba(245, 245, 247, 0.6);
+}
+.forceRefreshLink:disabled {
+  opacity: 0.5;
+  cursor: progress;
+}
+
 /* ── Animations ────────────────────────────── */
 
 @keyframes fadeRise {
