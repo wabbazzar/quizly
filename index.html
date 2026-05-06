@@ -15,8 +15,12 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="48x48" href="./icons/favicon-48x48.png" />
 
-    <!-- PWA -->
+    <!-- PWA — apple-touch-icon-precomposed is also required: iOS Safari's
+         share-sheet preview implicitly probes /apple-touch-icon-precomposed.png
+         even when the regular link is declared, and falls back to a generic
+         icon in iMessage previews if it 404s. -->
     <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="./icons/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Quizly" />
@@ -31,14 +35,27 @@
     <meta name="msapplication-TileColor" content="#4A90E2" />
     <meta name="msapplication-TileImage" content="./icons/mstile-144x144.png" />
 
-    <!-- Open Graph / Social Media -->
+    <!-- Open Graph / Social Media — absolute URLs required (iMessage and other
+         link scrapers don't resolve relative paths). -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://quizly.me/" />
     <meta property="og:title" content="Quizly - Flashcard Learning" />
     <meta
       property="og:description"
       content="Master your learning with interactive flashcards and multiple study modes"
     />
-    <meta property="og:image" content="./icons/icon-512x512.png" />
+    <meta property="og:image" content="https://quizly.me/icons/share-card-512.png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+
+    <!-- Twitter / iMessage compact card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Quizly - Flashcard Learning" />
+    <meta
+      name="twitter:description"
+      content="Master your learning with interactive flashcards and multiple study modes"
+    />
+    <meta name="twitter:image" content="https://quizly.me/icons/share-card-512.png" />
 
     <title>Quizly - Flashcard Learning</title>
     <!-- Fonts: Rounded sans to complement SVG without cursive -->

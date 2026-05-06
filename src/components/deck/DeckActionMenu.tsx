@@ -12,6 +12,9 @@ interface DeckActionMenuProps {
  * Hierarchical action menu for deck management.
  * Single trigger button opens a dropdown with organized actions.
  */
+const SHARE_URL = 'https://quizly.me';
+const SHARE_TITLE = 'Quizly';
+
 export const DeckActionMenu: FC<DeckActionMenuProps> = ({
   onNewDeck,
   onImport,
@@ -19,7 +22,9 @@ export const DeckActionMenu: FC<DeckActionMenuProps> = ({
   onManageOffline,
 }) => {
   const [open, setOpen] = useState(false);
+  const [shareCopied, setShareCopied] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const copiedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Close on outside click
   useEffect(() => {
@@ -46,6 +51,35 @@ export const DeckActionMenu: FC<DeckActionMenuProps> = ({
   const handleAction = useCallback((action: () => void) => {
     setOpen(false);
     action();
+  }, []);
+
+  // Clear the "Link copied!" timer if the menu unmounts mid-flash.
+  useEffect(() => {
+    return () => {
+      if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current);
+    };
+  }, []);
+
+  const handleShare = useCallback(async () => {
+    if (typeof navigator !== 'undefined' && 'share' in navigator) {
+      try {
+        // No `text` field — the URL's og:description carries the pitch;
+        // adding text makes iMessage / share sheets repeat the same copy twice.
+        await navigator.share({ title: SHARE_TITLE, url: SHARE_URL });
+        setOpen(false);
+        return;
+      } catch {
+        // user cancelled or share failed — fall through to clipboard
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(SHARE_URL);
+      setShareCopied(true);
+      if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current);
+      copiedTimerRef.current = setTimeout(() => setShareCopied(false), 2000);
+    } catch {
+      window.prompt('Copy link to Quizly:', SHARE_URL);
+    }
   }, []);
 
   return (
@@ -124,6 +158,25 @@ export const DeckActionMenu: FC<DeckActionMenuProps> = ({
                 Offline Storage
               </button>
             )}
+          </div>
+          <div className={styles.divider} />
+          <div className={styles.section}>
+            <span className={styles.sectionLabel}>Share</span>
+            <button
+              className={styles.item}
+              onClick={handleShare}
+              role="menuitem"
+              type="button"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="18" cy="5" r="3" />
+                <circle cx="6" cy="12" r="3" />
+                <circle cx="18" cy="19" r="3" />
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+              </svg>
+              {shareCopied ? 'Link copied!' : 'Share Quizly'}
+            </button>
           </div>
         </div>
       )}
