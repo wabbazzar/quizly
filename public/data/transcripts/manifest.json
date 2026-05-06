@@ -261,6 +261,46 @@
       "audioFile": "chinese_chpt13_1_dialogue.mp3"
     },
     {
+      "id": "chinese_chpt14_1_phrases",
+      "deckId": "chinese_chpt14_1",
+      "type": "phrases",
+      "filename": "chinese_chpt14_1_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Chp 14 pt 1",
+      "sortOrder": 13,
+      "audioFile": "chinese_chpt14_1_phrases.mp3"
+    },
+    {
+      "id": "chinese_chpt14_1_dialogue",
+      "deckId": "chinese_chpt14_1",
+      "type": "dialogue",
+      "filename": "chinese_chpt14_1_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Chp 14 pt 1",
+      "sortOrder": 13,
+      "audioFile": "chinese_chpt14_1_dialogue.mp3"
+    },
+    {
+      "id": "chinese_chpt14_2_phrases",
+      "deckId": "chinese_chpt14_2",
+      "type": "phrases",
+      "filename": "chinese_chpt14_2_phrases.txt",
+      "displayName": "Phrases",
+      "displayTitle": "Chp 14 pt 2",
+      "sortOrder": 14,
+      "audioFile": "chinese_chpt14_2_phrases.mp3"
+    },
+    {
+      "id": "chinese_chpt14_2_dialogue",
+      "deckId": "chinese_chpt14_2",
+      "type": "dialogue",
+      "filename": "chinese_chpt14_2_dialogue.txt",
+      "displayName": "Dialogue",
+      "displayTitle": "Chp 14 pt 2",
+      "sortOrder": 14,
+      "audioFile": "chinese_chpt14_2_dialogue.mp3"
+    },
+    {
       "id": "chinese_common_review_1_phrases",
       "deckId": "chinese_common_review_1",
       "type": "phrases",
@@ -341,5 +381,5 @@
       "audioFile": "chinese_travel_1_dialogue.mp3"
     }
   ],
-  "generatedAt": "2026-04-23T08:40:25.218Z"
+  "generatedAt": "2026-05-05T21:56:31.868Z"
 }

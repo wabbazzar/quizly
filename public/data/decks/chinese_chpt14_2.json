@@ -338,5 +338,917 @@
       "side_g": "汤姆 is the standard Chinese transliteration of 'Tom' — 汤 (tāng, soup) + 姆 (mǔ, used in foreign-name transliterations). In the textbook, 汤姆 is Helen's young son (Wang Peng's biǎojiě's son). The character 姆 appears in many female-coded transliterations like 玛姆 / 阿姆.",
       "level": 1
     }
-  ]
+  ],
+  "reading": {
+    "sides": {
+      "a": "characters",
+      "b": "pinyin",
+      "c": "english"
+    },
+    "tokenization": {
+      "unit": {
+        "a": "character",
+        "b": "space",
+        "c": "space"
+      },
+      "preservePunctuation": true,
+      "alignment": "index"
+    },
+    "practice": {
+      "dialogue_001": {
+        "title": "Attending the Birthday Party",
+        "description": "Textbook Dialogue II: Wang Peng and Li You arrive at Gao Xiaoyin's birthday party",
+        "lines": [
+          {
+            "a": "王朋，李友，快进来。",
+            "b": "Wáng Péng, Lǐ Yǒu, kuài jìn lai.",
+            "c": "Wang Peng, Li You, come in quickly.",
+            "wordAlignments": [
+              { "chinese": "王朋", "pinyin": "Wáng Péng", "english": "Wang Peng" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "李友", "pinyin": "Lǐ Yǒu", "english": "Li You" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "快", "pinyin": "kuài", "english": "quickly" },
+              { "chinese": "进来", "pinyin": "jìn lai", "english": "come in" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "小音，祝你生日快乐！这是送给你的生日礼物。",
+            "b": "Xiǎoyīn, zhù nǐ shēngrì kuàilè! Zhè shì sòng gěi nǐ de shēngrì lǐwù.",
+            "c": "Xiaoyin, happy birthday! This is a birthday gift for you.",
+            "wordAlignments": [
+              { "chinese": "小音", "pinyin": "Xiǎoyīn", "english": "Xiaoyin" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "祝", "pinyin": "zhù", "english": "wish" },
+              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
+              { "chinese": "生日", "pinyin": "shēngrì", "english": "birthday" },
+              { "chinese": "快乐", "pinyin": "kuàilè", "english": "happy" },
+              { "chinese": "！", "pinyin": "!", "english": "!" },
+              { "chinese": "这", "pinyin": "Zhè", "english": "this" },
+              { "chinese": "是", "pinyin": "shì", "english": "is" },
+              { "chinese": "送给", "pinyin": "sòng gěi", "english": "given to" },
+              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "生日", "pinyin": "shēngrì", "english": "birthday" },
+              { "chinese": "礼物", "pinyin": "lǐwù", "english": "gift" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "谢谢！太好了！我一直想买这本书。带这么多东西，你们太客气了。",
+            "b": "Xièxiè! Tài hǎo le! Wǒ yìzhí xiǎng mǎi zhè běn shū. Dài zhème duō dōngxi, nǐmen tài kèqi le.",
+            "c": "Thank you! That's wonderful! I've been wanting to buy this book. Bringing so many things — you're too polite.",
+            "wordAlignments": [
+              { "chinese": "谢谢", "pinyin": "Xièxiè", "english": "Thank you" },
+              { "chinese": "！", "pinyin": "!", "english": "!" },
+              { "chinese": "太", "pinyin": "Tài", "english": "so" },
+              { "chinese": "好", "pinyin": "hǎo", "english": "wonderful" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "！", "pinyin": "!", "english": "!" },
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "一直", "pinyin": "yìzhí", "english": "have been" },
+              { "chinese": "想", "pinyin": "xiǎng", "english": "wanting to" },
+              { "chinese": "买", "pinyin": "mǎi", "english": "buy" },
+              { "chinese": "这", "pinyin": "zhè", "english": "this" },
+              { "chinese": "本", "pinyin": "běn", "english": "" },
+              { "chinese": "书", "pinyin": "shū", "english": "book" },
+              { "chinese": "。", "pinyin": ".", "english": "." },
+              { "chinese": "带", "pinyin": "Dài", "english": "Bringing" },
+              { "chinese": "这么", "pinyin": "zhème", "english": "so" },
+              { "chinese": "多", "pinyin": "duō", "english": "many" },
+              { "chinese": "东西", "pinyin": "dōngxi", "english": "things" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "你们", "pinyin": "nǐmen", "english": "you" },
+              { "chinese": "太", "pinyin": "tài", "english": "too" },
+              { "chinese": "客气", "pinyin": "kèqi", "english": "polite" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "哥哥，李友，你们来了。",
+            "b": "Gēge, Lǐ Yǒu, nǐmen lái le.",
+            "c": "Big brother, Li You, you're here.",
+            "wordAlignments": [
+              { "chinese": "哥哥", "pinyin": "Gēge", "english": "Big brother" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "李友", "pinyin": "Lǐ Yǒu", "english": "Li You" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "你们", "pinyin": "nǐmen", "english": "you" },
+              { "chinese": "来", "pinyin": "lái", "english": "are here" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "啊。小红，你怎么样？",
+            "b": "À. Xiǎo Hóng, nǐ zěnmeyàng?",
+            "c": "Oh. Xiao Hong, how are you?",
+            "wordAlignments": [
+              { "chinese": "啊", "pinyin": "À", "english": "Oh" },
+              { "chinese": "。", "pinyin": ".", "english": "." },
+              { "chinese": "小红", "pinyin": "Xiǎo Hóng", "english": "Xiao Hong" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
+              { "chinese": "怎么样", "pinyin": "zěnmeyàng", "english": "how are" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "我很好。每天都在学英文。",
+            "b": "Wǒ hěn hǎo. Měitiān dōu zài xué Yīngwén.",
+            "c": "I'm fine. Every day I'm studying English.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "很", "pinyin": "hěn", "english": "am" },
+              { "chinese": "好", "pinyin": "hǎo", "english": "fine" },
+              { "chinese": "。", "pinyin": ".", "english": "." },
+              { "chinese": "每天", "pinyin": "Měitiān", "english": "every day" },
+              { "chinese": "都", "pinyin": "dōu", "english": "" },
+              { "chinese": "在", "pinyin": "zài", "english": "am" },
+              { "chinese": "学", "pinyin": "xué", "english": "studying" },
+              { "chinese": "英文", "pinyin": "Yīngwén", "english": "English" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "小红，你每天练习英文练习多长时间？",
+            "b": "Xiǎo Hóng, nǐ měitiān liànxí Yīngwén liànxí duō cháng shíjiān?",
+            "c": "Xiao Hong, how long do you practice English every day?",
+            "wordAlignments": [
+              { "chinese": "小红", "pinyin": "Xiǎo Hóng", "english": "Xiao Hong" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
+              { "chinese": "每天", "pinyin": "měitiān", "english": "every day" },
+              { "chinese": "练习", "pinyin": "liànxí", "english": "practice" },
+              { "chinese": "英文", "pinyin": "Yīngwén", "english": "English" },
+              { "chinese": "练习", "pinyin": "liànxí", "english": "practice" },
+              { "chinese": "多", "pinyin": "duō", "english": "how" },
+              { "chinese": "长", "pinyin": "cháng", "english": "long" },
+              { "chinese": "时间", "pinyin": "shíjiān", "english": "time" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "三个半钟头。还看两个钟头的英文电视。",
+            "b": "Sān ge bàn zhōngtóu. Hái kàn liǎng ge zhōngtóu de Yīngwén diànshì.",
+            "c": "Three and a half hours. I also watch two hours of English TV.",
+            "wordAlignments": [
+              { "chinese": "三", "pinyin": "Sān", "english": "Three" },
+              { "chinese": "个", "pinyin": "ge", "english": "" },
+              { "chinese": "半", "pinyin": "bàn", "english": "and a half" },
+              { "chinese": "钟头", "pinyin": "zhōngtóu", "english": "hours" },
+              { "chinese": "。", "pinyin": ".", "english": "." },
+              { "chinese": "还", "pinyin": "Hái", "english": "also" },
+              { "chinese": "看", "pinyin": "kàn", "english": "watch" },
+              { "chinese": "两", "pinyin": "liǎng", "english": "two" },
+              { "chinese": "个", "pinyin": "ge", "english": "" },
+              { "chinese": "钟头", "pinyin": "zhōngtóu", "english": "hours" },
+              { "chinese": "的", "pinyin": "de", "english": "of" },
+              { "chinese": "英文", "pinyin": "Yīngwén", "english": "English" },
+              { "chinese": "电视", "pinyin": "diànshì", "english": "TV" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "哎，你们两个是什么时候到的？",
+            "b": "Āi, nǐmen liǎng ge shì shénme shíhou dào de?",
+            "c": "Hey, when did you two arrive?",
+            "wordAlignments": [
+              { "chinese": "哎", "pinyin": "Āi", "english": "Hey" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "你们", "pinyin": "nǐmen", "english": "you" },
+              { "chinese": "两", "pinyin": "liǎng", "english": "two" },
+              { "chinese": "个", "pinyin": "ge", "english": "" },
+              { "chinese": "是", "pinyin": "shì", "english": "" },
+              { "chinese": "什么", "pinyin": "shénme", "english": "what" },
+              { "chinese": "时候", "pinyin": "shíhou", "english": "time" },
+              { "chinese": "到", "pinyin": "dào", "english": "arrive" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "刚到。",
+            "b": "Gāng dào.",
+            "c": "Just arrived.",
+            "wordAlignments": [
+              { "chinese": "刚", "pinyin": "Gāng", "english": "Just" },
+              { "chinese": "到", "pinyin": "dào", "english": "arrived" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "白英爱没跟你们一起来吗？",
+            "b": "Bái Yīng'ài méi gēn nǐmen yìqǐ lái ma?",
+            "c": "Didn't Bai Ying'ai come with you?",
+            "wordAlignments": [
+              { "chinese": "白英爱", "pinyin": "Bái Yīng'ài", "english": "Bai Ying'ai" },
+              { "chinese": "没", "pinyin": "méi", "english": "didn't" },
+              { "chinese": "跟", "pinyin": "gēn", "english": "with" },
+              { "chinese": "你们", "pinyin": "nǐmen", "english": "you" },
+              { "chinese": "一起", "pinyin": "yìqǐ", "english": "together" },
+              { "chinese": "来", "pinyin": "lái", "english": "come" },
+              { "chinese": "吗", "pinyin": "ma", "english": "" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "她还没来？我以为她已经来了。",
+            "b": "Tā hái méi lái? Wǒ yǐwéi tā yǐjīng lái le.",
+            "c": "She hasn't come yet? I thought she had already arrived.",
+            "wordAlignments": [
+              { "chinese": "她", "pinyin": "Tā", "english": "She" },
+              { "chinese": "还", "pinyin": "hái", "english": "still" },
+              { "chinese": "没", "pinyin": "méi", "english": "hasn't" },
+              { "chinese": "来", "pinyin": "lái", "english": "come" },
+              { "chinese": "？", "pinyin": "?", "english": "?" },
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "以为", "pinyin": "yǐwéi", "english": "thought" },
+              { "chinese": "她", "pinyin": "tā", "english": "she" },
+              { "chinese": "已经", "pinyin": "yǐjīng", "english": "already" },
+              { "chinese": "来", "pinyin": "lái", "english": "arrived" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "王朋，李友，来，我给你们介绍一下，这是我表姐海伦，这是她的儿子汤姆。",
+            "b": "Wáng Péng, Lǐ Yǒu, lái, wǒ gěi nǐmen jièshào yí xià, zhè shì wǒ biǎojiě Hǎilún, zhè shì tā de érzi Tāngmǔ.",
+            "c": "Wang Peng, Li You, come, let me introduce you. This is my older cousin Helen, and this is her son Tom.",
+            "wordAlignments": [
+              { "chinese": "王朋", "pinyin": "Wáng Péng", "english": "Wang Peng" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "李友", "pinyin": "Lǐ Yǒu", "english": "Li You" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "来", "pinyin": "lái", "english": "come" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "我", "pinyin": "wǒ", "english": "let me" },
+              { "chinese": "给", "pinyin": "gěi", "english": "" },
+              { "chinese": "你们", "pinyin": "nǐmen", "english": "you" },
+              { "chinese": "介绍", "pinyin": "jièshào", "english": "introduce" },
+              { "chinese": "一下", "pinyin": "yí xià", "english": "" },
+              { "chinese": "，", "pinyin": ",", "english": "." },
+              { "chinese": "这", "pinyin": "zhè", "english": "this" },
+              { "chinese": "是", "pinyin": "shì", "english": "is" },
+              { "chinese": "我", "pinyin": "wǒ", "english": "my" },
+              { "chinese": "表姐", "pinyin": "biǎojiě", "english": "older cousin" },
+              { "chinese": "海伦", "pinyin": "Hǎilún", "english": "Helen" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "这", "pinyin": "zhè", "english": "this" },
+              { "chinese": "是", "pinyin": "shì", "english": "is" },
+              { "chinese": "她", "pinyin": "tā", "english": "her" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "儿子", "pinyin": "érzi", "english": "son" },
+              { "chinese": "汤姆", "pinyin": "Tāngmǔ", "english": "Tom" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "你好，海伦。",
+            "b": "Nǐ hǎo, Hǎilún.",
+            "c": "Hello, Helen.",
+            "wordAlignments": [
+              { "chinese": "你好", "pinyin": "Nǐ hǎo", "english": "Hello" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "海伦", "pinyin": "Hǎilún", "english": "Helen" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "你好，王朋。文中和小音都说你又聪明又用功。",
+            "b": "Nǐ hǎo, Wáng Péng. Wénzhōng hé Xiǎoyīn dōu shuō nǐ yòu cōngming yòu yònggōng.",
+            "c": "Hello, Wang Peng. Wenzhong and Xiaoyin both say you are both smart and hardworking.",
+            "wordAlignments": [
+              { "chinese": "你好", "pinyin": "Nǐ hǎo", "english": "Hello" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "王朋", "pinyin": "Wáng Péng", "english": "Wang Peng" },
+              { "chinese": "。", "pinyin": ".", "english": "." },
+              { "chinese": "文中", "pinyin": "Wénzhōng", "english": "Wenzhong" },
+              { "chinese": "和", "pinyin": "hé", "english": "and" },
+              { "chinese": "小音", "pinyin": "Xiǎoyīn", "english": "Xiaoyin" },
+              { "chinese": "都", "pinyin": "dōu", "english": "both" },
+              { "chinese": "说", "pinyin": "shuō", "english": "say" },
+              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
+              { "chinese": "又", "pinyin": "yòu", "english": "are both" },
+              { "chinese": "聪明", "pinyin": "cōngming", "english": "smart" },
+              { "chinese": "又", "pinyin": "yòu", "english": "and" },
+              { "chinese": "用功", "pinyin": "yònggōng", "english": "hardworking" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "哪里，哪里。你的中文说得真好，是在哪儿学的？",
+            "b": "Nǎli, nǎli. Nǐ de Zhōngwén shuō de zhēn hǎo, shì zài nǎr xué de?",
+            "c": "You flatter me. Your Chinese is really good — where did you learn it?",
+            "wordAlignments": [
+              { "chinese": "哪里", "pinyin": "Nǎli", "english": "You flatter me" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "哪里", "pinyin": "nǎli", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." },
+              { "chinese": "你", "pinyin": "Nǐ", "english": "your" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "中文", "pinyin": "Zhōngwén", "english": "Chinese" },
+              { "chinese": "说", "pinyin": "shuō", "english": "speak" },
+              { "chinese": "得", "pinyin": "de", "english": "" },
+              { "chinese": "真", "pinyin": "zhēn", "english": "really" },
+              { "chinese": "好", "pinyin": "hǎo", "english": "well" },
+              { "chinese": "，", "pinyin": ",", "english": "—" },
+              { "chinese": "是", "pinyin": "shì", "english": "" },
+              { "chinese": "在", "pinyin": "zài", "english": "at" },
+              { "chinese": "哪儿", "pinyin": "nǎr", "english": "where" },
+              { "chinese": "学", "pinyin": "xué", "english": "did learn" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "在暑期班学的。",
+            "b": "Zài shǔqī bān xué de.",
+            "c": "I learned it in summer school.",
+            "wordAlignments": [
+              { "chinese": "在", "pinyin": "Zài", "english": "in" },
+              { "chinese": "暑期", "pinyin": "shǔqī", "english": "summer" },
+              { "chinese": "班", "pinyin": "bān", "english": "class" },
+              { "chinese": "学", "pinyin": "xué", "english": "learned" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "哎，汤姆长得真可爱！你们看，他笑了。他几岁了？",
+            "b": "Āi, Tāngmǔ zhǎng de zhēn kě'ài! Nǐmen kàn, tā xiào le. Tā jǐ suì le?",
+            "c": "Oh, Tom looks really cute! Look — he's smiling. How old is he?",
+            "wordAlignments": [
+              { "chinese": "哎", "pinyin": "Āi", "english": "Oh" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "汤姆", "pinyin": "Tāngmǔ", "english": "Tom" },
+              { "chinese": "长", "pinyin": "zhǎng", "english": "looks" },
+              { "chinese": "得", "pinyin": "de", "english": "" },
+              { "chinese": "真", "pinyin": "zhēn", "english": "really" },
+              { "chinese": "可爱", "pinyin": "kě'ài", "english": "cute" },
+              { "chinese": "！", "pinyin": "!", "english": "!" },
+              { "chinese": "你们", "pinyin": "Nǐmen", "english": "you (pl.)" },
+              { "chinese": "看", "pinyin": "kàn", "english": "look" },
+              { "chinese": "，", "pinyin": ",", "english": "—" },
+              { "chinese": "他", "pinyin": "tā", "english": "he" },
+              { "chinese": "笑", "pinyin": "xiào", "english": "is smiling" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." },
+              { "chinese": "他", "pinyin": "Tā", "english": "he" },
+              { "chinese": "几", "pinyin": "jǐ", "english": "how" },
+              { "chinese": "岁", "pinyin": "suì", "english": "old" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "刚一岁，是去年生的，属狗。",
+            "b": "Gāng yí suì, shì qùnián shēng de, shǔ gǒu.",
+            "c": "Just one year old. He was born last year — he's a Dog (zodiac).",
+            "wordAlignments": [
+              { "chinese": "刚", "pinyin": "Gāng", "english": "Just" },
+              { "chinese": "一", "pinyin": "yí", "english": "one" },
+              { "chinese": "岁", "pinyin": "suì", "english": "year old" },
+              { "chinese": "，", "pinyin": ",", "english": "." },
+              { "chinese": "是", "pinyin": "shì", "english": "" },
+              { "chinese": "去年", "pinyin": "qùnián", "english": "last year" },
+              { "chinese": "生", "pinyin": "shēng", "english": "was born" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "，", "pinyin": ",", "english": "—" },
+              { "chinese": "属", "pinyin": "shǔ", "english": "born in the year of" },
+              { "chinese": "狗", "pinyin": "gǒu", "english": "Dog" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "你们看，他的脸圆圆的，眼睛大大的，鼻子高高的，嘴不大也不小，长得很像海伦。",
+            "b": "Nǐmen kàn, tā de liǎn yuán yuán de, yǎnjing dà dà de, bízi gāo gāo de, zuǐ bú dà yě bù xiǎo, zhǎng de hěn xiàng Hǎilún.",
+            "c": "Look, his face is round, his eyes are big, his nose is high, his mouth is neither big nor small — he really looks like Helen.",
+            "wordAlignments": [
+              { "chinese": "你们", "pinyin": "Nǐmen", "english": "you" },
+              { "chinese": "看", "pinyin": "kàn", "english": "look" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "他", "pinyin": "tā", "english": "his" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "脸", "pinyin": "liǎn", "english": "face" },
+              { "chinese": "圆圆的", "pinyin": "yuán yuán de", "english": "is round" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "眼睛", "pinyin": "yǎnjing", "english": "eyes" },
+              { "chinese": "大大的", "pinyin": "dà dà de", "english": "are big" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "鼻子", "pinyin": "bízi", "english": "nose" },
+              { "chinese": "高高的", "pinyin": "gāo gāo de", "english": "is high" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "嘴", "pinyin": "zuǐ", "english": "mouth" },
+              { "chinese": "不", "pinyin": "bú", "english": "is neither" },
+              { "chinese": "大", "pinyin": "dà", "english": "big" },
+              { "chinese": "也", "pinyin": "yě", "english": "nor" },
+              { "chinese": "不", "pinyin": "bù", "english": "" },
+              { "chinese": "小", "pinyin": "xiǎo", "english": "small" },
+              { "chinese": "，", "pinyin": ",", "english": "—" },
+              { "chinese": "长", "pinyin": "zhǎng", "english": "looks" },
+              { "chinese": "得", "pinyin": "de", "english": "" },
+              { "chinese": "很", "pinyin": "hěn", "english": "really" },
+              { "chinese": "像", "pinyin": "xiàng", "english": "like" },
+              { "chinese": "海伦", "pinyin": "Hǎilún", "english": "Helen" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "妈妈这么漂亮，儿子长大一定也很帅。",
+            "b": "Māma zhème piàoliang, érzi zhǎng dà yídìng yě hěn shuài.",
+            "c": "With such a pretty mom, when the son grows up he will definitely be handsome too.",
+            "wordAlignments": [
+              { "chinese": "妈妈", "pinyin": "Māma", "english": "Mom" },
+              { "chinese": "这么", "pinyin": "zhème", "english": "so" },
+              { "chinese": "漂亮", "pinyin": "piàoliang", "english": "pretty" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "儿子", "pinyin": "érzi", "english": "the son" },
+              { "chinese": "长大", "pinyin": "zhǎng dà", "english": "grows up" },
+              { "chinese": "一定", "pinyin": "yídìng", "english": "definitely" },
+              { "chinese": "也", "pinyin": "yě", "english": "also" },
+              { "chinese": "很", "pinyin": "hěn", "english": "very" },
+              { "chinese": "帅", "pinyin": "shuài", "english": "handsome" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "来，来，来，我们吃蛋糕吧。",
+            "b": "Lái, lái, lái, wǒmen chī dàngāo ba.",
+            "c": "Come on, come on, let's eat cake.",
+            "wordAlignments": [
+              { "chinese": "来", "pinyin": "Lái", "english": "Come on" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "来", "pinyin": "lái", "english": "come on" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "来", "pinyin": "lái", "english": "come on" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "我们", "pinyin": "wǒmen", "english": "let's" },
+              { "chinese": "吃", "pinyin": "chī", "english": "eat" },
+              { "chinese": "蛋糕", "pinyin": "dàngāo", "english": "cake" },
+              { "chinese": "吧", "pinyin": "ba", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "等等白英爱吧。她最爱吃蛋糕。",
+            "b": "Děng děng Bái Yīng'ài ba. Tā zuì ài chī dàngāo.",
+            "c": "Let's wait for Bai Ying'ai. She loves cake the most.",
+            "wordAlignments": [
+              { "chinese": "等等", "pinyin": "Děng děng", "english": "Wait for" },
+              { "chinese": "白英爱", "pinyin": "Bái Yīng'ài", "english": "Bai Ying'ai" },
+              { "chinese": "吧", "pinyin": "ba", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." },
+              { "chinese": "她", "pinyin": "Tā", "english": "She" },
+              { "chinese": "最", "pinyin": "zuì", "english": "the most" },
+              { "chinese": "爱", "pinyin": "ài", "english": "loves" },
+              { "chinese": "吃", "pinyin": "chī", "english": "to eat" },
+              { "chinese": "蛋糕", "pinyin": "dàngāo", "english": "cake" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          }
+        ]
+      },
+      "dialogue_002": {
+        "title": "Talking About Zodiac Signs",
+        "description": "A small-talk exchange about Chinese zodiac years and ages",
+        "lines": [
+          {
+            "a": "小红，你属什么？",
+            "b": "Xiǎo Hóng, nǐ shǔ shénme?",
+            "c": "Xiao Hong, what's your zodiac sign?",
+            "wordAlignments": [
+              { "chinese": "小红", "pinyin": "Xiǎo Hóng", "english": "Xiao Hong" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "你", "pinyin": "nǐ", "english": "your" },
+              { "chinese": "属", "pinyin": "shǔ", "english": "zodiac sign" },
+              { "chinese": "什么", "pinyin": "shénme", "english": "what" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "我属狗，是去年生的吗？不，我已经十几岁了。",
+            "b": "Wǒ shǔ gǒu, shì qùnián shēng de ma? Bù, wǒ yǐjīng shí jǐ suì le.",
+            "c": "I'm a Dog. Was I born last year? No, I'm already in my teens.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "属", "pinyin": "shǔ", "english": "am born in the year of" },
+              { "chinese": "狗", "pinyin": "gǒu", "english": "Dog" },
+              { "chinese": "，", "pinyin": ",", "english": "." },
+              { "chinese": "是", "pinyin": "shì", "english": "" },
+              { "chinese": "去年", "pinyin": "qùnián", "english": "last year" },
+              { "chinese": "生", "pinyin": "shēng", "english": "was born" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "吗", "pinyin": "ma", "english": "" },
+              { "chinese": "？", "pinyin": "?", "english": "?" },
+              { "chinese": "不", "pinyin": "Bù", "english": "No" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "我", "pinyin": "wǒ", "english": "I" },
+              { "chinese": "已经", "pinyin": "yǐjīng", "english": "already" },
+              { "chinese": "十", "pinyin": "shí", "english": "am in my" },
+              { "chinese": "几", "pinyin": "jǐ", "english": "teens" },
+              { "chinese": "岁", "pinyin": "suì", "english": "" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "你又聪明又用功，长大一定很帅。",
+            "b": "Nǐ yòu cōngming yòu yònggōng, zhǎng dà yídìng hěn shuài.",
+            "c": "You're both smart and hardworking — you'll definitely be handsome when you grow up.",
+            "wordAlignments": [
+              { "chinese": "你", "pinyin": "Nǐ", "english": "You" },
+              { "chinese": "又", "pinyin": "yòu", "english": "are both" },
+              { "chinese": "聪明", "pinyin": "cōngming", "english": "smart" },
+              { "chinese": "又", "pinyin": "yòu", "english": "and" },
+              { "chinese": "用功", "pinyin": "yònggōng", "english": "hardworking" },
+              { "chinese": "，", "pinyin": ",", "english": "—" },
+              { "chinese": "长大", "pinyin": "zhǎng dà", "english": "when grow up" },
+              { "chinese": "一定", "pinyin": "yídìng", "english": "definitely" },
+              { "chinese": "很", "pinyin": "hěn", "english": "very" },
+              { "chinese": "帅", "pinyin": "shuài", "english": "handsome" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "哪里，哪里。汤姆的脸圆圆的，眼睛大大的，真可爱。",
+            "b": "Nǎli, nǎli. Tāngmǔ de liǎn yuán yuán de, yǎnjing dà dà de, zhēn kě'ài.",
+            "c": "You flatter me. Tom's face is round and his eyes are big — really cute.",
+            "wordAlignments": [
+              { "chinese": "哪里", "pinyin": "Nǎli", "english": "You flatter me" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "哪里", "pinyin": "nǎli", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." },
+              { "chinese": "汤姆", "pinyin": "Tāngmǔ", "english": "Tom" },
+              { "chinese": "的", "pinyin": "de", "english": "'s" },
+              { "chinese": "脸", "pinyin": "liǎn", "english": "face" },
+              { "chinese": "圆圆的", "pinyin": "yuán yuán de", "english": "is round" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "眼睛", "pinyin": "yǎnjing", "english": "eyes" },
+              { "chinese": "大大的", "pinyin": "dà dà de", "english": "are big" },
+              { "chinese": "，", "pinyin": ",", "english": "—" },
+              { "chinese": "真", "pinyin": "zhēn", "english": "really" },
+              { "chinese": "可爱", "pinyin": "kě'ài", "english": "cute" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "他鼻子高高的，嘴小小的，长得很像海伦。",
+            "b": "Tā bízi gāo gāo de, zuǐ xiǎo xiǎo de, zhǎng de hěn xiàng Hǎilún.",
+            "c": "His nose is high and his mouth is small — he really looks like Helen.",
+            "wordAlignments": [
+              { "chinese": "他", "pinyin": "Tā", "english": "His" },
+              { "chinese": "鼻子", "pinyin": "bízi", "english": "nose" },
+              { "chinese": "高高的", "pinyin": "gāo gāo de", "english": "is high" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "嘴", "pinyin": "zuǐ", "english": "mouth" },
+              { "chinese": "小小的", "pinyin": "xiǎo xiǎo de", "english": "is small" },
+              { "chinese": "，", "pinyin": ",", "english": "—" },
+              { "chinese": "长", "pinyin": "zhǎng", "english": "looks" },
+              { "chinese": "得", "pinyin": "de", "english": "" },
+              { "chinese": "很", "pinyin": "hěn", "english": "really" },
+              { "chinese": "像", "pinyin": "xiàng", "english": "like" },
+              { "chinese": "海伦", "pinyin": "Hǎilún", "english": "Helen" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          }
+        ]
+      },
+      "grammar_001": {
+        "title": "Time-Duration: Subject + Verb + (了) + Duration",
+        "description": "Stating how long an action lasts; with an object, the pattern is V + 了 + Duration + (的) + Object",
+        "lines": [
+          {
+            "a": "我每天学三个钟头中文。",
+            "b": "Wǒ měitiān xué sān ge zhōngtóu Zhōngwén.",
+            "c": "I study Chinese three hours every day.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "每天", "pinyin": "měitiān", "english": "every day" },
+              { "chinese": "学", "pinyin": "xué", "english": "study" },
+              { "chinese": "三", "pinyin": "sān", "english": "three" },
+              { "chinese": "个", "pinyin": "ge", "english": "" },
+              { "chinese": "钟头", "pinyin": "zhōngtóu", "english": "hours" },
+              { "chinese": "中文", "pinyin": "Zhōngwén", "english": "of Chinese" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "他看了两个钟头的电视。",
+            "b": "Tā kàn le liǎng ge zhōngtóu de diànshì.",
+            "c": "He watched two hours of TV.",
+            "wordAlignments": [
+              { "chinese": "他", "pinyin": "Tā", "english": "He" },
+              { "chinese": "看", "pinyin": "kàn", "english": "watched" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "两", "pinyin": "liǎng", "english": "two" },
+              { "chinese": "个", "pinyin": "ge", "english": "" },
+              { "chinese": "钟头", "pinyin": "zhōngtóu", "english": "hours" },
+              { "chinese": "的", "pinyin": "de", "english": "of" },
+              { "chinese": "电视", "pinyin": "diànshì", "english": "TV" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "我上了四个星期的暑期班。",
+            "b": "Wǒ shàng le sì ge xīngqī de shǔqī bān.",
+            "c": "I took four weeks of summer school.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "上", "pinyin": "shàng", "english": "took" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "四", "pinyin": "sì", "english": "four" },
+              { "chinese": "个", "pinyin": "ge", "english": "" },
+              { "chinese": "星期", "pinyin": "xīngqī", "english": "weeks" },
+              { "chinese": "的", "pinyin": "de", "english": "of" },
+              { "chinese": "暑期", "pinyin": "shǔqī", "english": "summer" },
+              { "chinese": "班", "pinyin": "bān", "english": "class" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "她每天练习英文练习三个半钟头。",
+            "b": "Tā měitiān liànxí Yīngwén liànxí sān ge bàn zhōngtóu.",
+            "c": "She practices English for three and a half hours every day.",
+            "wordAlignments": [
+              { "chinese": "她", "pinyin": "Tā", "english": "She" },
+              { "chinese": "每天", "pinyin": "měitiān", "english": "every day" },
+              { "chinese": "练习", "pinyin": "liànxí", "english": "practices" },
+              { "chinese": "英文", "pinyin": "Yīngwén", "english": "English" },
+              { "chinese": "练习", "pinyin": "liànxí", "english": "practices" },
+              { "chinese": "三", "pinyin": "sān", "english": "three" },
+              { "chinese": "个", "pinyin": "ge", "english": "" },
+              { "chinese": "半", "pinyin": "bàn", "english": "and a half" },
+              { "chinese": "钟头", "pinyin": "zhōngtóu", "english": "hours" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "老高想在上海住一年。",
+            "b": "Lǎo Gāo xiǎng zài Shànghǎi zhù yì nián.",
+            "c": "Old Gao wants to live in Shanghai for one year.",
+            "wordAlignments": [
+              { "chinese": "老高", "pinyin": "Lǎo Gāo", "english": "Old Gao" },
+              { "chinese": "想", "pinyin": "xiǎng", "english": "wants to" },
+              { "chinese": "在", "pinyin": "zài", "english": "in" },
+              { "chinese": "上海", "pinyin": "Shànghǎi", "english": "Shanghai" },
+              { "chinese": "住", "pinyin": "zhù", "english": "live" },
+              { "chinese": "一", "pinyin": "yì", "english": "one" },
+              { "chinese": "年", "pinyin": "nián", "english": "year" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          }
+        ]
+      },
+      "grammar_002": {
+        "title": "是…的 Sentences for Past Actions",
+        "description": "Use 是…的 to highlight time, place, or manner of a known past event",
+        "lines": [
+          {
+            "a": "你是什么时候到的？",
+            "b": "Nǐ shì shénme shíhou dào de?",
+            "c": "When did you arrive?",
+            "wordAlignments": [
+              { "chinese": "你", "pinyin": "Nǐ", "english": "you" },
+              { "chinese": "是", "pinyin": "shì", "english": "" },
+              { "chinese": "什么", "pinyin": "shénme", "english": "what" },
+              { "chinese": "时候", "pinyin": "shíhou", "english": "time" },
+              { "chinese": "到", "pinyin": "dào", "english": "arrive" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "我是昨天到的。",
+            "b": "Wǒ shì zuótiān dào de.",
+            "c": "I arrived yesterday.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "是", "pinyin": "shì", "english": "" },
+              { "chinese": "昨天", "pinyin": "zuótiān", "english": "yesterday" },
+              { "chinese": "到", "pinyin": "dào", "english": "arrived" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "你的中文是在哪儿学的？",
+            "b": "Nǐ de Zhōngwén shì zài nǎr xué de?",
+            "c": "Where did you learn your Chinese?",
+            "wordAlignments": [
+              { "chinese": "你", "pinyin": "Nǐ", "english": "your" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "中文", "pinyin": "Zhōngwén", "english": "Chinese" },
+              { "chinese": "是", "pinyin": "shì", "english": "" },
+              { "chinese": "在", "pinyin": "zài", "english": "at" },
+              { "chinese": "哪儿", "pinyin": "nǎr", "english": "where" },
+              { "chinese": "学", "pinyin": "xué", "english": "did learn" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "我是在暑期班学的。",
+            "b": "Wǒ shì zài shǔqī bān xué de.",
+            "c": "I learned it in summer school.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "是", "pinyin": "shì", "english": "" },
+              { "chinese": "在", "pinyin": "zài", "english": "in" },
+              { "chinese": "暑期", "pinyin": "shǔqī", "english": "summer" },
+              { "chinese": "班", "pinyin": "bān", "english": "class" },
+              { "chinese": "学", "pinyin": "xué", "english": "learned" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "汤姆是去年生的。",
+            "b": "Tāngmǔ shì qùnián shēng de.",
+            "c": "Tom was born last year.",
+            "wordAlignments": [
+              { "chinese": "汤姆", "pinyin": "Tāngmǔ", "english": "Tom" },
+              { "chinese": "是", "pinyin": "shì", "english": "" },
+              { "chinese": "去年", "pinyin": "qùnián", "english": "last year" },
+              { "chinese": "生", "pinyin": "shēng", "english": "was born" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "你是跟谁一起来的？",
+            "b": "Nǐ shì gēn shéi yìqǐ lái de?",
+            "c": "Who did you come with?",
+            "wordAlignments": [
+              { "chinese": "你", "pinyin": "Nǐ", "english": "you" },
+              { "chinese": "是", "pinyin": "shì", "english": "" },
+              { "chinese": "跟", "pinyin": "gēn", "english": "with" },
+              { "chinese": "谁", "pinyin": "shéi", "english": "who" },
+              { "chinese": "一起", "pinyin": "yìqǐ", "english": "together" },
+              { "chinese": "来", "pinyin": "lái", "english": "did come" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          }
+        ]
+      },
+      "grammar_003": {
+        "title": "还 (hái) — Still / Yet",
+        "description": "还 indicates an action or state continues, or has not yet happened (with negation)",
+        "lines": [
+          {
+            "a": "上午十一点了，他还在睡觉。",
+            "b": "Shàngwǔ shíyī diǎn le, tā hái zài shuì jiào.",
+            "c": "It's 11 a.m. and he's still sleeping.",
+            "wordAlignments": [
+              { "chinese": "上午", "pinyin": "Shàngwǔ", "english": "morning" },
+              { "chinese": "十一", "pinyin": "shíyī", "english": "eleven" },
+              { "chinese": "点", "pinyin": "diǎn", "english": "o'clock" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "他", "pinyin": "tā", "english": "he" },
+              { "chinese": "还", "pinyin": "hái", "english": "still" },
+              { "chinese": "在", "pinyin": "zài", "english": "is" },
+              { "chinese": "睡觉", "pinyin": "shuì jiào", "english": "sleeping" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "她还没来。",
+            "b": "Tā hái méi lái.",
+            "c": "She hasn't come yet.",
+            "wordAlignments": [
+              { "chinese": "她", "pinyin": "Tā", "english": "She" },
+              { "chinese": "还", "pinyin": "hái", "english": "yet" },
+              { "chinese": "没", "pinyin": "méi", "english": "hasn't" },
+              { "chinese": "来", "pinyin": "lái", "english": "come" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "我以为她已经来了，可是她还没到。",
+            "b": "Wǒ yǐwéi tā yǐjīng lái le, kěshì tā hái méi dào.",
+            "c": "I thought she had already come, but she still hasn't arrived.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "以为", "pinyin": "yǐwéi", "english": "thought" },
+              { "chinese": "她", "pinyin": "tā", "english": "she" },
+              { "chinese": "已经", "pinyin": "yǐjīng", "english": "already" },
+              { "chinese": "来", "pinyin": "lái", "english": "came" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "可是", "pinyin": "kěshì", "english": "but" },
+              { "chinese": "她", "pinyin": "tā", "english": "she" },
+              { "chinese": "还", "pinyin": "hái", "english": "still" },
+              { "chinese": "没", "pinyin": "méi", "english": "hasn't" },
+              { "chinese": "到", "pinyin": "dào", "english": "arrived" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "他还想再看两个钟头的电视。",
+            "b": "Tā hái xiǎng zài kàn liǎng ge zhōngtóu de diànshì.",
+            "c": "He still wants to watch two more hours of TV.",
+            "wordAlignments": [
+              { "chinese": "他", "pinyin": "Tā", "english": "He" },
+              { "chinese": "还", "pinyin": "hái", "english": "still" },
+              { "chinese": "想", "pinyin": "xiǎng", "english": "wants to" },
+              { "chinese": "再", "pinyin": "zài", "english": "again" },
+              { "chinese": "看", "pinyin": "kàn", "english": "watch" },
+              { "chinese": "两", "pinyin": "liǎng", "english": "two" },
+              { "chinese": "个", "pinyin": "ge", "english": "" },
+              { "chinese": "钟头", "pinyin": "zhōngtóu", "english": "hours" },
+              { "chinese": "的", "pinyin": "de", "english": "of" },
+              { "chinese": "电视", "pinyin": "diànshì", "english": "TV" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          }
+        ]
+      },
+      "grammar_004": {
+        "title": "又…又… (yòu…yòu…) — Both…and…",
+        "description": "Use 又 + Adj1 + 又 + Adj2 to describe two coexisting qualities of a subject",
+        "lines": [
+          {
+            "a": "他又聪明又用功。",
+            "b": "Tā yòu cōngming yòu yònggōng.",
+            "c": "He is both smart and hardworking.",
+            "wordAlignments": [
+              { "chinese": "他", "pinyin": "Tā", "english": "He" },
+              { "chinese": "又", "pinyin": "yòu", "english": "is both" },
+              { "chinese": "聪明", "pinyin": "cōngming", "english": "smart" },
+              { "chinese": "又", "pinyin": "yòu", "english": "and" },
+              { "chinese": "用功", "pinyin": "yònggōng", "english": "hardworking" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "汤姆又可爱又像妈妈。",
+            "b": "Tāngmǔ yòu kě'ài yòu xiàng māma.",
+            "c": "Tom is both cute and looks like his mom.",
+            "wordAlignments": [
+              { "chinese": "汤姆", "pinyin": "Tāngmǔ", "english": "Tom" },
+              { "chinese": "又", "pinyin": "yòu", "english": "is both" },
+              { "chinese": "可爱", "pinyin": "kě'ài", "english": "cute" },
+              { "chinese": "又", "pinyin": "yòu", "english": "and" },
+              { "chinese": "像", "pinyin": "xiàng", "english": "looks like" },
+              { "chinese": "妈妈", "pinyin": "māma", "english": "his mom" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "这个蛋糕又大又好吃。",
+            "b": "Zhè ge dàngāo yòu dà yòu hǎo chī.",
+            "c": "This cake is both big and delicious.",
+            "wordAlignments": [
+              { "chinese": "这", "pinyin": "Zhè", "english": "This" },
+              { "chinese": "个", "pinyin": "ge", "english": "" },
+              { "chinese": "蛋糕", "pinyin": "dàngāo", "english": "cake" },
+              { "chinese": "又", "pinyin": "yòu", "english": "is both" },
+              { "chinese": "大", "pinyin": "dà", "english": "big" },
+              { "chinese": "又", "pinyin": "yòu", "english": "and" },
+              { "chinese": "好吃", "pinyin": "hǎo chī", "english": "delicious" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "他的脸又圆又可爱。",
+            "b": "Tā de liǎn yòu yuán yòu kě'ài.",
+            "c": "His face is both round and cute.",
+            "wordAlignments": [
+              { "chinese": "他", "pinyin": "Tā", "english": "His" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "脸", "pinyin": "liǎn", "english": "face" },
+              { "chinese": "又", "pinyin": "yòu", "english": "is both" },
+              { "chinese": "圆", "pinyin": "yuán", "english": "round" },
+              { "chinese": "又", "pinyin": "yòu", "english": "and" },
+              { "chinese": "可爱", "pinyin": "kě'ài", "english": "cute" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "她又最爱吃蛋糕又最会做蛋糕。",
+            "b": "Tā yòu zuì ài chī dàngāo yòu zuì huì zuò dàngāo.",
+            "c": "She both loves eating cake the most and is best at making cake.",
+            "wordAlignments": [
+              { "chinese": "她", "pinyin": "Tā", "english": "She" },
+              { "chinese": "又", "pinyin": "yòu", "english": "both" },
+              { "chinese": "最", "pinyin": "zuì", "english": "the most" },
+              { "chinese": "爱", "pinyin": "ài", "english": "loves" },
+              { "chinese": "吃", "pinyin": "chī", "english": "eating" },
+              { "chinese": "蛋糕", "pinyin": "dàngāo", "english": "cake" },
+              { "chinese": "又", "pinyin": "yòu", "english": "and" },
+              { "chinese": "最", "pinyin": "zuì", "english": "the most" },
+              { "chinese": "会", "pinyin": "huì", "english": "is best at" },
+              { "chinese": "做", "pinyin": "zuò", "english": "making" },
+              { "chinese": "蛋糕", "pinyin": "dàngāo", "english": "cake" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          }
+        ]
+      }
+    }
+  }
 }
