@@ -193,11 +193,18 @@ function planSegments(content, defaultVoice) {
     } else if (raw.startsWith("小美:") || raw.startsWith("小美：")) {
       voice = VOICE_FEMALE;
       text = raw.replace(/^小美[:：]\s*/, "");
-    } else if (raw.startsWith("Xiaoming:") || raw.startsWith("Xiaomei:")) {
-      // English translation of the dialogue. Use the same voice that the
-      // immediately previous line set (so the speaker block stays coherent).
-      voice = current.voice;
-      text = raw.replace(/^(Xiaoming|Xiaomei):\s*/, "");
+    } else if (raw.startsWith("Xiaoming:") || raw.startsWith("Xiaoming：")) {
+      // English translation lines must be routed by speaker, not inherited
+      // from the previous line. Inheriting was the bug in the first chapter
+      // 14 run: both English translation lines ended up in whichever voice
+      // happened to speak last in Chinese (always 小美, the second turn),
+      // so the English dialogue sounded like a monologue. Strip the prefix
+      // because the voice change is the cue.
+      voice = VOICE_MALE;
+      text = raw.replace(/^Xiaoming[:：]\s*/, "");
+    } else if (raw.startsWith("Xiaomei:") || raw.startsWith("Xiaomei：")) {
+      voice = VOICE_FEMALE;
+      text = raw.replace(/^Xiaomei[:：]\s*/, "");
     }
 
     if (voice !== current.voice) {

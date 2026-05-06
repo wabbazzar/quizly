@@ -203,11 +203,33 @@ Voices are shared between both pipelines:
 - **Junjie** (`yunfeng`) — male, used for 小明 lines and the per-card English audio
 - **Yarui** (`xiaoxiao`) — female, used for 小美 lines, all non-speaker text in transcripts, and the per-card Chinese audio
 
-The transcript script auto-detects speaker tags `小明:` / `小美:` (and
-`Xiaoming:` / `Xiaomei:` English-translation lines, which inherit the
-preceding voice). Adjacent same-voice lines are coalesced; long segments
-are chunked at sentence punctuation; resulting MP3 chunks are concatenated
-into the final file.
+The transcript script auto-detects speaker tags and routes voices the
+same way in both languages:
+
+| Tag | Voice |
+|---|---|
+| `小明:` | Junjie (yunfeng, male) |
+| `小美:` | Yarui (xiaoxiao, female) |
+| `Xiaoming:` | Junjie (yunfeng, male) |
+| `Xiaomei:` | Yarui (xiaoxiao, female) |
+
+Both the Chinese and English translation lines for the same character go
+to the same voice, so the English exchange alternates voices the same way
+the Chinese one does. The prefixes get stripped — the voice change is the
+cue. Adjacent same-voice lines are coalesced; long segments are chunked at
+sentence punctuation; resulting MP3 chunks are concatenated into the
+final file.
+
+### Authoring rule for transcript .txt files
+
+Every English translation line in the transcript MUST start with
+`Xiaoming:` or `Xiaomei:` (not `Speaker A:`, not bare text), and the
+chosen prefix must match the Chinese speaker it translates. The script
+relies on this prefix to alternate voices in the English block. Without
+the prefix, both English lines fall through to whatever voice spoke last
+in Chinese, and the dialogue sounds like a monologue. (This was the
+chapter 14 first-run bug; fixed in the script as of 2026-05-06, but the
+authoring contract still applies.)
 
 ### Usage
 
