@@ -185,21 +185,71 @@ After writing the four `.txt` files, append four entries to `public/data/transcr
 
 Both transcripts share the same `sortOrder` (they're sibling entries for one chapter). Increment from the previous chapter's value.
 
-## Surface 3 — Audio generation (separate, ElevenLabs)
+## Surface 3 — Audio generation (Speechify, same pipeline as per-card)
 
-The transcript `.txt` files are converted to MP3 via ElevenLabs (NOT Speechify — Speechify is for the per-card `_side_a/b/c.mp3` files). See the relevant section of the project root `CLAUDE.md`:
+Both per-card audio and transcript audio go through **Speechify**. There's
+one shared technique (borrow the Firebase auth token from a logged-in
+Speechify session via Chrome CDP, then POST SSML to
+`audio.api.speechify.com/v3/synthesis/get`). Two scripts wrap it for the
+two different inputs:
 
-> **ElevenLabs Audio Generation**
-> Voices: **Amy** (`bhJUNIXWQQ94l8eI2VUf`, female, 小美) and **Adam Li** (`hZTuv9Zqrq4yHYrEmF1r`, male, 小明).
-> Settings: `eleven_multilingual_v2`, `speed: 0.9`, `stability: 0.6`, `language: zh`.
-> Output to `public/data/audio/` (NOT `public/data/transcripts/`):
->   - `chinese_chpt<N>_<part>_dialogue.mp3`
->   - `chinese_chpt<N>_<part>_phrases.mp3`
-> Max 10000 chars per TTS call — split if longer.
+| Script | Input | Output |
+|---|---|---|
+| `scripts/speechify-cdp-batch.mjs` | a deck JSON | one MP3 per card per side, into `public/data/audio/words/` |
+| `scripts/speechify-transcript.mjs` | a transcript `.txt` | one MP3 per transcript, into `public/data/audio/` |
 
-The MCP tool `mcp__elevenlabs__text_to_speech` handles the API call. Generate the dialogue and phrases files separately. The generated MP3s go to `public/data/audio/` — the manifest already references them by name so they appear in the app once the files exist.
+Voices are shared between both pipelines:
 
-If ElevenLabs API access isn't available in the session, leave the audio gap as a documented TODO and commit the text files anyway. The transcripts work fine as readable text in the Audio player even before the MP3s exist (the player falls back gracefully).
+- **Junjie** (`yunfeng`) — male, used for 小明 lines and the per-card English audio
+- **Yarui** (`xiaoxiao`) — female, used for 小美 lines, all non-speaker text in transcripts, and the per-card Chinese audio
+
+The transcript script auto-detects speaker tags `小明:` / `小美:` (and
+`Xiaoming:` / `Xiaomei:` English-translation lines, which inherit the
+preceding voice). Adjacent same-voice lines are coalesced; long segments
+are chunked at sentence punctuation; resulting MP3 chunks are concatenated
+into the final file.
+
+### Usage
+
+```bash
+# Smallest first to verify auth before committing to a long run
+node scripts/speechify-transcript.mjs \
+  public/data/transcripts/chinese_chpt<N>_<part>_phrases.txt
+
+node scripts/speechify-transcript.mjs \
+  public/data/transcripts/chinese_chpt<N>_<part>_dialogue.txt
+
+# Skip if already on disk
+node scripts/speechify-transcript.mjs <file>.txt --skip-existing
+
+# Force a single voice (skips speaker parsing — useful for one-speaker files)
+node scripts/speechify-transcript.mjs <file>.txt --voice xiaoxiao
+```
+
+### Prerequisites
+
+Same as `speechify-cdp-batch.mjs`:
+
+1. Chrome running with `--remote-debugging-port=9333` and
+   `--user-data-dir=/tmp/chrome-cdp`.
+2. The persistent profile must have an **active logged-in Speechify
+   session**. Sessions expire after a few hours of inactivity or after
+   OAuth refresh-token invalidation.
+
+If the script bails with `FATAL: Could not get auth token. Is Speechify
+logged in?`, the session is dead. Run Chrome non-headless against the
+profile, complete the Google OAuth flow at `app.speechify.com`, leave it
+running, then re-run the script.
+
+```bash
+google-chrome --remote-debugging-port=9333 --user-data-dir=/tmp/chrome-cdp \
+  --no-first-run https://app.speechify.com/
+```
+
+If you can't reauth in this session, leave audio as a TODO and commit the
+text files anyway — the transcript content shows in the Audio player as
+readable text even before the MP3 exists (the player falls back
+gracefully).
 
 ## Validation
 
@@ -264,6 +314,6 @@ git push
 - Phrases transcript canonical: `public/data/transcripts/chinese_chpt13_1_phrases.txt`
 - Dialogue transcript canonical: `public/data/transcripts/chinese_chpt13_1_dialogue.txt`
 - Transcript manifest: `public/data/transcripts/manifest.json`
-- Speechify (per-card) audio script: `scripts/speechify-cdp-batch.mjs` (different pipeline — see `add-chinese-card` skill)
-- ElevenLabs (transcript) audio: `mcp__elevenlabs__text_to_speech` MCP tool
+- Speechify per-card audio script: `scripts/speechify-cdp-batch.mjs` (see `add-chinese-card` skill)
+- Speechify transcript audio script: `scripts/speechify-transcript.mjs` (this skill)
 - Companion skills: `create-chinese-deck` (build the deck first), `add-chinese-card` (single-card adds + per-card Speechify audio)

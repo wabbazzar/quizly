@@ -955,29 +955,86 @@ Vocabulary Review - Key words from Chapter [N] used:
 - `chinese_chpt10_2_dialogue.txt`: 629 lines, 11 minutes, 1475 characters (~134 chars/min)
 - `chinese_chpt4_2_dialogue.txt`: 878 lines, 10 minutes, 1750 characters (~175 chars/min)
 
-## ElevenLabs Audio Generation
+## Speechify Transcript Audio Generation
 
-When generating audio for Chinese transcripts, use these optimized voices:
+Chapter transcripts (`*_phrases.txt`, `*_dialogue.txt`) are converted to MP3
+via the **Speechify** backend API — the same pipeline as the per-card
+audio, just operating on a transcript text file instead of card sides.
+**ElevenLabs is not used.** The Speechify subscription provides ~500 hours
+of synthesis credits, which is plenty for the chapter set.
+
+### Script
+
+`scripts/speechify-transcript.mjs` mirrors the structure of
+`scripts/speechify-cdp-batch.mjs`:
+
+- Connects to a Chrome instance running with `--remote-debugging-port=9333`
+  via Playwright CDP.
+- Borrows the Firebase auth token from the logged-in Speechify session in
+  IndexedDB (`firebaseLocalStorageDb` → `firebaseLocalStorage` →
+  `value.stsTokenManager.accessToken`).
+- POSTs to `https://audio.api.speechify.com/v3/synthesis/get` with SSML.
+- Strips the protobuf wrapper from the response (looks for `ID3` or MP3
+  frame sync `0xFF 0xEx`) to recover the raw MP3 bytes.
+
+The transcript script extends the per-card pattern by:
+
+- Parsing speaker tags (`小明:` / `小美:`) and assigning voices per turn
+  (Junjie/yunfeng for 小明, Yarui/xiaoxiao for 小美).
+- Coalescing adjacent same-voice lines, so a long speaker block becomes
+  one synth call.
+- Chunking long segments at sentence boundaries to stay under
+  `MAX_CHARS_PER_CHUNK = 1200` (Speechify is fine with longer payloads
+  but occasionally 5xxs mid-stream on long ones).
+- Concatenating the resulting MP3 chunks (raw concat works because every
+  chunk shares encoding params).
 
 ### Voice Configuration
 
-| Voice | Voice ID | Use For | Description |
-|-------|----------|---------|-------------|
-| **Amy** | `bhJUNIXWQQ94l8eI2VUf` | Female speaker (小美) | Friendly, Young and Natural |
-| **Adam Li** | `hZTuv9Zqrq4yHYrEmF1r` | Male speaker (小明) | Deep, Steady and Calm |
+| Speechify display | API voice ID | Used for |
+|---|---|---|
+| **Junjie** | `yunfeng` | 小明 lines (male) |
+| **Yarui** | `xiaoxiao` | 小美 lines (female), and the default voice for non-speaker text (English translations, vocab blocks) |
 
-### TTS Settings
+These are the same voice IDs used by the per-card script (`yunfeng` for
+side_a English, `xiaoxiao` for side_b/c Chinese). Don't introduce new
+voice IDs without re-running the matcher bench — the in-app handsfree
+matcher is calibrated against `xiaoxiao` reference recordings.
 
-```javascript
-// Recommended settings for Chinese dialogue
-{
-  model_id: "eleven_multilingual_v2",
-  speed: 0.9,           // Slightly slower for learners
-  stability: 0.6,       // Natural variation
-  output_directory: "/home/wabbazzar/code/quizly/public/data/audio",
-  language: "zh"        // Chinese language code
-}
+### Usage
+
+```bash
+# Single transcript
+node scripts/speechify-transcript.mjs public/data/transcripts/<file>.txt
+
+# Skip if already generated
+node scripts/speechify-transcript.mjs <file>.txt --skip-existing
+
+# Force a single voice (skip speaker parsing)
+node scripts/speechify-transcript.mjs <file>.txt --voice xiaoxiao
+
+# Override output path
+node scripts/speechify-transcript.mjs <file>.txt --out /tmp/test.mp3
 ```
+
+### Prerequisites — the gotcha
+
+Same as for `speechify-cdp-batch.mjs`. **The token-borrowing pattern only
+works when there's an active logged-in Speechify session in the Chrome
+profile at `/tmp/chrome-cdp`.** Sessions expire (~hours of inactivity, or
+when the OAuth refresh token is invalidated). Symptom: the script bails
+with `FATAL: Could not get auth token. Is Speechify logged in?`, and a
+probe of the IndexedDB shows `firebaseLocalStorage` is empty (the page is
+on the auth/login redirect, not the app).
+
+To recover, run Chrome non-headless and re-do the Google OAuth flow:
+
+```bash
+google-chrome --remote-debugging-port=9333 --user-data-dir=/tmp/chrome-cdp \
+  --no-first-run https://app.speechify.com/
+```
+
+Then sign in and leave the window running. After that, re-run the script.
 
 ### Audio File Naming Convention
 
