@@ -13,15 +13,20 @@ export const TranscriptModal: FC = () => {
     isLoadingContent,
     error,
     closeModal,
+    playbackRate,
+    repeat,
+    setPlaybackRate,
+    setRepeat,
   } = useTranscriptStore();
 
   const [copySuccess, setCopySuccess] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [playbackRate, setPlaybackRate] = useState(100);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [repeat, setRepeat] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  // Read the latest rate inside event handlers without re-binding listeners.
+  const playbackRateRef = useRef(playbackRate);
+  playbackRateRef.current = playbackRate;
 
   const audioFile = selectedTranscript?.audioFile;
   const audioUrl = audioFile ? `${import.meta.env.BASE_URL}data/audio/${audioFile}` : null;
@@ -36,14 +41,20 @@ export const TranscriptModal: FC = () => {
     }
   }, [isModalOpen]);
 
-  // Handle audio events
+  // Handle audio events. Re-applying playbackRate inside loadedmetadata fixes
+  // the "speed slider stops working after switching dialogues" bug: the
+  // browser resets audio.playbackRate to 1.0 every time it loads a new src,
+  // and the playbackRate-state useEffect below doesn't fire on src change.
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
     const handleEnded = () => setIsPlaying(false);
     const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
-    const handleLoadedMetadata = () => setDuration(audio.duration);
+    const handleLoadedMetadata = () => {
+      setDuration(audio.duration);
+      audio.playbackRate = playbackRateRef.current / 100;
+    };
 
     audio.addEventListener('ended', handleEnded);
     audio.addEventListener('timeupdate', handleTimeUpdate);
@@ -54,6 +65,14 @@ export const TranscriptModal: FC = () => {
       audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
     };
+  }, [audioUrl]);
+
+  // Reset progress when switching to a different transcript while the modal
+  // stays open — the audio element is reused, so currentTime can carry over.
+  useEffect(() => {
+    setCurrentTime(0);
+    setDuration(0);
+    setIsPlaying(false);
   }, [audioUrl]);
 
   // Update playback rate when slider changes
@@ -108,12 +127,12 @@ export const TranscriptModal: FC = () => {
   };
 
   const handleSpeedDecrease = useCallback(() => {
-    setPlaybackRate(prev => Math.max(75, prev - 5));
-  }, []);
+    setPlaybackRate(Math.max(75, playbackRate - 5));
+  }, [playbackRate, setPlaybackRate]);
 
   const handleSpeedIncrease = useCallback(() => {
-    setPlaybackRate(prev => Math.min(100, prev + 5));
-  }, []);
+    setPlaybackRate(Math.min(100, playbackRate + 5));
+  }, [playbackRate, setPlaybackRate]);
 
   const handleCopy = useCallback(async () => {
     if (!transcriptContent) return;
@@ -219,7 +238,7 @@ export const TranscriptModal: FC = () => {
               </div>
               <div className={styles.speedControl}>
                 <button
-                  onClick={() => setRepeat(r => !r)}
+                  onClick={() => setRepeat(!repeat)}
                   className={`${styles.repeatBtn} ${repeat ? styles.repeatBtnActive : ''}`}
                   aria-label={repeat ? 'Turn off repeat' : 'Turn on repeat'}
                   aria-pressed={repeat}
