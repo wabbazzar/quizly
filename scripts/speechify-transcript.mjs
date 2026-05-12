@@ -32,8 +32,9 @@
  */
 
 import { chromium } from "playwright";
-import { readFileSync, existsSync, writeFileSync, mkdirSync } from "fs";
+import { readFileSync, existsSync, writeFileSync, mkdirSync, unlinkSync } from "fs";
 import { resolve, basename, dirname } from "path";
+import { spawnSync } from "child_process";
 
 // ---------- CLI ----------
 const argv = process.argv.slice(2);
@@ -337,8 +338,56 @@ for (const chunk of allChunks) {
 }
 
 const merged = Buffer.concat(buffers);
-writeFileSync(OUT_PATH, merged);
+
+// Raw concatenation of per-chunk MP3 responses produces a file with one
+// embedded ID3v2/Info/LAME header per chunk. Browsers that scan ahead
+// (Chrome desktop) cope; those that trust the first header (mobile Safari,
+// some Chromium builds) report duration = the first chunk's duration and
+// stop playback there. Re-mux through ffmpeg to consolidate everything into
+// a single proper Xing/LAME header describing the full duration.
+const rawPath = OUT_PATH + ".raw.mp3";
+writeFileSync(rawPath, merged);
+const ff = spawnSync(
+  "ffmpeg",
+  [
+    "-y",
+    "-hide_banner",
+    "-loglevel",
+    "error",
+    "-err_detect",
+    "ignore_err",
+    "-fflags",
+    "+discardcorrupt",
+    "-i",
+    rawPath,
+    "-c:a",
+    "libmp3lame",
+    "-b:a",
+    "96k",
+    "-ar",
+    "48000",
+    "-ac",
+    "1",
+    "-id3v2_version",
+    "0",
+    "-write_xing",
+    "1",
+    OUT_PATH,
+  ],
+  { stdio: "inherit" }
+);
+try {
+  unlinkSync(rawPath);
+} catch {
+  /* ignore */
+}
+if (ff.status !== 0) {
+  console.error("ffmpeg remux failed. Falling back to raw concatenation.");
+  writeFileSync(OUT_PATH, merged);
+}
+
+const finalBytes = readFileSync(OUT_PATH).length;
 console.log(`\n=== DONE ===`);
-console.log(`Wrote: ${OUT_PATH} (${(merged.length / 1024).toFixed(1)} KB, ${buffers.length} chunks)`);
+console.log(`Wrote: ${OUT_PATH} (${(finalBytes / 1024).toFixed(1)} KB, ${buffers.length} chunks → 1 stream)`);
 
 await browser.close();
