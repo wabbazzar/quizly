@@ -93,3 +93,38 @@ Estimated listening time: 3 minutes
 汤姆, Tom.
 汤姆, Tom, a name.
 汤姆, Tom.
+圣诞节, Christmas.
+圣诞节, Christmas Day.
+圣诞节, Christmas.
+
+腿, leg.
+腿, the leg.
+腿, leg.
+
+脚, foot.
+脚, the foot.
+脚, foot.
+
+脚趾, toe.
+脚趾, the toes.
+脚趾, toe.
+
+手, hand.
+手, the hand.
+手, hand.
+
+耳朵, ear.
+耳朵, the ears.
+耳朵, ear.
+
+头, head.
+头, the head.
+头, head.
+
+头发, hair.
+头发, the hair on the head.
+头发, hair.
+
+舌头, tongue.
+舌头, the tongue.
+舌头, tongue.
