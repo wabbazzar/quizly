@@ -1,0 +1,1835 @@
+{
+  "id": "chinese_travel_1",
+  "metadata": {
+    "deck_name": "Chinese Travel Essentials",
+    "abbreviated_title": "Travel",
+    "deck_subtitle": "Hiking, Eating & Navigating China",
+    "description": "Essential vocabulary for traveling in China — hiking in Zhangjiajie, eating in Chongqing, and navigating Shanghai",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 7,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description",
+      "side_e": "example (pinyin)",
+      "side_f": "example translation",
+      "side_g": "usage notes"
+    },
+    "card_count": 18,
+    "difficulty": "beginner",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "travel",
+      "hiking",
+      "food",
+      "navigation",
+      "vocabulary"
+    ],
+    "version": "1.0.0",
+    "created_date": "2026-04-17T00:00:00Z",
+    "last_updated": "2026-04-17T00:00:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "hike_climb_mountain",
+      "side_a": "To hike; to climb a mountain",
+      "side_b": "pá shān",
+      "side_c": "爬山",
+      "side_d": "verb object",
+      "side_e": "Wǒmen míngtiān qù pá shān ba!",
+      "side_f": "Let's go hiking tomorrow!",
+      "side_g": "爬 means 'to climb/crawl' and 山 means 'mountain.' Together 爬山 is the standard expression for hiking or mountain climbing. In Zhangjiajie you'll hear this constantly. Can also say 爬山步道 (pá shān bùdào) for 'hiking trail.' Use 去爬山 to say 'go hiking.'",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "hot_pot",
+      "side_a": "Hot pot",
+      "side_b": "huǒguō",
+      "side_c": "火锅",
+      "side_d": "noun",
+      "side_e": "Chóngqìng de huǒguō fēicháng yǒumíng!",
+      "side_f": "Chongqing's hot pot is extremely famous!",
+      "side_g": "火 means 'fire' and 锅 means 'pot.' Chongqing-style hot pot (重庆火锅) is famously spicy with a 麻辣 (numbing-spicy) broth. You can ask for 鸳鸯锅 (yuānyāng guō, 'mandarin duck pot') which is a split pot — half spicy, half mild. Essential vocabulary for eating in Chongqing.",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "spicy",
+      "side_a": "Spicy; hot (flavor)",
+      "side_b": "là",
+      "side_c": "辣",
+      "side_d": "adjective",
+      "side_e": "Zhège cài tài là le! Wǒ chī bù liǎo.",
+      "side_f": "This dish is too spicy! I can't eat it.",
+      "side_g": "Critical word for Chongqing and Sichuan cuisine. 不辣 (bú là) means 'not spicy' — useful when ordering. 微辣 (wēi là) means 'mildly spicy,' 中辣 (zhōng là) means 'medium spicy,' and 特辣 (tè là) means 'extra spicy.' In Chongqing, 麻辣 (málà) combines numbing (Sichuan peppercorn) and spicy (chili).",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "delicious",
+      "side_a": "Delicious; tasty",
+      "side_b": "hǎochī",
+      "side_c": "好吃",
+      "side_d": "adjective",
+      "side_e": "Zhège jiǎozi zhēn hǎochī!",
+      "side_f": "These dumplings are really delicious!",
+      "side_g": "好 (good) + 吃 (eat) = literally 'good to eat.' One of the most useful compliments for food. For drinks, use 好喝 (hǎohē, 'good to drink'). 不好吃 means 'not tasty.' 很好吃 and 真好吃 are common intensified forms. You'll use this constantly at restaurants.",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "menu",
+      "side_a": "Menu",
+      "side_b": "càidān",
+      "side_c": "菜单",
+      "side_d": "noun",
+      "side_e": "Qǐng gěi wǒ càidān, xièxie.",
+      "side_f": "Please give me the menu, thank you.",
+      "side_g": "菜 means 'dishes/food' and 单 means 'list/slip.' At restaurants, say 请给我菜单 to ask for the menu. Many restaurants now use QR codes on the table — you might hear 扫码点餐 (sǎo mǎ diǎn cān, 'scan code to order'). Some places have picture menus which is helpful for pointing.",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "restroom",
+      "side_a": "Restroom; bathroom; toilet",
+      "side_b": "cèsuǒ",
+      "side_c": "厕所",
+      "side_d": "noun",
+      "side_e": "Qǐngwèn, cèsuǒ zài nǎr?",
+      "side_f": "Excuse me, where is the restroom?",
+      "side_g": "Possibly the most essential travel word. 厕所在哪儿？(Cèsuǒ zài nǎr?) is the go-to phrase. Signs may also say 卫生间 (wèishēngjiān, more formal) or 洗手间 (xǐshǒujiān, 'hand-washing room'). On hiking trails, look for signs saying 公共厕所 (gōnggòng cèsuǒ, 'public restroom').",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "scenery",
+      "side_a": "Scenery; landscape; view",
+      "side_b": "fēngjǐng",
+      "side_c": "风景",
+      "side_d": "noun",
+      "side_e": "Zhāngjiājiè de fēngjǐng tài měi le!",
+      "side_f": "The scenery in Zhangjiajie is so beautiful!",
+      "side_g": "风 means 'wind' and 景 means 'scene/view.' 风景 is the general word for natural scenery and landscapes. 风景区 (fēngjǐng qū) means 'scenic area' — you'll see this on signs at parks and tourist spots. 风景很好 means 'the scenery is great.' Also common: 景色 (jǐngsè, 'scenery/view').",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "travel_tourism",
+      "side_a": "To travel; tourism",
+      "side_b": "lǚyóu",
+      "side_c": "旅游",
+      "side_d": "verb and noun",
+      "side_e": "Wǒ hé wǒ tàitai qù Zhōngguó lǚyóu.",
+      "side_f": "My wife and I are traveling to China.",
+      "side_g": "旅 means 'travel/journey' and 游 means 'tour/roam.' 旅游 works as both verb and noun. 旅游景点 (lǚyóu jǐngdiǎn) means 'tourist attraction.' 旅游团 (lǚyóu tuán) means 'tour group.' You can say 我来旅游的 (wǒ lái lǚyóu de, 'I'm here for travel') when locals ask why you're visiting.",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "take_photo",
+      "side_a": "To take a photo",
+      "side_b": "zhào xiàng",
+      "side_c": "照相",
+      "side_d": "verb object",
+      "side_e": "Kěyǐ bāng wǒmen zhào xiàng ma?",
+      "side_f": "Can you help us take a photo?",
+      "side_g": "照 means 'to shine/illuminate' and 相 here means 'appearance/photo.' 照相机 (zhàoxiàngjī) means 'camera.' To ask someone to take your photo: 可以帮我们照相吗？Also commonly heard: 拍照 (pāi zhào, 'take a photo') — slightly more colloquial. At scenic spots, you'll use this a lot.",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "be_careful",
+      "side_a": "Be careful; watch out",
+      "side_b": "xiǎoxīn",
+      "side_c": "小心",
+      "side_d": "adjective and verb",
+      "side_e": "Pá shān de shíhou yào xiǎoxīn!",
+      "side_f": "Be careful when hiking!",
+      "side_g": "小 means 'small' and 心 means 'heart' — literally 'small heart,' meaning cautious. Essential for hiking trails. You'll see signs saying 小心滑 (xiǎoxīn huá, 'caution: slippery') or 小心台阶 (xiǎoxīn táijiē, 'watch your step'). You can warn your wife: 小心！路很滑 (Xiǎoxīn! Lù hěn huá — 'Careful! The path is slippery').",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "water",
+      "side_a": "Water",
+      "side_b": "shuǐ",
+      "side_c": "水",
+      "side_d": "noun",
+      "side_e": "Qǐng gěi wǒ yì píng shuǐ.",
+      "side_f": "Please give me a bottle of water.",
+      "side_g": "Absolutely critical when hiking. 矿泉水 (kuàngquánshuǐ) is 'mineral water' — sold everywhere. 热水 (rè shuǐ) is 'hot water' — Chinese restaurants give it by default. 冰水 (bīng shuǐ) is 'ice water' — you usually have to ask. In China, people drink 开水 (kāishuǐ, boiled water) regularly.",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "hotel",
+      "side_a": "Hotel",
+      "side_b": "jiǔdiàn",
+      "side_c": "酒店",
+      "side_d": "noun",
+      "side_e": "Wǒmen de jiǔdiàn zài nǎr? Wǒ xiǎng huí jiǔdiàn.",
+      "side_f": "Where is our hotel? I want to go back to the hotel.",
+      "side_g": "酒店 is the standard word for hotel. 宾馆 (bīnguǎn) is a slightly older/cheaper alternative. 前台 (qiántái) is 'front desk.' Useful phrase: 我住在XX酒店 (wǒ zhù zài XX jiǔdiàn, 'I'm staying at XX hotel') — helpful when giving taxi directions.",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "help",
+      "side_a": "To help; help",
+      "side_b": "bāngmáng",
+      "side_c": "帮忙",
+      "side_d": "verb object",
+      "side_e": "Nǐ kěyǐ bāng wǒ ge máng ma?",
+      "side_f": "Can you help me?",
+      "side_g": "帮 means 'help' and 忙 means 'busy/matter.' 帮忙 is the general way to ask for help. The polite full form is 你可以帮我个忙吗？(Can you do me a favor?). Shorter: 帮帮我 (bāngbang wǒ, 'help me'). People are generally very willing to help foreigners in China.",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "wife",
+      "side_a": "Wife (formal)",
+      "side_b": "tàitai",
+      "side_c": "太太",
+      "side_d": "noun",
+      "side_e": "Zhè shì wǒ tàitai. Wǒmen yìqǐ lái lǚyóu de.",
+      "side_f": "This is my wife. We came traveling together.",
+      "side_g": "太太 is the polite/formal way to say 'wife' — great for introducing her to locals. 老婆 (lǎopo) is the casual/intimate version. 爱人 (àirén) is more formal/mainland usage. When people ask 这是你太太吗？you can say 是的 (shì de, 'yes').",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "get_lost",
+      "side_a": "To get lost; to lose one's way",
+      "side_b": "mílù",
+      "side_c": "迷路",
+      "side_d": "verb object",
+      "side_e": "Wǒmen mílù le! Qǐngwèn, zhè shì nǎr?",
+      "side_f": "We're lost! Excuse me, where is this?",
+      "side_g": "迷 means 'confused/lost' and 路 means 'road.' 迷路了 (mílù le) means 'got lost' — add 了 for the completed state. On hiking trails in Zhangjiajie, stick to marked paths. If lost: 我迷路了，请帮帮我 (Wǒ mílù le, qǐng bāngbang wǒ — 'I'm lost, please help me').",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "look_forward_to",
+      "side_a": "To look forward to; to be excited for (something upcoming)",
+      "side_b": "qīdài",
+      "side_c": "期待",
+      "side_d": "verb",
+      "side_e": "Wǒ hěn qīdài chī huǒguō!",
+      "side_f": "I'm really excited for hot pot!",
+      "side_g": "期 means 'period of time' and 待 means 'to wait/await.' 期待 is more emotional than just 等 (děng, 'wait') — it conveys excitement or anticipation. Often paired with 很 (very) or 非常 (extremely): 我非常期待 (Wǒ fēicháng qīdài — 'I'm really looking forward to it'). Use it for upcoming trips, meals, meetings.",
+      "level": 1
+    },
+    {
+      "card_id": "card-017",
+      "idx": 16,
+      "name": "dont_understand",
+      "side_a": "(I) don't understand (what was said); can't understand (when listening)",
+      "side_b": "tīng bù dǒng",
+      "side_c": "听不懂",
+      "side_d": "verb phrase",
+      "side_e": "Duìbuqǐ, wǒ tīng bù dǒng.",
+      "side_f": "Sorry, I don't understand.",
+      "side_g": "听 (tīng) means 'to listen/hear' and 不懂 means 'don't understand.' Critical phrase when locals speak too fast — pair with 请说慢一点 (qǐng shuō màn yìdiǎn, 'please speak slowly'). Different from 看不懂 (kàn bù dǒng), which is 'can't read/understand visually.' Affirmative form: 听得懂 (tīng de dǒng, 'can understand'); to confirm understanding, just say 懂了 (dǒng le).",
+      "level": 1
+    },
+    {
+      "card_id": "card-018",
+      "idx": 17,
+      "name": "how_much_money",
+      "side_a": "How much? How much money? (asking the price)",
+      "side_b": "duōshao qián",
+      "side_c": "多少钱",
+      "side_d": "question phrase",
+      "side_e": "Zhège duōshao qián?",
+      "side_f": "How much is this?",
+      "side_g": "多少 (duōshao) means 'how many/how much' and 钱 (qián) means 'money.' The essential shopping phrase — point at an item and say 这个多少钱? to ask the price. Useful follow-ups: 太贵了 (tài guì le, 'too expensive'), 便宜一点 (piányi yìdiǎn, 'a bit cheaper'). At markets in China, bargaining is often expected; in malls and chains, prices are fixed.",
+      "level": 1
+    }
+  ],
+  "reading": {
+    "sides": {
+      "a": "characters",
+      "b": "pinyin",
+      "c": "english"
+    },
+    "tokenization": {
+      "unit": {
+        "a": "character",
+        "b": "space",
+        "c": "space"
+      },
+      "preservePunctuation": true,
+      "alignment": "index"
+    },
+    "practice": {
+      "dialogue_001": {
+        "title": "Arriving at the Hotel",
+        "description": "小明 and 小美 check into their hotel after arriving in China",
+        "lines": [
+          {
+            "a": "小明，我们的酒店到了！",
+            "b": "Xiǎo Míng, wǒmen de jiǔdiàn dào le!",
+            "c": "Xiaoming, we've arrived at our hotel!",
+            "wordAlignments": [
+              {
+                "chinese": "小明",
+                "pinyin": "Xiǎo Míng",
+                "english": "Xiaoming"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "我们",
+                "pinyin": "wǒmen",
+                "english": "our"
+              },
+              {
+                "chinese": "的",
+                "pinyin": "de",
+                "english": "'s"
+              },
+              {
+                "chinese": "酒店",
+                "pinyin": "jiǔdiàn",
+                "english": "hotel"
+              },
+              {
+                "chinese": "到",
+                "pinyin": "dào",
+                "english": "arrived"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(completed)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              }
+            ]
+          },
+          {
+            "a": "太好了！太太，你累不累？",
+            "b": "Tài hǎo le! Tàitai, nǐ lèi bu lèi?",
+            "c": "Great! Wife, are you tired?",
+            "wordAlignments": [
+              {
+                "chinese": "太",
+                "pinyin": "Tài",
+                "english": "Too"
+              },
+              {
+                "chinese": "好",
+                "pinyin": "hǎo",
+                "english": "good"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(exclamation)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              },
+              {
+                "chinese": "太太",
+                "pinyin": "Tàitai",
+                "english": "Wife"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "你",
+                "pinyin": "nǐ",
+                "english": "you"
+              },
+              {
+                "chinese": "累",
+                "pinyin": "lèi",
+                "english": "tired"
+              },
+              {
+                "chinese": "不",
+                "pinyin": "bu",
+                "english": "not"
+              },
+              {
+                "chinese": "累",
+                "pinyin": "lèi",
+                "english": "tired"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
+            ]
+          },
+          {
+            "a": "有一点累。我们是来旅游的，不是来跑步的！",
+            "b": "Yǒu yìdiǎn lèi. Wǒmen shì lái lǚyóu de, bú shì lái pǎobù de!",
+            "c": "A little tired. We're here to travel, not to run!",
+            "wordAlignments": [
+              {
+                "chinese": "有",
+                "pinyin": "Yǒu",
+                "english": "Have"
+              },
+              {
+                "chinese": "一点",
+                "pinyin": "yìdiǎn",
+                "english": "a little"
+              },
+              {
+                "chinese": "累",
+                "pinyin": "lèi",
+                "english": "tired"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              },
+              {
+                "chinese": "我们",
+                "pinyin": "Wǒmen",
+                "english": "We"
+              },
+              {
+                "chinese": "是",
+                "pinyin": "shì",
+                "english": "are"
+              },
+              {
+                "chinese": "来",
+                "pinyin": "lái",
+                "english": "come to"
+              },
+              {
+                "chinese": "旅游",
+                "pinyin": "lǚyóu",
+                "english": "travel"
+              },
+              {
+                "chinese": "的",
+                "pinyin": "de",
+                "english": "(emphasis)"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "不是",
+                "pinyin": "bú shì",
+                "english": "not"
+              },
+              {
+                "chinese": "来",
+                "pinyin": "lái",
+                "english": "come to"
+              },
+              {
+                "chinese": "跑步",
+                "pinyin": "pǎobù",
+                "english": "run"
+              },
+              {
+                "chinese": "的",
+                "pinyin": "de",
+                "english": "(emphasis)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              }
+            ]
+          },
+          {
+            "a": "哈哈！我去前台，你先休息。",
+            "b": "Hāhā! Wǒ qù qiántái, nǐ xiān xiūxi.",
+            "c": "Haha! I'll go to the front desk, you rest first.",
+            "wordAlignments": [
+              {
+                "chinese": "哈哈",
+                "pinyin": "Hāhā",
+                "english": "Haha"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              },
+              {
+                "chinese": "我",
+                "pinyin": "Wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "去",
+                "pinyin": "qù",
+                "english": "go to"
+              },
+              {
+                "chinese": "前台",
+                "pinyin": "qiántái",
+                "english": "front desk"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "你",
+                "pinyin": "nǐ",
+                "english": "you"
+              },
+              {
+                "chinese": "先",
+                "pinyin": "xiān",
+                "english": "first"
+              },
+              {
+                "chinese": "休息",
+                "pinyin": "xiūxi",
+                "english": "rest"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "好的，你需要帮忙吗？",
+            "b": "Hǎo de, nǐ xūyào bāngmáng ma?",
+            "c": "OK, do you need help?",
+            "wordAlignments": [
+              {
+                "chinese": "好的",
+                "pinyin": "Hǎo de",
+                "english": "OK"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "你",
+                "pinyin": "nǐ",
+                "english": "you"
+              },
+              {
+                "chinese": "需要",
+                "pinyin": "xūyào",
+                "english": "need"
+              },
+              {
+                "chinese": "帮忙",
+                "pinyin": "bāngmáng",
+                "english": "help"
+              },
+              {
+                "chinese": "吗",
+                "pinyin": "ma",
+                "english": "(question)"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
+            ]
+          },
+          {
+            "a": "不用，我一个人可以。太太先坐一会儿吧。",
+            "b": "Bú yòng, wǒ yí ge rén kěyǐ. Tàitai xiān zuò yíhuìr ba.",
+            "c": "No need, I can handle it alone. Wife, sit down for a bit.",
+            "wordAlignments": [
+              {
+                "chinese": "不用",
+                "pinyin": "Bú yòng",
+                "english": "No need"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "我",
+                "pinyin": "wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "一个",
+                "pinyin": "yí ge",
+                "english": "one"
+              },
+              {
+                "chinese": "人",
+                "pinyin": "rén",
+                "english": "person"
+              },
+              {
+                "chinese": "可以",
+                "pinyin": "kěyǐ",
+                "english": "can"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              },
+              {
+                "chinese": "太太",
+                "pinyin": "Tàitai",
+                "english": "Wife"
+              },
+              {
+                "chinese": "先",
+                "pinyin": "xiān",
+                "english": "first"
+              },
+              {
+                "chinese": "坐",
+                "pinyin": "zuò",
+                "english": "sit"
+              },
+              {
+                "chinese": "一会儿",
+                "pinyin": "yíhuìr",
+                "english": "a while"
+              },
+              {
+                "chinese": "吧",
+                "pinyin": "ba",
+                "english": "(suggestion)"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          }
+        ]
+      },
+      "dialogue_002": {
+        "title": "Ordering Hot Pot",
+        "description": "小明 and 小美 order dinner at a hot pot restaurant in Chongqing",
+        "lines": [
+          {
+            "a": "这家火锅店看起来不错！",
+            "b": "Zhè jiā huǒguō diàn kàn qǐlai búcuò!",
+            "c": "This hot pot restaurant looks pretty good!",
+            "wordAlignments": [
+              {
+                "chinese": "这",
+                "pinyin": "Zhè",
+                "english": "This"
+              },
+              {
+                "chinese": "家",
+                "pinyin": "jiā",
+                "english": "(measure word)"
+              },
+              {
+                "chinese": "火锅",
+                "pinyin": "huǒguō",
+                "english": "hot pot"
+              },
+              {
+                "chinese": "店",
+                "pinyin": "diàn",
+                "english": "restaurant"
+              },
+              {
+                "chinese": "看起来",
+                "pinyin": "kàn qǐlai",
+                "english": "looks"
+              },
+              {
+                "chinese": "不错",
+                "pinyin": "búcuò",
+                "english": "pretty good"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              }
+            ]
+          },
+          {
+            "a": "我们看看菜单吧。",
+            "b": "Wǒmen kànkan càidān ba.",
+            "c": "Let's look at the menu.",
+            "wordAlignments": [
+              {
+                "chinese": "我们",
+                "pinyin": "Wǒmen",
+                "english": "We"
+              },
+              {
+                "chinese": "看看",
+                "pinyin": "kànkan",
+                "english": "take a look at"
+              },
+              {
+                "chinese": "菜单",
+                "pinyin": "càidān",
+                "english": "menu"
+              },
+              {
+                "chinese": "吧",
+                "pinyin": "ba",
+                "english": "(suggestion)"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "小明，这个太辣了，我吃不了。",
+            "b": "Xiǎo Míng, zhège tài là le, wǒ chī bu liǎo.",
+            "c": "Xiaoming, this is too spicy, I can't eat it.",
+            "wordAlignments": [
+              {
+                "chinese": "小明",
+                "pinyin": "Xiǎo Míng",
+                "english": "Xiaoming"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "这个",
+                "pinyin": "zhège",
+                "english": "this"
+              },
+              {
+                "chinese": "太",
+                "pinyin": "tài",
+                "english": "too"
+              },
+              {
+                "chinese": "辣",
+                "pinyin": "là",
+                "english": "spicy"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(excessively)"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "我",
+                "pinyin": "wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "吃不了",
+                "pinyin": "chī bu liǎo",
+                "english": "can't eat"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "没关系，我们点鸳鸯锅，一半辣一半不辣。",
+            "b": "Méi guānxi, wǒmen diǎn yuānyāng guō, yí bàn là yí bàn bú là.",
+            "c": "No worries, let's order a split pot, half spicy half not spicy.",
+            "wordAlignments": [
+              {
+                "chinese": "没关系",
+                "pinyin": "Méi guānxi",
+                "english": "No worries"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "我们",
+                "pinyin": "wǒmen",
+                "english": "we"
+              },
+              {
+                "chinese": "点",
+                "pinyin": "diǎn",
+                "english": "order"
+              },
+              {
+                "chinese": "鸳鸯",
+                "pinyin": "yuānyāng",
+                "english": "mandarin duck (split)"
+              },
+              {
+                "chinese": "锅",
+                "pinyin": "guō",
+                "english": "pot"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "一半",
+                "pinyin": "yí bàn",
+                "english": "half"
+              },
+              {
+                "chinese": "辣",
+                "pinyin": "là",
+                "english": "spicy"
+              },
+              {
+                "chinese": "一半",
+                "pinyin": "yí bàn",
+                "english": "half"
+              },
+              {
+                "chinese": "不辣",
+                "pinyin": "bú là",
+                "english": "not spicy"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "好主意！再要两杯水。",
+            "b": "Hǎo zhǔyi! Zài yào liǎng bēi shuǐ.",
+            "c": "Good idea! Also get two glasses of water.",
+            "wordAlignments": [
+              {
+                "chinese": "好",
+                "pinyin": "Hǎo",
+                "english": "Good"
+              },
+              {
+                "chinese": "主意",
+                "pinyin": "zhǔyi",
+                "english": "idea"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              },
+              {
+                "chinese": "再",
+                "pinyin": "Zài",
+                "english": "Also"
+              },
+              {
+                "chinese": "要",
+                "pinyin": "yào",
+                "english": "get"
+              },
+              {
+                "chinese": "两",
+                "pinyin": "liǎng",
+                "english": "two"
+              },
+              {
+                "chinese": "杯",
+                "pinyin": "bēi",
+                "english": "glasses of"
+              },
+              {
+                "chinese": "水",
+                "pinyin": "shuǐ",
+                "english": "water"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "这个牛肉真好吃！",
+            "b": "Zhège niúròu zhēn hǎochī!",
+            "c": "This beef is really delicious!",
+            "wordAlignments": [
+              {
+                "chinese": "这个",
+                "pinyin": "Zhège",
+                "english": "This"
+              },
+              {
+                "chinese": "牛肉",
+                "pinyin": "niúròu",
+                "english": "beef"
+              },
+              {
+                "chinese": "真",
+                "pinyin": "zhēn",
+                "english": "really"
+              },
+              {
+                "chinese": "好吃",
+                "pinyin": "hǎochī",
+                "english": "delicious"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              }
+            ]
+          }
+        ]
+      },
+      "dialogue_003": {
+        "title": "Hiking in Zhangjiajie",
+        "description": "小明 and 小美 go hiking and enjoy the mountain scenery",
+        "lines": [
+          {
+            "a": "今天我们去爬山吧！",
+            "b": "Jīntiān wǒmen qù pá shān ba!",
+            "c": "Let's go hiking today!",
+            "wordAlignments": [
+              {
+                "chinese": "今天",
+                "pinyin": "Jīntiān",
+                "english": "Today"
+              },
+              {
+                "chinese": "我们",
+                "pinyin": "wǒmen",
+                "english": "we"
+              },
+              {
+                "chinese": "去",
+                "pinyin": "qù",
+                "english": "go"
+              },
+              {
+                "chinese": "爬山",
+                "pinyin": "pá shān",
+                "english": "hiking"
+              },
+              {
+                "chinese": "吧",
+                "pinyin": "ba",
+                "english": "(suggestion)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              }
+            ]
+          },
+          {
+            "a": "好啊！听说这里的风景很美。",
+            "b": "Hǎo a! Tīngshuō zhèlǐ de fēngjǐng hěn měi.",
+            "c": "Sure! I heard the scenery here is very beautiful.",
+            "wordAlignments": [
+              {
+                "chinese": "好",
+                "pinyin": "Hǎo",
+                "english": "Sure"
+              },
+              {
+                "chinese": "啊",
+                "pinyin": "a",
+                "english": "(exclamation)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              },
+              {
+                "chinese": "听说",
+                "pinyin": "Tīngshuō",
+                "english": "I heard"
+              },
+              {
+                "chinese": "这里",
+                "pinyin": "zhèlǐ",
+                "english": "here"
+              },
+              {
+                "chinese": "的",
+                "pinyin": "de",
+                "english": "'s"
+              },
+              {
+                "chinese": "风景",
+                "pinyin": "fēngjǐng",
+                "english": "scenery"
+              },
+              {
+                "chinese": "很",
+                "pinyin": "hěn",
+                "english": "very"
+              },
+              {
+                "chinese": "美",
+                "pinyin": "měi",
+                "english": "beautiful"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "小心！这里的路很滑。",
+            "b": "Xiǎoxīn! Zhèlǐ de lù hěn huá.",
+            "c": "Be careful! The path here is very slippery.",
+            "wordAlignments": [
+              {
+                "chinese": "小心",
+                "pinyin": "Xiǎoxīn",
+                "english": "Be careful"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              },
+              {
+                "chinese": "这里",
+                "pinyin": "Zhèlǐ",
+                "english": "Here"
+              },
+              {
+                "chinese": "的",
+                "pinyin": "de",
+                "english": "'s"
+              },
+              {
+                "chinese": "路",
+                "pinyin": "lù",
+                "english": "path"
+              },
+              {
+                "chinese": "很",
+                "pinyin": "hěn",
+                "english": "very"
+              },
+              {
+                "chinese": "滑",
+                "pinyin": "huá",
+                "english": "slippery"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "谢谢！你看，风景太美了，我想照相。",
+            "b": "Xièxie! Nǐ kàn, fēngjǐng tài měi le, wǒ xiǎng zhào xiàng.",
+            "c": "Thanks! Look, the scenery is so beautiful, I want to take a photo.",
+            "wordAlignments": [
+              {
+                "chinese": "谢谢",
+                "pinyin": "Xièxie",
+                "english": "Thanks"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              },
+              {
+                "chinese": "你",
+                "pinyin": "Nǐ",
+                "english": "You"
+              },
+              {
+                "chinese": "看",
+                "pinyin": "kàn",
+                "english": "look"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "风景",
+                "pinyin": "fēngjǐng",
+                "english": "scenery"
+              },
+              {
+                "chinese": "太",
+                "pinyin": "tài",
+                "english": "so"
+              },
+              {
+                "chinese": "美",
+                "pinyin": "měi",
+                "english": "beautiful"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(emphasis)"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "我",
+                "pinyin": "wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "想",
+                "pinyin": "xiǎng",
+                "english": "want to"
+              },
+              {
+                "chinese": "照相",
+                "pinyin": "zhào xiàng",
+                "english": "take a photo"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "好，我帮你拍。你带水了吗？",
+            "b": "Hǎo, wǒ bāng nǐ pāi. Nǐ dài shuǐ le ma?",
+            "c": "OK, I'll take it for you. Did you bring water?",
+            "wordAlignments": [
+              {
+                "chinese": "好",
+                "pinyin": "Hǎo",
+                "english": "OK"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "我",
+                "pinyin": "wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "帮",
+                "pinyin": "bāng",
+                "english": "help"
+              },
+              {
+                "chinese": "你",
+                "pinyin": "nǐ",
+                "english": "you"
+              },
+              {
+                "chinese": "拍",
+                "pinyin": "pāi",
+                "english": "take (photo)"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              },
+              {
+                "chinese": "你",
+                "pinyin": "Nǐ",
+                "english": "You"
+              },
+              {
+                "chinese": "带",
+                "pinyin": "dài",
+                "english": "bring"
+              },
+              {
+                "chinese": "水",
+                "pinyin": "shuǐ",
+                "english": "water"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(completed)"
+              },
+              {
+                "chinese": "吗",
+                "pinyin": "ma",
+                "english": "(question)"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
+            ]
+          },
+          {
+            "a": "带了！爬山一定要带水。",
+            "b": "Dài le! Pá shān yídìng yào dài shuǐ.",
+            "c": "Yes! You must bring water when hiking.",
+            "wordAlignments": [
+              {
+                "chinese": "带",
+                "pinyin": "Dài",
+                "english": "Brought"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(completed)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              },
+              {
+                "chinese": "爬山",
+                "pinyin": "Pá shān",
+                "english": "Hiking"
+              },
+              {
+                "chinese": "一定",
+                "pinyin": "yídìng",
+                "english": "must"
+              },
+              {
+                "chinese": "要",
+                "pinyin": "yào",
+                "english": "need to"
+              },
+              {
+                "chinese": "带",
+                "pinyin": "dài",
+                "english": "bring"
+              },
+              {
+                "chinese": "水",
+                "pinyin": "shuǐ",
+                "english": "water"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          }
+        ]
+      },
+      "dialogue_004": {
+        "title": "Finding the Restroom",
+        "description": "小美 gets lost looking for the restroom and asks for help",
+        "lines": [
+          {
+            "a": "小明，厕所在哪儿？",
+            "b": "Xiǎo Míng, cèsuǒ zài nǎr?",
+            "c": "Xiaoming, where is the restroom?",
+            "wordAlignments": [
+              {
+                "chinese": "小明",
+                "pinyin": "Xiǎo Míng",
+                "english": "Xiaoming"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "厕所",
+                "pinyin": "cèsuǒ",
+                "english": "restroom"
+              },
+              {
+                "chinese": "在",
+                "pinyin": "zài",
+                "english": "is at"
+              },
+              {
+                "chinese": "哪儿",
+                "pinyin": "nǎr",
+                "english": "where"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
+            ]
+          },
+          {
+            "a": "我不知道，你去问一下吧。",
+            "b": "Wǒ bù zhīdào, nǐ qù wèn yíxià ba.",
+            "c": "I don't know, go ask someone.",
+            "wordAlignments": [
+              {
+                "chinese": "我",
+                "pinyin": "Wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "不",
+                "pinyin": "bù",
+                "english": "don't"
+              },
+              {
+                "chinese": "知道",
+                "pinyin": "zhīdào",
+                "english": "know"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "你",
+                "pinyin": "nǐ",
+                "english": "you"
+              },
+              {
+                "chinese": "去",
+                "pinyin": "qù",
+                "english": "go"
+              },
+              {
+                "chinese": "问",
+                "pinyin": "wèn",
+                "english": "ask"
+              },
+              {
+                "chinese": "一下",
+                "pinyin": "yíxià",
+                "english": "a moment"
+              },
+              {
+                "chinese": "吧",
+                "pinyin": "ba",
+                "english": "(suggestion)"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "我去找了，可是我迷路了！",
+            "b": "Wǒ qù zhǎo le, kěshì wǒ mílù le!",
+            "c": "I went to look, but I got lost!",
+            "wordAlignments": [
+              {
+                "chinese": "我",
+                "pinyin": "Wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "去",
+                "pinyin": "qù",
+                "english": "went"
+              },
+              {
+                "chinese": "找",
+                "pinyin": "zhǎo",
+                "english": "to look for"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(completed)"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "可是",
+                "pinyin": "kěshì",
+                "english": "but"
+              },
+              {
+                "chinese": "我",
+                "pinyin": "wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "迷路",
+                "pinyin": "mílù",
+                "english": "got lost"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(completed)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              }
+            ]
+          },
+          {
+            "a": "别着急，我帮你找。请问，厕所在哪儿？",
+            "b": "Bié zhāojí, wǒ bāng nǐ zhǎo. Qǐngwèn, cèsuǒ zài nǎr?",
+            "c": "Don't worry, I'll help you find it. Excuse me, where is the restroom?",
+            "wordAlignments": [
+              {
+                "chinese": "别",
+                "pinyin": "Bié",
+                "english": "Don't"
+              },
+              {
+                "chinese": "着急",
+                "pinyin": "zhāojí",
+                "english": "worry"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "我",
+                "pinyin": "wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "帮",
+                "pinyin": "bāng",
+                "english": "help"
+              },
+              {
+                "chinese": "你",
+                "pinyin": "nǐ",
+                "english": "you"
+              },
+              {
+                "chinese": "找",
+                "pinyin": "zhǎo",
+                "english": "find"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              },
+              {
+                "chinese": "请问",
+                "pinyin": "Qǐngwèn",
+                "english": "Excuse me"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "厕所",
+                "pinyin": "cèsuǒ",
+                "english": "restroom"
+              },
+              {
+                "chinese": "在",
+                "pinyin": "zài",
+                "english": "is at"
+              },
+              {
+                "chinese": "哪儿",
+                "pinyin": "nǎr",
+                "english": "where"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
+            ]
+          },
+          {
+            "a": "谢谢你帮忙！下次我不会迷路了。",
+            "b": "Xièxie nǐ bāngmáng! Xià cì wǒ bú huì mílù le.",
+            "c": "Thank you for helping! Next time I won't get lost.",
+            "wordAlignments": [
+              {
+                "chinese": "谢谢",
+                "pinyin": "Xièxie",
+                "english": "Thank"
+              },
+              {
+                "chinese": "你",
+                "pinyin": "nǐ",
+                "english": "you"
+              },
+              {
+                "chinese": "帮忙",
+                "pinyin": "bāngmáng",
+                "english": "for helping"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              },
+              {
+                "chinese": "下次",
+                "pinyin": "Xià cì",
+                "english": "Next time"
+              },
+              {
+                "chinese": "我",
+                "pinyin": "wǒ",
+                "english": "I"
+              },
+              {
+                "chinese": "不会",
+                "pinyin": "bú huì",
+                "english": "won't"
+              },
+              {
+                "chinese": "迷路",
+                "pinyin": "mílù",
+                "english": "get lost"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(anymore)"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          }
+        ]
+      },
+      "dialogue_005": {
+        "title": "Taking Photos at Scenic Spots",
+        "description": "小明 and 小美 enjoy sightseeing and take photos together",
+        "lines": [
+          {
+            "a": "太太，这里的风景真漂亮！",
+            "b": "Tàitai, zhèlǐ de fēngjǐng zhēn piàoliang!",
+            "c": "Wife, the scenery here is really beautiful!",
+            "wordAlignments": [
+              {
+                "chinese": "太太",
+                "pinyin": "Tàitai",
+                "english": "Wife"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "这里",
+                "pinyin": "zhèlǐ",
+                "english": "here"
+              },
+              {
+                "chinese": "的",
+                "pinyin": "de",
+                "english": "'s"
+              },
+              {
+                "chinese": "风景",
+                "pinyin": "fēngjǐng",
+                "english": "scenery"
+              },
+              {
+                "chinese": "真",
+                "pinyin": "zhēn",
+                "english": "really"
+              },
+              {
+                "chinese": "漂亮",
+                "pinyin": "piàoliang",
+                "english": "beautiful"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              }
+            ]
+          },
+          {
+            "a": "是啊！我们一起照相吧。",
+            "b": "Shì a! Wǒmen yìqǐ zhào xiàng ba.",
+            "c": "Yes! Let's take a photo together.",
+            "wordAlignments": [
+              {
+                "chinese": "是",
+                "pinyin": "Shì",
+                "english": "Yes"
+              },
+              {
+                "chinese": "啊",
+                "pinyin": "a",
+                "english": "(agreement)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              },
+              {
+                "chinese": "我们",
+                "pinyin": "Wǒmen",
+                "english": "We"
+              },
+              {
+                "chinese": "一起",
+                "pinyin": "yìqǐ",
+                "english": "together"
+              },
+              {
+                "chinese": "照相",
+                "pinyin": "zhào xiàng",
+                "english": "take a photo"
+              },
+              {
+                "chinese": "吧",
+                "pinyin": "ba",
+                "english": "(suggestion)"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          },
+          {
+            "a": "请问，可以帮我们照相吗？",
+            "b": "Qǐngwèn, kěyǐ bāng wǒmen zhào xiàng ma?",
+            "c": "Excuse me, can you take a photo for us?",
+            "wordAlignments": [
+              {
+                "chinese": "请问",
+                "pinyin": "Qǐngwèn",
+                "english": "Excuse me"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "可以",
+                "pinyin": "kěyǐ",
+                "english": "can"
+              },
+              {
+                "chinese": "帮",
+                "pinyin": "bāng",
+                "english": "help"
+              },
+              {
+                "chinese": "我们",
+                "pinyin": "wǒmen",
+                "english": "us"
+              },
+              {
+                "chinese": "照相",
+                "pinyin": "zhào xiàng",
+                "english": "take a photo"
+              },
+              {
+                "chinese": "吗",
+                "pinyin": "ma",
+                "english": "(question)"
+              },
+              {
+                "chinese": "？",
+                "pinyin": "?",
+                "english": "?"
+              }
+            ]
+          },
+          {
+            "a": "这次旅游太开心了！",
+            "b": "Zhè cì lǚyóu tài kāixīn le!",
+            "c": "This trip has been so much fun!",
+            "wordAlignments": [
+              {
+                "chinese": "这次",
+                "pinyin": "Zhè cì",
+                "english": "This time"
+              },
+              {
+                "chinese": "旅游",
+                "pinyin": "lǚyóu",
+                "english": "trip"
+              },
+              {
+                "chinese": "太",
+                "pinyin": "tài",
+                "english": "so"
+              },
+              {
+                "chinese": "开心",
+                "pinyin": "kāixīn",
+                "english": "happy"
+              },
+              {
+                "chinese": "了",
+                "pinyin": "le",
+                "english": "(emphasis)"
+              },
+              {
+                "chinese": "！",
+                "pinyin": "!",
+                "english": "!"
+              }
+            ]
+          },
+          {
+            "a": "是啊，太太。下次我们再来旅游。",
+            "b": "Shì a, tàitai. Xià cì wǒmen zài lái lǚyóu.",
+            "c": "Yes, wife. Next time we'll travel here again.",
+            "wordAlignments": [
+              {
+                "chinese": "是",
+                "pinyin": "Shì",
+                "english": "Yes"
+              },
+              {
+                "chinese": "啊",
+                "pinyin": "a",
+                "english": "(agreement)"
+              },
+              {
+                "chinese": "，",
+                "pinyin": ",",
+                "english": ","
+              },
+              {
+                "chinese": "太太",
+                "pinyin": "tàitai",
+                "english": "wife"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              },
+              {
+                "chinese": "下次",
+                "pinyin": "Xià cì",
+                "english": "Next time"
+              },
+              {
+                "chinese": "我们",
+                "pinyin": "wǒmen",
+                "english": "we"
+              },
+              {
+                "chinese": "再",
+                "pinyin": "zài",
+                "english": "again"
+              },
+              {
+                "chinese": "来",
+                "pinyin": "lái",
+                "english": "come"
+              },
+              {
+                "chinese": "旅游",
+                "pinyin": "lǚyóu",
+                "english": "travel"
+              },
+              {
+                "chinese": "。",
+                "pinyin": ".",
+                "english": "."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

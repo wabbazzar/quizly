@@ -1,0 +1,938 @@
+{
+  "id": "chinese_chpt14_1",
+  "metadata": {
+    "deck_name": "Chinese Chapter 14 Part 1",
+    "abbreviated_title": "Chp 14 pt 1",
+    "deck_subtitle": "Birthday Party — Let's Go to a Party!",
+    "description": "Vocabulary from Integrated Chinese Lesson 14 Dialogue I: invitations, gifts to bring (drinks, fruit, flowers), measure words, and arranging a ride.",
+    "category": "Language Learning",
+    "available_levels": [
+      1,
+      2,
+      3
+    ],
+    "available_sides": 7,
+    "side_labels": {
+      "side_a": "english",
+      "side_b": "pinyin",
+      "side_c": "characters",
+      "side_d": "description",
+      "side_e": "example (pinyin)",
+      "side_f": "example translation",
+      "side_g": "usage notes"
+    },
+    "card_count": 19,
+    "difficulty": "intermediate",
+    "tags": [
+      "chinese",
+      "mandarin",
+      "birthday",
+      "party",
+      "gifts",
+      "fruit",
+      "vocabulary",
+      "chapter14"
+    ],
+    "version": "1.0.0",
+    "created_date": "2026-05-05T00:00:00Z",
+    "last_updated": "2026-05-05T00:00:00Z",
+    "family_id": "chinese"
+  },
+  "content": [
+    {
+      "card_id": "card-001",
+      "idx": 0,
+      "name": "dance_party",
+      "side_a": "Dance party; ball",
+      "side_b": "wǔhuì",
+      "side_c": "舞会",
+      "side_d": "noun",
+      "side_e": "Wǎnshang wǒmen zài tā jiā kāi wǔhuì.",
+      "side_f": "Tonight we're throwing a dance party at her place.",
+      "side_g": "舞 means 'dance' and 会 means 'gathering/meeting,' so 舞会 is literally a 'dancing gathering.' Use 开舞会 for 'throw a dance party,' 去舞会 for 'go to a dance party.' Distinct from 派对 (pàiduì, casual party loanword) — 舞会 implies dancing is the point. Also appears in 生日舞会 (birthday dance party), 化装舞会 (masquerade ball).",
+      "level": 1
+    },
+    {
+      "card_id": "card-002",
+      "idx": 1,
+      "name": "older_female_cousin",
+      "side_a": "Older female cousin (mother's side, or father's sister's daughter)",
+      "side_b": "biǎojiě",
+      "side_c": "表姐",
+      "side_d": "noun",
+      "side_e": "Zhè shì wǒ biǎojiě, tā bǐ wǒ dà liǎng suì.",
+      "side_f": "This is my older female cousin; she's two years older than me.",
+      "side_g": "表 marks cousins through your mother or your father's sister; 堂 (táng) marks cousins through your father's brother. 姐 = older sister, so 表姐 is specifically an older female cousin. Other forms: 表妹 (younger), 表哥 (older male), 表弟 (younger male). Chinese kinship is precise — there is no generic 'cousin' word.",
+      "level": 1
+    },
+    {
+      "card_id": "card-003",
+      "idx": 2,
+      "name": "middle_school",
+      "side_a": "Middle school; secondary school",
+      "side_b": "zhōngxué",
+      "side_c": "中学",
+      "side_d": "noun",
+      "side_e": "Tā shì wǒ de zhōngxué tóngxué.",
+      "side_f": "She's my middle-school classmate.",
+      "side_g": "中 means 'middle' and 学 is short for 学校 (school). 中学 covers grades 7-12 in China — initial half is 初中 (chūzhōng, junior high) and the upper half is 高中 (gāozhōng, senior high). Compare with 小学 (xiǎoxué, elementary) and 大学 (dàxué, college/university). 中学同学 means 'middle-school classmate,' a common way to introduce old friends.",
+      "level": 1
+    },
+    {
+      "card_id": "card-004",
+      "idx": 3,
+      "name": "to_give_as_gift",
+      "side_a": "To give (as a gift); to send; to deliver",
+      "side_b": "sòng",
+      "side_c": "送",
+      "side_d": "verb",
+      "side_e": "Wǒ mǎi le yì běn shū sòng gěi tā.",
+      "side_f": "I bought a book to give to her.",
+      "side_g": "送 covers giving (a gift), sending (a delivery), and seeing someone off. Pattern: 送 + recipient (with 给) + item, e.g. 送给她一本书 or 送一本书给她. Different from 给 (gěi, to give plainly) — 送 implies generosity or ceremony. Also 送行 (see off), 送礼 (give a gift), 送货 (deliver goods).",
+      "level": 1
+    },
+    {
+      "card_id": "card-005",
+      "idx": 4,
+      "name": "gift",
+      "side_a": "Gift; present",
+      "side_b": "lǐwù",
+      "side_c": "礼物",
+      "side_d": "noun",
+      "side_e": "Nǐ yào sòng gěi Xiǎoyīn shénme shēngrì lǐwù?",
+      "side_f": "What birthday gift are you giving Xiaoyin?",
+      "side_g": "礼 means 'courtesy/ceremony' and 物 means 'thing,' so 礼物 is literally a 'courtesy thing.' Pair with 送 (give) or 收 (receive): 送礼物, 收礼物. Specific kinds: 生日礼物 (birthday gift), 结婚礼物 (wedding gift), 圣诞礼物 (Christmas gift). Avoid 给 with 礼物 — use 送 for 'give a gift.'",
+      "level": 1
+    },
+    {
+      "card_id": "card-006",
+      "idx": 5,
+      "name": "measure_book",
+      "side_a": "Measure word for books and bound items",
+      "side_b": "běn",
+      "side_c": "本",
+      "side_d": "measure word",
+      "side_e": "Wǒ mǎi le yì běn shū hé sān běn zázhì.",
+      "side_f": "I bought one book and three magazines.",
+      "side_g": "本 counts books, magazines, notebooks, dictionaries — anything bound. Pattern: number + 本 + noun, as in 一本书, 两本词典. Don't use 个 for books — use 本. As a separate word 本 also means 'this/own' (本人 = oneself, 本店 = this shop), but as a measure it's strictly bound items.",
+      "level": 1
+    },
+    {
+      "card_id": "card-007",
+      "idx": 6,
+      "name": "beverage",
+      "side_a": "Beverage; drink",
+      "side_b": "yǐnliào",
+      "side_c": "饮料",
+      "side_d": "noun",
+      "side_e": "Yǐnliào huòzhě shuǐguǒ dōu kěyǐ.",
+      "side_f": "Drinks or fruit, either is fine.",
+      "side_g": "饮 means 'to drink' (literary) and 料 means 'material,' so 饮料 is the catch-all for non-alcoholic drinks — sodas, juices, sports drinks. For alcohol use 酒 (jiǔ); for hot drinks like tea/coffee, you'd say 茶 or 咖啡 directly. On menus 饮料 is the section header. 喝点饮料 = 'have a drink.'",
+      "level": 1
+    },
+    {
+      "card_id": "card-008",
+      "idx": 7,
+      "name": "fruit",
+      "side_a": "Fruit",
+      "side_b": "shuǐguǒ",
+      "side_c": "水果",
+      "side_d": "noun",
+      "side_e": "Xiǎoyīn ài chī shuǐguǒ.",
+      "side_f": "Xiaoyin loves to eat fruit.",
+      "side_g": "水 means 'water' and 果 means 'fruit,' so 水果 is literally 'watery fruit' — fresh fruit specifically. Dried fruit is 干果 (gānguǒ); nuts overlap with 坚果 (jiānguǒ). 吃水果 is the standard verb pairing. 水果店 = fruit shop, 水果汁 = fruit juice. Common gift to bring when visiting someone in China.",
+      "level": 1
+    },
+    {
+      "card_id": "card-009",
+      "idx": 8,
+      "name": "measure_bunch",
+      "side_a": "Measure word for bunches, bouquets, and chairs",
+      "side_b": "bǎ",
+      "side_c": "把",
+      "side_d": "measure word",
+      "side_e": "Wǒ zài mǎi yì bǎ huār.",
+      "side_f": "I'll also buy a bouquet of flowers.",
+      "side_g": "把 counts things you can grasp by a handle — chairs (一把椅子), umbrellas (一把伞), knives (一把刀) — and bunches like flowers (一把花) or grass. As a verb 把 means 'to hold,' which is the etymological link. Don't confuse with the 把-construction grammar particle, which is a different use of the same character.",
+      "level": 1
+    },
+    {
+      "card_id": "card-010",
+      "idx": 9,
+      "name": "flower",
+      "side_a": "Flower",
+      "side_b": "huā",
+      "side_c": "花",
+      "side_d": "noun",
+      "side_e": "Tā sòng le wǒ yì bǎ hěn piàoliang de huār.",
+      "side_f": "He gave me a beautiful bouquet of flowers.",
+      "side_g": "花 is the standalone noun for flower; the diminutive 花儿 (huār) is common in northern speech. Measure words: 一朵花 (one bloom), 一束花 / 一把花 (a bouquet). 花 also appears as a verb meaning 'to spend' (money or time): 花钱, 花时间 — same character, different sense.",
+      "level": 1
+    },
+    {
+      "card_id": "card-011",
+      "idx": 10,
+      "name": "to_love",
+      "side_a": "To love; to like; to be fond of",
+      "side_b": "ài",
+      "side_c": "爱",
+      "side_d": "verb",
+      "side_e": "Xiǎoyīn ài chī shuǐguǒ.",
+      "side_f": "Xiaoyin loves to eat fruit.",
+      "side_g": "爱 covers a wide affection range — 'love (a person)' and 'be fond of (an activity).' 爱 + verb means 'love doing,' as in 爱吃 (love eating), 爱看 (love watching). Stronger than 喜欢 (xǐhuan, like). For romantic love specifically, 爱情 (àiqíng) is the noun, 我爱你 the declaration. 最爱 = 'love most/most loved.'",
+      "level": 1
+    },
+    {
+      "card_id": "card-012",
+      "idx": 11,
+      "name": "apple",
+      "side_a": "Apple",
+      "side_b": "píngguǒ",
+      "side_c": "苹果",
+      "side_d": "noun",
+      "side_e": "Wǒ zài mǎi yì xiē píngguǒ, lí hé xīguā ba.",
+      "side_f": "I'll also buy some apples, pears, and watermelons.",
+      "side_g": "苹 (apple-tree) + 果 (fruit) = apple. Measure word is 个 (一个苹果) — apples don't take a special MW. Note 苹果公司 = Apple (the company) and 苹果手机 = iPhone. Distinct from 平 (píng, flat) which sounds the same — context disambiguates.",
+      "level": 1
+    },
+    {
+      "card_id": "card-013",
+      "idx": 12,
+      "name": "pear",
+      "side_a": "Pear",
+      "side_b": "lí",
+      "side_c": "梨",
+      "side_d": "noun",
+      "side_e": "Wǒ ài chī lí, bù tài ài chī píngguǒ.",
+      "side_f": "I love pears, but don't really like apples.",
+      "side_g": "梨 is a single character for 'pear.' Note the homophone 离 (lí, 'leave/distance') — different character, same pronunciation. Cultural note: in Chinese custom, sharing a pear (分梨 fēn lí) sounds like 分离 (separation), so couples avoid splitting one. Common pairing: 雪梨 (snow pear), 梨汁 (pear juice).",
+      "level": 1
+    },
+    {
+      "card_id": "card-014",
+      "idx": 13,
+      "name": "watermelon",
+      "side_a": "Watermelon",
+      "side_b": "xīguā",
+      "side_c": "西瓜",
+      "side_d": "noun",
+      "side_e": "Xià tiān chī xīguā zuì shūfu.",
+      "side_f": "Eating watermelon in summer is the most refreshing.",
+      "side_g": "西 means 'west' and 瓜 means 'melon/gourd' (the fruit reportedly came west to China via the Silk Road). Other 瓜 family: 黄瓜 (cucumber), 南瓜 (pumpkin), 冬瓜 (winter melon). Measure word: 一个西瓜 for whole, 一片西瓜 for a slice. Chinese summer staple, often served chilled.",
+      "level": 1
+    },
+    {
+      "card_id": "card-015",
+      "idx": 14,
+      "name": "to_live",
+      "side_a": "To live (in a certain place); to reside",
+      "side_b": "zhù",
+      "side_c": "住",
+      "side_d": "verb",
+      "side_e": "Nǐ zhù de dìfang lí Xiǎoyīn jiā hěn yuǎn.",
+      "side_f": "Where you live is very far from Xiaoyin's house.",
+      "side_g": "住 = 'reside' (a place of dwelling), distinct from 生活 (shēnghuó, to live a life) and 活 (huó, to be alive). Pattern: 住在 + place — 我住在北京. Also as part of 住的地方 (the place [one] lives), and 住院 (be hospitalized). Don't use 住 for short stays — use 待 (dāi) or 留 (liú).",
+      "level": 1
+    },
+    {
+      "card_id": "card-016",
+      "idx": 15,
+      "name": "heavy",
+      "side_a": "Heavy; serious",
+      "side_b": "zhòng",
+      "side_c": "重",
+      "side_d": "adjective",
+      "side_e": "Shuǐguǒ hěn zhòng, wǒ kāi chē lái jiē nǐ.",
+      "side_f": "The fruit is heavy, so I'll drive over to pick you up.",
+      "side_g": "重 covers physical weight ('heavy') and figurative weight ('serious, important'). 病很重 = the illness is serious; 任务很重 = the task is heavy. Opposite is 轻 (qīng, light). Note the second pronunciation: 重 (chóng) means 'again, repeat' — same character, different reading (重新 chóngxīn = anew).",
+      "level": 1
+    },
+    {
+      "card_id": "card-017",
+      "idx": 16,
+      "name": "to_pick_up",
+      "side_a": "To pick (someone) up; to meet; to welcome",
+      "side_b": "jiē",
+      "side_c": "接",
+      "side_d": "verb",
+      "side_e": "Wǒ kāi chē lái jiē nǐ, wǒmen yìqǐ qù ba.",
+      "side_f": "I'll drive over to pick you up; let's go together.",
+      "side_g": "接 = meet someone arriving (at airport, train, home) and bring them along — opposite of 送 (see someone off). 去机场接朋友 = go to the airport to pick up a friend. Also extends to 'answer' (接电话 answer the phone) and 'connect' (接通). Don't confuse with 收 (shōu, receive a thing) — 接 is for receiving people or calls.",
+      "level": 1
+    },
+    {
+      "card_id": "card-018",
+      "idx": 17,
+      "name": "building_floor",
+      "side_a": "Multi-story building; floor (of a multi-level building)",
+      "side_b": "lóu",
+      "side_c": "楼",
+      "side_d": "noun",
+      "side_e": "Wǒ liù diǎn bàn zài lóu xià děng nǐ.",
+      "side_f": "I'll wait for you downstairs at six-thirty.",
+      "side_g": "楼 means both the whole building (一座楼 a building) and individual floors (三楼 third floor). Compounds: 楼上 (upstairs), 楼下 (downstairs), 教学楼 (teaching building), 公寓楼 (apartment building). Floor numbering matches American style — 一楼 = ground/first floor. For an unspecified floor use 层 (céng) instead.",
+      "level": 1
+    },
+    {
+      "card_id": "card-019",
+      "idx": 18,
+      "name": "wang_hong",
+      "side_a": "Wang Hong (a personal name)",
+      "side_b": "Wáng Hóng",
+      "side_c": "王红",
+      "side_d": "proper noun",
+      "side_e": "Tīngshuō hái yǒu Xiǎoyīn de zhōngxué tóngxué Wáng Hóng.",
+      "side_f": "I heard Xiaoyin's middle-school classmate Wang Hong is also coming.",
+      "side_g": "王 (wáng) is one of the most common Chinese surnames, originally meaning 'king.' 红 (hóng) means 'red,' a common given name for women evoking fortune and warmth. In the textbook narrative, 王红 is the younger sister of 王朋 (Wang Peng) and a classmate of 高小音. Family name comes first; the full name is 王红, not 红王.",
+      "level": 1
+    }
+  ],
+  "reading": {
+    "sides": {
+      "a": "characters",
+      "b": "pinyin",
+      "c": "english"
+    },
+    "tokenization": {
+      "unit": {
+        "a": "character",
+        "b": "space",
+        "c": "space"
+      },
+      "preservePunctuation": true,
+      "alignment": "index"
+    },
+    "practice": {
+      "dialogue_001": {
+        "title": "Let's Go to a Party!",
+        "description": "Textbook dialogue: Li You phones Wang Peng to invite him to Gao Xiaoyin's birthday party",
+        "lines": [
+          {
+            "a": "王朋，你做什么呢？",
+            "b": "Wáng Péng, nǐ zuò shénme ne?",
+            "c": "Wang Peng, what are you doing?",
+            "wordAlignments": [
+              { "chinese": "王朋", "pinyin": "Wáng Péng", "english": "Wang Peng" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
+              { "chinese": "做", "pinyin": "zuò", "english": "doing" },
+              { "chinese": "什么", "pinyin": "shénme", "english": "what" },
+              { "chinese": "呢", "pinyin": "ne", "english": "" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "我看书呢。",
+            "b": "Wǒ kàn shū ne.",
+            "c": "I'm reading a book.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "看", "pinyin": "kàn", "english": "reading" },
+              { "chinese": "书", "pinyin": "shū", "english": "a book" },
+              { "chinese": "呢", "pinyin": "ne", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "今天高小音过生日，晚上我们在她家开舞会，你能去吗？",
+            "b": "Jīntiān Gāo Xiǎoyīn guò shēngrì, wǎnshang wǒmen zài tā jiā kāi wǔhuì, nǐ néng qù ma?",
+            "c": "Today is Gao Xiaoyin's birthday. Tonight we're throwing a dance party at her place. Can you go?",
+            "wordAlignments": [
+              { "chinese": "今天", "pinyin": "Jīntiān", "english": "Today" },
+              { "chinese": "高小音", "pinyin": "Gāo Xiǎoyīn", "english": "Gao Xiaoyin" },
+              { "chinese": "过", "pinyin": "guò", "english": "celebrates" },
+              { "chinese": "生日", "pinyin": "shēngrì", "english": "birthday" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "晚上", "pinyin": "wǎnshang", "english": "tonight" },
+              { "chinese": "我们", "pinyin": "wǒmen", "english": "we" },
+              { "chinese": "在", "pinyin": "zài", "english": "at" },
+              { "chinese": "她", "pinyin": "tā", "english": "her" },
+              { "chinese": "家", "pinyin": "jiā", "english": "place" },
+              { "chinese": "开", "pinyin": "kāi", "english": "throw" },
+              { "chinese": "舞会", "pinyin": "wǔhuì", "english": "dance party" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
+              { "chinese": "能", "pinyin": "néng", "english": "can" },
+              { "chinese": "去", "pinyin": "qù", "english": "go" },
+              { "chinese": "吗", "pinyin": "ma", "english": "" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "能去。几点？",
+            "b": "Néng qù. Jǐ diǎn?",
+            "c": "I can go. What time?",
+            "wordAlignments": [
+              { "chinese": "能", "pinyin": "Néng", "english": "can" },
+              { "chinese": "去", "pinyin": "qù", "english": "go" },
+              { "chinese": "。", "pinyin": ".", "english": "." },
+              { "chinese": "几", "pinyin": "Jǐ", "english": "what" },
+              { "chinese": "点", "pinyin": "diǎn", "english": "time" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "七点。我们先吃饭，吃完饭再唱歌跳舞。",
+            "b": "Qī diǎn. Wǒmen xiān chī fàn, chī wán fàn zài chàng gē tiào wǔ.",
+            "c": "Seven o'clock. We'll eat first, and after eating we'll sing and dance.",
+            "wordAlignments": [
+              { "chinese": "七", "pinyin": "Qī", "english": "Seven" },
+              { "chinese": "点", "pinyin": "diǎn", "english": "o'clock" },
+              { "chinese": "。", "pinyin": ".", "english": "." },
+              { "chinese": "我们", "pinyin": "Wǒmen", "english": "We" },
+              { "chinese": "先", "pinyin": "xiān", "english": "first" },
+              { "chinese": "吃", "pinyin": "chī", "english": "eat" },
+              { "chinese": "饭", "pinyin": "fàn", "english": "a meal" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "吃", "pinyin": "chī", "english": "eat" },
+              { "chinese": "完", "pinyin": "wán", "english": "finish" },
+              { "chinese": "饭", "pinyin": "fàn", "english": "the meal" },
+              { "chinese": "再", "pinyin": "zài", "english": "then" },
+              { "chinese": "唱", "pinyin": "chàng", "english": "sing" },
+              { "chinese": "歌", "pinyin": "gē", "english": "songs" },
+              { "chinese": "跳", "pinyin": "tiào", "english": "dance" },
+              { "chinese": "舞", "pinyin": "wǔ", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "有哪些人？",
+            "b": "Yǒu nǎ xiē rén?",
+            "c": "Who all is going?",
+            "wordAlignments": [
+              { "chinese": "有", "pinyin": "Yǒu", "english": "There are" },
+              { "chinese": "哪", "pinyin": "nǎ", "english": "which" },
+              { "chinese": "些", "pinyin": "xiē", "english": "" },
+              { "chinese": "人", "pinyin": "rén", "english": "people" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "小音和她的男朋友，小音的表姐，白英爱，你妹妹王红，听说还有小音的中学同学。",
+            "b": "Xiǎoyīn hé tā de nánpéngyou, Xiǎoyīn de biǎojiě, Bái Yīng'ài, nǐ mèimei Wáng Hóng, tīngshuō hái yǒu Xiǎoyīn de zhōngxué tóngxué.",
+            "c": "Xiaoyin and her boyfriend, Xiaoyin's older female cousin, Bai Ying'ai, your younger sister Wang Hong, and I heard Xiaoyin's middle-school classmate is also coming.",
+            "wordAlignments": [
+              { "chinese": "小音", "pinyin": "Xiǎoyīn", "english": "Xiaoyin" },
+              { "chinese": "和", "pinyin": "hé", "english": "and" },
+              { "chinese": "她", "pinyin": "tā", "english": "her" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "男朋友", "pinyin": "nánpéngyou", "english": "boyfriend" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "小音", "pinyin": "Xiǎoyīn", "english": "Xiaoyin's" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "表姐", "pinyin": "biǎojiě", "english": "older female cousin" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "白英爱", "pinyin": "Bái Yīng'ài", "english": "Bai Ying'ai" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "你", "pinyin": "nǐ", "english": "your" },
+              { "chinese": "妹妹", "pinyin": "mèimei", "english": "younger sister" },
+              { "chinese": "王红", "pinyin": "Wáng Hóng", "english": "Wang Hong" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "听说", "pinyin": "tīngshuō", "english": "I heard" },
+              { "chinese": "还", "pinyin": "hái", "english": "also" },
+              { "chinese": "有", "pinyin": "yǒu", "english": "there will be" },
+              { "chinese": "小音", "pinyin": "Xiǎoyīn", "english": "Xiaoyin's" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "中学", "pinyin": "zhōngxué", "english": "middle-school" },
+              { "chinese": "同学", "pinyin": "tóngxué", "english": "classmate" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "你要送给小音什么生日礼物？",
+            "b": "Nǐ yào sòng gěi Xiǎoyīn shénme shēngrì lǐwù?",
+            "c": "What birthday gift are you giving Xiaoyin?",
+            "wordAlignments": [
+              { "chinese": "你", "pinyin": "Nǐ", "english": "you" },
+              { "chinese": "要", "pinyin": "yào", "english": "going to" },
+              { "chinese": "送", "pinyin": "sòng", "english": "give" },
+              { "chinese": "给", "pinyin": "gěi", "english": "to" },
+              { "chinese": "小音", "pinyin": "Xiǎoyīn", "english": "Xiaoyin" },
+              { "chinese": "什么", "pinyin": "shénme", "english": "what" },
+              { "chinese": "生日", "pinyin": "shēngrì", "english": "birthday" },
+              { "chinese": "礼物", "pinyin": "lǐwù", "english": "gift" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "我买了一本书送给她。",
+            "b": "Wǒ mǎi le yì běn shū sòng gěi tā.",
+            "c": "I bought a book to give to her.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "买", "pinyin": "mǎi", "english": "bought" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "一", "pinyin": "yì", "english": "a" },
+              { "chinese": "本", "pinyin": "běn", "english": "" },
+              { "chinese": "书", "pinyin": "shū", "english": "book" },
+              { "chinese": "送", "pinyin": "sòng", "english": "give" },
+              { "chinese": "给", "pinyin": "gěi", "english": "to" },
+              { "chinese": "她", "pinyin": "tā", "english": "her" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "那我带什么东西？",
+            "b": "Nà wǒ dài shénme dōngxi?",
+            "c": "Then what should I bring?",
+            "wordAlignments": [
+              { "chinese": "那", "pinyin": "Nà", "english": "Then" },
+              { "chinese": "我", "pinyin": "wǒ", "english": "I" },
+              { "chinese": "带", "pinyin": "dài", "english": "bring" },
+              { "chinese": "什么", "pinyin": "shénme", "english": "what" },
+              { "chinese": "东西", "pinyin": "dōngxi", "english": "thing" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "饮料或者水果都可以。",
+            "b": "Yǐnliào huòzhě shuǐguǒ dōu kěyǐ.",
+            "c": "Drinks or fruit, either is fine.",
+            "wordAlignments": [
+              { "chinese": "饮料", "pinyin": "Yǐnliào", "english": "Drinks" },
+              { "chinese": "或者", "pinyin": "huòzhě", "english": "or" },
+              { "chinese": "水果", "pinyin": "shuǐguǒ", "english": "fruit" },
+              { "chinese": "都", "pinyin": "dōu", "english": "either" },
+              { "chinese": "可以", "pinyin": "kěyǐ", "english": "is fine" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "那我带一些饮料，再买一把花儿。",
+            "b": "Nà wǒ dài yì xiē yǐnliào, zài mǎi yì bǎ huār.",
+            "c": "Then I'll bring some drinks, and also buy a bouquet of flowers.",
+            "wordAlignments": [
+              { "chinese": "那", "pinyin": "Nà", "english": "Then" },
+              { "chinese": "我", "pinyin": "wǒ", "english": "I'll" },
+              { "chinese": "带", "pinyin": "dài", "english": "bring" },
+              { "chinese": "一些", "pinyin": "yì xiē", "english": "some" },
+              { "chinese": "饮料", "pinyin": "yǐnliào", "english": "drinks" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "再", "pinyin": "zài", "english": "also" },
+              { "chinese": "买", "pinyin": "mǎi", "english": "buy" },
+              { "chinese": "一", "pinyin": "yì", "english": "a" },
+              { "chinese": "把", "pinyin": "bǎ", "english": "bouquet of" },
+              { "chinese": "花儿", "pinyin": "huār", "english": "flowers" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "小音爱吃水果，我再买一些苹果、梨和西瓜吧。",
+            "b": "Xiǎoyīn ài chī shuǐguǒ, wǒ zài mǎi yì xiē píngguǒ, lí hé xīguā ba.",
+            "c": "Xiaoyin loves to eat fruit, so I'll also buy some apples, pears, and watermelon.",
+            "wordAlignments": [
+              { "chinese": "小音", "pinyin": "Xiǎoyīn", "english": "Xiaoyin" },
+              { "chinese": "爱", "pinyin": "ài", "english": "loves" },
+              { "chinese": "吃", "pinyin": "chī", "english": "to eat" },
+              { "chinese": "水果", "pinyin": "shuǐguǒ", "english": "fruit" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "我", "pinyin": "wǒ", "english": "I'll" },
+              { "chinese": "再", "pinyin": "zài", "english": "also" },
+              { "chinese": "买", "pinyin": "mǎi", "english": "buy" },
+              { "chinese": "一些", "pinyin": "yì xiē", "english": "some" },
+              { "chinese": "苹果", "pinyin": "píngguǒ", "english": "apples" },
+              { "chinese": "、", "pinyin": ",", "english": "," },
+              { "chinese": "梨", "pinyin": "lí", "english": "pears" },
+              { "chinese": "和", "pinyin": "hé", "english": "and" },
+              { "chinese": "西瓜", "pinyin": "xīguā", "english": "watermelon" },
+              { "chinese": "吧", "pinyin": "ba", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "你住的地方离小音家很远，水果很重，我开车来接你，我们一起去吧。",
+            "b": "Nǐ zhù de dìfang lí Xiǎoyīn jiā hěn yuǎn, shuǐguǒ hěn zhòng, wǒ kāi chē lái jiē nǐ, wǒmen yìqǐ qù ba.",
+            "c": "Where you live is far from Xiaoyin's house, and the fruit is heavy, so I'll drive over to pick you up; let's go together.",
+            "wordAlignments": [
+              { "chinese": "你", "pinyin": "Nǐ", "english": "you" },
+              { "chinese": "住", "pinyin": "zhù", "english": "live" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "地方", "pinyin": "dìfang", "english": "the place" },
+              { "chinese": "离", "pinyin": "lí", "english": "from" },
+              { "chinese": "小音", "pinyin": "Xiǎoyīn", "english": "Xiaoyin's" },
+              { "chinese": "家", "pinyin": "jiā", "english": "house" },
+              { "chinese": "很", "pinyin": "hěn", "english": "very" },
+              { "chinese": "远", "pinyin": "yuǎn", "english": "far" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "水果", "pinyin": "shuǐguǒ", "english": "the fruit" },
+              { "chinese": "很", "pinyin": "hěn", "english": "very" },
+              { "chinese": "重", "pinyin": "zhòng", "english": "heavy" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "我", "pinyin": "wǒ", "english": "I'll" },
+              { "chinese": "开", "pinyin": "kāi", "english": "drive" },
+              { "chinese": "车", "pinyin": "chē", "english": "the car" },
+              { "chinese": "来", "pinyin": "lái", "english": "over" },
+              { "chinese": "接", "pinyin": "jiē", "english": "pick up" },
+              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "我们", "pinyin": "wǒmen", "english": "we" },
+              { "chinese": "一起", "pinyin": "yìqǐ", "english": "together" },
+              { "chinese": "去", "pinyin": "qù", "english": "go" },
+              { "chinese": "吧", "pinyin": "ba", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "好，我六点半在楼下等你。",
+            "b": "Hǎo, wǒ liù diǎn bàn zài lóu xià děng nǐ.",
+            "c": "Okay, I'll wait for you downstairs at six-thirty.",
+            "wordAlignments": [
+              { "chinese": "好", "pinyin": "Hǎo", "english": "Okay" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "我", "pinyin": "wǒ", "english": "I'll" },
+              { "chinese": "六", "pinyin": "liù", "english": "six" },
+              { "chinese": "点", "pinyin": "diǎn", "english": "" },
+              { "chinese": "半", "pinyin": "bàn", "english": "thirty" },
+              { "chinese": "在", "pinyin": "zài", "english": "at" },
+              { "chinese": "楼", "pinyin": "lóu", "english": "the building" },
+              { "chinese": "下", "pinyin": "xià", "english": "downstairs" },
+              { "chinese": "等", "pinyin": "děng", "english": "wait for" },
+              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          }
+        ]
+      },
+      "dialogue_002": {
+        "title": "Shopping for the Party",
+        "description": "Practice dialogue: Wang Peng and Li You at the store choosing fruit and flowers",
+        "lines": [
+          {
+            "a": "你在看什么呢？",
+            "b": "Nǐ zài kàn shénme ne?",
+            "c": "What are you looking at?",
+            "wordAlignments": [
+              { "chinese": "你", "pinyin": "Nǐ", "english": "you" },
+              { "chinese": "在", "pinyin": "zài", "english": "" },
+              { "chinese": "看", "pinyin": "kàn", "english": "looking at" },
+              { "chinese": "什么", "pinyin": "shénme", "english": "what" },
+              { "chinese": "呢", "pinyin": "ne", "english": "" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "我在看这些花儿，想买一把送给小音。",
+            "b": "Wǒ zài kàn zhè xiē huār, xiǎng mǎi yì bǎ sòng gěi Xiǎoyīn.",
+            "c": "I'm looking at these flowers; I want to buy a bouquet to give to Xiaoyin.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "在", "pinyin": "zài", "english": "" },
+              { "chinese": "看", "pinyin": "kàn", "english": "looking at" },
+              { "chinese": "这些", "pinyin": "zhè xiē", "english": "these" },
+              { "chinese": "花儿", "pinyin": "huār", "english": "flowers" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "想", "pinyin": "xiǎng", "english": "want to" },
+              { "chinese": "买", "pinyin": "mǎi", "english": "buy" },
+              { "chinese": "一", "pinyin": "yì", "english": "a" },
+              { "chinese": "把", "pinyin": "bǎ", "english": "bouquet" },
+              { "chinese": "送", "pinyin": "sòng", "english": "give" },
+              { "chinese": "给", "pinyin": "gěi", "english": "to" },
+              { "chinese": "小音", "pinyin": "Xiǎoyīn", "english": "Xiaoyin" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "她爱吃水果，你再买一些苹果和梨吧。",
+            "b": "Tā ài chī shuǐguǒ, nǐ zài mǎi yì xiē píngguǒ hé lí ba.",
+            "c": "She loves eating fruit; you should also buy some apples and pears.",
+            "wordAlignments": [
+              { "chinese": "她", "pinyin": "Tā", "english": "She" },
+              { "chinese": "爱", "pinyin": "ài", "english": "loves" },
+              { "chinese": "吃", "pinyin": "chī", "english": "eating" },
+              { "chinese": "水果", "pinyin": "shuǐguǒ", "english": "fruit" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
+              { "chinese": "再", "pinyin": "zài", "english": "also" },
+              { "chinese": "买", "pinyin": "mǎi", "english": "buy" },
+              { "chinese": "一些", "pinyin": "yì xiē", "english": "some" },
+              { "chinese": "苹果", "pinyin": "píngguǒ", "english": "apples" },
+              { "chinese": "和", "pinyin": "hé", "english": "and" },
+              { "chinese": "梨", "pinyin": "lí", "english": "pears" },
+              { "chinese": "吧", "pinyin": "ba", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "西瓜呢？我表姐说她最爱吃西瓜。",
+            "b": "Xīguā ne? Wǒ biǎojiě shuō tā zuì ài chī xīguā.",
+            "c": "What about watermelon? My older female cousin says she loves watermelon most.",
+            "wordAlignments": [
+              { "chinese": "西瓜", "pinyin": "Xīguā", "english": "watermelon" },
+              { "chinese": "呢", "pinyin": "ne", "english": "what about" },
+              { "chinese": "？", "pinyin": "?", "english": "?" },
+              { "chinese": "我", "pinyin": "Wǒ", "english": "My" },
+              { "chinese": "表姐", "pinyin": "biǎojiě", "english": "older female cousin" },
+              { "chinese": "说", "pinyin": "shuō", "english": "says" },
+              { "chinese": "她", "pinyin": "tā", "english": "she" },
+              { "chinese": "最", "pinyin": "zuì", "english": "most" },
+              { "chinese": "爱", "pinyin": "ài", "english": "loves" },
+              { "chinese": "吃", "pinyin": "chī", "english": "eating" },
+              { "chinese": "西瓜", "pinyin": "xīguā", "english": "watermelon" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "西瓜很重，我开车来接你，我们一起把水果带过去。",
+            "b": "Xīguā hěn zhòng, wǒ kāi chē lái jiē nǐ, wǒmen yìqǐ bǎ shuǐguǒ dài guòqu.",
+            "c": "Watermelons are heavy; I'll drive over to pick you up, and we'll take the fruit together.",
+            "wordAlignments": [
+              { "chinese": "西瓜", "pinyin": "Xīguā", "english": "Watermelons" },
+              { "chinese": "很", "pinyin": "hěn", "english": "very" },
+              { "chinese": "重", "pinyin": "zhòng", "english": "heavy" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "我", "pinyin": "wǒ", "english": "I'll" },
+              { "chinese": "开", "pinyin": "kāi", "english": "drive" },
+              { "chinese": "车", "pinyin": "chē", "english": "the car" },
+              { "chinese": "来", "pinyin": "lái", "english": "over" },
+              { "chinese": "接", "pinyin": "jiē", "english": "pick up" },
+              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "我们", "pinyin": "wǒmen", "english": "we" },
+              { "chinese": "一起", "pinyin": "yìqǐ", "english": "together" },
+              { "chinese": "把", "pinyin": "bǎ", "english": "" },
+              { "chinese": "水果", "pinyin": "shuǐguǒ", "english": "the fruit" },
+              { "chinese": "带", "pinyin": "dài", "english": "take" },
+              { "chinese": "过去", "pinyin": "guòqu", "english": "over" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "好，别忘了给小音买一本书做生日礼物。",
+            "b": "Hǎo, bié wàng le gěi Xiǎoyīn mǎi yì běn shū zuò shēngrì lǐwù.",
+            "c": "Good. Don't forget to buy a book for Xiaoyin as a birthday gift.",
+            "wordAlignments": [
+              { "chinese": "好", "pinyin": "Hǎo", "english": "Good" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "别", "pinyin": "bié", "english": "don't" },
+              { "chinese": "忘", "pinyin": "wàng", "english": "forget" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "给", "pinyin": "gěi", "english": "for" },
+              { "chinese": "小音", "pinyin": "Xiǎoyīn", "english": "Xiaoyin" },
+              { "chinese": "买", "pinyin": "mǎi", "english": "to buy" },
+              { "chinese": "一", "pinyin": "yì", "english": "a" },
+              { "chinese": "本", "pinyin": "běn", "english": "" },
+              { "chinese": "书", "pinyin": "shū", "english": "book" },
+              { "chinese": "做", "pinyin": "zuò", "english": "as" },
+              { "chinese": "生日", "pinyin": "shēngrì", "english": "birthday" },
+              { "chinese": "礼物", "pinyin": "lǐwù", "english": "gift" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "我已经买了，是一本她中学时候爱看的书。",
+            "b": "Wǒ yǐjīng mǎi le, shì yì běn tā zhōngxué shíhou ài kàn de shū.",
+            "c": "I already bought it; it's a book she loved reading back in middle school.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "已经", "pinyin": "yǐjīng", "english": "already" },
+              { "chinese": "买", "pinyin": "mǎi", "english": "bought" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "是", "pinyin": "shì", "english": "it's" },
+              { "chinese": "一", "pinyin": "yì", "english": "a" },
+              { "chinese": "本", "pinyin": "běn", "english": "" },
+              { "chinese": "她", "pinyin": "tā", "english": "she" },
+              { "chinese": "中学", "pinyin": "zhōngxué", "english": "middle-school" },
+              { "chinese": "时候", "pinyin": "shíhou", "english": "back in" },
+              { "chinese": "爱", "pinyin": "ài", "english": "loved" },
+              { "chinese": "看", "pinyin": "kàn", "english": "reading" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "书", "pinyin": "shū", "english": "book" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          }
+        ]
+      },
+      "grammar_001": {
+        "title": "呢 (ne) Indicating an Action in Progress",
+        "description": "The particle 呢 at the end of a sentence shows an action is ongoing. It often pairs with 在 (zài).",
+        "lines": [
+          {
+            "a": "你写什么呢？",
+            "b": "Nǐ xiě shénme ne?",
+            "c": "What are you writing?",
+            "wordAlignments": [
+              { "chinese": "你", "pinyin": "Nǐ", "english": "you" },
+              { "chinese": "写", "pinyin": "xiě", "english": "writing" },
+              { "chinese": "什么", "pinyin": "shénme", "english": "what" },
+              { "chinese": "呢", "pinyin": "ne", "english": "" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "我写日记呢。",
+            "b": "Wǒ xiě rìjì ne.",
+            "c": "I'm writing in my journal.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "写", "pinyin": "xiě", "english": "writing" },
+              { "chinese": "日记", "pinyin": "rìjì", "english": "in my journal" },
+              { "chinese": "呢", "pinyin": "ne", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "你在做什么呢？",
+            "b": "Nǐ zài zuò shénme ne?",
+            "c": "What are you doing?",
+            "wordAlignments": [
+              { "chinese": "你", "pinyin": "Nǐ", "english": "you" },
+              { "chinese": "在", "pinyin": "zài", "english": "" },
+              { "chinese": "做", "pinyin": "zuò", "english": "doing" },
+              { "chinese": "什么", "pinyin": "shénme", "english": "what" },
+              { "chinese": "呢", "pinyin": "ne", "english": "" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "我在听音乐呢。",
+            "b": "Wǒ zài tīng yīnyuè ne.",
+            "c": "I'm listening to music.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "在", "pinyin": "zài", "english": "" },
+              { "chinese": "听", "pinyin": "tīng", "english": "listening to" },
+              { "chinese": "音乐", "pinyin": "yīnyuè", "english": "music" },
+              { "chinese": "呢", "pinyin": "ne", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "小音在开舞会呢，你为什么不去？",
+            "b": "Xiǎoyīn zài kāi wǔhuì ne, nǐ wèishénme bù qù?",
+            "c": "Xiaoyin is throwing a dance party right now; why aren't you going?",
+            "wordAlignments": [
+              { "chinese": "小音", "pinyin": "Xiǎoyīn", "english": "Xiaoyin" },
+              { "chinese": "在", "pinyin": "zài", "english": "" },
+              { "chinese": "开", "pinyin": "kāi", "english": "throwing" },
+              { "chinese": "舞会", "pinyin": "wǔhuì", "english": "a dance party" },
+              { "chinese": "呢", "pinyin": "ne", "english": "right now" },
+              { "chinese": "，", "pinyin": ",", "english": "," },
+              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
+              { "chinese": "为什么", "pinyin": "wèishénme", "english": "why" },
+              { "chinese": "不", "pinyin": "bù", "english": "not" },
+              { "chinese": "去", "pinyin": "qù", "english": "going" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "我表姐在楼下等我呢。",
+            "b": "Wǒ biǎojiě zài lóu xià děng wǒ ne.",
+            "c": "My older female cousin is waiting for me downstairs.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "My" },
+              { "chinese": "表姐", "pinyin": "biǎojiě", "english": "older female cousin" },
+              { "chinese": "在", "pinyin": "zài", "english": "" },
+              { "chinese": "楼", "pinyin": "lóu", "english": "" },
+              { "chinese": "下", "pinyin": "xià", "english": "downstairs" },
+              { "chinese": "等", "pinyin": "děng", "english": "waiting for" },
+              { "chinese": "我", "pinyin": "wǒ", "english": "me" },
+              { "chinese": "呢", "pinyin": "ne", "english": "" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          }
+        ]
+      },
+      "grammar_002": {
+        "title": "Verbal & Subject-Predicate Phrases as Attributives with 的",
+        "description": "Verb phrases and subject-predicate phrases can modify nouns when followed by 的 — e.g. 吃的东西 (things to eat), 朋友送的苹果 (apples a friend gave).",
+        "lines": [
+          {
+            "a": "我们带了很多吃的东西。",
+            "b": "Wǒmen dài le hěn duō chī de dōngxi.",
+            "c": "We brought a lot of things to eat.",
+            "wordAlignments": [
+              { "chinese": "我们", "pinyin": "Wǒmen", "english": "We" },
+              { "chinese": "带", "pinyin": "dài", "english": "brought" },
+              { "chinese": "了", "pinyin": "le", "english": "" },
+              { "chinese": "很多", "pinyin": "hěn duō", "english": "a lot of" },
+              { "chinese": "吃", "pinyin": "chī", "english": "to eat" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "东西", "pinyin": "dōngxi", "english": "things" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "她穿的衣服很漂亮。",
+            "b": "Tā chuān de yīfu hěn piàoliang.",
+            "c": "The clothes she's wearing are very pretty.",
+            "wordAlignments": [
+              { "chinese": "她", "pinyin": "Tā", "english": "she" },
+              { "chinese": "穿", "pinyin": "chuān", "english": "wearing" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "衣服", "pinyin": "yīfu", "english": "the clothes" },
+              { "chinese": "很", "pinyin": "hěn", "english": "very" },
+              { "chinese": "漂亮", "pinyin": "piàoliang", "english": "pretty" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "这是朋友送的苹果。",
+            "b": "Zhè shì péngyou sòng de píngguǒ.",
+            "c": "These are the apples a friend gave me.",
+            "wordAlignments": [
+              { "chinese": "这", "pinyin": "Zhè", "english": "These" },
+              { "chinese": "是", "pinyin": "shì", "english": "are" },
+              { "chinese": "朋友", "pinyin": "péngyou", "english": "a friend" },
+              { "chinese": "送", "pinyin": "sòng", "english": "gave" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "苹果", "pinyin": "píngguǒ", "english": "apples" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          },
+          {
+            "a": "请你跳舞的那个人是谁？",
+            "b": "Qǐng nǐ tiào wǔ de nà ge rén shì shéi?",
+            "c": "Who is that person who asked you to dance?",
+            "wordAlignments": [
+              { "chinese": "请", "pinyin": "Qǐng", "english": "asked" },
+              { "chinese": "你", "pinyin": "nǐ", "english": "you" },
+              { "chinese": "跳", "pinyin": "tiào", "english": "to dance" },
+              { "chinese": "舞", "pinyin": "wǔ", "english": "" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "那", "pinyin": "nà", "english": "that" },
+              { "chinese": "个", "pinyin": "ge", "english": "" },
+              { "chinese": "人", "pinyin": "rén", "english": "person" },
+              { "chinese": "是", "pinyin": "shì", "english": "is" },
+              { "chinese": "谁", "pinyin": "shéi", "english": "who" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "你住的地方离学校远不远？",
+            "b": "Nǐ zhù de dìfang lí xuéxiào yuǎn bu yuǎn?",
+            "c": "Is the place you live far from school?",
+            "wordAlignments": [
+              { "chinese": "你", "pinyin": "Nǐ", "english": "you" },
+              { "chinese": "住", "pinyin": "zhù", "english": "live" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "地方", "pinyin": "dìfang", "english": "the place" },
+              { "chinese": "离", "pinyin": "lí", "english": "from" },
+              { "chinese": "学校", "pinyin": "xuéxiào", "english": "school" },
+              { "chinese": "远", "pinyin": "yuǎn", "english": "far" },
+              { "chinese": "不", "pinyin": "bu", "english": "" },
+              { "chinese": "远", "pinyin": "yuǎn", "english": "" },
+              { "chinese": "？", "pinyin": "?", "english": "?" }
+            ]
+          },
+          {
+            "a": "我买的礼物是一本书。",
+            "b": "Wǒ mǎi de lǐwù shì yì běn shū.",
+            "c": "The gift I bought is a book.",
+            "wordAlignments": [
+              { "chinese": "我", "pinyin": "Wǒ", "english": "I" },
+              { "chinese": "买", "pinyin": "mǎi", "english": "bought" },
+              { "chinese": "的", "pinyin": "de", "english": "" },
+              { "chinese": "礼物", "pinyin": "lǐwù", "english": "the gift" },
+              { "chinese": "是", "pinyin": "shì", "english": "is" },
+              { "chinese": "一", "pinyin": "yì", "english": "a" },
+              { "chinese": "本", "pinyin": "běn", "english": "" },
+              { "chinese": "书", "pinyin": "shū", "english": "book" },
+              { "chinese": "。", "pinyin": ".", "english": "." }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
